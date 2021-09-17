@@ -116,12 +116,12 @@
 		4956CE2326F467040007523B /* NoGaDa */ = {
 			isa = PBXGroup;
 			children = (
+				4956CE5626F469F30007523B /* Model */,
+				4956CE5526F469F00007523B /* View */,
+				4956CE5426F469E30007523B /* Controller */,
 				4956CE2426F467040007523B /* AppDelegate.swift */,
 				4956CE2626F467040007523B /* SceneDelegate.swift */,
-				4956CE2826F467040007523B /* ViewController.swift */,
-				4956CE2A26F467040007523B /* Main.storyboard */,
 				4956CE2D26F467060007523B /* Assets.xcassets */,
-				4956CE2F26F467060007523B /* LaunchScreen.storyboard */,
 				4956CE3226F467060007523B /* Info.plist */,
 			);
 			path = NoGaDa;
@@ -145,6 +145,38 @@
 			path = NoGaDaUITests;
 			sourceTree = "<group>";
 		};
+		4956CE5426F469E30007523B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4956CE2826F467040007523B /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4956CE5526F469F00007523B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4956CE5726F469FA0007523B /* Storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4956CE5626F469F30007523B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4956CE5726F469FA0007523B /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				4956CE2A26F467040007523B /* Main.storyboard */,
+				4956CE2F26F467060007523B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		92EF67CED36C18763E116A46 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +187,6 @@
 				F5B36D4C2E117A580A51C07D /* Pods-NoGaDaTests.debug.xcconfig */,
 				6C22E3EB259442EC29DDD4D7 /* Pods-NoGaDaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
