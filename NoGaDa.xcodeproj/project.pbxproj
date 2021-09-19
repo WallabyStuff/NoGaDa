@@ -3,12 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		34EA26694D5CB266A9B15F8F /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7720E53C3BAA6F994BF373 /* Pods_NoGaDaTests.framework */; };
 		474CD8333F1B0AFE69AA2EDE /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2626E07EA8B53E963583F58F /* Pods_NoGaDa_NoGaDaUITests.framework */; };
+		493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */; };
+		493576C026F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */; };
+		493BCBE026F4B2890096422A /* PopUpArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBDF26F4B2890096422A /* PopUpArchiveViewController.swift */; };
+		493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */; };
+		493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */; };
+		493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBE826F4CEA10096422A /* SongTableViewCell.swift */; };
+		493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBE926F4CEA10096422A /* SongTableViewCell.xib */; };
+		493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEC26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift */; };
+		493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */; };
+		493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */; };
+		493BCBF326F642630096422A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBF226F642630096422A /* EmojiTextField.swift */; };
 		4956CE2526F467040007523B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2426F467040007523B /* AppDelegate.swift */; };
 		4956CE2726F467040007523B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2626F467040007523B /* SceneDelegate.swift */; };
 		4956CE2926F467040007523B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2826F467040007523B /* ViewController.swift */; };
@@ -18,6 +29,11 @@
 		4956CE3C26F467060007523B /* NoGaDaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE3B26F467060007523B /* NoGaDaTests.swift */; };
 		4956CE4726F467060007523B /* NoGaDaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE4626F467060007523B /* NoGaDaUITests.swift */; };
 		4956CE5926F476450007523B /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5826F476450007523B /* ColorSet.swift */; };
+		4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5A26F47CC30007523B /* ViewGlobalExtension.swift */; };
+		4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5C26F4940A0007523B /* SearchViewController.swift */; };
+		4956CE5F26F494730007523B /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveViewController.swift */; };
+		4956CE6126F494870007523B /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* FolderViewController.swift */; };
+		4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6226F494990007523B /* AddFolderViewController.swift */; };
 		A0A07270628B86A1698B1DDD /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5028A481B7D32E18ADB952 /* Pods_NoGaDa.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +58,17 @@
 		2626E07EA8B53E963583F58F /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		366366F417278D5A38E76A14 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
 		3E153CD5AE40F6F168965219 /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
+		493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderTableViewCell.swift; sourceTree = "<group>"; };
+		493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpArchiveFolderTableViewCell.xib; sourceTree = "<group>"; };
+		493BCBDF26F4B2890096422A /* PopUpArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveViewController.swift; sourceTree = "<group>"; };
+		493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
+		493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderTableViewCell.xib; sourceTree = "<group>"; };
+		493BCBE826F4CEA10096422A /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
+		493BCBE926F4CEA10096422A /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
+		493BCBEC26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFloatingPanelLayout.swift; sourceTree = "<group>"; };
+		493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
+		493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartTableViewCell.xib; sourceTree = "<group>"; };
+		493BCBF226F642630096422A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		4956CE2126F467040007523B /* NoGaDa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoGaDa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4956CE2426F467040007523B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4956CE2626F467040007523B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +84,11 @@
 		4956CE4626F467060007523B /* NoGaDaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoGaDaUITests.swift; sourceTree = "<group>"; };
 		4956CE4826F467060007523B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4956CE5826F476450007523B /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
+		4956CE5A26F47CC30007523B /* ViewGlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGlobalExtension.swift; sourceTree = "<group>"; };
+		4956CE5C26F4940A0007523B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		4956CE5E26F494730007523B /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
+		4956CE6026F494870007523B /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		4956CE6226F494990007523B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		5A5028A481B7D32E18ADB952 /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A90500C16DBFE98D1A31FA2 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6C22E3EB259442EC29DDD4D7 /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +125,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		493BCBE126F4BAC00096422A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */,
+				493BCBE826F4CEA10096422A /* SongTableViewCell.swift */,
+				493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */,
+				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		493BCBE226F4BAC30096422A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */,
+				493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */,
+				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
+				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		4956CE1826F467040007523B = {
 			isa = PBXGroup;
 			children = (
@@ -150,7 +204,13 @@
 		4956CE5426F469E30007523B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				493BCBE126F4BAC00096422A /* Cell */,
 				4956CE2826F467040007523B /* ViewController.swift */,
+				4956CE5C26F4940A0007523B /* SearchViewController.swift */,
+				4956CE5E26F494730007523B /* ArchiveViewController.swift */,
+				4956CE6026F494870007523B /* FolderViewController.swift */,
+				4956CE6226F494990007523B /* AddFolderViewController.swift */,
+				493BCBDF26F4B2890096422A /* PopUpArchiveViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -158,7 +218,11 @@
 		4956CE5526F469F00007523B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				493BCBE226F4BAC30096422A /* Cell */,
 				4956CE5726F469FA0007523B /* Storyboard */,
+				4956CE5A26F47CC30007523B /* ViewGlobalExtension.swift */,
+				493BCBEC26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift */,
+				493BCBF226F642630096422A /* EmojiTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +278,7 @@
 				4956CE1D26F467040007523B /* Sources */,
 				4956CE1E26F467040007523B /* Frameworks */,
 				4956CE1F26F467040007523B /* Resources */,
+				BBD5457BBEA45A97CCE16AB7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,6 +316,7 @@
 				4956CE3E26F467060007523B /* Sources */,
 				4956CE3F26F467060007523B /* Frameworks */,
 				4956CE4026F467060007523B /* Resources */,
+				8F7B7F94AD4A73A3A84DA683 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -310,8 +376,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */,
+				493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */,
+				493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */,
 				4956CE2E26F467060007523B /* Assets.xcassets in Resources */,
 				4956CE2C26F467040007523B /* Main.storyboard in Resources */,
+				493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */,
+				493576C026F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +446,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8F7B7F94AD4A73A3A84DA683 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B6601F70F33055211BA8768D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -398,6 +485,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BBD5457BBEA45A97CCE16AB7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -405,10 +509,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
+				4956CE6126F494870007523B /* FolderViewController.swift in Sources */,
+				493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */,
+				4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */,
+				493BCBF326F642630096422A /* EmojiTextField.swift in Sources */,
+				493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */,
 				4956CE5926F476450007523B /* ColorSet.swift in Sources */,
+				4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */,
+				493BCBE026F4B2890096422A /* PopUpArchiveViewController.swift in Sources */,
 				4956CE2926F467040007523B /* ViewController.swift in Sources */,
 				4956CE2526F467040007523B /* AppDelegate.swift in Sources */,
+				4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */,
+				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
+				493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */,
+				4956CE5F26F494730007523B /* ArchiveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
