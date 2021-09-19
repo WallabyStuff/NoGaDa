@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchViewController.swift
 //  NoGaDa
 //
 //  Created by 이승기 on 2021/09/17.
@@ -7,26 +7,28 @@
 
 import UIKit
 
-import RxCocoa
 import RxSwift
+import RxCocoa
 import RxGesture
 import FloatingPanel
+import Hero
 
-class ViewController: UIViewController {
+class SearchViewController: UIViewController {
 
-    // MARK: Declaration
+    // MARK: - Declaraiton
     var disposeBag = DisposeBag()
     let archiveFloatingPanel = FloatingPanelController()
     
-    @IBOutlet weak var archiveShortcutView: UIView!
-    @IBOutlet weak var searchBoxView: UIView!
+    @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var brandSelector: UISegmentedControl!
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var chartTableView: UITableView!
+    @IBOutlet weak var searchResultTableView: UITableView!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initView()
         initInstance()
         initEventListener()
@@ -36,85 +38,79 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 
     // MARK: - Initialization
     private func initView() {
         self.hero.isEnabled = true
         
         // Search TextField
-        searchBoxView.hero.id = "searchBar"
-        searchBoxView.layer.cornerRadius = 12
+        searchTextField.hero.id = "searchBar"
+        searchTextField.layer.cornerRadius = 12
+        searchTextField.setPlaceholderColor(ColorSet.searchBarPlaceholderColor)
+        searchTextField.setLeftPadding(width: 12)
+        searchTextField.setRightPadding(width: 52)
+        searchTextField.layer.shadowColor = ColorSet.searchbarShadowColor.cgColor
+        searchTextField.layer.shadowOffset = .zero
+        searchTextField.layer.shadowRadius = 20
+        searchTextField.layer.shadowOpacity = 1
         
         // Search Button
         searchButton.hero.id = "searchButton"
         searchButton.layer.cornerRadius = 8
         
-        // Archive Shortcut View (Button)
-        archiveShortcutView.layer.cornerRadius = 20
+        // Brand Selector SegmentedControl
+        brandSelector.setTextColor(color: ColorSet.segmentedControlTextColor)
         
-        // Chart TableView
-        chartTableView.layer.cornerRadius = 12
-        chartTableView.tableFooterView = UIView()
-        chartTableView.separatorStyle = .none
+        // Exit Button
+        exitButton.makeAsCircle()
+        
+        // SearchResult TableView
+        searchResultTableView.tableFooterView = UIView()
+        searchResultTableView.separatorStyle = .none
+        searchResultTableView.layer.cornerRadius = 12
+        
     }
     
     private func initInstance() {
-        // Chart TableView
-        let chartTableCellNibName = UINib(nibName: "ChartTableViewCell", bundle: nil)
-        chartTableView.register(chartTableCellNibName, forCellReuseIdentifier: "chartTableViewCell")
-        chartTableView.delegate = self
-        chartTableView.dataSource = self
+        // SearchResult TableView
+        let searchResultCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
+        searchResultTableView.register(searchResultCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
+        searchResultTableView.dataSource = self
+        searchResultTableView.delegate = self
     }
     
     private func initEventListener() {
-        // Search Textfield Tap Action
-        searchBoxView.rx.tapGesture()
-            .when(.recognized)
+        // Exit Button Tap Action
+        exitButton.rx.tap
             .bind(with: self) { vc, _ in
-                vc.presentSearchVC()
-                vc.archiveFloatingPanel.hide(animated: true)
-            }.disposed(by: disposeBag)
-        
-        // Search Textfield LongPress Action
-        searchBoxView.rx.longPressGesture()
-            .when(.began)
-            .bind(with: self) { vc, _ in
-                vc.presentSearchVC()
-                vc.archiveFloatingPanel.hide(animated: true)
+                vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         // Search Button Tap Action
-        searchButton.rx.tapGesture()
+        searchButton.rx.tap
+            .bind(with: self) { vc, _ in
+                vc.dismissKeyboardAndArchivePanel()
+            }.disposed(by: disposeBag)
+        
+        // Search TextField Tap Action
+        searchTextField.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { vc, _ in
-                vc.presentSearchVC()
                 vc.archiveFloatingPanel.hide(animated: true)
             }.disposed(by: disposeBag)
         
-        // Archive Shortcut Tap Action
-        archiveShortcutView.rx.tapGesture()
-            .when(.recognized)
-            .bind(with: self) { vc, _ in
-                vc.presentArchiveVC()
-                vc.archiveFloatingPanel.hide(animated: true)
+        // Brand Segmented Control Action
+        brandSelector.rx.selectedSegmentIndex
+            .bind(with: self) { vc, index in
+                // TODO - replace table cells according to brand catalog
             }.disposed(by: disposeBag)
     }
     
     // MARK: - Method
-    func presentSearchVC() {
-        guard let searchVC = storyboard?.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else { return }
-        searchVC.modalPresentationStyle = .fullScreen
-        
-        present(searchVC, animated: true, completion: nil)
-    }
-    
-    func presentArchiveVC() {
-        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveStoryboard") as? ArchiveViewController else { return }
-        archiveVC.modalPresentationStyle = .fullScreen
-        
-        present(archiveVC, animated: true, completion: nil)
-    }
-    
     private func configurePopUpArchivePanel() {
         let appearance = SurfaceAppearance()
         appearance.cornerRadius = 32
@@ -140,23 +136,35 @@ class ViewController: UIViewController {
         archiveFloatingPanel.show(animated: true, completion: nil)
         archiveFloatingPanel.move(to: .half, animated: true)
     }
+    
+    private func dismissKeyboardAndArchivePanel() {
+        view.endEditing(true)
+        archiveFloatingPanel.hide(animated: true)
+    }
+    
 }
 
 // MARK: - Extension
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let chartCell = tableView.dequeueReusableCell(withIdentifier: "chartTableViewCell") as? ChartTableViewCell else { return UITableViewCell() }
+        guard let searchResultCell = tableView.dequeueReusableCell(withIdentifier: "searchResultTableViewCell") as? SongTableViewCell else { return UITableViewCell() }
         
-        chartCell.chartNumberLabel.text = "\(indexPath.row + 1)"
-        
-        return chartCell
+        return searchResultCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
         showPopUpArchivePanel()
+    }
+}
+
+extension SearchViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        dismissKeyboardAndArchivePanel()
     }
 }
