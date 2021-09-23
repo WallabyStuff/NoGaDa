@@ -10,6 +10,8 @@ import UIKit
 class FolderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellContentView: UIView!
+    @IBOutlet weak var titleEmojiLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,5 +21,7 @@ class FolderTableViewCell: UITableViewCell {
 
     private func initView() {
         cellContentView.layer.cornerRadius = 12
+        titleEmojiLabel.text    = ""
+        titleLabel.text         = ""
     }
 }

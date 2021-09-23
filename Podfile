@@ -11,7 +11,8 @@ target 'NoGaDa' do
   pod 'RxGesture'
   pod 'Hero'
   pod 'FloatingPanel'
-
+  pod 'RealmSwift'
+ 
   target 'NoGaDaTests' do
     inherit! :search_paths
     # Pods for testing

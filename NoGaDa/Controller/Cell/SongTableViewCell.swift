@@ -23,4 +23,11 @@ class SongTableViewCell: UITableViewCell {
     private func initView() {
         cellContentview.layer.cornerRadius = 12
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        singerLabel.releaseAccentColor()
+        titleLabel.releaseAccentColor()
+    }
 }
