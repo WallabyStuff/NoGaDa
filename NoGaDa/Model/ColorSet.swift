@@ -21,6 +21,7 @@ class ColorSet {
     static let floatingPanelShadowColor             = UIColor(named: "FloatingPanelShadowColor")!
     static let exitButtonForegroundColor            = UIColor(named: "ExitButtonForegroundColor")!
     static let folderCellBackgroundColor            = UIColor(named: "FolderCellBackgroundColor")!
+    static let loadingIndicatorColor                = UIColor(named: "LoadingIndicatorColor")!
     static let pointColor                           = UIColor(named: "PointColor")!
     static let searchBarBackgroundColor             = UIColor(named: "serachBarBackgroundColor")!
     static let searchbarShadowColor                 = UIColor(named: "SearchbarShadowColor")!
@@ -31,6 +32,7 @@ class ColorSet {
     static let segmentedControlBackgroundColor      = UIColor(named: "SegmentedControlBackgroundColor")!
     static let segmentedControlForegroundColor      = UIColor(named: "SegmentedControlForegroundColor")!
     static let segmentedControlTextColor            = UIColor(named: "SegmentedControlTextColor")!
+    static let tableViewPlaceholderTextColor        = UIColor(named: "TableViewPlaceholderTextColor")!
     static let textColor                            = UIColor(named: "TextColor")!
     static let textfieldBackgroundColor             = UIColor(named: "TextfieldBackgroundColor")!
     static let textfieldPlaceholderColor            = UIColor(named: "TextfieldPlaceholderColor")!

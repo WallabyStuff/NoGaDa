@@ -11,10 +11,16 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
+protocol AddFolderViewDelegate: AnyObject {
+    func addFolderView(didAddFile: Bool)
+}
+
 class AddFolderViewController: UIViewController {
     
     // MARK: - Declaraiton
+    weak var delegate: AddFolderViewDelegate?
     var disposeBag = DisposeBag()
+    let archiveFolderManager = ArchiveFolderManager()
     
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
@@ -84,6 +90,20 @@ class AddFolderViewController: UIViewController {
                         vc.folderEmojiTextField.text = inputChar.description
                     }
                 }
+            }.disposed(by: disposeBag)
+        
+        // Confirm Button Tap Acrion
+        confirmButton.rx.tap
+            .bind(with: self) { vc, _ in
+                guard let title = vc.folderTitleTextField.text else { return }
+                guard let titleEmoji = vc.folderEmojiTextField.text else { return }
+                vc.archiveFolderManager.addData(title: title, titleEmoji: titleEmoji)
+                    .subscribe {
+                        vc.delegate?.addFolderView(didAddFile: true)
+                        vc.dismiss(animated: true, completion: nil)
+                    } onError: { error in
+                        print(error)
+                    }.disposed(by: vc.disposeBag)
             }.disposed(by: disposeBag)
     }
     
