@@ -97,6 +97,48 @@ class PopUpArchiveViewController: UIViewController {
                 vc.folderTableView.reloadData()
             }).disposed(by: disposeBag)
     }
+    
+    private func presentAddSongAlert(targetFolder: ArchiveFolder, selectedSong: Song) {
+        let addSongAlert = UIAlertController(title: "저장",
+                                             message: "「\(selectedSong.title)」를 「\(targetFolder.title)」에 저장하시겠습니까?",
+                                             preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            
+            self.archiveFolderManager.appendSong(archiveFolder: targetFolder, song: selectedSong)
+                .subscribe(with: self, onCompleted: { vc in
+                    vc.delegate?.popUpArchiveView(successfullyAdded: vc.selectedSong!)
+                }).disposed(by: self.disposeBag)
+        }
+        
+        addSongAlert.addAction(confirmAction)
+        addSongAlert.addAction(cancelAction)
+        
+        present(addSongAlert, animated: true, completion: nil)
+    }
+    
+    private func presentRemoveFolderAlert(targetFolder: ArchiveFolder, _ completion: @escaping () -> Void ) {
+        let removeFolderAlert = UIAlertController(title: "삭제",
+                                                  message: "정말로 「\(targetFolder.title)」 를 삭제하시겠습니까?",
+                                                  preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            
+            self.archiveFolderManager.deleteData(archiveFolder: targetFolder)
+                .subscribe(onCompleted: {
+                    completion()
+                }).disposed(by: self.disposeBag)
+        }
+        
+        removeFolderAlert.addAction(confirmAction)
+        removeFolderAlert.addAction(cancelAction)
+        
+        present(removeFolderAlert, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Extension
@@ -115,21 +157,16 @@ extension PopUpArchiveViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        archiveFolderManager.appendSong(archiveFolder: archiveFolderArr[indexPath.row], song: selectedSong!)
-            .subscribe(with: self, onCompleted: { vc in
-                print("성공적으로 저장됨")
-                vc.delegate?.popUpArchiveView(successfullyAdded: vc.selectedSong!)
-            }).disposed(by: disposeBag)
+        presentAddSongAlert(targetFolder: archiveFolderArr[indexPath.row], selectedSong: selectedSong!)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            archiveFolderManager.deleteData(archiveFolder: archiveFolderArr[indexPath.row])
-                .subscribe(with: self, onCompleted: { vc in
-                    vc.archiveFolderArr.remove(at: indexPath.row)
-                    vc.folderTableView.deleteRows(at: [indexPath], with: .left)
-                }).disposed(by: disposeBag)
+            presentRemoveFolderAlert(targetFolder: archiveFolderArr[indexPath.row]) { [weak self] in
+                self?.archiveFolderArr.remove(at: indexPath.row)
+                self?.folderTableView.deleteRows(at: [indexPath], with: .left)
+            }
         }
     }
 }

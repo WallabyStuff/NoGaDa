@@ -126,9 +126,9 @@ class BISegmentedControl: UIView {
         
         for (index, segment) in segmentedStackView.arrangedSubviews.enumerated() {
             if segment.isInBound(point: tapPosition) {
-                delegate?.BISegmentedControl(didSelectSegmentAt: index)
                 currentPosition = index
                 changeIndicatorPosition()
+                delegate?.BISegmentedControl(didSelectSegmentAt: index)
                 return
             }
         }

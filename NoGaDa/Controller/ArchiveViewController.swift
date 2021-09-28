@@ -19,6 +19,9 @@ class ArchiveViewController: UIViewController {
     let archiveFolderManager = ArchiveFolderManager()
     var archiveFolderArr = [ArchiveFolder]()
     
+    @IBOutlet weak var appbarView: UIView!
+    @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var appbarTitleLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var addFolderButton: UIButton!
     @IBOutlet weak var folderTableView: UITableView!
@@ -35,20 +38,46 @@ class ArchiveViewController: UIViewController {
     
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return .lightContent
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setArchiveFolders()
     }
 
     // MARK: - Initialization
     private func initView() {
+        self.hero.isEnabled = true
+        
+        // Appbar View
+        appbarView.hero.id = "appbar"
+        appbarView.layer.cornerRadius = 28
+        appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        appbarView.setAppbarShadow()
+        
+        // Appbar Height
+        DispatchQueue.main.async {
+            self.appbarViewHeightConstraint.constant = 90 + SafeAreaInset.top
+        }
+        
+        // Appbar Title Label
+        appbarTitleLabel.hero.id = "appbarTitle"
+        
         // Add Folder Button
         addFolderButton.layer.cornerRadius = 12
+        addFolderButton.hero.modifiers = [.translate(y: 20), .fade]
         
         // Exit Button
+        exitButton.hero.id = "exitButton"
         exitButton.makeAsCircle()
+        exitButton.setExitButtonShadow()
         
         // Folder TableView
         folderTableView.separatorStyle = .none
         folderTableView.tableFooterView = UIView()
+        folderTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
     }
     
     private func initInstance() {
@@ -87,8 +116,6 @@ class ArchiveViewController: UIViewController {
         folderVC.delegate = self
         folderVC.modalPresentationStyle = .fullScreen
         folderVC.currentArchiveFolder = selectedArchiveFolder
-        folderVC.hero.isEnabled = true
-        folderVC.hero.modalAnimationType = .selectBy(presenting: .push(direction: .left), dismissing: .pull(direction: .right))
         
         present(folderVC, animated: true, completion: nil)
     }
@@ -99,6 +126,27 @@ class ArchiveViewController: UIViewController {
                 vc.archiveFolderArr = archiveFolderArr
                 vc.folderTableView.reloadData()
             }).disposed(by: disposeBag)
+    }
+    
+    private func presentRemoveFolderAlert(targetFolder: ArchiveFolder, _ completion: @escaping () -> Void ) {
+        let removeFolderAlert = UIAlertController(title: "삭제",
+                                                  message: "정말로 「\(targetFolder.title)」 를 삭제하시겠습니까?",
+                                                  preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            
+            self.archiveFolderManager.deleteData(archiveFolder: targetFolder)
+                .subscribe(onCompleted: {
+                    completion()
+                }).disposed(by: self.disposeBag)
+        }
+        
+        removeFolderAlert.addAction(confirmAction)
+        removeFolderAlert.addAction(cancelAction)
+        
+        present(removeFolderAlert, animated: true, completion: nil)
     }
 }
 
@@ -124,11 +172,10 @@ extension ArchiveViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            archiveFolderManager.deleteData(archiveFolder: archiveFolderArr[indexPath.row])
-                .subscribe(with: self, onCompleted: { vc in
-                    vc.archiveFolderArr.remove(at: indexPath.row)
-                    vc.folderTableView.deleteRows(at: [indexPath], with: .left)
-                }).disposed(by: disposeBag)
+            presentRemoveFolderAlert(targetFolder: archiveFolderArr[indexPath.row]) { [weak self] in
+                self?.archiveFolderArr.remove(at: indexPath.row)
+                self?.folderTableView.deleteRows(at: [indexPath], with: .left)
+            }
         }
     }
 }

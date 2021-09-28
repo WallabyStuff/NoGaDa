@@ -135,19 +135,15 @@ class ArchiveFolderManager {
         }
     }
     
-    func deleteSong(archiveFolder: ArchiveFolder, song: ArchiveSong) -> Completable {
+    func deleteSong(song: ArchiveSong) -> Completable {
         return Completable.create { completable in
             do {
                 let realmInstance = try Realm()
                 
-                for archivedSong in archiveFolder.songs {
-                    if archivedSong.no == song.no {
-                        try realmInstance.write {
-                            realmInstance.delete(archivedSong)
-                            completable(.completed)
-                            return
-                        }
-                    }
+                try realmInstance.write {
+                    realmInstance.delete(song)
+                    completable(.completed)
+                    return
                 }
             } catch {
                 completable(.error(error))
@@ -166,5 +162,16 @@ class ArchiveFolderManager {
         }
         
         return isExists
+    }
+    
+    func getSongsCount() -> Int {
+        do {
+            let realmInstance = try Realm()
+            let archivedSongs = realmInstance.objects(ArchiveSong.self)
+            return archivedSongs.count
+        } catch {
+            print(error)
+            return 0
+        }
     }
 }

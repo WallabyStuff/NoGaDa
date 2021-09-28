@@ -11,6 +11,7 @@ class ChartTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var chartNumberLabel: UILabel!
+    @IBOutlet weak var chartNumberBoxView: UIView!
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     
@@ -19,8 +20,23 @@ class ChartTableViewCell: UITableViewCell {
         
         initView()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cellContentView.layer.borderColor = ColorSet.updatedSongCellStrokeColor.cgColor
+    }
 
     private func initView() {
+        cellContentView.clipsToBounds = false
+        cellContentView.layer.borderWidth = 1
+        cellContentView.layer.borderColor = ColorSet.updatedSongCellStrokeColor.cgColor
         cellContentView.layer.cornerRadius = 12
+        
+        chartNumberBoxView.layer.cornerRadius = 8
+        chartNumberLabel.text   = ""
+        songTitleLabel.text     = ""
+        singerLabel.text        = ""
+        chartNumberLabel.text   = ""
     }
 }

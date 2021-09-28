@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,36 +22,36 @@
                         <rect key="frame" x="0.0" y="6" width="362" height="43"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DM8-aP-sBE">
-                                <rect key="frame" x="12" y="10.5" width="22" height="22"/>
+                                <rect key="frame" x="12" y="9.5" width="24" height="24"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1Y-9J-xuq">
-                                        <rect key="frame" x="2.5" y="2.5" width="17.5" height="17"/>
+                                        <rect key="frame" x="3.5" y="3.5" width="17.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" name="TextColor"/>
+                                        <color key="textColor" name="UpdatedSongCellNumberTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="ChartCellBackgroundColor"/>
+                                <color key="backgroundColor" name="UpdatedSongCellNumberBoxBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="g1Y-9J-xuq" firstAttribute="centerX" secondItem="DM8-aP-sBE" secondAttribute="centerX" id="8uk-PQ-e2R"/>
-                                    <constraint firstAttribute="height" constant="22" id="HFv-Lj-1RG"/>
-                                    <constraint firstAttribute="width" constant="22" id="XNs-9s-1y0"/>
+                                    <constraint firstAttribute="height" constant="24" id="HFv-Lj-1RG"/>
+                                    <constraint firstAttribute="width" constant="24" id="XNs-9s-1y0"/>
                                     <constraint firstItem="g1Y-9J-xuq" firstAttribute="centerY" secondItem="DM8-aP-sBE" secondAttribute="centerY" id="hgo-wd-JQQ"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J14-mp-8CN">
-                                <rect key="frame" x="46" y="0.0" width="304" height="43"/>
+                                <rect key="frame" x="48" y="0.0" width="302" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1I-wS-x1q">
-                                        <rect key="frame" x="0.0" y="0.0" width="213" height="43"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="211.5" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" name="TextColor"/>
+                                        <color key="textColor" name="UpdatedSongCellForegroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghA-0s-BGA">
-                                        <rect key="frame" x="213" y="0.0" width="91" height="43"/>
+                                        <rect key="frame" x="211.5" y="0.0" width="90.5" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" name="TextColor"/>
+                                        <color key="textColor" name="UpdatedSongCellForegroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -61,7 +61,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="ChartCellBackgroundColor"/>
+                        <color key="backgroundColor" name="UpdatedSongCellBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="J14-mp-8CN" secondAttribute="bottom" id="AUU-TS-G7d"/>
                             <constraint firstItem="DM8-aP-sBE" firstAttribute="leading" secondItem="k9s-KG-tX1" secondAttribute="leading" constant="12" id="M4d-00-YKk"/>
@@ -83,6 +83,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellContentView" destination="k9s-KG-tX1" id="7IB-81-FYm"/>
+                <outlet property="chartNumberBoxView" destination="DM8-aP-sBE" id="WN0-B3-3Tz"/>
                 <outlet property="chartNumberLabel" destination="g1Y-9J-xuq" id="fcF-OW-SHz"/>
                 <outlet property="singerLabel" destination="ghA-0s-BGA" id="N9e-Xi-cgX"/>
                 <outlet property="songTitleLabel" destination="h1I-wS-x1q" id="W4g-mz-LMe"/>
@@ -92,12 +93,18 @@
     </objects>
     <resources>
         <namedColor name="BackgroundColor">
-            <color red="0.99199998378753662" green="0.96899998188018799" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ChartCellBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="TextColor">
+        <namedColor name="UpdatedSongCellBackgroundColor">
+            <color red="0.96607202290000005" green="0.96607202290000005" blue="0.99323421720000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UpdatedSongCellForegroundColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UpdatedSongCellNumberBoxBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UpdatedSongCellNumberTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

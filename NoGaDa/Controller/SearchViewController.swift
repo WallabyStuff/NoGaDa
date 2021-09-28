@@ -21,9 +21,14 @@ class SearchViewController: UIViewController {
     var karaokeManager = KaraokeManager()
     var searchResultArr = [Song]()
     
+    @IBOutlet weak var appbarView: UIView!
+    @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var appbarTitleLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var brandSelector: UISegmentedControl!
+    @IBOutlet weak var searchBoxView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var clearTextFieldButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var noSearchResultLabel: UILabel!
@@ -40,38 +45,61 @@ class SearchViewController: UIViewController {
     
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return .lightContent
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setSearchResult()
     }
 
     // MARK: - Initialization
     private func initView() {
         self.hero.isEnabled = true
         
+        // Appbar
+        appbarView.hero.id = "appbar"
+        appbarView.layer.cornerRadius = 28
+        appbarView.layer.cornerCurve = .circular
+        appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner])
+        appbarView.setAppbarShadow()
+        
+        // Appbar height constraint
+        appbarViewHeightConstraint.constant = 140 + SafeAreaInset.top
+        
+        // Appbar Title Label
+        appbarTitleLabel.hero.id = "appbarTitle"
+        
+        // SearchBox View
+        searchBoxView.hero.id = "searchBox"
+        searchBoxView.layer.cornerRadius = 12
+        searchBoxView.layer.masksToBounds = true
+        searchBoxView.setSearchBoxShadow()
+        
         // Search TextField
-        searchTextField.hero.id = "searchBar"
-        searchTextField.layer.cornerRadius = 12
-        searchTextField.setPlaceholderColor(ColorSet.searchBarPlaceholderColor)
+        searchTextField.setPlaceholderColor(ColorSet.appbarTextfieldPlaceholderColor)
         searchTextField.setLeftPadding(width: 12)
-        searchTextField.setRightPadding(width: 52)
-        searchTextField.layer.shadowColor = ColorSet.searchbarShadowColor.cgColor
-        searchTextField.layer.shadowOffset = .zero
-        searchTextField.layer.shadowRadius = 20
-        searchTextField.layer.shadowOpacity = 1
+        searchTextField.setRightPadding(width: 80)
         
         // Search Button
-        filterButton.hero.id = "searchButton"
+        filterButton.hero.id = "searchBoxButton"
         filterButton.layer.cornerRadius = 8
         filterButton.setPadding(width: 8)
+        filterButton.setSearchBoxButtonShadow()
         
         // Brand Selector SegmentedControl
-        brandSelector.setTextColor(color: ColorSet.segmentedControlTextColor)
+        brandSelector.setSelectedTextColor(ColorSet.segmentedControlSelectedTextColor)
+        brandSelector.setDefaultTextColor(ColorSet.segmentedControlDefaultTextColor)
         
         // Exit Button
         exitButton.makeAsCircle()
+        exitButton.setExitButtonShadow()
+        exitButton.hero.modifiers = [.fade, .translate(x: view.frame.width - exitButton.frame.origin.x)]
         
         // SearchResult TableView
         searchResultTableView.tableFooterView = UIView()
@@ -80,6 +108,9 @@ class SearchViewController: UIViewController {
         
         // Search loading IndicatorView
         searchIndicator.stopAnimatingAndHide()
+        
+        // Clear search textfield Button
+        clearTextFieldButton.setPadding(width: 6)
     }
     
     private func initInstance() {
@@ -120,6 +151,12 @@ class SearchViewController: UIViewController {
                 // TODO - replace table cells according to brand catalog
                 vc.setSearchResult()
             }.disposed(by: disposeBag)
+        
+        // Clear TextField Button Tap Action
+        clearTextFieldButton.rx.tap
+            .bind(with: self, onNext: { vc, _ in
+                vc.searchTextField.text = ""
+            }).disposed(by: disposeBag)
     }
     
     // MARK: - Method
@@ -155,12 +192,13 @@ class SearchViewController: UIViewController {
         
         karaokeManager.fetchSong(titleOrSinger: titleOrSinger, brand: brand)
             .observe(on: MainScheduler.instance)
+            .retry(3)
             .subscribe(with: self, onNext: { vc, searchResultList in
                 vc.searchResultArr = searchResultList
                 vc.reloadSearchResult()
             }, onError: { vc, error in
-                print(error)
                 vc.searchIndicator.stopAnimatingAndHide()
+                vc.noSearchResultLabel.text = "오류가 발생했습니다."
                 vc.noSearchResultLabel.isHidden = false
             }).disposed(by: disposeBag)
     }
@@ -169,14 +207,20 @@ class SearchViewController: UIViewController {
         searchIndicator.stopAnimatingAndHide()
         searchResultTableView.reloadData()
         
-        if searchResultArr.count == 0 { noSearchResultLabel.isHidden = false }
+        if searchResultArr.count == 0 {
+            noSearchResultLabel.text = "검색 결과가 없습니다."
+            noSearchResultLabel.isHidden = false
+            return
+        }
+        
+        searchResultTableView.scrollToTopCell(animated: false)
     }
     
     func presentSearchFilterPopoverVC() {
         guard let searchFilterVC = storyboard?.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
         
         searchFilterVC.modalPresentationStyle = .popover
-        searchFilterVC.preferredContentSize = CGSize(width: 240, height: 100)
+        searchFilterVC.preferredContentSize = CGSize(width: 240, height: 88)
         searchFilterVC.popoverPresentationController?.permittedArrowDirections = .up
         searchFilterVC.popoverPresentationController?.sourceRect = filterButton.bounds
         searchFilterVC.popoverPresentationController?.sourceView = filterButton
@@ -188,13 +232,12 @@ class SearchViewController: UIViewController {
     private func configurePopUpArchivePanel(selectedSong: Song) {
         let appearance = SurfaceAppearance()
         appearance.cornerRadius = 32
-        appearance.setPanelShadow(color: ColorSet.floatingPanelShadowColor)
         
         archiveFloatingPanel.removeFromParent()
-        archiveFloatingPanel.isRemovalInteractionEnabled = true
         archiveFloatingPanel.contentMode = .fitToBounds
+        archiveFloatingPanel.backdropView.dismissalTapGestureRecognizer.isEnabled = true
         archiveFloatingPanel.surfaceView.appearance = appearance
-        archiveFloatingPanel.surfaceView.grabberHandle.barColor = ColorSet.accentSubColor
+        archiveFloatingPanel.surfaceView.grabberHandle.barColor = ColorSet.floatingPanelHandleColor
         archiveFloatingPanel.layout = PopUpArchiveFloatingPanelLayout()
         
         guard let popUpArchiveVC = storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpArchiveViewController else { return }
@@ -221,6 +264,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         searchResultCell.titleLabel.text        = searchResultArr[indexPath.row].title
         searchResultCell.singerLabel.text       = searchResultArr[indexPath.row].singer
         searchResultCell.songNumberLabel.text   = searchResultArr[indexPath.row].no
+        searchResultCell.brandLabel.text        = searchResultArr[indexPath.row].brand
         
         searchResultCell.titleLabel.setAccentColor(string: searchTextField.text?.trimmingCharacters(in: .whitespaces) ?? "")
         searchResultCell.singerLabel.setAccentColor(string: searchTextField.text?.trimmingCharacters(in: .whitespaces) ?? "")

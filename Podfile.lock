@@ -1,6 +1,6 @@
 PODS:
   - FloatingPanel (2.4.0)
-  - Hero (1.6.1)
+  - Hero (1.6.0)
   - Realm (10.14.0):
     - Realm/Headers (= 10.14.0)
   - Realm/Headers (10.14.0)
@@ -18,7 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - FloatingPanel
-  - Hero
+  - Hero (= 1.6.0)
   - RealmSwift
   - RxCocoa
   - RxGesture
@@ -37,7 +37,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   FloatingPanel: fa60183672ed86313b9e241e34465e82211260e8
-  Hero: 215865ba3ae41dd9bb08cd6c60a645529c6fc94b
+  Hero: 052b9b9bab68fc4e30cc04e5936eaf0de97b59d3
   Realm: 95a120db10fa66d0f1d10bee4ce828177ae00090
   RealmSwift: 4937e1b6f9b87bc25dc23883198807bf69e8cb76
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -45,6 +45,6 @@ SPEC CHECKSUMS:
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
 
-PODFILE CHECKSUM: 708adb942677df47cc80f8d6e6b64ec1ab2eea82
+PODFILE CHECKSUM: a0482a505e0f71e41335cd73497eef1ff21bf241
 
 COCOAPODS: 1.10.2

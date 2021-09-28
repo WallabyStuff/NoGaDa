@@ -15,7 +15,14 @@ class PopUpArchiveFloatingPanelLayout: FloatingPanelLayout {
         return [
             .full: FloatingPanelLayoutAnchor(absoluteInset: 16.0, edge: .top, referenceGuide: .safeArea),
             .half: FloatingPanelLayoutAnchor(fractionalInset: 0.5, edge: .bottom, referenceGuide: .safeArea),
-            .tip: FloatingPanelLayoutAnchor(absoluteInset: 196, edge: .bottom, referenceGuide: .safeArea),
+            .tip: FloatingPanelLayoutAnchor(absoluteInset: 220, edge: .bottom, referenceGuide: .safeArea),
         ]
+    }
+    
+    func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+        switch state {
+        case .full, .half: return 0.3
+        default: return 0.0
+        }
     }
 }

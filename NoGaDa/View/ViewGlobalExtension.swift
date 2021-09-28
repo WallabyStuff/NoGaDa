@@ -30,15 +30,67 @@ extension UITextField {
 }
 
 extension UISegmentedControl {
-    func setTextColor(color: UIColor) {
-        self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : color], for: .selected)
-        self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : color], for: .normal)
+    func setSelectedTextColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor : color], for: .selected)
+    }
+    
+    func setDefaultTextColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor : color], for: .normal)
     }
 }
 
 extension UIView {
     func makeAsCircle() {
         self.layer.cornerRadius = self.frame.width / 2
+    }
+    
+    func setAppbarShadow() {
+        self.layer.shadowColor = ColorSet.appbarBackgroundColor.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 12
+        self.layer.shadowOpacity = 0.4
+    }
+    
+    func setSearchBoxShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 12
+        self.layer.shadowOpacity = 0.1
+    }
+    
+    func setSearchBoxButtonShadow() {
+        self.layer.shadowColor = ColorSet.appbarBackgroundColor.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 4
+        self.layer.shadowOpacity = 0.3
+    }
+    
+    func setExitButtonShadow() {
+        self.layer.shadowColor = ColorSet.appbarExitButtonBackgroundColor.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 0.4
+    }
+    
+    func setReversedExitButtonShadow() {
+        self.layer.shadowColor = ColorSet.appbarBackgroundColor.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 0.4
+    }
+    
+    func setArchiveShortCutShadow() {
+        self.layer.shadowColor = ColorSet.archiveShortcutShadowColor.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 4)
+        self.layer.shadowRadius = 8
+        self.layer.shadowOpacity = 0.4
+    }
+    
+    func setSongNumberBoxShadow() {
+        self.layer.shadowColor = ColorSet.songCellNumberBoxShadowColor.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 4)
+        self.layer.shadowRadius = 12
+        self.layer.shadowOpacity = 1
     }
 }
 
@@ -58,7 +110,7 @@ extension UILabel {
         guard let text = self.text else { return }
         
         let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(.foregroundColor, value: ColorSet.pointColor,
+        attributedString.addAttribute(.foregroundColor, value: ColorSet.textAccentColor,
                                       range: (text.lowercased() as NSString).range(of: string.lowercased()))
         self.attributedText = attributedString
     }
@@ -75,13 +127,13 @@ extension UILabel {
 
 extension UIActivityIndicatorView {
     func startAnimatingAndShow() {
-        self.stopAnimating()
+        self.startAnimating()
         self.isHidden = false
     }
     
     func stopAnimatingAndHide() {
         self.isHidden = true
-        self.startAnimating()
+        self.stopAnimating()
     }
 }
 
@@ -89,4 +141,18 @@ extension UIButton {
     func setPadding(width: CGFloat) {
         self.imageEdgeInsets = UIEdgeInsets(top: width, left: width, bottom: width, right: width)
     }
+}
+
+extension UITableView {
+    func scrollToTopCell(animated: Bool) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.scrollToRow(at: indexPath, at: .top, animated: animated)
+    }
+}
+
+extension UIScrollView {
+    func scrollToTop(animated: Bool) {
+        let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
+        setContentOffset(desiredOffset, animated: animated)
+   }
 }

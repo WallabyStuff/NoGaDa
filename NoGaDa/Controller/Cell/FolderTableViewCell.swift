@@ -18,8 +18,16 @@ class FolderTableViewCell: UITableViewCell {
         
         initView()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
+    }
 
     private func initView() {
+        cellContentView.layer.borderWidth = 1
+        cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
         cellContentView.layer.cornerRadius = 12
         titleEmojiLabel.text    = ""
         titleLabel.text         = ""

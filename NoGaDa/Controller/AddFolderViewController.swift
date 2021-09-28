@@ -53,6 +53,7 @@ class AddFolderViewController: UIViewController {
         
         // Exit Button
         exitButton.makeAsCircle()
+        exitButton.setReversedExitButtonShadow()
         
         // Emoji Textfield Frame
         emojiTextFieldFrame.layer.cornerRadius = 20
@@ -61,7 +62,7 @@ class AddFolderViewController: UIViewController {
         folderTitleTextField.layer.cornerRadius = 12
         folderTitleTextField.setLeftPadding(width: 8)
         folderTitleTextField.setRightPadding(width: 8)
-        folderTitleTextField.setPlaceholderColor(ColorSet.textfieldPlaceholderColor)
+        folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
     }
     
     private func initInstance() {

@@ -19,8 +19,20 @@ class ViewController: UIViewController {
     let archiveFloatingPanel = FloatingPanelController()
     let karaokeManager = KaraokeManager()
     var updatedSongList = [Song]()
+    let archiveFolderManager = ArchiveFolderManager()
     
+    var minimumAppbarHeight: CGFloat = 80
+    var maximumAppbarHeight: CGFloat = 140
+    
+    @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var appbarView: AppbarView!
+    @IBOutlet weak var appbarTitleLabel: UILabel!
+    @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var mainContentScrollView: UIScrollView!
+    @IBOutlet weak var mainContentScrollViewContentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var archiveShortcutView: UIView!
+    @IBOutlet weak var archiveShortcutBackgroundImageView: UIImageView!
+    @IBOutlet weak var totalArchivedSongSizeLabel: UILabel!
     @IBOutlet weak var searchBoxView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var brandSegmentedControl: BISegmentedControl!
@@ -39,23 +51,66 @@ class ViewController: UIViewController {
     
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return .lightContent
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setUpdatedSongChart()
     }
 
     // MARK: - Initialization
     private func initView() {
         self.hero.isEnabled = true
         
+        // Appbar View
+        appbarView.backgroundColor = .clear
+        appbarView.configure(cornerRadius: 28, roundCorners: [.bottomRight])
+        appbarView.setAppbarShadow()
+        
+        // Appbar Height
+        DispatchQueue.main.async {
+            self.minimumAppbarHeight = 80 + SafeAreaInset.top
+            self.maximumAppbarHeight = 140 + SafeAreaInset.top
+            self.appbarViewHeightConstraint.constant = AppbarHeight.maximum
+        }
+        
+        // Appbar title Label
+        appbarTitleLabel.hero.id = "appbarTitle"
+        
+        // Setting Button
+        settingButton.setPadding(width: 6)
+        
+        // Main content ScrollView
+        DispatchQueue.main.async {
+            self.mainContentScrollView.contentInset = UIEdgeInsets(top: self.appbarViewHeightConstraint.constant, left: 0, bottom: 0, right: 0)
+            self.mainContentScrollView.scrollToTop(animated: false)
+        }
+        
+        // Main content ScrollView content View
+        mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
+        
         // Search TextField
-        searchBoxView.hero.id = "searchBar"
+        searchBoxView.hero.id = "searchBox"
         searchBoxView.layer.cornerRadius = 12
+        searchBoxView.setSearchBoxShadow()
         
         // Search Button
-        searchButton.hero.id = "searchButton"
+        searchButton.hero.id = "searchBoxButton"
         searchButton.layer.cornerRadius = 8
+        searchButton.setSearchBoxButtonShadow()
         
         // Archive Shortcut View (Button)
         archiveShortcutView.layer.cornerRadius = 20
+        archiveShortcutView.setArchiveShortCutShadow()
+        
+        // Archive shortcut background ImageView
+        archiveShortcutBackgroundImageView.layer.cornerRadius = 20
+        archiveShortcutBackgroundImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
+        
+        // Total archived song size Label
+        totalArchivedSongSizeLabel.text = "총 \(archiveFolderManager.getSongsCount())곡"
         
         // Chart TableView
         chartTableView.layer.cornerRadius = 12
@@ -63,9 +118,9 @@ class ViewController: UIViewController {
         chartTableView.separatorStyle = .none
         
         // Karaoke brand segmented control
-        brandSegmentedControl.segmentTintColor = .black
-        brandSegmentedControl.segmentDefaultColor = .gray
-        brandSegmentedControl.barIndicatorColor = ColorSet.pointColor
+        brandSegmentedControl.segmentTintColor = ColorSet.updatedSongSelectorSelectedTextColor
+        brandSegmentedControl.segmentDefaultColor = ColorSet.updatedSongSelectorUnSelectedTextColor
+        brandSegmentedControl.barIndicatorColor = ColorSet.updatedSongSelectorBarIndicatorColor
         brandSegmentedControl.barIndicatorHeight = 3
         brandSegmentedControl.segmentFontSize = 14
         brandSegmentedControl.addSegment(title: "tj 업데이트")
@@ -79,7 +134,7 @@ class ViewController: UIViewController {
         chartTableView.delegate = self
         chartTableView.dataSource = self
         
-        setUpdatedSongChart(brand: .tj)
+        setUpdatedSongChart()
         
         // Karaoke brand segmented control
         brandSegmentedControl.delegate = self
@@ -117,6 +172,33 @@ class ViewController: UIViewController {
                 vc.presentArchiveVC()
                 vc.archiveFloatingPanel.hide(animated: true)
             }.disposed(by: disposeBag)
+        
+        // Main content ScrollView Slide Action
+        mainContentScrollView.rx.contentOffset
+            .subscribe(with: self, onNext: { vc, offset in
+                let changedY = offset.y + vc.maximumAppbarHeight
+                
+                if -vc.maximumAppbarHeight < offset.y {
+                    // Shrink Appbar
+                    if vc.maximumAppbarHeight - changedY >= vc.minimumAppbarHeight {
+                        let modifiedAppbarHeight: CGFloat = vc.maximumAppbarHeight - changedY
+                        vc.appbarViewHeightConstraint.constant = modifiedAppbarHeight
+                        
+                        let appbarTitleLabelAlpha: CGFloat = 1 - (vc.maximumAppbarHeight - modifiedAppbarHeight) / (vc.maximumAppbarHeight - vc.minimumAppbarHeight)
+                        vc.appbarTitleLabel.alpha = appbarTitleLabelAlpha
+                        vc.settingButton.alpha = appbarTitleLabelAlpha
+                    } else {
+                        vc.appbarViewHeightConstraint.constant = vc.minimumAppbarHeight
+                        vc.appbarTitleLabel.alpha = 0
+                        vc.settingButton.alpha = 0
+                    }
+                } else {
+                    // Stretch Appbar
+                    vc.appbarViewHeightConstraint.constant = vc.maximumAppbarHeight - changedY * 0.2
+                    vc.appbarTitleLabel.alpha = 1
+                    vc.settingButton.alpha = 1
+                }
+            }).disposed(by: disposeBag)
     }
     
     // MARK: - Method
@@ -137,13 +219,12 @@ class ViewController: UIViewController {
     private func configurePopUpArchivePanel(selectedSong: Song) {
         let appearance = SurfaceAppearance()
         appearance.cornerRadius = 32
-        appearance.setPanelShadow(color: ColorSet.floatingPanelShadowColor)
         
         archiveFloatingPanel.removeFromParent()
-        archiveFloatingPanel.isRemovalInteractionEnabled = true
         archiveFloatingPanel.contentMode = .fitToBounds
+        archiveFloatingPanel.backdropView.dismissalTapGestureRecognizer.isEnabled = true
         archiveFloatingPanel.surfaceView.appearance = appearance
-        archiveFloatingPanel.surfaceView.grabberHandle.barColor = ColorSet.accentSubColor
+        archiveFloatingPanel.surfaceView.grabberHandle.barColor = ColorSet.floatingPanelHandleColor
         archiveFloatingPanel.layout = PopUpArchiveFloatingPanelLayout()
         
         guard let popUpArchiveVC = storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpArchiveViewController else { return }
@@ -162,12 +243,18 @@ class ViewController: UIViewController {
         archiveFloatingPanel.move(to: .half, animated: true)
     }
     
-    private func setUpdatedSongChart(brand: KaraokeBrand) {
+    private func setUpdatedSongChart() {
+        var brand: KaraokeBrand = .tj
+        if brandSegmentedControl.currentPosition != 0 {
+            brand = .kumyoung
+        }
+        
         chartLoadingIndicator.startAnimatingAndShow()
         chartLoadErrorMessageLabel.isHidden = true
         
         karaokeManager.fetchUpdatedSong(brand: brand)
             .observe(on: MainScheduler.instance)
+            .retry(3)
             .subscribe(with: self, onNext: { vc, updatedSongList in
                 vc.updatedSongList = updatedSongList
                 vc.reloadChartTableView()
@@ -181,6 +268,7 @@ class ViewController: UIViewController {
     private func reloadChartTableView() {
         chartLoadingIndicator.stopAnimatingAndHide()
         chartTableView.reloadData()
+        chartTableView.scrollToTopCell(animated: false)
         
         if updatedSongList.count == 0 {
             chartLoadErrorMessageLabel.text = "업데이트 된 곡이 없습니다."
@@ -212,11 +300,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ViewController: BISegmentedControlDelegate {
     func BISegmentedControl(didSelectSegmentAt index: Int) {
-        if index == 0 {
-            setUpdatedSongChart(brand: .tj)
-        } else {
-            setUpdatedSongChart(brand: .kumyoung)
-        }
+        setUpdatedSongChart()
     }
 }
 
