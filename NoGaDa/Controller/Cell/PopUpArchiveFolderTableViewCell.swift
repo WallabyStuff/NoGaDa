@@ -22,7 +22,7 @@ class PopUpArchiveFolderTableViewCell: UITableViewCell {
         // Selection View
         let selectionView = UIView(frame: self.frame)
         selectionView.layer.cornerRadius = 8
-        selectionView.backgroundColor = ColorSet.accentSubColor
+        selectionView.backgroundColor = ColorSet.popUpArchiveSeparatorColor
         self.selectedBackgroundView = selectionView
     }
 }

@@ -25,6 +25,8 @@ class FolderViewController: UIViewController {
     var currentArchiveFolder: ArchiveFolder? // pass from superview(ArchiveViewController)
     var archivedSongArr = [ArchiveSong]()
     
+    @IBOutlet weak var appbarView: UIView!
+    @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var folderTitleEmojiTextField: EmojiTextField!
     @IBOutlet weak var folderTitleTextField: UITextField!
@@ -50,7 +52,13 @@ class FolderViewController: UIViewController {
     
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return .lightContent
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        setArchivedSongs()
     }
     
     // MARK: - Initialization
@@ -64,13 +72,39 @@ class FolderViewController: UIViewController {
     }
     
     private func initView() {
+        self.hero.isEnabled = true
+        
+        // Appbar View
+        appbarView.hero.id = "appbar"
+        appbarView.layer.cornerRadius = 28
+        appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        appbarView.setAppbarShadow()
+        
+        // Appbar Height
+        appbarViewHeightConstraint.constant = 90 + SafeAreaInset.top
+        
         // Exit Button
+        exitButton.hero.id = "exitButton"
         exitButton.makeAsCircle()
+        exitButton.setExitButtonShadow()
         
         // Archived Song TableView
         archivedSongTableView.tableFooterView = UIView()
         archivedSongTableView.separatorStyle = .none
         archivedSongTableView.layer.cornerRadius = 12
+        archivedSongTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        
+        // Folder title Textfield
+        folderTitleTextField.layer.cornerRadius = 12
+        folderTitleTextField.setLeftPadding(width: 16)
+        folderTitleTextField.setRightPadding(width: 16)
+        folderTitleTextField.setSearchBoxShadow()
+        folderTitleTextField.hero.modifiers = [.fade, .translate(y: 12)]
+        
+        // Folder title emoji Textfield
+        folderTitleEmojiTextField.layer.cornerRadius = 16
+        folderTitleEmojiTextField.setSearchBoxShadow()
+        folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: 12)]
     }
     
     private func initInstance() {
@@ -154,17 +188,19 @@ extension FolderViewController: UITableViewDataSource, UITableViewDelegate {
         songCell.titleLabel.text        = archivedSongArr[indexPath.row].title
         songCell.songNumberLabel.text   = archivedSongArr[indexPath.row].no
         songCell.singerLabel.text       = archivedSongArr[indexPath.row].singer
+        songCell.brandLabel.text        = archivedSongArr[indexPath.row].brand
         
         return songCell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            archiveFolderManager.deleteSong(archiveFolder: currentArchiveFolder!, song: archivedSongArr[indexPath.row])
+            archiveFolderManager.deleteSong(song: archivedSongArr[indexPath.row])
                 .subscribe(with: self, onCompleted: { vc in
                     vc.archivedSongArr.remove(at: indexPath.row)
                     vc.archivedSongTableView.deleteRows(at: [indexPath], with: .left)
-                }).disposed(by: disposeBag)
+                })
+                .disposed(by: disposeBag)
         }
     }
 }

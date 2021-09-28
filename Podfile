@@ -9,7 +9,7 @@ target 'NoGaDa' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxGesture'
-  pod 'Hero'
+  pod 'Hero', '1.6.0'
   pod 'FloatingPanel'
   pod 'RealmSwift'
  
