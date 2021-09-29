@@ -173,6 +173,12 @@ class ViewController: UIViewController {
                 vc.archiveFloatingPanel.hide(animated: true)
             }.disposed(by: disposeBag)
         
+        // Setting Button Tap Action
+        settingButton.rx.tap
+            .bind(with: self, onNext: { vc, _ in
+                vc.presentSettingVC()
+            }).disposed(by: disposeBag)
+        
         // Main content ScrollView Slide Action
         mainContentScrollView.rx.contentOffset
             .subscribe(with: self, onNext: { vc, offset in
@@ -214,6 +220,12 @@ class ViewController: UIViewController {
         archiveVC.modalPresentationStyle = .fullScreen
         
         present(archiveVC, animated: true, completion: nil)
+    }
+    
+    func presentSettingVC() {
+        guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "settingStoryboard") as? SettingViewController else { return }
+        
+        present(settingVC, animated: true, completion: nil)
     }
     
     private func configurePopUpArchivePanel(selectedSong: Song) {

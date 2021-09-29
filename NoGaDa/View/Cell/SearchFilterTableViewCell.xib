@@ -36,6 +36,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="filterSwitch" destination="FJn-VZ-ocd" id="ddA-ig-XaD"/>
                 <outlet property="titleLabel" destination="Vtq-eD-KV3" id="ZS9-8X-dAN"/>

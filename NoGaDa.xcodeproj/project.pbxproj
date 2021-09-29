@@ -35,8 +35,15 @@
 		4956CE6126F494870007523B /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* FolderViewController.swift */; };
 		4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6226F494990007523B /* AddFolderViewController.swift */; };
 		4989A72626F8863C00A98B63 /* KaraokeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeManager.swift */; };
+		4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */; };
+		4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */; };
+		4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD6270471CB005F0D85 /* ResourceItem.swift */; };
 		49C6DC33270298E30094403B /* AppbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppbarView.swift */; };
 		49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC362703129B0094403B /* SafeAreaInset.swift */; };
+		49C6DC75270372F40094403B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC74270372F40094403B /* SettingViewController.swift */; };
+		49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */; };
+		49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */; };
+		49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC7C270382620094403B /* SettingEtcItem.swift */; };
 		49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */; };
 		49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */; };
 		49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B126FC68F30024C5F9 /* Song.swift */; };
@@ -48,6 +55,7 @@
 		49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */; };
 		49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */; };
 		49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */; };
+		49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FB0D0927038DED00AE3A9F /* CreditViewController.swift */; };
 		AE4CF0CD631C525E606164AC /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C411C7213996900DC91856 /* Pods_NoGaDa_NoGaDaUITests.framework */; };
 		E3D259B2E2FC1C1C73B33B02 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9EB434CB0BBE3FEF6E476C /* Pods_NoGaDa.framework */; };
 /* End PBXBuildFile section */
@@ -105,8 +113,15 @@
 		4956CE6026F494870007523B /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		4956CE6226F494990007523B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		4989A72526F8863C00A98B63 /* KaraokeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeManager.swift; sourceTree = "<group>"; };
+		4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconResourceCollectionViewCell.swift; sourceTree = "<group>"; };
+		4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconResourceCollectionViewCell.xib; sourceTree = "<group>"; };
+		4997CFD6270471CB005F0D85 /* ResourceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceItem.swift; sourceTree = "<group>"; };
 		49C6DC32270298E30094403B /* AppbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarView.swift; sourceTree = "<group>"; };
 		49C6DC362703129B0094403B /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
+		49C6DC74270372F40094403B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcTableViewCell.swift; sourceTree = "<group>"; };
+		49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingEtcTableViewCell.xib; sourceTree = "<group>"; };
+		49C6DC7C270382620094403B /* SettingEtcItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcItem.swift; sourceTree = "<group>"; };
 		49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrand.swift; sourceTree = "<group>"; };
 		49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeAPIErrMessage.swift; sourceTree = "<group>"; };
 		49D1D6B126FC68F30024C5F9 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -118,6 +133,7 @@
 		49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
 		49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterItem.swift; sourceTree = "<group>"; };
 		49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewController.swift; sourceTree = "<group>"; };
+		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		A2E6958378A44498808BB46E /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
 		B9FD68BF65BEFAB7133960B1 /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC7F50C051A07EE5B360F071 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +179,8 @@
 				493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */,
 				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
 				49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */,
+				49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */,
+				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -175,6 +193,8 @@
 				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
 				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
 				49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */,
+				49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */,
+				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -245,6 +265,8 @@
 				4956CE6226F494990007523B /* AddFolderViewController.swift */,
 				493BCBDF26F4B2890096422A /* PopUpArchiveViewController.swift */,
 				49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */,
+				49C6DC74270372F40094403B /* SettingViewController.swift */,
+				49FB0D0927038DED00AE3A9F /* CreditViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -268,6 +290,7 @@
 			children = (
 				4956CE5826F476450007523B /* ColorSet.swift */,
 				49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */,
+				49C6DC7C270382620094403B /* SettingEtcItem.swift */,
 				49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */,
 				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
 				49D1D6B126FC68F30024C5F9 /* Song.swift */,
@@ -275,6 +298,7 @@
 				49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */,
 				49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */,
 				49C6DC362703129B0094403B /* SafeAreaInset.swift */,
+				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -429,11 +453,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */,
+				4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */,
 				493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */,
 				493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */,
 				4956CE2E26F467060007523B /* Assets.xcassets in Resources */,
 				4956CE2C26F467040007523B /* Main.storyboard in Resources */,
 				49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */,
+				49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */,
 				493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */,
 				493576C026F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib in Resources */,
 			);
@@ -576,6 +602,7 @@
 				4956CE5926F476450007523B /* ColorSet.swift in Sources */,
 				4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */,
 				493BCBE026F4B2890096422A /* PopUpArchiveViewController.swift in Sources */,
+				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
 				49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */,
 				49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */,
 				4956CE2926F467040007523B /* ViewController.swift in Sources */,
@@ -584,15 +611,20 @@
 				4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */,
 				49D1D6B826FC6C0E0024C5F9 /* ArchiveFolder.swift in Sources */,
 				49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */,
+				49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
 				49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
 				4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */,
+				49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */,
+				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
 				493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */,
 				4956CE5F26F494730007523B /* ArchiveViewController.swift in Sources */,
 				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
+				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,
+				49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
