@@ -219,8 +219,10 @@ class SearchViewController: UIViewController {
     func presentSearchFilterPopoverVC() {
         guard let searchFilterVC = storyboard?.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
         
+        searchFilterVC.navigationController?.popoverPresentationController?.backgroundColor = .white
+        searchFilterVC.delegate = self
         searchFilterVC.modalPresentationStyle = .popover
-        searchFilterVC.preferredContentSize = CGSize(width: 240, height: 88)
+        searchFilterVC.preferredContentSize = CGSize(width: 240, height: 160)
         searchFilterVC.popoverPresentationController?.permittedArrowDirections = .up
         searchFilterVC.popoverPresentationController?.sourceRect = filterButton.bounds
         searchFilterVC.popoverPresentationController?.sourceView = filterButton
@@ -300,8 +302,15 @@ extension SearchViewController: PopUpArchiveViewDelegate {
     }
 }
 
-extension UIViewController: UIPopoverPresentationControllerDelegate {
+extension SearchViewController: UIPopoverPresentationControllerDelegate {
     public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+extension SearchViewController: PopOverSearchFilterViewDelegate {
+    func popOverSearchFilterView(didTapApply: Bool) {
+        print("activated")
+        self.setSearchResult()
     }
 }

@@ -10,12 +10,18 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol PopOverSearchFilterViewDelegate: AnyObject {
+    func popOverSearchFilterView(didTapApply: Bool)
+}
+
 class PopOverSearchFilterViewController: UIViewController {
 
     // MARK: - Declaration
+    weak var delegate: PopOverSearchFilterViewDelegate?
     var disposeBag = DisposeBag()
     
     @IBOutlet weak var filterItemTableView: UITableView!
+    @IBOutlet weak var applyButton: UIButton!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -32,6 +38,7 @@ class PopOverSearchFilterViewController: UIViewController {
         // filter item TableView
         filterItemTableView.tableFooterView = UIView()
         filterItemTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
+        filterItemTableView.backgroundColor = .white
     }
     
     private func initInstance() {
@@ -41,10 +48,17 @@ class PopOverSearchFilterViewController: UIViewController {
         filterItemTableView.dataSource  = self
         filterItemTableView.delegate    = self
         
+        // Apply Button
+        applyButton.layer.cornerRadius = 12
     }
     
     private func initEventListener() {
-        
+        // Apply Button Tap Action
+        applyButton.rx.tap
+            .bind(with: self, onNext: { vc, _ in
+                vc.delegate?.popOverSearchFilterView(didTapApply: true)
+                vc.dismiss(animated: true, completion: nil)
+            }).disposed(by: disposeBag)
     }
     
     

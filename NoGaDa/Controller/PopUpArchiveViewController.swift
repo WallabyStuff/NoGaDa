@@ -58,6 +58,12 @@ class PopUpArchiveViewController: UIViewController {
         
         // Exit Button
         exitButton.makeAsCircle()
+        
+        // Add folder Button
+        addFolderButton.layer.shadowColor = UIColor.gray.cgColor
+        addFolderButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        addFolderButton.layer.shadowRadius = 8
+        addFolderButton.layer.shadowOpacity = 0.2
     }
     
     private func initInstance() {
