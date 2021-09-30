@@ -93,6 +93,19 @@ extension UIView {
         self.layer.shadowRadius = 28
         self.layer.shadowOpacity = 0.2
     }
+    
+    func fillStatusBar(color: UIColor) {
+        DispatchQueue.main.async {
+            let safeAreaView = UIView()
+            safeAreaView.backgroundColor = color
+            self.insertSubview(safeAreaView, at: 0)
+            safeAreaView.translatesAutoresizingMaskIntoConstraints = false
+            safeAreaView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            safeAreaView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            safeAreaView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            safeAreaView.heightAnchor.constraint(equalToConstant: SafeAreaInset.top).isActive = true
+        }
+    }
 }
 
 extension SurfaceAppearance {
