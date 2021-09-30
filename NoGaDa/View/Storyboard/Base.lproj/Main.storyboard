@@ -207,15 +207,15 @@
                         <outlet property="archiveShortcutBackgroundImageView" destination="cdb-Bg-C5u" id="v69-0l-x9f"/>
                         <outlet property="archiveShortcutView" destination="gFp-3Y-lW7" id="Qfd-kU-IAw"/>
                         <outlet property="brandSegmentedControl" destination="n9e-jd-iKq" id="XPR-0L-gVf"/>
-                        <outlet property="chartLoadErrorMessageLabel" destination="CxZ-Cq-9Qe" id="ZjY-75-4ZL"/>
-                        <outlet property="chartLoadingIndicator" destination="PSy-Ae-0Dt" id="Tk0-aT-G7N"/>
-                        <outlet property="chartTableView" destination="Hd8-bd-esb" id="mnT-Yl-TrC"/>
                         <outlet property="mainContentScrollView" destination="ybw-gb-oEp" id="Hv7-cN-oJE"/>
                         <outlet property="mainContentScrollViewContentViewHeightConstraint" destination="RfP-0D-X1i" id="Jjy-pG-kDD"/>
                         <outlet property="searchBoxView" destination="f7c-mC-iEt" id="EJv-gu-Pfb"/>
                         <outlet property="searchButton" destination="iGc-zW-LaH" id="Q0k-SV-Bds"/>
                         <outlet property="settingButton" destination="DUl-qM-V9V" id="z6z-Wf-S7p"/>
                         <outlet property="totalArchivedSongSizeLabel" destination="I8f-kb-mSm" id="grm-hV-G2l"/>
+                        <outlet property="updatedSongLoadingIndicator" destination="PSy-Ae-0Dt" id="Tk0-aT-G7N"/>
+                        <outlet property="updatedSongTableView" destination="Hd8-bd-esb" id="mnT-Yl-TrC"/>
+                        <outlet property="updatedsongLoadErrorMessageLabel" destination="CxZ-Cq-9Qe" id="ZjY-75-4ZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

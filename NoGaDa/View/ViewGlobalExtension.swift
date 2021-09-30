@@ -117,10 +117,15 @@ extension UILabel {
     func setAccentColor(string: String) {
         guard let text = self.text else { return }
         
-        let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(.foregroundColor, value: ColorSet.textAccentColor,
-                                      range: (text.lowercased() as NSString).range(of: string.lowercased()))
-        self.attributedText = attributedString
+        DispatchQueue.global(qos: .background).async {
+            let attributedString = NSMutableAttributedString(string: text)
+            attributedString.addAttribute(.foregroundColor, value: ColorSet.textAccentColor,
+                                          range: (text.lowercased() as NSString).range(of: string.lowercased()))
+            
+            DispatchQueue.main.async {
+                self.attributedText = attributedString
+            }
+        }
     }
     
     func releaseAccentColor() {
@@ -163,4 +168,14 @@ extension UIScrollView {
         let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
         setContentOffset(desiredOffset, animated: animated)
    }
+}
+
+extension UITextView {
+    func centerVertically() {
+        let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let size = sizeThatFits(fittingSize)
+        let topOffset = (bounds.size.height - size.height * zoomScale) / 2
+        let positiveTopOffset = max(1, topOffset)
+        contentOffset.y = -positiveTopOffset
+    }
 }
