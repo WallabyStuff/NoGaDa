@@ -112,7 +112,7 @@ class SearchViewController: UIViewController {
         // SearchResult TableView
         searchResultTableView.tableFooterView = UIView()
         searchResultTableView.separatorStyle = .none
-        searchResultTableView.layer.cornerRadius = 12
+        searchResultTableView.layer.cornerRadius = 16
         
         // Search loading IndicatorView
         searchIndicator.stopAnimatingAndHide()

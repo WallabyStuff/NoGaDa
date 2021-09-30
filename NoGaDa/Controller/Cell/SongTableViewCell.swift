@@ -27,7 +27,7 @@ class SongTableViewCell: UITableViewCell {
         
         cellContentView.layer.borderWidth = 1
         cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
-        cellContentView.layer.cornerRadius = 12
+        cellContentView.layer.cornerRadius = 16
         cellContentView.clipsToBounds = false
         
         songNumberBoxView.layer.cornerRadius = 12
