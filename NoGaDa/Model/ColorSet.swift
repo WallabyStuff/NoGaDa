@@ -11,6 +11,7 @@ class ColorSet {
     // General
     static let accentColor                              = UIColor(named: "AccentColor")!
     static let addFolderButtonBackgroundColor           = UIColor(named: "AddFolderButtonBackgroundColor")!
+    static let addFolderButtonDisabledBackgroundColor   = UIColor(named: "AddFolderButtonDisabledBackgroundColor")!
     static let addFolderButtonForegroundColor           = UIColor(named: "AddFolderButtonForegroundColor")!
     static let addFolderButtonReversedBackgroundColor   = UIColor(named: "AddFolderButtonReversedBackgroundColor")!
     static let addFolderButtonReversedForegroundColor   = UIColor(named: "AddFolderButtonReversedForegroundColor")!
@@ -20,6 +21,7 @@ class ColorSet {
     static let archiveShortcutShadowColor               = UIColor(named: "ArchiveShortcutShadowColor")!
     static let backgroundColor                          = UIColor(named: "BackgroundColor")!
     static let clearTextfieldButtonColor                = UIColor(named: "ClearTextfieldButtonColor")!
+    static let disabledTextColor                        = UIColor(named: "DisabledTextColor")!
     static let floatingPanelHandleColor                 = UIColor(named: "FloatingPanelHandleColor")!
     static let iconResourceBoxBackgroundColor           = UIColor(named: "IconResourceBoxBackgroundColor")!
     static let popUpArchiveBackgroundColor              = UIColor(named: "PopUpArchiveBackgroundColor")!

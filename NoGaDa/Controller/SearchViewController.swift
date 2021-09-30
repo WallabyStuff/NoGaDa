@@ -273,7 +273,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         searchResultCell.titleLabel.text        = searchResultArr[indexPath.row].title
         searchResultCell.singerLabel.text       = searchResultArr[indexPath.row].singer
         searchResultCell.songNumberLabel.text   = searchResultArr[indexPath.row].no
-        searchResultCell.brandLabel.text        = searchResultArr[indexPath.row].brand
+        searchResultCell.brandLabel.text        = searchResultArr[indexPath.row].brand.localizedString
         
         searchResultCell.titleLabel.setAccentColor(string: searchKeyword)
         searchResultCell.singerLabel.setAccentColor(string: searchKeyword)

@@ -18,7 +18,7 @@ class KaraokeManager {
         
         return Observable.create { observable in
             DispatchQueue.global(qos: .background).async {
-                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(brand.rawValue)".urlEncode()
+                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(brand.path)".urlEncode()
                 
                 guard let url = URL(string: fullPath) else {
                     observable.onError(KaraokeAPIErrMessage.urlParsingError)
@@ -57,7 +57,7 @@ class KaraokeManager {
         
         return Observable.create { observable in
             DispatchQueue.global(qos: .background).async {
-                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.rawValue)".urlEncode()
+                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.path)".urlEncode()
                 
                 guard let url = URL(string: fullPath) else {
                     observable.onError(KaraokeAPIErrMessage.urlParsingError)
@@ -95,7 +95,7 @@ class KaraokeManager {
         
         return Observable.create { observable in
             DispatchQueue.global(qos: .background).async {
-                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.rawValue)".urlEncode()
+                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.path)".urlEncode()
                 
                 guard let url = URL(string: fullPath) else {
                     observable.onError(KaraokeAPIErrMessage.urlParsingError)
