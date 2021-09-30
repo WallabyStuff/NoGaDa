@@ -203,4 +203,16 @@ extension FolderViewController: UITableViewDataSource, UITableViewDelegate {
                 .disposed(by: disposeBag)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
+        
+        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
+        
+        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+    }
 }

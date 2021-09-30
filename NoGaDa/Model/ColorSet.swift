@@ -16,6 +16,7 @@ class ColorSet {
     static let addFolderButtonReversedForegroundColor   = UIColor(named: "AddFolderButtonReversedForegroundColor")!
     static let archiveShortcutBackgroundColor           = UIColor(named: "ArchiveShortcutBackgroundColor")!
     static let archiveShortcutPlaceholderColor          = UIColor(named: "ArchiveShortcutPlaceholderColor")!
+    static let archiveShortcutSelectedBackgroundColor   = UIColor(named: "ArchiveShortcutSelectedBackgroundColor")!
     static let archiveShortcutShadowColor               = UIColor(named: "ArchiveShortcutShadowColor")!
     static let backgroundColor                          = UIColor(named: "BackgroundColor")!
     static let clearTextfieldButtonColor                = UIColor(named: "ClearTextfieldButtonColor")!
@@ -61,5 +62,6 @@ class ColorSet {
     static let updatedSongCellStrokeColor               = UIColor(named: "UpdatedSongCellStrokeColor")!
     static let updatedSongSelectorBarIndicatorColor     = UIColor(named: "UpdatedSongSelectorBarIndicatorColor")!
     static let updatedSongSelectorSelectedTextColor     = UIColor(named: "UpdatedSongSelectorSelectedTextColor")!
+    static let songCellSelectedBackgroundColor          = UIColor(named: "SongCellSelectedBackgroundColor")!
     static let updatedSongSelectorUnSelectedTextColor   = UIColor(named: "UpdatedSongSelectorUnSelectedTextColor")!
 }
