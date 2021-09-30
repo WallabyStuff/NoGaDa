@@ -31,6 +31,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var clearTextFieldButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var searchResultContentView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var noSearchResultLabel: UILabel!
     @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
@@ -81,6 +82,10 @@ class SearchViewController: UIViewController {
         searchBoxView.layer.cornerRadius = 12
         searchBoxView.layer.masksToBounds = true
         searchBoxView.setSearchBoxShadow()
+        
+        // Search result ContentView
+        searchResultContentView.clipsToBounds = true
+        searchResultContentView.layer.cornerRadius = 12
         
         // Search TextField
         searchTextField.setPlaceholderColor(ColorSet.appbarTextfieldPlaceholderColor)

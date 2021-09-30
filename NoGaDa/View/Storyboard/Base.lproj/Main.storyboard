@@ -240,20 +240,20 @@
                                 <color key="selectedSegmentTintColor" name="SegmentedControlAccentColor"/>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-bR-N8c">
-                                <rect key="frame" x="0.0" y="275" width="414" height="621"/>
+                                <rect key="frame" x="28" y="275" width="358" height="621"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="116" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3EW-vv-6hL">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="621"/>
+                                        <rect key="frame" x="-28" y="0.0" width="414" height="621"/>
                                         <color key="backgroundColor" name="BackgroundColor"/>
                                     </tableView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 결과가 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nd8-5P-dIH">
-                                        <rect key="frame" x="20" y="300" width="374" height="21"/>
+                                        <rect key="frame" x="20" y="300" width="318" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" name="TextFieldPlaceholderColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eUp-gj-p3D">
-                                        <rect key="frame" x="197" y="300.5" width="20" height="20"/>
+                                        <rect key="frame" x="169" y="300.5" width="20" height="20"/>
                                         <color key="color" name="LoadingIndicatorColor"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -262,8 +262,8 @@
                                     <constraint firstItem="nd8-5P-dIH" firstAttribute="leading" secondItem="h9Q-bR-N8c" secondAttribute="leading" constant="20" id="BS0-9c-wFy"/>
                                     <constraint firstAttribute="bottom" secondItem="3EW-vv-6hL" secondAttribute="bottom" id="F62-JL-Ata"/>
                                     <constraint firstItem="nd8-5P-dIH" firstAttribute="centerX" secondItem="h9Q-bR-N8c" secondAttribute="centerX" id="NT6-u8-0SN"/>
-                                    <constraint firstItem="3EW-vv-6hL" firstAttribute="leading" secondItem="h9Q-bR-N8c" secondAttribute="leading" id="Sg5-dY-Qdu"/>
-                                    <constraint firstAttribute="trailing" secondItem="3EW-vv-6hL" secondAttribute="trailing" id="Tcu-BL-nRl"/>
+                                    <constraint firstItem="3EW-vv-6hL" firstAttribute="leading" secondItem="h9Q-bR-N8c" secondAttribute="leading" constant="-28" id="Sg5-dY-Qdu"/>
+                                    <constraint firstAttribute="trailing" secondItem="3EW-vv-6hL" secondAttribute="trailing" constant="-28" id="Tcu-BL-nRl"/>
                                     <constraint firstItem="eUp-gj-p3D" firstAttribute="centerY" secondItem="h9Q-bR-N8c" secondAttribute="centerY" id="dl4-Ko-6MQ"/>
                                     <constraint firstItem="eUp-gj-p3D" firstAttribute="centerX" secondItem="h9Q-bR-N8c" secondAttribute="centerX" id="ko2-wL-OVF"/>
                                     <constraint firstItem="3EW-vv-6hL" firstAttribute="top" secondItem="h9Q-bR-N8c" secondAttribute="top" id="nAe-Gs-EKM"/>
@@ -358,13 +358,13 @@
                             <constraint firstItem="Dkj-Mj-N6A" firstAttribute="trailing" secondItem="HWm-DX-mxj" secondAttribute="trailing" constant="28" id="Czu-nR-xoe"/>
                             <constraint firstItem="AMD-wF-jsz" firstAttribute="top" secondItem="zzz-1R-5xO" secondAttribute="top" id="G8q-yf-ddZ"/>
                             <constraint firstAttribute="bottom" secondItem="h9Q-bR-N8c" secondAttribute="bottom" id="NqH-bh-a12"/>
-                            <constraint firstItem="h9Q-bR-N8c" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" id="UWa-Ta-DzF"/>
+                            <constraint firstItem="h9Q-bR-N8c" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" constant="28" id="UWa-Ta-DzF"/>
                             <constraint firstItem="HWm-DX-mxj" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" constant="28" id="dRt-ga-ryC"/>
                             <constraint firstItem="AMD-wF-jsz" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" id="eej-ph-Gag"/>
                             <constraint firstItem="HWm-DX-mxj" firstAttribute="top" secondItem="AMD-wF-jsz" secondAttribute="bottom" constant="36" id="hQA-Qc-In1"/>
                             <constraint firstItem="h9Q-bR-N8c" firstAttribute="top" secondItem="HWm-DX-mxj" secondAttribute="bottom" constant="28" id="i08-Fq-9VH"/>
                             <constraint firstItem="AMD-wF-jsz" firstAttribute="trailing" secondItem="Dkj-Mj-N6A" secondAttribute="trailing" id="ir5-1S-MrI"/>
-                            <constraint firstItem="Dkj-Mj-N6A" firstAttribute="trailing" secondItem="h9Q-bR-N8c" secondAttribute="trailing" id="yae-mp-R0Y"/>
+                            <constraint firstItem="Dkj-Mj-N6A" firstAttribute="trailing" secondItem="h9Q-bR-N8c" secondAttribute="trailing" constant="28" id="yae-mp-R0Y"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -379,6 +379,7 @@
                         <outlet property="noSearchResultLabel" destination="nd8-5P-dIH" id="Pcv-pw-8jJ"/>
                         <outlet property="searchBoxView" destination="kbI-rr-6J7" id="qkW-1f-aJA"/>
                         <outlet property="searchIndicator" destination="eUp-gj-p3D" id="XUv-Kr-57w"/>
+                        <outlet property="searchResultContentView" destination="h9Q-bR-N8c" id="KP1-8z-ueK"/>
                         <outlet property="searchResultTableView" destination="3EW-vv-6hL" id="ukH-Rx-M6I"/>
                         <outlet property="searchTextField" destination="I1L-Kc-4uI" id="fj2-3w-qcf"/>
                     </connections>
