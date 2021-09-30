@@ -64,29 +64,18 @@ class ViewController: UIViewController {
     private func initView() {
         self.hero.isEnabled = true
         
+        view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
+        
         // Appbar View
         appbarView.backgroundColor = .clear
         appbarView.configure(cornerRadius: 28, roundCorners: [.bottomRight])
         appbarView.setAppbarShadow()
-        
-        // Appbar Height
-        DispatchQueue.main.async {
-            self.minimumAppbarHeight = 80 + SafeAreaInset.top
-            self.maximumAppbarHeight = 140 + SafeAreaInset.top
-            self.appbarViewHeightConstraint.constant = AppbarHeight.maximum
-        }
         
         // Appbar title Label
         appbarTitleLabel.hero.id = "appbarTitle"
         
         // Setting Button
         settingButton.setPadding(width: 6)
-        
-        // Main content ScrollView
-        DispatchQueue.main.async {
-            self.mainContentScrollView.contentInset = UIEdgeInsets(top: self.appbarViewHeightConstraint.constant, left: 0, bottom: 0, right: 0)
-            self.mainContentScrollView.scrollToTop(animated: false)
-        }
         
         // Main content ScrollView content View
         mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
@@ -121,6 +110,17 @@ class ViewController: UIViewController {
         brandSegmentedControl.segmentFontSize = 14
         brandSegmentedControl.addSegment(title: "tj 업데이트")
         brandSegmentedControl.addSegment(title: "금영 업데이트")
+        
+        DispatchQueue.main.async {
+            // Appbar Height
+            self.minimumAppbarHeight = 80 + SafeAreaInset.top
+            self.maximumAppbarHeight = 140 + SafeAreaInset.top
+            self.appbarViewHeightConstraint.constant = AppbarHeight.maximum
+            
+            // Main content ScrollView
+            self.mainContentScrollView.contentInset = UIEdgeInsets(top: self.appbarViewHeightConstraint.constant, left: 0, bottom: 0, right: 0)
+            self.mainContentScrollView.scrollToTop(animated: false)
+        }
     }
     
     private func initInstance() {

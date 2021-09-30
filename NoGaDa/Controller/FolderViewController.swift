@@ -74,6 +74,8 @@ class FolderViewController: UIViewController {
     private func initView() {
         self.hero.isEnabled = true
         
+        view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
+        
         // Appbar View
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28

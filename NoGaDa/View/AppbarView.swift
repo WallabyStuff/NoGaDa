@@ -54,12 +54,4 @@ class AppbarView: UIView {
         maskLayer.shadowOpacity = 0.2
         layer.insertSublayer(maskLayer, at: 0)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches began")
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches ended")
-    }
 }

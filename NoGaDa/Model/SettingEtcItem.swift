@@ -42,7 +42,7 @@ enum SettingEtcItem: String, CaseIterable {
                 let composeVC = MFMailComposeViewController()
                 
                 composeVC.setToRecipients(["avocado.34.131@gmail.com"])
-                composeVC.setSubject("노가다 버그 및 피드백 리포트")
+                composeVC.setSubject("버그 및 피드백 리포트")
                 composeVC.setMessageBody("", isHTML: false)
                 
                 vc.present(composeVC, animated: true, completion: nil)

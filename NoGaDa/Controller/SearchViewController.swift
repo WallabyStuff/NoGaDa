@@ -64,6 +64,8 @@ class SearchViewController: UIViewController {
     private func initView() {
         self.hero.isEnabled = true
         
+        view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
+        
         // Appbar
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28
