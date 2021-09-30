@@ -7,7 +7,25 @@
 
 import UIKit
 
-enum KaraokeBrand: String {
-    case tj         = "/tj.json"
-    case kumyoung   = "/kumyoung.json"
+enum KaraokeBrand: String, Codable {
+    case tj       = "tj"
+    case kumyoung = "kumyoung"
+    
+    var path: String {
+        switch self {
+        case .tj:
+            return "/tj.json"
+        case .kumyoung:
+            return "/kumyoung.json"
+        }
+    }
+    
+    var localizedString: String {
+        switch self {
+        case .tj:
+            return "tj"
+        case .kumyoung:
+            return "금영"
+        }
+    }
 }

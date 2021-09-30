@@ -112,7 +112,7 @@ class ArchiveFolderManager {
                 let archiveSong = ArchiveSong(no: song.no,
                                               title: song.title,
                                               singer: song.singer,
-                                              brand: song.brand,
+                                              brand: song.brand.localizedString,
                                               composer: song.composer,
                                               lyricists: song.lyricist,
                                               releaseDate: song.release)
