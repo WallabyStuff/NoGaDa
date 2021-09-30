@@ -278,6 +278,18 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         view.endEditing(true)
         showPopUpArchivePanel(selectedSong: searchResultArr[indexPath.row])
     }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
+        
+        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
+        
+        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+    }
 }
 
 extension SearchViewController: UIScrollViewDelegate {

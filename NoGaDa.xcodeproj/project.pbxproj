@@ -38,6 +38,7 @@
 		4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */; };
 		4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */; };
 		4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD6270471CB005F0D85 /* ResourceItem.swift */; };
+		4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */; };
 		49C6DC33270298E30094403B /* AppbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppbarView.swift */; };
 		49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC362703129B0094403B /* SafeAreaInset.swift */; };
 		49C6DC75270372F40094403B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC74270372F40094403B /* SettingViewController.swift */; };
@@ -116,6 +117,7 @@
 		4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconResourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconResourceCollectionViewCell.xib; sourceTree = "<group>"; };
 		4997CFD6270471CB005F0D85 /* ResourceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceItem.swift; sourceTree = "<group>"; };
+		4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveShortcutView.swift; sourceTree = "<group>"; };
 		49C6DC32270298E30094403B /* AppbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarView.swift; sourceTree = "<group>"; };
 		49C6DC362703129B0094403B /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
 		49C6DC74270372F40094403B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
 				4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */,
 				49C6DC32270298E30094403B /* AppbarView.swift */,
+				4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */,
 				49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
+				4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
 				49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,

@@ -178,6 +178,18 @@ extension ArchiveViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard let folderCell = tableView.cellForRow(at: indexPath) as? FolderTableViewCell else { return }
+        
+        folderCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard let folderCell = tableView.cellForRow(at: indexPath) as? FolderTableViewCell else { return }
+        
+        folderCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+    }
 }
 
 extension ArchiveViewController: FolderViewDelegate {

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -89,7 +87,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="brandLabel" destination="2gF-7m-Etz" id="jPt-Cs-JvI"/>
-                <outlet property="cellContentview" destination="5iS-RB-ze0" id="wq2-3G-AP4"/>
+                <outlet property="cellContentView" destination="5iS-RB-ze0" id="wq2-3G-AP4"/>
                 <outlet property="singerLabel" destination="xip-d2-MYg" id="MTj-jm-40F"/>
                 <outlet property="songNumberBoxView" destination="wMZ-Io-ybn" id="Jaw-Hf-0OY"/>
                 <outlet property="songNumberLabel" destination="0ZF-vX-BnD" id="GQ4-s2-rY8"/>

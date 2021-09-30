@@ -9,7 +9,7 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var cellContentview: UIView!
+    @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var brandLabel: UILabel!
@@ -25,10 +25,10 @@ class SongTableViewCell: UITableViewCell {
     private func initView() {
         contentView.clipsToBounds = false
         
-        cellContentview.layer.borderWidth = 1
-        cellContentview.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
-        cellContentview.layer.cornerRadius = 12
-        cellContentview.clipsToBounds = false
+        cellContentView.layer.borderWidth = 1
+        cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
+        cellContentView.layer.cornerRadius = 12
+        cellContentView.clipsToBounds = false
         
         songNumberBoxView.layer.cornerRadius = 12
         songNumberBoxView.layer.masksToBounds = true
@@ -46,7 +46,7 @@ class SongTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        cellContentview.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
+        cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
         singerLabel.releaseAccentColor()
         titleLabel.releaseAccentColor()
     }

@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var mainContentScrollViewContentViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var archiveShortcutView: UIView!
+    @IBOutlet weak var archiveShortcutView: ArchiveShortcutView!
     @IBOutlet weak var archiveShortcutBackgroundImageView: UIImageView!
     @IBOutlet weak var totalArchivedSongSizeLabel: UILabel!
     @IBOutlet weak var searchBoxView: UIView!
@@ -100,10 +100,6 @@ class ViewController: UIViewController {
         searchButton.hero.id = "searchBoxButton"
         searchButton.layer.cornerRadius = 8
         searchButton.setSearchBoxButtonShadow()
-        
-        // Archive Shortcut View (Button)
-        archiveShortcutView.layer.cornerRadius = 20
-        archiveShortcutView.setArchiveShortCutShadow()
         
         // Archive shortcut background ImageView
         archiveShortcutBackgroundImageView.layer.cornerRadius = 20
@@ -312,6 +308,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showPopUpArchivePanel(selectedSong: updatedSongArr[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard let updatedSongCell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
+        
+        updatedSongCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard let updatedSongCell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
+        
+        updatedSongCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
     }
 }
 
