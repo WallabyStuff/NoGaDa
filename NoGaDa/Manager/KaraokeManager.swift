@@ -17,35 +17,37 @@ class KaraokeManager {
     func fetchUpdatedSong(brand: KaraokeBrand) -> Observable<[Song]> {
         
         return Observable.create { observable in
-            let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(brand.rawValue)".urlEncode()
-            
-            guard let url = URL(string: fullPath) else {
-                observable.onError(KaraokeAPIErrMessage.urlParsingError)
-                return Disposables.create()
+            DispatchQueue.global(qos: .background).async {
+                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(brand.rawValue)".urlEncode()
+                
+                guard let url = URL(string: fullPath) else {
+                    observable.onError(KaraokeAPIErrMessage.urlParsingError)
+                    return
+                }
+                
+                var request         = URLRequest(url: url)
+                request.httpMethod  = "GET"
+                
+                URLSession.shared.dataTask(with: request) { jsonData, response, error in
+                    guard let jsonData = jsonData else {
+                        observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
+                        return
+                    }
+                    
+                    guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+                        observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
+                        return
+                    }
+                    
+                    guard let updatedSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
+                        observable.onError(KaraokeAPIErrMessage.jsonParsingError)
+                        return
+                    }
+                    
+                    observable.onNext(updatedSongList)
+                    observable.onCompleted()
+                }.resume()
             }
-            
-            var request         = URLRequest(url: url)
-            request.httpMethod  = "GET"
-            
-            URLSession.shared.dataTask(with: request) { jsonData, response, error in
-                guard let jsonData = jsonData else {
-                    observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                    observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
-                    return
-                }
-                
-                guard let updatedSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-                    observable.onError(KaraokeAPIErrMessage.jsonParsingError)
-                    return
-                }
-                
-                observable.onNext(updatedSongList)
-                observable.onCompleted()
-            }.resume()
             
             return Disposables.create()
         }
@@ -54,34 +56,36 @@ class KaraokeManager {
     func fetchSong(title: String, brand: KaraokeBrand) -> Observable<[Song]> {
         
         return Observable.create { observable in
-            let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.rawValue)".urlEncode()
-            
-            guard let url = URL(string: fullPath) else {
-                observable.onError(KaraokeAPIErrMessage.urlParsingError)
-                return Disposables.create()
+            DispatchQueue.global(qos: .background).async {
+                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.rawValue)".urlEncode()
+                
+                guard let url = URL(string: fullPath) else {
+                    observable.onError(KaraokeAPIErrMessage.urlParsingError)
+                    return
+                }
+                
+                var request         = URLRequest(url: url)
+                request.httpMethod  = "GET"
+                
+                URLSession.shared.dataTask(with: request) { jsonData, response, error in
+                    guard let jsonData = jsonData else {
+                        observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
+                        return
+                    }
+                    
+                    guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+                        observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
+                        return
+                    }
+                    
+                    guard let searchResultSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
+                        observable.onError(KaraokeAPIErrMessage.jsonParsingError)
+                        return
+                    }
+                    
+                    observable.onNext(searchResultSongList)
+                }.resume()
             }
-            
-            var request         = URLRequest(url: url)
-            request.httpMethod  = "GET"
-            
-            URLSession.shared.dataTask(with: request) { jsonData, response, error in
-                guard let jsonData = jsonData else {
-                    observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                    observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
-                    return
-                }
-                
-                guard let searchResultSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-                    observable.onError(KaraokeAPIErrMessage.jsonParsingError)
-                    return
-                }
-                
-                observable.onNext(searchResultSongList)
-            }.resume()
             
             return Disposables.create()
         }
@@ -90,34 +94,36 @@ class KaraokeManager {
     func fetchSong(singer: String, brand: KaraokeBrand) -> Observable<[Song]> {
         
         return Observable.create { observable in
-            let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.rawValue)".urlEncode()
-            
-            guard let url = URL(string: fullPath) else {
-                observable.onError(KaraokeAPIErrMessage.urlParsingError)
-                return Disposables.create()
+            DispatchQueue.global(qos: .background).async {
+                let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.rawValue)".urlEncode()
+                
+                guard let url = URL(string: fullPath) else {
+                    observable.onError(KaraokeAPIErrMessage.urlParsingError)
+                    return
+                }
+                
+                var request         = URLRequest(url: url)
+                request.httpMethod  = "GET"
+                
+                URLSession.shared.dataTask(with: request) { jsonData, response, error in
+                    guard let jsonData = jsonData else {
+                        observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
+                        return
+                    }
+                    
+                    guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+                        observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
+                        return
+                    }
+                    
+                    guard let searchResultSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
+                        observable.onError(KaraokeAPIErrMessage.jsonParsingError)
+                        return
+                    }
+                    
+                    observable.onNext(searchResultSongList)
+                }.resume()
             }
-            
-            var request         = URLRequest(url: url)
-            request.httpMethod  = "GET"
-            
-            URLSession.shared.dataTask(with: request) { jsonData, response, error in
-                guard let jsonData = jsonData else {
-                    observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                    observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
-                    return
-                }
-                
-                guard let searchResultSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-                    observable.onError(KaraokeAPIErrMessage.jsonParsingError)
-                    return
-                }
-                
-                observable.onNext(searchResultSongList)
-            }.resume()
             
             return Disposables.create()
         }

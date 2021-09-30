@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var disposeBag = DisposeBag()
     let archiveFloatingPanel = FloatingPanelController()
     let karaokeManager = KaraokeManager()
-    var updatedSongList = [Song]()
+    var updatedSongArr = [Song]()
     let archiveFolderManager = ArchiveFolderManager()
     
     var minimumAppbarHeight: CGFloat = 80
@@ -36,9 +36,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBoxView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var brandSegmentedControl: BISegmentedControl!
-    @IBOutlet weak var chartTableView: UITableView!
-    @IBOutlet weak var chartLoadErrorMessageLabel: UILabel!
-    @IBOutlet weak var chartLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var updatedSongTableView: UITableView!
+    @IBOutlet weak var updatedsongLoadErrorMessageLabel: UILabel!
+    @IBOutlet weak var updatedSongLoadingIndicator: UIActivityIndicatorView!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -113,9 +113,9 @@ class ViewController: UIViewController {
         totalArchivedSongSizeLabel.text = "총 \(archiveFolderManager.getSongsCount())곡"
         
         // Chart TableView
-        chartTableView.layer.cornerRadius = 12
-        chartTableView.tableFooterView = UIView()
-        chartTableView.separatorStyle = .none
+        updatedSongTableView.layer.cornerRadius = 12
+        updatedSongTableView.tableFooterView = UIView()
+        updatedSongTableView.separatorStyle = .none
         
         // Karaoke brand segmented control
         brandSegmentedControl.segmentTintColor = ColorSet.updatedSongSelectorSelectedTextColor
@@ -130,9 +130,9 @@ class ViewController: UIViewController {
     private func initInstance() {
         // Chart TableView
         let chartTableCellNibName = UINib(nibName: "ChartTableViewCell", bundle: nil)
-        chartTableView.register(chartTableCellNibName, forCellReuseIdentifier: "chartTableViewCell")
-        chartTableView.delegate = self
-        chartTableView.dataSource = self
+        updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "chartTableViewCell")
+        updatedSongTableView.delegate = self
+        updatedSongTableView.dataSource = self
         
         setUpdatedSongChart()
         
@@ -261,30 +261,35 @@ class ViewController: UIViewController {
             brand = .kumyoung
         }
         
-        chartLoadingIndicator.startAnimatingAndShow()
-        chartLoadErrorMessageLabel.isHidden = true
+        updatedSongLoadingIndicator.startAnimatingAndShow()
+        updatedsongLoadErrorMessageLabel.isHidden = true
+        updatedSongArr.removeAll()
+        updatedSongTableView.reloadData()
         
         karaokeManager.fetchUpdatedSong(brand: brand)
-            .observe(on: MainScheduler.instance)
             .retry(3)
             .subscribe(with: self, onNext: { vc, updatedSongList in
-                vc.updatedSongList = updatedSongList
-                vc.reloadChartTableView()
+                DispatchQueue.main.async {
+                    vc.updatedSongArr = updatedSongList
+                    vc.reloadChartTableView()
+                }
             }, onError: { vc, error in
-                vc.chartLoadingIndicator.stopAnimatingAndHide()
-                vc.chartLoadErrorMessageLabel.text = "오류가 발생했습니다."
-                vc.chartLoadErrorMessageLabel.isHidden = false
+                DispatchQueue.main.async {
+                    vc.updatedSongLoadingIndicator.stopAnimatingAndHide()
+                    vc.updatedsongLoadErrorMessageLabel.text = "오류가 발생했습니다."
+                    vc.updatedsongLoadErrorMessageLabel.isHidden = false
+                }
             }).disposed(by: disposeBag)
     }
     
     private func reloadChartTableView() {
-        chartLoadingIndicator.stopAnimatingAndHide()
-        chartTableView.reloadData()
-        chartTableView.scrollToTopCell(animated: false)
+        updatedSongLoadingIndicator.stopAnimatingAndHide()
+        updatedSongTableView.reloadData()
+        updatedSongTableView.scrollToTopCell(animated: false)
         
-        if updatedSongList.count == 0 {
-            chartLoadErrorMessageLabel.text = "업데이트 된 곡이 없습니다."
-            chartLoadErrorMessageLabel.isHidden = false
+        if updatedSongArr.count == 0 {
+            updatedsongLoadErrorMessageLabel.text = "업데이트 된 곡이 없습니다."
+            updatedsongLoadErrorMessageLabel.isHidden = false
         }
     }
 }
@@ -292,21 +297,21 @@ class ViewController: UIViewController {
 // MARK: - Extension
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return updatedSongList.count
+        return updatedSongArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let chartCell = tableView.dequeueReusableCell(withIdentifier: "chartTableViewCell") as? ChartTableViewCell else { return UITableViewCell() }
         
         chartCell.chartNumberLabel.text = "\(indexPath.row + 1)"
-        chartCell.songTitleLabel.text   = "\(updatedSongList[indexPath.row].title)"
-        chartCell.singerLabel.text      = "\(updatedSongList[indexPath.row].singer)"
+        chartCell.songTitleLabel.text   = "\(updatedSongArr[indexPath.row].title)"
+        chartCell.singerLabel.text      = "\(updatedSongArr[indexPath.row].singer)"
         
         return chartCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showPopUpArchivePanel(selectedSong: updatedSongList[indexPath.row])
+        showPopUpArchivePanel(selectedSong: updatedSongArr[indexPath.row])
     }
 }
 
@@ -317,7 +322,7 @@ extension ViewController: BISegmentedControlDelegate {
 }
 
 extension ViewController: PopUpArchiveViewDelegate {
-    func popUpArchiveView(successfullyAdded: Song) {
+    func popUpArchiveView(isSuccessfullyAdded: Bool) {
         archiveFloatingPanel.hide(animated: true)
     }
 }

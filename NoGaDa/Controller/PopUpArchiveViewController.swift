@@ -12,7 +12,7 @@ import RxCocoa
 import RxGesture
 
 protocol PopUpArchiveViewDelegate: AnyObject {
-    func popUpArchiveView(successfullyAdded: Song)
+    func popUpArchiveView(isSuccessfullyAdded: Bool)
 }
 
 class PopUpArchiveViewController: UIViewController {
@@ -115,7 +115,13 @@ class PopUpArchiveViewController: UIViewController {
             
             self.archiveFolderManager.appendSong(archiveFolder: targetFolder, song: selectedSong)
                 .subscribe(with: self, onCompleted: { vc in
-                    vc.delegate?.popUpArchiveView(successfullyAdded: vc.selectedSong!)
+                    vc.delegate?.popUpArchiveView(isSuccessfullyAdded: true)
+                }, onError: { vc, error in
+                    guard let error = error as? ArchiveFolderManagerError else { return }
+                    
+                    if error == .alreadyExists {
+                        vc.presentAlreadyExitstAlert()
+                    }
                 }).disposed(by: self.disposeBag)
         }
         
@@ -144,6 +150,19 @@ class PopUpArchiveViewController: UIViewController {
         removeFolderAlert.addAction(cancelAction)
         
         present(removeFolderAlert, animated: true, completion: nil)
+    }
+    
+    private func presentAlreadyExitstAlert() {
+        let alreadyExistsAlert = UIAlertController(title: "알림",
+                                                   message: "이미 저장된 곡입니다.",
+                                                   preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel) { [weak self] action in
+            self?.delegate?.popUpArchiveView(isSuccessfullyAdded: false)
+        }
+        alreadyExistsAlert.addAction(confirmAction)
+        
+        present(alreadyExistsAlert, animated: true, completion: nil)
     }
 }
 

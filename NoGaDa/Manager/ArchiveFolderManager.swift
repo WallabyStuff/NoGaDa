@@ -11,7 +11,7 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-enum ArchiveFolderManagerErrorMessage: String, Error {
+enum ArchiveFolderManagerError: String, Error {
     case alreadyExists = "file already exists on Realm"
 }
 
@@ -118,13 +118,12 @@ class ArchiveFolderManager {
                                               releaseDate: song.release)
                 
                 if self.isSongExists(archiveFolder: archiveFolder, song: archiveSong) {
-                    completable(.error(ArchiveFolderManagerErrorMessage.alreadyExists))
+                    completable(.error(ArchiveFolderManagerError.alreadyExists))
                     return Disposables.create()
                 }
                 
                 try realmInsatnce.write {
                     archiveFolder.songs.append(archiveSong)
-//                    realmInsatnce.add(archiveFolder)
                     completable(.completed)
                 }
             } catch {
