@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxGesture
 import FloatingPanel
+import RealmSwift
 
 class ViewController: UIViewController {
 
@@ -47,6 +48,8 @@ class ViewController: UIViewController {
         initView()
         initInstance()
         initEventListener()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        print("realm key: \(Realm.Configuration.defaultConfiguration.encryptionKey?.description)")
     }
     
     // MARK: - Override
