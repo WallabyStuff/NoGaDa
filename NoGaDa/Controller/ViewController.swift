@@ -48,8 +48,12 @@ class ViewController: UIViewController {
         initView()
         initInstance()
         initEventListener()
-        print(Realm.Configuration.defaultConfiguration.fileURL)
-        print("realm key: \(Realm.Configuration.defaultConfiguration.encryptionKey?.description)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setTotalArchivedSongSize()
     }
     
     // MARK: - Override
@@ -96,9 +100,6 @@ class ViewController: UIViewController {
         // Archive shortcut background ImageView
         archiveShortcutBackgroundImageView.layer.cornerRadius = 20
         archiveShortcutBackgroundImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
-        
-        // Total archived song size Label
-        totalArchivedSongSizeLabel.text = "총 \(archiveFolderManager.getSongsCount())곡"
         
         // Chart TableView
         updatedSongTableView.layer.cornerRadius = 12
@@ -291,6 +292,10 @@ class ViewController: UIViewController {
             updatedsongLoadErrorMessageLabel.isHidden = false
         }
     }
+    
+    private func setTotalArchivedSongSize() {
+        totalArchivedSongSizeLabel.text = "총 \(archiveFolderManager.getSongsCount())곡"
+    }
 }
 
 // MARK: - Extension
@@ -335,5 +340,6 @@ extension ViewController: BISegmentedControlDelegate {
 extension ViewController: PopUpArchiveViewDelegate {
     func popUpArchiveView(isSuccessfullyAdded: Bool) {
         archiveFloatingPanel.hide(animated: true)
+        setTotalArchivedSongSize()
     }
 }
