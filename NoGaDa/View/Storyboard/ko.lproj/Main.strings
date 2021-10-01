@@ -1,0 +1,96 @@
+
+/* Class = "UILabel"; text = "제목이나 가수명으로 노래를 검색하세요"; ObjectID = "4Jq-qh-3mw"; */
+"4Jq-qh-3mw.text" = "제목이나 가수명으로 노래를 검색하세요";
+
+/* Class = "UILabel"; text = "Contact us"; ObjectID = "6P6-Kw-gij"; */
+"6P6-Kw-gij.text" = "Contact us";
+
+/* Class = "UITextField"; placeholder = "폴더 이름"; ObjectID = "7w4-j5-IR6"; */
+"7w4-j5-IR6.placeholder" = "폴더 이름";
+
+/* Class = "UILabel"; text = "새 폴더"; ObjectID = "C4h-cQ-6N2"; */
+"C4h-cQ-6N2.text" = "새 폴더";
+
+/* Class = "UIButton"; normalTitle = "+ 새 폴더 생성"; ObjectID = "Cbk-yG-6kt"; */
+"Cbk-yG-6kt.normalTitle" = "+ 새 폴더 생성";
+
+/* Class = "UITextField"; text = "😀"; ObjectID = "Cpu-J9-uYf"; */
+"Cpu-J9-uYf.text" = "😀";
+
+/* Class = "UILabel"; text = "오류가 발생했습니다."; ObjectID = "CxZ-Cq-9Qe"; */
+"CxZ-Cq-9Qe.text" = "오류가 발생했습니다.";
+
+/* Class = "UILabel"; text = "노래방 가서 다 부를거야!"; ObjectID = "DLU-ju-7zi"; */
+"DLU-ju-7zi.text" = "노래방 가서 다 부를거야!";
+
+/* Class = "UISegmentedControl"; HWm-DX-mxj.segmentTitles[0] = "tj"; ObjectID = "HWm-DX-mxj"; */
+"HWm-DX-mxj.segmentTitles[0]" = "tj";
+
+/* Class = "UISegmentedControl"; HWm-DX-mxj.segmentTitles[1] = "금영"; ObjectID = "HWm-DX-mxj"; */
+"HWm-DX-mxj.segmentTitles[1]" = "금영";
+
+/* Class = "UITextField"; placeholder = "제목이나 가수명으로 노래를 검색하세요"; ObjectID = "I1L-Kc-4uI"; */
+"I1L-Kc-4uI.placeholder" = "제목이나 가수명으로 노래를 검색하세요";
+
+/* Class = "UILabel"; text = "총 --곡"; ObjectID = "I8f-kb-mSm"; */
+"I8f-kb-mSm.text" = "총 --곡";
+
+/* Class = "UILabel"; text = "Credit"; ObjectID = "J4O-zs-k0K"; */
+"J4O-zs-k0K.text" = "Credit";
+
+/* Class = "UIButton"; normalTitle = "적용"; ObjectID = "KXr-bc-Zdo"; */
+"KXr-bc-Zdo.normalTitle" = "적용";
+
+/* Class = "UILabel"; text = "Setting"; ObjectID = "M4g-7J-YGo"; */
+"M4g-7J-YGo.text" = "Setting";
+
+/* Class = "UILabel"; text = "기타"; ObjectID = "SVo-nP-6mw"; */
+"SVo-nP-6mw.text" = "기타";
+
+/* Class = "UILabel"; text = "보관함"; ObjectID = "UOS-9k-ADV"; */
+"UOS-9k-ADV.text" = "보관함";
+
+/* Class = "UITextField"; text = "노래방 가서 부르고 싶은 노래"; ObjectID = "VpG-sO-j57"; */
+"VpG-sO-j57.text" = "노래방 가서 부르고 싶은 노래";
+
+/* Class = "UILabel"; text = "보관함 바로가기"; ObjectID = "Ysc-M8-Y7u"; */
+"Ysc-M8-Y7u.text" = "보관함 바로가기";
+
+/* Class = "UILabel"; text = "보관함"; ObjectID = "asG-Yn-m5w"; */
+"asG-Yn-m5w.text" = "보관함";
+
+/* Class = "UIButton"; normalTitle = "+ 새 폴더 생성"; ObjectID = "bTv-E6-Q0q"; */
+"bTv-E6-Q0q.normalTitle" = "+ 새 폴더 생성";
+
+/* Class = "UILabel"; text = "노래 검색"; ObjectID = "cQ5-Pr-b1K"; */
+"cQ5-Pr-b1K.text" = "노래 검색";
+
+/* Class = "UINavigationItem"; title = "Main"; ObjectID = "dBf-gf-Im0"; */
+"dBf-gf-Im0.title" = "Main";
+
+/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "fSo-Bc-Q9v"; */
+"fSo-Bc-Q9v.normalTitle" = "확인";
+
+/* Class = "UITextView"; text = "Developer : Lee Seunggi\nUi/Ux Design: Lee Seunggi\nContact : avocado34.131@gmail.com\n\n\nApi Contributor : Yun KwangSeon\nContact : middleyks@hanmail.net"; ObjectID = "gjp-Oi-p6X"; */
+"gjp-Oi-p6X.text" = "Developer : Lee Seunggi\nUi/Ux Design: Lee Seunggi\nContact : avocado34.131@gmail.com\n\n\nApi Contributor : Yun KwangSeon\nContact : middleyks@hanmail.net";
+
+/* Class = "UILabel"; text = "Used resources"; ObjectID = "hgy-DL-w7S"; */
+"hgy-DL-w7S.text" = "Used resources";
+
+/* Class = "UILabel"; text = "검색필터"; ObjectID = "hkW-sj-9w7"; */
+"hkW-sj-9w7.text" = "검색필터";
+
+/* Class = "UIViewController"; title = "노래 검색"; ObjectID = "lvi-2L-p6a"; */
+"lvi-2L-p6a.title" = "노래 검색";
+
+/* Class = "UILabel"; text = "검색 결과가 없습니다."; ObjectID = "nd8-5P-dIH"; */
+"nd8-5P-dIH.text" = "검색 결과가 없습니다.";
+
+/* Class = "UILabel"; text = "노가다 노래방 가서 다 부를거야  version 1.0.0"; ObjectID = "skd-ZX-9Km"; */
+"skd-ZX-9Km.text" = "노가다 노래방 가서 다 부를거야  version 1.0.0";
+
+/* Class = "UILabel"; text = "Copyright © LeeSeunggi All Right Reserved"; ObjectID = "suC-8F-fRQ"; */
+"suC-8F-fRQ.text" = "Copyright © LeeSeunggi All Right Reserved";
+
+/* Class = "UITextField"; text = "😃"; ObjectID = "zbA-aj-vX6"; */
+"zbA-aj-vX6.text" = "😃";
