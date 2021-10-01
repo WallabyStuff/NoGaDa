@@ -56,6 +56,7 @@ class ArchiveFolderManager {
                 let realmInstance = try Realm()
                 
                 try realmInstance.write {
+                    realmInstance.delete(archiveFolder.songs)
                     realmInstance.delete(archiveFolder)
                     completable(.completed)
                 }
