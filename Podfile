@@ -6,7 +6,13 @@ target 'NoGaDa' do
   use_frameworks!
 
   # Pods for NoGaDa
-
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxGesture'
+  pod 'Hero', '1.6.0'
+  pod 'FloatingPanel'
+  pod 'RealmSwift'
+ 
   target 'NoGaDaTests' do
     inherit! :search_paths
     # Pods for testing
