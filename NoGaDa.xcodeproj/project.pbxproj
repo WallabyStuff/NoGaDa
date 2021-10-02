@@ -281,7 +281,6 @@
 		4956CE5526F469F00007523B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				493BCBE226F4BAC30096422A /* Cell */,
 				4956CE5726F469FA0007523B /* Storyboard */,
 				4956CE5A26F47CC30007523B /* ViewGlobalExtension.swift */,
 				493BCBEC26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift */,
@@ -315,6 +314,7 @@
 		4956CE5726F469FA0007523B /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				493BCBE226F4BAC30096422A /* Cell */,
 				4956CE2A26F467040007523B /* Main.storyboard */,
 				4956CE2F26F467060007523B /* LaunchScreen.storyboard */,
 			);
