@@ -57,8 +57,12 @@ class FolderViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
         setArchivedSongs()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     // MARK: - Initialization
@@ -216,5 +220,9 @@ extension FolderViewController: UITableViewDataSource, UITableViewDelegate {
         guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
         
         searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
