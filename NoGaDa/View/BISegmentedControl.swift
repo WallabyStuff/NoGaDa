@@ -19,7 +19,7 @@ class BISegmentedControl: UIView {
     private var barIndicatorLeftAnchor: NSLayoutConstraint?
     private var barIndicatorwidthAnchor: NSLayoutConstraint?
     var barIndicatorWidthProportion: CGFloat = 0.7
-    var barIndicatorColor: UIColor = UIColor.red
+    var barIndicatorColor: UIColor = ColorSet.updatedSongSelectorBarIndicatorColor
     var barIndicatorHeight: CGFloat = 4
     var currentPosition = 0
     var segmentTintColor: UIColor = .black

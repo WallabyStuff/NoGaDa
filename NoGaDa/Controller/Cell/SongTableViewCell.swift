@@ -23,6 +23,7 @@ class SongTableViewCell: UITableViewCell {
     }
 
     private func initView() {
+        clipsToBounds = false
         contentView.clipsToBounds = false
         
         cellContentView.layer.borderWidth = 1

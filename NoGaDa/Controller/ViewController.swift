@@ -56,6 +56,12 @@ class ViewController: UIViewController {
         setTotalArchivedSongSize()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        mainContentScrollView.scrollToTop(animated: false)
+    }
+    
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

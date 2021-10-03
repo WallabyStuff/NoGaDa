@@ -40,6 +40,7 @@ class EmojiTextField: UITextField {
     
     private func configure() {
         delegate = self
+        tintColor = .clear
         setRandomEmoji()
     }
     
@@ -53,13 +54,13 @@ class EmojiTextField: UITextField {
     }
     
     func setRandomEmoji() {
-        self.text = String(UnicodeScalar(Array(0x1F300...0x1F3F0).randomElement()!)!)
+        text = String(UnicodeScalar(Array(0x1F300...0x1F3F0).randomElement()!)!)
     }
 }
 
 extension EmojiTextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.endEditing(true)
+        endEditing(true)
     }
 }
 
