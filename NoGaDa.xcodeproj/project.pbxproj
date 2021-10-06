@@ -20,6 +20,7 @@
 		493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */; };
 		493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */; };
 		493BCBF326F642630096422A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBF226F642630096422A /* EmojiTextField.swift */; };
+		493F232E270DEA4700A618DC /* ArchiveFloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */; };
 		4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */; };
 		4956CE2526F467040007523B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2426F467040007523B /* AppDelegate.swift */; };
 		4956CE2726F467040007523B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2626F467040007523B /* SceneDelegate.swift */; };
@@ -97,6 +98,7 @@
 		493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
 		493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartTableViewCell.xib; sourceTree = "<group>"; };
 		493BCBF226F642630096422A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
+		493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFloatingPanel.swift; sourceTree = "<group>"; };
 		4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BISegmentedControl.swift; sourceTree = "<group>"; };
 		4956CE2126F467040007523B /* NoGaDa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoGaDa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4956CE2426F467040007523B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */,
 				49C6DC32270298E30094403B /* AppbarView.swift */,
 				4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */,
+				493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				49D1D6B826FC6C0E0024C5F9 /* ArchiveFolder.swift in Sources */,
 				49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */,
 				49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */,
+				493F232E270DEA4700A618DC /* ArchiveFloatingPanel.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
 				4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,

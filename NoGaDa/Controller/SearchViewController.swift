@@ -17,10 +17,10 @@ class SearchViewController: UIViewController {
 
     // MARK: - Declaraiton
     var disposeBag = DisposeBag()
-    let archiveFloatingPanel = FloatingPanelController()
     var karaokeManager = KaraokeManager()
     var searchResultArr = [Song]()
     var searchKeyword = ""
+    var archiveFloatingPanel: ArchiveFloatingPanel?
     
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var searchResultContentView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
-    @IBOutlet weak var noSearchResultLabel: UILabel!
+    @IBOutlet weak var searchResultPlaceholderLabel: UILabel!
     @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
     
     // MARK: - LifeCycle
@@ -119,6 +119,10 @@ class SearchViewController: UIViewController {
         
         // Clear search textfield Button
         clearTextFieldButton.setPadding(width: 6)
+        
+        // Search result placeholder label
+        searchResultPlaceholderLabel.text = "검색창에 제목 또는 가수명으로 노래를 검색하세요!"
+        searchResultPlaceholderLabel.isHidden = false
     }
     
     private func initInstance() {
@@ -131,6 +135,9 @@ class SearchViewController: UIViewController {
         // Search TextField
         searchTextField.delegate = self
         searchTextField.becomeFirstResponder()
+        
+        // Archive floating panel
+        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
     }
     
     private func initEventListener() {
@@ -162,15 +169,9 @@ class SearchViewController: UIViewController {
     }
     
     // MARK: - Method
-    private func showPopUpArchivePanel(selectedSong: Song) {
-        configurePopUpArchivePanel(selectedSong: selectedSong)
-        archiveFloatingPanel.show(animated: true, completion: nil)
-        archiveFloatingPanel.move(to: .half, animated: true)
-    }
-    
     private func dismissKeyboardAndArchivePanel() {
         view.endEditing(true)
-        archiveFloatingPanel.hide(animated: true)
+        archiveFloatingPanel?.hide(animated: true)
     }
     
     private func setSearchResult() {
@@ -191,7 +192,7 @@ class SearchViewController: UIViewController {
         
         searchIndicator.startAnimatingAndShow()
         searchKeyword = titleOrSinger
-        noSearchResultLabel.isHidden = true
+        searchResultPlaceholderLabel.isHidden = true
         searchResultArr.removeAll()
         searchResultTableView.reloadData()
         
@@ -205,8 +206,8 @@ class SearchViewController: UIViewController {
             }, onError: { vc, error in
                 DispatchQueue.main.async {
                     vc.searchIndicator.stopAnimatingAndHide()
-                    vc.noSearchResultLabel.text = "오류가 발생했습니다."
-                    vc.noSearchResultLabel.isHidden = false
+                    vc.searchResultPlaceholderLabel.text = "오류가 발생했습니다."
+                    vc.searchResultPlaceholderLabel.isHidden = false
                 }
             }).disposed(by: disposeBag)
     }
@@ -216,8 +217,8 @@ class SearchViewController: UIViewController {
         searchResultTableView.reloadData()
         
         if searchResultArr.count == 0 {
-            noSearchResultLabel.text = "검색 결과가 없습니다."
-            noSearchResultLabel.isHidden = false
+            searchResultPlaceholderLabel.text = "검색 결과가 없습니다."
+            searchResultPlaceholderLabel.isHidden = false
             return
         }
         
@@ -238,27 +239,6 @@ class SearchViewController: UIViewController {
         
         present(searchFilterVC, animated: true, completion: nil)
     }
-    
-    private func configurePopUpArchivePanel(selectedSong: Song) {
-        let appearance = SurfaceAppearance()
-        appearance.cornerRadius = 32
-        
-        archiveFloatingPanel.removeFromParent()
-        archiveFloatingPanel.contentMode = .fitToBounds
-        archiveFloatingPanel.backdropView.dismissalTapGestureRecognizer.isEnabled = true
-        archiveFloatingPanel.surfaceView.appearance = appearance
-        archiveFloatingPanel.surfaceView.grabberHandle.barColor = ColorSet.floatingPanelHandleColor
-        archiveFloatingPanel.layout = PopUpArchiveFloatingPanelLayout()
-        
-        guard let popUpArchiveVC = storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpArchiveViewController else { return }
-        popUpArchiveVC.delegate = self
-        popUpArchiveVC.selectedSong = selectedSong
-        popUpArchiveVC.exitButtonAction = { [weak self] in
-            self?.archiveFloatingPanel.hide(animated: true)
-        }
-        archiveFloatingPanel.set(contentViewController: popUpArchiveVC)
-        archiveFloatingPanel.addPanel(toParent: self)
-    }
 }
 
 // MARK: - Extension
@@ -275,15 +255,21 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         searchResultCell.songNumberLabel.text   = searchResultArr[indexPath.row].no
         searchResultCell.brandLabel.text        = searchResultArr[indexPath.row].brand.localizedString
         
-        searchResultCell.titleLabel.setAccentColor(string: searchKeyword)
-        searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
+        if !SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
+            searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
+        } else if SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
+            searchResultCell.titleLabel.setAccentColor(string: searchKeyword)
+        } else {
+            searchResultCell.titleLabel.setAccentColor(string: searchKeyword)
+            searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
+        }
         
         return searchResultCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
-        showPopUpArchivePanel(selectedSong: searchResultArr[indexPath.row])
+        archiveFloatingPanel?.show(selectedSong: searchResultArr[indexPath.row], animated: true)
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
@@ -312,12 +298,6 @@ extension SearchViewController: UITextFieldDelegate {
     }
 }
 
-extension SearchViewController: PopUpArchiveViewDelegate {
-    func popUpArchiveView(isSuccessfullyAdded: Bool) {
-        archiveFloatingPanel.hide(animated: true)
-    }
-}
-
 extension SearchViewController: UIPopoverPresentationControllerDelegate {
     public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
@@ -328,8 +308,4 @@ extension SearchViewController: PopOverSearchFilterViewDelegate {
     func popOverSearchFilterView(didTapApply: Bool) {
         self.setSearchResult()
     }
-}
-
-extension SearchViewController: UITextViewDelegate {
-    
 }
