@@ -47,6 +47,7 @@
 		49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */; };
 		49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */; };
 		49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC7C270382620094403B /* SettingEtcItem.swift */; };
+		49CF8428270E03F400E0EB72 /* ReviewRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF8427270E03F400E0EB72 /* ReviewRequestManager.swift */; };
 		49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */; };
 		49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */; };
 		49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B126FC68F30024C5F9 /* Song.swift */; };
@@ -131,6 +132,7 @@
 		49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcTableViewCell.swift; sourceTree = "<group>"; };
 		49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingEtcTableViewCell.xib; sourceTree = "<group>"; };
 		49C6DC7C270382620094403B /* SettingEtcItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcItem.swift; sourceTree = "<group>"; };
+		49CF8427270E03F400E0EB72 /* ReviewRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestManager.swift; sourceTree = "<group>"; };
 		49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrand.swift; sourceTree = "<group>"; };
 		49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeAPIErrMessage.swift; sourceTree = "<group>"; };
 		49D1D6B126FC68F30024C5F9 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			children = (
 				4989A72526F8863C00A98B63 /* KaraokeManager.swift */,
 				49D1D6BB26FC70720024C5F9 /* ArchiveFolderManager.swift */,
+				49CF8427270E03F400E0EB72 /* ReviewRequestManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				493F232E270DEA4700A618DC /* ArchiveFloatingPanel.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
 				4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */,
+				49CF8428270E03F400E0EB72 /* ReviewRequestManager.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
 				49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,

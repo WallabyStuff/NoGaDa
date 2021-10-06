@@ -10,7 +10,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxGesture
-import FloatingPanel
 import RealmSwift
 
 class ViewController: UIViewController {

@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
-import FloatingPanel
 import Hero
 
 class SearchViewController: UIViewController {
