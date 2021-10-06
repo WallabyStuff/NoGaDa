@@ -17,10 +17,10 @@ class ViewController: UIViewController {
 
     // MARK: Declaration
     var disposeBag = DisposeBag()
-    let archiveFloatingPanel = FloatingPanelController()
     let karaokeManager = KaraokeManager()
     var updatedSongArr = [Song]()
     let archiveFolderManager = ArchiveFolderManager()
+    var archiveFloatingPanel: ArchiveFloatingPanel?
     
     var minimumAppbarHeight: CGFloat = 80
     var maximumAppbarHeight: CGFloat = 140
@@ -144,6 +144,12 @@ class ViewController: UIViewController {
         
         // Karaoke brand segmented control
         brandSegmentedControl.delegate = self
+        
+        // Archive floating panel
+        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
+        archiveFloatingPanel?.successfullyAddedAction = { [weak self] in
+            self?.setTotalArchivedSongSize()
+        }
     }
     
     private func initEventListener() {
@@ -152,7 +158,7 @@ class ViewController: UIViewController {
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
-                vc.archiveFloatingPanel.hide(animated: true)
+                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Search Textfield LongPress Action
@@ -160,7 +166,7 @@ class ViewController: UIViewController {
             .when(.began)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
-                vc.archiveFloatingPanel.hide(animated: true)
+                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Search Button Tap Action
@@ -168,7 +174,7 @@ class ViewController: UIViewController {
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
-                vc.archiveFloatingPanel.hide(animated: true)
+                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Archive Shortcut Tap Action
@@ -176,7 +182,7 @@ class ViewController: UIViewController {
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentArchiveVC()
-                vc.archiveFloatingPanel.hide(animated: true)
+                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Setting Button Tap Action
@@ -232,33 +238,6 @@ class ViewController: UIViewController {
         guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "settingStoryboard") as? SettingViewController else { return }
         
         present(settingVC, animated: true, completion: nil)
-    }
-    
-    private func configurePopUpArchivePanel(selectedSong: Song) {
-        let appearance = SurfaceAppearance()
-        appearance.cornerRadius = 32
-        
-        archiveFloatingPanel.removeFromParent()
-        archiveFloatingPanel.contentMode = .fitToBounds
-        archiveFloatingPanel.backdropView.dismissalTapGestureRecognizer.isEnabled = true
-        archiveFloatingPanel.surfaceView.appearance = appearance
-        archiveFloatingPanel.surfaceView.grabberHandle.barColor = ColorSet.floatingPanelHandleColor
-        archiveFloatingPanel.layout = PopUpArchiveFloatingPanelLayout()
-        
-        guard let popUpArchiveVC = storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpArchiveViewController else { return }
-        popUpArchiveVC.delegate = self
-        popUpArchiveVC.selectedSong = selectedSong
-        popUpArchiveVC.exitButtonAction = { [weak self] in
-            self?.archiveFloatingPanel.hide(animated: true)
-        }
-        archiveFloatingPanel.set(contentViewController: popUpArchiveVC)
-        archiveFloatingPanel.addPanel(toParent: self)
-    }
-    
-    private func showPopUpArchivePanel(selectedSong: Song) {
-        configurePopUpArchivePanel(selectedSong: selectedSong)
-        archiveFloatingPanel.show(animated: true, completion: nil)
-        archiveFloatingPanel.move(to: .half, animated: true)
     }
     
     private func setUpdatedSongChart() {
@@ -321,7 +300,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showPopUpArchivePanel(selectedSong: updatedSongArr[indexPath.row])
+        archiveFloatingPanel?.show(selectedSong: updatedSongArr[indexPath.row], animated: true)
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
@@ -340,12 +319,5 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 extension ViewController: BISegmentedControlDelegate {
     func BISegmentedControl(didSelectSegmentAt index: Int) {
         setUpdatedSongChart()
-    }
-}
-
-extension ViewController: PopUpArchiveViewDelegate {
-    func popUpArchiveView(isSuccessfullyAdded: Bool) {
-        archiveFloatingPanel.hide(animated: true)
-        setTotalArchivedSongSize()
     }
 }

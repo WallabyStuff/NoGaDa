@@ -231,8 +231,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HWm-DX-mxj">
-                                <rect key="frame" x="28" y="216" width="358" height="32"/>
+                                <rect key="frame" x="125" y="212" width="164" height="32"/>
                                 <color key="backgroundColor" name="SegmentedControlBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="164" id="Ui0-Bd-DfQ"/>
+                                </constraints>
                                 <segments>
                                     <segment title="tj"/>
                                     <segment title="금영"/>
@@ -240,20 +243,20 @@
                                 <color key="selectedSegmentTintColor" name="SegmentedControlAccentColor"/>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-bR-N8c">
-                                <rect key="frame" x="28" y="275" width="358" height="621"/>
+                                <rect key="frame" x="28" y="267" width="358" height="629"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="116" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3EW-vv-6hL">
-                                        <rect key="frame" x="-28" y="0.0" width="414" height="621"/>
+                                        <rect key="frame" x="-28" y="0.0" width="414" height="629"/>
                                         <color key="backgroundColor" name="BackgroundColor"/>
                                     </tableView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 결과가 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nd8-5P-dIH">
-                                        <rect key="frame" x="20" y="300" width="318" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 결과가 없습니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nd8-5P-dIH">
+                                        <rect key="frame" x="20" y="304" width="318" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" name="TextFieldPlaceholderColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eUp-gj-p3D">
-                                        <rect key="frame" x="169" y="300.5" width="20" height="20"/>
+                                        <rect key="frame" x="169" y="304.5" width="20" height="20"/>
                                         <color key="color" name="LoadingIndicatorColor"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -355,14 +358,13 @@
                         <viewLayoutGuide key="safeArea" id="Dkj-Mj-N6A"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Dkj-Mj-N6A" firstAttribute="trailing" secondItem="HWm-DX-mxj" secondAttribute="trailing" constant="28" id="Czu-nR-xoe"/>
                             <constraint firstItem="AMD-wF-jsz" firstAttribute="top" secondItem="zzz-1R-5xO" secondAttribute="top" id="G8q-yf-ddZ"/>
                             <constraint firstAttribute="bottom" secondItem="h9Q-bR-N8c" secondAttribute="bottom" id="NqH-bh-a12"/>
                             <constraint firstItem="h9Q-bR-N8c" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" constant="28" id="UWa-Ta-DzF"/>
-                            <constraint firstItem="HWm-DX-mxj" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" constant="28" id="dRt-ga-ryC"/>
+                            <constraint firstItem="HWm-DX-mxj" firstAttribute="centerX" secondItem="zzz-1R-5xO" secondAttribute="centerX" id="Wq3-M9-0bD"/>
                             <constraint firstItem="AMD-wF-jsz" firstAttribute="leading" secondItem="Dkj-Mj-N6A" secondAttribute="leading" id="eej-ph-Gag"/>
-                            <constraint firstItem="HWm-DX-mxj" firstAttribute="top" secondItem="AMD-wF-jsz" secondAttribute="bottom" constant="36" id="hQA-Qc-In1"/>
-                            <constraint firstItem="h9Q-bR-N8c" firstAttribute="top" secondItem="HWm-DX-mxj" secondAttribute="bottom" constant="28" id="i08-Fq-9VH"/>
+                            <constraint firstItem="HWm-DX-mxj" firstAttribute="top" secondItem="AMD-wF-jsz" secondAttribute="bottom" constant="32" id="hQA-Qc-In1"/>
+                            <constraint firstItem="h9Q-bR-N8c" firstAttribute="top" secondItem="HWm-DX-mxj" secondAttribute="bottom" constant="24" id="i08-Fq-9VH"/>
                             <constraint firstItem="AMD-wF-jsz" firstAttribute="trailing" secondItem="Dkj-Mj-N6A" secondAttribute="trailing" id="ir5-1S-MrI"/>
                             <constraint firstItem="Dkj-Mj-N6A" firstAttribute="trailing" secondItem="h9Q-bR-N8c" secondAttribute="trailing" constant="28" id="yae-mp-R0Y"/>
                         </constraints>
@@ -376,10 +378,10 @@
                         <outlet property="clearTextFieldButton" destination="KoJ-Vf-9zG" id="1RT-O6-rac"/>
                         <outlet property="exitButton" destination="oKs-di-f33" id="XFF-e3-osR"/>
                         <outlet property="filterButton" destination="UOH-GX-Z1R" id="rY5-Jk-tM7"/>
-                        <outlet property="noSearchResultLabel" destination="nd8-5P-dIH" id="Pcv-pw-8jJ"/>
                         <outlet property="searchBoxView" destination="kbI-rr-6J7" id="qkW-1f-aJA"/>
                         <outlet property="searchIndicator" destination="eUp-gj-p3D" id="XUv-Kr-57w"/>
                         <outlet property="searchResultContentView" destination="h9Q-bR-N8c" id="KP1-8z-ueK"/>
+                        <outlet property="searchResultPlaceholderLabel" destination="nd8-5P-dIH" id="Pcv-pw-8jJ"/>
                         <outlet property="searchResultTableView" destination="3EW-vv-6hL" id="ukH-Rx-M6I"/>
                         <outlet property="searchTextField" destination="I1L-Kc-4uI" id="fj2-3w-qcf"/>
                     </connections>
