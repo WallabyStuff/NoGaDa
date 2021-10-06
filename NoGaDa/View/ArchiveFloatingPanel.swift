@@ -70,5 +70,7 @@ extension ArchiveFloatingPanel: PopUpArchiveViewDelegate {
     func popUpArchiveView(isSuccessfullyAdded: Bool) {
         floatingPanel.hide(animated: true)
         successfullyAddedAction()
+        
+        ReviewRequestManager.requestReview()
     }
 }
