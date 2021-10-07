@@ -59,6 +59,7 @@
 		49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */; };
 		49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */; };
 		49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */; };
+		49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6EB5A270E0F3200610383 /* AdMobManager.swift */; };
 		49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FB0D0927038DED00AE3A9F /* CreditViewController.swift */; };
 		AE4CF0CD631C525E606164AC /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C411C7213996900DC91856 /* Pods_NoGaDa_NoGaDaUITests.framework */; };
 		E3D259B2E2FC1C1C73B33B02 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9EB434CB0BBE3FEF6E476C /* Pods_NoGaDa.framework */; };
@@ -144,6 +145,7 @@
 		49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
 		49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterItem.swift; sourceTree = "<group>"; };
 		49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewController.swift; sourceTree = "<group>"; };
+		49E6EB5A270E0F3200610383 /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
 		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		A2E6958378A44498808BB46E /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
 		B9FD68BF65BEFAB7133960B1 /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +334,7 @@
 				4989A72526F8863C00A98B63 /* KaraokeManager.swift */,
 				49D1D6BB26FC70720024C5F9 /* ArchiveFolderManager.swift */,
 				49CF8427270E03F400E0EB72 /* ReviewRequestManager.swift */,
+				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */,
 				49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */,
 				4956CE5926F476450007523B /* ColorSet.swift in Sources */,
+				49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */,
 				4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */,
 				493BCBE026F4B2890096422A /* PopUpArchiveViewController.swift in Sources */,
 				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
