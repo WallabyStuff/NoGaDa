@@ -12,6 +12,7 @@ class ArchiveFloatingPanel {
     
     private var floatingPanel = FloatingPanelController()
     private var vc: UIViewController?
+    private var adMobManager = AdMobManager()
     var successfullyAddedAction: () -> Void = {}
     
     init(vc: UIViewController) {
@@ -68,9 +69,14 @@ class ArchiveFloatingPanel {
 
 extension ArchiveFloatingPanel: PopUpArchiveViewDelegate {
     func popUpArchiveView(isSuccessfullyAdded: Bool) {
-        floatingPanel.hide(animated: true)
-        successfullyAddedAction()
-        
-        ReviewRequestManager.requestReview()
+        if isSuccessfullyAdded {
+            guard let vc = vc else { return }
+            
+            floatingPanel.hide(animated: true)
+            successfullyAddedAction()
+            
+            ReviewRequestManager.requestReview()
+            adMobManager.presentAdMob(vc: vc)
+        }
     }
 }
