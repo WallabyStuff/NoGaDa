@@ -68,8 +68,8 @@ extension UIView {
     func setExitButtonShadow() {
         self.layer.shadowColor = ColorSet.appbarExitButtonBackgroundColor.cgColor
         self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 20
-        self.layer.shadowOpacity = 0.4
+        self.layer.shadowRadius = 16
+        self.layer.shadowOpacity = 0.2
     }
     
     func setReversedExitButtonShadow() {

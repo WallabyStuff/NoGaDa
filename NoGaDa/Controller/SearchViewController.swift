@@ -24,7 +24,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
-    @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var brandSelector: UISegmentedControl!
     @IBOutlet weak var searchBoxView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -103,10 +103,9 @@ class SearchViewController: UIViewController {
         brandSelector.setSelectedTextColor(ColorSet.segmentedControlSelectedTextColor)
         brandSelector.setDefaultTextColor(ColorSet.segmentedControlDefaultTextColor)
         
-        // Exit Button
-        exitButton.makeAsCircle()
-        exitButton.setExitButtonShadow()
-        exitButton.hero.modifiers = [.fade, .translate(x: view.frame.width - exitButton.frame.origin.x)]
+        // Back Button
+        backButton.hero.modifiers = [.fade]
+        backButton.setPadding(width: 6)
         
         // SearchResult TableView
         searchResultTableView.tableFooterView = UIView()
@@ -141,7 +140,7 @@ class SearchViewController: UIViewController {
     
     private func initEventListener() {
         // Exit Button Tap Action
-        exitButton.rx.tap
+        backButton.rx.tap
             .bind(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
