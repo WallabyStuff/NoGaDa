@@ -277,14 +277,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKs-di-f33">
-                                        <rect key="frame" x="352" y="52" width="34" height="34"/>
-                                        <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
+                                        <rect key="frame" x="28" y="51.5" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="IfE-Yl-lQr"/>
-                                            <constraint firstAttribute="width" constant="34" id="Y3k-Lc-SGs"/>
+                                            <constraint firstAttribute="width" constant="32" id="Hr8-HE-Gg7"/>
+                                            <constraint firstAttribute="height" constant="32" id="w6e-Wv-5XN"/>
                                         </constraints>
-                                        <color key="tintColor" name="AppbarBackgroundColor"/>
-                                        <state key="normal" image="xmark" catalog="system">
+                                        <color key="tintColor" name="AppbarTextColor"/>
+                                        <state key="normal" image="back-arrow">
                                             <color key="titleColor" name="ExitButtonForegroundColor"/>
                                         </state>
                                     </button>
@@ -336,7 +336,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노래 검색" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ5-Pr-b1K">
-                                        <rect key="frame" x="28" y="54.5" width="88.5" height="29"/>
+                                        <rect key="frame" x="297.5" y="53" width="88.5" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" name="AppbarTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -344,14 +344,14 @@
                                 </subviews>
                                 <color key="backgroundColor" name="AppbarBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="kbI-rr-6J7" firstAttribute="top" secondItem="oKs-di-f33" secondAttribute="bottom" constant="24" id="4Lp-nN-JrM"/>
+                                    <constraint firstItem="kbI-rr-6J7" firstAttribute="top" secondItem="cQ5-Pr-b1K" secondAttribute="bottom" constant="28" id="656-83-eES"/>
+                                    <constraint firstAttribute="trailing" secondItem="cQ5-Pr-b1K" secondAttribute="trailing" constant="28" id="9I3-D4-OeH"/>
                                     <constraint firstAttribute="trailing" secondItem="kbI-rr-6J7" secondAttribute="trailing" constant="28" id="Cho-Oh-1gF"/>
+                                    <constraint firstItem="oKs-di-f33" firstAttribute="leading" secondItem="AMD-wF-jsz" secondAttribute="leading" constant="28" id="Ero-OU-w3u"/>
                                     <constraint firstAttribute="bottom" secondItem="kbI-rr-6J7" secondAttribute="bottom" constant="20" id="FiO-nf-Pwj"/>
                                     <constraint firstItem="kbI-rr-6J7" firstAttribute="leading" secondItem="AMD-wF-jsz" secondAttribute="leading" constant="28" id="Rsu-ez-gbT"/>
-                                    <constraint firstItem="cQ5-Pr-b1K" firstAttribute="centerY" secondItem="oKs-di-f33" secondAttribute="centerY" id="U6p-8L-HaI"/>
                                     <constraint firstAttribute="height" constant="180" id="ibs-zs-uSB"/>
-                                    <constraint firstAttribute="trailing" secondItem="oKs-di-f33" secondAttribute="trailing" constant="28" id="jWM-Cy-fbu"/>
-                                    <constraint firstItem="cQ5-Pr-b1K" firstAttribute="leading" secondItem="AMD-wF-jsz" secondAttribute="leading" constant="28" id="m8z-Uv-ABp"/>
+                                    <constraint firstItem="oKs-di-f33" firstAttribute="centerY" secondItem="cQ5-Pr-b1K" secondAttribute="centerY" id="imd-FD-or1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -374,9 +374,9 @@
                         <outlet property="appbarTitleLabel" destination="cQ5-Pr-b1K" id="tcU-TS-150"/>
                         <outlet property="appbarView" destination="AMD-wF-jsz" id="29t-1L-o8i"/>
                         <outlet property="appbarViewHeightConstraint" destination="ibs-zs-uSB" id="zTa-7m-y1P"/>
+                        <outlet property="backButton" destination="oKs-di-f33" id="XFF-e3-osR"/>
                         <outlet property="brandSelector" destination="HWm-DX-mxj" id="Hg6-4O-MNM"/>
                         <outlet property="clearTextFieldButton" destination="KoJ-Vf-9zG" id="1RT-O6-rac"/>
-                        <outlet property="exitButton" destination="oKs-di-f33" id="XFF-e3-osR"/>
                         <outlet property="filterButton" destination="UOH-GX-Z1R" id="rY5-Jk-tM7"/>
                         <outlet property="searchBoxView" destination="kbI-rr-6J7" id="qkW-1f-aJA"/>
                         <outlet property="searchIndicator" destination="eUp-gj-p3D" id="XUv-Kr-57w"/>
@@ -1094,6 +1094,7 @@ Contact : middleyks@hanmail.net</string>
     </scenes>
     <resources>
         <image name="ArchiveShortcutBackgroundImage" width="1024" height="717"/>
+        <image name="back-arrow" width="492" height="492"/>
         <image name="folder" width="512" height="512"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
