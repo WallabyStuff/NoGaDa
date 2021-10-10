@@ -12,28 +12,29 @@ import RxCocoa
 import RxGesture
 import Hero
 
+enum ContentsType {
+    case searchHistory
+    case searchResult
+}
+
 class SearchViewController: UIViewController {
 
     // MARK: - Declaraiton
     var disposeBag = DisposeBag()
-    var karaokeManager = KaraokeManager()
-    var searchResultArr = [Song]()
-    var searchKeyword = ""
     var archiveFloatingPanel: ArchiveFloatingPanel?
+    var searchHistoryVC = SearchHistoryViewController()
+    var searchResultVC = SearchResultViewController()
+    let searchHistoryManager = SearchHistoryManager()
     
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var brandSelector: UISegmentedControl!
     @IBOutlet weak var searchBoxView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var clearTextFieldButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var searchResultContentView: UIView!
-    @IBOutlet weak var searchResultTableView: UITableView!
-    @IBOutlet weak var searchResultPlaceholderLabel: UILabel!
-    @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var contentsView: UIView!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -52,18 +53,10 @@ class SearchViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        setSearchResult()
-    }
 
     // MARK: - Initialization
     private func initView() {
         self.hero.isEnabled = true
-        
-        view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         
         // Appbar
         appbarView.hero.id = "appbar"
@@ -71,6 +64,7 @@ class SearchViewController: UIViewController {
         appbarView.layer.cornerCurve = .circular
         appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner])
         appbarView.setAppbarShadow()
+        view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         
         // Appbar height constraint
         appbarViewHeightConstraint.constant = 140 + SafeAreaInset.top
@@ -84,10 +78,6 @@ class SearchViewController: UIViewController {
         searchBoxView.layer.masksToBounds = true
         searchBoxView.setSearchBoxShadow()
         
-        // Search result ContentView
-        searchResultContentView.clipsToBounds = true
-        searchResultContentView.layer.cornerRadius = 12
-        
         // Search TextField
         searchTextField.setPlaceholderColor(ColorSet.appbarTextfieldPlaceholderColor)
         searchTextField.setLeftPadding(width: 12)
@@ -99,37 +89,18 @@ class SearchViewController: UIViewController {
         filterButton.setPadding(width: 8)
         filterButton.setSearchBoxButtonShadow()
         
-        // Brand Selector SegmentedControl
-        brandSelector.setSelectedTextColor(ColorSet.segmentedControlSelectedTextColor)
-        brandSelector.setDefaultTextColor(ColorSet.segmentedControlDefaultTextColor)
-        
         // Back Button
         backButton.hero.modifiers = [.fade]
         backButton.setPadding(width: 6)
         
-        // SearchResult TableView
-        searchResultTableView.tableFooterView = UIView()
-        searchResultTableView.separatorStyle = .none
-        searchResultTableView.layer.cornerRadius = 16
-        
-        // Search loading IndicatorView
-        searchIndicator.stopAnimatingAndHide()
-        
         // Clear search textfield Button
         clearTextFieldButton.setPadding(width: 6)
         
-        // Search result placeholder label
-        searchResultPlaceholderLabel.text = "검색창에 제목 또는 가수명으로 노래를 검색하세요!"
-        searchResultPlaceholderLabel.isHidden = false
+        // Set up ContainerView
+        configureContainerView()
     }
     
     private func initInstance() {
-        // SearchResult TableView
-        let searchResultCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
-        searchResultTableView.register(searchResultCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-        
         // Search TextField
         searchTextField.delegate = self
         searchTextField.becomeFirstResponder()
@@ -151,13 +122,6 @@ class SearchViewController: UIViewController {
                 vc.presentSearchFilterPopoverVC()
             }.disposed(by: disposeBag)
         
-        // Brand Segmented Control Action
-        brandSelector.rx.selectedSegmentIndex
-            .bind(with: self) { vc, _ in
-                // TODO - replace table cells according to brand catalog
-                vc.setSearchResult()
-            }.disposed(by: disposeBag)
-        
         // Clear TextField Button Tap Action
         clearTextFieldButton.rx.tap
             .bind(with: self, onNext: { vc, _ in
@@ -172,58 +136,7 @@ class SearchViewController: UIViewController {
         archiveFloatingPanel?.hide(animated: true)
     }
     
-    private func setSearchResult() {
-        dismissKeyboardAndArchivePanel()
-        
-        var brand: KaraokeBrand = .tj
-        if brandSelector.selectedSegmentIndex == 1 {
-            brand = .kumyoung
-        }
-        
-        let titleOrSinger = searchTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
-        if titleOrSinger.isEmpty { return }
-        
-        if !SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
-            presentSearchFilterPopoverVC()
-            return
-        }
-        
-        searchIndicator.startAnimatingAndShow()
-        searchKeyword = titleOrSinger
-        searchResultPlaceholderLabel.isHidden = true
-        searchResultArr.removeAll()
-        searchResultTableView.reloadData()
-        
-        karaokeManager.fetchSong(titleOrSinger: titleOrSinger, brand: brand)
-            .retry(3)
-            .subscribe(with: self, onNext: { vc, searchResultList in
-                DispatchQueue.main.async {
-                    vc.searchResultArr = searchResultList
-                    vc.reloadSearchResult()
-                }
-            }, onError: { vc, error in
-                DispatchQueue.main.async {
-                    vc.searchIndicator.stopAnimatingAndHide()
-                    vc.searchResultPlaceholderLabel.text = "오류가 발생했습니다."
-                    vc.searchResultPlaceholderLabel.isHidden = false
-                }
-            }).disposed(by: disposeBag)
-    }
-    
-    private func reloadSearchResult() {
-        searchIndicator.stopAnimatingAndHide()
-        searchResultTableView.reloadData()
-        
-        if searchResultArr.count == 0 {
-            searchResultPlaceholderLabel.text = "검색 결과가 없습니다."
-            searchResultPlaceholderLabel.isHidden = false
-            return
-        }
-        
-        searchResultTableView.scrollToTopCell(animated: false)
-    }
-    
-    func presentSearchFilterPopoverVC() {
+    private func presentSearchFilterPopoverVC() {
         guard let searchFilterVC = storyboard?.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
         
         searchFilterVC.navigationController?.popoverPresentationController?.backgroundColor = .white
@@ -237,52 +150,66 @@ class SearchViewController: UIViewController {
         
         present(searchFilterVC, animated: true, completion: nil)
     }
+    
+    private func setSearchResult() {
+        guard let searchKeyword = searchTextField.text else {
+            return
+        }
+        
+        if searchKeyword.isEmpty {
+            return
+        }
+        
+        if !SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
+            presentSearchFilterPopoverVC()
+            return
+        }
+        
+        view.endEditing(true)
+        
+        searchHistoryManager.addData(searchKeyword: searchKeyword)
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        searchResultVC.setSearchResult(searchKeyword)
+        replaceContents(type: .searchResult)
+    }
+    
+    private func configureContainerView() {
+        searchHistoryVC = storyboard?.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
+        searchResultVC = storyboard?.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
+        
+        searchHistoryVC.delegate = self
+        searchResultVC.delegate = self
+        
+        addChild(searchHistoryVC)
+        addChild(searchResultVC)
+        
+        contentsView.addSubview(searchHistoryVC.view)
+        contentsView.addSubview(searchResultVC.view)
+
+        searchHistoryVC.didMove(toParent: self)
+        searchResultVC.didMove(toParent: self)
+        
+        searchHistoryVC.view.frame = contentsView.bounds
+        searchResultVC.view.frame = contentsView.bounds
+        
+        searchResultVC.view.isHidden = true
+    }
+    
+    private func replaceContents(type: ContentsType) {
+        if type == .searchHistory {
+            searchHistoryVC.updateSearchHistory()
+            searchHistoryVC.view.isHidden = false
+            searchResultVC.view.isHidden = true
+        } else {
+            searchHistoryVC.view.isHidden = true
+            searchResultVC.view.isHidden = false
+        }
+    }
 }
 
 // MARK: - Extension
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultArr.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let searchResultCell = tableView.dequeueReusableCell(withIdentifier: "searchResultTableViewCell") as? SongTableViewCell else { return UITableViewCell() }
-        
-        searchResultCell.titleLabel.text        = searchResultArr[indexPath.row].title
-        searchResultCell.singerLabel.text       = searchResultArr[indexPath.row].singer
-        searchResultCell.songNumberLabel.text   = searchResultArr[indexPath.row].no
-        searchResultCell.brandLabel.text        = searchResultArr[indexPath.row].brand.localizedString
-        
-        if !SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
-            searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
-        } else if SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
-            searchResultCell.titleLabel.setAccentColor(string: searchKeyword)
-        } else {
-            searchResultCell.titleLabel.setAccentColor(string: searchKeyword)
-            searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
-        }
-        
-        return searchResultCell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        view.endEditing(true)
-        archiveFloatingPanel?.show(selectedSong: searchResultArr[indexPath.row], animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
-    }
-}
-
 extension SearchViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         dismissKeyboardAndArchivePanel()
@@ -294,6 +221,10 @@ extension SearchViewController: UITextFieldDelegate {
         setSearchResult()
         return false
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        replaceContents(type: .searchHistory)
+    }
 }
 
 extension SearchViewController: UIPopoverPresentationControllerDelegate {
@@ -304,6 +235,23 @@ extension SearchViewController: UIPopoverPresentationControllerDelegate {
 
 extension SearchViewController: PopOverSearchFilterViewDelegate {
     func popOverSearchFilterView(didTapApply: Bool) {
-        self.setSearchResult()
+        setSearchResult()
+    }
+}
+
+extension SearchViewController: SearchResultViewDelegate {
+    func searchResultView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedSongRowAt selectedSong: Song) {
+        archiveFloatingPanel?.show(selectedSong: selectedSong, animated: true)
+    }
+}
+
+extension SearchViewController: SearchHistoryViewDelegate {
+    func searchHistoryView(_ tableViewTouchesBegan: Bool) {
+        dismissKeyboardAndArchivePanel()
+    }
+    
+    func searchHistoryView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedHistoryRowAt selectedHistory: SearchHistory) {
+        searchTextField.text = selectedHistory.keyword
+        searchTextField.becomeFirstResponder()
     }
 }

@@ -22,6 +22,12 @@
 		493BCBF326F642630096422A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBF226F642630096422A /* EmojiTextField.swift */; };
 		493F232E270DEA4700A618DC /* ArchiveFloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */; };
 		4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */; };
+		495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334302711DE37003F64DE /* SearchResultViewController.swift */; };
+		495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334322711DE4B003F64DE /* SearchHistoryViewController.swift */; };
+		495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */; };
+		495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */; };
+		4953343B271204C4003F64DE /* SearchHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953343A271204C4003F64DE /* SearchHistoryManager.swift */; };
+		4953343D2712C126003F64DE /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953343C2712C126003F64DE /* SearchHistory.swift */; };
 		4956CE2526F467040007523B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2426F467040007523B /* AppDelegate.swift */; };
 		4956CE2726F467040007523B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2626F467040007523B /* SceneDelegate.swift */; };
 		4956CE2926F467040007523B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE2826F467040007523B /* ViewController.swift */; };
@@ -102,6 +108,12 @@
 		493BCBF226F642630096422A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFloatingPanel.swift; sourceTree = "<group>"; };
 		4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BISegmentedControl.swift; sourceTree = "<group>"; };
+		495334302711DE37003F64DE /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		495334322711DE4B003F64DE /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
+		495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		4953343A271204C4003F64DE /* SearchHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryManager.swift; sourceTree = "<group>"; };
+		4953343C2712C126003F64DE /* SearchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
 		4956CE2126F467040007523B /* NoGaDa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoGaDa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4956CE2426F467040007523B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4956CE2626F467040007523B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +206,7 @@
 				49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */,
 				49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */,
 				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
+				495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -208,6 +221,7 @@
 				49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */,
 				49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */,
 				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
+				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -280,6 +294,8 @@
 				49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */,
 				49C6DC74270372F40094403B /* SettingViewController.swift */,
 				49FB0D0927038DED00AE3A9F /* CreditViewController.swift */,
+				495334302711DE37003F64DE /* SearchResultViewController.swift */,
+				495334322711DE4B003F64DE /* SearchHistoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -313,6 +329,7 @@
 				49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */,
 				49C6DC362703129B0094403B /* SafeAreaInset.swift */,
 				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
+				4953343C2712C126003F64DE /* SearchHistory.swift */,
 				491A6D082707026C00E41D5B /* InfoPlist.strings */,
 			);
 			path = Model;
@@ -335,6 +352,7 @@
 				49D1D6BB26FC70720024C5F9 /* ArchiveFolderManager.swift */,
 				49CF8427270E03F400E0EB72 /* ReviewRequestManager.swift */,
 				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
+				4953343A271204C4003F64DE /* SearchHistoryManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -477,6 +495,7 @@
 				493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */,
 				4956CE2E26F467060007523B /* Assets.xcassets in Resources */,
 				4956CE2C26F467040007523B /* Main.storyboard in Resources */,
+				495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */,
 				49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */,
 				49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */,
 				493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */,
@@ -610,8 +629,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
+				495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */,
 				4956CE6126F494870007523B /* FolderViewController.swift in Sources */,
 				493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */,
+				4953343B271204C4003F64DE /* SearchHistoryManager.swift in Sources */,
 				4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */,
 				4989A72626F8863C00A98B63 /* KaraokeManager.swift in Sources */,
 				49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */,
@@ -621,6 +642,7 @@
 				49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */,
 				4956CE5926F476450007523B /* ColorSet.swift in Sources */,
 				49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */,
+				495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */,
 				4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */,
 				493BCBE026F4B2890096422A /* PopUpArchiveViewController.swift in Sources */,
 				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
@@ -642,6 +664,8 @@
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
 				4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */,
 				49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */,
+				495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */,
+				4953343D2712C126003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
 				493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */,
 				4956CE5F26F494730007523B /* ArchiveViewController.swift in Sources */,
@@ -839,7 +863,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 497P4L97SV;
 				INFOPLIST_FILE = NoGaDa/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -847,7 +871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MuffinLabs.NoGaDa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -862,7 +886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 497P4L97SV;
 				INFOPLIST_FILE = NoGaDa/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -870,7 +894,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MuffinLabs.NoGaDa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
