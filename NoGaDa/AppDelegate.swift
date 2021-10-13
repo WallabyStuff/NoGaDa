@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftRater
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         initUserDefaults()
+        requestRating()
         return true
     }
 
@@ -37,6 +39,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                "searchWithTitle": true,
                "searchWithSinger": true
                ])
+    }
+    
+    private func requestRating() {
+        SwiftRater.daysUntilPrompt = 7
+        SwiftRater.usesUntilPrompt = 10
+        SwiftRater.significantUsesUntilPrompt = 3
+        SwiftRater.daysBeforeReminding = 1
+        SwiftRater.showLaterButton = true
+        SwiftRater.debugMode = true
+        SwiftRater.appLaunched()
     }
 }
 

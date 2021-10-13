@@ -22,10 +22,6 @@ class ArchiveShortcutView: UIView {
     private func configure() {
         backgroundColor = ColorSet.archiveShortcutBackgroundColor
         layer.cornerRadius = 20
-        layer.shadowColor = ColorSet.archiveShortcutShadowColor.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 4)
-        layer.shadowRadius = 8
-        layer.shadowOpacity = 0.4
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

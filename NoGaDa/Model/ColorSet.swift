@@ -18,7 +18,6 @@ class ColorSet {
     static let archiveShortcutBackgroundColor           = UIColor(named: "ArchiveShortcutBackgroundColor")!
     static let archiveShortcutPlaceholderColor          = UIColor(named: "ArchiveShortcutPlaceholderColor")!
     static let archiveShortcutSelectedBackgroundColor   = UIColor(named: "ArchiveShortcutSelectedBackgroundColor")!
-    static let archiveShortcutShadowColor               = UIColor(named: "ArchiveShortcutShadowColor")!
     static let backgroundColor                          = UIColor(named: "BackgroundColor")!
     static let clearTextfieldButtonColor                = UIColor(named: "ClearTextfieldButtonColor")!
     static let disabledTextColor                        = UIColor(named: "DisabledTextColor")!
@@ -34,6 +33,8 @@ class ColorSet {
     static let settingGroupHeaderTextColor              = UIColor(named: "SettingGroupHeaderTextColor")!
     static let settingIconBoxBackgroundColor            = UIColor(named: "SettingIconBoxBackgroundColor")!
     static let settingIconBoxForegroundColor            = UIColor(named: "SettingIconBoxForegroundColor")!
+    static let splashBackgroundColor                    = UIColor(named: "SplashBackgroundColor")!
+    static let subTextColor                             = UIColor(named: "SubTextColor")!
     static let textAccentColor                          = UIColor(named: "TextAccentColor")!
     static let textColor                                = UIColor(named: "TextColor")!
     static let textFieldBackgroundColor                 = UIColor(named: "TextFieldBackgroundColor")!

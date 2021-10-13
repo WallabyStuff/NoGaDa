@@ -91,6 +91,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             let filterItem = SearchFilterItem.allCases[indexPath.row]
             
+            filterItemCell.selectionStyle = .none
             filterItemCell.contentView.backgroundColor = ColorSet.settingGroupBackgroundColor
             filterItemCell.titleLabel.textColor = ColorSet.textColor
             filterItemCell.titleLabel.text = filterItem.title
@@ -106,6 +107,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             let etcItem = SettingEtcItem.allCases[indexPath.row]
             
+            etcItemCell.selectionStyle = .none
             etcItemCell.titleLabel.text = etcItem.title
             etcItemCell.iconImageView.image = etcItem.icon
             etcItemCell.rx.tapGesture()

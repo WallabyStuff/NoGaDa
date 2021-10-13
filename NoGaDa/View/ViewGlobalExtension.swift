@@ -68,8 +68,8 @@ extension UIView {
     func setExitButtonShadow() {
         self.layer.shadowColor = ColorSet.appbarExitButtonBackgroundColor.cgColor
         self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 20
-        self.layer.shadowOpacity = 0.4
+        self.layer.shadowRadius = 16
+        self.layer.shadowOpacity = 0.2
     }
     
     func setReversedExitButtonShadow() {
@@ -171,8 +171,8 @@ extension UITableView {
 
 extension UIScrollView {
     func scrollToTop(animated: Bool) {
-        let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
-        setContentOffset(desiredOffset, animated: animated)
+        let topOffset = CGPoint(x: 0, y: -contentInset.top)
+        setContentOffset(topOffset, animated: animated)
    }
 }
 
