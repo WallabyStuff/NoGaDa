@@ -34,6 +34,7 @@ class ColorSet {
     static let settingGroupHeaderTextColor              = UIColor(named: "SettingGroupHeaderTextColor")!
     static let settingIconBoxBackgroundColor            = UIColor(named: "SettingIconBoxBackgroundColor")!
     static let settingIconBoxForegroundColor            = UIColor(named: "SettingIconBoxForegroundColor")!
+    static let splashBackgroundColor                    = UIColor(named: "SplashBackgroundColor")!
     static let subTextColor                             = UIColor(named: "SubTextColor")!
     static let textAccentColor                          = UIColor(named: "TextAccentColor")!
     static let textColor                                = UIColor(named: "TextColor")!

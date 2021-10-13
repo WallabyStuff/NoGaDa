@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 
     // MARK: Declaration
     var disposeBag = DisposeBag()
+    let splashView = SplashView()
     let karaokeManager = KaraokeManager()
     var updatedSongArr = [Song]()
     let archiveFolderManager = ArchiveFolderManager()
@@ -44,6 +45,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        splashView.splash(vc: self)
         initView()
         initInstance()
         initEventListener()

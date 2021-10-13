@@ -171,8 +171,8 @@ extension UITableView {
 
 extension UIScrollView {
     func scrollToTop(animated: Bool) {
-        let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
-        setContentOffset(desiredOffset, animated: animated)
+        let topOffset = CGPoint(x: 0, y: -contentInset.top)
+        setContentOffset(topOffset, animated: animated)
    }
 }
 
