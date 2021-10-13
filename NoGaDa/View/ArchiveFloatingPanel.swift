@@ -75,7 +75,6 @@ extension ArchiveFloatingPanel: PopUpArchiveViewDelegate {
             floatingPanel.hide(animated: true)
             successfullyAddedAction()
             
-            ReviewRequestManager.requestReview()
             adMobManager.presentAdMob(vc: vc)
         }
     }

@@ -16,6 +16,7 @@ enum AdMobUnitID {
 class AdMobManager {
     
     private var interstitial: GADInterstitialAd?
+    var presentFrequency = 2
     
     init() {
         configureAdMob()
@@ -23,7 +24,7 @@ class AdMobManager {
     
     private func configureAdMob() {
         let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID: AdMobUnitID.afterSaveSong,
+        GADInterstitialAd.load(withAdUnitID: AdMobUnitID.testInterstitial,
                                request: request) { [weak self] ad, error in
             guard let self = self else { return }
             
@@ -37,10 +38,31 @@ class AdMobManager {
     }
     
     func presentAdMob(vc: UIViewController) {
-        if let interstitial = interstitial {
-            interstitial.present(fromRootViewController: vc)
-        } else {
-            print("Log Ad wasn't ready")
+        guard let interstitial = interstitial else {
+            print("Log ad is not loaded")
+            return
         }
+        
+        if !admobUsageState() {
+            interstitial.present(fromRootViewController: vc)
+            configureAdMob()
+        }
+        
+        updateAdmobUsageCount()
+    }
+    
+    private func admobUsageState() -> Bool {
+        let currentUsageCount = UserDefaults.standard.integer(forKey: "admobUsageCount")
+        
+        if currentUsageCount % presentFrequency == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func updateAdmobUsageCount() {
+        let currentUsageState = UserDefaults.standard.integer(forKey: "admobUsageCount")
+        UserDefaults.standard.set(currentUsageState + 1, forKey: "admobUsageCount")
     }
 }

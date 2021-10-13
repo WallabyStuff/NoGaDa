@@ -18,7 +18,6 @@ class ColorSet {
     static let archiveShortcutBackgroundColor           = UIColor(named: "ArchiveShortcutBackgroundColor")!
     static let archiveShortcutPlaceholderColor          = UIColor(named: "ArchiveShortcutPlaceholderColor")!
     static let archiveShortcutSelectedBackgroundColor   = UIColor(named: "ArchiveShortcutSelectedBackgroundColor")!
-    static let archiveShortcutShadowColor               = UIColor(named: "ArchiveShortcutShadowColor")!
     static let backgroundColor                          = UIColor(named: "BackgroundColor")!
     static let clearTextfieldButtonColor                = UIColor(named: "ClearTextfieldButtonColor")!
     static let disabledTextColor                        = UIColor(named: "DisabledTextColor")!

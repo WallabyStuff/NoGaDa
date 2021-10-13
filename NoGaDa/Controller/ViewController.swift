@@ -129,8 +129,11 @@ class ViewController: UIViewController {
             self.appbarViewHeightConstraint.constant = AppbarHeight.maximum
             
             // Main content ScrollView
-            self.mainContentScrollView.contentInset = UIEdgeInsets(top: self.appbarViewHeightConstraint.constant, left: 0, bottom: 0, right: 0)
-            self.mainContentScrollView.scrollToTop(animated: false)
+            self.mainContentScrollView.contentInset = UIEdgeInsets(top: self.appbarViewHeightConstraint.constant,
+                                                                   left: 0,
+                                                                   bottom: 0,
+                                                                   right: 0)
+            self.mainContentScrollView.scrollToTop(animated: true)
         }
     }
     

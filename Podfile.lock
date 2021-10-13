@@ -62,6 +62,7 @@ PODS:
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
+  - SwiftRater (1.8.0)
 
 DEPENDENCIES:
   - FloatingPanel
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxGesture
   - RxSwift
+  - SwiftRater
 
 SPEC REPOS:
   trunk:
@@ -88,6 +90,7 @@ SPEC REPOS:
     - RxGesture
     - RxRelay
     - RxSwift
+    - SwiftRater
 
 SPEC CHECKSUMS:
   FloatingPanel: fa60183672ed86313b9e241e34465e82211260e8
@@ -104,7 +107,8 @@ SPEC CHECKSUMS:
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
 
-PODFILE CHECKSUM: 96525deba4399e0b6fdbfe14cd11800d9bd71d22
+PODFILE CHECKSUM: a5202dbe91dcd6f663b97ee3d48d7361e7f64f95
 
 COCOAPODS: 1.10.2

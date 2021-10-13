@@ -13,6 +13,7 @@ target 'NoGaDa' do
   pod 'FloatingPanel'
   pod 'RealmSwift'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'SwiftRater'
  
   target 'NoGaDaTests' do
     inherit! :search_paths
