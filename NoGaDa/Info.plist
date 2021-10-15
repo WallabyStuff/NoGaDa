@@ -22,6 +22,8 @@
 	<string>ca-app-pub-3998172297943713~9920494223</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string></string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

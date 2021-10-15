@@ -11,24 +11,19 @@ class SplashView: UIView {
     
     let splashImageView = UIImageView()
     
-    func splash(vc: UIViewController) {
-        show(vc: vc)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.hide()
-        }
-    }
-    
-    private func show(vc: UIViewController) {
+    func show(vc: UIViewController) {
         configureSplashView(vc: vc)
         addSplashImageView(vc: vc)
     }
     
-    private func hide() {
-        UIView.animate(withDuration: 0.3) {
-            self.alpha = 0
-        } completion: { isCompleted in
-            if isCompleted {
-                self.removeFromSuperview()
+    func hide() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            UIView.animate(withDuration: 0.3) {
+                self.alpha = 0
+            } completion: { isCompleted in
+                if isCompleted {
+                    self.removeFromSuperview()
+                }
             }
         }
     }
