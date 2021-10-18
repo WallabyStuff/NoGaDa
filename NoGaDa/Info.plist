@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSUserTrackingUsageDescription</key>
-	<string></string>
+	<string>앱이 타겟광고게재 추적 목적으로 IDFA에 접근하려고 합니다.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
