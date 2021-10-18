@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxGesture
 import RealmSwift
+import AppTrackingTransparency
 
 class ViewController: UIViewController {
 
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        splashView.splash(vc: self)
+        splashView.show(vc: self)
         initView()
         initInstance()
         initEventListener()
@@ -54,7 +55,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        splashView.hide()
         setTotalArchivedSongSize()
+        requestTrackingAuthorization()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -284,6 +287,12 @@ class ViewController: UIViewController {
     
     private func setTotalArchivedSongSize() {
         totalArchivedSongSizeLabel.text = "총 \(archiveFolderManager.getSongsCount())곡"
+    }
+    
+    private func requestTrackingAuthorization() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { _ in }
+        }
     }
 }
 

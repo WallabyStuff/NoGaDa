@@ -24,7 +24,7 @@ class AdMobManager {
     
     private func configureAdMob() {
         let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID: AdMobUnitID.testInterstitial,
+        GADInterstitialAd.load(withAdUnitID: AdMobUnitID.afterSaveSong,
                                request: request) { [weak self] ad, error in
             guard let self = self else { return }
             
