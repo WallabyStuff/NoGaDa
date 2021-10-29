@@ -90,8 +90,8 @@ extension UIView {
         self.layer.cornerRadius = 20
         self.layer.shadowColor = UIColor.gray.cgColor
         self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 28
-        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 40
+        self.layer.shadowOpacity = 0.15
     }
     
     func fillStatusBar(color: UIColor) {

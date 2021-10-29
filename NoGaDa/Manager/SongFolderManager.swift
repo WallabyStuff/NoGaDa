@@ -11,11 +11,13 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-enum ArchiveFolderManagerError: String, Error {
+enum SongFolderManagerError: String, Error {
     case alreadyExists = "file already exists on Realm"
 }
 
-class ArchiveFolderManager {
+class SongFolderManager {
+    
+    var disposeBag = DisposeBag()
     
     func addData(title: String, titleEmoji: String) -> Completable {
         return Completable.create { completable in
@@ -45,6 +47,26 @@ class ArchiveFolderManager {
             } catch {
                 observable.onError(error)
             }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func fetchData(_ id: String) -> Observable<ArchiveFolder> {
+        return Observable.create { [weak self] observable in
+            guard let self = self else { return Disposables.create() }
+            
+            self.fetchData()
+                .subscribe(onNext: { songFolderList in
+                    songFolderList.forEach { songFolderRealm in
+                        if songFolderRealm.id == id {
+                            observable.onNext(songFolderRealm)
+                        }
+                    }
+                    observable.onCompleted()
+                }, onError: { error in
+                    observable.onError(error)
+                }).disposed(by: self.disposeBag)
             
             return Disposables.create()
         }
@@ -84,13 +106,13 @@ class ArchiveFolderManager {
         }
     }
     
-    func updateTitleEmoji(archiveFolder: ArchiveFolder, newEmoji: String) -> Completable {
+    func updateTitleEmoji(songFolder: ArchiveFolder, newEmoji: String) -> Completable {
         return Completable.create { completable in
             do {
                 let realmInstance = try Realm()
                 
                 try realmInstance.write {
-                    archiveFolder.titleEmoji = newEmoji
+                    songFolder.titleEmoji = newEmoji
                     completable(.completed)
                 }
             } catch {
@@ -101,7 +123,7 @@ class ArchiveFolderManager {
         }
     }
     
-    func appendSong(archiveFolder: ArchiveFolder, song: Song) -> Completable {
+    func appendSong(songFolder: ArchiveFolder, song: Song) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else {
                 return Disposables.create()
@@ -118,13 +140,13 @@ class ArchiveFolderManager {
                                               lyricists: song.lyricist,
                                               releaseDate: song.release)
                 
-                if self.isSongExists(archiveFolder: archiveFolder, song: archiveSong) {
-                    completable(.error(ArchiveFolderManagerError.alreadyExists))
+                if self.isSongExists(archiveFolder: songFolder, song: archiveSong) {
+                    completable(.error(SongFolderManagerError.alreadyExists))
                     return Disposables.create()
                 }
                 
                 try realmInsatnce.write {
-                    archiveFolder.songs.append(archiveSong)
+                    songFolder.songs.append(archiveSong)
                     completable(.completed)
                 }
             } catch {
