@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,7 +14,7 @@
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,10 +346,10 @@
             </objects>
             <point key="canvasLocation" x="1953.6231884057972" y="445.98214285714283"/>
         </scene>
-        <!--Archive View Controller-->
+        <!--Song Folder List View Controller-->
         <scene sceneID="rkz-to-yxy">
             <objects>
-                <viewController storyboardIdentifier="archiveStoryboard" id="SKu-B0-PKP" customClass="ArchiveViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="archiveStoryboard" id="SKu-B0-PKP" customClass="SongFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="daW-lO-aI7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,7 +423,7 @@
                         <outlet property="appbarView" destination="Nh9-cG-5pA" id="4Ve-Nj-xZu"/>
                         <outlet property="appbarViewHeightConstraint" destination="VoQ-SF-Mt5" id="8f5-aL-Xzo"/>
                         <outlet property="exitButton" destination="ANc-KA-l8f" id="ukx-nv-xCL"/>
-                        <outlet property="folderTableView" destination="T7y-QS-627" id="Thh-xG-0R7"/>
+                        <outlet property="songFolderTableView" destination="T7y-QS-627" id="Thh-xG-0R7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdM-KU-GzH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -563,7 +563,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oc1-7B-Fd1">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노가다 노래방 가서 다 부를거야  version 1.0.2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skd-ZX-9Km">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노가다 노래방 가서 다 부를거야  version 1.0.3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skd-ZX-9Km">
                                                 <rect key="frame" x="132" y="36" width="150" height="76.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -720,10 +720,10 @@ Contact : middleyks@hanmail.net</string>
             </objects>
             <point key="canvasLocation" x="1954" y="1876"/>
         </scene>
-        <!--Folder View Controller-->
+        <!--Saved Song List View Controller-->
         <scene sceneID="43r-Um-FnT">
             <objects>
-                <viewController storyboardIdentifier="folderStoryboard" id="mA0-n8-KB2" customClass="FolderViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="folderStoryboard" id="mA0-n8-KB2" customClass="SavedSongListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gCI-v3-1gi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -797,10 +797,10 @@ Contact : middleyks@hanmail.net</string>
                     <connections>
                         <outlet property="appbarView" destination="t6f-Uc-Fde" id="fs0-GS-x1x"/>
                         <outlet property="appbarViewHeightConstraint" destination="TxA-o0-f11" id="4KF-LG-eKi"/>
-                        <outlet property="archivedSongTableView" destination="NHF-Ep-BFi" id="K9G-2I-R49"/>
                         <outlet property="exitButton" destination="7qb-Wn-0yl" id="gfR-pR-Ylk"/>
                         <outlet property="folderTitleEmojiTextField" destination="Cpu-J9-uYf" id="XYM-jg-CRE"/>
                         <outlet property="folderTitleTextField" destination="VpG-sO-j57" id="p8z-RT-sUx"/>
+                        <outlet property="savedSongTableView" destination="NHF-Ep-BFi" id="K9G-2I-R49"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Dw-0I-biw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1049,10 +1049,10 @@ Contact : middleyks@hanmail.net</string>
             </objects>
             <point key="canvasLocation" x="3477" y="506"/>
         </scene>
-        <!--Pop Up Archive View Controller-->
+        <!--Pop Up Song Folder List View Controller-->
         <scene sceneID="mtz-SH-Vtt">
             <objects>
-                <viewController storyboardIdentifier="popUpArchiveStoryboard" id="9vJ-GT-MxP" customClass="PopUpArchiveViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popUpArchiveStoryboard" id="9vJ-GT-MxP" customClass="PopUpSongFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VcZ-Ez-ZCF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

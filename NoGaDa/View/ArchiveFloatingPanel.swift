@@ -44,7 +44,7 @@ class ArchiveFloatingPanel {
 
         floatingPanel.removeFromParent()
         
-        guard let popUpArchiveVC = vc.storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpArchiveViewController else { return }
+        guard let popUpArchiveVC = vc.storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpSongFolderListViewController else { return }
         
         popUpArchiveVC.delegate = self
         popUpArchiveVC.selectedSong = selectedSong

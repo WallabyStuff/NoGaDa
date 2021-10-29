@@ -83,9 +83,9 @@ class BISegmentedControl: UIView {
         
         UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0.8,
-                       options: [.allowUserInteraction]) {
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1,
+                       options: [.allowUserInteraction, .curveEaseInOut]) {
             self.barIndicatorwidthAnchor?.constant = barIndicatorWidth
             self.barIndicatorLeftAnchor?.constant = barIndicatorXPosition
             self.layoutIfNeeded()

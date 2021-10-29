@@ -20,11 +20,11 @@ enum ContentsType {
 class SearchViewController: UIViewController {
 
     // MARK: - Declaraiton
-    var disposeBag = DisposeBag()
-    var archiveFloatingPanel: ArchiveFloatingPanel?
-    var searchHistoryVC = SearchHistoryViewController()
-    var searchResultVC = SearchResultViewController()
-    let searchHistoryManager = SearchHistoryManager()
+    private var searchViewModel = SearchViewModel()
+    private var disposeBag = DisposeBag()
+    private var archiveFloatingPanel: ArchiveFloatingPanel?
+    private var searchHistoryVC = SearchHistoryViewController()
+    private var searchResultVC = SearchResultViewController()
     
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -98,15 +98,15 @@ class SearchViewController: UIViewController {
         
         // Set up ContainerView
         configureContainerView()
+        
+        // Archive floating panel
+        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
     }
     
     private func initInstance() {
         // Search TextField
         searchTextField.delegate = self
         searchTextField.becomeFirstResponder()
-        
-        // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
     }
     
     private func initEventListener() {
@@ -167,10 +167,7 @@ class SearchViewController: UIViewController {
         
         view.endEditing(true)
         
-        searchHistoryManager.addData(searchKeyword: searchKeyword)
-            .subscribe()
-            .disposed(by: disposeBag)
-        
+        searchViewModel.addSearchHistory(searchKeyword)
         searchResultVC.setSearchResult(searchKeyword)
         replaceContents(type: .searchResult)
     }
