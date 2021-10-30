@@ -21,7 +21,7 @@
 		493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */; };
 		493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */; };
 		493BCBF326F642630096422A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBF226F642630096422A /* EmojiTextField.swift */; };
-		493F232E270DEA4700A618DC /* ArchiveFloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */; };
+		493F232E270DEA4700A618DC /* ArchiveFloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */; };
 		49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFB2720766100EC12B3 /* SearchViewModel.swift */; };
 		49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */; };
 		49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */; };
@@ -115,7 +115,7 @@
 		493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
 		493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartTableViewCell.xib; sourceTree = "<group>"; };
 		493BCBF226F642630096422A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
-		493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFloatingPanel.swift; sourceTree = "<group>"; };
+		493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFloatingPanelView.swift; sourceTree = "<group>"; };
 		49484CFB2720766100EC12B3 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
@@ -352,7 +352,7 @@
 				4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */,
 				49C6DC32270298E30094403B /* AppbarView.swift */,
 				4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */,
-				493F232D270DEA4700A618DC /* ArchiveFloatingPanel.swift */,
+				493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */,
 				496BE2AE27173D5300CFD96D /* SplashView.swift */,
 			);
 			path = View;
@@ -695,7 +695,7 @@
 				49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */,
 				49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */,
 				491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */,
-				493F232E270DEA4700A618DC /* ArchiveFloatingPanel.swift in Sources */,
+				493F232E270DEA4700A618DC /* ArchiveFloatingPanelView.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
 				4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,

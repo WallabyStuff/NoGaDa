@@ -22,7 +22,7 @@ class SearchViewController: UIViewController {
     // MARK: - Declaraiton
     private var searchViewModel = SearchViewModel()
     private var disposeBag = DisposeBag()
-    private var archiveFloatingPanel: ArchiveFloatingPanel?
+    private var archiveFloatingPanel: ArchiveFloatingPanelView?
     private var searchHistoryVC = SearchHistoryViewController()
     private var searchResultVC = SearchResultViewController()
     
@@ -100,7 +100,7 @@ class SearchViewController: UIViewController {
         configureContainerView()
         
         // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
+        archiveFloatingPanel = ArchiveFloatingPanelView(vc: self)
     }
     
     private func initInstance() {

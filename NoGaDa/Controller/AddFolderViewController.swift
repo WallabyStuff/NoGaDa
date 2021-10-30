@@ -85,9 +85,9 @@ class AddFolderViewController: UIViewController {
                 
                 vc.addFolderViewModel.addFolder(title, titleEmoji)
                     .observe(on: MainScheduler.instance)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.delegate?.addFolderView(didAddFile: true)
-                        self?.dismiss(animated: true, completion: nil)
+                    .subscribe(onCompleted: { [weak vc] in
+                        vc?.delegate?.addFolderView(didAddFile: true)
+                        vc?.dismiss(animated: true, completion: nil)
                     }).disposed(by: vc.disposeBag)
             }.disposed(by: disposeBag)
         

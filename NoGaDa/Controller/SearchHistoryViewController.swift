@@ -57,8 +57,8 @@ class SearchHistoryViewController: UIViewController {
             .bind(with: self, onNext: { vc, _ in
                 vc.searchHistoryViewModel.deleteAllHistory()
                     .observe(on: MainScheduler.instance)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.updateSearchHistory()
+                    .subscribe(onCompleted: { [weak vc] in
+                        vc?.updateSearchHistory()
                     }).disposed(by: vc.disposeBag)
             }).disposed(by: disposeBag)
     }
