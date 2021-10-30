@@ -8,10 +8,10 @@
 import UIKit
 import FloatingPanel
 
-class ArchiveFloatingPanel {
+class ArchiveFloatingPanelView {
     
     private var floatingPanel = FloatingPanelController()
-    private var vc: UIViewController?
+    private weak var vc: UIViewController?
     private var adMobManager = AdMobManager()
     var successfullyAddedAction: () -> Void = {}
     
@@ -67,7 +67,7 @@ class ArchiveFloatingPanel {
     }
 }
 
-extension ArchiveFloatingPanel: PopUpArchiveViewDelegate {
+extension ArchiveFloatingPanelView: PopUpArchiveViewDelegate {
     func popUpArchiveView(isSuccessfullyAdded: Bool) {
         if isSuccessfullyAdded {
             guard let vc = vc else { return }

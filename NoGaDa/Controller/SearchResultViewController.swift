@@ -97,7 +97,7 @@ class SearchResultViewController: UIViewController {
         
         searchIndicator.startAnimatingAndShow()
         searchResultPlaceholderLabel.isHidden = true
-        clearSearchResult()
+        clearSearchResultTableView()
         
         searchResultViewModel.fetchSearchResult(keyword: searchKeyword, brand: brand)
             .observe(on: MainScheduler.instance)
@@ -123,7 +123,7 @@ class SearchResultViewController: UIViewController {
         searchResultTableView.scrollToTopCell(animated: false)
     }
     
-    private func clearSearchResult() {
+    private func clearSearchResultTableView() {
         searchResultViewModel.clearSearchResult()
         searchResultTableView.reloadData()
     }

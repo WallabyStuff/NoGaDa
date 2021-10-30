@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     // MARK: Declaration
     var disposeBag = DisposeBag()
     let splashView = SplashView()
-    var archiveFloatingPanel: ArchiveFloatingPanel?
+    var archiveFloatingPanel: ArchiveFloatingPanelView?
     let mainViewModel = MainViewModel()
     var updatedSongBrand: KaraokeBrand {
         if brandSegmentedControl.currentPosition == 0 {
@@ -158,7 +158,7 @@ class MainViewController: UIViewController {
         brandSegmentedControl.delegate = self
         
         // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
+        archiveFloatingPanel = ArchiveFloatingPanelView(vc: self)
         archiveFloatingPanel?.successfullyAddedAction = { [weak self] in
             self?.updateTotalSavedSongSize()
         }
