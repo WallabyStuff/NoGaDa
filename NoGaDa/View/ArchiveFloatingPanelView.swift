@@ -57,6 +57,7 @@ class ArchiveFloatingPanelView {
     }
     
     public func show(selectedSong: Song, animated: Bool) {
+        adMobManager = AdMobManager()
         configureAction(selectedSong: selectedSong)
         floatingPanel.show(animated: true, completion: nil)
         floatingPanel.move(to: .half, animated: true)
