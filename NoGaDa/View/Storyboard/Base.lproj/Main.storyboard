@@ -569,7 +569,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjp-Oi-p6X">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gjp-Oi-p6X">
                                                 <rect key="frame" x="20" y="164.5" width="374" height="140"/>
                                                 <color key="backgroundColor" name="BackgroundColor"/>
                                                 <constraints>
@@ -711,6 +711,7 @@ Contact : middleyks@hanmail.net</string>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="catactUsIconBoxView" destination="Eeh-9q-ubR" id="3vv-bF-wGk"/>
+                        <outlet property="contactTextView" destination="gjp-Oi-p6X" id="36p-kM-geb"/>
                         <outlet property="contactUsBoxView" destination="IlQ-6i-y2x" id="lgt-ic-eNm"/>
                         <outlet property="exitButton" destination="08s-rt-RuB" id="eLY-rt-gdN"/>
                         <outlet property="iconResourceCollectionView" destination="2I6-x2-R5A" id="zgL-Q5-aXb"/>

@@ -65,12 +65,6 @@ class MainViewController: UIViewController {
         requestTrackingAuthorization()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        mainContentScrollView.scrollToTop(animated: false)
-    }
-    
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -79,7 +73,7 @@ class MainViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        setUpdatedSongChart()
+        reloadUpdateChartTableView()
     }
 
     // MARK: - Initialization
@@ -262,7 +256,7 @@ class MainViewController: UIViewController {
         updatedSongLoadingIndicator.startAnimatingAndShow()
         updatedsongLoadErrorMessageLabel.isHidden = true
         clearUpdatedSongTableView()
-        
+
         mainViewModel.fetchUpdatedSong(brand: updatedSongBrand)
             .observe(on: MainScheduler.instance)
             .subscribe(with: self, onCompleted: { vc in
@@ -277,12 +271,14 @@ class MainViewController: UIViewController {
     private func reloadUpdateChartTableView() {
         updatedSongLoadingIndicator.stopAnimatingAndHide()
         updatedSongTableView.reloadData()
-        updatedSongTableView.scrollToTopCell(animated: false)
         
         if mainViewModel.updatedSongCount == 0 {
             updatedsongLoadErrorMessageLabel.text = "업데이트 된 곡이 없습니다."
             updatedsongLoadErrorMessageLabel.isHidden = false
+            return
         }
+        
+        updatedSongTableView.scrollToTopCell(animated: false)
     }
     
     private func updateTotalSavedSongSize() {

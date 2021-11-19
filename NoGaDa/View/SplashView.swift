@@ -22,7 +22,6 @@ class SplashView: UIView {
                 self.alpha = 0
             } completion: { isCompleted in
                 if isCompleted {
-                    print("Log splash is completed")
                     self.removeFromSuperview()
                 }
             }

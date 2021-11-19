@@ -38,10 +38,6 @@ class PopUpSongFolderListViewController: UIViewController {
         initEventListener()
         setArchiveFolders()
     }
-    
-    deinit {
-        print("Log PopupsongVC deinitialized")
-    }
 
     // MARK: - Initialization
     private func configureData() {
