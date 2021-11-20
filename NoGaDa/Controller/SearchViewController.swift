@@ -91,7 +91,7 @@ class SearchViewController: UIViewController {
         
         // Back Button
         backButton.hero.modifiers = [.fade]
-        backButton.setPadding(width: 6)
+        backButton.setPadding(width: 4)
         
         // Clear search textfield Button
         clearTextFieldButton.setPadding(width: 6)

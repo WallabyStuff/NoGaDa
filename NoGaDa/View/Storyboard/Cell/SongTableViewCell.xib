@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,112 +11,94 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultTableViewCell" rowHeight="120" id="KGk-i7-Jjw" customClass="SongTableViewCell" customModule="NoGaDa" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="399" height="120"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultTableViewCell" rowHeight="84" id="KGk-i7-Jjw" customClass="SongTableViewCell" customModule="NoGaDa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="84"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="399" height="120"/>
+                <rect key="frame" x="0.0" y="0.0" width="399" height="84"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iS-RB-ze0">
-                        <rect key="frame" x="28" y="8" width="343" height="96"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tj" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gF-7m-Etz">
-                                <rect key="frame" x="306.5" y="19.5" width="8.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="SongCellForegroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVi-v8-OyC">
-                                <rect key="frame" x="20" y="16" width="219" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="mNm-Cl-zaY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" name="SongCellForegroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xip-d2-MYg">
-                                <rect key="frame" x="20" y="48" width="219" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="a7r-cV-2db"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="SongCellForegroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" name="SongCellBackgroundColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVi-v8-OyC">
+                        <rect key="frame" x="92" y="16" width="42" height="19.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <color key="textColor" name="TextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xip-d2-MYg">
+                        <rect key="frame" x="92" y="43.5" width="42" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" name="SubTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="song no" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gF-7m-Etz">
+                        <rect key="frame" x="146" y="33.5" width="233" height="17"/>
                         <constraints>
-                            <constraint firstItem="xip-d2-MYg" firstAttribute="leading" secondItem="5iS-RB-ze0" secondAttribute="leading" constant="20" id="4hz-xV-de0"/>
-                            <constraint firstAttribute="trailing" secondItem="2gF-7m-Etz" secondAttribute="trailing" constant="28" id="AcK-nY-x3i"/>
-                            <constraint firstItem="gVi-v8-OyC" firstAttribute="leading" secondItem="5iS-RB-ze0" secondAttribute="leading" constant="20" id="Dx7-qF-Rjg"/>
-                            <constraint firstAttribute="bottom" secondItem="xip-d2-MYg" secondAttribute="bottom" constant="16" id="Jnd-0W-Zer"/>
-                            <constraint firstItem="xip-d2-MYg" firstAttribute="top" secondItem="gVi-v8-OyC" secondAttribute="bottom" constant="8" id="N89-oB-SSo"/>
-                            <constraint firstItem="gVi-v8-OyC" firstAttribute="top" secondItem="5iS-RB-ze0" secondAttribute="top" constant="16" id="dXd-ti-BQc"/>
-                            <constraint firstItem="2gF-7m-Etz" firstAttribute="centerY" secondItem="gVi-v8-OyC" secondAttribute="centerY" id="mpA-9Y-4GV"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="Ux2-vZ-cBj"/>
                         </constraints>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMZ-Io-ybn">
-                        <rect key="frame" x="279" y="68" width="80" height="40"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZF-vX-BnD">
-                                <rect key="frame" x="4" y="0.0" width="72" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="SongCellNumberTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" name="SongCellNumberBoxBackgroundColor"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" name="TextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YEO-7e-KIh">
+                        <rect key="frame" x="20" y="12" width="60" height="60"/>
+                        <color key="backgroundColor" name="SongThumbnailBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="4zj-xV-RBa"/>
-                            <constraint firstItem="0ZF-vX-BnD" firstAttribute="leading" secondItem="wMZ-Io-ybn" secondAttribute="leading" constant="4" id="88r-Gk-Jzt"/>
-                            <constraint firstAttribute="trailing" secondItem="0ZF-vX-BnD" secondAttribute="trailing" constant="4" id="FPy-Bk-R5j"/>
-                            <constraint firstAttribute="bottom" secondItem="0ZF-vX-BnD" secondAttribute="bottom" id="bBJ-pn-IvZ"/>
-                            <constraint firstAttribute="height" constant="40" id="iNI-2h-YgE"/>
-                            <constraint firstItem="0ZF-vX-BnD" firstAttribute="top" secondItem="wMZ-Io-ybn" secondAttribute="top" id="kJd-vS-g2o"/>
+                            <constraint firstAttribute="height" constant="60" id="0bn-jN-znQ"/>
+                            <constraint firstAttribute="width" constant="60" id="qeh-Ei-SaL"/>
                         </constraints>
-                    </view>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music-note" translatesAutoresizingMaskIntoConstraints="NO" id="VjY-4q-wcq">
+                        <rect key="frame" x="36" y="28" width="28" height="28"/>
+                        <color key="tintColor" name="SongThumbnailForegroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="9JK-VX-imz"/>
+                            <constraint firstAttribute="width" constant="28" id="UXx-wC-ncU"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
-                <color key="backgroundColor" name="BackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="5iS-RB-ze0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="0kD-ty-RsP"/>
-                    <constraint firstItem="xip-d2-MYg" firstAttribute="trailing" secondItem="wMZ-Io-ybn" secondAttribute="trailing" constant="-92" id="2w7-BJ-SIS"/>
-                    <constraint firstItem="wMZ-Io-ybn" firstAttribute="bottom" secondItem="5iS-RB-ze0" secondAttribute="bottom" constant="4" id="9f2-Hg-qSa"/>
-                    <constraint firstItem="gVi-v8-OyC" firstAttribute="trailing" secondItem="wMZ-Io-ybn" secondAttribute="trailing" constant="-92" id="BvQ-Ud-PGt"/>
-                    <constraint firstItem="5iS-RB-ze0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="Qri-hj-bpe"/>
-                    <constraint firstAttribute="trailing" secondItem="5iS-RB-ze0" secondAttribute="trailing" constant="28" id="tRF-fO-hqY"/>
-                    <constraint firstAttribute="bottom" secondItem="5iS-RB-ze0" secondAttribute="bottom" constant="16" id="vbw-5r-uYb"/>
-                    <constraint firstAttribute="trailing" secondItem="wMZ-Io-ybn" secondAttribute="trailing" constant="40" id="zKK-6c-8Gu"/>
+                    <constraint firstItem="VjY-4q-wcq" firstAttribute="centerY" secondItem="YEO-7e-KIh" secondAttribute="centerY" id="209-kf-bNy"/>
+                    <constraint firstItem="xip-d2-MYg" firstAttribute="top" secondItem="gVi-v8-OyC" secondAttribute="bottom" constant="8" id="549-M7-k8F"/>
+                    <constraint firstItem="xip-d2-MYg" firstAttribute="leading" secondItem="YEO-7e-KIh" secondAttribute="trailing" constant="12" id="5VH-0T-nQJ"/>
+                    <constraint firstItem="2gF-7m-Etz" firstAttribute="leading" secondItem="xip-d2-MYg" secondAttribute="trailing" constant="12" id="EZI-0Z-0j0"/>
+                    <constraint firstItem="gVi-v8-OyC" firstAttribute="leading" secondItem="YEO-7e-KIh" secondAttribute="trailing" constant="12" id="HAI-5V-vxn"/>
+                    <constraint firstItem="gVi-v8-OyC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="JZR-Hc-phb"/>
+                    <constraint firstItem="YEO-7e-KIh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="a2S-wb-48b"/>
+                    <constraint firstItem="2gF-7m-Etz" firstAttribute="leading" secondItem="gVi-v8-OyC" secondAttribute="trailing" constant="12" id="mYj-BU-0LC"/>
+                    <constraint firstItem="2gF-7m-Etz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rrm-RD-LeR"/>
+                    <constraint firstAttribute="trailing" secondItem="2gF-7m-Etz" secondAttribute="trailing" constant="20" id="ujs-M0-iKW"/>
+                    <constraint firstItem="VjY-4q-wcq" firstAttribute="centerX" secondItem="YEO-7e-KIh" secondAttribute="centerX" id="vQH-gA-vII"/>
+                    <constraint firstItem="YEO-7e-KIh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xkz-da-clT"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="BackgroundColor"/>
             <connections>
-                <outlet property="brandLabel" destination="2gF-7m-Etz" id="jPt-Cs-JvI"/>
-                <outlet property="cellContentView" destination="5iS-RB-ze0" id="wq2-3G-AP4"/>
                 <outlet property="singerLabel" destination="xip-d2-MYg" id="MTj-jm-40F"/>
-                <outlet property="songNumberBoxView" destination="wMZ-Io-ybn" id="Jaw-Hf-0OY"/>
-                <outlet property="songNumberLabel" destination="0ZF-vX-BnD" id="GQ4-s2-rY8"/>
+                <outlet property="songNumberLabel" destination="2gF-7m-Etz" id="lpQ-nu-MIa"/>
+                <outlet property="thumbnailImageView" destination="YEO-7e-KIh" id="JSm-3C-bd6"/>
+                <outlet property="thumbnailPlaceholderImageView" destination="VjY-4q-wcq" id="cGU-59-gJu"/>
                 <outlet property="titleLabel" destination="gVi-v8-OyC" id="Peh-hw-myW"/>
             </connections>
-            <point key="canvasLocation" x="128.2608695652174" y="178.125"/>
+            <point key="canvasLocation" x="128.2608695652174" y="190.17857142857142"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="music-note" width="489.16400146484375" height="489.16400146484375"/>
         <namedColor name="BackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="SongCellBackgroundColor">
-            <color red="0.9660000205039978" green="0.9660000205039978" blue="0.99299997091293335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="SongThumbnailBackgroundColor">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="SongCellForegroundColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="SongThumbnailForegroundColor">
+            <color red="0.51764705882352935" green="0.49019607843137253" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="SongCellNumberBoxBackgroundColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="SubTextColor">
+            <color red="0.58039215686274503" green="0.57647058823529407" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="SongCellNumberTextColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="TextColor">
+            <color red="0.20000000298023224" green="0.23899999260902405" blue="0.29399999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

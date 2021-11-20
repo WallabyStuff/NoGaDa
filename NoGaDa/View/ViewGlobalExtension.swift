@@ -90,8 +90,8 @@ extension UIView {
         self.layer.cornerRadius = 20
         self.layer.shadowColor = UIColor.gray.cgColor
         self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 40
-        self.layer.shadowOpacity = 0.15
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 0.1
     }
     
     func fillStatusBar(color: UIColor) {
@@ -134,11 +134,11 @@ extension UILabel {
         }
     }
     
-    func releaseAccentColor() {
+    func releaseAccentColor(with releaseColor: UIColor) {
         guard let text = self.text else { return }
         
         let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(.foregroundColor, value: ColorSet.textColor,
+        attributedString.addAttribute(.foregroundColor, value: releaseColor,
                                       range: (text as NSString).range(of: text))
         self.attributedText = attributedString
     }

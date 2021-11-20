@@ -87,4 +87,8 @@ extension UpdatedSongViewModel {
     var singer: String {
         return song.singer
     }
+    
+    var songNumber: String {
+        return song.no
+    }
 }

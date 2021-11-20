@@ -54,6 +54,7 @@ class PopUpSongFolderListViewController: UIViewController {
         // Folder TableView
         folderTableView.layer.cornerRadius = 8
         folderTableView.tableFooterView = UIView()
+        folderTableView.separatorInset = UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0)
         
         // Exit Button
         exitButton.makeAsCircle()
