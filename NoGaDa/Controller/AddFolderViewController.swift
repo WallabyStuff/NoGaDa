@@ -18,9 +18,9 @@ protocol AddFolderViewDelegate: AnyObject {
 class AddFolderViewController: UIViewController {
     
     // MARK: - Declaraiton
+    private let addFolderViewModel = AddFolderViewModel()
     weak var delegate: AddFolderViewDelegate?
-    var disposeBag = DisposeBag()
-    let archiveFolderManager = ArchiveFolderManager()
+    private var disposeBag = DisposeBag()
     
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
@@ -82,13 +82,13 @@ class AddFolderViewController: UIViewController {
             .bind(with: self) { vc, _ in
                 guard let title = vc.folderTitleTextField.text else { return }
                 guard let titleEmoji = vc.folderEmojiTextField.text else { return }
-                vc.archiveFolderManager.addData(title: title, titleEmoji: titleEmoji)
-                    .subscribe {
-                        vc.delegate?.addFolderView(didAddFile: true)
-                        vc.dismiss(animated: true, completion: nil)
-                    } onError: { error in
-                        print(error)
-                    }.disposed(by: vc.disposeBag)
+                
+                vc.addFolderViewModel.addFolder(title, titleEmoji)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onCompleted: { [weak vc] in
+                        vc?.delegate?.addFolderView(didAddFile: true)
+                        vc?.dismiss(animated: true, completion: nil)
+                    }).disposed(by: vc.disposeBag)
             }.disposed(by: disposeBag)
         
         // Add Button Success State

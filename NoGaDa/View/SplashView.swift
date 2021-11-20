@@ -43,7 +43,7 @@ class SplashView: UIView {
         addSubview(splashImageView)
         splashImageView.translatesAutoresizingMaskIntoConstraints = false
         splashImageView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
-        splashImageView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
+        splashImageView.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor, constant: -60).isActive = true
         splashImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         splashImageView.heightAnchor.constraint(equalTo: splashImageView.widthAnchor).isActive = true
     }

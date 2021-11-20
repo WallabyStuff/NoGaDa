@@ -21,6 +21,7 @@ class CreditViewController: UIViewController {
     @IBOutlet weak var contactUsBoxView: UIView!
     @IBOutlet weak var catactUsIconBoxView: UIView!
     @IBOutlet weak var iconResourceCollectionView: UICollectionView!
+    @IBOutlet weak var contactTextView: UITextView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -40,6 +41,9 @@ class CreditViewController: UIViewController {
         
         // Icon resource CollectionView
         iconResourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+        
+        // Contact Text View
+        contactTextView.dataDetectorTypes = .all
     }
     
     private func initInstance() {

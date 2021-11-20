@@ -18,10 +18,9 @@ protocol SearchHistoryViewDelegate: AnyObject {
 class SearchHistoryViewController: UIViewController {
     
     // MARK: - Declaration
+    let searchHistoryViewModel = SearchHistoryViewModel()
     var disposeBag = DisposeBag()
     weak var delegate: SearchHistoryViewDelegate?
-    let searchHistoryManager = SearchHistoryManager()
-    var searchHistoryList = [SearchHistory]()
     
     @IBOutlet weak var searchHistoryTableView: UITableView!
     @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
@@ -56,26 +55,25 @@ class SearchHistoryViewController: UIViewController {
         // Clear history Button
         clearHistoryButton.rx.tap
             .bind(with: self, onNext: { vc, _ in
-                vc.searchHistoryManager.deleteAll()
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.updateSearchHistory()
+                vc.searchHistoryViewModel.deleteAllHistory()
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onCompleted: { [weak vc] in
+                        vc?.updateSearchHistory()
                     }).disposed(by: vc.disposeBag)
-                
             }).disposed(by: disposeBag)
     }
     
     // MARK: - Method
     func updateSearchHistory() {
-        searchHistoryManager.fetchData()
-            .subscribe(onNext: { [weak self] searchHistoryList in
-                self?.searchHistoryList.removeAll()
-                self?.searchHistoryList = searchHistoryList
+        searchHistoryViewModel.fetchSearchHistory()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onCompleted: { [weak self] in
                 self?.reloadSearchHistoryTableView()
             }).disposed(by: disposeBag)
     }
     
     private func reloadSearchHistoryTableView() {
-        if searchHistoryList.count == 0 {
+        if searchHistoryViewModel.isSearchHistoryEmpty {
             searchHistoryTableViewPlaceholderLabel.isHidden = false
             searchHistoryTableView.reloadData()
         } else {
@@ -88,7 +86,7 @@ class SearchHistoryViewController: UIViewController {
 // MARK: - Extension
 extension SearchHistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchHistoryList.count
+        return searchHistoryViewModel.numberOfRowsInSection(searchHistoryViewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,22 +94,26 @@ extension SearchHistoryViewController: UITableViewDataSource, UITableViewDelegat
             return UITableViewCell()
         }
         
-        searchHistoryCell.titleLabel.text = searchHistoryList[indexPath.row].keyword
+        let searchHistoryItemVM = searchHistoryViewModel.searchHistoryItemAtIndex(indexPath)
+        
+        searchHistoryCell.titleLabel.text = searchHistoryItemVM.keyword
         searchHistoryCell.removeButtonTapAction = { [weak self] in
             guard let self = self else { return }
             
-            self.searchHistoryManager.deleteData(self.searchHistoryList[indexPath.row].keyword)
-                .subscribe { [weak self] _ in
-                    print("Log index \(indexPath.row)")
+            self.searchHistoryViewModel.deleteHistory(indexPath)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onCompleted: { [weak self] in
                     self?.updateSearchHistory()
-                }.disposed(by: self.disposeBag)
+                }).disposed(by: self.disposeBag)
         }
         
         return searchHistoryCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.searchHistoryView(tableView, didSelectRowAt: indexPath, selectedHistoryRowAt: searchHistoryList[indexPath.row])
+        let searchHistoryItemVM = searchHistoryViewModel.searchHistoryItemAtIndex(indexPath)
+        
+        delegate?.searchHistoryView(tableView, didSelectRowAt: indexPath, selectedHistoryRowAt: searchHistoryItemVM.searchHistory)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

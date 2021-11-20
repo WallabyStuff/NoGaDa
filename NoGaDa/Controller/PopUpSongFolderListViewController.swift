@@ -15,15 +15,14 @@ protocol PopUpArchiveViewDelegate: AnyObject {
     func popUpArchiveView(isSuccessfullyAdded: Bool)
 }
 
-class PopUpArchiveViewController: UIViewController {
+class PopUpSongFolderListViewController: UIViewController {
 
     // MARK: - Declaraiton
+    private let popUpSongFolderListViewModel = PopUpSongFolderListViewModel()
     weak var delegate: PopUpArchiveViewDelegate?
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     var selectedSong: Song? // Passed from superview (main/search)View | Necessary instance
     var exitButtonAction: () -> Void = {}
-    let archiveFolderManager = ArchiveFolderManager()
-    var archiveFolderArr = [ArchiveFolder]()
     
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var addFolderButton: UIButton!
@@ -55,6 +54,7 @@ class PopUpArchiveViewController: UIViewController {
         // Folder TableView
         folderTableView.layer.cornerRadius = 8
         folderTableView.tableFooterView = UIView()
+        folderTableView.separatorInset = UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0)
         
         // Exit Button
         exitButton.makeAsCircle()
@@ -97,10 +97,10 @@ class PopUpArchiveViewController: UIViewController {
     }
     
     private func setArchiveFolders() {
-        archiveFolderManager.fetchData()
-            .subscribe(with: self, onNext: { vc, archiveFolderArr in
-                vc.archiveFolderArr = archiveFolderArr
-                vc.folderTableView.reloadData()
+        popUpSongFolderListViewModel.fetchSongFolder()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onCompleted: { [weak self] in
+                self?.folderTableView.reloadData()
             }).disposed(by: disposeBag)
     }
     
@@ -113,11 +113,12 @@ class PopUpArchiveViewController: UIViewController {
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
             guard let self = self else { return }
             
-            self.archiveFolderManager.appendSong(archiveFolder: targetFolder, song: selectedSong)
+            self.popUpSongFolderListViewModel.appendSong(targetFolder, selectedSong)
+                .observe(on: MainScheduler.instance)
                 .subscribe(with: self, onCompleted: { vc in
                     vc.delegate?.popUpArchiveView(isSuccessfullyAdded: true)
                 }, onError: { vc, error in
-                    guard let error = error as? ArchiveFolderManagerError else { return }
+                    guard let error = error as? SongFolderManagerError else { return }
                     
                     if error == .alreadyExists {
                         vc.presentAlreadyExitstAlert()
@@ -131,16 +132,18 @@ class PopUpArchiveViewController: UIViewController {
         present(addSongAlert, animated: true, completion: nil)
     }
     
-    private func presentRemoveFolderAlert(targetFolder: ArchiveFolder, _ completion: @escaping () -> Void ) {
+    private func presentRemoveFolderAlert(_ indexPath: IndexPath, _ completion: @escaping () -> Void ) {
+        let songFolderVM = popUpSongFolderListViewModel.songFolderAtIndex(indexPath)
+        
         let removeFolderAlert = UIAlertController(title: "삭제",
-                                                  message: "정말로 「\(targetFolder.title)」 를 삭제하시겠습니까?",
+                                                  message: "정말로 「\(songFolderVM.titleEmoji)\(songFolderVM.title)」 를 삭제하시겠습니까?",
                                                   preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "취소", style: .destructive)
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
             guard let self = self else { return }
             
-            self.archiveFolderManager.deleteData(archiveFolder: targetFolder)
+            self.popUpSongFolderListViewModel.deleteFolder(indexPath)
                 .subscribe(onCompleted: {
                     completion()
                 }).disposed(by: self.disposeBag)
@@ -167,36 +170,39 @@ class PopUpArchiveViewController: UIViewController {
 }
 
 // MARK: - Extension
-extension PopUpArchiveViewController: UITableViewDataSource, UITableViewDelegate {
+extension PopUpSongFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return archiveFolderArr.count
+        return popUpSongFolderListViewModel.numberOfRowsInSection(popUpSongFolderListViewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let folderCell = tableView.dequeueReusableCell(withIdentifier: "popUpArchiveTableCell") as? PopUpArchiveFolderTableViewCell else { return UITableViewCell() }
         
-        folderCell.titleLabel.text = archiveFolderArr[indexPath.row].title
-        folderCell.emojiLabel.text = archiveFolderArr[indexPath.row].titleEmoji
+        let songFolderVM = popUpSongFolderListViewModel.songFolderAtIndex(indexPath)
+        
+        folderCell.titleLabel.text = songFolderVM.title
+        folderCell.emojiLabel.text = songFolderVM.titleEmoji
         
         return folderCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentAddSongAlert(targetFolder: archiveFolderArr[indexPath.row], selectedSong: selectedSong!)
+        let songFolderVM = popUpSongFolderListViewModel.songFolderAtIndex(indexPath)
+        
+        presentAddSongAlert(targetFolder: songFolderVM.songFolder, selectedSong: selectedSong!)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            presentRemoveFolderAlert(targetFolder: archiveFolderArr[indexPath.row]) { [weak self] in
-                self?.archiveFolderArr.remove(at: indexPath.row)
+            presentRemoveFolderAlert(indexPath) { [weak self] in
                 self?.folderTableView.deleteRows(at: [indexPath], with: .left)
             }
         }
     }
 }
 
-extension PopUpArchiveViewController: AddFolderViewDelegate {
+extension PopUpSongFolderListViewController: AddFolderViewDelegate {
     func addFolderView(didAddFile: Bool) {
         setArchiveFolders()
     }

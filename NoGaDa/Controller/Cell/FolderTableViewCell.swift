@@ -29,6 +29,7 @@ class FolderTableViewCell: UITableViewCell {
         cellContentView.layer.borderWidth = 1
         cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
         cellContentView.layer.cornerRadius = 12
+        
         titleEmojiLabel.text    = ""
         titleLabel.text         = ""
     }
