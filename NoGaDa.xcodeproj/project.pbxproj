@@ -18,8 +18,8 @@
 		493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBE826F4CEA10096422A /* SongTableViewCell.swift */; };
 		493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBE926F4CEA10096422A /* SongTableViewCell.xib */; };
 		493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEC26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift */; };
-		493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */; };
-		493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */; };
+		493BCBF026F4EBCF0096422A /* UpdatedSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */; };
+		493BCBF126F4EBCF0096422A /* UpdatedSongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */; };
 		493BCBF326F642630096422A /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBF226F642630096422A /* EmojiTextField.swift */; };
 		493F232E270DEA4700A618DC /* ArchiveFloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */; };
 		49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFB2720766100EC12B3 /* SearchViewModel.swift */; };
@@ -112,8 +112,8 @@
 		493BCBE826F4CEA10096422A /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		493BCBE926F4CEA10096422A /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
 		493BCBEC26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFloatingPanelLayout.swift; sourceTree = "<group>"; };
-		493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
-		493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartTableViewCell.xib; sourceTree = "<group>"; };
+		493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedSongTableViewCell.swift; sourceTree = "<group>"; };
+		493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdatedSongTableViewCell.xib; sourceTree = "<group>"; };
 		493BCBF226F642630096422A /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFloatingPanelView.swift; sourceTree = "<group>"; };
 		49484CFB2720766100EC12B3 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 			children = (
 				493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */,
 				493BCBE826F4CEA10096422A /* SongTableViewCell.swift */,
-				493BCBEE26F4EBCF0096422A /* ChartTableViewCell.swift */,
+				493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */,
 				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
 				49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */,
 				49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */,
@@ -255,7 +255,7 @@
 		493BCBE226F4BAC30096422A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				493BCBEF26F4EBCF0096422A /* ChartTableViewCell.xib */,
+				493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */,
 				493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */,
 				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
 				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
@@ -524,7 +524,7 @@
 				4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */,
 				4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */,
 				493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */,
-				493BCBF126F4EBCF0096422A /* ChartTableViewCell.xib in Resources */,
+				493BCBF126F4EBCF0096422A /* UpdatedSongTableViewCell.xib in Resources */,
 				4956CE2E26F467060007523B /* Assets.xcassets in Resources */,
 				4956CE2C26F467040007523B /* Main.storyboard in Resources */,
 				495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */,
@@ -707,7 +707,7 @@
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
 				49484D022720B6D500EC12B3 /* SongFolderListViewModel.swift in Sources */,
-				493BCBF026F4EBCF0096422A /* ChartTableViewCell.swift in Sources */,
+				493BCBF026F4EBCF0096422A /* UpdatedSongTableViewCell.swift in Sources */,
 				4956CE5F26F494730007523B /* SongFolderListViewController.swift in Sources */,
 				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,

@@ -32,6 +32,8 @@ class ColorSet {
     static let settingGroupBackgroundColor              = UIColor(named: "SettingGroupBackgroundColor")!
     static let settingGroupHeaderTextColor              = UIColor(named: "SettingGroupHeaderTextColor")!
     static let settingIconBoxBackgroundColor            = UIColor(named: "SettingIconBoxBackgroundColor")!
+    static let songThumbnailBackgroundColor             = UIColor(named: "SongThumbnailBackgroundColor")!
+    static let songThumbnailForegroundColor             = UIColor(named: "SongThumbnailForegroundColor")!
     static let settingIconBoxForegroundColor            = UIColor(named: "SettingIconBoxForegroundColor")!
     static let splashBackgroundColor                    = UIColor(named: "SplashBackgroundColor")!
     static let subTextColor                             = UIColor(named: "SubTextColor")!
@@ -58,11 +60,6 @@ class ColorSet {
     static let songCellStrokeColor              = UIColor(named: "SongCellStrokeColor")!
     
     // UpdatedSongColor
-    static let updatedSongCellBackgroundColor           = UIColor(named: "UpdatedSongCellBackgroundColor")!
-    static let updatedSongCellForegroundColor           = UIColor(named: "UpdatedSongCellForegroundColor")!
-    static let updatedSongCellNumberBoxBackgroundColor  = UIColor(named: "UpdatedSongCellNumberBoxBackgroundColor")!
-    static let updatedSongCellNumberTextColor           = UIColor(named: "UpdatedSongCellNumberTextColor")!
-    static let updatedSongCellStrokeColor               = UIColor(named: "UpdatedSongCellStrokeColor")!
     static let updatedSongSelectorBarIndicatorColor     = UIColor(named: "UpdatedSongSelectorBarIndicatorColor")!
     static let updatedSongSelectorSelectedTextColor     = UIColor(named: "UpdatedSongSelectorSelectedTextColor")!
     static let songCellSelectedBackgroundColor          = UIColor(named: "SongCellSelectedBackgroundColor")!

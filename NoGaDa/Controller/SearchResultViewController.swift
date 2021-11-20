@@ -142,8 +142,7 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
         
         searchResultCell.titleLabel.text        = searchResultVM.title
         searchResultCell.singerLabel.text       = searchResultVM.singer
-        searchResultCell.songNumberLabel.text   = searchResultVM.no
-        searchResultCell.brandLabel.text        = searchResultVM.brand
+        searchResultCell.songNumberLabel.text   = "\(searchResultVM.brand) \(searchResultVM.no)"
         
         if !SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
             searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
@@ -162,17 +161,5 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
         
         let searchResultVM = searchResultViewModel.searchResultSongAtIndex(indexPath)
         delegate?.searchResultView(tableView, didSelectRowAt: indexPath, selectedSongRowAt: searchResultVM.song)
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
     }
 }

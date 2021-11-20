@@ -194,9 +194,8 @@ extension SavedSongListViewController: UITableViewDataSource, UITableViewDelegat
         let savedSongVM = savedSongListViewModel.archiveSongAtIndex(indexPath)
         
         songCell.titleLabel.text        = savedSongVM.title
-        songCell.songNumberLabel.text   = savedSongVM.no
         songCell.singerLabel.text       = savedSongVM.singer
-        songCell.brandLabel.text        = savedSongVM.brand
+        songCell.songNumberLabel.text   = "\(savedSongVM.brand) \(savedSongVM.no)"
         
         return songCell
     }
@@ -209,22 +208,6 @@ extension SavedSongListViewController: UITableViewDataSource, UITableViewDelegat
                     self?.savedSongTableView.deleteRows(at: [indexPath], with: .left)
                 }).disposed(by: disposeBag)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else {
-            return
-        }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else {
-            return
-        }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

@@ -63,6 +63,7 @@ class MainViewController: UIViewController {
         splashView.hide()
         updateTotalSavedSongSize()
         requestTrackingAuthorization()
+        updatedSongTableView.flashScrollIndicators()
     }
     
     // MARK: - Override
@@ -91,7 +92,7 @@ class MainViewController: UIViewController {
         appbarTitleLabel.hero.id = "appbarTitle"
         
         // Setting Button
-        settingButton.setPadding(width: 6)
+        settingButton.setPadding(width: 4)
         
         // Main content ScrollView content View
         mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
@@ -141,8 +142,8 @@ class MainViewController: UIViewController {
     
     private func initInstance() {
         // Chart TableView
-        let chartTableCellNibName = UINib(nibName: "ChartTableViewCell", bundle: nil)
-        updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "chartTableViewCell")
+        let chartTableCellNibName = UINib(nibName: "UpdatedSongTableViewCell", bundle: nil)
+        updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "updatedSongTableViewCell")
         updatedSongTableView.delegate = self
         updatedSongTableView.dataSource = self
         
@@ -304,36 +305,20 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let chartCell = tableView.dequeueReusableCell(withIdentifier: "chartTableViewCell") as? ChartTableViewCell else { return UITableViewCell() }
+        guard let updatedSongCell = tableView.dequeueReusableCell(withIdentifier: "updatedSongTableViewCell") as? UpdatedSongTableViewCell else { return UITableViewCell() }
         
         let updatedSongVM = mainViewModel.updatedSongAtIndex(indexPath)
         
-        chartCell.chartNumberLabel.text = "\(indexPath.row + 1)"
-        chartCell.songTitleLabel.text   = "\(updatedSongVM.title)"
-        chartCell.singerLabel.text      = "\(updatedSongVM.singer)"
+        updatedSongCell.songTitleLabel.text   = "\(updatedSongVM.title)"
+        updatedSongCell.singerLabel.text      = "\(updatedSongVM.singer)"
+        updatedSongCell.songNumberLabel.text  = "\(updatedSongVM.songNumber)"
         
-        return chartCell
+        return updatedSongCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let updatedSongVM = mainViewModel.updatedSongAtIndex(indexPath)
         archiveFloatingPanel?.show(selectedSong: updatedSongVM.song, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let updatedSongCell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else {
-            return
-        }
-        
-        updatedSongCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let updatedSongCell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else {
-            return
-        }
-        
-        updatedSongCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
     }
 }
 
