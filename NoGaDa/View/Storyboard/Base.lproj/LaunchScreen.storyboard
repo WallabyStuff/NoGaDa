@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="CD3-De-Vfe">
-                                <rect key="frame" x="107" y="288" width="200" height="200"/>
+                                <rect key="frame" x="107" y="312" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="PFe-0k-a4j"/>
                                     <constraint firstAttribute="width" constant="200" id="dvM-59-xFK"/>
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" name="SplashBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CD3-De-Vfe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VSC-8T-sQu"/>
-                            <constraint firstItem="CD3-De-Vfe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-60" id="jJf-Vb-WQC"/>
+                            <constraint firstItem="CD3-De-Vfe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-36" id="jJf-Vb-WQC"/>
                         </constraints>
                     </view>
                 </viewController>
