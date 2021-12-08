@@ -10,20 +10,21 @@ import RxSwift
 import RxCocoa
 
 class AddFolderViewModel {
+    
     private var disposeBag = DisposeBag()
-    private let songfolderManager = SongFolderManager()
+    private let songFolderManager = SongFolderManager()
 }
 
 extension AddFolderViewModel {
     func addFolder(_ title: String, _ titleEmoji: String) -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
-            self.songfolderManager.addData(title: title, titleEmoji: titleEmoji)
+            self.songFolderManager.addData(title: title, titleEmoji: titleEmoji)
                 .subscribe(onCompleted: {
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()

@@ -15,13 +15,12 @@ class KaraokeManager {
     var disposeBag = DisposeBag()
     
     func fetchUpdatedSong(brand: KaraokeBrand) -> Observable<[Song]> {
-        
-        return Observable.create { observable in
+        return Observable.create { observer in
             DispatchQueue.global(qos: .background).async {
                 let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(brand.path)".urlEncode()
                 
                 guard let url = URL(string: fullPath) else {
-                    observable.onError(KaraokeAPIErrMessage.urlParsingError)
+                    observer.onError(KaraokeAPIErrMessage.urlParsingError)
                     return
                 }
                 
@@ -30,22 +29,22 @@ class KaraokeManager {
                 
                 URLSession.shared.dataTask(with: request) { jsonData, response, error in
                     guard let jsonData = jsonData else {
-                        observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
+                        observer.onError(KaraokeAPIErrMessage.didNotReceiveData)
                         return
                     }
                     
                     guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                        observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
+                        observer.onError(KaraokeAPIErrMessage.httpRequestFailure)
                         return
                     }
                     
                     guard let updatedSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-                        observable.onError(KaraokeAPIErrMessage.jsonParsingError)
+                        observer.onError(KaraokeAPIErrMessage.jsonParsingError)
                         return
                     }
                     
-                    observable.onNext(updatedSongList)
-                    observable.onCompleted()
+                    observer.onNext(updatedSongList)
+                    observer.onCompleted()
                 }.resume()
             }
             
@@ -54,13 +53,12 @@ class KaraokeManager {
     }
     
     func fetchSong(title: String, brand: KaraokeBrand) -> Observable<[Song]> {
-        
-        return Observable.create { observable in
+        return Observable.create { observer in
             DispatchQueue.global(qos: .background).async {
                 let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.path)".urlEncode()
                 
                 guard let url = URL(string: fullPath) else {
-                    observable.onError(KaraokeAPIErrMessage.urlParsingError)
+                    observer.onError(KaraokeAPIErrMessage.urlParsingError)
                     return
                 }
                 
@@ -69,21 +67,21 @@ class KaraokeManager {
                 
                 URLSession.shared.dataTask(with: request) { jsonData, response, error in
                     guard let jsonData = jsonData else {
-                        observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
+                        observer.onError(KaraokeAPIErrMessage.didNotReceiveData)
                         return
                     }
                     
                     guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                        observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
+                        observer.onError(KaraokeAPIErrMessage.httpRequestFailure)
                         return
                     }
                     
                     guard let searchResultSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-                        observable.onError(KaraokeAPIErrMessage.jsonParsingError)
+                        observer.onError(KaraokeAPIErrMessage.jsonParsingError)
                         return
                     }
                     
-                    observable.onNext(searchResultSongList)
+                    observer.onNext(searchResultSongList)
                 }.resume()
             }
             
@@ -92,13 +90,12 @@ class KaraokeManager {
     }
     
     func fetchSong(singer: String, brand: KaraokeBrand) -> Observable<[Song]> {
-        
-        return Observable.create { observable in
+        return Observable.create { observer in
             DispatchQueue.global(qos: .background).async {
                 let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.path)".urlEncode()
                 
                 guard let url = URL(string: fullPath) else {
-                    observable.onError(KaraokeAPIErrMessage.urlParsingError)
+                    observer.onError(KaraokeAPIErrMessage.urlParsingError)
                     return
                 }
                 
@@ -107,21 +104,21 @@ class KaraokeManager {
                 
                 URLSession.shared.dataTask(with: request) { jsonData, response, error in
                     guard let jsonData = jsonData else {
-                        observable.onError(KaraokeAPIErrMessage.didNotReceiveData)
+                        observer.onError(KaraokeAPIErrMessage.didNotReceiveData)
                         return
                     }
                     
                     guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                        observable.onError(KaraokeAPIErrMessage.httpRequestFailure)
+                        observer.onError(KaraokeAPIErrMessage.httpRequestFailure)
                         return
                     }
                     
                     guard let searchResultSongList = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-                        observable.onError(KaraokeAPIErrMessage.jsonParsingError)
+                        observer.onError(KaraokeAPIErrMessage.jsonParsingError)
                         return
                     }
                     
-                    observable.onNext(searchResultSongList)
+                    observer.onNext(searchResultSongList)
                 }.resume()
             }
             
@@ -134,7 +131,7 @@ class KaraokeManager {
         let fetchWithTitle      = fetchSong(title: titleOrSinger, brand: brand)
         let fetchWithSinger     = fetchSong(singer: titleOrSinger, brand: brand)
         
-        return Observable.create { [weak self] observable in
+        return Observable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             if SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
@@ -142,25 +139,25 @@ class KaraokeManager {
                 Observable.combineLatest(fetchWithTitle, fetchWithSinger, resultSelector: { resultWithTitle, resultWithSinger in
                     return Array(Set(resultWithTitle).union(Set(resultWithSinger))).sorted{ $0.title < $1.title }
                 }).subscribe(onNext: { combinedSongResultList in
-                    observable.onNext(combinedSongResultList)
+                    observer.onNext(combinedSongResultList)
                 }, onError: { error in
-                    observable.onError(error)
+                    observer.onError(error)
                 }).disposed(by: self.disposeBag)
             } else if SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
                 // Search with title
                 self.fetchSong(title: titleOrSinger, brand: brand)
                     .subscribe(onNext: { searchResultSongList in
-                        observable.onNext(searchResultSongList)
+                        observer.onNext(searchResultSongList)
                     }, onError: { error in
-                        observable.onError(error)
+                        observer.onError(error)
                     }).disposed(by: self.disposeBag)
             } else {
                 // Search with singer
                 self.fetchSong(singer: titleOrSinger, brand: brand)
                     .subscribe(onNext: { searchResultSongList in
-                        observable.onNext(searchResultSongList)
+                        observer.onNext(searchResultSongList)
                     }, onError: { error in
-                        observable.onError(error)
+                        observer.onError(error)
                     }).disposed(by: self.disposeBag)
             }
             
@@ -170,7 +167,6 @@ class KaraokeManager {
 }
 
 extension String {
-    
     func urlEncode() -> String {
         return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
     }

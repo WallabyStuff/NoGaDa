@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum KaraokeBrand: String, Codable {
+enum KaraokeBrand: String, Codable, CaseIterable {
     case tj       = "tj"
     case kumyoung = "kumyoung"
     

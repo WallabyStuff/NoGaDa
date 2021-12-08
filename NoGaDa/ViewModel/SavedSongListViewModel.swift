@@ -27,16 +27,16 @@ extension SavedSongListViewModel {
     }
     
     func fetchSongFolder(_ id: String) -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.songFolderManager.fetchData(id)
                 .subscribe(onNext: { songFolderRealm in
                     self.songFolder = songFolderRealm
                     self.songList = Array(songFolderRealm.songs)
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()
@@ -44,16 +44,32 @@ extension SavedSongListViewModel {
     }
     
     func deleteSong(_ indexPath: IndexPath) -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.songFolderManager.deleteSong(song: self.songList[indexPath.row])
                 .subscribe(onCompleted: {
                     self.songList.remove(at: indexPath.row)
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
+    }
+    
+    // Wrapper method of fetchFolder
+    func reloadFolder(_ id: String) -> Completable {
+        return Completable.create { [weak self] observer in
+            guard let self = self else { return Disposables.create() }
+            
+            self.fetchSongFolder(id)
+                .subscribe {
+                    observer(.completed)
+                } onError: { error in
+                    observer(.error(error))
+                }.disposed(by: self.disposeBag)
             
             return Disposables.create()
         }
@@ -62,14 +78,14 @@ extension SavedSongListViewModel {
 
 extension SavedSongListViewModel {
     func updateFolderTitle(_ newTitle: String) -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.songFolderManager.updateTitle(archiveFolder: self.songFolder, newTitle: newTitle)
                 .subscribe(onCompleted: {
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()
@@ -77,14 +93,14 @@ extension SavedSongListViewModel {
     }
     
     func updateFolderTitleEmoji(_ newEmoji: String) -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.songFolderManager.updateTitleEmoji(songFolder: self.songFolder, newEmoji: newEmoji)
                 .subscribe(onCompleted: {
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()

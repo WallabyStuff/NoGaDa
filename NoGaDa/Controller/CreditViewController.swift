@@ -15,9 +15,11 @@ import MessageUI
 class CreditViewController: UIViewController {
 
     // MARK: - Declaration
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    private var creditViewModel = CreditViewModel()
     
     @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var contactUsBoxView: UIView!
     @IBOutlet weak var catactUsIconBoxView: UIView!
     @IBOutlet weak var iconResourceCollectionView: UICollectionView!
@@ -32,8 +34,11 @@ class CreditViewController: UIViewController {
         initEventListener()
     }
     
-    // MARK: - Initialization
+    // MARK: - Initializer
     private func initView() {
+        // Header label
+        headerLabel.text = creditViewModel.headerText
+        
         // ContactUs Box View
         contactUsBoxView.layer.cornerRadius = 20
         contactUsBoxView.makeAsSettingGroupView()
@@ -68,13 +73,13 @@ class CreditViewController: UIViewController {
                 if MFMailComposeViewController.canSendMail() {
                     let composeVC = MFMailComposeViewController()
                     
-                    composeVC.setToRecipients(["avocado.34.131@gmail.com"])
-                    composeVC.setSubject("문의")
+                    composeVC.setToRecipients(vc.creditViewModel.emailRecipients)
+                    composeVC.setSubject(vc.creditViewModel.sendEmailErrorMessage)
                     composeVC.setMessageBody("", isHTML: false)
                     
                     vc.present(composeVC, animated: true, completion: nil)
                 } else {
-                    print("can't send an email because some reason")
+                    print(vc.creditViewModel.sendEmailErrorMessage)
                 }
             }).disposed(by: disposeBag)
     }
@@ -85,15 +90,16 @@ class CreditViewController: UIViewController {
 // MARK: Extension
 extension CreditViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ResourceItem.allCases.count
+        return creditViewModel.numberOfRowInSection(creditViewModel.sectionCount)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let resourceCell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconResourceCollectionCell", for: indexPath) as? IconResourceCollectionViewCell else { return UICollectionViewCell() }
         
-        let resourceItem                    = ResourceItem.allCases[indexPath.row]
+        let resourceItem = creditViewModel.resourceItemAtIndex(indexPath)
         resourceCell.descriptionLabel.text  = resourceItem.description
         resourceCell.iconImageView.image    = resourceItem.image
+        
         resourceCell.rx.tapGesture()
             .when(.recognized)
             .bind(with: self, onNext: { vc, _ in
