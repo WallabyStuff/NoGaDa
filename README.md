@@ -1,12 +1,12 @@
 <div align="center">
- <img src="https://user-images.githubusercontent.com/63496607/137466148-e37edcfd-70fa-4974-94f0-49000ce4c10c.png" width="100">
+ <img src="https://user-images.githubusercontent.com/63496607/145188343-0bb2b12c-4730-4f99-a9ee-7d036a3736f6.png" width="100">
  <h1>노가다 - 노래방 가서 다 부를거야!</h1>
 </div>
 
 
 <br><br>
 ## Screenshots 📱
-![Preview image](https://user-images.githubusercontent.com/63496607/142732554-666665da-d2f7-4039-af48-8291a0b833d9.png)
+![Preview image](https://user-images.githubusercontent.com/63496607/145188498-1bd10f05-a5af-4aeb-becb-7ae61b230352.png)
 
 ---
 
