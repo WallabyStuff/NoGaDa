@@ -13,18 +13,17 @@ import RxCocoa
 class SearchHistoryManager {
     
     func addData(searchKeyword: String) -> Completable {
-        
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 
                 try realmInstance.write {
                     let searchHistory = SearchHistory(keyword: searchKeyword)
                     realmInstance.add(searchHistory, update: .modified)
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -32,17 +31,16 @@ class SearchHistoryManager {
     }
     
     func fetchData() -> Observable<[SearchHistory]> {
-        
-        return Observable.create { observable in
+        return Observable.create { observer in
             do {
                 let realmInstance = try Realm()
                 var searchHistoryList = Array(realmInstance.objects(SearchHistory.self))
                 searchHistoryList.sort { return $0.date > $1.date }
                 
-                observable.onNext(searchHistoryList)
-                observable.onCompleted()
+                observer.onNext(searchHistoryList)
+                observer.onCompleted()
             } catch {
-                observable.onError(error)
+                observer.onError(error)
             }
             
             return Disposables.create()
@@ -50,8 +48,7 @@ class SearchHistoryManager {
     }
     
     func deleteData(_ keyword: String) -> Completable {
-        
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 let searchHistoryList = realmInstance.objects(SearchHistory.self)
@@ -60,12 +57,12 @@ class SearchHistoryManager {
                     if searchHistory.keyword == keyword {
                         try realmInstance.write {
                             realmInstance.delete(searchHistory)
-                            completable(.completed)
+                            observer(.completed)
                         }
                     }
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -73,18 +70,17 @@ class SearchHistoryManager {
     }
     
     func deleteAll() -> Completable {
-        
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 let searchHistoryList = Array(realmInstance.objects(SearchHistory.self))
                 
                 try realmInstance.write {
                     realmInstance.delete(searchHistoryList)
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()

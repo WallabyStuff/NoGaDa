@@ -26,7 +26,7 @@ class AddFolderViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var emojiTextFieldFrame: UIView!
     @IBOutlet weak var folderEmojiTextField: EmojiTextField!
-    @IBOutlet weak var folderTitleTextField: UITextField!
+    @IBOutlet weak var folderTitleTextField: HighlightingTextfield!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -59,7 +59,6 @@ class AddFolderViewController: UIViewController {
         emojiTextFieldFrame.layer.cornerRadius = 20
         
         // Folder Title Textfield
-        folderTitleTextField.layer.cornerRadius = 12
         folderTitleTextField.setLeftPadding(width: 8)
         folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
     }
@@ -77,7 +76,7 @@ class AddFolderViewController: UIViewController {
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
-        // Confirm Button Tap Acrion
+        // Confirm Button Tap Action
         confirmButton.rx.tap
             .bind(with: self) { vc, _ in
                 guard let title = vc.folderTitleTextField.text else { return }

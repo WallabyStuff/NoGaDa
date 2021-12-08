@@ -19,10 +19,15 @@ class ColorSet {
     static let archiveShortcutPlaceholderColor          = UIColor(named: "ArchiveShortcutPlaceholderColor")!
     static let archiveShortcutSelectedBackgroundColor   = UIColor(named: "ArchiveShortcutSelectedBackgroundColor")!
     static let backgroundColor                          = UIColor(named: "BackgroundColor")!
+    static let brandPopUpButtonBorderColor              = UIColor(named: "BrandPopUpButtonBorderColor")!
     static let clearTextfieldButtonColor                = UIColor(named: "ClearTextfieldButtonColor")!
     static let disabledTextColor                        = UIColor(named: "DisabledTextColor")!
+    static let floatingButtonBackgroundColor            = UIColor(named: "FloatingButtonBackgroundColor")!
+    static let floatingButtonForegroundColor            = UIColor(named: "FloatingButtonForegroundColor")!
     static let floatingPanelHandleColor                 = UIColor(named: "FloatingPanelHandleColor")!
     static let iconResourceBoxBackgroundColor           = UIColor(named: "IconResourceBoxBackgroundColor")!
+    static let notificationViewBakcgroundColor          = UIColor(named: "NotificationViewBakcgroundColor")
+    static let notificationViewCloseButtonColor         = UIColor(named: "NotificationViewCloseButtonColor")
     static let popUpArchiveBackgroundColor              = UIColor(named: "PopUpArchiveBackgroundColor")!
     static let popUpArchiveSeparatorColor               = UIColor(named: "PopUpArchiveSeparatorColor")!
     static let segmentedControlAccentColor              = UIColor(named: "SegmentedControlAccentColor")!

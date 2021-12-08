@@ -20,17 +20,17 @@ class SongFolderManager {
     var disposeBag = DisposeBag()
     
     func addData(title: String, titleEmoji: String) -> Completable {
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 let archiveFolder = ArchiveFolder(title: title, titleEmoji: titleEmoji)
                 
                 try realmInstance.write {
                     realmInstance.add(archiveFolder)
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -38,14 +38,14 @@ class SongFolderManager {
     }
     
     func fetchData() -> Observable<[ArchiveFolder]> {
-        return Observable.create { observable in
+        return Observable.create { observer in
             do {
                 let realmInstance = try Realm()
                 let archiveFolders = realmInstance.objects(ArchiveFolder.self)
-                observable.onNext(Array(archiveFolders))
-                observable.onCompleted()
+                observer.onNext(Array(archiveFolders))
+                observer.onCompleted()
             } catch {
-                observable.onError(error)
+                observer.onError(error)
             }
             
             return Disposables.create()
@@ -53,19 +53,19 @@ class SongFolderManager {
     }
     
     func fetchData(_ id: String) -> Observable<ArchiveFolder> {
-        return Observable.create { [weak self] observable in
+        return Observable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.fetchData()
                 .subscribe(onNext: { songFolderList in
                     songFolderList.forEach { songFolderRealm in
                         if songFolderRealm.id == id {
-                            observable.onNext(songFolderRealm)
+                            observer.onNext(songFolderRealm)
                         }
                     }
-                    observable.onCompleted()
+                    observer.onCompleted()
                 }, onError: { error in
-                    observable.onError(error)
+                    observer.onError(error)
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()
@@ -73,17 +73,17 @@ class SongFolderManager {
     }
     
     func deleteData(archiveFolder: ArchiveFolder) -> Completable {
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 
                 try realmInstance.write {
                     realmInstance.delete(archiveFolder.songs)
                     realmInstance.delete(archiveFolder)
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -91,15 +91,15 @@ class SongFolderManager {
     }
     
     func updateTitle(archiveFolder: ArchiveFolder, newTitle: String) -> Completable {
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 try realmInstance.write {
                     archiveFolder.title = newTitle
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -107,27 +107,25 @@ class SongFolderManager {
     }
     
     func updateTitleEmoji(songFolder: ArchiveFolder, newEmoji: String) -> Completable {
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 
                 try realmInstance.write {
                     songFolder.titleEmoji = newEmoji
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
         }
     }
     
-    func appendSong(songFolder: ArchiveFolder, song: Song) -> Completable {
-        return Completable.create { [weak self] completable in
-            guard let self = self else {
-                return Disposables.create()
-            }
+    func addSong(songFolder: ArchiveFolder, song: Song) -> Completable {
+        return Completable.create { [weak self] observer in
+            guard let self = self else { return Disposables.create() }
             
             do {
                 let realmInsatnce = try Realm()
@@ -141,16 +139,16 @@ class SongFolderManager {
                                               releaseDate: song.release)
                 
                 if self.isSongExists(archiveFolder: songFolder, song: archiveSong) {
-                    completable(.error(SongFolderManagerError.alreadyExists))
+                    observer(.error(SongFolderManagerError.alreadyExists))
                     return Disposables.create()
                 }
                 
                 try realmInsatnce.write {
                     songFolder.songs.append(archiveSong)
-                    completable(.completed)
+                    observer(.completed)
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -158,17 +156,17 @@ class SongFolderManager {
     }
     
     func deleteSong(song: ArchiveSong) -> Completable {
-        return Completable.create { completable in
+        return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
                 
                 try realmInstance.write {
                     realmInstance.delete(song)
-                    completable(.completed)
+                    observer(.completed)
                     return
                 }
             } catch {
-                completable(.error(error))
+                observer(.error(error))
             }
             
             return Disposables.create()
@@ -177,8 +175,9 @@ class SongFolderManager {
     
     private func isSongExists(archiveFolder: ArchiveFolder, song: ArchiveSong) -> Bool {
         var isExists = false
+        
         for archivedSong in archiveFolder.songs {
-            if archivedSong.no == song.no {
+            if archivedSong.no == song.no && !archivedSong.no.isEmpty {
                 isExists = true
             }
         }
@@ -192,7 +191,6 @@ class SongFolderManager {
             let archivedSongs = realmInstance.objects(ArchiveSong.self)
             return archivedSongs.count
         } catch {
-            print(error)
             return 0
         }
     }

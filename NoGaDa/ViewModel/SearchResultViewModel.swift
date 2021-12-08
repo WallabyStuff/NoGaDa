@@ -18,16 +18,16 @@ class SearchResultViewModel {
 
 extension SearchResultViewModel {
     func fetchSearchResult(keyword: String, brand: KaraokeBrand) -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.karaokeManager.fetchSong(titleOrSinger: keyword, brand: brand)
                 .retry(3)
                 .subscribe(onNext: { searchResultSongList in
                     self.searchResultSongList = searchResultSongList
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()

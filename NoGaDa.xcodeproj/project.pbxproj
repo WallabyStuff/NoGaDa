@@ -76,6 +76,10 @@
 		49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6EB5A270E0F3200610383 /* AdMobManager.swift */; };
 		49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FB0D0927038DED00AE3A9F /* CreditViewController.swift */; };
 		8153FCF94A99DFA2D72D5FB3 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */; };
+		8E70392E275F2D15001D10A6 /* AddSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70392D275F2D15001D10A6 /* AddSongViewController.swift */; };
+		8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70392F275F466D001D10A6 /* AddSongViewModel.swift */; };
+		8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */; };
+		8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703933275FECE3001D10A6 /* CreditViewModel.swift */; };
 		C69D67261F6FF37CF9B86903 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE908B65C08BA3AFF5EA0DAD /* Pods_NoGaDa.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +181,10 @@
 		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		535D138E38520FF8441D8FDC /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
 		67EF086622F185807A9B411D /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
+		8E70392D275F2D15001D10A6 /* AddSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewController.swift; sourceTree = "<group>"; };
+		8E70392F275F466D001D10A6 /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
+		8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightingTextfield.swift; sourceTree = "<group>"; };
+		8E703933275FECE3001D10A6 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
 		9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992C5409F902D4E2EB68D8D7 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
 		9AFF6C2C4282DE5B487B8D08 /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -338,6 +346,7 @@
 				49FB0D0927038DED00AE3A9F /* CreditViewController.swift */,
 				495334302711DE37003F64DE /* SearchResultViewController.swift */,
 				495334322711DE4B003F64DE /* SearchHistoryViewController.swift */,
+				8E70392D275F2D15001D10A6 /* AddSongViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -354,6 +363,7 @@
 				4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */,
 				493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */,
 				496BE2AE27173D5300CFD96D /* SplashView.swift */,
+				8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -373,7 +383,9 @@
 				49C6DC362703129B0094403B /* SafeAreaInset.swift */,
 				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
 				4953343E2712C503003F64DE /* SearchHistory.swift */,
+				8E70392F275F466D001D10A6 /* AddSongViewModel.swift */,
 				491A6D082707026C00E41D5B /* InfoPlist.strings */,
+				8E703933275FECE3001D10A6 /* CreditViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -664,6 +676,7 @@
 				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
 				495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */,
 				4956CE6126F494870007523B /* SavedSongListViewController.swift in Sources */,
+				8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */,
 				493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */,
 				4953343B271204C4003F64DE /* SearchHistoryManager.swift in Sources */,
 				4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */,
@@ -679,9 +692,12 @@
 				49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */,
 				4992C7622721B3D6006045FF /* AddFolderViewModel.swift in Sources */,
 				495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */,
+				8E70392E275F2D15001D10A6 /* AddSongViewController.swift in Sources */,
 				4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */,
+				8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */,
 				493BCBE026F4B2890096422A /* PopUpSongFolderListViewController.swift in Sources */,
 				496BE2AF27173D5300CFD96D /* SplashView.swift in Sources */,
+				8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */,
 				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
 				49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */,
 				49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */,
@@ -903,7 +919,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 497P4L97SV;
 				INFOPLIST_FILE = NoGaDa/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -911,7 +927,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MuffinLabs.NoGaDa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -926,7 +942,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 497P4L97SV;
 				INFOPLIST_FILE = NoGaDa/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -934,7 +950,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MuffinLabs.NoGaDa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

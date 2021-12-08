@@ -60,10 +60,9 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        splashView.hide()
+        hideSplashView()
         updateTotalSavedSongSize()
         requestTrackingAuthorization()
-        updatedSongTableView.flashScrollIndicators()
     }
     
     // MARK: - Override
@@ -292,9 +291,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    func clearUpdatedSongTableView() {
+    private func clearUpdatedSongTableView() {
         mainViewModel.clearUpdatedSong()
         updatedSongTableView.reloadData()
+    }
+    
+    private func hideSplashView() {
+        splashView.hide { [weak self] in
+            self?.updatedSongTableView.flashScrollIndicators()
+        }
     }
 }
 

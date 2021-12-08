@@ -22,7 +22,7 @@ class SavedSongListViewController: UIViewController {
     private let savedSongListViewModel = SavedSongListViewModel()
     weak var delegate: SavedSongListViewDelegate?
     private var disposeBag = DisposeBag()
-    public var currentSongFolderId: String?
+    public var currentFolderId: String?
     
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -30,6 +30,7 @@ class SavedSongListViewController: UIViewController {
     @IBOutlet weak var folderTitleEmojiTextField: EmojiTextField!
     @IBOutlet weak var folderTitleTextField: UITextField!
     @IBOutlet weak var savedSongTableView: UITableView!
+    @IBOutlet weak var addSongButton: UIButton!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -65,7 +66,7 @@ class SavedSongListViewController: UIViewController {
     
     // MARK: - Initialization
     private func configureData() {
-        guard let currentSongFolderId = currentSongFolderId else {
+        guard let currentSongFolderId = currentFolderId else {
             dismiss(animated: true, completion: nil)
             return
         }
@@ -100,21 +101,29 @@ class SavedSongListViewController: UIViewController {
         savedSongTableView.tableFooterView = UIView()
         savedSongTableView.separatorStyle = .none
         savedSongTableView.layer.cornerRadius = 12
-        savedSongTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        savedSongTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 100, right: 0)
         
         // Folder title Textfield
         folderTitleTextField.layer.cornerRadius = 12
         folderTitleTextField.setLeftPadding(width: 16)
         folderTitleTextField.setRightPadding(width: 16)
         folderTitleTextField.setSearchBoxShadow()
-        folderTitleTextField.hero.modifiers = [.fade, .translate(y: 12)]
+        folderTitleTextField.hero.modifiers = [.fade, .translate(y: -12)]
         folderTitleTextField.text = savedSongListViewModel.folderTitle
         
         // Folder title emoji Textfield
         folderTitleEmojiTextField.layer.cornerRadius = 16
         folderTitleEmojiTextField.setSearchBoxShadow()
-        folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: 12)]
+        folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: -12)]
         folderTitleEmojiTextField.text = savedSongListViewModel.folderTitleEmoji
+        
+        // Add Song Button
+        addSongButton.makeAsCircle()
+        addSongButton.hero.modifiers = [.fade, .translate(y: SafeAreaInset.bottom + 28)]
+        addSongButton.layer.shadowColor = ColorSet.floatingButtonBackgroundColor.cgColor
+        addSongButton.layer.shadowOffset = .zero
+        addSongButton.layer.shadowRadius = 20
+        addSongButton.layer.shadowOpacity = 0.25
     }
     
     private func initInstance() {
@@ -146,11 +155,17 @@ class SavedSongListViewController: UIViewController {
                     }
                 }
             }.disposed(by: disposeBag)
+        
+        // Add Song Button Tab Action
+        addSongButton.rx.tap
+            .bind(with: self, onNext: { vc, _ in
+                vc.presentAddSongVC()
+            }).disposed(by: disposeBag)
     }
     
     // MARK: - Method
     private func setSavedSong() {
-        savedSongListViewModel.fetchSongFolder(currentSongFolderId!)
+        savedSongListViewModel.fetchSongFolder(currentFolderId!)
             .subscribe(onCompleted: { [weak self] in
                 self?.savedSongTableView.reloadData()
             }).disposed(by: disposeBag)
@@ -178,6 +193,23 @@ class SavedSongListViewController: UIViewController {
                     self?.delegate?.folderView(didChangeFolderDescription: true)
                 }).disposed(by: disposeBag)
         }
+    }
+    
+    private func presentAddSongVC() {
+        guard let addSongVC = storyboard?.instantiateViewController(withIdentifier: "addSongStoryboard") as? AddSongViewController else { return }
+        
+        addSongVC.modalPresentationStyle = .fullScreen
+        addSongVC.currentFolderId = currentFolderId
+        addSongVC.delegate = self
+        
+        present(addSongVC, animated: true, completion: nil)
+    }
+    
+    private func reloadSavedSongTableView() {
+        savedSongListViewModel.reloadFolder(currentFolderId!)
+            .subscribe(onCompleted: { [weak self] in
+                self?.savedSongTableView.reloadData()
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -212,5 +244,11 @@ extension SavedSongListViewController: UITableViewDataSource, UITableViewDelegat
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         view.endEditing(true)
+    }
+}
+
+extension SavedSongListViewController: AddSongViewDelegate {
+    func didSongUpdated() {
+        reloadSavedSongTableView()
     }
 }

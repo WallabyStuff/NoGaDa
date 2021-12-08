@@ -11,10 +11,10 @@ import RxCocoa
 
 class MainViewModel {
     
-    var disposeBag = DisposeBag()
-    let karaokeManager = KaraokeManager()
-    var updatedSongList = [Song]()
-    let songFolderManager = SongFolderManager()
+    private var disposeBag = DisposeBag()
+    private let karaokeManager = KaraokeManager()
+    private var updatedSongList = [Song]()
+    private let songFolderManager = SongFolderManager()
 }
 
 extension MainViewModel {

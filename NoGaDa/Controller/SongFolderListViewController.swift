@@ -122,7 +122,7 @@ class SongFolderListViewController: UIViewController {
         
         folderVC.delegate = self
         folderVC.modalPresentationStyle = .fullScreen
-        folderVC.currentSongFolderId = selectedArchiveFolder.id
+        folderVC.currentFolderId = selectedArchiveFolder.id
         
         present(folderVC, animated: true, completion: nil)
     }

@@ -18,15 +18,15 @@ class SearchHistoryViewModel {
 
 extension SearchHistoryViewModel {
     func fetchSearchHistory() -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.searchHistoryManager.fetchData()
                 .subscribe(onNext:{ searchHistoryList in
                     self.searchHistoryList = searchHistoryList
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()
@@ -34,14 +34,14 @@ extension SearchHistoryViewModel {
     }
     
     func deleteAllHistory() -> Completable {
-        return Completable.create { [weak self] completable in
+        return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
             
             self.searchHistoryManager.deleteAll()
                 .subscribe(onCompleted: {
-                    completable(.completed)
+                    observer(.completed)
                 }, onError: { error in
-                    completable(.error(error))
+                    observer(.error(error))
                 }).disposed(by: self.disposeBag)
             
             return Disposables.create()
