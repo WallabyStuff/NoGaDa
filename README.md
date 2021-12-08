@@ -6,7 +6,7 @@
 
 <br><br>
 ## Screenshots 📱
-![Preview image](https://user-images.githubusercontent.com/63496607/137466187-40a92faa-7f11-413c-9424-a07d98de0c15.png)
+![Preview image](https://user-images.githubusercontent.com/63496607/142732554-666665da-d2f7-4039-af48-8291a0b833d9.png)
 
 ---
 
