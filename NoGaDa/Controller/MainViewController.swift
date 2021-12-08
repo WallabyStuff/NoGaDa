@@ -13,15 +13,20 @@ import RxGesture
 import RealmSwift
 import AppTrackingTransparency
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     // MARK: Declaration
     var disposeBag = DisposeBag()
     let splashView = SplashView()
-    let karaokeManager = KaraokeManager()
-    var updatedSongArr = [Song]()
-    let archiveFolderManager = ArchiveFolderManager()
-    var archiveFloatingPanel: ArchiveFloatingPanel?
+    var archiveFloatingPanel: ArchiveFloatingPanelView?
+    let mainViewModel = MainViewModel()
+    var updatedSongBrand: KaraokeBrand {
+        if brandSegmentedControl.currentPosition == 0 {
+            return .tj
+        } else {
+            return .kumyoung
+        }
+    }
     
     var minimumAppbarHeight: CGFloat = 80
     var maximumAppbarHeight: CGFloat = 140
@@ -56,14 +61,9 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         splashView.hide()
-        setTotalArchivedSongSize()
+        updateTotalSavedSongSize()
         requestTrackingAuthorization()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        mainContentScrollView.scrollToTop(animated: false)
+        updatedSongTableView.flashScrollIndicators()
     }
     
     // MARK: - Override
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        setUpdatedSongChart()
+        reloadUpdateChartTableView()
     }
 
     // MARK: - Initialization
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         appbarTitleLabel.hero.id = "appbarTitle"
         
         // Setting Button
-        settingButton.setPadding(width: 6)
+        settingButton.setPadding(width: 4)
         
         // Main content ScrollView content View
         mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
@@ -142,8 +142,8 @@ class ViewController: UIViewController {
     
     private func initInstance() {
         // Chart TableView
-        let chartTableCellNibName = UINib(nibName: "ChartTableViewCell", bundle: nil)
-        updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "chartTableViewCell")
+        let chartTableCellNibName = UINib(nibName: "UpdatedSongTableViewCell", bundle: nil)
+        updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "updatedSongTableViewCell")
         updatedSongTableView.delegate = self
         updatedSongTableView.dataSource = self
         
@@ -153,9 +153,9 @@ class ViewController: UIViewController {
         brandSegmentedControl.delegate = self
         
         // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanel(vc: self)
+        archiveFloatingPanel = ArchiveFloatingPanelView(vc: self)
         archiveFloatingPanel?.successfullyAddedAction = { [weak self] in
-            self?.setTotalArchivedSongSize()
+            self?.updateTotalSavedSongSize()
         }
     }
     
@@ -228,65 +228,62 @@ class ViewController: UIViewController {
     
     // MARK: - Method
     func presentSearchVC() {
-        guard let searchVC = storyboard?.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else { return }
-        searchVC.modalPresentationStyle = .fullScreen
+        guard let searchVC = storyboard?.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else {
+            return
+        }
         
+        searchVC.modalPresentationStyle = .fullScreen
         present(searchVC, animated: true, completion: nil)
     }
     
     func presentArchiveVC() {
-        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveStoryboard") as? ArchiveViewController else { return }
-        archiveVC.modalPresentationStyle = .fullScreen
+        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveStoryboard") as? SongFolderListViewController else {
+            return
+        }
         
+        archiveVC.modalPresentationStyle = .fullScreen
         present(archiveVC, animated: true, completion: nil)
     }
     
     func presentSettingVC() {
-        guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "settingStoryboard") as? SettingViewController else { return }
+        guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "settingStoryboard") as? SettingViewController else {
+            return
+        }
         
         present(settingVC, animated: true, completion: nil)
     }
     
     private func setUpdatedSongChart() {
-        var brand: KaraokeBrand = .tj
-        if brandSegmentedControl.currentPosition != 0 {
-            brand = .kumyoung
-        }
-        
         updatedSongLoadingIndicator.startAnimatingAndShow()
         updatedsongLoadErrorMessageLabel.isHidden = true
-        updatedSongArr.removeAll()
-        updatedSongTableView.reloadData()
-        
-        karaokeManager.fetchUpdatedSong(brand: brand)
-            .retry(3)
-            .subscribe(with: self, onNext: { vc, updatedSongList in
-                DispatchQueue.main.async {
-                    vc.updatedSongArr = updatedSongList
-                    vc.reloadChartTableView()
-                }
+        clearUpdatedSongTableView()
+
+        mainViewModel.fetchUpdatedSong(brand: updatedSongBrand)
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onCompleted: { vc in
+                vc.reloadUpdateChartTableView()
             }, onError: { vc, error in
-                DispatchQueue.main.async {
-                    vc.updatedSongLoadingIndicator.stopAnimatingAndHide()
-                    vc.updatedsongLoadErrorMessageLabel.text = "오류가 발생했습니다."
-                    vc.updatedsongLoadErrorMessageLabel.isHidden = false
-                }
+                vc.updatedSongLoadingIndicator.stopAnimatingAndHide()
+                vc.updatedsongLoadErrorMessageLabel.text = "오류가 발생했습니다."
+                vc.updatedsongLoadErrorMessageLabel.isHidden = false
             }).disposed(by: disposeBag)
     }
     
-    private func reloadChartTableView() {
+    private func reloadUpdateChartTableView() {
         updatedSongLoadingIndicator.stopAnimatingAndHide()
         updatedSongTableView.reloadData()
-        updatedSongTableView.scrollToTopCell(animated: false)
         
-        if updatedSongArr.count == 0 {
+        if mainViewModel.updatedSongCount == 0 {
             updatedsongLoadErrorMessageLabel.text = "업데이트 된 곡이 없습니다."
             updatedsongLoadErrorMessageLabel.isHidden = false
+            return
         }
+        
+        updatedSongTableView.scrollToTopCell(animated: false)
     }
     
-    private func setTotalArchivedSongSize() {
-        totalArchivedSongSizeLabel.text = "총 \(archiveFolderManager.getSongsCount())곡"
+    private func updateTotalSavedSongSize() {
+        totalArchivedSongSizeLabel.text = mainViewModel.savedSongSizeString
     }
     
     private func requestTrackingAuthorization() {
@@ -294,42 +291,38 @@ class ViewController: UIViewController {
             ATTrackingManager.requestTrackingAuthorization { _ in }
         }
     }
+    
+    func clearUpdatedSongTableView() {
+        mainViewModel.clearUpdatedSong()
+        updatedSongTableView.reloadData()
+    }
 }
 
 // MARK: - Extension
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return updatedSongArr.count
+        return mainViewModel.numberOfRowsInSection(mainViewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let chartCell = tableView.dequeueReusableCell(withIdentifier: "chartTableViewCell") as? ChartTableViewCell else { return UITableViewCell() }
+        guard let updatedSongCell = tableView.dequeueReusableCell(withIdentifier: "updatedSongTableViewCell") as? UpdatedSongTableViewCell else { return UITableViewCell() }
         
-        chartCell.chartNumberLabel.text = "\(indexPath.row + 1)"
-        chartCell.songTitleLabel.text   = "\(updatedSongArr[indexPath.row].title)"
-        chartCell.singerLabel.text      = "\(updatedSongArr[indexPath.row].singer)"
+        let updatedSongVM = mainViewModel.updatedSongAtIndex(indexPath)
         
-        return chartCell
+        updatedSongCell.songTitleLabel.text   = "\(updatedSongVM.title)"
+        updatedSongCell.singerLabel.text      = "\(updatedSongVM.singer)"
+        updatedSongCell.songNumberLabel.text  = "\(updatedSongVM.songNumber)"
+        
+        return updatedSongCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        archiveFloatingPanel?.show(selectedSong: updatedSongArr[indexPath.row], animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let updatedSongCell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
-        
-        updatedSongCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let updatedSongCell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
-        
-        updatedSongCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+        let updatedSongVM = mainViewModel.updatedSongAtIndex(indexPath)
+        archiveFloatingPanel?.show(selectedSong: updatedSongVM.song, animated: true)
     }
 }
 
-extension ViewController: BISegmentedControlDelegate {
+extension MainViewController: BISegmentedControlDelegate {
     func BISegmentedControl(didSelectSegmentAt index: Int) {
         setUpdatedSongChart()
     }

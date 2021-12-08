@@ -14,7 +14,6 @@ enum AdMobUnitID {
 }
 
 class AdMobManager {
-    
     private var interstitial: GADInterstitialAd?
     var presentFrequency = 2
     
@@ -44,6 +43,7 @@ class AdMobManager {
         }
         
         if !admobUsageState() {
+            print("admob present now")
             interstitial.present(fromRootViewController: vc)
             configureAdMob()
         }

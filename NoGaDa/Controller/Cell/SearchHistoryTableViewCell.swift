@@ -27,6 +27,10 @@ class SearchHistoryTableViewCell: UITableViewCell {
     // MARK: - Initialization
     private func initView() {
         titleLabel.text = ""
+        
+        let selectedView = UIView()
+        selectedView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+        selectedBackgroundView = selectedView
     }
     
     private func initEventListener() {

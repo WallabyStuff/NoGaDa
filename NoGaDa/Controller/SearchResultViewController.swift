@@ -17,10 +17,9 @@ protocol SearchResultViewDelegate: AnyObject {
 class SearchResultViewController: UIViewController {
 
     // MARK: - Declaration
+    let searchResultViewModel = SearchResultViewModel()
     var disposeBag = DisposeBag()
     weak var delegate: SearchResultViewDelegate?
-    var karaokeManager = KaraokeManager()
-    var searchResultSongList = [Song]()
     var searchKeyword = ""
     
     @IBOutlet weak var brandSelector: UISegmentedControl!
@@ -98,22 +97,16 @@ class SearchResultViewController: UIViewController {
         
         searchIndicator.startAnimatingAndShow()
         searchResultPlaceholderLabel.isHidden = true
-        searchResultSongList.removeAll()
-        searchResultTableView.reloadData()
+        clearSearchResultTableView()
         
-        karaokeManager.fetchSong(titleOrSinger: searchKeyword, brand: brand)
-            .retry(3)
-            .subscribe(with: self, onNext: { vc, searchResultList in
-                DispatchQueue.main.async {
-                    vc.searchResultSongList = searchResultList
-                    vc.reloadSearchResult()
-                }
+        searchResultViewModel.fetchSearchResult(keyword: searchKeyword, brand: brand)
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onCompleted: { vc in
+                vc.reloadSearchResult()
             }, onError: { vc, error in
-                DispatchQueue.main.async {
-                    vc.searchIndicator.stopAnimatingAndHide()
-                    vc.searchResultPlaceholderLabel.text = "오류가 발생했습니다"
-                    vc.searchResultPlaceholderLabel.isHidden = false
-                }
+                vc.searchIndicator.stopAnimatingAndHide()
+                vc.searchResultPlaceholderLabel.text = "오류가 발생했습니다"
+                vc.searchResultPlaceholderLabel.isHidden = false
             }).disposed(by: disposeBag)
     }
     
@@ -121,7 +114,7 @@ class SearchResultViewController: UIViewController {
         searchIndicator.stopAnimatingAndHide()
         searchResultTableView.reloadData()
         
-        if searchResultSongList.count == 0 {
+        if searchResultViewModel.isSearchResultSongEmpty {
             searchResultPlaceholderLabel.text = "검색 결과가 없습니다"
             searchResultPlaceholderLabel.isHidden = false
             return
@@ -129,21 +122,27 @@ class SearchResultViewController: UIViewController {
         
         searchResultTableView.scrollToTopCell(animated: false)
     }
+    
+    private func clearSearchResultTableView() {
+        searchResultViewModel.clearSearchResult()
+        searchResultTableView.reloadData()
+    }
 }
 
 // MARK: - Extension
 extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultSongList.count
+        return searchResultViewModel.numberOfRowsInSection(searchResultViewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let searchResultCell = tableView.dequeueReusableCell(withIdentifier: "searchResultTableViewCell") as? SongTableViewCell else { return UITableViewCell() }
         
-        searchResultCell.titleLabel.text        = searchResultSongList[indexPath.row].title
-        searchResultCell.singerLabel.text       = searchResultSongList[indexPath.row].singer
-        searchResultCell.songNumberLabel.text   = searchResultSongList[indexPath.row].no
-        searchResultCell.brandLabel.text        = searchResultSongList[indexPath.row].brand.localizedString
+        let searchResultVM = searchResultViewModel.searchResultSongAtIndex(indexPath)
+        
+        searchResultCell.titleLabel.text        = searchResultVM.title
+        searchResultCell.singerLabel.text       = searchResultVM.singer
+        searchResultCell.songNumberLabel.text   = "\(searchResultVM.brand) \(searchResultVM.no)"
         
         if !SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
             searchResultCell.singerLabel.setAccentColor(string: searchKeyword)
@@ -159,18 +158,8 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
-        delegate?.searchResultView(tableView, didSelectRowAt: indexPath, selectedSongRowAt: searchResultSongList[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
         
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+        let searchResultVM = searchResultViewModel.searchResultSongAtIndex(indexPath)
+        delegate?.searchResultView(tableView, didSelectRowAt: indexPath, selectedSongRowAt: searchResultVM.song)
     }
 }

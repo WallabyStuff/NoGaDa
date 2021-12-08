@@ -37,12 +37,14 @@ class SettingViewController: UIViewController {
         searchFilterTableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.tableFooterView = UIView()
+        searchFilterTableView.isScrollEnabled = false
         
         // Etc group View
         etcGroupView.makeAsSettingGroupView()
         etcTableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         etcTableView.layer.cornerRadius = 20
         etcTableView.tableFooterView = UIView()
+        etcTableView.isScrollEnabled = false
     }
     
     private func initInstance() {

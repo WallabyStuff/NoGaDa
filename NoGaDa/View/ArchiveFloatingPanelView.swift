@@ -8,10 +8,10 @@
 import UIKit
 import FloatingPanel
 
-class ArchiveFloatingPanel {
+class ArchiveFloatingPanelView {
     
     private var floatingPanel = FloatingPanelController()
-    private var vc: UIViewController?
+    private weak var vc: UIViewController?
     private var adMobManager = AdMobManager()
     var successfullyAddedAction: () -> Void = {}
     
@@ -44,7 +44,7 @@ class ArchiveFloatingPanel {
 
         floatingPanel.removeFromParent()
         
-        guard let popUpArchiveVC = vc.storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpArchiveViewController else { return }
+        guard let popUpArchiveVC = vc.storyboard?.instantiateViewController(identifier: "popUpArchiveStoryboard") as? PopUpSongFolderListViewController else { return }
         
         popUpArchiveVC.delegate = self
         popUpArchiveVC.selectedSong = selectedSong
@@ -57,6 +57,7 @@ class ArchiveFloatingPanel {
     }
     
     public func show(selectedSong: Song, animated: Bool) {
+        adMobManager = AdMobManager()
         configureAction(selectedSong: selectedSong)
         floatingPanel.show(animated: true, completion: nil)
         floatingPanel.move(to: .half, animated: true)
@@ -67,7 +68,7 @@ class ArchiveFloatingPanel {
     }
 }
 
-extension ArchiveFloatingPanel: PopUpArchiveViewDelegate {
+extension ArchiveFloatingPanelView: PopUpArchiveViewDelegate {
     func popUpArchiveView(isSuccessfullyAdded: Bool) {
         if isSuccessfullyAdded {
             guard let vc = vc else { return }

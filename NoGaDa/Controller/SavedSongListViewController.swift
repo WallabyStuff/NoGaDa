@@ -12,25 +12,24 @@ import RxCocoa
 import RxGesture
 import Hero
 
-protocol FolderViewDelegate: AnyObject {
+protocol SavedSongListViewDelegate: AnyObject {
     func folderView(didChangeFolderDescription: Bool)
 }
 
-class FolderViewController: UIViewController {
+class SavedSongListViewController: UIViewController {
     
     // MARK: - Declaraiton
-    weak var delegate: FolderViewDelegate?
-    var disposeBag = DisposeBag()
-    let archiveFolderManager = ArchiveFolderManager()
-    var currentArchiveFolder: ArchiveFolder? // pass from superview(ArchiveViewController)
-    var archivedSongArr = [ArchiveSong]()
+    private let savedSongListViewModel = SavedSongListViewModel()
+    weak var delegate: SavedSongListViewDelegate?
+    private var disposeBag = DisposeBag()
+    public var currentSongFolderId: String?
     
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var folderTitleEmojiTextField: EmojiTextField!
     @IBOutlet weak var folderTitleTextField: UITextField!
-    @IBOutlet weak var archivedSongTableView: UITableView!
+    @IBOutlet weak var savedSongTableView: UITableView!
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -40,7 +39,6 @@ class FolderViewController: UIViewController {
         initView()
         initInstance()
         initEventListener()
-        setArchivedSongs()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,7 +55,7 @@ class FolderViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        setArchivedSongs()
+        setSavedSong()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -67,12 +65,16 @@ class FolderViewController: UIViewController {
     
     // MARK: - Initialization
     private func configureData() {
-        if currentArchiveFolder == nil {
+        guard let currentSongFolderId = currentSongFolderId else {
             dismiss(animated: true, completion: nil)
+            return
         }
-        
-        folderTitleTextField.text = currentArchiveFolder?.title
-        folderTitleEmojiTextField.text = currentArchiveFolder?.titleEmoji
+
+        savedSongListViewModel.fetchSongFolder(currentSongFolderId)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onCompleted: { [weak self] in
+                self?.savedSongTableView.reloadData()
+            }).disposed(by: disposeBag)
     }
     
     private func initView() {
@@ -95,10 +97,10 @@ class FolderViewController: UIViewController {
         exitButton.setExitButtonShadow()
         
         // Archived Song TableView
-        archivedSongTableView.tableFooterView = UIView()
-        archivedSongTableView.separatorStyle = .none
-        archivedSongTableView.layer.cornerRadius = 12
-        archivedSongTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        savedSongTableView.tableFooterView = UIView()
+        savedSongTableView.separatorStyle = .none
+        savedSongTableView.layer.cornerRadius = 12
+        savedSongTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
         // Folder title Textfield
         folderTitleTextField.layer.cornerRadius = 12
@@ -106,19 +108,21 @@ class FolderViewController: UIViewController {
         folderTitleTextField.setRightPadding(width: 16)
         folderTitleTextField.setSearchBoxShadow()
         folderTitleTextField.hero.modifiers = [.fade, .translate(y: 12)]
+        folderTitleTextField.text = savedSongListViewModel.folderTitle
         
         // Folder title emoji Textfield
         folderTitleEmojiTextField.layer.cornerRadius = 16
         folderTitleEmojiTextField.setSearchBoxShadow()
         folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: 12)]
+        folderTitleEmojiTextField.text = savedSongListViewModel.folderTitleEmoji
     }
     
     private func initInstance() {
         // Archived Song TableView
         let songCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
-        archivedSongTableView.register(songCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
-        archivedSongTableView.dataSource = self
-        archivedSongTableView.delegate = self
+        savedSongTableView.register(songCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
+        savedSongTableView.dataSource = self
+        savedSongTableView.delegate = self
     }
     
     private func initEventListener() {
@@ -145,9 +149,11 @@ class FolderViewController: UIViewController {
     }
     
     // MARK: - Method
-    private func setArchivedSongs() {
-        archivedSongArr = Array(currentArchiveFolder!.songs)
-        archivedSongTableView.reloadData()
+    private func setSavedSong() {
+        savedSongListViewModel.fetchSongFolder(currentSongFolderId!)
+            .subscribe(onCompleted: { [weak self] in
+                self?.savedSongTableView.reloadData()
+            }).disposed(by: disposeBag)
     }
     
     private func updateFolderNameIfNeeded() {
@@ -155,71 +161,53 @@ class FolderViewController: UIViewController {
             return
         }
         
-        if folderTitle != currentArchiveFolder?.title {
-            archiveFolderManager.updateTitle(archiveFolder: currentArchiveFolder!, newTitle: folderTitle)
-                .subscribe(with: self) { vc in
-                    vc.delegate?.folderView(didChangeFolderDescription: true)
-                } onError: { vc, error in
-                    print(error)
-                    // TODO: - Handle the Error State
-                }.disposed(by: disposeBag)
+        if folderTitle != savedSongListViewModel.folderTitle {
+            savedSongListViewModel.updateFolderTitle(folderTitle)
+                .subscribe(onCompleted: { [weak self] in
+                    self?.delegate?.folderView(didChangeFolderDescription: true)
+                }).disposed(by: disposeBag)
         }
     }
     
     private func updateFolderTitleEmojiIfNeeded() {
         guard let folderTitleEmoji = folderTitleEmojiTextField.text else { return }
         
-        if folderTitleEmoji != currentArchiveFolder?.titleEmoji {
-            archiveFolderManager.updateTitleEmoji(archiveFolder: currentArchiveFolder!, newEmoji: folderTitleEmoji)
-                .subscribe(with: self) { vc in
-                    vc.delegate?.folderView(didChangeFolderDescription: true)
-                } onError: { vc, error in
-                    print(error)
-                    // TODO: - Handle the Error State
-                }.disposed(by: disposeBag)
+        if folderTitleEmoji != savedSongListViewModel.folderTitleEmoji {
+            savedSongListViewModel.updateFolderTitleEmoji(folderTitleEmoji)
+                .subscribe(onCompleted: { [weak self] in
+                    self?.delegate?.folderView(didChangeFolderDescription: true)
+                }).disposed(by: disposeBag)
         }
     }
 }
 
 // MARK: - Extension
-extension FolderViewController: UITableViewDataSource, UITableViewDelegate {
+extension SavedSongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return archivedSongArr.count
+        return savedSongListViewModel.numberOfRowsInSection(savedSongListViewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let songCell = tableView.dequeueReusableCell(withIdentifier: "searchResultTableViewCell") as? SongTableViewCell else { return UITableViewCell() }
         
-        songCell.titleLabel.text        = archivedSongArr[indexPath.row].title
-        songCell.songNumberLabel.text   = archivedSongArr[indexPath.row].no
-        songCell.singerLabel.text       = archivedSongArr[indexPath.row].singer
-        songCell.brandLabel.text        = archivedSongArr[indexPath.row].brand
+        let savedSongVM = savedSongListViewModel.archiveSongAtIndex(indexPath)
+        
+        songCell.titleLabel.text        = savedSongVM.title
+        songCell.singerLabel.text       = savedSongVM.singer
+        songCell.songNumberLabel.text   = "\(savedSongVM.brand) \(savedSongVM.no)"
         
         return songCell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            archiveFolderManager.deleteSong(song: archivedSongArr[indexPath.row])
-                .subscribe(with: self, onCompleted: { vc in
-                    vc.archivedSongArr.remove(at: indexPath.row)
-                    vc.archivedSongTableView.deleteRows(at: [indexPath], with: .left)
-                })
-                .disposed(by: disposeBag)
+            savedSongListViewModel.deleteSong(indexPath)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onCompleted: { [weak self] in
+                    self?.savedSongTableView.deleteRows(at: [indexPath], with: .left)
+                }).disposed(by: disposeBag)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let searchResultCell = tableView.cellForRow(at: indexPath) as? SongTableViewCell else { return }
-        
-        searchResultCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
