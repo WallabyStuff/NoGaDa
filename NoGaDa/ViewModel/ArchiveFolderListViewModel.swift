@@ -9,14 +9,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SongFolderListViewModel {
-    
+class ArchiveFolderListViewModel {
     private var disposeBag = DisposeBag()
     private let songFolderManager = SongFolderManager()
     private var songFolderList = [ArchiveFolder]()
 }
 
-extension SongFolderListViewModel {
+extension ArchiveFolderListViewModel {
     func fetchFolders() {
         songFolderManager.fetchData()
             .subscribe(onNext: { [weak self] songFolderList in
@@ -42,7 +41,7 @@ extension SongFolderListViewModel {
     }
 }
 
-extension SongFolderListViewModel {
+extension ArchiveFolderListViewModel {
     var sectionCount: Int {
         return 0
     }

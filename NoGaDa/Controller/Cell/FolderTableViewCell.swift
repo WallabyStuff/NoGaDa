@@ -9,6 +9,7 @@ import UIKit
 
 class FolderTableViewCell: UITableViewCell {
 
+    public static let releaseAnimationDuration: CGFloat = 0.5
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var titleEmojiLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -32,5 +33,34 @@ class FolderTableViewCell: UITableViewCell {
         
         titleEmojiLabel.text    = ""
         titleLabel.text         = ""
+    }
+}
+
+extension FolderTableViewCell {
+    
+    private var releaseAnimationDuration: CGFloat {
+        return 0.3
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        UIView.animate(withDuration: releaseAnimationDuration) {
+            self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        
+        UIView.animate(withDuration: releaseAnimationDuration) {
+            self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+        }
     }
 }
