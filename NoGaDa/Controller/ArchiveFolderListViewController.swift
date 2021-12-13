@@ -12,10 +12,10 @@ import RxCocoa
 import RxGesture
 import Hero
 
-class SongFolderListViewController: UIViewController {
+class ArchiveFolderListViewController: UIViewController {
 
     // MARK: - Declaraiton
-    private let songFolderListViewModel = SongFolderListViewModel()
+    private let songFolderListViewModel = ArchiveFolderListViewModel()
     private var disposeBag = DisposeBag()
     
     @IBOutlet weak var appbarView: UIView!
@@ -116,7 +116,7 @@ class SongFolderListViewController: UIViewController {
     }
     
     private func presentFolderVC(selectedArchiveFolder: ArchiveFolder) {
-        guard let folderVC = storyboard?.instantiateViewController(identifier: "folderStoryboard") as? SavedSongListViewController else {
+        guard let folderVC = storyboard?.instantiateViewController(identifier: "folderStoryboard") as? ArchiveSongListViewController else {
             return
         }
         
@@ -158,7 +158,7 @@ class SongFolderListViewController: UIViewController {
 }
 
 // MARK: - Extension
-extension SongFolderListViewController: UITableViewDataSource, UITableViewDelegate {
+extension ArchiveFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songFolderListViewModel.numberOfRowsInSection(songFolderListViewModel.sectionCount)
@@ -189,31 +189,15 @@ extension SongFolderListViewController: UITableViewDataSource, UITableViewDelega
             }
         }
     }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let folderCell = tableView.cellForRow(at: indexPath) as? FolderTableViewCell else {
-            return
-        }
-        
-        folderCell.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let folderCell = tableView.cellForRow(at: indexPath) as? FolderTableViewCell else {
-            return
-        }
-        
-        folderCell.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
-    }
 }
 
-extension SongFolderListViewController: SavedSongListViewDelegate {
+extension ArchiveFolderListViewController: ArchiveSongListViewDelegate {
     func folderView(didChangeFolderDescription: Bool) {
         setArchiveFolders()
     }
 }
 
-extension SongFolderListViewController: AddFolderViewDelegate {
+extension ArchiveFolderListViewController: AddFolderViewDelegate {
     func addFolderView(didAddFile: Bool) {
         setArchiveFolders()
     }

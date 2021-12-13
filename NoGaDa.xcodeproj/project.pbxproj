@@ -25,8 +25,8 @@
 		49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFB2720766100EC12B3 /* SearchViewModel.swift */; };
 		49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */; };
 		49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */; };
-		49484D022720B6D500EC12B3 /* SongFolderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D012720B6D500EC12B3 /* SongFolderListViewModel.swift */; };
-		49484D042720BD7D00EC12B3 /* SavedSongListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D032720BD7D00EC12B3 /* SavedSongListViewModel.swift */; };
+		49484D022720B6D500EC12B3 /* ArchiveFolderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D012720B6D500EC12B3 /* ArchiveFolderListViewModel.swift */; };
+		49484D042720BD7D00EC12B3 /* ArchiveSongListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D032720BD7D00EC12B3 /* ArchiveSongListViewModel.swift */; };
 		4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */; };
 		495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334302711DE37003F64DE /* SearchResultViewController.swift */; };
 		495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334322711DE4B003F64DE /* SearchHistoryViewController.swift */; };
@@ -45,8 +45,8 @@
 		4956CE5926F476450007523B /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5826F476450007523B /* ColorSet.swift */; };
 		4956CE5B26F47CC30007523B /* ViewGlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5A26F47CC30007523B /* ViewGlobalExtension.swift */; };
 		4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5C26F4940A0007523B /* SearchViewController.swift */; };
-		4956CE5F26F494730007523B /* SongFolderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* SongFolderListViewController.swift */; };
-		4956CE6126F494870007523B /* SavedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* SavedSongListViewController.swift */; };
+		4956CE5F26F494730007523B /* ArchiveFolderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveFolderListViewController.swift */; };
+		4956CE6126F494870007523B /* ArchiveSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongListViewController.swift */; };
 		4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6226F494990007523B /* AddFolderViewController.swift */; };
 		496BE2AF27173D5300CFD96D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496BE2AE27173D5300CFD96D /* SplashView.swift */; };
 		4989A72626F8863C00A98B63 /* KaraokeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeManager.swift */; };
@@ -55,7 +55,7 @@
 		4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */; };
 		4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */; };
 		4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD6270471CB005F0D85 /* ResourceItem.swift */; };
-		4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */; };
+		4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */; };
 		49C6DC33270298E30094403B /* AppbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppbarView.swift */; };
 		49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC362703129B0094403B /* SafeAreaInset.swift */; };
 		49C6DC75270372F40094403B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC74270372F40094403B /* SettingViewController.swift */; };
@@ -123,8 +123,8 @@
 		49484CFB2720766100EC12B3 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
-		49484D012720B6D500EC12B3 /* SongFolderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFolderListViewModel.swift; sourceTree = "<group>"; };
-		49484D032720BD7D00EC12B3 /* SavedSongListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSongListViewModel.swift; sourceTree = "<group>"; };
+		49484D012720B6D500EC12B3 /* ArchiveFolderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderListViewModel.swift; sourceTree = "<group>"; };
+		49484D032720BD7D00EC12B3 /* ArchiveSongListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongListViewModel.swift; sourceTree = "<group>"; };
 		4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BISegmentedControl.swift; sourceTree = "<group>"; };
 		495334302711DE37003F64DE /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		495334322711DE4B003F64DE /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
@@ -149,8 +149,8 @@
 		4956CE5826F476450007523B /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		4956CE5A26F47CC30007523B /* ViewGlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGlobalExtension.swift; sourceTree = "<group>"; };
 		4956CE5C26F4940A0007523B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		4956CE5E26F494730007523B /* SongFolderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFolderListViewController.swift; sourceTree = "<group>"; };
-		4956CE6026F494870007523B /* SavedSongListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSongListViewController.swift; sourceTree = "<group>"; };
+		4956CE5E26F494730007523B /* ArchiveFolderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderListViewController.swift; sourceTree = "<group>"; };
+		4956CE6026F494870007523B /* ArchiveSongListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongListViewController.swift; sourceTree = "<group>"; };
 		4956CE6226F494990007523B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		496BE2AE27173D5300CFD96D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		4989A72526F8863C00A98B63 /* KaraokeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeManager.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconResourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconResourceCollectionViewCell.xib; sourceTree = "<group>"; };
 		4997CFD6270471CB005F0D85 /* ResourceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceItem.swift; sourceTree = "<group>"; };
-		4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveShortcutView.swift; sourceTree = "<group>"; };
+		4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderShortcutView.swift; sourceTree = "<group>"; };
 		49C6DC32270298E30094403B /* AppbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarView.swift; sourceTree = "<group>"; };
 		49C6DC362703129B0094403B /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
 		49C6DC74270372F40094403B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -235,8 +235,8 @@
 			children = (
 				491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */,
 				49484CFB2720766100EC12B3 /* SearchViewModel.swift */,
-				49484D012720B6D500EC12B3 /* SongFolderListViewModel.swift */,
-				49484D032720BD7D00EC12B3 /* SavedSongListViewModel.swift */,
+				49484D012720B6D500EC12B3 /* ArchiveFolderListViewModel.swift */,
+				49484D032720BD7D00EC12B3 /* ArchiveSongListViewModel.swift */,
 				4992C7612721B3D6006045FF /* AddFolderViewModel.swift */,
 				4992C7632721B86F006045FF /* PopUpSongFolderListViewModel.swift */,
 				49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */,
@@ -337,8 +337,8 @@
 				493BCBE126F4BAC00096422A /* Cell */,
 				4956CE2826F467040007523B /* MainViewController.swift */,
 				4956CE5C26F4940A0007523B /* SearchViewController.swift */,
-				4956CE5E26F494730007523B /* SongFolderListViewController.swift */,
-				4956CE6026F494870007523B /* SavedSongListViewController.swift */,
+				4956CE5E26F494730007523B /* ArchiveFolderListViewController.swift */,
+				4956CE6026F494870007523B /* ArchiveSongListViewController.swift */,
 				4956CE6226F494990007523B /* AddFolderViewController.swift */,
 				493BCBDF26F4B2890096422A /* PopUpSongFolderListViewController.swift */,
 				49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */,
@@ -360,7 +360,7 @@
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
 				4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */,
 				49C6DC32270298E30094403B /* AppbarView.swift */,
-				4997D01627059FD3005F0D85 /* ArchiveShortcutView.swift */,
+				4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */,
 				493F232D270DEA4700A618DC /* ArchiveFloatingPanelView.swift */,
 				496BE2AE27173D5300CFD96D /* SplashView.swift */,
 				8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */,
@@ -675,7 +675,7 @@
 				4992C7642721B86F006045FF /* PopUpSongFolderListViewModel.swift in Sources */,
 				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
 				495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */,
-				4956CE6126F494870007523B /* SavedSongListViewController.swift in Sources */,
+				4956CE6126F494870007523B /* ArchiveSongListViewController.swift in Sources */,
 				8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */,
 				493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */,
 				4953343B271204C4003F64DE /* SearchHistoryManager.swift in Sources */,
@@ -683,7 +683,7 @@
 				4989A72626F8863C00A98B63 /* KaraokeManager.swift in Sources */,
 				49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */,
 				49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */,
-				49484D042720BD7D00EC12B3 /* SavedSongListViewModel.swift in Sources */,
+				49484D042720BD7D00EC12B3 /* ArchiveSongListViewModel.swift in Sources */,
 				49C6DC33270298E30094403B /* AppbarView.swift in Sources */,
 				493BCBF326F642630096422A /* EmojiTextField.swift in Sources */,
 				493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */,
@@ -713,7 +713,7 @@
 				491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */,
 				493F232E270DEA4700A618DC /* ArchiveFloatingPanelView.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* PopUpArchiveFloatingPanelLayout.swift in Sources */,
-				4997D01727059FD3005F0D85 /* ArchiveShortcutView.swift in Sources */,
+				4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
 				49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
@@ -722,9 +722,9 @@
 				495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */,
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
-				49484D022720B6D500EC12B3 /* SongFolderListViewModel.swift in Sources */,
+				49484D022720B6D500EC12B3 /* ArchiveFolderListViewModel.swift in Sources */,
 				493BCBF026F4EBCF0096422A /* UpdatedSongTableViewCell.swift in Sources */,
-				4956CE5F26F494730007523B /* SongFolderListViewController.swift in Sources */,
+				4956CE5F26F494730007523B /* ArchiveFolderListViewController.swift in Sources */,
 				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,

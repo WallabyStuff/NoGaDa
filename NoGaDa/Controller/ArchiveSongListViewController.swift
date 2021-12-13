@@ -12,15 +12,15 @@ import RxCocoa
 import RxGesture
 import Hero
 
-protocol SavedSongListViewDelegate: AnyObject {
+protocol ArchiveSongListViewDelegate: AnyObject {
     func folderView(didChangeFolderDescription: Bool)
 }
 
-class SavedSongListViewController: UIViewController {
+class ArchiveSongListViewController: UIViewController {
     
     // MARK: - Declaraiton
-    private let savedSongListViewModel = SavedSongListViewModel()
-    weak var delegate: SavedSongListViewDelegate?
+    private let savedSongListViewModel = ArchiveSongListViewModel()
+    weak var delegate: ArchiveSongListViewDelegate?
     private var disposeBag = DisposeBag()
     public var currentFolderId: String?
     
@@ -214,7 +214,7 @@ class SavedSongListViewController: UIViewController {
 }
 
 // MARK: - Extension
-extension SavedSongListViewController: UITableViewDataSource, UITableViewDelegate {
+extension ArchiveSongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return savedSongListViewModel.numberOfRowsInSection(savedSongListViewModel.sectionCount)
@@ -247,7 +247,7 @@ extension SavedSongListViewController: UITableViewDataSource, UITableViewDelegat
     }
 }
 
-extension SavedSongListViewController: AddSongViewDelegate {
+extension ArchiveSongListViewController: AddSongViewDelegate {
     func didSongUpdated() {
         reloadSavedSongTableView()
     }

@@ -10,14 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SavedSongListViewModel {
+class ArchiveSongListViewModel {
     private var disposeBag = DisposeBag()
     private let songFolderManager = SongFolderManager()
     private var songFolder = ArchiveFolder()
     private var songList = [ArchiveSong]()
 }
 
-extension SavedSongListViewModel {
+extension ArchiveSongListViewModel {
     var folderTitle: String {
         return songFolder.title
     }
@@ -76,7 +76,7 @@ extension SavedSongListViewModel {
     }
 }
 
-extension SavedSongListViewModel {
+extension ArchiveSongListViewModel {
     func updateFolderTitle(_ newTitle: String) -> Completable {
         return Completable.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }
@@ -108,11 +108,11 @@ extension SavedSongListViewModel {
     }
 }
 
-extension SavedSongListViewModel {
+extension ArchiveSongListViewModel {
     
 }
 
-extension SavedSongListViewModel {
+extension ArchiveSongListViewModel {
     var sectionCount: Int {
         return 0
     }

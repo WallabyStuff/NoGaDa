@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var mainContentScrollViewContentViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var archiveShortcutView: ArchiveShortcutView!
+    @IBOutlet weak var archiveShortcutView: ArchiveFolderShortcutView!
     @IBOutlet weak var archiveShortcutBackgroundImageView: UIImageView!
     @IBOutlet weak var totalArchivedSongSizeLabel: UILabel!
     @IBOutlet weak var searchBoxView: UIView!
@@ -236,7 +236,7 @@ class MainViewController: UIViewController {
     }
     
     func presentArchiveVC() {
-        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveStoryboard") as? SongFolderListViewController else {
+        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveStoryboard") as? ArchiveFolderListViewController else {
             return
         }
         
