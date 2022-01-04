@@ -11,22 +11,22 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
-protocol AddFolderViewDelegate: AnyObject {
-    func addFolderView(didAddFile: Bool)
+@objc protocol AddFolderViewDelegate: AnyObject {
+    @objc func didFolderAdded()
 }
 
 class AddFolderViewController: UIViewController {
     
     // MARK: - Declaraiton
-    private let addFolderViewModel = AddFolderViewModel()
-    weak var delegate: AddFolderViewDelegate?
-    private var disposeBag = DisposeBag()
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var emojiTextFieldFrame: UIView!
     @IBOutlet weak var folderEmojiTextField: EmojiTextField!
     @IBOutlet weak var folderTitleTextField: HighlightingTextfield!
+    
+    weak var delegate: AddFolderViewDelegate?
+    private let addFolderViewModel = AddFolderViewModel()
+    private var disposeBag = DisposeBag()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class AddFolderViewController: UIViewController {
 
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Override
@@ -69,7 +69,7 @@ class AddFolderViewController: UIViewController {
         folderTitleTextField.returnKeyType = .done
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Exit Button Tap Action
         exitButton.rx.tap
             .bind(with: self) { vc, _ in
@@ -85,7 +85,7 @@ class AddFolderViewController: UIViewController {
                 vc.addFolderViewModel.addFolder(title, titleEmoji)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onCompleted: { [weak vc] in
-                        vc?.delegate?.addFolderView(didAddFile: true)
+                        vc?.delegate?.didFolderAdded()
                         vc?.dismiss(animated: true, completion: nil)
                     }).disposed(by: vc.disposeBag)
             }.disposed(by: disposeBag)

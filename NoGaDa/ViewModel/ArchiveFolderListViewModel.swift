@@ -16,12 +16,21 @@ class ArchiveFolderListViewModel {
 }
 
 extension ArchiveFolderListViewModel {
-    func fetchFolders() {
-        songFolderManager.fetchData()
-            .subscribe(onNext: { [weak self] songFolderList in
-                guard let self = self else { return }
-                self.songFolderList = songFolderList
-            }).disposed(by: disposeBag)
+    func fetchFolders() -> Completable {
+        return Completable.create { [weak self] observer in
+            guard let self = self else { return Disposables.create() }
+            
+            self.songFolderManager.fetchData()
+                .subscribe(onNext: { [weak self] songFolderList in
+                    guard let self = self else { return }
+                    self.songFolderList = songFolderList
+                    observer(.completed)
+                }, onError: { error in
+                    observer(.error(error))
+                }).disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+        }
     }
     
     func deleteFolder(_ indexPath: IndexPath) -> Completable {
@@ -50,27 +59,11 @@ extension ArchiveFolderListViewModel {
         return songFolderList.count
     }
     
-    func archiveFolderAtIndex(_ indexPath: IndexPath) -> ArchiveFolderViewModel {
-        return ArchiveFolderViewModel(songFolderList[indexPath.row])
+    func archiveFolderAtIndex(_ indexPath: IndexPath) -> ArchiveFolder {
+        return songFolderList[indexPath.row]
     }
 }
 
 struct ArchiveFolderViewModel {
     var archiveFolder: ArchiveFolder
-}
-
-extension ArchiveFolderViewModel {
-    init(_ archiveFolder: ArchiveFolder) {
-        self.archiveFolder = archiveFolder
-    }
-}
-
-extension ArchiveFolderViewModel {
-    var titleEmoji: String {
-        return archiveFolder.titleEmoji
-    }
-    
-    var title: String {
-        return archiveFolder.title
-    }
 }

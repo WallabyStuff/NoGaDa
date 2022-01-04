@@ -12,18 +12,13 @@ import RxGesture
 import Hero
 
 
-protocol AddSongViewDelegate: AnyObject {
-    func didSongUpdated()
+@objc protocol AddSongViewDelegate: AnyObject {
+    @objc optional func didSongAdded()
 }
 
 class AddSongViewController: UIViewController {
     
     // MARK: - Declaration
-    weak var delegate: AddSongViewDelegate?
-    private var disposeBag = DisposeBag()
-    private let addSongViewModel = AddSongViewModel()
-    public var currentFolderId: String?
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var notificationView: UIView!
@@ -34,14 +29,17 @@ class AddSongViewController: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
+    weak var delegate: AddSongViewDelegate?
+    public var viewModel: AddSongViewModel?
+    private var disposeBag = DisposeBag()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureData()
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Override
@@ -50,9 +48,10 @@ class AddSongViewController: UIViewController {
     }
     
     // MARK: - Initializer
-    private func configureData() {
-        if currentFolderId == nil {
+    private func setupData() {
+        if viewModel == nil {
             dismiss(animated: true, completion: nil)
+            return
         }
     }
     
@@ -99,7 +98,7 @@ class AddSongViewController: UIViewController {
         contentScrollView.delegate = self
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Exit button
         exitButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -112,7 +111,7 @@ class AddSongViewController: UIViewController {
                 vc.singerTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
         
-        // Song composer textfield
+        // Singer textfield
         singerTextField.rx.controlEvent(.editingDidEndOnExit)
             .bind(with: self, onNext: { vc,_ in
                 vc.songNumberTextField.becomeFirstResponder()
@@ -125,9 +124,9 @@ class AddSongViewController: UIViewController {
             }).disposed(by: disposeBag)
         
         let songTitleOb = songTitleTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
-        let songComposerOb = singerTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
+        let singerOb = singerTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
         
-        Driver.combineLatest(songTitleOb, songComposerOb, resultSelector: { $0 && $1 })
+        Driver.combineLatest(songTitleOb, singerOb, resultSelector: { $0 && $1 })
             .drive(with: self, onNext: { vc, isAllTextFieldFilled in
                 if isAllTextFieldFilled {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
@@ -158,14 +157,13 @@ class AddSongViewController: UIViewController {
         let singer = singerTextField.text ?? ""
         let songNumber = songNumberTextField.text ?? ""
         
-        addSongViewModel.addSong(title: songTitle,
+        viewModel?.addSong(title: songTitle,
                                  singer: singer,
                                  songNumber: songNumber,
-                                 brand: selectedBrand(),
-                                 to: currentFolderId!)
+                                 brand: selectedBrand())
             .subscribe(onCompleted: { [weak self] in
                 // Success to add a new song
-                self?.delegate?.didSongUpdated()
+                self?.delegate?.didSongAdded?()
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
     }
@@ -189,11 +187,11 @@ class AddSongViewController: UIViewController {
 // MARK: - Extension
 extension AddSongViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return addSongViewModel.numberOfComponents
+        return viewModel!.numberOfComponents
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return addSongViewModel.numberOfRowsInComponent
+        return viewModel!.numberOfRowsInComponent
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -201,7 +199,7 @@ extension AddSongViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         pickerLabel.textAlignment = .center
         pickerLabel.textColor = ColorSet.textColor
         pickerLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        pickerLabel.text = addSongViewModel.titleForRowAt(row)
+        pickerLabel.text = viewModel!.titleForRowAt(row)
         
         return pickerLabel
     }

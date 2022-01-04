@@ -17,16 +17,16 @@ protocol SearchResultViewDelegate: AnyObject {
 class SearchResultViewController: UIViewController {
 
     // MARK: - Declaration
-    let searchResultViewModel = SearchResultViewModel()
-    var disposeBag = DisposeBag()
-    weak var delegate: SearchResultViewDelegate?
-    var searchKeyword = ""
-    
     @IBOutlet weak var brandSelector: UISegmentedControl!
     @IBOutlet weak var searchResultContentView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var searchResultPlaceholderLabel: UILabel!
     @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
+    
+    weak var delegate: SearchResultViewDelegate?
+    private let searchResultViewModel = SearchResultViewModel()
+    private var disposeBag = DisposeBag()
+    private var searchKeyword = ""
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class SearchResultViewController: UIViewController {
 
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Override
@@ -82,7 +82,7 @@ class SearchResultViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    private func initEventListener() {
+    private func bind() {
         
     }
     

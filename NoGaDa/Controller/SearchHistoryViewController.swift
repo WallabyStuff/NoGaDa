@@ -18,13 +18,13 @@ protocol SearchHistoryViewDelegate: AnyObject {
 class SearchHistoryViewController: UIViewController {
     
     // MARK: - Declaration
-    let searchHistoryViewModel = SearchHistoryViewModel()
-    var disposeBag = DisposeBag()
-    weak var delegate: SearchHistoryViewDelegate?
-    
     @IBOutlet weak var searchHistoryTableView: UITableView!
     @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
     @IBOutlet weak var clearHistoryButton: UIButton!
+    
+    weak var delegate: SearchHistoryViewDelegate?
+    private let searchHistoryViewModel = SearchHistoryViewModel()
+    private var disposeBag = DisposeBag()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class SearchHistoryViewController: UIViewController {
 
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Initialization
@@ -51,7 +51,7 @@ class SearchHistoryViewController: UIViewController {
         searchHistoryTableView.delegate = self
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Clear history Button
         clearHistoryButton.rx.tap
             .bind(with: self, onNext: { vc, _ in

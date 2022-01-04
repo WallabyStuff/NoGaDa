@@ -9,12 +9,14 @@ import UIKit
 
 class UpdatedSongTableViewCell: UITableViewCell {
 
+    // MARK: - Declaration
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var thumbnailPlaceholderImageView: UIImageView!
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var songNumberLabel: UILabel!
     
+    // MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -25,6 +27,7 @@ class UpdatedSongTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
 
+    // MARK: - Initialization
     private func initView() {
         thumbnailImageView.layer.cornerRadius = 12
         

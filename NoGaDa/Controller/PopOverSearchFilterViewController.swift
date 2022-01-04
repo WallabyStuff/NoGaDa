@@ -17,11 +17,11 @@ protocol PopOverSearchFilterViewDelegate: AnyObject {
 class PopOverSearchFilterViewController: UIViewController {
 
     // MARK: - Declaration
-    weak var delegate: PopOverSearchFilterViewDelegate?
-    var disposeBag = DisposeBag()
-    
     @IBOutlet weak var filterItemTableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
+    
+    weak var delegate: PopOverSearchFilterViewDelegate?
+    private var disposeBag = DisposeBag()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class PopOverSearchFilterViewController: UIViewController {
 
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
 
@@ -52,7 +52,7 @@ class PopOverSearchFilterViewController: UIViewController {
         applyButton.layer.cornerRadius = 12
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Apply Button Tap Action
         applyButton.rx.tap
             .bind(with: self, onNext: { vc, _ in

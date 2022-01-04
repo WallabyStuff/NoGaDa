@@ -9,15 +9,18 @@ import UIKit
 
 class PopUpArchiveFolderTableViewCell: UITableViewCell {
 
+    // MARK: - Declaration
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
+    // MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
         initView()
     }
 
+    // MARK: - Initialization
     func initView() {
         // Selection View
         let selectionView = UIView(frame: self.frame)

@@ -15,9 +15,6 @@ import MessageUI
 class CreditViewController: UIViewController {
 
     // MARK: - Declaration
-    private var disposeBag = DisposeBag()
-    private var creditViewModel = CreditViewModel()
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var contactUsBoxView: UIView!
@@ -25,13 +22,16 @@ class CreditViewController: UIViewController {
     @IBOutlet weak var iconResourceCollectionView: UICollectionView!
     @IBOutlet weak var contactTextView: UITextView!
     
+    private var disposeBag = DisposeBag()
+    private var creditViewModel = CreditViewModel()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Initializer
@@ -59,7 +59,7 @@ class CreditViewController: UIViewController {
         iconResourceCollectionView.delegate = self
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Exit button Tap Action
         exitButton.rx.tap
             .bind(with: self, onNext: { vc, _ in

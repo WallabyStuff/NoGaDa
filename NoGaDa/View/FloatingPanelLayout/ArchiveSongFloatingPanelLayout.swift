@@ -8,7 +8,7 @@
 import UIKit
 import FloatingPanel
 
-class PopUpArchiveFloatingPanelLayout: FloatingPanelLayout {
+class ArchiveSongFloatingPanelLayout: FloatingPanelLayout {
     let position: FloatingPanelPosition = .bottom
     let initialState: FloatingPanelState = .tip
     var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
@@ -21,7 +21,7 @@ class PopUpArchiveFloatingPanelLayout: FloatingPanelLayout {
     
     func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
         switch state {
-        case .full, .half: return 0.3
+        case .full, .half: return 0.5
         default: return 0.0
         }
     }

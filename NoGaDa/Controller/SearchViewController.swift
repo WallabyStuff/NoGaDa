@@ -20,12 +20,6 @@ enum ContentsType {
 class SearchViewController: UIViewController {
 
     // MARK: - Declaraiton
-    private var searchViewModel = SearchViewModel()
-    private var disposeBag = DisposeBag()
-    private var archiveFloatingPanel: ArchiveFloatingPanelView?
-    private var searchHistoryVC = SearchHistoryViewController()
-    private var searchResultVC = SearchResultViewController()
-    
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -36,13 +30,20 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var contentsView: UIView!
     
+    public var viewModel: SearchViewModel?
+    private var disposeBag = DisposeBag()
+    private var searchHistoryVC = SearchHistoryViewController()
+    private var searchResultVC = SearchResultViewController()
+    private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupData()
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Override
@@ -55,6 +56,13 @@ class SearchViewController: UIViewController {
     }
 
     // MARK: - Initialization
+    private func setupData() {
+        if viewModel == nil {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+    }
+    
     private func initView() {
         self.hero.isEnabled = true
         
@@ -98,18 +106,21 @@ class SearchViewController: UIViewController {
         
         // Set up ContainerView
         configureContainerView()
-        
-        // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanelView(vc: self)
     }
     
     private func initInstance() {
         // Search TextField
         searchTextField.delegate = self
         searchTextField.becomeFirstResponder()
+        
+        // View Model
+        viewModel = SearchViewModel()
+        
+        // Archive folder floating panel view
+        archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: self, delegate: self)
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Exit Button Tap Action
         backButton.rx.tap
             .bind(with: self) { vc, _ in
@@ -133,7 +144,7 @@ class SearchViewController: UIViewController {
     // MARK: - Method
     private func dismissKeyboardAndArchivePanel() {
         view.endEditing(true)
-        archiveFloatingPanel?.hide(animated: true)
+        archiveFolderFloatingPanelView?.hide(animated: true)
     }
     
     private func presentSearchFilterPopoverVC() {
@@ -156,9 +167,7 @@ class SearchViewController: UIViewController {
             return
         }
         
-        if searchKeyword.isEmpty {
-            return
-        }
+        if searchKeyword.isEmpty { return }
         
         if !SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
             presentSearchFilterPopoverVC()
@@ -167,7 +176,7 @@ class SearchViewController: UIViewController {
         
         view.endEditing(true)
         
-        searchViewModel.addSearchHistory(searchKeyword)
+        viewModel!.addSearchHistory(searchKeyword)
         searchResultVC.setSearchResult(searchKeyword)
         replaceContents(type: .searchResult)
     }
@@ -238,7 +247,7 @@ extension SearchViewController: PopOverSearchFilterViewDelegate {
 
 extension SearchViewController: SearchResultViewDelegate {
     func searchResultView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedSongRowAt selectedSong: Song) {
-        archiveFloatingPanel?.show(selectedSong: selectedSong, animated: true)
+        archiveFolderFloatingPanelView?.show(selectedSong)
     }
 }
 
@@ -250,5 +259,11 @@ extension SearchViewController: SearchHistoryViewDelegate {
     func searchHistoryView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedHistoryRowAt selectedHistory: SearchHistory) {
         searchTextField.text = selectedHistory.keyword
         searchTextField.becomeFirstResponder()
+    }
+}
+
+extension SearchViewController: PopUpArchiveFolderViewDelegate {
+    func didSongAdded() {
+        archiveFolderFloatingPanelView?.hide(animated: true)
     }
 }
