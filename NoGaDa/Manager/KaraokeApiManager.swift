@@ -10,11 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class KaraokeManager {
+class KaraokeApiManager {
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
-    func fetchUpdatedSong(brand: KaraokeBrand) -> Observable<[Song]> {
+    public func fetchUpdatedSong(brand: KaraokeBrand) -> Observable<[Song]> {
         return Observable.create { observer in
             DispatchQueue.global(qos: .background).async {
                 let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(brand.path)".urlEncode()
@@ -52,7 +52,7 @@ class KaraokeManager {
         }
     }
     
-    func fetchSong(title: String, brand: KaraokeBrand) -> Observable<[Song]> {
+    public func fetchSong(title: String, brand: KaraokeBrand) -> Observable<[Song]> {
         return Observable.create { observer in
             DispatchQueue.global(qos: .background).async {
                 let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.path)".urlEncode()
@@ -89,7 +89,7 @@ class KaraokeManager {
         }
     }
     
-    func fetchSong(singer: String, brand: KaraokeBrand) -> Observable<[Song]> {
+    public func fetchSong(singer: String, brand: KaraokeBrand) -> Observable<[Song]> {
         return Observable.create { observer in
             DispatchQueue.global(qos: .background).async {
                 let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.path)".urlEncode()
@@ -126,7 +126,7 @@ class KaraokeManager {
         }
     }
     
-    func fetchSong(titleOrSinger: String, brand: KaraokeBrand) -> Observable<[Song]> {
+    public func fetchSong(titleOrSinger: String, brand: KaraokeBrand) -> Observable<[Song]> {
         
         let fetchWithTitle      = fetchSong(title: titleOrSinger, brand: brand)
         let fetchWithSinger     = fetchSong(singer: titleOrSinger, brand: brand)

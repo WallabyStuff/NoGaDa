@@ -11,12 +11,12 @@ class EmojiTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        setup()
     }
     
     // required for iOS 13
@@ -38,7 +38,7 @@ class EmojiTextField: UITextField {
         return super.canPerformAction(action, withSender: sender)
     }
     
-    private func configure() {
+    private func setup() {
         delegate = self
         tintColor = .clear
         setRandomEmoji()

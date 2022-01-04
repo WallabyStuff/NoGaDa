@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -16,7 +16,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybw-gb-oEp">
@@ -228,7 +228,7 @@
             <objects>
                 <viewController storyboardIdentifier="searchStoryboard" title="노래 검색" interfaceStyle="light" id="lvi-2L-p6a" customClass="SearchViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zzz-1R-5xO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjq-K5-Ohp">
@@ -349,9 +349,9 @@
         <!--Archive Folder List View Controller-->
         <scene sceneID="rkz-to-yxy">
             <objects>
-                <viewController storyboardIdentifier="archiveStoryboard" id="SKu-B0-PKP" customClass="ArchiveFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="archiveFolderListStoryboard" id="SKu-B0-PKP" customClass="ArchiveFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="daW-lO-aI7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T7y-QS-627">
@@ -391,7 +391,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTv-E6-Q0q">
-                                <rect key="frame" x="28" y="798" width="358" height="48"/>
+                                <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="EU6-zy-95A"/>
@@ -410,10 +410,10 @@
                             <constraint firstItem="T7y-QS-627" firstAttribute="leading" secondItem="TxO-Pg-Vld" secondAttribute="leading" id="T9O-mi-pl5"/>
                             <constraint firstItem="T7y-QS-627" firstAttribute="top" secondItem="Nh9-cG-5pA" secondAttribute="bottom" constant="-28" id="YBp-1p-FES"/>
                             <constraint firstItem="Nh9-cG-5pA" firstAttribute="leading" secondItem="TxO-Pg-Vld" secondAttribute="leading" id="Zem-tF-pLP"/>
-                            <constraint firstItem="TxO-Pg-Vld" firstAttribute="trailing" secondItem="bTv-E6-Q0q" secondAttribute="trailing" constant="28" id="bSE-ld-eta"/>
+                            <constraint firstItem="TxO-Pg-Vld" firstAttribute="trailing" secondItem="bTv-E6-Q0q" secondAttribute="trailing" constant="20" id="bSE-ld-eta"/>
                             <constraint firstItem="TxO-Pg-Vld" firstAttribute="bottom" secondItem="T7y-QS-627" secondAttribute="bottom" id="ht8-UR-9tG"/>
                             <constraint firstItem="TxO-Pg-Vld" firstAttribute="bottom" secondItem="bTv-E6-Q0q" secondAttribute="bottom" constant="16" id="lI9-BZ-duj"/>
-                            <constraint firstItem="bTv-E6-Q0q" firstAttribute="leading" secondItem="TxO-Pg-Vld" secondAttribute="leading" constant="28" id="lm0-E0-z0z"/>
+                            <constraint firstItem="bTv-E6-Q0q" firstAttribute="leading" secondItem="TxO-Pg-Vld" secondAttribute="leading" constant="20" id="lm0-E0-z0z"/>
                             <constraint firstItem="Nh9-cG-5pA" firstAttribute="trailing" secondItem="TxO-Pg-Vld" secondAttribute="trailing" id="xjo-a9-7zT"/>
                         </constraints>
                     </view>
@@ -422,8 +422,8 @@
                         <outlet property="appbarTitleLabel" destination="UOS-9k-ADV" id="Ycq-yj-LEO"/>
                         <outlet property="appbarView" destination="Nh9-cG-5pA" id="4Ve-Nj-xZu"/>
                         <outlet property="appbarViewHeightConstraint" destination="VoQ-SF-Mt5" id="8f5-aL-Xzo"/>
+                        <outlet property="archiveFolderTableView" destination="T7y-QS-627" id="Thh-xG-0R7"/>
                         <outlet property="exitButton" destination="ANc-KA-l8f" id="ukx-nv-xCL"/>
-                        <outlet property="songFolderTableView" destination="T7y-QS-627" id="Thh-xG-0R7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdM-KU-GzH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -435,7 +435,7 @@
             <objects>
                 <viewController storyboardIdentifier="settingStoryboard" id="khg-tt-Xzq" customClass="SettingViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2d4-sW-al2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4g-7J-YGo">
@@ -538,7 +538,7 @@
             <objects>
                 <viewController storyboardIdentifier="creditStoryboard" id="jgW-uV-xql" customClass="CreditViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DjH-JI-hYv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4O-zs-k0K">
@@ -725,9 +725,9 @@ Contact : middleyks@hanmail.net</string>
         <!--Archive Song List View Controller-->
         <scene sceneID="43r-Um-FnT">
             <objects>
-                <viewController storyboardIdentifier="folderStoryboard" id="mA0-n8-KB2" customClass="ArchiveSongListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="archiveSongListStoryboard" id="mA0-n8-KB2" customClass="ArchiveSongListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gCI-v3-1gi">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NHF-Ep-BFi">
@@ -813,10 +813,10 @@ Contact : middleyks@hanmail.net</string>
                         <outlet property="addSongButton" destination="cb9-FY-hcQ" id="46D-a2-8ac"/>
                         <outlet property="appbarView" destination="t6f-Uc-Fde" id="fs0-GS-x1x"/>
                         <outlet property="appbarViewHeightConstraint" destination="TxA-o0-f11" id="4KF-LG-eKi"/>
+                        <outlet property="archiveSongTableView" destination="NHF-Ep-BFi" id="K9G-2I-R49"/>
                         <outlet property="exitButton" destination="7qb-Wn-0yl" id="gfR-pR-Ylk"/>
                         <outlet property="folderTitleEmojiTextField" destination="Cpu-J9-uYf" id="XYM-jg-CRE"/>
                         <outlet property="folderTitleTextField" destination="VpG-sO-j57" id="p8z-RT-sUx"/>
-                        <outlet property="savedSongTableView" destination="NHF-Ep-BFi" id="K9G-2I-R49"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Dw-0I-biw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -828,7 +828,7 @@ Contact : middleyks@hanmail.net</string>
             <objects>
                 <viewController storyboardIdentifier="addSongStoryboard" id="2ED-L9-ri1" customClass="AddSongViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1zE-wk-TvH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노래추가" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndp-I8-HIn">
@@ -849,7 +849,7 @@ Contact : middleyks@hanmail.net</string>
                                 <state key="normal" image="xmark" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z7-ac-h2L">
-                                <rect key="frame" x="28" y="798" width="358" height="48"/>
+                                <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="sbU-T5-63z"/>
@@ -999,11 +999,11 @@ Contact : middleyks@hanmail.net</string>
                             <constraint firstItem="9z7-ac-h2L" firstAttribute="top" secondItem="Cs3-Q4-voD" secondAttribute="bottom" constant="20" id="D9d-jN-mRh"/>
                             <constraint firstItem="vq8-tr-buY" firstAttribute="trailing" secondItem="QSd-kL-TXV" secondAttribute="trailing" constant="20" id="Mai-do-cWY"/>
                             <constraint firstItem="Ndp-I8-HIn" firstAttribute="top" secondItem="vq8-tr-buY" secondAttribute="top" constant="28" id="PdO-HT-Gr4"/>
-                            <constraint firstItem="vq8-tr-buY" firstAttribute="trailing" secondItem="9z7-ac-h2L" secondAttribute="trailing" constant="28" id="TPw-pR-yIt"/>
+                            <constraint firstItem="vq8-tr-buY" firstAttribute="trailing" secondItem="9z7-ac-h2L" secondAttribute="trailing" constant="20" id="TPw-pR-yIt"/>
                             <constraint firstItem="QSd-kL-TXV" firstAttribute="top" secondItem="vq8-tr-buY" secondAttribute="top" constant="28" id="fZp-Am-OaJ"/>
                             <constraint firstItem="Ndp-I8-HIn" firstAttribute="leading" secondItem="vq8-tr-buY" secondAttribute="leading" constant="20" id="hG4-Mb-dpz"/>
                             <constraint firstItem="Cs3-Q4-voD" firstAttribute="leading" secondItem="vq8-tr-buY" secondAttribute="leading" id="jo8-cG-Qxa"/>
-                            <constraint firstItem="9z7-ac-h2L" firstAttribute="leading" secondItem="vq8-tr-buY" secondAttribute="leading" constant="28" id="l15-nq-83K"/>
+                            <constraint firstItem="9z7-ac-h2L" firstAttribute="leading" secondItem="vq8-tr-buY" secondAttribute="leading" constant="20" id="l15-nq-83K"/>
                             <constraint firstItem="Cs3-Q4-voD" firstAttribute="trailing" secondItem="vq8-tr-buY" secondAttribute="trailing" id="ltE-Db-RQa"/>
                             <constraint firstItem="vq8-tr-buY" firstAttribute="bottom" secondItem="9z7-ac-h2L" secondAttribute="bottom" constant="16" id="nwJ-9J-G6P"/>
                             <constraint firstItem="QSd-kL-TXV" firstAttribute="leading" secondItem="Ndp-I8-HIn" secondAttribute="trailing" constant="12" id="oSL-Aj-qGn"/>
@@ -1024,14 +1024,112 @@ Contact : middleyks@hanmail.net</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svW-fs-hoz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3476.811594202899" y="1174.5535714285713"/>
+            <point key="canvasLocation" x="3478" y="1175"/>
+        </scene>
+        <!--Pop Up Song Option View Controller-->
+        <scene sceneID="513-Mw-Lz4">
+            <objects>
+                <viewController storyboardIdentifier="popUpSongOptionStoryboard" id="GCc-xr-W3u" customClass="PopUpSongOptionViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2oI-1b-Hdg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b6T-eI-owg">
+                                <rect key="frame" x="24" y="32" width="52" height="52"/>
+                                <color key="backgroundColor" name="SongThumbnailBackgroundColor"/>
+                                <color key="tintColor" name="SongThumbnailForegroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="GMS-DA-2Ub"/>
+                                    <constraint firstAttribute="width" constant="52" id="hIT-Lx-ejA"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9n-BC-fIS">
+                                <rect key="frame" x="88" y="38" width="248" height="19.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" name="TextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="singer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqR-oj-q4j">
+                                <rect key="frame" x="88" y="61.5" width="248" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" name="SubTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weS-3v-qS7">
+                                <rect key="frame" x="356" y="32" width="34" height="34"/>
+                                <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="gqa-9p-xcZ"/>
+                                    <constraint firstAttribute="width" constant="34" id="sVY-3O-DZm"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <color key="titleColor" name="ExitButtonForegroundColor"/>
+                                </state>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music-note" translatesAutoresizingMaskIntoConstraints="NO" id="3wp-FX-d8b">
+                                <rect key="frame" x="38" y="46" width="24" height="24"/>
+                                <color key="tintColor" name="SongThumbnailForegroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="bqe-gJ-1vN"/>
+                                    <constraint firstAttribute="height" constant="24" id="ss1-EL-b9c"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUq-ok-U6O">
+                                <rect key="frame" x="0.0" y="100" width="414" height="1"/>
+                                <color key="backgroundColor" name="SeperatorColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="yz0-qO-HYt"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wXD-8T-phX">
+                                <rect key="frame" x="0.0" y="101" width="414" height="687"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kxa-te-wfu"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aUq-ok-U6O" firstAttribute="leading" secondItem="Kxa-te-wfu" secondAttribute="leading" id="4SA-Ra-uDv"/>
+                            <constraint firstItem="weS-3v-qS7" firstAttribute="leading" secondItem="jqR-oj-q4j" secondAttribute="trailing" constant="20" id="6jk-au-nP7"/>
+                            <constraint firstItem="wXD-8T-phX" firstAttribute="top" secondItem="aUq-ok-U6O" secondAttribute="bottom" id="759-20-6AB"/>
+                            <constraint firstItem="Kxa-te-wfu" firstAttribute="trailing" secondItem="aUq-ok-U6O" secondAttribute="trailing" id="AKG-pa-VKu"/>
+                            <constraint firstItem="b6T-eI-owg" firstAttribute="top" secondItem="Kxa-te-wfu" secondAttribute="top" constant="32" id="Orq-Rd-n78"/>
+                            <constraint firstItem="aUq-ok-U6O" firstAttribute="top" secondItem="b6T-eI-owg" secondAttribute="bottom" constant="16" id="Tlq-RP-bWk"/>
+                            <constraint firstItem="Kxa-te-wfu" firstAttribute="trailing" secondItem="weS-3v-qS7" secondAttribute="trailing" constant="24" id="Wq8-mC-mqy"/>
+                            <constraint firstItem="Kxa-te-wfu" firstAttribute="bottom" secondItem="wXD-8T-phX" secondAttribute="bottom" constant="20" id="aCo-YK-UBR"/>
+                            <constraint firstItem="Kxa-te-wfu" firstAttribute="trailing" secondItem="wXD-8T-phX" secondAttribute="trailing" id="dhe-n5-vzJ"/>
+                            <constraint firstItem="3wp-FX-d8b" firstAttribute="centerX" secondItem="b6T-eI-owg" secondAttribute="centerX" id="eta-gf-pGq"/>
+                            <constraint firstItem="wXD-8T-phX" firstAttribute="leading" secondItem="Kxa-te-wfu" secondAttribute="leading" id="glE-or-pFS"/>
+                            <constraint firstItem="weS-3v-qS7" firstAttribute="top" secondItem="Kxa-te-wfu" secondAttribute="top" constant="32" id="hIz-zb-A0V"/>
+                            <constraint firstItem="jqR-oj-q4j" firstAttribute="top" secondItem="n9n-BC-fIS" secondAttribute="bottom" constant="4" id="lvk-hp-aej"/>
+                            <constraint firstItem="n9n-BC-fIS" firstAttribute="leading" secondItem="b6T-eI-owg" secondAttribute="trailing" constant="12" id="oyJ-Yc-JD3"/>
+                            <constraint firstItem="n9n-BC-fIS" firstAttribute="top" secondItem="b6T-eI-owg" secondAttribute="top" constant="6" id="rUx-xv-h0w"/>
+                            <constraint firstItem="3wp-FX-d8b" firstAttribute="centerY" secondItem="b6T-eI-owg" secondAttribute="centerY" id="sLL-X4-R1B"/>
+                            <constraint firstItem="jqR-oj-q4j" firstAttribute="leading" secondItem="b6T-eI-owg" secondAttribute="trailing" constant="12" id="tJh-6d-sM2"/>
+                            <constraint firstItem="b6T-eI-owg" firstAttribute="leading" secondItem="Kxa-te-wfu" secondAttribute="leading" constant="24" id="xL6-ul-T0j"/>
+                            <constraint firstItem="weS-3v-qS7" firstAttribute="leading" secondItem="n9n-BC-fIS" secondAttribute="trailing" constant="20" id="zJa-F9-w5T"/>
+                        </constraints>
+                    </view>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="exitButton" destination="weS-3v-qS7" id="ata-4y-Jwv"/>
+                        <outlet property="optionTableView" destination="wXD-8T-phX" id="drP-D6-bgA"/>
+                        <outlet property="singerLabel" destination="jqR-oj-q4j" id="wjq-dT-INs"/>
+                        <outlet property="songThumbnailImageView" destination="b6T-eI-owg" id="iB1-OD-Rvj"/>
+                        <outlet property="songTitleLabel" destination="n9n-BC-fIS" id="bB6-Cq-DEc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e87-TR-b1N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4282.608695652174" y="1174.5535714285713"/>
         </scene>
         <!--Add Folder View Controller-->
         <scene sceneID="NMI-Ri-V0z">
             <objects>
                 <viewController storyboardIdentifier="addFolderStoryboard" id="QML-rD-hle" customClass="AddFolderViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PNb-sm-0Vy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMV-wn-dWl">
@@ -1087,7 +1185,7 @@ Contact : middleyks@hanmail.net</string>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSo-Bc-Q9v">
-                                <rect key="frame" x="28" y="798" width="358" height="48"/>
+                                <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="hTm-Yt-0oX"/>
@@ -1109,10 +1207,10 @@ Contact : middleyks@hanmail.net</string>
                             <constraint firstItem="u2I-dJ-fyq" firstAttribute="trailing" secondItem="dMV-wn-dWl" secondAttribute="trailing" constant="28" id="Lh9-fw-IBs"/>
                             <constraint firstItem="dMV-wn-dWl" firstAttribute="centerY" secondItem="C4h-cQ-6N2" secondAttribute="centerY" id="NFj-6e-DS7"/>
                             <constraint firstItem="C4h-cQ-6N2" firstAttribute="top" secondItem="u2I-dJ-fyq" secondAttribute="top" constant="28" id="R4o-MF-AvB"/>
-                            <constraint firstItem="fSo-Bc-Q9v" firstAttribute="leading" secondItem="u2I-dJ-fyq" secondAttribute="leading" constant="28" id="cQR-hZ-LvZ"/>
+                            <constraint firstItem="fSo-Bc-Q9v" firstAttribute="leading" secondItem="u2I-dJ-fyq" secondAttribute="leading" constant="20" id="cQR-hZ-LvZ"/>
                             <constraint firstItem="dMV-wn-dWl" firstAttribute="leading" secondItem="C4h-cQ-6N2" secondAttribute="trailing" constant="12" id="eSa-8O-QEz"/>
                             <constraint firstItem="7w4-j5-IR6" firstAttribute="top" secondItem="nTH-Wu-Wvo" secondAttribute="bottom" constant="40" id="sSP-LF-1si"/>
-                            <constraint firstItem="u2I-dJ-fyq" firstAttribute="trailing" secondItem="fSo-Bc-Q9v" secondAttribute="trailing" constant="28" id="u1c-7N-Pgd"/>
+                            <constraint firstItem="u2I-dJ-fyq" firstAttribute="trailing" secondItem="fSo-Bc-Q9v" secondAttribute="trailing" constant="20" id="u1c-7N-Pgd"/>
                             <constraint firstItem="nTH-Wu-Wvo" firstAttribute="top" secondItem="C4h-cQ-6N2" secondAttribute="bottom" constant="72" id="wMe-O5-ZuW"/>
                         </constraints>
                     </view>
@@ -1268,32 +1366,32 @@ Contact : middleyks@hanmail.net</string>
             </objects>
             <point key="canvasLocation" x="3477" y="506"/>
         </scene>
-        <!--Pop Up Song Folder List View Controller-->
+        <!--Pop Up Archive Folder List View Controller-->
         <scene sceneID="mtz-SH-Vtt">
             <objects>
-                <viewController storyboardIdentifier="popUpArchiveStoryboard" id="9vJ-GT-MxP" customClass="PopUpSongFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popUpArchiveStoryboard" id="9vJ-GT-MxP" customClass="PopUpArchiveFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VcZ-Ez-ZCF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-qC-NmS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관함" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asG-Yn-m5w">
-                                        <rect key="frame" x="72" y="28" width="52" height="24"/>
+                                        <rect key="frame" x="68" y="28" width="52" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" translatesAutoresizingMaskIntoConstraints="NO" id="Ko6-ak-2us">
-                                        <rect key="frame" x="28" y="24" width="32" height="32"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder-filled" translatesAutoresizingMaskIntoConstraints="NO" id="Ko6-ak-2us">
+                                        <rect key="frame" x="24" y="24" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="tfd-RQ-UdI"/>
                                             <constraint firstAttribute="height" constant="32" id="zeR-zu-OSk"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4DL-Bt-0R2">
-                                        <rect key="frame" x="352" y="23" width="34" height="34"/>
+                                        <rect key="frame" x="356" y="23" width="34" height="34"/>
                                         <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="rMa-9e-RqM"/>
@@ -1308,9 +1406,9 @@ Contact : middleyks@hanmail.net</string>
                                 <color key="backgroundColor" name="PopUpArchiveBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="2Kb-bc-cha"/>
-                                    <constraint firstItem="Ko6-ak-2us" firstAttribute="leading" secondItem="jGw-qC-NmS" secondAttribute="leading" constant="28" id="IMv-fe-SKl"/>
+                                    <constraint firstItem="Ko6-ak-2us" firstAttribute="leading" secondItem="jGw-qC-NmS" secondAttribute="leading" constant="24" id="IMv-fe-SKl"/>
                                     <constraint firstItem="Ko6-ak-2us" firstAttribute="centerY" secondItem="jGw-qC-NmS" secondAttribute="centerY" id="TOy-q0-BCy"/>
-                                    <constraint firstAttribute="trailing" secondItem="4DL-Bt-0R2" secondAttribute="trailing" constant="28" id="feC-GT-xwn"/>
+                                    <constraint firstAttribute="trailing" secondItem="4DL-Bt-0R2" secondAttribute="trailing" constant="24" id="feC-GT-xwn"/>
                                     <constraint firstItem="asG-Yn-m5w" firstAttribute="centerY" secondItem="Ko6-ak-2us" secondAttribute="centerY" id="j9D-bE-Dxt"/>
                                     <constraint firstItem="4DL-Bt-0R2" firstAttribute="centerY" secondItem="asG-Yn-m5w" secondAttribute="centerY" id="lsv-ks-aKX"/>
                                     <constraint firstItem="asG-Yn-m5w" firstAttribute="leading" secondItem="Ko6-ak-2us" secondAttribute="trailing" constant="12" id="zOn-mw-Bk6"/>
@@ -1322,7 +1420,7 @@ Contact : middleyks@hanmail.net</string>
                                 <color key="separatorColor" name="AccentSubColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cbk-yG-6kt">
-                                <rect key="frame" x="28" y="744" width="358" height="48"/>
+                                <rect key="frame" x="20" y="744" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonReversedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="XUc-BM-Gzf"/>
@@ -1337,11 +1435,11 @@ Contact : middleyks@hanmail.net</string>
                         <color key="backgroundColor" name="PopUpArchiveBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jGw-qC-NmS" firstAttribute="leading" secondItem="vmg-R5-WT2" secondAttribute="leading" id="6Nt-TT-LrQ"/>
-                            <constraint firstItem="vmg-R5-WT2" firstAttribute="trailing" secondItem="Cbk-yG-6kt" secondAttribute="trailing" constant="28" id="Hya-UI-qcC"/>
+                            <constraint firstItem="vmg-R5-WT2" firstAttribute="trailing" secondItem="Cbk-yG-6kt" secondAttribute="trailing" constant="20" id="Hya-UI-qcC"/>
                             <constraint firstItem="jGw-qC-NmS" firstAttribute="trailing" secondItem="vmg-R5-WT2" secondAttribute="trailing" id="TU3-c2-sPB"/>
                             <constraint firstItem="jGw-qC-NmS" firstAttribute="top" secondItem="vmg-R5-WT2" secondAttribute="top" id="V5A-rb-c4k"/>
                             <constraint firstItem="oVr-SQ-8vF" firstAttribute="leading" secondItem="vmg-R5-WT2" secondAttribute="leading" constant="20" id="c3C-VP-FLm"/>
-                            <constraint firstItem="Cbk-yG-6kt" firstAttribute="leading" secondItem="vmg-R5-WT2" secondAttribute="leading" constant="28" id="fdT-g2-way"/>
+                            <constraint firstItem="Cbk-yG-6kt" firstAttribute="leading" secondItem="vmg-R5-WT2" secondAttribute="leading" constant="20" id="fdT-g2-way"/>
                             <constraint firstItem="vmg-R5-WT2" firstAttribute="trailing" secondItem="oVr-SQ-8vF" secondAttribute="trailing" constant="20" id="hZT-bz-v3b"/>
                             <constraint firstItem="oVr-SQ-8vF" firstAttribute="top" secondItem="jGw-qC-NmS" secondAttribute="bottom" constant="8" id="qFd-QA-eqR"/>
                             <constraint firstItem="Cbk-yG-6kt" firstAttribute="top" secondItem="oVr-SQ-8vF" secondAttribute="bottom" constant="32" id="rZn-2v-cU7"/>
@@ -1351,8 +1449,8 @@ Contact : middleyks@hanmail.net</string>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="addFolderButton" destination="Cbk-yG-6kt" id="Nz7-w0-ZsL"/>
+                        <outlet property="archiveFolderTableView" destination="oVr-SQ-8vF" id="JUn-1R-iXi"/>
                         <outlet property="exitButton" destination="4DL-Bt-0R2" id="cfo-D4-NSa"/>
-                        <outlet property="folderTableView" destination="oVr-SQ-8vF" id="JUn-1R-iXi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qQi-3H-7Hi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1410,8 +1508,9 @@ Contact : middleyks@hanmail.net</string>
     <resources>
         <image name="ArchiveShortcutBackgroundImage" width="1024" height="717"/>
         <image name="back-arrow" width="492" height="492"/>
-        <image name="folder" width="512" height="512"/>
+        <image name="folder-filled" width="100" height="100"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="music-note" width="489.16400146484375" height="489.16400146484375"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="plus" width="512" height="512"/>
         <image name="setting" width="512" height="512"/>
@@ -1492,6 +1591,9 @@ Contact : middleyks@hanmail.net</string>
         <namedColor name="SegmentedControlBackgroundColor">
             <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="SeperatorColor">
+            <color red="0.88599997758865356" green="0.88599997758865356" blue="0.88599997758865356" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="SettingGroupBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1503,6 +1605,12 @@ Contact : middleyks@hanmail.net</string>
         </namedColor>
         <namedColor name="SettingIconBoxForegroundColor">
             <color red="0.32899999618530273" green="0.38400000333786011" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SongThumbnailBackgroundColor">
+            <color red="0.9649999737739563" green="0.9649999737739563" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SongThumbnailForegroundColor">
+            <color red="0.51800000667572021" green="0.49000000953674316" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SubTextColor">
             <color red="0.57999998331069946" green="0.57599997520446777" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -38,8 +38,8 @@ class SearchHistoryTableViewCell: UITableViewCell {
     }
 }
 
+// MARK: - Extension
 extension SearchHistoryTableViewCell {
-    
     private var releaseAnimationDuration: CGFloat {
         return 0.3
     }

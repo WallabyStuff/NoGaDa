@@ -12,7 +12,7 @@ import RxCocoa
 class SearchResultViewModel {
     
     var disposeBag = DisposeBag()
-    var karaokeManager = KaraokeManager()
+    var karaokeManager = KaraokeApiManager()
     var searchResultSongList = [Song]()
 }
 

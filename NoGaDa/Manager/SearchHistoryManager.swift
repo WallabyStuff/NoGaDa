@@ -11,8 +11,7 @@ import RxSwift
 import RxCocoa
 
 class SearchHistoryManager {
-    
-    func addData(searchKeyword: String) -> Completable {
+    public func addData(searchKeyword: String) -> Completable {
         return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
@@ -30,7 +29,7 @@ class SearchHistoryManager {
         }
     }
     
-    func fetchData() -> Observable<[SearchHistory]> {
+    public func fetchData() -> Observable<[SearchHistory]> {
         return Observable.create { observer in
             do {
                 let realmInstance = try Realm()
@@ -47,7 +46,7 @@ class SearchHistoryManager {
         }
     }
     
-    func deleteData(_ keyword: String) -> Completable {
+    public func deleteData(_ keyword: String) -> Completable {
         return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
@@ -69,7 +68,7 @@ class SearchHistoryManager {
         }
     }
     
-    func deleteAll() -> Completable {
+    public func deleteAll() -> Completable {
         return Completable.create { observer in
             do {
                 let realmInstance = try Realm()

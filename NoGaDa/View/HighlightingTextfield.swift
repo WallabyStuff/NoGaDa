@@ -17,15 +17,15 @@ class HighlightingTextfield: UITextField {
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        setup()
     }
     
-    private func configure() {
+    private func setup() {
         initView()
         initEventListener()
     }

@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 class AddFolderViewModel {
-    
     private var disposeBag = DisposeBag()
     private let songFolderManager = SongFolderManager()
 }

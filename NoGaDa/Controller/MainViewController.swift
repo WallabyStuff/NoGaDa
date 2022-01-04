@@ -16,21 +16,6 @@ import AppTrackingTransparency
 class MainViewController: UIViewController {
 
     // MARK: Declaration
-    var disposeBag = DisposeBag()
-    let splashView = SplashView()
-    var archiveFloatingPanel: ArchiveFloatingPanelView?
-    let mainViewModel = MainViewModel()
-    var updatedSongBrand: KaraokeBrand {
-        if brandSegmentedControl.currentPosition == 0 {
-            return .tj
-        } else {
-            return .kumyoung
-        }
-    }
-    
-    var minimumAppbarHeight: CGFloat = 80
-    var maximumAppbarHeight: CGFloat = 140
-    
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarView: AppbarView!
     @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -47,6 +32,21 @@ class MainViewController: UIViewController {
     @IBOutlet weak var updatedsongLoadErrorMessageLabel: UILabel!
     @IBOutlet weak var updatedSongLoadingIndicator: UIActivityIndicatorView!
     
+    private var disposeBag = DisposeBag()
+    private let splashView = SplashView()
+    private let viewModel = MainViewModel()
+    private var updatedSongBrand: KaraokeBrand {
+        if brandSegmentedControl.currentPosition == 0 {
+            return .tj
+        } else {
+            return .kumyoung
+        }
+    }
+    private var archiveFolderFloatingView: ArchiveFolderFloatingPanelView?
+    
+    private var minimumAppbarHeight: CGFloat = 80
+    private var maximumAppbarHeight: CGFloat = 140
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +54,12 @@ class MainViewController: UIViewController {
         splashView.show(vc: self)
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+     
         hideSplashView()
         updateTotalSavedSongSize()
         requestTrackingAuthorization()
@@ -124,8 +124,12 @@ class MainViewController: UIViewController {
         brandSegmentedControl.addSegment(title: "tj 업데이트")
         brandSegmentedControl.addSegment(title: "금영 업데이트")
         
+        initAppbar()
+    }
+    
+    private func initAppbar() {
+        // Appbar Height
         DispatchQueue.main.async {
-            // Appbar Height
             self.minimumAppbarHeight = 80 + SafeAreaInset.top
             self.maximumAppbarHeight = 140 + SafeAreaInset.top
             self.appbarViewHeightConstraint.constant = AppbarHeight.maximum
@@ -150,21 +154,14 @@ class MainViewController: UIViewController {
         
         // Karaoke brand segmented control
         brandSegmentedControl.delegate = self
-        
-        // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanelView(vc: self)
-        archiveFloatingPanel?.successfullyAddedAction = { [weak self] in
-            self?.updateTotalSavedSongSize()
-        }
     }
     
-    private func initEventListener() {
+    private func bind() {
         // Search Textfield Tap Action
         searchBoxView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
-                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Search Textfield LongPress Action
@@ -172,7 +169,6 @@ class MainViewController: UIViewController {
             .when(.began)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
-                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Search Button Tap Action
@@ -180,15 +176,13 @@ class MainViewController: UIViewController {
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
-                vc.archiveFloatingPanel?.hide(animated: true)
             }.disposed(by: disposeBag)
         
         // Archive Shortcut Tap Action
         archiveShortcutView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { vc, _ in
-                vc.presentArchiveVC()
-                vc.archiveFloatingPanel?.hide(animated: true)
+                vc.presentArchiveFolderVC()
             }.disposed(by: disposeBag)
         
         // Setting Button Tap Action
@@ -223,6 +217,14 @@ class MainViewController: UIViewController {
                     vc.settingButton.alpha = 1
                 }
             }).disposed(by: disposeBag)
+        
+        // UpdatedSong TableView
+        updatedSongTableView.rx.itemSelected
+            .asDriver()
+            .drive(with: self, onNext: { vc, indexPath in
+                let selectedSong = vc.viewModel.updatedSongAtIndex(indexPath)
+                vc.showArchiveFolderFloatingView(selectedSong)
+            }).disposed(by: disposeBag)
     }
     
     // MARK: - Method
@@ -235,8 +237,8 @@ class MainViewController: UIViewController {
         present(searchVC, animated: true, completion: nil)
     }
     
-    func presentArchiveVC() {
-        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveStoryboard") as? ArchiveFolderListViewController else {
+    func presentArchiveFolderVC() {
+        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveFolderListStoryboard") as? ArchiveFolderListViewController else {
             return
         }
         
@@ -257,7 +259,7 @@ class MainViewController: UIViewController {
         updatedsongLoadErrorMessageLabel.isHidden = true
         clearUpdatedSongTableView()
 
-        mainViewModel.fetchUpdatedSong(brand: updatedSongBrand)
+        viewModel.fetchUpdatedSong(brand: updatedSongBrand)
             .observe(on: MainScheduler.instance)
             .subscribe(with: self, onCompleted: { vc in
                 vc.reloadUpdateChartTableView()
@@ -272,7 +274,7 @@ class MainViewController: UIViewController {
         updatedSongLoadingIndicator.stopAnimatingAndHide()
         updatedSongTableView.reloadData()
         
-        if mainViewModel.updatedSongCount == 0 {
+        if viewModel.updatedSongCount == 0 {
             updatedsongLoadErrorMessageLabel.text = "업데이트 된 곡이 없습니다."
             updatedsongLoadErrorMessageLabel.isHidden = false
             return
@@ -282,7 +284,7 @@ class MainViewController: UIViewController {
     }
     
     private func updateTotalSavedSongSize() {
-        totalArchivedSongSizeLabel.text = mainViewModel.savedSongSizeString
+        totalArchivedSongSizeLabel.text = viewModel.savedSongSizeString
     }
     
     private func requestTrackingAuthorization() {
@@ -292,7 +294,7 @@ class MainViewController: UIViewController {
     }
     
     private func clearUpdatedSongTableView() {
-        mainViewModel.clearUpdatedSong()
+        viewModel.clearUpdatedSong()
         updatedSongTableView.reloadData()
     }
     
@@ -301,29 +303,31 @@ class MainViewController: UIViewController {
             self?.updatedSongTableView.flashScrollIndicators()
         }
     }
+    
+    private func showArchiveFolderFloatingView(_ selectedSong: Song) {
+        archiveFolderFloatingView?.hide(animated: false)
+        archiveFolderFloatingView = ArchiveFolderFloatingPanelView(parentViewController: self, delegate: self)
+        archiveFolderFloatingView?.show(selectedSong)
+        
+    }
 }
 
 // MARK: - Extension
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mainViewModel.numberOfRowsInSection(mainViewModel.sectionCount)
+        return viewModel.numberOfRowsInSection(viewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let updatedSongCell = tableView.dequeueReusableCell(withIdentifier: "updatedSongTableViewCell") as? UpdatedSongTableViewCell else { return UITableViewCell() }
         
-        let updatedSongVM = mainViewModel.updatedSongAtIndex(indexPath)
+        let updatedSongVM = viewModel.updatedSongAtIndex(indexPath)
         
         updatedSongCell.songTitleLabel.text   = "\(updatedSongVM.title)"
         updatedSongCell.singerLabel.text      = "\(updatedSongVM.singer)"
-        updatedSongCell.songNumberLabel.text  = "\(updatedSongVM.songNumber)"
+        updatedSongCell.songNumberLabel.text  = "\(updatedSongVM.no)"
         
         return updatedSongCell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let updatedSongVM = mainViewModel.updatedSongAtIndex(indexPath)
-        archiveFloatingPanel?.show(selectedSong: updatedSongVM.song, animated: true)
     }
 }
 
@@ -332,3 +336,17 @@ extension MainViewController: BISegmentedControlDelegate {
         setUpdatedSongChart()
     }
 }
+
+extension MainViewController: PopUpArchiveFolderViewDelegate {
+    func didSongAdded() {
+        archiveFolderFloatingView?.hide(animated: true)
+        totalArchivedSongSizeLabel.text = viewModel.savedSongSizeString
+    }
+}
+
+extension MainViewController: ArchiveFolderListViewDelegate {
+    func didFileChanged() {
+        totalArchivedSongSizeLabel.text = viewModel.savedSongSizeString
+    }
+}
+

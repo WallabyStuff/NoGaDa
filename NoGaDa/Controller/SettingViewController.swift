@@ -13,13 +13,13 @@ import RxCocoa
 class SettingViewController: UIViewController {
 
     // MARK: - Declaration
-    var disposeBag = DisposeBag()
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var searchFilterGroupView: UIView!
     @IBOutlet weak var etcGroupView: UIView!
     @IBOutlet weak var searchFilterTableView: UITableView!
     @IBOutlet weak var etcTableView: UITableView!
+    
+    private var disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class SettingViewController: UIViewController {
 
         initView()
         initInstance()
-        initEventListener()
+        bind()
     }
     
     // MARK: - Intitialization
@@ -62,7 +62,7 @@ class SettingViewController: UIViewController {
         etcTableView.delegate = self
     }
     
-    private func initEventListener() {
+    private func bind() {
         // ExitButton Tap Action
         exitButton.rx.tap
             .bind(with: self, onNext: { vc, _ in

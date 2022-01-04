@@ -15,7 +15,7 @@ enum AdMobUnitID {
 
 class AdMobManager {
     private var interstitial: GADInterstitialAd?
-    var presentFrequency = 2
+    public var presentFrequency = 2
     
     init() {
         configureAdMob()
@@ -36,7 +36,7 @@ class AdMobManager {
         }
     }
     
-    func presentAdMob(vc: UIViewController) {
+    public func presentAdMob(vc: UIViewController) {
         guard let interstitial = interstitial else {
             print("Log ad is not loaded")
             return

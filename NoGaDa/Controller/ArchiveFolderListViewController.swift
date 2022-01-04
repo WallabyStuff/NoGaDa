@@ -12,18 +12,23 @@ import RxCocoa
 import RxGesture
 import Hero
 
+@objc protocol ArchiveFolderListViewDelegate: AnyObject {
+    @objc optional func didFileChanged()
+}
+
 class ArchiveFolderListViewController: UIViewController {
 
     // MARK: - Declaraiton
-    private let songFolderListViewModel = ArchiveFolderListViewModel()
-    private var disposeBag = DisposeBag()
-    
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var addFolderButton: UIButton!
-    @IBOutlet weak var songFolderTableView: UITableView!
+    @IBOutlet weak var archiveFolderTableView: UITableView!
+    
+    weak var delegate: ArchiveFolderListViewDelegate?
+    private let viewModel = ArchiveFolderListViewModel()
+    private var disposeBag = DisposeBag()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -31,8 +36,8 @@ class ArchiveFolderListViewController: UIViewController {
 
         initView()
         initInstance()
-        initEventListener()
-        setArchiveFolders()
+        bind()
+        reloadArchiveFolderTableView()
     }
     
     // MARK: - Override
@@ -42,8 +47,7 @@ class ArchiveFolderListViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
-        setArchiveFolders()
+        reloadArchiveFolderTableView()
     }
 
     // MARK: - Initialization
@@ -76,20 +80,20 @@ class ArchiveFolderListViewController: UIViewController {
         exitButton.setExitButtonShadow()
         
         // Folder TableView
-        songFolderTableView.separatorStyle = .none
-        songFolderTableView.tableFooterView = UIView()
-        songFolderTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        archiveFolderTableView.separatorStyle = .none
+        archiveFolderTableView.tableFooterView = UIView()
+        archiveFolderTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
     }
     
     private func initInstance() {
         // Folder TableView
         let folderCellNibName = UINib(nibName: "FolderTableViewCell", bundle: nil)
-        songFolderTableView.register(folderCellNibName, forCellReuseIdentifier: "folderTableViewCell")
-        songFolderTableView.delegate = self
-        songFolderTableView.dataSource = self
+        archiveFolderTableView.register(folderCellNibName, forCellReuseIdentifier: "folderTableViewCell")
+        archiveFolderTableView.delegate = self
+        archiveFolderTableView.dataSource = self
     }
     
-    private func initEventListener() {
+    private func bind() {
         // ExitButton TapAction
         exitButton.rx.tap
             .bind(with: self) { vc, _ in
@@ -99,41 +103,27 @@ class ArchiveFolderListViewController: UIViewController {
         // AddFolder Button Tap Action
         addFolderButton.rx.tap
             .bind(with: self) { vc, _ in
-                vc.presentAddFolderVC()
+                vc.presentAddFolderView()
             }.disposed(by: disposeBag)
+        
+        // ArchiveFolder TablewView
+        archiveFolderTableView.rx.itemSelected
+            .asDriver()
+            .drive(with: self, onNext: { vc, indexPath in
+                vc.presentArchiveSongListVC(indexPath: indexPath)
+            }).disposed(by: disposeBag)
     }
     
     // MARK: - Method
-    private func presentAddFolderVC() {
-        guard let addFolderVC = storyboard?.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
-            return
-        }
-        
-        addFolderVC.delegate = self
-        addFolderVC.modalPresentationStyle = .fullScreen
-        
-        present(addFolderVC, animated: true, completion: nil)
-    }
-    
-    private func presentFolderVC(selectedArchiveFolder: ArchiveFolder) {
-        guard let folderVC = storyboard?.instantiateViewController(identifier: "folderStoryboard") as? ArchiveSongListViewController else {
-            return
-        }
-        
-        folderVC.delegate = self
-        folderVC.modalPresentationStyle = .fullScreen
-        folderVC.currentFolderId = selectedArchiveFolder.id
-        
-        present(folderVC, animated: true, completion: nil)
-    }
-    
-    private func setArchiveFolders() {
-        songFolderListViewModel.fetchFolders()
-        songFolderTableView.reloadData()
+    private func reloadArchiveFolderTableView() {
+        viewModel.fetchFolders()
+            .subscribe(onCompleted: { [weak self] in
+                self?.archiveFolderTableView.reloadData()
+            }).disposed(by: disposeBag)
     }
     
     private func presentRemoveFolderAlert(_ indexPath: IndexPath, _ completion: @escaping () -> Void ) {
-        let archiveFolderVM = songFolderListViewModel.archiveFolderAtIndex(indexPath)
+        let archiveFolderVM = viewModel.archiveFolderAtIndex(indexPath)
         
         let removeFolderAlert = UIAlertController(title: "삭제",
                                                   message: "정말로 「\(archiveFolderVM.titleEmoji)\(archiveFolderVM.title)」 를 삭제하시겠습니까?",
@@ -143,7 +133,7 @@ class ArchiveFolderListViewController: UIViewController {
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
             guard let self = self else { return }
             
-            self.songFolderListViewModel.deleteFolder(indexPath)
+            self.viewModel.deleteFolder(indexPath)
                 .observe(on: MainScheduler.instance)
                 .subscribe(onCompleted: {
                     completion()
@@ -152,8 +142,29 @@ class ArchiveFolderListViewController: UIViewController {
         
         removeFolderAlert.addAction(confirmAction)
         removeFolderAlert.addAction(cancelAction)
-        
         present(removeFolderAlert, animated: true, completion: nil)
+    }
+    
+    func presentAddFolderView() {
+        guard let addFolderVC = storyboard?.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
+            return
+        }
+        
+        addFolderVC.modalPresentationStyle = .fullScreen
+        addFolderVC.delegate = self
+        present(addFolderVC, animated: true, completion: nil)
+    }
+    
+    public func presentArchiveSongListVC(indexPath: IndexPath) {
+        guard let archiveSongListVC = storyboard?.instantiateViewController(identifier: "archiveSongListStoryboard") as? ArchiveSongListViewController else {
+            return
+        }
+        
+        archiveSongListVC.modalPresentationStyle = .fullScreen
+        let viewModel = ArchiveSongListViewModel(currentFolderId: viewModel.archiveFolderAtIndex(indexPath).id)
+        archiveSongListVC.viewModel = viewModel
+        archiveSongListVC.delegate = self
+        present(archiveSongListVC, animated: true, completion: nil)
     }
 }
 
@@ -161,13 +172,13 @@ class ArchiveFolderListViewController: UIViewController {
 extension ArchiveFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return songFolderListViewModel.numberOfRowsInSection(songFolderListViewModel.sectionCount)
+        return viewModel.numberOfRowsInSection(viewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let folderCell = tableView.dequeueReusableCell(withIdentifier: "folderTableViewCell") as? FolderTableViewCell else { return UITableViewCell() }
         
-        let archiveFolderVM = songFolderListViewModel.archiveFolderAtIndex(indexPath)
+        let archiveFolderVM = viewModel.archiveFolderAtIndex(indexPath)
         
         folderCell.titleEmojiLabel.text = archiveFolderVM.titleEmoji
         folderCell.titleLabel.text      = archiveFolderVM.title
@@ -175,30 +186,26 @@ extension ArchiveFolderListViewController: UITableViewDataSource, UITableViewDel
         return folderCell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let archiveFolderVM = songFolderListViewModel.archiveFolderAtIndex(indexPath)
-        
-        presentFolderVC(selectedArchiveFolder: archiveFolderVM.archiveFolder)
-    }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
             presentRemoveFolderAlert(indexPath) { [weak self] in
-                self?.songFolderTableView.deleteRows(at: [indexPath], with: .left)
+                self?.archiveFolderTableView.deleteRows(at: [indexPath], with: .left)
+                self?.delegate?.didFileChanged?()
             }
         }
     }
 }
 
 extension ArchiveFolderListViewController: ArchiveSongListViewDelegate {
-    func folderView(didChangeFolderDescription: Bool) {
-        setArchiveFolders()
+    func didFolderNameChanged() {
+        reloadArchiveFolderTableView()
     }
 }
 
 extension ArchiveFolderListViewController: AddFolderViewDelegate {
-    func addFolderView(didAddFile: Bool) {
-        setArchiveFolders()
+    func didFolderAdded() {
+        reloadArchiveFolderTableView()
+        delegate?.didFileChanged?()
     }
 }

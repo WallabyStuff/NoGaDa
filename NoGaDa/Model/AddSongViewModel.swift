@@ -12,15 +12,23 @@ import RxCocoa
 
 class AddSongViewModel {
     private var disposeBag = DisposeBag()
+    private var targetFolderId: String?
     private var songFolderManager = SongFolderManager()
+    
+    init(targetFolderId: String) {
+        self.targetFolderId = targetFolderId
+    }
 }
 
 extension AddSongViewModel {
-    func addSong(title: String, singer: String, songNumber: String, brand: KaraokeBrand, to folderId: String) -> Completable {
+    public func addSong(title: String, singer: String, songNumber: String, brand: KaraokeBrand) -> Completable {
         return Completable.create { [weak self] observer in
-            guard let self = self else { return Disposables.create() }
+            guard let self = self,
+                  let targetFolderId = self.targetFolderId else {
+                      return Disposables.create()
+                  }
             
-            self.songFolderManager.fetchData(folderId)
+            self.songFolderManager.fetchData(targetFolderId)
                 .subscribe(onNext: { folder in
                     let song = Song(brand: brand,
                                     no: songNumber,

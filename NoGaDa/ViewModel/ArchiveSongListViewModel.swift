@@ -11,10 +11,16 @@ import RxSwift
 import RxCocoa
 
 class ArchiveSongListViewModel {
+    public var currentFolderId: String?
     private var disposeBag = DisposeBag()
     private let songFolderManager = SongFolderManager()
     private var songFolder = ArchiveFolder()
     private var songList = [ArchiveSong]()
+    private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
+    
+    init(currentFolderId: String) {
+        self.currentFolderId = currentFolderId
+    }
 }
 
 extension ArchiveSongListViewModel {
@@ -26,11 +32,14 @@ extension ArchiveSongListViewModel {
         return songFolder.titleEmoji
     }
     
-    func fetchSongFolder(_ id: String) -> Completable {
+    func fetchSongFolder() -> Completable {
         return Completable.create { [weak self] observer in
-            guard let self = self else { return Disposables.create() }
+            guard let self = self,
+                  let folderId = self.currentFolderId else {
+                return Disposables.create()
+            }
             
-            self.songFolderManager.fetchData(id)
+            self.songFolderManager.fetchData(folderId)
                 .subscribe(onNext: { songFolderRealm in
                     self.songFolder = songFolderRealm
                     self.songList = Array(songFolderRealm.songs)
@@ -60,11 +69,13 @@ extension ArchiveSongListViewModel {
     }
     
     // Wrapper method of fetchFolder
-    func reloadFolder(_ id: String) -> Completable {
+    func reloadFolder() -> Completable {
         return Completable.create { [weak self] observer in
-            guard let self = self else { return Disposables.create() }
+            guard let self = self else {
+                return Disposables.create()
+            }
             
-            self.fetchSongFolder(id)
+            self.fetchSongFolder()
                 .subscribe {
                     observer(.completed)
                 } onError: { error in
@@ -121,8 +132,8 @@ extension ArchiveSongListViewModel {
         return songFolder.songs.count
     }
     
-    func archiveSongAtIndex(_ indexPath: IndexPath) -> SavedSongViewModel {
-        return SavedSongViewModel(songList[indexPath.row])
+    func archiveSongAtIndex(_ indexPath: IndexPath) -> ArchiveSong {
+        return songList[indexPath.row]
     }
 }
 
@@ -143,33 +154,5 @@ extension SongFolderViewModel {
     
     var titleEmoji: String {
         return songFolder.titleEmoji
-    }
-}
-
-struct SavedSongViewModel {
-    var song: ArchiveSong
-}
-
-extension SavedSongViewModel {
-    init(_ song: ArchiveSong) {
-        self.song = song
-    }
-}
-
-extension SavedSongViewModel {
-    var title: String {
-        return song.title
-    }
-    
-    var singer: String {
-        return song.singer
-    }
-    
-    var brand: String {
-        return song.brand
-    }
-    
-    var no: String {
-        return song.no
     }
 }

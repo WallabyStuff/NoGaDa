@@ -34,6 +34,7 @@ class ColorSet {
     static let segmentedControlBackgroundColor          = UIColor(named: "SegmentedControlBackgroundColor")!
     static let segmentedControlDefaultTextColor         = UIColor(named: "SegmentedControlDefaultTextColor")!
     static let segmentedControlSelectedTextColor        = UIColor(named: "SegmentedControlSelectedTextColor")!
+    static let seperatorColor                           = UIColor(named: "SeperatorColor")!
     static let settingGroupBackgroundColor              = UIColor(named: "SettingGroupBackgroundColor")!
     static let settingGroupHeaderTextColor              = UIColor(named: "SettingGroupHeaderTextColor")!
     static let settingIconBoxBackgroundColor            = UIColor(named: "SettingIconBoxBackgroundColor")!
