@@ -13,15 +13,15 @@ class PopUpArchiveFolderTableViewCell: UITableViewCell {
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initView()
+        setupview()
     }
 
-    // MARK: - Initialization
-    func initView() {
+    // MARK: - Initializers
+    private func setupview() {
         // Selection View
         let selectionView = UIView(frame: self.frame)
         selectionView.layer.cornerRadius = 8

@@ -21,10 +21,6 @@ class ArchiveFolderFloatingPanelView {
         setup()
     }
     
-    deinit {
-        print("Log-i Archive folder floating panel deinitialized")
-    }
-    
     private func setup() {
         let appearance = SurfaceAppearance()
         appearance.cornerRadius = 28

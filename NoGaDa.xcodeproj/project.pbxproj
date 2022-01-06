@@ -87,6 +87,10 @@
 		8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70392F275F466D001D10A6 /* AddSongViewModel.swift */; };
 		8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */; };
 		8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703933275FECE3001D10A6 /* CreditViewModel.swift */; };
+		8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */; };
+		8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */; };
+		8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */; };
+		8EFA4D902786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */; };
 		C69D67261F6FF37CF9B86903 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE908B65C08BA3AFF5EA0DAD /* Pods_NoGaDa.framework */; };
 /* End PBXBuildFile section */
 
@@ -199,6 +203,10 @@
 		8E70392F275F466D001D10A6 /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
 		8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightingTextfield.swift; sourceTree = "<group>"; };
 		8E703933275FECE3001D10A6 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
+		8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewController.swift; sourceTree = "<group>"; };
+		8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewModel.swift; sourceTree = "<group>"; };
+		8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerTableViewCell.swift; sourceTree = "<group>"; };
+		8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KaraokeBrandPickerTableViewCell.xib; sourceTree = "<group>"; };
 		9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992C5409F902D4E2EB68D8D7 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
 		9AFF6C2C4282DE5B487B8D08 /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +264,7 @@
 				49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */,
 				49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */,
 				8E6C95E82767B37B00667C01 /* PopUpSongOptionViewModel.swift */,
+				8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -272,6 +281,7 @@
 				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
 				495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */,
 				8E6C95E42767B18500667C01 /* PopUpSongOptionTableViewCell.swift */,
+				8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -288,6 +298,7 @@
 				49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */,
 				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
 				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
+				8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -365,6 +376,7 @@
 				495334322711DE4B003F64DE /* SearchHistoryViewController.swift */,
 				8E70392D275F2D15001D10A6 /* AddSongViewController.swift */,
 				8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */,
+				8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -568,6 +580,7 @@
 				493BCBF126F4EBCF0096422A /* UpdatedSongTableViewCell.xib in Resources */,
 				4956CE2E26F467060007523B /* Assets.xcassets in Resources */,
 				4956CE2C26F467040007523B /* Main.storyboard in Resources */,
+				8EFA4D902786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib in Resources */,
 				8E6C95E72767B18500667C01 /* PopUpSongOptionTableViewCell.xib in Resources */,
 				495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */,
 				49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */,
@@ -753,6 +766,7 @@
 				49C6DC372703129B0094403B /* SafeAreaInset.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
 				4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */,
+				8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */,
 				49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */,
 				495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */,
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
@@ -764,6 +778,8 @@
 				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,
+				8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */,
+				8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */,
 				49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

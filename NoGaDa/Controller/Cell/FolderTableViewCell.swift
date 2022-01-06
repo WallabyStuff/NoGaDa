@@ -16,11 +16,11 @@ class FolderTableViewCell: UITableViewCell {
     
     public static let releaseAnimationDuration: CGFloat = 0.5
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initView()
+        setupView()
     }
     
     override func prepareForReuse() {
@@ -29,8 +29,8 @@ class FolderTableViewCell: UITableViewCell {
         cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
     }
 
-    // MARK: - Initializer
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         cellContentView.layer.borderWidth = 1
         cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
         cellContentView.layer.cornerRadius = 12
@@ -40,7 +40,7 @@ class FolderTableViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension FolderTableViewCell {
     private var releaseAnimationDuration: CGFloat {
         return 0.3

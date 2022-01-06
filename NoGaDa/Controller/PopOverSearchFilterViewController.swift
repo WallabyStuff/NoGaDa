@@ -23,25 +23,24 @@ class PopOverSearchFilterViewController: UIViewController {
     weak var delegate: PopOverSearchFilterViewDelegate?
     private var disposeBag = DisposeBag()
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
-    
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         // filter item TableView
         filterItemTableView.tableFooterView = UIView()
         filterItemTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
         filterItemTableView.backgroundColor = .white
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Filter item Tableview
         let searchFilterCellNibName     = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
         filterItemTableView.register(searchFilterCellNibName, forCellReuseIdentifier: "searchFilterTableCell")
@@ -62,10 +61,10 @@ class PopOverSearchFilterViewController: UIViewController {
     }
     
     
-    // MARK: - Method
+    // MARK: - Methods
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension PopOverSearchFilterViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SearchFilterItem.allCases.count

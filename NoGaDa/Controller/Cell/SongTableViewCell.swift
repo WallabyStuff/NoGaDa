@@ -16,11 +16,11 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var songNumberLabel: UILabel!
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initView()
+        setupView()
     }
     
     override func prepareForReuse() {
@@ -30,8 +30,8 @@ class SongTableViewCell: UITableViewCell {
         singerLabel.releaseAccentColor(with: ColorSet.subTextColor)
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         thumbnailImageView.layer.cornerRadius = 16
         
         songNumberLabel.text    = ""

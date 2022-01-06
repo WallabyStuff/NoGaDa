@@ -13,15 +13,15 @@ class PopUpSongOptionTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initView()
+        setupView()
     }
     
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         titleLabel.text = ""
         iconImageView.image = UIImage()
         

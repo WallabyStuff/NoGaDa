@@ -1,18 +1,17 @@
 //
-//  SettingEtcTableViewCell.swift
+//  KaraokeBrandPickerTableViewCell.swift
 //  NoGaDa
 //
-//  Created by 이승기 on 2021/09/29.
+//  Created by 이승기 on 2022/01/06.
 //
 
 import UIKit
 
-class SettingEtcTableViewCell: UITableViewCell {
-
+class KaraokeBrandPickerTableViewCell: UITableViewCell {
+    
     // MARK: - Declaration
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var iconBoxView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var brandNameLabel: UILabel!
+    static let identifier = "karaokeBrandTableCell"
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -20,12 +19,10 @@ class SettingEtcTableViewCell: UITableViewCell {
         
         setupView()
     }
-
+    
     // MARK: - Initializers
     private func setupView() {
-        titleLabel.text = ""
-        iconBoxView.layer.cornerRadius = 12
-        iconImageView.image = UIImage()
+        brandNameLabel.text = ""
         
         let selectedView = UIView()
         selectedView.bounds = bounds

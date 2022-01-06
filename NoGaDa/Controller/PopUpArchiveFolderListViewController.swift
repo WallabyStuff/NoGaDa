@@ -28,18 +28,18 @@ class PopUpArchiveFolderListViewController: UIViewController {
     private var disposeBag = DisposeBag()
     public var exitButtonAction: () -> Void = {}
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupData()
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
         setArchiveFolders()
     }
 
-    // MARK: - Initialization
+    // MARK: - Initializers
     private func setupData() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
@@ -47,7 +47,7 @@ class PopUpArchiveFolderListViewController: UIViewController {
         }
     }
     
-    private func initView() {
+    private func setupView() {
         // AddFolder Button
         addFolderButton.layer.cornerRadius = 12
         
@@ -66,7 +66,7 @@ class PopUpArchiveFolderListViewController: UIViewController {
         addFolderButton.layer.shadowOpacity = 0.1
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Folder TableView
         let folderCellNibName = UINib(nibName: "PopUpArchiveFolderTableViewCell", bundle: nil)
         archiveFolderTableView.register(folderCellNibName, forCellReuseIdentifier: "popUpArchiveTableCell")
@@ -99,7 +99,7 @@ class PopUpArchiveFolderListViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     private func setArchiveFolders() {
         viewModel?.fetchSongFolder()
             .observe(on: MainScheduler.instance)
@@ -125,7 +125,7 @@ class PopUpArchiveFolderListViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension PopUpArchiveFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel!.numberOfRowsInSection(viewModel!.sectionCount)

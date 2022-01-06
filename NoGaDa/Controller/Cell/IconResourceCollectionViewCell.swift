@@ -18,11 +18,11 @@ class IconResourceCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initView()
+        setupView()
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         cellContentView.layer.cornerRadius = 12
     }
 }

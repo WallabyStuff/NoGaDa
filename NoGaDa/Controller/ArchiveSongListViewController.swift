@@ -32,13 +32,13 @@ class ArchiveSongListViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
@@ -49,7 +49,7 @@ class ArchiveSongListViewController: UIViewController {
         updateFolderTitleEmojiIfNeeded()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -78,7 +78,7 @@ class ArchiveSongListViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func initView() {
+    private func setupView() {
         self.hero.isEnabled = true
         
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
@@ -101,7 +101,7 @@ class ArchiveSongListViewController: UIViewController {
         archiveSongTableView.tableFooterView = UIView()
         archiveSongTableView.separatorStyle = .none
         archiveSongTableView.layer.cornerRadius = 12
-        archiveSongTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 100, right: 0)
+        archiveSongTableView.contentInset = UIEdgeInsets(top: 48, left: 0, bottom: 100, right: 0)
         
         // Folder title Textfield
         folderTitleTextField.layer.cornerRadius = 12
@@ -126,7 +126,7 @@ class ArchiveSongListViewController: UIViewController {
         addSongButton.layer.shadowOpacity = 0.25
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Archive Song TableView
         let songCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
         archiveSongTableView.register(songCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
@@ -175,7 +175,7 @@ class ArchiveSongListViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     private func setArchiveSong() {
         viewModel!.fetchSongFolder()
             .subscribe(onCompleted: { [weak self] in
@@ -230,7 +230,7 @@ class ArchiveSongListViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension ArchiveSongListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel!.numberOfRowsInSection(viewModel!.sectionCount)
