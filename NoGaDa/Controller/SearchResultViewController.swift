@@ -28,24 +28,24 @@ class SearchResultViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var searchKeyword = ""
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         searchResultTableView.reloadData()
     }
     
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         // Search result ContentView
         searchResultContentView.clipsToBounds = true
         searchResultContentView.layer.cornerRadius = 12
@@ -67,7 +67,7 @@ class SearchResultViewController: UIViewController {
         searchResultPlaceholderLabel.isHidden = true
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // SearchResult TableView
         let searchResultCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
         searchResultTableView.register(searchResultCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
@@ -86,7 +86,7 @@ class SearchResultViewController: UIViewController {
         
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     public func setSearchResult(_ searchKeyword: String) {
         self.searchKeyword = searchKeyword
         
@@ -129,7 +129,7 @@ class SearchResultViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResultViewModel.numberOfRowsInSection(searchResultViewModel.sectionCount)

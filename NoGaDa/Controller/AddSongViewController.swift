@@ -25,29 +25,40 @@ class AddSongViewController: UIViewController {
     @IBOutlet weak var songTitleTextField: HighlightingTextfield!
     @IBOutlet weak var singerTextField: HighlightingTextfield!
     @IBOutlet weak var songNumberTextField: HighlightingTextfield!
-    @IBOutlet weak var brandPickerView: UIPickerView!
+    @IBOutlet weak var brandPickerButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
     weak var delegate: AddSongViewDelegate?
     public var viewModel: AddSongViewModel?
     private var disposeBag = DisposeBag()
+    private var selectedBrand: KaraokeBrand = .tj
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    // MARK: - Initializer
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+            
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            traitCollection.performAsCurrent {
+                brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
+            }
+        }
+    }
+    
+    // MARK: - Initializers
     private func setupData() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
@@ -55,7 +66,7 @@ class AddSongViewController: UIViewController {
         }
     }
     
-    private func initView() {
+    private func setupView() {
         // Exit button
         exitButton.makeAsCircle()
         exitButton.setExitButtonShadow()
@@ -79,21 +90,17 @@ class AddSongViewController: UIViewController {
         songNumberTextField.setLeftPadding(width: 12)
         songNumberTextField.setRightPadding(width: 12)
         
-        // Brand picker view
-        brandPickerView.layer.borderWidth = 1
-        brandPickerView.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
-        brandPickerView.layer.cornerRadius = 12
+        // Brand picker Button
+        brandPickerButton.layer.cornerRadius = 12
+        brandPickerButton.layer.borderWidth = 1
+        brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func initInstance() {
-        // Brand  picker view
-        brandPickerView.dataSource = self
-        brandPickerView.delegate = self
-        
+    private func setupInstance() {
         // Content scrollView
         contentScrollView.delegate = self
     }
@@ -130,7 +137,7 @@ class AddSongViewController: UIViewController {
             .drive(with: self, onNext: { vc, isAllTextFieldFilled in
                 if isAllTextFieldFilled {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
-                    vc.confirmButton.setTitleColor(ColorSet.textColor, for: .normal)
+                    vc.confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
                 } else {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
                     vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
@@ -149,18 +156,25 @@ class AddSongViewController: UIViewController {
             .bind(with: self, onNext: { vc,_ in
                 vc.addSong()
             }).disposed(by: disposeBag)
+        
+        // Brand picker button tap action
+        brandPickerButton.rx.tap
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
+                vc.showBrandPickerVC()
+            }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     private func addSong() {
         let songTitle = songTitleTextField.text ?? ""
         let singer = singerTextField.text ?? ""
         let songNumber = songNumberTextField.text ?? ""
-        
+
         viewModel?.addSong(title: songTitle,
                                  singer: singer,
                                  songNumber: songNumber,
-                                 brand: selectedBrand())
+                                 brand: selectedBrand)
             .subscribe(onCompleted: { [weak self] in
                 // Success to add a new song
                 self?.delegate?.didSongAdded?()
@@ -168,9 +182,18 @@ class AddSongViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func selectedBrand() -> KaraokeBrand {
-        let selectedRow = brandPickerView.selectedRow(inComponent: 0)
-        return KaraokeBrand.allCases[selectedRow]
+    private func showBrandPickerVC() {
+        guard let brandPickerVC = storyboard?.instantiateViewController(withIdentifier: "karaokeBrandPickerStoryboard") as? KaraokeBrandPickerViewController else { return }
+        
+        brandPickerVC.modalPresentationStyle = .popover
+        brandPickerVC.preferredContentSize = CGSize(width: 140, height: 87) // two 44height of cells - 1height of separator height
+        brandPickerVC.popoverPresentationController?.permittedArrowDirections = .right
+        brandPickerVC.popoverPresentationController?.sourceRect = brandPickerButton.bounds
+        brandPickerVC.popoverPresentationController?.sourceView = brandPickerButton
+        brandPickerVC.presentationController?.delegate = self
+        brandPickerVC.delegate = self
+        
+        present(brandPickerVC, animated: true)
     }
     
     @objc
@@ -182,35 +205,29 @@ class AddSongViewController: UIViewController {
     private func keyboardWillHide(_ sender: Notification) {
         view.frame.origin.y = 0
     }
-}
-
-// MARK: - Extension
-extension AddSongViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return viewModel!.numberOfComponents
-    }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel!.numberOfRowsInComponent
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let pickerLabel = UILabel()
-        pickerLabel.textAlignment = .center
-        pickerLabel.textColor = ColorSet.textColor
-        pickerLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        pickerLabel.text = viewModel!.titleForRowAt(row)
-        
-        return pickerLabel
+    @objc
+    private func didTapDoneButton(_ sender: Any) {
+        view.endEditing(true)
     }
 }
 
+// MARK: - Extensions
 extension AddSongViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         view.endEditing(true)
     }
 }
 
-extension AddSongViewController: UITextFieldDelegate {
-    
+extension AddSongViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+extension AddSongViewController: BrandPickerViewDelegaet {
+    func didBrandSelected(_ selectedBrand: KaraokeBrand) {
+        self.selectedBrand = selectedBrand
+        brandPickerButton.setTitle(selectedBrand.localizedString, for: .normal)
+    }
 }

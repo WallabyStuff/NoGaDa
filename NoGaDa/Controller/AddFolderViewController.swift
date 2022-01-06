@@ -28,16 +28,16 @@ class AddFolderViewController: UIViewController {
     private let addFolderViewModel = AddFolderViewModel()
     private var disposeBag = DisposeBag()
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
@@ -46,8 +46,8 @@ class AddFolderViewController: UIViewController {
         view.endEditing(true)
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         // Confirm Button
         confirmButton.layer.cornerRadius = 12
         
@@ -63,7 +63,7 @@ class AddFolderViewController: UIViewController {
         folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Folder Title TextField
         folderTitleTextField.delegate = self
         folderTitleTextField.returnKeyType = .done
@@ -98,7 +98,7 @@ class AddFolderViewController: UIViewController {
             .drive(with: self, onNext: { vc, isAllTextFieldFilled in
                 if isAllTextFieldFilled {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
-                    vc.confirmButton.setTitleColor(ColorSet.textColor, for: .normal)
+                    vc.confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
                 } else {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
                     vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
@@ -108,10 +108,10 @@ class AddFolderViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension AddFolderViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)

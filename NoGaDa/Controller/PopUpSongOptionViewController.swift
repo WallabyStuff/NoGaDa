@@ -29,17 +29,17 @@ class PopUpSongOptionViewController: UIViewController {
     public var exitButtonAction: () -> Void = {}
     private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupData()
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Initializer
+    // MARK: - Initializers
     private func setupData() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
@@ -47,7 +47,7 @@ class PopUpSongOptionViewController: UIViewController {
         }
     }
     
-    private func initView() {
+    private func setupView() {
         // Song thumbnail imageView
         songThumbnailImageView.layer.cornerRadius = 12
         
@@ -65,7 +65,7 @@ class PopUpSongOptionViewController: UIViewController {
         optionTableView.tableFooterView = UIView()
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Option tableView
         let optionTableCellNibName = UINib(nibName: "PopUpSongOptionTableViewCell", bundle: nil)
         optionTableView.register(optionTableCellNibName, forCellReuseIdentifier: "popUpSongOptionTableCell")
@@ -133,7 +133,7 @@ class PopUpSongOptionViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension PopUpSongOptionViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel!.numberOfRowsInSection(viewModel!.sectionCount)

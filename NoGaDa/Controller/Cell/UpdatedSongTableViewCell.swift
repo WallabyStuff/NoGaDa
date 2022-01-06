@@ -16,19 +16,19 @@ class UpdatedSongTableViewCell: UITableViewCell {
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var songNumberLabel: UILabel!
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initView()
+        setupView()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         thumbnailImageView.layer.cornerRadius = 12
         
         songTitleLabel.text     = ""

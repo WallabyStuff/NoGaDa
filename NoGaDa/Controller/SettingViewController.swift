@@ -25,29 +25,31 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Intitialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         // Search filter group View
         searchFilterGroupView.makeAsSettingGroupView()
-        searchFilterTableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.tableFooterView = UIView()
         searchFilterTableView.isScrollEnabled = false
+        searchFilterTableView.separatorColor = ColorSet.settingItemSeparatorColor
+        searchFilterTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 80)
         
         // Etc group View
         etcGroupView.makeAsSettingGroupView()
-        etcTableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         etcTableView.layer.cornerRadius = 20
         etcTableView.tableFooterView = UIView()
         etcTableView.isScrollEnabled = false
+        etcTableView.separatorColor = ColorSet.settingItemSeparatorColor
+        etcTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 64)
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Search filter TableView
         let searchFilterCellNibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
         searchFilterTableView.register(searchFilterCellNibName, forCellReuseIdentifier: "searchFilterTableCell")
@@ -70,10 +72,10 @@ class SettingViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
@@ -93,7 +95,6 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             let filterItem = SearchFilterItem.allCases[indexPath.row]
             
-            filterItemCell.selectionStyle = .none
             filterItemCell.contentView.backgroundColor = ColorSet.settingGroupBackgroundColor
             filterItemCell.titleLabel.textColor = ColorSet.textColor
             filterItemCell.titleLabel.text = filterItem.title
@@ -109,7 +110,6 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             let etcItem = SettingEtcItem.allCases[indexPath.row]
             
-            etcItemCell.selectionStyle = .none
             etcItemCell.titleLabel.text = etcItem.title
             etcItemCell.iconImageView.image = etcItem.icon
             etcItemCell.rx.tapGesture()

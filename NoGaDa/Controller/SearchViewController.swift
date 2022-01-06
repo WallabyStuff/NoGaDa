@@ -36,17 +36,22 @@ class SearchViewController: UIViewController {
     private var searchResultVC = SearchResultViewController()
     private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupData()
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Override
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchTextField.becomeFirstResponder()
+    }
+    
+    // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -55,7 +60,7 @@ class SearchViewController: UIViewController {
         view.endEditing(true)
     }
 
-    // MARK: - Initialization
+    // MARK: - Initializers
     private func setupData() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
@@ -63,7 +68,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    private func initView() {
+    private func setupView() {
         self.hero.isEnabled = true
         
         // Appbar
@@ -81,7 +86,6 @@ class SearchViewController: UIViewController {
         appbarTitleLabel.hero.id = "appbarTitle"
         
         // SearchBox View
-        searchBoxView.hero.id = "searchBox"
         searchBoxView.layer.cornerRadius = 12
         searchBoxView.layer.masksToBounds = true
         searchBoxView.setSearchBoxShadow()
@@ -92,7 +96,6 @@ class SearchViewController: UIViewController {
         searchTextField.setRightPadding(width: 80)
         
         // Search Button
-        filterButton.hero.id = "searchBoxButton"
         filterButton.layer.cornerRadius = 8
         filterButton.setPadding(width: 8)
         filterButton.setSearchBoxButtonShadow()
@@ -108,10 +111,9 @@ class SearchViewController: UIViewController {
         configureContainerView()
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Search TextField
         searchTextField.delegate = self
-        searchTextField.becomeFirstResponder()
         
         // View Model
         viewModel = SearchViewModel()
@@ -141,7 +143,7 @@ class SearchViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     private func dismissKeyboardAndArchivePanel() {
         view.endEditing(true)
         archiveFolderFloatingPanelView?.hide(animated: true)
@@ -163,7 +165,7 @@ class SearchViewController: UIViewController {
     }
     
     private func setSearchResult() {
-        guard let searchKeyword = searchTextField.text else {
+        guard let searchKeyword = searchTextField.text?.trimmingCharacters(in: .whitespaces) else {
             return
         }
         
@@ -215,7 +217,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         dismissKeyboardAndArchivePanel()

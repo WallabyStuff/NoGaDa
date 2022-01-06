@@ -30,17 +30,17 @@ class ArchiveFolderListViewController: UIViewController {
     private let viewModel = ArchiveFolderListViewModel()
     private var disposeBag = DisposeBag()
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
         reloadArchiveFolderTableView()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -50,8 +50,8 @@ class ArchiveFolderListViewController: UIViewController {
         reloadArchiveFolderTableView()
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         self.hero.isEnabled = true
         
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
@@ -82,10 +82,10 @@ class ArchiveFolderListViewController: UIViewController {
         // Folder TableView
         archiveFolderTableView.separatorStyle = .none
         archiveFolderTableView.tableFooterView = UIView()
-        archiveFolderTableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        archiveFolderTableView.contentInset = UIEdgeInsets(top: 48, left: 0, bottom: 0, right: 0)
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Folder TableView
         let folderCellNibName = UINib(nibName: "FolderTableViewCell", bundle: nil)
         archiveFolderTableView.register(folderCellNibName, forCellReuseIdentifier: "folderTableViewCell")
@@ -114,7 +114,7 @@ class ArchiveFolderListViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     private func reloadArchiveFolderTableView() {
         viewModel.fetchFolders()
             .subscribe(onCompleted: { [weak self] in
@@ -168,7 +168,7 @@ class ArchiveFolderListViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension ArchiveFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

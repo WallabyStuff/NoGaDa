@@ -29,13 +29,13 @@ class CreditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Initializer
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         // Header label
         headerLabel.text = creditViewModel.headerText
         
@@ -51,7 +51,7 @@ class CreditViewController: UIViewController {
         contactTextView.dataDetectorTypes = .all
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Icon resource CollectionView
         let iconResourceNibName = UINib(nibName: "IconResourceCollectionViewCell", bundle: nil)
         iconResourceCollectionView.register(iconResourceNibName, forCellWithReuseIdentifier: "iconResourceCollectionCell")
@@ -84,10 +84,10 @@ class CreditViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
 }
 
-// MARK: Extension
+// MARK: Extensions
 extension CreditViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return creditViewModel.numberOfRowInSection(creditViewModel.sectionCount)

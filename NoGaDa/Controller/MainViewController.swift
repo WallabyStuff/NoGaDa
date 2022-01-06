@@ -43,17 +43,16 @@ class MainViewController: UIViewController {
         }
     }
     private var archiveFolderFloatingView: ArchiveFolderFloatingPanelView?
-    
     private var minimumAppbarHeight: CGFloat = 80
     private var maximumAppbarHeight: CGFloat = 140
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         splashView.show(vc: self)
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
@@ -65,7 +64,7 @@ class MainViewController: UIViewController {
         requestTrackingAuthorization()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -76,8 +75,8 @@ class MainViewController: UIViewController {
         reloadUpdateChartTableView()
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         self.hero.isEnabled = true
         
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
@@ -97,12 +96,10 @@ class MainViewController: UIViewController {
         mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
         
         // Search TextField
-        searchBoxView.hero.id = "searchBox"
         searchBoxView.layer.cornerRadius = 12
         searchBoxView.setSearchBoxShadow()
         
         // Search Button
-        searchButton.hero.id = "searchBoxButton"
         searchButton.layer.cornerRadius = 8
         searchButton.setSearchBoxButtonShadow()
         
@@ -124,10 +121,10 @@ class MainViewController: UIViewController {
         brandSegmentedControl.addSegment(title: "tj 업데이트")
         brandSegmentedControl.addSegment(title: "금영 업데이트")
         
-        initAppbar()
+        setupAppbar()
     }
     
-    private func initAppbar() {
+    private func setupAppbar() {
         // Appbar Height
         DispatchQueue.main.async {
             self.minimumAppbarHeight = 80 + SafeAreaInset.top
@@ -143,7 +140,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Chart TableView
         let chartTableCellNibName = UINib(nibName: "UpdatedSongTableViewCell", bundle: nil)
         updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "updatedSongTableViewCell")
@@ -227,7 +224,7 @@ class MainViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     func presentSearchVC() {
         guard let searchVC = storyboard?.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else {
             return
@@ -312,7 +309,7 @@ class MainViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(viewModel.sectionCount)

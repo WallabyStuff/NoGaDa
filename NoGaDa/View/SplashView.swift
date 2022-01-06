@@ -9,27 +9,29 @@ import UIKit
 
 class SplashView: UIView {
     
+    // MARK: - Declaration
     private let splashImageView = UIImageView()
     private let hideDelay: CGFloat = 0.3
     private let hideDuration: CGFloat = 0.3
     
+    // MARK: - Methods
     func show(vc: UIViewController) {
-        configureSplashView(vc: vc)
-        addSplashImageView(vc: vc)
+        setupSplashView(vc: vc)
+        setupSplashImageView(vc: vc)
     }
     
-    func hide(_ completion: @escaping () -> Void) {
+    func hide(_ completion: (() -> Void)?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + hideDelay) {
             UIView.animate(withDuration: self.hideDuration) {
                 self.alpha = 0
             } completion: { _ in
-                completion()
+                completion?()
                 self.removeFromSuperview()
             }
         }
     }
     
-    private func configureSplashView(vc: UIViewController) {
+    private func setupSplashView(vc: UIViewController) {
         vc.view.addSubview(self)
         backgroundColor = ColorSet.splashBackgroundColor
         translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +41,7 @@ class SplashView: UIView {
         trailingAnchor.constraint(equalTo: vc.view.trailingAnchor).isActive = true
     }
     
-    private func addSplashImageView(vc: UIViewController) {
+    private func setupSplashImageView(vc: UIViewController) {
         splashImageView.image = UIImage(named: "SplashImage")!
         addSubview(splashImageView)
         splashImageView.translatesAutoresizingMaskIntoConstraints = false

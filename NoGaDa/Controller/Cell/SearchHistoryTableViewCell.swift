@@ -17,20 +17,20 @@ class SearchHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        initView()
-        initEventListener()
+        setupView()
+        bind()
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         titleLabel.text = ""
         selectionStyle = .none
     }
     
-    private func initEventListener() {
+    private func bind() {
         removeButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.removeButtonTapAction()
@@ -38,7 +38,7 @@ class SearchHistoryTableViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchHistoryTableViewCell {
     private var releaseAnimationDuration: CGFloat {
         return 0.3

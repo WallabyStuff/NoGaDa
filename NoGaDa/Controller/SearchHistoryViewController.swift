@@ -26,24 +26,24 @@ class SearchHistoryViewController: UIViewController {
     private let searchHistoryViewModel = SearchHistoryViewModel()
     private var disposeBag = DisposeBag()
     
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
+        setupView()
+        setupInstance()
         bind()
     }
     
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupView() {
         // Search history tableView
         searchHistoryTableView.separatorStyle = .none
         searchHistoryTableView.tableFooterView = UIView()
         updateSearchHistory()
     }
     
-    private func initInstance() {
+    private func setupInstance() {
         // Search history tableView
         let searchHistoryCellNibName = UINib(nibName: "SearchHistoryTableViewCell", bundle: nil)
         searchHistoryTableView.register(searchHistoryCellNibName, forCellReuseIdentifier: "searchHistoryTableCell")
@@ -63,7 +63,7 @@ class SearchHistoryViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     func updateSearchHistory() {
         searchHistoryViewModel.fetchSearchHistory()
             .observe(on: MainScheduler.instance)
@@ -83,7 +83,7 @@ class SearchHistoryViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchHistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchHistoryViewModel.numberOfRowsInSection(searchHistoryViewModel.sectionCount)

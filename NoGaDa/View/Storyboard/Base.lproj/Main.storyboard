@@ -461,11 +461,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMj-e0-NH2">
-                                <rect key="frame" x="20" y="128" width="374" height="105"/>
+                                <rect key="frame" x="20" y="128" width="374" height="104"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BXi-Mg-xtY">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="105"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BXi-Mg-xtY">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="104"/>
                                         <color key="backgroundColor" name="SettingGroupBackgroundColor"/>
+                                        <color key="tintColor" name="SettingGroupBackgroundColor"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" name="BackgroundColor"/>
@@ -474,28 +475,30 @@
                                     <constraint firstItem="BXi-Mg-xtY" firstAttribute="leading" secondItem="OMj-e0-NH2" secondAttribute="leading" id="CEk-7E-YCS"/>
                                     <constraint firstItem="BXi-Mg-xtY" firstAttribute="top" secondItem="OMj-e0-NH2" secondAttribute="top" id="LGX-EO-dzW"/>
                                     <constraint firstAttribute="trailing" secondItem="BXi-Mg-xtY" secondAttribute="trailing" id="Llt-2S-w1d"/>
-                                    <constraint firstAttribute="height" constant="105" id="d6T-m4-uRR"/>
+                                    <constraint firstAttribute="height" constant="104" id="d6T-m4-uRR"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UG7-NJ-BIS">
-                                <rect key="frame" x="20" y="305" width="374" height="105"/>
+                                <rect key="frame" x="20" y="304" width="374" height="104"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sF5-Lv-wuJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="105"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uzs-GU-dBy">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="104"/>
                                         <color key="backgroundColor" name="SettingGroupBackgroundColor"/>
+                                        <color key="tintColor" name="SettingGroupBackgroundColor"/>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" name="SettingGroupBackgroundColor"/>
+                                <color key="tintColor" name="BackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="sF5-Lv-wuJ" secondAttribute="bottom" id="3Th-Hk-Gfz"/>
-                                    <constraint firstItem="sF5-Lv-wuJ" firstAttribute="leading" secondItem="UG7-NJ-BIS" secondAttribute="leading" id="F29-NA-n0B"/>
-                                    <constraint firstAttribute="trailing" secondItem="sF5-Lv-wuJ" secondAttribute="trailing" id="q4l-xr-TIL"/>
-                                    <constraint firstAttribute="height" constant="105" id="y4g-6E-glW"/>
-                                    <constraint firstItem="sF5-Lv-wuJ" firstAttribute="top" secondItem="UG7-NJ-BIS" secondAttribute="top" id="zdk-JS-EHf"/>
+                                    <constraint firstAttribute="trailing" secondItem="uzs-GU-dBy" secondAttribute="trailing" id="C0y-nK-mQH"/>
+                                    <constraint firstItem="uzs-GU-dBy" firstAttribute="top" secondItem="UG7-NJ-BIS" secondAttribute="top" id="qUr-bz-CxL"/>
+                                    <constraint firstItem="uzs-GU-dBy" firstAttribute="leading" secondItem="UG7-NJ-BIS" secondAttribute="leading" id="uAk-eP-x6g"/>
+                                    <constraint firstAttribute="bottom" secondItem="uzs-GU-dBy" secondAttribute="bottom" id="xU2-YH-qP4"/>
+                                    <constraint firstAttribute="height" constant="104" id="y4g-6E-glW"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기타" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVo-nP-6mw">
-                                <rect key="frame" x="20" y="269" width="28" height="20"/>
+                                <rect key="frame" x="20" y="268" width="28" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" name="SettingGroupHeaderTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -523,7 +526,7 @@
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="etcGroupView" destination="UG7-NJ-BIS" id="A2l-MA-cA4"/>
-                        <outlet property="etcTableView" destination="sF5-Lv-wuJ" id="dfe-Q4-jHe"/>
+                        <outlet property="etcTableView" destination="uzs-GU-dBy" id="Ao1-t4-LTV"/>
                         <outlet property="exitButton" destination="pDz-3Z-lXn" id="AHo-D7-lT9"/>
                         <outlet property="searchFilterGroupView" destination="OMj-e0-NH2" id="MHT-qQ-NAp"/>
                         <outlet property="searchFilterTableView" destination="BXi-Mg-xtY" id="98W-Hl-qzC"/>
@@ -937,7 +940,7 @@ Contact : middleyks@hanmail.net</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="노래 번호를 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mg6-uV-IuS" customClass="HighlightingTextfield" customModule="NoGaDa" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="394" width="278" height="44"/>
+                                                <rect key="frame" x="20" y="394" width="282" height="44"/>
                                                 <color key="backgroundColor" name="TextFieldBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="gwq-yq-s1y"/>
@@ -945,15 +948,18 @@ Contact : middleyks@hanmail.net</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oay-jU-6oh">
-                                                <rect key="frame" x="310" y="394" width="84" height="44"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLM-Pu-mvZ">
+                                                <rect key="frame" x="314" y="394" width="80" height="44"/>
                                                 <color key="backgroundColor" name="BackgroundColor"/>
-                                                <color key="tintColor" name="TextColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="TfH-4W-yTV"/>
-                                                    <constraint firstAttribute="width" constant="84" id="aIT-7F-1i6"/>
+                                                    <constraint firstAttribute="height" constant="44" id="MTV-RF-nfd"/>
+                                                    <constraint firstAttribute="width" constant="80" id="TrJ-by-7pi"/>
                                                 </constraints>
-                                            </pickerView>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="tintColor" name="TextColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="tj"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="BackgroundColor"/>
                                         <constraints>
@@ -965,20 +971,20 @@ Contact : middleyks@hanmail.net</string>
                                             <constraint firstItem="z2W-cy-ejG" firstAttribute="leading" secondItem="fVP-SW-cP7" secondAttribute="leading" constant="20" id="Hed-dq-Ix1"/>
                                             <constraint firstItem="Ia9-Fn-irA" firstAttribute="top" secondItem="qRa-se-ADp" secondAttribute="bottom" constant="8" id="JQg-cs-mX5"/>
                                             <constraint firstItem="Lhr-hp-w4p" firstAttribute="top" secondItem="z2W-cy-ejG" secondAttribute="bottom" constant="20" id="Kn4-cD-1lo"/>
-                                            <constraint firstAttribute="trailing" secondItem="oay-jU-6oh" secondAttribute="trailing" constant="20" id="MZ1-KL-Z9N"/>
                                             <constraint firstItem="PBD-no-mkA" firstAttribute="top" secondItem="fVP-SW-cP7" secondAttribute="top" constant="20" id="R1C-jR-kcd"/>
                                             <constraint firstItem="z2W-cy-ejG" firstAttribute="top" secondItem="WtI-lZ-zIR" secondAttribute="bottom" constant="8" id="Tnn-bV-qCI"/>
                                             <constraint firstItem="qRa-se-ADp" firstAttribute="leading" secondItem="fVP-SW-cP7" secondAttribute="leading" constant="20" id="Vx9-76-PPD"/>
+                                            <constraint firstItem="rLM-Pu-mvZ" firstAttribute="leading" secondItem="mg6-uV-IuS" secondAttribute="trailing" constant="12" id="bnc-qw-VLw"/>
+                                            <constraint firstItem="rLM-Pu-mvZ" firstAttribute="top" secondItem="Lhr-hp-w4p" secondAttribute="bottom" constant="8" id="eKI-kl-c3k"/>
                                             <constraint firstAttribute="trailing" secondItem="z2W-cy-ejG" secondAttribute="trailing" constant="20" id="eoq-1G-nsX"/>
                                             <constraint firstItem="WtI-lZ-zIR" firstAttribute="leading" secondItem="fVP-SW-cP7" secondAttribute="leading" constant="20" id="flT-nE-y9k"/>
                                             <constraint firstItem="mg6-uV-IuS" firstAttribute="leading" secondItem="fVP-SW-cP7" secondAttribute="leading" constant="20" id="imF-a3-Q57"/>
                                             <constraint firstAttribute="trailing" secondItem="qRa-se-ADp" secondAttribute="trailing" constant="20" id="jAi-ZV-F3U"/>
-                                            <constraint firstItem="oay-jU-6oh" firstAttribute="leading" secondItem="mg6-uV-IuS" secondAttribute="trailing" constant="12" id="k1T-QY-vm5"/>
                                             <constraint firstItem="Lhr-hp-w4p" firstAttribute="leading" secondItem="fVP-SW-cP7" secondAttribute="leading" constant="20" id="kDC-GU-XxK"/>
+                                            <constraint firstAttribute="trailing" secondItem="rLM-Pu-mvZ" secondAttribute="trailing" constant="20" id="lE6-aF-FOU"/>
                                             <constraint firstItem="WtI-lZ-zIR" firstAttribute="top" secondItem="Ia9-Fn-irA" secondAttribute="bottom" constant="20" id="nst-zU-MN8"/>
                                             <constraint firstItem="PBD-no-mkA" firstAttribute="leading" secondItem="fVP-SW-cP7" secondAttribute="leading" constant="20" id="ofM-gb-4VA"/>
                                             <constraint firstAttribute="trailing" secondItem="WtI-lZ-zIR" secondAttribute="trailing" constant="20" id="rH4-1Z-JkG"/>
-                                            <constraint firstItem="oay-jU-6oh" firstAttribute="top" secondItem="Lhr-hp-w4p" secondAttribute="bottom" constant="8" id="tTI-U1-Bjz"/>
                                             <constraint firstItem="qRa-se-ADp" firstAttribute="top" secondItem="PBD-no-mkA" secondAttribute="bottom" constant="40" id="vLr-2C-hna"/>
                                             <constraint firstAttribute="height" constant="600" id="ybP-qL-aSG"/>
                                         </constraints>
@@ -1011,7 +1017,7 @@ Contact : middleyks@hanmail.net</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="brandPickerView" destination="oay-jU-6oh" id="YwR-hc-b5r"/>
+                        <outlet property="brandPickerButton" destination="rLM-Pu-mvZ" id="kcy-BW-bBY"/>
                         <outlet property="confirmButton" destination="9z7-ac-h2L" id="4Lq-fM-PAU"/>
                         <outlet property="contentScrollView" destination="Cs3-Q4-voD" id="67e-39-TXZ"/>
                         <outlet property="contentView" destination="fVP-SW-cP7" id="O5J-Ja-gfC"/>
@@ -1122,7 +1128,38 @@ Contact : middleyks@hanmail.net</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e87-TR-b1N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4282.608695652174" y="1174.5535714285713"/>
+            <point key="canvasLocation" x="4187" y="1175"/>
+        </scene>
+        <!--Karaoke Brand Picker View Controller-->
+        <scene sceneID="f1e-Jt-rLO">
+            <objects>
+                <viewController storyboardIdentifier="karaokeBrandPickerStoryboard" id="I1V-wR-gy1" customClass="KaraokeBrandPickerViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F2h-18-80e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4X1-x4-IZa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
+                                <color key="backgroundColor" name="PopOverBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dz7-QR-ib9"/>
+                        <color key="backgroundColor" name="PopOverBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4X1-x4-IZa" firstAttribute="top" secondItem="F2h-18-80e" secondAttribute="top" id="5sZ-tq-9BU"/>
+                            <constraint firstAttribute="bottom" secondItem="4X1-x4-IZa" secondAttribute="bottom" id="MTm-Gx-dYW"/>
+                            <constraint firstItem="4X1-x4-IZa" firstAttribute="trailing" secondItem="Dz7-QR-ib9" secondAttribute="trailing" id="rsD-oO-Ses"/>
+                            <constraint firstItem="4X1-x4-IZa" firstAttribute="leading" secondItem="Dz7-QR-ib9" secondAttribute="leading" id="uQQ-5B-URy"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="375" height="215"/>
+                    <connections>
+                        <outlet property="brandPickerTableView" destination="4X1-x4-IZa" id="lKB-K8-d5D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hTG-FZ-kp3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3478" y="1611"/>
         </scene>
         <!--Add Folder View Controller-->
         <scene sceneID="NMI-Ri-V0z">
@@ -1234,7 +1271,7 @@ Contact : middleyks@hanmail.net</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-ee-2eB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-ee-2eB">
                                 <rect key="frame" x="0.0" y="76" width="414" height="644"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
@@ -1455,7 +1492,7 @@ Contact : middleyks@hanmail.net</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qQi-3H-7Hi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4283" y="446"/>
+            <point key="canvasLocation" x="4187" y="446"/>
         </scene>
         <!--Pop Over Search Filter View Controller-->
         <scene sceneID="sP4-8b-EGN">
@@ -1465,7 +1502,7 @@ Contact : middleyks@hanmail.net</string>
                         <rect key="frame" x="0.0" y="0.0" width="253" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-DW-v27">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-DW-v27">
                                 <rect key="frame" x="0.0" y="12" width="253" height="220"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1502,7 +1539,7 @@ Contact : middleyks@hanmail.net</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fn9-La-cG5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4875" y="646"/>
+            <point key="canvasLocation" x="4756" y="646"/>
         </scene>
     </scenes>
     <resources>
@@ -1578,6 +1615,9 @@ Contact : middleyks@hanmail.net</string>
         </namedColor>
         <namedColor name="NotificationViewBakcgroundColor">
             <color red="0.94099998474121094" green="0.95300000905990601" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PopOverBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PopUpArchiveBackgroundColor">
             <color red="1" green="0.85199999809265137" blue="0.38299998641014099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

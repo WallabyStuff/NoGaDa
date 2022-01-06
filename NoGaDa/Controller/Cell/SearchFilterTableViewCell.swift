@@ -13,7 +13,7 @@ class SearchFilterTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterSwitch: UISwitch!
 
-    // MARK: - LifeCycle
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -24,5 +24,6 @@ class SearchFilterTableViewCell: UITableViewCell {
     private func initView() {
         titleLabel.text = ""
         filterSwitch.isOn = true
+        selectionStyle = .none
     }
 }
