@@ -108,25 +108,29 @@ class AddSongViewController: UIViewController {
     private func bind() {
         // Exit button
         exitButton.rx.tap
-            .subscribe(onNext: { [weak self] in
+            .asDriver()
+            .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
         
         // Song title textfield
         songTitleTextField.rx.controlEvent(.editingDidEndOnExit)
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.singerTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
         
         // Singer textfield
         singerTextField.rx.controlEvent(.editingDidEndOnExit)
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.songNumberTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
         
         // Song number textfield
         songNumberTextField.rx.controlEvent(.editingDidEndOnExit)
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.view.endEditing(true)
             }).disposed(by: disposeBag)
         
@@ -153,7 +157,8 @@ class AddSongViewController: UIViewController {
         
         // Confirm button tap action
         confirmButton.rx.tap
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.addSong()
             }).disposed(by: disposeBag)
         

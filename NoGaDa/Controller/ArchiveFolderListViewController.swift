@@ -29,6 +29,8 @@ class ArchiveFolderListViewController: UIViewController {
     weak var delegate: ArchiveFolderListViewDelegate?
     private let viewModel = ArchiveFolderListViewModel()
     private var disposeBag = DisposeBag()
+    private let minimumAppbarHeight = 88 + SafeAreaInset.top
+    private let archiveFolderTableViewTopInset: CGFloat = 36
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,11 +64,6 @@ class ArchiveFolderListViewController: UIViewController {
         appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
         appbarView.setAppbarShadow()
         
-        // Appbar Height
-        DispatchQueue.main.async {
-            self.appbarViewHeightConstraint.constant = 90 + SafeAreaInset.top
-        }
-        
         // Appbar Title Label
         appbarTitleLabel.hero.id = "appbarTitle"
         
@@ -75,14 +72,13 @@ class ArchiveFolderListViewController: UIViewController {
         addFolderButton.hero.modifiers = [.translate(y: 20), .fade]
         
         // Exit Button
-        exitButton.hero.id = "exitButton"
         exitButton.makeAsCircle()
         exitButton.setExitButtonShadow()
         
         // Folder TableView
         archiveFolderTableView.separatorStyle = .none
         archiveFolderTableView.tableFooterView = UIView()
-        archiveFolderTableView.contentInset = UIEdgeInsets(top: 48, left: 0, bottom: 0, right: 0)
+        archiveFolderTableView.contentInset = UIEdgeInsets(top: archiveFolderTableViewTopInset, left: 0, bottom: 0, right: 0)
     }
     
     private func setupInstance() {
@@ -96,13 +92,15 @@ class ArchiveFolderListViewController: UIViewController {
     private func bind() {
         // ExitButton TapAction
         exitButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         // AddFolder Button Tap Action
         addFolderButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.presentAddFolderView()
             }.disposed(by: disposeBag)
         
@@ -111,6 +109,18 @@ class ArchiveFolderListViewController: UIViewController {
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
                 vc.presentArchiveSongListVC(indexPath: indexPath)
+            }).disposed(by: disposeBag)
+        
+        // Appbar stretching animation
+        archiveFolderTableView.rx.contentOffset
+            .asDriver()
+            .drive(with: self, onNext: { vc, offset in
+                let changedY = offset.y + vc.archiveFolderTableViewTopInset
+                let newAppbarHeight = vc.minimumAppbarHeight - (changedY * 0.2)
+                
+                if newAppbarHeight >= vc.minimumAppbarHeight {
+                    vc.appbarViewHeightConstraint.constant = newAppbarHeight
+                }
             }).disposed(by: disposeBag)
     }
     

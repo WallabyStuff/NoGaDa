@@ -78,7 +78,8 @@ class PopUpSongOptionViewController: UIViewController {
     
     private func bind() {
         // Exit button
-        exitButton.rx.tap.asDriver()
+        exitButton.rx.tap
+            .asDriver()
             .drive(with: self, onNext: { vc, _ in
                 vc.exitButtonAction()
             }).disposed(by: disposeBag)

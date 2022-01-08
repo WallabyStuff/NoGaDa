@@ -77,13 +77,15 @@ class PopUpArchiveFolderListViewController: UIViewController {
     private func bind() {
         // AddFolder Button Tap Actiobn
         addFolderButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.presentAddFolderVC()
             }.disposed(by: disposeBag)
         
         // Exit button Tap Action
         exitButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.exitButtonAction()
             }.disposed(by: disposeBag)
         

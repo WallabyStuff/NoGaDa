@@ -16,8 +16,8 @@ import AppTrackingTransparency
 class MainViewController: UIViewController {
 
     // MARK: Declaration
-    @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarView: AppbarView!
+    @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
@@ -190,7 +190,8 @@ class MainViewController: UIViewController {
         
         // Main content ScrollView Slide Action
         mainContentScrollView.rx.contentOffset
-            .subscribe(with: self, onNext: { vc, offset in
+            .asDriver()
+            .drive(with: self, onNext: { vc, offset in
                 let changedY = offset.y + vc.maximumAppbarHeight
                 
                 if -vc.maximumAppbarHeight < offset.y {

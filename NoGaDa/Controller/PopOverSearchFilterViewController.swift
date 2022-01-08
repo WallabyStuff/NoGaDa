@@ -54,7 +54,8 @@ class PopOverSearchFilterViewController: UIViewController {
     private func bind() {
         // Apply Button Tap Action
         applyButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.delegate?.popOverSearchFilterView(didTapApply: true)
                 vc.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)

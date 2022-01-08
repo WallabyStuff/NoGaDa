@@ -72,13 +72,15 @@ class AddFolderViewController: UIViewController {
     private func bind() {
         // Exit Button Tap Action
         exitButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         // Confirm Button Tap Action
         confirmButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 guard let title = vc.folderTitleTextField.text else { return }
                 guard let titleEmoji = vc.folderEmojiTextField.text else { return }
                 

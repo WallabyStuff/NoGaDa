@@ -54,7 +54,8 @@ class SearchHistoryViewController: UIViewController {
     private func bind() {
         // Clear history Button
         clearHistoryButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.searchHistoryViewModel.deleteAllHistory()
                     .observe(on: MainScheduler.instance)
                     .subscribe(onCompleted: { [weak vc] in
