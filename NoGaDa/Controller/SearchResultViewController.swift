@@ -76,7 +76,8 @@ class SearchResultViewController: UIViewController {
         
         // Brand Segmented Control Action
         brandSelector.rx.selectedSegmentIndex
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 // TODO - replace table cells according to brand catalog
                 vc.setSearchResult(vc.searchKeyword)
             }.disposed(by: disposeBag)

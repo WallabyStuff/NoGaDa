@@ -125,19 +125,22 @@ class SearchViewController: UIViewController {
     private func bind() {
         // Exit Button Tap Action
         backButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         // Filter Button Tap Action
         filterButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.presentSearchFilterPopoverVC()
             }.disposed(by: disposeBag)
         
         // Clear TextField Button Tap Action
         clearTextFieldButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.searchTextField.text = ""
                 vc.searchTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)

@@ -31,6 +31,8 @@ class ArchiveSongListViewController: UIViewController {
     public var viewModel: ArchiveSongListViewModel?
     private var disposeBag = DisposeBag()
     private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
+    private let minimumAppbarHeight: CGFloat = 88 + SafeAreaInset.top
+    private let archiveSongTableViewTopInset: CGFloat = 36
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -88,12 +90,14 @@ class ArchiveSongListViewController: UIViewController {
         appbarView.layer.cornerRadius = 28
         appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
         appbarView.setAppbarShadow()
-        
-        // Appbar Height
-        appbarViewHeightConstraint.constant = 90 + SafeAreaInset.top
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.appbarViewHeightConstraint.constant = self.minimumAppbarHeight
+            self.appbarViewHeightConstraint.isActive = true
+            print(self.minimumAppbarHeight)
+        }
         
         // Exit Button
-        exitButton.hero.id = "exitButton"
         exitButton.makeAsCircle()
         exitButton.setExitButtonShadow()
         
@@ -101,7 +105,7 @@ class ArchiveSongListViewController: UIViewController {
         archiveSongTableView.tableFooterView = UIView()
         archiveSongTableView.separatorStyle = .none
         archiveSongTableView.layer.cornerRadius = 12
-        archiveSongTableView.contentInset = UIEdgeInsets(top: 48, left: 0, bottom: 100, right: 0)
+        archiveSongTableView.contentInset = UIEdgeInsets(top: archiveSongTableViewTopInset, left: 0, bottom: 100, right: 0)
         
         // Folder title Textfield
         folderTitleTextField.layer.cornerRadius = 12
@@ -140,13 +144,15 @@ class ArchiveSongListViewController: UIViewController {
     private func bind() {
         // Exit Button Tap Action
         exitButton.rx.tap
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         // Title Emoji Label Tap Action
         folderTitleEmojiTextField.rx.text
-            .bind(with: self) { vc, string in
+            .asDriver()
+            .drive(with: self) { vc, string in
                 guard let string = string else { return }
                 if string.count >= 1 {
                     guard let inputChar = string.last else { return }
@@ -161,7 +167,8 @@ class ArchiveSongListViewController: UIViewController {
         
         // Add Song Button Tab Action
         addSongButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.presentAddSongVC()
             }).disposed(by: disposeBag)
         
@@ -171,6 +178,18 @@ class ArchiveSongListViewController: UIViewController {
             .drive(with: self, onNext: { vc, indexPath in
                 if let selectedSong = vc.viewModel?.archiveSongAtIndex(indexPath) {
                     vc.songOptionFloatingPanelView?.show(selectedSong)
+                }
+            }).disposed(by: disposeBag)
+        
+        // Appbar stretching animation
+        archiveSongTableView.rx.contentOffset
+            .asDriver()
+            .drive(with: self, onNext: { vc, offset in
+                let changedY = offset.y + vc.archiveSongTableViewTopInset
+                let newAppbarHeight = vc.minimumAppbarHeight - (changedY * 0.2)
+                
+                if newAppbarHeight >= vc.minimumAppbarHeight {
+                    vc.appbarViewHeightConstraint.constant = newAppbarHeight
                 }
             }).disposed(by: disposeBag)
     }

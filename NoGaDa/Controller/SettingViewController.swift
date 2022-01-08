@@ -67,7 +67,8 @@ class SettingViewController: UIViewController {
     private func bind() {
         // ExitButton Tap Action
         exitButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
     }
