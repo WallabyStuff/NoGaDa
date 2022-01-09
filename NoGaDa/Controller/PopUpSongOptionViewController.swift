@@ -35,56 +35,76 @@ class PopUpSongOptionViewController: UIViewController {
 
         setupData()
         setupView()
-        setupInstance()
         bind()
     }
     
     // MARK: - Initializers
     private func setupData() {
+        setupViewModel()
+    }
+    
+    private func setupView() {
+        setupExitButton()
+        setupSongThumbnailImageView()
+        setupSongTitleLabel()
+        setupSingerLabel()
+        setupOptionTableView()
+        setupArchiveFolderFloatingPanelView()
+    }
+    
+    private func bind() {
+        bindExitButton()
+        bindOptionTableView()
+    }
+    
+    // MARK: - Setups
+    private func setupViewModel() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
             return
         }
     }
     
-    private func setupView() {
-        // Song thumbnail imageView
-        songThumbnailImageView.layer.cornerRadius = 12
-        
-        // Song title label
-        songTitleLabel.text = viewModel?.selectedSong?.title
-        
-        // Singer label
-        singerLabel.text = viewModel?.selectedSong?.singer
-        
-        // Exit button
+    private func setupExitButton() {
         exitButton.makeAsCircle()
-        
-        // Option tableView
-        optionTableView.separatorStyle = .none
-        optionTableView.tableFooterView = UIView()
     }
     
-    private func setupInstance() {
-        // Option tableView
-        let optionTableCellNibName = UINib(nibName: "PopUpSongOptionTableViewCell", bundle: nil)
-        optionTableView.register(optionTableCellNibName, forCellReuseIdentifier: "popUpSongOptionTableCell")
+    private func setupSongThumbnailImageView() {
+        songThumbnailImageView.layer.cornerRadius = 12
+    }
+    
+    private func setupSongTitleLabel() {
+        songTitleLabel.text = viewModel?.selectedSong?.title
+    }
+    
+    private func setupSingerLabel() {
+        singerLabel.text = viewModel?.selectedSong?.singer
+    }
+    
+    private func setupOptionTableView() {
+        optionTableView.separatorStyle = .none
+        optionTableView.tableFooterView = UIView()
+        
+        let nibName = UINib(nibName: "PopUpSongOptionTableViewCell", bundle: nil)
+        optionTableView.register(nibName, forCellReuseIdentifier: "popUpSongOptionTableCell")
         optionTableView.dataSource = self
         optionTableView.delegate = self
-        
-        // Archive folder list floating panel view
+    }
+    
+    private func setupArchiveFolderFloatingPanelView() {
         archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: viewModel?.parentViewController ?? self, delegate: self)
     }
     
-    private func bind() {
-        // Exit button
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in
                 vc.exitButtonAction()
             }).disposed(by: disposeBag)
-        
-        // Option tableView
+    }
+    
+    private func bindOptionTableView() {
         optionTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
@@ -157,7 +177,5 @@ extension PopUpSongOptionViewController: PopUpArchiveFolderViewDelegate {
         archiveFolderFloatingPanelView = nil
         
         deletedSelectedSong()
-        self.delegate?.didSelectedItemMoved?()
     }
 }
-

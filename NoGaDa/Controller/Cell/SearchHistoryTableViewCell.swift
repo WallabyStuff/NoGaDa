@@ -41,7 +41,7 @@ class SearchHistoryTableViewCell: UITableViewCell {
 // MARK: - Extensions
 extension SearchHistoryTableViewCell {
     private var releaseAnimationDuration: CGFloat {
-        return 0.3
+        return 0.2
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,9 +53,7 @@ extension SearchHistoryTableViewCell {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
-        UIView.animate(withDuration: releaseAnimationDuration) {
-            self.backgroundColor = ColorSet.backgroundColor
-        }
+        self.backgroundColor = ColorSet.backgroundColor
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

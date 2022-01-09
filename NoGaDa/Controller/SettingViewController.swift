@@ -26,13 +26,21 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
     
     // MARK: - Initializers
     private func setupView() {
-        // Search filter group View
+        setupSearchFilterGroupView()
+        setupEtcGroupView()
+    }
+    
+    private func bind() {
+        bindExitButton()
+    }
+    
+    // MARK: - Setups
+    private func setupSearchFilterGroupView() {
         searchFilterGroupView.makeAsSettingGroupView()
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.tableFooterView = UIView()
@@ -40,32 +48,29 @@ class SettingViewController: UIViewController {
         searchFilterTableView.separatorColor = ColorSet.settingItemSeparatorColor
         searchFilterTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 80)
         
-        // Etc group View
+        let nibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
+        searchFilterTableView.register(nibName, forCellReuseIdentifier: "searchFilterTableCell")
+        searchFilterTableView.layer.cornerRadius = 20
+        searchFilterTableView.dataSource = self
+        searchFilterTableView.delegate = self
+    }
+    
+    private func setupEtcGroupView() {
         etcGroupView.makeAsSettingGroupView()
         etcTableView.layer.cornerRadius = 20
         etcTableView.tableFooterView = UIView()
         etcTableView.isScrollEnabled = false
         etcTableView.separatorColor = ColorSet.settingItemSeparatorColor
         etcTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 64)
-    }
-    
-    private func setupInstance() {
-        // Search filter TableView
-        let searchFilterCellNibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
-        searchFilterTableView.register(searchFilterCellNibName, forCellReuseIdentifier: "searchFilterTableCell")
-        searchFilterTableView.layer.cornerRadius = 20
-        searchFilterTableView.dataSource = self
-        searchFilterTableView.delegate = self
         
-        // Etc TableView
-        let settingEtcCellNibName = UINib(nibName: "SettingEtcTableViewCell", bundle: nil)
-        etcTableView.register(settingEtcCellNibName, forCellReuseIdentifier: "settingEtcTableCell")
+        let nibName = UINib(nibName: "SettingEtcTableViewCell", bundle: nil)
+        etcTableView.register(nibName, forCellReuseIdentifier: "settingEtcTableCell")
         etcTableView.dataSource = self
         etcTableView.delegate = self
     }
     
-    private func bind() {
-        // ExitButton Tap Action
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in

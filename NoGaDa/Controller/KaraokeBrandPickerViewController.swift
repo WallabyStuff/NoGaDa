@@ -28,30 +28,34 @@ class KaraokeBrandPickerViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
     
     // MARK: - Intializations
     private func setupView() {
-        // brand picker tableview
+        setupBrandPickerTableView()
+    }
+    
+    private func bind() {
+        bindBrandPickerTableView()
+    }
+    
+    // MARK: - Setups
+    private func setupBrandPickerTableView() {
         brandPickerTableView.tableFooterView = UIView()
         brandPickerTableView.separatorStyle = .singleLine
         brandPickerTableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         brandPickerTableView.showsVerticalScrollIndicator = false
         brandPickerTableView.isScrollEnabled = false
-    }
-    
-    private func setupInstance() {
-        // brand picker tableview
-        let brandPickerCellNibName = UINib(nibName: "KaraokeBrandPickerTableViewCell", bundle: nil)
-        brandPickerTableView.register(brandPickerCellNibName, forCellReuseIdentifier: KaraokeBrandPickerTableViewCell.identifier)
+        
+        let nibName = UINib(nibName: "KaraokeBrandPickerTableViewCell", bundle: nil)
+        brandPickerTableView.register(nibName, forCellReuseIdentifier: KaraokeBrandPickerTableViewCell.identifier)
         brandPickerTableView.dataSource = self
         brandPickerTableView.delegate = self
     }
     
-    private func bind() {
-        // brand picker selected action
+    // MARK: - Bidns
+    private func bindBrandPickerTableView() {
         brandPickerTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc,indexPath in

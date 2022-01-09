@@ -40,7 +40,6 @@ class ArchiveSongListViewController: UIViewController {
         
         setupData()
         setupView()
-        setupInstance()
         bind()
     }
     
@@ -68,24 +67,40 @@ class ArchiveSongListViewController: UIViewController {
     
     // MARK: - Initialization
     private func setupData() {
-        if viewModel == nil {
-            dismiss(animated: true, completion: nil)
-            return
-        }
-        
-        viewModel!.fetchSongFolder()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onCompleted: { [weak self] in
-                self?.archiveSongTableView.reloadData()
-            }).disposed(by: disposeBag)
+        setupViewModel()
     }
     
     private func setupView() {
         self.hero.isEnabled = true
         
+        setupAppbarView()
+        setupExitButton()
+        setupArchiveSongTableView()
+        setupFolderTitleTextField()
+        setupTitleEmojiTextField()
+        setupAddSongButton()
+        setupSongOptionFloatingPanelView()
+    }
+    
+    private func bind() {
+        bindExitButton()
+        bindFolderTitleEmojiTextField()
+        bindAddSongButton()
+        bindArchiveSongTableView()
+        bindAppbarView()
+    }
+    
+    // MARK: - Setups
+    private func setupViewModel() {
+        if viewModel == nil {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+    }
+    
+    private func setupAppbarView() {
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         
-        // Appbar View
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28
         appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
@@ -94,34 +109,49 @@ class ArchiveSongListViewController: UIViewController {
             guard let self = self else { return }
             self.appbarViewHeightConstraint.constant = self.minimumAppbarHeight
             self.appbarViewHeightConstraint.isActive = true
-            print(self.minimumAppbarHeight)
         }
-        
-        // Exit Button
+    }
+    
+    private func setupExitButton() {
         exitButton.makeAsCircle()
         exitButton.setExitButtonShadow()
-        
-        // Archived Song TableView
+    }
+    
+    private func setupArchiveSongTableView() {
         archiveSongTableView.tableFooterView = UIView()
         archiveSongTableView.separatorStyle = .none
         archiveSongTableView.layer.cornerRadius = 12
         archiveSongTableView.contentInset = UIEdgeInsets(top: archiveSongTableViewTopInset, left: 0, bottom: 100, right: 0)
         
-        // Folder title Textfield
+        let songCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
+        archiveSongTableView.register(songCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
+        archiveSongTableView.dataSource = self
+        archiveSongTableView.delegate = self
+        
+        viewModel!.fetchSongFolder()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onCompleted: { [weak self] in
+                self?.archiveSongTableView.reloadData()
+            }).disposed(by: disposeBag)
+    }
+    
+    private func setupFolderTitleTextField() {
         folderTitleTextField.layer.cornerRadius = 12
         folderTitleTextField.setLeftPadding(width: 16)
         folderTitleTextField.setRightPadding(width: 16)
         folderTitleTextField.setSearchBoxShadow()
         folderTitleTextField.hero.modifiers = [.fade, .translate(y: -12)]
         folderTitleTextField.text = viewModel!.folderTitle
-        
-        // Folder title emoji Textfield
+    }
+    
+    private func setupTitleEmojiTextField() {
         folderTitleEmojiTextField.layer.cornerRadius = 16
         folderTitleEmojiTextField.setSearchBoxShadow()
         folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: -12)]
         folderTitleEmojiTextField.text = viewModel!.folderTitleEmoji
-        
-        // Add Song Button
+    }
+    
+    private func setupAddSongButton() {
         addSongButton.makeAsCircle()
         addSongButton.hero.modifiers = [.fade, .translate(y: SafeAreaInset.bottom + 28)]
         addSongButton.layer.shadowColor = ColorSet.floatingButtonBackgroundColor.cgColor
@@ -130,26 +160,20 @@ class ArchiveSongListViewController: UIViewController {
         addSongButton.layer.shadowOpacity = 0.25
     }
     
-    private func setupInstance() {
-        // Archive Song TableView
-        let songCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
-        archiveSongTableView.register(songCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
-        archiveSongTableView.dataSource = self
-        archiveSongTableView.delegate = self
-        
-        // songOption floating panel view
+    private func setupSongOptionFloatingPanelView() {
         songOptionFloatingPanelView = SongOptionFloatingPanelView(parentViewConroller: self, delegate: self)
     }
     
-    private func bind() {
-        // Exit Button Tap Action
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
-        
-        // Title Emoji Label Tap Action
+    }
+    
+    private func bindFolderTitleEmojiTextField() {
         folderTitleEmojiTextField.rx.text
             .asDriver()
             .drive(with: self) { vc, string in
@@ -164,15 +188,17 @@ class ArchiveSongListViewController: UIViewController {
                     }
                 }
             }.disposed(by: disposeBag)
-        
-        // Add Song Button Tab Action
+    }
+    
+    private func bindAddSongButton() {
         addSongButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in
                 vc.presentAddSongVC()
             }).disposed(by: disposeBag)
-        
-        // Archive song list TableView
+    }
+    
+    private func bindArchiveSongTableView() {
         archiveSongTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
@@ -180,8 +206,9 @@ class ArchiveSongListViewController: UIViewController {
                     vc.songOptionFloatingPanelView?.show(selectedSong)
                 }
             }).disposed(by: disposeBag)
-        
-        // Appbar stretching animation
+    }
+    
+    private func bindAppbarView() {
         archiveSongTableView.rx.contentOffset
             .asDriver()
             .drive(with: self, onNext: { vc, offset in

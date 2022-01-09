@@ -28,31 +28,37 @@ class PopOverSearchFilterViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
 
     // MARK: - Initializers
     private func setupView() {
-        // filter item TableView
-        filterItemTableView.tableFooterView = UIView()
-        filterItemTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
-        filterItemTableView.backgroundColor = .white
-    }
-    
-    private func setupInstance() {
-        // Filter item Tableview
-        let searchFilterCellNibName     = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
-        filterItemTableView.register(searchFilterCellNibName, forCellReuseIdentifier: "searchFilterTableCell")
-        filterItemTableView.dataSource  = self
-        filterItemTableView.delegate    = self
-        
-        // Apply Button
-        applyButton.layer.cornerRadius = 12
+        setupFilterItemTableView()
+        setupApplayButton()
     }
     
     private func bind() {
-        // Apply Button Tap Action
+        bindApplyButton()
+    }
+        
+    // MARK: - Setups
+    private func setupFilterItemTableView() {
+        filterItemTableView.tableFooterView = UIView()
+        filterItemTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
+        filterItemTableView.backgroundColor = .white
+        
+        let nibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
+        filterItemTableView.register(nibName, forCellReuseIdentifier: "searchFilterTableCell")
+        filterItemTableView.dataSource = self
+        filterItemTableView.delegate = self
+    }
+    
+    private func setupApplayButton() {
+        applyButton.layer.cornerRadius = 12
+    }
+    
+    // MARK: - Binds
+    private func bindApplyButton() {
         applyButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in
@@ -60,7 +66,6 @@ class PopOverSearchFilterViewController: UIViewController {
                 vc.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
     }
-    
     
     // MARK: - Methods
 }

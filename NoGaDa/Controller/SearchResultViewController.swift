@@ -33,7 +33,6 @@ class SearchResultViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
     
@@ -46,45 +45,56 @@ class SearchResultViewController: UIViewController {
     
     // MARK: - Initializers
     private func setupView() {
-        // Search result ContentView
+        setupSearchResultContentView()
+        setupBrandSelector()
+        setupSearchResultTableView()
+        setupLoadingIndicatorView()
+        setupSearchResultPlaceholderLabel()
+    }
+    
+    private func bind() {
+        bindBrandSelector()
+    }
+    
+    // MARK: - Setups
+    private func setupSearchResultContentView() {
         searchResultContentView.clipsToBounds = true
         searchResultContentView.layer.cornerRadius = 12
-        
-        // Brand Selector SegmentedControl
+    }
+    
+    private func setupBrandSelector() {
         brandSelector.setSelectedTextColor(ColorSet.segmentedControlSelectedTextColor)
         brandSelector.setDefaultTextColor(ColorSet.segmentedControlDefaultTextColor)
-        
-        // SearchResult TableView
+    }
+    
+    private func setupSearchResultTableView() {
         searchResultTableView.tableFooterView = UIView()
         searchResultTableView.separatorStyle = .none
         searchResultTableView.layer.cornerRadius = 16
         
-        // Search loading IndicatorView
-        searchIndicator.stopAnimatingAndHide()
-        
-        // Search result placeholder label
-        searchResultPlaceholderLabel.text = "검색창에 제목이나 가수명으로 노래를 검색하세요!"
-        searchResultPlaceholderLabel.isHidden = true
-    }
-    
-    private func setupInstance() {
-        // SearchResult TableView
         let searchResultCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
         searchResultTableView.register(searchResultCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
         searchResultTableView.dataSource = self
         searchResultTableView.delegate = self
-        
-        // Brand Segmented Control Action
+    }
+    
+    private func setupLoadingIndicatorView() {
+        searchIndicator.stopAnimatingAndHide()
+    }
+    
+    private func setupSearchResultPlaceholderLabel() {
+        searchResultPlaceholderLabel.text = "검색창에 제목이나 가수명으로 노래를 검색하세요!"
+        searchResultPlaceholderLabel.isHidden = true
+    }
+    
+    // MARK: - Binds
+    private func bindBrandSelector() {
         brandSelector.rx.selectedSegmentIndex
             .asDriver()
             .drive(with: self) { vc, _ in
                 // TODO - replace table cells according to brand catalog
                 vc.setSearchResult(vc.searchKeyword)
             }.disposed(by: disposeBag)
-    }
-    
-    private func bind() {
-        
     }
     
     // MARK: - Methods

@@ -43,7 +43,7 @@ class FolderTableViewCell: UITableViewCell {
 // MARK: - Extensions
 extension FolderTableViewCell {
     private var releaseAnimationDuration: CGFloat {
-        return 0.3
+        return 0.2
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -55,9 +55,7 @@ extension FolderTableViewCell {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
-        UIView.animate(withDuration: releaseAnimationDuration) {
-            self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
-        }
+        self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

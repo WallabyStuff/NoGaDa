@@ -20,7 +20,7 @@ class AddFolderViewController: UIViewController {
     // MARK: - Declaraiton
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var emojiTextFieldFrame: UIView!
+    @IBOutlet weak var emojiTextFieldFrameView: UIView!
     @IBOutlet weak var folderEmojiTextField: EmojiTextField!
     @IBOutlet weak var folderTitleTextField: HighlightingTextfield!
     
@@ -48,19 +48,10 @@ class AddFolderViewController: UIViewController {
 
     // MARK: - Initializers
     private func setupView() {
-        // Confirm Button
-        confirmButton.layer.cornerRadius = 12
-        
-        // Exit Button
-        exitButton.makeAsCircle()
-        exitButton.setReversedExitButtonShadow()
-        
-        // Emoji Textfield Frame
-        emojiTextFieldFrame.layer.cornerRadius = 20
-        
-        // Folder Title Textfield
-        folderTitleTextField.setLeftPadding(width: 8)
-        folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
+        setupConfirmButton()
+        setupExitButton()
+        setupEmojiTextFieldFrameView()
+        setupFolderTitleTextField()
     }
     
     private func setupInstance() {
@@ -70,14 +61,32 @@ class AddFolderViewController: UIViewController {
     }
     
     private func bind() {
-        // Exit Button Tap Action
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.dismiss(animated: true, completion: nil)
-            }.disposed(by: disposeBag)
-        
-        // Confirm Button Tap Action
+        bindConfirmButton()
+        bindConfirmButtonActivateState()
+        bindExitButton()
+    }
+    
+    // MARK: - Setups
+    private func setupConfirmButton() {
+        confirmButton.layer.cornerRadius = 12
+    }
+    
+    private func setupExitButton() {
+        exitButton.makeAsCircle()
+        exitButton.setReversedExitButtonShadow()
+    }
+    
+    private func setupEmojiTextFieldFrameView() {
+        emojiTextFieldFrameView.layer.cornerRadius = 20
+    }
+    
+    private func setupFolderTitleTextField() {
+        folderTitleTextField.setLeftPadding(width: 8)
+        folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
+    }
+    
+    // MARK: - Binds
+    private func bindConfirmButton() {
         confirmButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
@@ -91,8 +100,9 @@ class AddFolderViewController: UIViewController {
                         vc?.dismiss(animated: true, completion: nil)
                     }).disposed(by: vc.disposeBag)
             }.disposed(by: disposeBag)
-        
-        // Add Button Success State
+    }
+    
+    private func bindConfirmButtonActivateState() {
         let folderEmojiOb = folderEmojiTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
         let folderTitleOb = folderTitleTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
         
@@ -108,6 +118,14 @@ class AddFolderViewController: UIViewController {
                 
                 vc.confirmButton.isEnabled = isAllTextFieldFilled
             }).disposed(by: disposeBag)
+    }
+    
+    private func bindExitButton() {
+        exitButton.rx.tap
+            .asDriver()
+            .drive(with: self) { vc, _ in
+                vc.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     // MARK: - Methods

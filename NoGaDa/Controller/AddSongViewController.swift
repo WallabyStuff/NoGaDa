@@ -39,7 +39,6 @@ class AddSongViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
     
@@ -67,73 +66,103 @@ class AddSongViewController: UIViewController {
     }
     
     private func setupView() {
-        // Exit button
-        exitButton.makeAsCircle()
-        exitButton.setExitButtonShadow()
-        
-        // Confirm button
-        confirmButton.layer.cornerRadius = 12
-        confirmButton.hero.modifiers = [.translate(y: 20), .fade]
-        
-        // Notification view
-        notificationView.layer.cornerRadius = 12
-        
-        // Song title textfield
-        songTitleTextField.setLeftPadding(width: 12)
-        songTitleTextField.setRightPadding(width: 12)
-        
-        // Song author textfield
-        singerTextField.setLeftPadding(width: 12)
-        singerTextField.setRightPadding(width: 12)
-        
-        // Song number textfield
-        songNumberTextField.setLeftPadding(width: 12)
-        songNumberTextField.setRightPadding(width: 12)
-        
-        // Brand picker Button
-        brandPickerButton.layer.cornerRadius = 12
-        brandPickerButton.layer.borderWidth = 1
-        brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
-        
+        setupExitButton()
+        setupConfirmButton()
+        setupNotificationView()
+        setupSongTitleTextField()
+        setupSingerTextField()
+        setupSongNumberTextField()
+        setupBrandPickerButton()
+        setupContentScrollView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func setupInstance() {
-        // Content scrollView
+    private func bind() {
+        bindExitButton()
+        bindSongTitleTextField()
+        bindSingerTextField()
+        bindSongNumberTextField()
+        bindConfirmButtonActivateState()
+        bindContentView()
+        bindConfirmButton()
+        bindBrandPickerButton()
+    }
+    
+    // MARK: - Setups
+    private func setupExitButton() {
+        exitButton.makeAsCircle()
+        exitButton.setExitButtonShadow()
+    }
+    
+    private func setupConfirmButton() {
+        confirmButton.layer.cornerRadius = 12
+        confirmButton.hero.modifiers = [.translate(y: 20), .fade]
+    }
+    
+    private func setupNotificationView() {
+        notificationView.layer.cornerRadius = 12
+    }
+    
+    private func setupSongTitleTextField() {
+        songTitleTextField.setLeftPadding(width: 12)
+        songTitleTextField.setRightPadding(width: 12)
+    }
+    
+    private func setupSingerTextField() {
+        singerTextField.setLeftPadding(width: 12)
+        singerTextField.setRightPadding(width: 12)
+    }
+    
+    private func setupSongNumberTextField() {
+        songNumberTextField.setLeftPadding(width: 12)
+        songNumberTextField.setRightPadding(width: 12)
+    }
+    
+    private func setupBrandPickerButton() {
+        brandPickerButton.layer.cornerRadius = 12
+        brandPickerButton.layer.borderWidth = 1
+        brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
+    }
+    
+    private func setupContentScrollView() {
         contentScrollView.delegate = self
     }
     
-    private func bind() {
-        // Exit button
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
-        
-        // Song title textfield
+    }
+    
+    private func bindSongTitleTextField() {
         songTitleTextField.rx.controlEvent(.editingDidEndOnExit)
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.singerTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
-        
-        // Singer textfield
+    }
+    
+    private func bindSingerTextField() {
         singerTextField.rx.controlEvent(.editingDidEndOnExit)
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.songNumberTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
-        
-        // Song number textfield
+    }
+    
+    private func bindSongNumberTextField() {
         songNumberTextField.rx.controlEvent(.editingDidEndOnExit)
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.view.endEditing(true)
             }).disposed(by: disposeBag)
-        
+    }
+    
+    private func bindConfirmButtonActivateState() {
         let songTitleOb = songTitleTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
         let singerOb = singerTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
         
@@ -147,22 +176,25 @@ class AddSongViewController: UIViewController {
                     vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
                 }
             }).disposed(by: disposeBag)
-        
-        // ContentView tap action
+    }
+    
+    private func bindContentView() {
         contentView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self, onNext: { vc,_ in
                 vc.view.endEditing(true)
             }).disposed(by: disposeBag)
-        
-        // Confirm button tap action
+    }
+    
+    private func bindConfirmButton() {
         confirmButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.addSong()
             }).disposed(by: disposeBag)
-        
-        // Brand picker button tap action
+    }
+    
+    private func bindBrandPickerButton() {
         brandPickerButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
