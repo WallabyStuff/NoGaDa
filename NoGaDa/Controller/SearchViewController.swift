@@ -42,7 +42,6 @@ class SearchViewController: UIViewController {
 
         setupData()
         setupView()
-        setupInstance()
         bind()
     }
     
@@ -62,16 +61,34 @@ class SearchViewController: UIViewController {
 
     // MARK: - Initializers
     private func setupData() {
-        if viewModel == nil {
-            dismiss(animated: true, completion: nil)
-            return
-        }
+        setupViewModel()
     }
     
     private func setupView() {
         self.hero.isEnabled = true
         
-        // Appbar
+        setupAppbarView()
+        setupSearchBoxView()
+        setupSearchTextField()
+        setupSearchButton()
+        setupBackButton()
+        setupClearTextFieldButton()
+        setupContainerView()
+        setupArchiveFloatingPanelView()
+    }
+    
+    private func bind() {
+        bindBackButton()
+        bindFilterButton()
+        bindClearTextFieldButton()
+    }
+    
+    // MARK: - Setups
+    private func setupViewModel() {
+        viewModel = SearchViewModel()
+    }
+    
+    private func setupAppbarView() {
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28
         appbarView.layer.cornerCurve = .circular
@@ -79,65 +96,83 @@ class SearchViewController: UIViewController {
         appbarView.setAppbarShadow()
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         
-        // Appbar height constraint
         appbarViewHeightConstraint.constant = 140 + SafeAreaInset.top
         
-        // Appbar Title Label
         appbarTitleLabel.hero.id = "appbarTitle"
-        
-        // SearchBox View
+    }
+    
+    private func setupSearchBoxView() {
         searchBoxView.layer.cornerRadius = 12
         searchBoxView.layer.masksToBounds = true
         searchBoxView.setSearchBoxShadow()
-        
-        // Search TextField
+    }
+    
+    private func setupSearchTextField() {
         searchTextField.setPlaceholderColor(ColorSet.appbarTextfieldPlaceholderColor)
         searchTextField.setLeftPadding(width: 12)
         searchTextField.setRightPadding(width: 80)
-        
-        // Search Button
+        searchTextField.delegate = self
+    }
+    
+    private func setupSearchButton() {
         filterButton.layer.cornerRadius = 8
         filterButton.setPadding(width: 8)
         filterButton.setSearchBoxButtonShadow()
-        
-        // Back Button
-        backButton.hero.modifiers = [.fade]
-        backButton.setPadding(width: 4)
-        
-        // Clear search textfield Button
-        clearTextFieldButton.setPadding(width: 6)
-        
-        // Set up ContainerView
-        configureContainerView()
     }
     
-    private func setupInstance() {
-        // Search TextField
-        searchTextField.delegate = self
+    private func setupBackButton() {
+        backButton.hero.modifiers = [.fade]
+        backButton.setPadding(width: 4)
+    }
+    
+    private func setupClearTextFieldButton() {
+        clearTextFieldButton.setPadding(width: 6)
+    }
+    
+    private func setupContainerView() {
+        searchHistoryVC = storyboard?.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
+        searchResultVC = storyboard?.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
         
-        // View Model
-        viewModel = SearchViewModel()
+        searchHistoryVC.delegate = self
+        searchResultVC.delegate = self
         
-        // Archive folder floating panel view
+        addChild(searchHistoryVC)
+        addChild(searchResultVC)
+        
+        contentsView.addSubview(searchHistoryVC.view)
+        contentsView.addSubview(searchResultVC.view)
+
+        searchHistoryVC.didMove(toParent: self)
+        searchResultVC.didMove(toParent: self)
+        
+        searchHistoryVC.view.frame = contentsView.bounds
+        searchResultVC.view.frame = contentsView.bounds
+        
+        searchResultVC.view.isHidden = true
+    }
+    
+    private func setupArchiveFloatingPanelView() {
         archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: self, delegate: self)
     }
     
-    private func bind() {
-        // Exit Button Tap Action
+    // MARK: - Binds
+    private func bindBackButton() {
         backButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
-        
-        // Filter Button Tap Action
+    }
+    
+    private func bindFilterButton() {
         filterButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.presentSearchFilterPopoverVC()
             }.disposed(by: disposeBag)
-        
-        // Clear TextField Button Tap Action
+    }
+    
+    private func bindClearTextFieldButton() {
         clearTextFieldButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in
@@ -184,28 +219,6 @@ class SearchViewController: UIViewController {
         viewModel!.addSearchHistory(searchKeyword)
         searchResultVC.setSearchResult(searchKeyword)
         replaceContents(type: .searchResult)
-    }
-    
-    private func configureContainerView() {
-        searchHistoryVC = storyboard?.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
-        searchResultVC = storyboard?.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
-        
-        searchHistoryVC.delegate = self
-        searchResultVC.delegate = self
-        
-        addChild(searchHistoryVC)
-        addChild(searchResultVC)
-        
-        contentsView.addSubview(searchHistoryVC.view)
-        contentsView.addSubview(searchResultVC.view)
-
-        searchHistoryVC.didMove(toParent: self)
-        searchResultVC.didMove(toParent: self)
-        
-        searchHistoryVC.view.frame = contentsView.bounds
-        searchResultVC.view.frame = contentsView.bounds
-        
-        searchResultVC.view.isHidden = true
     }
     
     private func replaceContents(type: ContentsType) {

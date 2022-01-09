@@ -31,28 +31,32 @@ class SearchHistoryViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
     
     // MARK: - Initializers
     private func setupView() {
-        // Search history tableView
+        setupSearchHistoryTableView()
+    }
+    
+    private func bind() {
+        bindClearHistoryButton()
+    }
+    
+    // MARK: - Setups
+    private func setupSearchHistoryTableView() {
         searchHistoryTableView.separatorStyle = .none
         searchHistoryTableView.tableFooterView = UIView()
         updateSearchHistory()
-    }
-    
-    private func setupInstance() {
-        // Search history tableView
-        let searchHistoryCellNibName = UINib(nibName: "SearchHistoryTableViewCell", bundle: nil)
-        searchHistoryTableView.register(searchHistoryCellNibName, forCellReuseIdentifier: "searchHistoryTableCell")
+        
+        let nibName = UINib(nibName: "SearchHistoryTableViewCell", bundle: nil)
+        searchHistoryTableView.register(nibName, forCellReuseIdentifier: "searchHistoryTableCell")
         searchHistoryTableView.dataSource = self
         searchHistoryTableView.delegate = self
     }
     
-    private func bind() {
-        // Clear history Button
+    // MARK: - Binds
+    private func bindClearHistoryButton() {
         clearHistoryButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in

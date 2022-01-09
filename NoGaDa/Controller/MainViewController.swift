@@ -52,7 +52,6 @@ class MainViewController: UIViewController {
         
         splashView.show(vc: self)
         setupView()
-        setupInstance()
         bind()
     }
     
@@ -78,53 +77,33 @@ class MainViewController: UIViewController {
     // MARK: - Initializers
     private func setupView() {
         self.hero.isEnabled = true
-        
+        setupAppbarView()
+        setupSettingButton()
+        setupMainContentScrollView()
+        setupSearchTextField()
+        setupSearchButton()
+        setupArchiveShortcutBackgroundImageView()
+        setupUpdatedSongTableView()
+        setupBrandSegmentedControl()
+    }
+    
+    private func bind() {
+        bindSearchBoxView()
+        bindSearchButton()
+        bindArchiveShorcutView()
+        bindSettingButton()
+        bindMainContentScrollView()
+        bindUpdatedSongTableView()
+    }
+    
+    // MARK: - Setups
+    private func setupAppbarView() {
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
-        
-        // Appbar View
         appbarView.backgroundColor = .clear
         appbarView.configure(cornerRadius: 28, roundCorners: [.bottomRight])
         appbarView.setAppbarShadow()
-        
-        // Appbar title Label
         appbarTitleLabel.hero.id = "appbarTitle"
         
-        // Setting Button
-        settingButton.setPadding(width: 4)
-        
-        // Main content ScrollView content View
-        mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
-        
-        // Search TextField
-        searchBoxView.layer.cornerRadius = 12
-        searchBoxView.setSearchBoxShadow()
-        
-        // Search Button
-        searchButton.layer.cornerRadius = 8
-        searchButton.setSearchBoxButtonShadow()
-        
-        // Archive shortcut background ImageView
-        archiveShortcutBackgroundImageView.layer.cornerRadius = 20
-        archiveShortcutBackgroundImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
-        
-        // Chart TableView
-        updatedSongTableView.layer.cornerRadius = 12
-        updatedSongTableView.tableFooterView = UIView()
-        updatedSongTableView.separatorStyle = .none
-        
-        // Karaoke brand segmented control
-        brandSegmentedControl.segmentTintColor = ColorSet.updatedSongSelectorSelectedTextColor
-        brandSegmentedControl.segmentDefaultColor = ColorSet.updatedSongSelectorUnSelectedTextColor
-        brandSegmentedControl.barIndicatorColor = ColorSet.updatedSongSelectorBarIndicatorColor
-        brandSegmentedControl.barIndicatorHeight = 3
-        brandSegmentedControl.segmentFontSize = 14
-        brandSegmentedControl.addSegment(title: "tj 업데이트")
-        brandSegmentedControl.addSegment(title: "금영 업데이트")
-        
-        setupAppbar()
-    }
-    
-    private func setupAppbar() {
         // Appbar Height
         DispatchQueue.main.async {
             self.minimumAppbarHeight = 80 + SafeAreaInset.top
@@ -140,55 +119,91 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func setupInstance() {
-        // Chart TableView
-        let chartTableCellNibName = UINib(nibName: "UpdatedSongTableViewCell", bundle: nil)
-        updatedSongTableView.register(chartTableCellNibName, forCellReuseIdentifier: "updatedSongTableViewCell")
+    private func setupSettingButton() {
+        settingButton.setPadding(width: 4)
+    }
+    
+    private func setupMainContentScrollView() {
+        mainContentScrollViewContentViewHeightConstraint.constant = view.frame.height
+    }
+    
+    private func setupSearchTextField() {
+        searchBoxView.layer.cornerRadius = 12
+        searchBoxView.setSearchBoxShadow()
+    }
+    
+    private func setupSearchButton() {
+        searchButton.layer.cornerRadius = 8
+        searchButton.setSearchBoxButtonShadow()
+    }
+    
+    private func setupArchiveShortcutBackgroundImageView() {
+        archiveShortcutBackgroundImageView.layer.cornerRadius = 20
+        archiveShortcutBackgroundImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
+    }
+    
+    private func setupUpdatedSongTableView() {
+        updatedSongTableView.layer.cornerRadius = 12
+        updatedSongTableView.tableFooterView = UIView()
+        updatedSongTableView.separatorStyle = .none
+        
+        let nibName = UINib(nibName: "UpdatedSongTableViewCell", bundle: nil)
+        updatedSongTableView.register(nibName, forCellReuseIdentifier: "updatedSongTableViewCell")
         updatedSongTableView.delegate = self
         updatedSongTableView.dataSource = self
-        
         setUpdatedSongChart()
-        
-        // Karaoke brand segmented control
+    }
+    
+    private func setupBrandSegmentedControl() {
+        brandSegmentedControl.segmentTintColor = ColorSet.updatedSongSelectorSelectedTextColor
+        brandSegmentedControl.segmentDefaultColor = ColorSet.updatedSongSelectorUnSelectedTextColor
+        brandSegmentedControl.barIndicatorColor = ColorSet.updatedSongSelectorBarIndicatorColor
+        brandSegmentedControl.barIndicatorHeight = 3
+        brandSegmentedControl.segmentFontSize = 14
+        brandSegmentedControl.addSegment(title: "tj 업데이트")
+        brandSegmentedControl.addSegment(title: "금영 업데이트")
         brandSegmentedControl.delegate = self
     }
     
-    private func bind() {
-        // Search Textfield Tap Action
+    // MARK: - Bindss
+    private func bindSearchBoxView() {
         searchBoxView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
             }.disposed(by: disposeBag)
         
-        // Search Textfield LongPress Action
         searchBoxView.rx.longPressGesture()
             .when(.began)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
             }.disposed(by: disposeBag)
-        
-        // Search Button Tap Action
+    }
+    
+    private func bindSearchButton() {
         searchButton.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentSearchVC()
             }.disposed(by: disposeBag)
-        
-        // Archive Shortcut Tap Action
+    }
+    
+    private func bindArchiveShorcutView() {
         archiveShortcutView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { vc, _ in
                 vc.presentArchiveFolderVC()
             }.disposed(by: disposeBag)
-        
-        // Setting Button Tap Action
+    }
+    
+    private func bindSettingButton() {
         settingButton.rx.tap
             .bind(with: self, onNext: { vc, _ in
                 vc.presentSettingVC()
             }).disposed(by: disposeBag)
-        
-        // Main content ScrollView Slide Action
+    }
+    
+    private func bindMainContentScrollView() {
         mainContentScrollView.rx.contentOffset
             .asDriver()
             .drive(with: self, onNext: { vc, offset in
@@ -215,8 +230,9 @@ class MainViewController: UIViewController {
                     vc.settingButton.alpha = 1
                 }
             }).disposed(by: disposeBag)
-        
-        // UpdatedSong TableView
+    }
+    
+    private func bindUpdatedSongTableView() {
         updatedSongTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in

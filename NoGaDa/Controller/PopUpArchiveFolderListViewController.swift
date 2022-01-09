@@ -34,62 +34,77 @@ class PopUpArchiveFolderListViewController: UIViewController {
 
         setupData()
         setupView()
-        setupInstance()
         bind()
         setArchiveFolders()
     }
 
     // MARK: - Initializers
     private func setupData() {
+        setupViewModel()
+    }
+    
+    private func setupView() {
+        setupAddFolderButton()
+        setupArchiveFolderTableView()
+        setupExitButton()
+        setupAddFolderButton()
+    }
+    
+    private func bind() {
+        bindAddFolderButton()
+        bindExitButton()
+        bindArchiveFolderTableView()
+    }
+    
+    // MARK: - Setups
+    private func setupViewModel() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
             return
         }
     }
     
-    private func setupView() {
-        // AddFolder Button
+    private func setupAddFolderButton() {
         addFolderButton.layer.cornerRadius = 12
-        
-        // Folder TableView
-        archiveFolderTableView.layer.cornerRadius = 8
-        archiveFolderTableView.tableFooterView = UIView()
-        archiveFolderTableView.separatorInset = UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0)
-        
-        // Exit Button
-        exitButton.makeAsCircle()
-        
-        // Add folder Button
         addFolderButton.layer.shadowColor = UIColor.gray.cgColor
         addFolderButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         addFolderButton.layer.shadowRadius = 4
         addFolderButton.layer.shadowOpacity = 0.1
     }
     
-    private func setupInstance() {
-        // Folder TableView
-        let folderCellNibName = UINib(nibName: "PopUpArchiveFolderTableViewCell", bundle: nil)
-        archiveFolderTableView.register(folderCellNibName, forCellReuseIdentifier: "popUpArchiveTableCell")
+    private func setupArchiveFolderTableView() {
+        archiveFolderTableView.layer.cornerRadius = 8
+        archiveFolderTableView.tableFooterView = UIView()
+        archiveFolderTableView.separatorInset = UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0)
+        
+        let nibName = UINib(nibName: "PopUpArchiveFolderTableViewCell", bundle: nil)
+        archiveFolderTableView.register(nibName, forCellReuseIdentifier: "popUpArchiveTableCell")
         archiveFolderTableView.dataSource = self
         archiveFolderTableView.delegate = self
     }
     
-    private func bind() {
-        // AddFolder Button Tap Actiobn
+    private func setupExitButton() {
+        exitButton.makeAsCircle()
+    }
+    
+    // MARK: - Binds
+    private func bindAddFolderButton() {
         addFolderButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.presentAddFolderVC()
             }.disposed(by: disposeBag)
-        
-        // Exit button Tap Action
+    }
+    
+    private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.exitButtonAction()
             }.disposed(by: disposeBag)
-        
-        // Archive folder TableView
+    }
+    
+    private func bindArchiveFolderTableView() {
         archiveFolderTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in

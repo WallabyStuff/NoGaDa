@@ -37,9 +37,14 @@ class ArchiveFolderListViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
         reloadArchiveFolderTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        unhighlightSelectedCell()
     }
     
     // MARK: - Overrides
@@ -56,62 +61,76 @@ class ArchiveFolderListViewController: UIViewController {
     private func setupView() {
         self.hero.isEnabled = true
         
+        setupAppbar()
+        setupAddFolderButton()
+        setupExitButton()
+        setupArchiveFolderTableView()
+    }
+    
+    private func bind() {
+        bindExitButton()
+        bindAddFolderButton()
+        bindArchiveFolderTableView()
+        bindAppbarView()
+    }
+    
+    // MARK: - Setups
+    private func setupAppbar() {
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
-        
-        // Appbar View
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28
         appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
         appbarView.setAppbarShadow()
-        
-        // Appbar Title Label
         appbarTitleLabel.hero.id = "appbarTitle"
-        
-        // Add Folder Button
+    }
+    
+    private func setupAddFolderButton() {
         addFolderButton.layer.cornerRadius = 12
         addFolderButton.hero.modifiers = [.translate(y: 20), .fade]
-        
-        // Exit Button
+    }
+    
+    private func setupExitButton() {
         exitButton.makeAsCircle()
         exitButton.setExitButtonShadow()
-        
-        // Folder TableView
+    }
+    
+    private func setupArchiveFolderTableView() {
         archiveFolderTableView.separatorStyle = .none
         archiveFolderTableView.tableFooterView = UIView()
         archiveFolderTableView.contentInset = UIEdgeInsets(top: archiveFolderTableViewTopInset, left: 0, bottom: 0, right: 0)
-    }
-    
-    private func setupInstance() {
-        // Folder TableView
-        let folderCellNibName = UINib(nibName: "FolderTableViewCell", bundle: nil)
-        archiveFolderTableView.register(folderCellNibName, forCellReuseIdentifier: "folderTableViewCell")
+        
+        let nibName = UINib(nibName: "FolderTableViewCell", bundle: nil)
+        archiveFolderTableView.register(nibName, forCellReuseIdentifier: "folderTableViewCell")
         archiveFolderTableView.delegate = self
         archiveFolderTableView.dataSource = self
     }
     
-    private func bind() {
-        // ExitButton TapAction
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
-        
-        // AddFolder Button Tap Action
+    }
+    
+    private func bindAddFolderButton() {
         addFolderButton.rx.tap
             .asDriver()
             .drive(with: self) { vc, _ in
                 vc.presentAddFolderView()
             }.disposed(by: disposeBag)
-        
-        // ArchiveFolder TablewView
+    }
+    
+    private func bindArchiveFolderTableView() {
         archiveFolderTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
                 vc.presentArchiveSongListVC(indexPath: indexPath)
             }).disposed(by: disposeBag)
-        
-        // Appbar stretching animation
+    }
+    
+    private func bindAppbarView() {
         archiveFolderTableView.rx.contentOffset
             .asDriver()
             .drive(with: self, onNext: { vc, offset in
@@ -175,6 +194,11 @@ class ArchiveFolderListViewController: UIViewController {
         archiveSongListVC.viewModel = viewModel
         archiveSongListVC.delegate = self
         present(archiveSongListVC, animated: true, completion: nil)
+    }
+    
+    private func unhighlightSelectedCell(_ animated: Bool = true) {
+        guard let indexPath = archiveFolderTableView.indexPathForSelectedRow else { return }
+        archiveFolderTableView.deselectRow(at: indexPath, animated: animated)
     }
 }
 

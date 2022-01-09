@@ -14,6 +14,7 @@ class PopUpArchiveFolderListViewModel {
     private var selectedSong: Song?
     private let songFolderManager = SongFolderManager()
     private var songFolderList = [ArchiveFolder]()
+    private var feedbackGenerator = UINotificationFeedbackGenerator()
     
     init(selectedSong: Song) {
         self.selectedSong = selectedSong
@@ -133,8 +134,11 @@ extension PopUpArchiveFolderListViewModel {
                 self.addSong(targetFolder, selectedSong)
                     .observe(on: MainScheduler.instance)
                     .subscribe(with: self, onCompleted: { vc in
+                        // Success to save
+                        vc.feedbackGenerator.notificationOccurred(.success)
                         observer(.completed)
                     }, onError: { vc, error in
+                        // Fail to save because of some error
                         guard let error = error as? SongFolderManagerError else { return }
                         
                         if error == .alreadyExists {
