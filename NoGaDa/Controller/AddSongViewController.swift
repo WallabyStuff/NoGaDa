@@ -12,167 +12,225 @@ import RxGesture
 import Hero
 
 
-protocol AddSongViewDelegate: AnyObject {
-    func didSongUpdated()
+@objc protocol AddSongViewDelegate: AnyObject {
+    @objc optional func didSongAdded()
 }
 
 class AddSongViewController: UIViewController {
     
     // MARK: - Declaration
-    weak var delegate: AddSongViewDelegate?
-    private var disposeBag = DisposeBag()
-    private let addSongViewModel = AddSongViewModel()
-    public var currentFolderId: String?
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var songTitleTextField: HighlightingTextfield!
     @IBOutlet weak var singerTextField: HighlightingTextfield!
     @IBOutlet weak var songNumberTextField: HighlightingTextfield!
-    @IBOutlet weak var brandPickerView: UIPickerView!
+    @IBOutlet weak var brandPickerButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-    // MARK: - LifeCycle
+    weak var delegate: AddSongViewDelegate?
+    public var viewModel: AddSongViewModel?
+    private var disposeBag = DisposeBag()
+    private var selectedBrand: KaraokeBrand = .tj
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureData()
-        initView()
-        initInstance()
-        initEventListener()
+        setupView()
+        bind()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    // MARK: - Initializer
-    private func configureData() {
-        if currentFolderId == nil {
-            dismiss(animated: true, completion: nil)
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+            
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            traitCollection.performAsCurrent {
+                brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
+            }
         }
     }
     
-    private func initView() {
-        // Exit button
-        exitButton.makeAsCircle()
-        exitButton.setExitButtonShadow()
-        
-        // Confirm button
-        confirmButton.layer.cornerRadius = 12
-        confirmButton.hero.modifiers = [.translate(y: 20), .fade]
-        
-        // Notification view
-        notificationView.layer.cornerRadius = 12
-        
-        // Song title textfield
-        songTitleTextField.setLeftPadding(width: 12)
-        songTitleTextField.setRightPadding(width: 12)
-        
-        // Song author textfield
-        singerTextField.setLeftPadding(width: 12)
-        singerTextField.setRightPadding(width: 12)
-        
-        // Song number textfield
-        songNumberTextField.setLeftPadding(width: 12)
-        songNumberTextField.setRightPadding(width: 12)
-        
-        // Brand picker view
-        brandPickerView.layer.borderWidth = 1
-        brandPickerView.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
-        brandPickerView.layer.cornerRadius = 12
-        
+    // MARK: - Initializers
+    private func setupData() {
+        if viewModel == nil {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+    }
+    
+    private func setupView() {
+        setupExitButton()
+        setupConfirmButton()
+        setupNotificationView()
+        setupSongTitleTextField()
+        setupSingerTextField()
+        setupSongNumberTextField()
+        setupBrandPickerButton()
+        setupContentScrollView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func initInstance() {
-        // Brand  picker view
-        brandPickerView.dataSource = self
-        brandPickerView.delegate = self
-        
-        // Content scrollView
+    private func bind() {
+        bindExitButton()
+        bindSongTitleTextField()
+        bindSingerTextField()
+        bindSongNumberTextField()
+        bindConfirmButtonActivateState()
+        bindContentView()
+        bindConfirmButton()
+        bindBrandPickerButton()
+    }
+    
+    // MARK: - Setups
+    private func setupExitButton() {
+        exitButton.makeAsCircle()
+        exitButton.setExitButtonShadow()
+    }
+    
+    private func setupConfirmButton() {
+        confirmButton.layer.cornerRadius = 12
+        confirmButton.hero.modifiers = [.translate(y: 20), .fade]
+    }
+    
+    private func setupNotificationView() {
+        notificationView.layer.cornerRadius = 12
+    }
+    
+    private func setupSongTitleTextField() {
+        songTitleTextField.setLeftPadding(width: 12)
+        songTitleTextField.setRightPadding(width: 12)
+    }
+    
+    private func setupSingerTextField() {
+        singerTextField.setLeftPadding(width: 12)
+        singerTextField.setRightPadding(width: 12)
+    }
+    
+    private func setupSongNumberTextField() {
+        songNumberTextField.setLeftPadding(width: 12)
+        songNumberTextField.setRightPadding(width: 12)
+    }
+    
+    private func setupBrandPickerButton() {
+        brandPickerButton.layer.cornerRadius = 12
+        brandPickerButton.layer.borderWidth = 1
+        brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
+    }
+    
+    private func setupContentScrollView() {
         contentScrollView.delegate = self
     }
     
-    private func initEventListener() {
-        // Exit button
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
-            .subscribe(onNext: { [weak self] in
+            .asDriver()
+            .drive(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
-        
-        // Song title textfield
+    }
+    
+    private func bindSongTitleTextField() {
         songTitleTextField.rx.controlEvent(.editingDidEndOnExit)
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.singerTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
-        
-        // Song composer textfield
+    }
+    
+    private func bindSingerTextField() {
         singerTextField.rx.controlEvent(.editingDidEndOnExit)
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.songNumberTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
-        
-        // Song number textfield
+    }
+    
+    private func bindSongNumberTextField() {
         songNumberTextField.rx.controlEvent(.editingDidEndOnExit)
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.view.endEditing(true)
             }).disposed(by: disposeBag)
-        
+    }
+    
+    private func bindConfirmButtonActivateState() {
         let songTitleOb = songTitleTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
-        let songComposerOb = singerTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
+        let singerOb = singerTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
         
-        Driver.combineLatest(songTitleOb, songComposerOb, resultSelector: { $0 && $1 })
+        Driver.combineLatest(songTitleOb, singerOb, resultSelector: { $0 && $1 })
             .drive(with: self, onNext: { vc, isAllTextFieldFilled in
                 if isAllTextFieldFilled {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
-                    vc.confirmButton.setTitleColor(ColorSet.textColor, for: .normal)
+                    vc.confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
                 } else {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
                     vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
                 }
             }).disposed(by: disposeBag)
-        
-        // ContentView tap action
+    }
+    
+    private func bindContentView() {
         contentView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self, onNext: { vc,_ in
                 vc.view.endEditing(true)
             }).disposed(by: disposeBag)
-        
-        // Confirm button tap action
+    }
+    
+    private func bindConfirmButton() {
         confirmButton.rx.tap
-            .bind(with: self, onNext: { vc,_ in
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
                 vc.addSong()
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    private func bindBrandPickerButton() {
+        brandPickerButton.rx.tap
+            .asDriver()
+            .drive(with: self, onNext: { vc,_ in
+                vc.showBrandPickerVC()
+            }).disposed(by: disposeBag)
+    }
+    
+    // MARK: - Methods
     private func addSong() {
         let songTitle = songTitleTextField.text ?? ""
         let singer = singerTextField.text ?? ""
         let songNumber = songNumberTextField.text ?? ""
-        
-        addSongViewModel.addSong(title: songTitle,
+
+        viewModel?.addSong(title: songTitle,
                                  singer: singer,
                                  songNumber: songNumber,
-                                 brand: selectedBrand(),
-                                 to: currentFolderId!)
+                                 brand: selectedBrand)
             .subscribe(onCompleted: { [weak self] in
                 // Success to add a new song
-                self?.delegate?.didSongUpdated()
+                self?.delegate?.didSongAdded?()
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
     }
     
-    private func selectedBrand() -> KaraokeBrand {
-        let selectedRow = brandPickerView.selectedRow(inComponent: 0)
-        return KaraokeBrand.allCases[selectedRow]
+    private func showBrandPickerVC() {
+        guard let brandPickerVC = storyboard?.instantiateViewController(withIdentifier: "karaokeBrandPickerStoryboard") as? KaraokeBrandPickerViewController else { return }
+        
+        brandPickerVC.modalPresentationStyle = .popover
+        brandPickerVC.preferredContentSize = CGSize(width: 140, height: 87) // two 44height of cells - 1height of separator height
+        brandPickerVC.popoverPresentationController?.permittedArrowDirections = .right
+        brandPickerVC.popoverPresentationController?.sourceRect = brandPickerButton.bounds
+        brandPickerVC.popoverPresentationController?.sourceView = brandPickerButton
+        brandPickerVC.presentationController?.delegate = self
+        brandPickerVC.delegate = self
+        
+        present(brandPickerVC, animated: true)
     }
     
     @objc
@@ -184,35 +242,29 @@ class AddSongViewController: UIViewController {
     private func keyboardWillHide(_ sender: Notification) {
         view.frame.origin.y = 0
     }
-}
-
-// MARK: - Extension
-extension AddSongViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return addSongViewModel.numberOfComponents
-    }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return addSongViewModel.numberOfRowsInComponent
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let pickerLabel = UILabel()
-        pickerLabel.textAlignment = .center
-        pickerLabel.textColor = ColorSet.textColor
-        pickerLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        pickerLabel.text = addSongViewModel.titleForRowAt(row)
-        
-        return pickerLabel
+    @objc
+    private func didTapDoneButton(_ sender: Any) {
+        view.endEditing(true)
     }
 }
 
+// MARK: - Extensions
 extension AddSongViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         view.endEditing(true)
     }
 }
 
-extension AddSongViewController: UITextFieldDelegate {
-    
+extension AddSongViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+extension AddSongViewController: BrandPickerViewDelegaet {
+    func didBrandSelected(_ selectedBrand: KaraokeBrand) {
+        self.selectedBrand = selectedBrand
+        brandPickerButton.setTitle(selectedBrand.localizedString, for: .normal)
+    }
 }

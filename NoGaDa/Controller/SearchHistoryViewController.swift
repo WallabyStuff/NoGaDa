@@ -18,43 +18,48 @@ protocol SearchHistoryViewDelegate: AnyObject {
 class SearchHistoryViewController: UIViewController {
     
     // MARK: - Declaration
-    let searchHistoryViewModel = SearchHistoryViewModel()
-    var disposeBag = DisposeBag()
-    weak var delegate: SearchHistoryViewDelegate?
-    
     @IBOutlet weak var searchHistoryTableView: UITableView!
     @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
     @IBOutlet weak var clearHistoryButton: UIButton!
     
-    // MARK: - LifeCycle
+    weak var delegate: SearchHistoryViewDelegate?
+    private let searchHistoryViewModel = SearchHistoryViewModel()
+    private var disposeBag = DisposeBag()
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
-        initEventListener()
+        setupView()
+        bind()
     }
     
-    // MARK: - Initialization
-    private func initView() {
-        // Search history tableView
+    // MARK: - Initializers
+    private func setupView() {
+        setupSearchHistoryTableView()
+    }
+    
+    private func bind() {
+        bindClearHistoryButton()
+    }
+    
+    // MARK: - Setups
+    private func setupSearchHistoryTableView() {
         searchHistoryTableView.separatorStyle = .none
         searchHistoryTableView.tableFooterView = UIView()
         updateSearchHistory()
-    }
-    
-    private func initInstance() {
-        // Search history tableView
-        let searchHistoryCellNibName = UINib(nibName: "SearchHistoryTableViewCell", bundle: nil)
-        searchHistoryTableView.register(searchHistoryCellNibName, forCellReuseIdentifier: "searchHistoryTableCell")
+        
+        let nibName = UINib(nibName: "SearchHistoryTableViewCell", bundle: nil)
+        searchHistoryTableView.register(nibName, forCellReuseIdentifier: "searchHistoryTableCell")
         searchHistoryTableView.dataSource = self
         searchHistoryTableView.delegate = self
     }
     
-    private func initEventListener() {
-        // Clear history Button
+    // MARK: - Binds
+    private func bindClearHistoryButton() {
         clearHistoryButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.searchHistoryViewModel.deleteAllHistory()
                     .observe(on: MainScheduler.instance)
                     .subscribe(onCompleted: { [weak vc] in
@@ -63,7 +68,7 @@ class SearchHistoryViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
     func updateSearchHistory() {
         searchHistoryViewModel.fetchSearchHistory()
             .observe(on: MainScheduler.instance)
@@ -83,7 +88,7 @@ class SearchHistoryViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchHistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchHistoryViewModel.numberOfRowsInSection(searchHistoryViewModel.sectionCount)
