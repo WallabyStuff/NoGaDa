@@ -27,6 +27,7 @@ class PopUpArchiveFolderListViewController: UIViewController {
     public var viewModel: PopUpArchiveFolderListViewModel?
     private var disposeBag = DisposeBag()
     public var exitButtonAction: () -> Void = {}
+    private let admobManager = AdMobManager()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -109,8 +110,9 @@ class PopUpArchiveFolderListViewController: UIViewController {
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
                 vc.viewModel?.presentAddSongAlert(viewController: self, indexPath: indexPath)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.delegate?.didSongAdded?()
+                    .subscribe(with: vc, onCompleted: { vc in
+                        vc.admobManager.presentAdMob(vc: vc)
+                        vc.delegate?.didSongAdded?()
                     })
                     .disposed(by: vc.disposeBag)
             }).disposed(by: disposeBag)

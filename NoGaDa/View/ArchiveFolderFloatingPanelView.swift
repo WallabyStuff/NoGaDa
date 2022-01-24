@@ -13,7 +13,6 @@ class ArchiveFolderFloatingPanelView {
     private var floatingPanel = FloatingPanelController()
     private var parentViewController: UIViewController?
     private var contentViewDelegate: PopUpArchiveFolderViewDelegate?
-//    private var adMobManager = AdMobManager()
     
     init(parentViewController: UIViewController, delegate: PopUpArchiveFolderViewDelegate) {
         self.parentViewController = parentViewController

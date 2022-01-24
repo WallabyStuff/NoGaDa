@@ -72,8 +72,8 @@ class SearchResultViewController: UIViewController {
         searchResultTableView.separatorStyle = .none
         searchResultTableView.layer.cornerRadius = 16
         
-        let searchResultCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
-        searchResultTableView.register(searchResultCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
+        let nibName = UINib(nibName: "SongTableViewCell", bundle: nil)
+        searchResultTableView.register(nibName, forCellReuseIdentifier: "searchResultTableViewCell")
         searchResultTableView.dataSource = self
         searchResultTableView.delegate = self
     }
