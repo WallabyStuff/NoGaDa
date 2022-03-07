@@ -247,6 +247,7 @@ class MainViewController: UIViewController {
             return
         }
         
+        HapticFeedbackManager.playImpactFeedback(.light)
         searchVC.modalPresentationStyle = .fullScreen
         present(searchVC, animated: true, completion: nil)
     }
