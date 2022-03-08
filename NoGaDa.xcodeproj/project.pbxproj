@@ -76,6 +76,10 @@
 		49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6EB5A270E0F3200610383 /* AdMobManager.swift */; };
 		49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FB0D0927038DED00AE3A9F /* CreditViewController.swift */; };
 		8153FCF94A99DFA2D72D5FB3 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */; };
+		8E03595D27D799B9006A77CA /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03595C27D799B9006A77CA /* Setting.storyboard */; };
+		8E03596127D79F43006A77CA /* Archive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596027D79F43006A77CA /* Archive.storyboard */; };
+		8E03596327D79F8C006A77CA /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596227D79F8C006A77CA /* Search.storyboard */; };
+		8E03596527D7A25C006A77CA /* Folder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596427D7A25C006A77CA /* Folder.storyboard */; };
 		8E14E8EB27D49E2D008F18B8 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */; };
 		8E6C95DE276797D100667C01 /* PopUpSongOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */; };
 		8E6C95E027679BB400667C01 /* SongOptionFloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */; };
@@ -193,6 +197,10 @@
 		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		535D138E38520FF8441D8FDC /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
 		67EF086622F185807A9B411D /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
+		8E03595C27D799B9006A77CA /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		8E03596027D79F43006A77CA /* Archive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Archive.storyboard; sourceTree = "<group>"; };
+		8E03596227D79F8C006A77CA /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		8E03596427D7A25C006A77CA /* Folder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Folder.storyboard; sourceTree = "<group>"; };
 		8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSongOptionViewController.swift; sourceTree = "<group>"; };
 		8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOptionFloatingPanelView.swift; sourceTree = "<group>"; };
@@ -430,6 +438,10 @@
 				493BCBE226F4BAC30096422A /* Cell */,
 				4956CE2A26F467040007523B /* Main.storyboard */,
 				4956CE2F26F467060007523B /* LaunchScreen.storyboard */,
+				8E03595C27D799B9006A77CA /* Setting.storyboard */,
+				8E03596027D79F43006A77CA /* Archive.storyboard */,
+				8E03596227D79F8C006A77CA /* Search.storyboard */,
+				8E03596427D7A25C006A77CA /* Folder.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -579,15 +591,19 @@
 			files = (
 				4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */,
 				4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */,
+				8E03595D27D799B9006A77CA /* Setting.storyboard in Resources */,
+				8E03596327D79F8C006A77CA /* Search.storyboard in Resources */,
 				493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */,
 				493BCBF126F4EBCF0096422A /* UpdatedSongTableViewCell.xib in Resources */,
 				4956CE2E26F467060007523B /* Assets.xcassets in Resources */,
 				4956CE2C26F467040007523B /* Main.storyboard in Resources */,
 				8EFA4D902786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib in Resources */,
+				8E03596127D79F43006A77CA /* Archive.storyboard in Resources */,
 				8E6C95E72767B18500667C01 /* PopUpSongOptionTableViewCell.xib in Resources */,
 				495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */,
 				49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */,
 				49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */,
+				8E03596527D7A25C006A77CA /* Folder.storyboard in Resources */,
 				493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */,
 				491A6D062707026C00E41D5B /* InfoPlist.strings in Resources */,
 				493576C026F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib in Resources */,

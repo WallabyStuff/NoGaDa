@@ -243,7 +243,8 @@ class MainViewController: UIViewController {
     
     // MARK: - Methods
     func presentSearchVC() {
-        guard let searchVC = storyboard?.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else {
+        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        guard let searchVC = storyboard.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else {
             return
         }
         
@@ -253,7 +254,8 @@ class MainViewController: UIViewController {
     }
     
     func presentArchiveFolderVC() {
-        guard let archiveVC = storyboard?.instantiateViewController(identifier: "archiveFolderListStoryboard") as? ArchiveFolderListViewController else {
+        let storyboard = UIStoryboard(name: "Archive", bundle: nil)
+        guard let archiveVC = storyboard.instantiateViewController(identifier: "archiveFolderListStoryboard") as? ArchiveFolderListViewController else {
             return
         }
         
@@ -262,7 +264,8 @@ class MainViewController: UIViewController {
     }
     
     func presentSettingVC() {
-        guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "settingStoryboard") as? SettingViewController else {
+        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+        guard let settingVC = storyboard.instantiateViewController(withIdentifier: "settingStoryboard") as? SettingViewController else {
             return
         }
         

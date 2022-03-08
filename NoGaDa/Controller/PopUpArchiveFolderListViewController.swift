@@ -128,7 +128,8 @@ class PopUpArchiveFolderListViewController: UIViewController {
     }
     
     private func presentAddFolderVC() {
-        guard let addFolderVC = storyboard?.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
+        let storyboard = UIStoryboard(name: "Folder", bundle: nil)
+        guard let addFolderVC = storyboard.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
             return
         }
         

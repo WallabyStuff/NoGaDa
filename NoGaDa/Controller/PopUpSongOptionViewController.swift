@@ -119,7 +119,8 @@ class PopUpSongOptionViewController: UIViewController {
     
     // MARK: - Methods
     private func presentArchiveFolderVC(_ selectedSong: Song) {
-        guard let archiveFolderVC = storyboard?.instantiateViewController(withIdentifier: "popUpArchiveStoryboard") as? PopUpArchiveFolderListViewController else {
+        let storyboard = UIStoryboard(name: "Folder", bundle: nil)
+        guard let archiveFolderVC = storyboard.instantiateViewController(withIdentifier: "popUpArchiveStoryboard") as? PopUpArchiveFolderListViewController else {
             return
         }
         

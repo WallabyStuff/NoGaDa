@@ -130,8 +130,9 @@ class SearchViewController: UIViewController {
     }
     
     private func setupContainerView() {
-        searchHistoryVC = storyboard?.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
-        searchResultVC = storyboard?.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
+        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        searchHistoryVC = storyboard.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
+        searchResultVC = storyboard.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
         
         searchHistoryVC.delegate = self
         searchResultVC.delegate = self
@@ -188,7 +189,8 @@ class SearchViewController: UIViewController {
     }
     
     private func presentSearchFilterPopoverVC() {
-        guard let searchFilterVC = storyboard?.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
+        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        guard let searchFilterVC = storyboard.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
         
         searchFilterVC.navigationController?.popoverPresentationController?.backgroundColor = .white
         searchFilterVC.delegate = self

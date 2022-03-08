@@ -175,7 +175,8 @@ class ArchiveFolderListViewController: UIViewController {
     }
     
     func presentAddFolderView() {
-        guard let addFolderVC = storyboard?.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
+        let storyboard = UIStoryboard(name: "Folder", bundle: nil)
+        guard let addFolderVC = storyboard.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
             return
         }
         
@@ -185,7 +186,8 @@ class ArchiveFolderListViewController: UIViewController {
     }
     
     public func presentArchiveSongListVC(indexPath: IndexPath) {
-        guard let archiveSongListVC = storyboard?.instantiateViewController(identifier: "archiveSongListStoryboard") as? ArchiveSongListViewController else {
+        let storyboard = UIStoryboard(name: "Archive", bundle: nil)
+        guard let archiveSongListVC = storyboard.instantiateViewController(identifier: "archiveSongListStoryboard") as? ArchiveSongListViewController else {
             return
         }
         
