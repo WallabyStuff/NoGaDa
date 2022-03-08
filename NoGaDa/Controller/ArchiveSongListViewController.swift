@@ -261,7 +261,8 @@ class ArchiveSongListViewController: UIViewController {
     }
     
     private func presentAddSongVC() {
-        guard let addSongVC = storyboard?.instantiateViewController(withIdentifier: "addSongStoryboard") as? AddSongViewController else {
+        let storyboard = UIStoryboard(name: "Archive", bundle: nil)
+        guard let addSongVC = storyboard.instantiateViewController(withIdentifier: "addSongStoryboard") as? AddSongViewController else {
             return
         }
         

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kFq-eD-ZE7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Folder View Controller-->
+        <scene sceneID="eca-QN-CC2">
+            <objects>
+                <viewController storyboardIdentifier="addFolderStoryboard" id="p0D-xI-FmM" customClass="AddFolderViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vEv-2H-TEz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDZ-IY-dIy">
+                                <rect key="frame" x="352" y="72" width="34" height="34"/>
+                                <color key="backgroundColor" name="AppbarBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="1Lc-wo-Es5"/>
+                                    <constraint firstAttribute="width" constant="34" id="uPk-my-EBt"/>
+                                </constraints>
+                                <color key="tintColor" name="AppbarTextColor"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <color key="titleColor" name="ExitButtonForegroundColor"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 폴더" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC2-np-Knt">
+                                <rect key="frame" x="20" y="72" width="320" height="33.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" name="TextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfP-Yk-c2s">
+                                <rect key="frame" x="131" y="177.5" width="152" height="152"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="😃" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zv5-bv-Ii1" customClass="EmojiTextField" customModule="NoGaDa" customModuleProvider="target">
+                                        <rect key="frame" x="36" y="36" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="62"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" name="TextFieldBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Zv5-bv-Ii1" firstAttribute="centerX" secondItem="hfP-Yk-c2s" secondAttribute="centerX" id="GMz-5y-EN0"/>
+                                    <constraint firstAttribute="width" constant="152" id="Ndr-U9-6Wz"/>
+                                    <constraint firstAttribute="height" constant="152" id="OSl-zj-j2v"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zv5-bv-Ii1" secondAttribute="trailing" constant="36" id="VT5-Ls-D2P"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zv5-bv-Ii1" secondAttribute="bottom" constant="36" id="WrN-L1-qzZ"/>
+                                    <constraint firstItem="Zv5-bv-Ii1" firstAttribute="centerY" secondItem="hfP-Yk-c2s" secondAttribute="centerY" id="ebU-ZZ-WoH"/>
+                                    <constraint firstItem="Zv5-bv-Ii1" firstAttribute="top" secondItem="hfP-Yk-c2s" secondAttribute="top" constant="36" id="gjc-n7-pLR"/>
+                                    <constraint firstItem="Zv5-bv-Ii1" firstAttribute="leading" secondItem="hfP-Yk-c2s" secondAttribute="leading" constant="36" id="srB-X7-7rz"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="폴더 이름" textAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="H3v-hy-qy6" customClass="HighlightingTextfield" customModule="NoGaDa" customModuleProvider="target">
+                                <rect key="frame" x="77" y="369.5" width="260" height="44"/>
+                                <color key="backgroundColor" name="TextFieldBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="1yv-kx-sKo"/>
+                                    <constraint firstAttribute="height" constant="44" id="OkF-AC-jzI"/>
+                                </constraints>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpE-WO-btC">
+                                <rect key="frame" x="20" y="798" width="374" height="48"/>
+                                <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="0bK-z3-jDs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="확인">
+                                    <color key="titleColor" name="CreateFolderButtonForegroundColor1"/>
+                                    <color key="titleShadowColor" name="AddFolderButtonForegroundColor"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MxO-yf-Ieq"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yDZ-IY-dIy" firstAttribute="centerY" secondItem="aC2-np-Knt" secondAttribute="centerY" id="06u-CN-2g8"/>
+                            <constraint firstItem="H3v-hy-qy6" firstAttribute="top" secondItem="hfP-Yk-c2s" secondAttribute="bottom" constant="40" id="8ET-HP-0gW"/>
+                            <constraint firstItem="MxO-yf-Ieq" firstAttribute="trailing" secondItem="vpE-WO-btC" secondAttribute="trailing" constant="20" id="HUp-rq-pLr"/>
+                            <constraint firstItem="aC2-np-Knt" firstAttribute="leading" secondItem="MxO-yf-Ieq" secondAttribute="leading" constant="20" id="Kmd-FU-fwd"/>
+                            <constraint firstItem="MxO-yf-Ieq" firstAttribute="trailing" secondItem="yDZ-IY-dIy" secondAttribute="trailing" constant="28" id="Lq0-OO-r2w"/>
+                            <constraint firstItem="MxO-yf-Ieq" firstAttribute="bottom" secondItem="vpE-WO-btC" secondAttribute="bottom" constant="16" id="Tus-C1-FtI"/>
+                            <constraint firstItem="H3v-hy-qy6" firstAttribute="centerX" secondItem="hfP-Yk-c2s" secondAttribute="centerX" id="Ykm-SL-MhD"/>
+                            <constraint firstItem="vpE-WO-btC" firstAttribute="leading" secondItem="MxO-yf-Ieq" secondAttribute="leading" constant="20" id="ihj-YC-Hxa"/>
+                            <constraint firstItem="yDZ-IY-dIy" firstAttribute="leading" secondItem="aC2-np-Knt" secondAttribute="trailing" constant="12" id="kGl-31-kI5"/>
+                            <constraint firstItem="aC2-np-Knt" firstAttribute="top" secondItem="MxO-yf-Ieq" secondAttribute="top" constant="28" id="nNz-el-v5w"/>
+                            <constraint firstItem="hfP-Yk-c2s" firstAttribute="centerX" secondItem="vEv-2H-TEz" secondAttribute="centerX" id="qle-yg-FSc"/>
+                            <constraint firstItem="hfP-Yk-c2s" firstAttribute="top" secondItem="aC2-np-Knt" secondAttribute="bottom" constant="72" id="ted-Aq-g5V"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmButton" destination="vpE-WO-btC" id="wCG-8v-0cW"/>
+                        <outlet property="emojiTextFieldFrameView" destination="hfP-Yk-c2s" id="S3y-tK-U8n"/>
+                        <outlet property="exitButton" destination="yDZ-IY-dIy" id="x4z-Hs-GGI"/>
+                        <outlet property="folderEmojiTextField" destination="Zv5-bv-Ii1" id="K8r-4T-7Wm"/>
+                        <outlet property="folderTitleTextField" destination="H3v-hy-qy6" id="QN5-PW-Bu9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0xw-QP-okv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1954" y="1175"/>
+        </scene>
+        <!--Pop Up Archive Folder List View Controller-->
+        <scene sceneID="w2F-vT-x9Z">
+            <objects>
+                <viewController storyboardIdentifier="popUpArchiveStoryboard" id="kFq-eD-ZE7" customClass="PopUpArchiveFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="enW-TD-Mn3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3PS-8L-joK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관함" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8y-nB-AXP">
+                                        <rect key="frame" x="68" y="28" width="52" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder-filled" translatesAutoresizingMaskIntoConstraints="NO" id="aQY-wI-8wJ">
+                                        <rect key="frame" x="24" y="24" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="FI7-Ab-sRb"/>
+                                            <constraint firstAttribute="height" constant="32" id="NbZ-Lx-jth"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cB-5r-8fc">
+                                        <rect key="frame" x="356" y="23" width="34" height="34"/>
+                                        <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="BOR-lv-rrZ"/>
+                                            <constraint firstAttribute="width" constant="34" id="riI-cC-ND8"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="xmark" catalog="system">
+                                            <color key="titleColor" name="ExitButtonForegroundColor"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="PopUpArchiveBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="8vT-sC-frY"/>
+                                    <constraint firstItem="n8y-nB-AXP" firstAttribute="leading" secondItem="aQY-wI-8wJ" secondAttribute="trailing" constant="12" id="AbT-aV-YtD"/>
+                                    <constraint firstItem="aQY-wI-8wJ" firstAttribute="centerY" secondItem="3PS-8L-joK" secondAttribute="centerY" id="T3N-hE-bjl"/>
+                                    <constraint firstItem="aQY-wI-8wJ" firstAttribute="leading" secondItem="3PS-8L-joK" secondAttribute="leading" constant="24" id="Zj8-mn-tD7"/>
+                                    <constraint firstItem="n8y-nB-AXP" firstAttribute="centerY" secondItem="aQY-wI-8wJ" secondAttribute="centerY" id="b0Z-1B-Le3"/>
+                                    <constraint firstItem="9cB-5r-8fc" firstAttribute="centerY" secondItem="n8y-nB-AXP" secondAttribute="centerY" id="qFs-mr-TGy"/>
+                                    <constraint firstAttribute="trailing" secondItem="9cB-5r-8fc" secondAttribute="trailing" constant="24" id="yZu-eL-nop"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kex-xz-aUX">
+                                <rect key="frame" x="20" y="132" width="374" height="614"/>
+                                <color key="backgroundColor" name="PopUpArchiveBackgroundColor"/>
+                                <color key="separatorColor" name="AccentSubColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBe-ZC-ecj">
+                                <rect key="frame" x="20" y="778" width="374" height="48"/>
+                                <color key="backgroundColor" name="AddFolderButtonReversedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="4SE-SD-UDL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="+ 새 폴더 생성">
+                                    <color key="titleColor" name="AddFolderButtonForegroundColor"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Sgr-O2-INk"/>
+                        <color key="backgroundColor" name="PopUpArchiveBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Sgr-O2-INk" firstAttribute="bottom" secondItem="IBe-ZC-ecj" secondAttribute="bottom" constant="16" id="DDg-70-zKl"/>
+                            <constraint firstItem="IBe-ZC-ecj" firstAttribute="top" secondItem="Kex-xz-aUX" secondAttribute="bottom" constant="32" id="W1j-Yn-tCM"/>
+                            <constraint firstItem="Sgr-O2-INk" firstAttribute="trailing" secondItem="IBe-ZC-ecj" secondAttribute="trailing" constant="20" id="abP-QQ-zNc"/>
+                            <constraint firstItem="Kex-xz-aUX" firstAttribute="leading" secondItem="Sgr-O2-INk" secondAttribute="leading" constant="20" id="baN-K6-ajM"/>
+                            <constraint firstItem="3PS-8L-joK" firstAttribute="leading" secondItem="Sgr-O2-INk" secondAttribute="leading" id="dXG-dP-pSF"/>
+                            <constraint firstItem="3PS-8L-joK" firstAttribute="top" secondItem="Sgr-O2-INk" secondAttribute="top" id="eD7-eI-ewj"/>
+                            <constraint firstItem="3PS-8L-joK" firstAttribute="trailing" secondItem="Sgr-O2-INk" secondAttribute="trailing" id="lU0-6E-xaH"/>
+                            <constraint firstItem="Sgr-O2-INk" firstAttribute="trailing" secondItem="Kex-xz-aUX" secondAttribute="trailing" constant="20" id="p2P-dL-hga"/>
+                            <constraint firstItem="IBe-ZC-ecj" firstAttribute="leading" secondItem="Sgr-O2-INk" secondAttribute="leading" constant="20" id="udf-wb-MGS"/>
+                            <constraint firstItem="Kex-xz-aUX" firstAttribute="top" secondItem="3PS-8L-joK" secondAttribute="bottom" constant="8" id="wNe-GO-zOn"/>
+                        </constraints>
+                    </view>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="addFolderButton" destination="IBe-ZC-ecj" id="sdX-pB-hSV"/>
+                        <outlet property="archiveFolderTableView" destination="Kex-xz-aUX" id="bLs-D0-uF6"/>
+                        <outlet property="exitButton" destination="9cB-5r-8fc" id="WwM-ka-w6G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lsj-w2-8yF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1169" y="1174"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="folder-filled" width="100" height="100"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="AccentSubColor">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AddFolderButtonBackgroundColor">
+            <color red="1" green="0.85199999809265137" blue="0.38299998641014099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AddFolderButtonForegroundColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AddFolderButtonReversedBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppbarBackgroundColor">
+            <color red="0.31200000643730164" green="0.31600001454353333" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppbarExitButtonBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppbarTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CreateFolderButtonForegroundColor1">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ExitButtonForegroundColor">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PopUpArchiveBackgroundColor">
+            <color red="1" green="0.85199999809265137" blue="0.38299998641014099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.20000000298023224" green="0.23899999260902405" blue="0.29399999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextFieldBackgroundColor">
+            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

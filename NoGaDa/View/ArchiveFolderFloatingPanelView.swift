@@ -53,7 +53,8 @@ class ArchiveFolderFloatingPanelView {
     }
     
     private func prepareForShow(_ selectedSong: Song) {
-        guard let archiveFolderListVC = parentViewController?.storyboard?.instantiateViewController(withIdentifier: "popUpArchiveStoryboard") as? PopUpArchiveFolderListViewController else {
+        let storyboard = UIStoryboard(name: "Folder", bundle: nil)
+        guard let archiveFolderListVC = storyboard.instantiateViewController(withIdentifier: "popUpArchiveStoryboard") as? PopUpArchiveFolderListViewController else {
             return
         }
         

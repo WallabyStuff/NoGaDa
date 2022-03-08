@@ -33,7 +33,7 @@ enum SettingEtcItem: String, CaseIterable {
     func action(vc: UIViewController) {
         switch self {
         case .credit:
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let storyboard = UIStoryboard(name: "Setting", bundle: Bundle.main)
             guard let creditVC = storyboard.instantiateViewController(identifier: "creditStoryboard") as? CreditViewController else { return }
             
             vc.present(creditVC, animated: true, completion: nil)

@@ -220,7 +220,8 @@ class AddSongViewController: UIViewController {
     }
     
     private func showBrandPickerVC() {
-        guard let brandPickerVC = storyboard?.instantiateViewController(withIdentifier: "karaokeBrandPickerStoryboard") as? KaraokeBrandPickerViewController else { return }
+        let storyboard = UIStoryboard(name: "Archive", bundle: nil)
+        guard let brandPickerVC = storyboard.instantiateViewController(withIdentifier: "karaokeBrandPickerStoryboard") as? KaraokeBrandPickerViewController else { return }
         
         brandPickerVC.modalPresentationStyle = .popover
         brandPickerVC.preferredContentSize = CGSize(width: 140, height: 87) // two 44height of cells - 1height of separator height
