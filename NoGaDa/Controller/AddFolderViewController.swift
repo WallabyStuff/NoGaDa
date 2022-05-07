@@ -17,7 +17,9 @@ import RxGesture
 
 class AddFolderViewController: UIViewController {
     
-    // MARK: - Declaraiton
+    
+    // MARK: - Properteis
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var emojiTextFieldFrameView: UIView!
@@ -25,19 +27,22 @@ class AddFolderViewController: UIViewController {
     @IBOutlet weak var folderTitleTextField: HighlightingTextfield!
     
     weak var delegate: AddFolderViewDelegate?
-    private let addFolderViewModel = AddFolderViewModel()
+    private let viewModel: AddFolderViewModel
     private var disposeBag = DisposeBag()
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
-        setupInstance()
         bind()
     }
     
+    
     // MARK: - Overrides
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
@@ -46,18 +51,32 @@ class AddFolderViewController: UIViewController {
         view.endEditing(true)
     }
 
+    
     // MARK: - Initializers
+    
+    init(_ viewModel: AddFolderViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: AddFolderViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
+    
     private func setupView() {
+        setupFolderTitleTextfield()
         setupConfirmButton()
         setupExitButton()
         setupEmojiTextFieldFrameView()
         setupFolderTitleTextField()
-    }
-    
-    private func setupInstance() {
-        // Folder Title TextField
-        folderTitleTextField.delegate = self
-        folderTitleTextField.returnKeyType = .done
     }
     
     private func bind() {
@@ -66,7 +85,11 @@ class AddFolderViewController: UIViewController {
         bindExitButton()
     }
     
-    // MARK: - Setups
+    private func setupFolderTitleTextfield() {
+        folderTitleTextField.delegate = self
+        folderTitleTextField.returnKeyType = .done
+    }
+    
     private func setupConfirmButton() {
         confirmButton.layer.cornerRadius = 12
     }
@@ -85,7 +108,9 @@ class AddFolderViewController: UIViewController {
         folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
     }
     
+    
     // MARK: - Binds
+    
     private func bindConfirmButton() {
         confirmButton.rx.tap
             .asDriver()
@@ -93,7 +118,7 @@ class AddFolderViewController: UIViewController {
                 guard let title = vc.folderTitleTextField.text else { return }
                 guard let titleEmoji = vc.folderEmojiTextField.text else { return }
                 
-                vc.addFolderViewModel.addFolder(title, titleEmoji)
+                vc.viewModel.addFolder(title, titleEmoji)
                     .observe(on: MainScheduler.instance)
                     .subscribe(onCompleted: { [weak vc] in
                         vc?.delegate?.didFolderAdded()
@@ -128,10 +153,13 @@ class AddFolderViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
 }
 
+
 // MARK: - Extensions
+
 extension AddFolderViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)

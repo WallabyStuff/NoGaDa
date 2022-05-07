@@ -53,13 +53,18 @@ class SongOptionFloatingPanelView {
     }
     
     private func prepareForShow(_ selectedSong: ArchiveSong) {
-        guard let songOptionVC = parentViewController?.storyboard?.instantiateViewController(withIdentifier: "popUpSongOptionStoryboard") as? PopUpSongOptionViewController else {
+        guard let parentVC = parentViewController,
+              let storyboard = parentVC.storyboard else {
             return
         }
         
-        let viewModel = PopUpSongOptionViewModel(parentViewController: parentViewController!, selectedSong: selectedSong)
+        let songOptionVC = storyboard.instantiateViewController(identifier: "popUpSongOptionStoryboard") { [weak self] coder -> PopUpSongOptionViewController in
+            guard let self = self else { return PopUpSongOptionViewController(.init()) }
+            
+            let viewModel = PopUpSongOptionViewModel(parentViewController: self.parentViewController!, selectedSong: selectedSong)
+            return .init(coder, viewModel) ?? PopUpSongOptionViewController(.init())
+        }
         
-        songOptionVC.viewModel = viewModel
         songOptionVC.delegate = contentViewDelegate
         songOptionVC.exitButtonAction = { [weak self] in
             self?.hide(animated: true)

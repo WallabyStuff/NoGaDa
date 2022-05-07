@@ -15,7 +15,8 @@ import AppTrackingTransparency
 
 class MainViewController: UIViewController {
 
-    // MARK: Declaration
+    
+    // MARK: Properties
     @IBOutlet weak var appbarView: AppbarView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -46,7 +47,9 @@ class MainViewController: UIViewController {
     private var minimumAppbarHeight: CGFloat = 80
     private var maximumAppbarHeight: CGFloat = 140
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,7 +66,9 @@ class MainViewController: UIViewController {
         requestTrackingAuthorization()
     }
     
+    
     // MARK: - Overrides
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -74,7 +79,9 @@ class MainViewController: UIViewController {
         reloadUpdateChartTableView()
     }
 
-    // MARK: - Initializers
+    
+    // MARK: - Setups
+    
     private func setupView() {
         self.hero.isEnabled = true
         setupAppbarView()
@@ -96,7 +103,6 @@ class MainViewController: UIViewController {
         bindUpdatedSongTableView()
     }
     
-    // MARK: - Setups
     private func setupAppbarView() {
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         appbarView.backgroundColor = .clear
@@ -165,7 +171,9 @@ class MainViewController: UIViewController {
         brandSegmentedControl.delegate = self
     }
     
+    
     // MARK: - Bindss
+    
     private func bindSearchBoxView() {
         searchBoxView.rx.tapGesture()
             .when(.recognized)
@@ -241,11 +249,14 @@ class MainViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     func presentSearchVC() {
         let storyboard = UIStoryboard(name: "Search", bundle: nil)
-        guard let searchVC = storyboard.instantiateViewController(identifier: "searchStoryboard") as? SearchViewController else {
-            return
+        let searchVC = storyboard.instantiateViewController(identifier: "searchStoryboard") { coder -> SearchViewController in
+            let viewModel = SearchViewModel()
+            return .init(coder, viewModel) ?? SearchViewController(.init())
         }
         
         HapticFeedbackManager.playImpactFeedback(.light)
@@ -255,8 +266,9 @@ class MainViewController: UIViewController {
     
     func presentArchiveFolderVC() {
         let storyboard = UIStoryboard(name: "Archive", bundle: nil)
-        guard let archiveVC = storyboard.instantiateViewController(identifier: "archiveFolderListStoryboard") as? ArchiveFolderListViewController else {
-            return
+        let archiveVC = storyboard.instantiateViewController(identifier: "archiveFolderListStoryboard") { coder -> ArchiveFolderListViewController in
+            let viewModel = ArchiveFolderListViewModel()
+            return .init(coder, viewModel) ?? ArchiveFolderListViewController(.init())
         }
         
         archiveVC.modalPresentationStyle = .fullScreen
@@ -330,7 +342,9 @@ class MainViewController: UIViewController {
     }
 }
 
+
 // MARK: - Extensions
+
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(viewModel.sectionCount)

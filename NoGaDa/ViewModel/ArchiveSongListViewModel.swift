@@ -11,12 +11,16 @@ import RxSwift
 import RxCocoa
 
 class ArchiveSongListViewModel {
-    public var currentFolderId: String?
+    public var currentFolderId: String
     private var disposeBag = DisposeBag()
     private let songFolderManager = SongFolderManager()
     private var songFolder = ArchiveFolder()
     private var songList = [ArchiveSong]()
     private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
+    
+    init() {
+        fatalError("You must give 'currentFolderId' paramenter to initialize")
+    }
     
     init(currentFolderId: String) {
         self.currentFolderId = currentFolderId
@@ -34,12 +38,11 @@ extension ArchiveSongListViewModel {
     
     func fetchSongFolder() -> Completable {
         return Completable.create { [weak self] observer in
-            guard let self = self,
-                  let folderId = self.currentFolderId else {
+            guard let self = self else {
                 return Disposables.create()
             }
             
-            self.songFolderManager.fetchData(folderId)
+            self.songFolderManager.fetchData(self.currentFolderId)
                 .subscribe(onNext: { songFolderRealm in
                     self.songFolder = songFolderRealm
                     self.songList = Array(songFolderRealm.songs)

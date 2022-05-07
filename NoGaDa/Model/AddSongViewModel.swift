@@ -15,6 +15,10 @@ class AddSongViewModel {
     private var targetFolderId: String?
     private var songFolderManager = SongFolderManager()
     
+    init() {
+        fatalError("You must give 'targetFolderId' to initialize")
+    }
+    
     init(targetFolderId: String) {
         self.targetFolderId = targetFolderId
     }

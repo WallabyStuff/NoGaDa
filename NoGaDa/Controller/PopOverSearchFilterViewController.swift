@@ -16,14 +16,18 @@ protocol PopOverSearchFilterViewDelegate: AnyObject {
 
 class PopOverSearchFilterViewController: UIViewController {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var filterItemTableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
     
     weak var delegate: PopOverSearchFilterViewDelegate?
     private var disposeBag = DisposeBag()
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +35,12 @@ class PopOverSearchFilterViewController: UIViewController {
         bind()
     }
 
+    
     // MARK: - Initializers
+    
+    
+    // MARK: - Setups
+    
     private func setupView() {
         setupFilterItemTableView()
         setupApplayButton()
@@ -40,8 +49,7 @@ class PopOverSearchFilterViewController: UIViewController {
     private func bind() {
         bindApplyButton()
     }
-        
-    // MARK: - Setups
+    
     private func setupFilterItemTableView() {
         filterItemTableView.tableFooterView = UIView()
         filterItemTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
@@ -57,7 +65,9 @@ class PopOverSearchFilterViewController: UIViewController {
         applyButton.layer.cornerRadius = 12
     }
     
+    
     // MARK: - Binds
+    
     private func bindApplyButton() {
         applyButton.rx.tap
             .asDriver()
@@ -67,10 +77,13 @@ class PopOverSearchFilterViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
 }
 
+
 // MARK: - Extensions
+
 extension PopOverSearchFilterViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SearchFilterItem.allCases.count

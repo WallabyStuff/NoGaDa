@@ -12,7 +12,9 @@ import RxCocoa
 
 class SettingViewController: UIViewController {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var searchFilterGroupView: UIView!
     @IBOutlet weak var etcGroupView: UIView!
@@ -21,15 +23,19 @@ class SettingViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
         bind()
     }
+
     
-    // MARK: - Initializers
+    // MARK: - Setups
+    
     private func setupView() {
         setupSearchFilterGroupView()
         setupEtcGroupView()
@@ -39,7 +45,6 @@ class SettingViewController: UIViewController {
         bindExitButton()
     }
     
-    // MARK: - Setups
     private func setupSearchFilterGroupView() {
         searchFilterGroupView.makeAsSettingGroupView()
         searchFilterTableView.layer.cornerRadius = 20
@@ -69,7 +74,9 @@ class SettingViewController: UIViewController {
         etcTableView.delegate = self
     }
     
+    
     // MARK: - Binds
+    
     private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
@@ -78,10 +85,13 @@ class SettingViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
 }
 
+
 // MARK: - Extensions
+
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {

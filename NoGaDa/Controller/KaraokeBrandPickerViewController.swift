@@ -16,22 +16,45 @@ protocol BrandPickerViewDelegaet: AnyObject {
 
 class KaraokeBrandPickerViewController: UIViewController {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var brandPickerTableView: UITableView!
     
     weak var delegate: BrandPickerViewDelegaet?
-    private let viewModel = KaraokeBrandPickerViewModel()
+    private let viewModel: KaraokeBrandPickerViewModel
     private var disposeBag = DisposeBag()
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
         bind()
     }
+
     
     // MARK: - Intializations
+    
+    init(_ viewModel: KaraokeBrandPickerViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: KaraokeBrandPickerViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
+    
     private func setupView() {
         setupBrandPickerTableView()
     }
@@ -40,7 +63,6 @@ class KaraokeBrandPickerViewController: UIViewController {
         bindBrandPickerTableView()
     }
     
-    // MARK: - Setups
     private func setupBrandPickerTableView() {
         brandPickerTableView.tableFooterView = UIView()
         brandPickerTableView.separatorStyle = .singleLine
@@ -54,7 +76,9 @@ class KaraokeBrandPickerViewController: UIViewController {
         brandPickerTableView.delegate = self
     }
     
+    
     // MARK: - Bidns
+    
     private func bindBrandPickerTableView() {
         brandPickerTableView.rx.itemSelected
             .asDriver()
@@ -65,7 +89,9 @@ class KaraokeBrandPickerViewController: UIViewController {
     }
 }
 
+
 // MARK: Extensions
+
 extension KaraokeBrandPickerViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRowsInSection(section)

@@ -18,18 +18,22 @@ import RxGesture
 
 class PopUpArchiveFolderListViewController: UIViewController {
 
-    // MARK: - Declaraiton
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var addFolderButton: UIButton!
     @IBOutlet weak var archiveFolderTableView: UITableView!
     
     weak var delegate: PopUpArchiveFolderViewDelegate?
-    public var viewModel: PopUpArchiveFolderListViewModel?
+    private var viewModel: PopUpArchiveFolderListViewModel
     private var disposeBag = DisposeBag()
     public var exitButtonAction: () -> Void = {}
     private let admobManager = AdMobManager()
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,7 +43,26 @@ class PopUpArchiveFolderListViewController: UIViewController {
         setArchiveFolders()
     }
 
+    
     // MARK: - Initializers
+    
+    init(_ viewModel: PopUpArchiveFolderListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: PopUpArchiveFolderListViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
+    
     private func setupData() {
         setupViewModel()
     }
@@ -57,7 +80,6 @@ class PopUpArchiveFolderListViewController: UIViewController {
         bindArchiveFolderTableView()
     }
     
-    // MARK: - Setups
     private func setupViewModel() {
         if viewModel == nil {
             dismiss(animated: true, completion: nil)
@@ -88,7 +110,9 @@ class PopUpArchiveFolderListViewController: UIViewController {
         exitButton.makeAsCircle()
     }
     
+    
     // MARK: - Binds
+    
     private func bindAddFolderButton() {
         addFolderButton.rx.tap
             .asDriver()
@@ -109,7 +133,7 @@ class PopUpArchiveFolderListViewController: UIViewController {
         archiveFolderTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
-                vc.viewModel?.presentAddSongAlert(viewController: self, indexPath: indexPath)
+                vc.viewModel.presentAddSongAlert(viewController: self, indexPath: indexPath)
                     .subscribe(with: vc, onCompleted: { vc in
                         vc.admobManager.presentAdMob(vc: vc)
                         vc.delegate?.didSongAdded?()
@@ -118,9 +142,11 @@ class PopUpArchiveFolderListViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     private func setArchiveFolders() {
-        viewModel?.fetchSongFolder()
+        viewModel.fetchSongFolder()
             .observe(on: MainScheduler.instance)
             .subscribe(onCompleted: { [weak self] in
                 self?.archiveFolderTableView.reloadData()
@@ -129,8 +155,9 @@ class PopUpArchiveFolderListViewController: UIViewController {
     
     private func presentAddFolderVC() {
         let storyboard = UIStoryboard(name: "Folder", bundle: nil)
-        guard let addFolderVC = storyboard.instantiateViewController(identifier: "addFolderStoryboard") as? AddFolderViewController else {
-            return
+        let addFolderVC = storyboard.instantiateViewController(identifier: "addFolderStoryboard") { coder -> AddFolderViewController in
+            let viewModel = AddFolderViewModel()
+            return .init(coder, viewModel) ?? AddFolderViewController(.init())
         }
         
         addFolderVC.delegate = self
@@ -138,25 +165,27 @@ class PopUpArchiveFolderListViewController: UIViewController {
     }
     
     private func reloadArchiveFolderTableView() {
-        viewModel?.fetchSongFolder()
+        viewModel.fetchSongFolder()
             .subscribe(onCompleted: { [weak self] in
                 self?.archiveFolderTableView.reloadData()
             }).disposed(by: disposeBag)
     }
 }
 
+
 // MARK: - Extensions
+
 extension PopUpArchiveFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel!.numberOfRowsInSection(viewModel!.sectionCount)
+        return viewModel.numberOfRowsInSection(viewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let folderCell = tableView.dequeueReusableCell(withIdentifier: "popUpArchiveTableCell") as? PopUpArchiveFolderTableViewCell,
-              let songFolderVM = viewModel?.songFolderAtIndex(indexPath) else {
+        guard let folderCell = tableView.dequeueReusableCell(withIdentifier: "popUpArchiveTableCell") as? PopUpArchiveFolderTableViewCell else {
               return UITableViewCell()
           }
         
+        let songFolderVM = viewModel.songFolderAtIndex(indexPath)
         folderCell.titleLabel.text = songFolderVM.title
         folderCell.emojiLabel.text = songFolderVM.titleEmoji
         
@@ -165,7 +194,7 @@ extension PopUpArchiveFolderListViewController: UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            viewModel?.presentRemoveFolderAlert(viewController: self, indexPath: indexPath)
+            viewModel.presentRemoveFolderAlert(viewController: self, indexPath: indexPath)
                 .subscribe(onCompleted: { [weak self] in
                     self?.reloadArchiveFolderTableView()
                 })
