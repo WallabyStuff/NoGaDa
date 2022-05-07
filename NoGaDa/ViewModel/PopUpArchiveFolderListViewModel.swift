@@ -15,6 +15,10 @@ class PopUpArchiveFolderListViewModel {
     private let songFolderManager = SongFolderManager()
     private var songFolderList = [ArchiveFolder]()
     
+    init() {
+        fatalError("You must give 'selectedSong' paramenter to initialize")
+    }
+    
     init(selectedSong: Song) {
         self.selectedSong = selectedSong
     }

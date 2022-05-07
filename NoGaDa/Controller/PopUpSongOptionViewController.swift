@@ -16,7 +16,9 @@ import RxCocoa
 
 class PopUpSongOptionViewController: UIViewController {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var songThumbnailImageView: UIImageView!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var songTitleLabel: UILabel!
@@ -24,24 +26,39 @@ class PopUpSongOptionViewController: UIViewController {
     @IBOutlet weak var optionTableView: UITableView!
     
     weak var delegate: PopUpSongOptionViewDelegate?
-    public var viewModel: PopUpSongOptionViewModel?
+    private var viewModel: PopUpSongOptionViewModel
     private var disposeBag = DisposeBag()
     public var exitButtonAction: () -> Void = {}
     private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupData()
         setupView()
         bind()
     }
     
+    
     // MARK: - Initializers
-    private func setupData() {
-        setupViewModel()
+    
+    init(_ viewModel: PopUpSongOptionViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
+    
+    init?(_ coder: NSCoder, _ viewModel: PopUpSongOptionViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
     
     private func setupView() {
         setupExitButton()
@@ -57,14 +74,6 @@ class PopUpSongOptionViewController: UIViewController {
         bindOptionTableView()
     }
     
-    // MARK: - Setups
-    private func setupViewModel() {
-        if viewModel == nil {
-            dismiss(animated: true, completion: nil)
-            return
-        }
-    }
-    
     private func setupExitButton() {
         exitButton.makeAsCircle()
     }
@@ -74,11 +83,11 @@ class PopUpSongOptionViewController: UIViewController {
     }
     
     private func setupSongTitleLabel() {
-        songTitleLabel.text = viewModel?.selectedSong?.title
+        songTitleLabel.text = viewModel.selectedSong?.title
     }
     
     private func setupSingerLabel() {
-        singerLabel.text = viewModel?.selectedSong?.singer
+        singerLabel.text = viewModel.selectedSong?.singer
     }
     
     private func setupOptionTableView() {
@@ -92,10 +101,12 @@ class PopUpSongOptionViewController: UIViewController {
     }
     
     private func setupArchiveFolderFloatingPanelView() {
-        archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: viewModel?.parentViewController ?? self, delegate: self)
+        archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: viewModel.parentViewController ?? self, delegate: self)
     }
     
+    
     // MARK: - Binds
+    
     private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
@@ -109,7 +120,7 @@ class PopUpSongOptionViewController: UIViewController {
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
                 if indexPath.row == 0 {
-                    guard let selectedSong = vc.viewModel?.selectedSong?.asSongType() else { return }
+                    guard let selectedSong = vc.viewModel.selectedSong?.asSongType() else { return }
                     vc.archiveFolderFloatingPanelView?.show(selectedSong)
                 } else {
                     vc.presentRemoveAlert()
@@ -117,22 +128,22 @@ class PopUpSongOptionViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     private func presentArchiveFolderVC(_ selectedSong: Song) {
         let storyboard = UIStoryboard(name: "Folder", bundle: nil)
-        guard let archiveFolderVC = storyboard.instantiateViewController(withIdentifier: "popUpArchiveStoryboard") as? PopUpArchiveFolderListViewController else {
-            return
+        let archiveFolderVC = storyboard.instantiateViewController(identifier: "popUpArchiveStoryboard") { coder -> PopUpArchiveFolderListViewController in
+            let viewModel = PopUpArchiveFolderListViewModel()
+            return .init(coder, viewModel) ?? PopUpArchiveFolderListViewController(.init())
         }
         
-        let viewModel = PopUpArchiveFolderListViewModel(selectedSong: selectedSong)
-        archiveFolderVC.viewModel = viewModel
         archiveFolderVC.delegate = self
-        
         present(archiveFolderVC, animated: true, completion: nil)
     }
     
     private func presentRemoveAlert() {
-        let removeAlert = UIAlertController(title: "삭제", message: "정말 「\(viewModel!.selectedSong!.title)」 를 삭제하시겠습니까?", preferredStyle: .alert)
+        let removeAlert = UIAlertController(title: "삭제", message: "정말 「\(viewModel.selectedSong!.title)」 를 삭제하시겠습니까?", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
             self?.deletedSelectedSong()
@@ -147,7 +158,7 @@ class PopUpSongOptionViewController: UIViewController {
     }
     
     private func deletedSelectedSong() {
-        viewModel!.deleteSong()
+        viewModel.deleteSong()
             .subscribe(with: self, onCompleted: { vc in
                 vc.archiveFolderFloatingPanelView?.hide(animated: true)
                 vc.delegate?.didSelectedItemMoved?()
@@ -155,16 +166,18 @@ class PopUpSongOptionViewController: UIViewController {
     }
 }
 
+
 // MARK: - Extensions
+
 extension PopUpSongOptionViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel!.numberOfRowsInSection(viewModel!.sectionCount)
+        return viewModel.numberOfRowsInSection(viewModel.sectionCount)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let optionCell = tableView.dequeueReusableCell(withIdentifier: "popUpSongOptionTableCell", for: indexPath) as? PopUpSongOptionTableViewCell else { return UITableViewCell() }
         
-        let optionModel = viewModel!.optionAtIndex(indexPath)
+        let optionModel = viewModel.optionAtIndex(indexPath)
         optionCell.titleLabel.text = optionModel.title
         optionCell.iconImageView.image = optionModel.icon
         

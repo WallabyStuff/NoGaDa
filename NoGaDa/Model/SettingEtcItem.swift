@@ -34,7 +34,10 @@ enum SettingEtcItem: String, CaseIterable {
         switch self {
         case .credit:
             let storyboard = UIStoryboard(name: "Setting", bundle: Bundle.main)
-            guard let creditVC = storyboard.instantiateViewController(identifier: "creditStoryboard") as? CreditViewController else { return }
+            let creditVC = storyboard.instantiateViewController(identifier: "creditStoryboard") { coder -> CreditViewController in
+                let viewModel = CreditViewModel()
+                return .init(coder, viewModel) ?? CreditViewController(viewModel)
+            }
             
             vc.present(creditVC, animated: true, completion: nil)
         case .bugReport:

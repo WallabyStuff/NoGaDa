@@ -18,7 +18,9 @@ import Hero
 
 class AddSongViewController: UIViewController {
     
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var notificationView: UIView!
@@ -30,19 +32,22 @@ class AddSongViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     
     weak var delegate: AddSongViewDelegate?
-    public var viewModel: AddSongViewModel?
+    private var viewModel: AddSongViewModel
     private var disposeBag = DisposeBag()
     private var selectedBrand: KaraokeBrand = .tj
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupView()
         bind()
     }
     
+    
     // MARK: - Overrides
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -57,13 +62,25 @@ class AddSongViewController: UIViewController {
         }
     }
     
+    
     // MARK: - Initializers
-    private func setupData() {
-        if viewModel == nil {
-            dismiss(animated: true, completion: nil)
-            return
-        }
+    
+    init(_ viewModel: AddSongViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
+    
+    init?(_ coder: NSCoder, _ viewModel: AddSongViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
     
     private func setupView() {
         setupExitButton()
@@ -89,7 +106,6 @@ class AddSongViewController: UIViewController {
         bindBrandPickerButton()
     }
     
-    // MARK: - Setups
     private func setupExitButton() {
         exitButton.makeAsCircle()
         exitButton.setExitButtonShadow()
@@ -129,7 +145,9 @@ class AddSongViewController: UIViewController {
         contentScrollView.delegate = self
     }
     
+    
     // MARK: - Binds
+    
     private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
@@ -202,13 +220,15 @@ class AddSongViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     private func addSong() {
         let songTitle = songTitleTextField.text ?? ""
         let singer = singerTextField.text ?? ""
         let songNumber = songNumberTextField.text ?? ""
 
-        viewModel?.addSong(title: songTitle,
+        viewModel.addSong(title: songTitle,
                                  singer: singer,
                                  songNumber: songNumber,
                                  brand: selectedBrand)
@@ -250,7 +270,9 @@ class AddSongViewController: UIViewController {
     }
 }
 
+
 // MARK: - Extensions
+
 extension AddSongViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         view.endEditing(true)

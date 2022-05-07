@@ -16,7 +16,9 @@ protocol SearchResultViewDelegate: AnyObject {
 
 class SearchResultViewController: UIViewController {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var brandSelector: UISegmentedControl!
     @IBOutlet weak var searchResultContentView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
@@ -24,11 +26,14 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
     
     weak var delegate: SearchResultViewDelegate?
+    private var viewModel: SearchResultViewModel
     private let searchResultViewModel = SearchResultViewModel()
     private var disposeBag = DisposeBag()
     private var searchKeyword = ""
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,14 +41,35 @@ class SearchResultViewController: UIViewController {
         bind()
     }
     
+    
     // MARK: - Overrides
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         searchResultTableView.reloadData()
     }
     
+    
     // MARK: - Initializers
+    
+    init(_ viewModel: SearchResultViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: SearchResultViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
+    
     private func setupView() {
         setupSearchResultContentView()
         setupBrandSelector()
@@ -56,7 +82,6 @@ class SearchResultViewController: UIViewController {
         bindBrandSelector()
     }
     
-    // MARK: - Setups
     private func setupSearchResultContentView() {
         searchResultContentView.clipsToBounds = true
         searchResultContentView.layer.cornerRadius = 12
@@ -87,7 +112,9 @@ class SearchResultViewController: UIViewController {
         searchResultPlaceholderLabel.isHidden = true
     }
     
+    
     // MARK: - Binds
+    
     private func bindBrandSelector() {
         brandSelector.rx.selectedSegmentIndex
             .asDriver()
@@ -97,7 +124,9 @@ class SearchResultViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     public func setSearchResult(_ searchKeyword: String) {
         self.searchKeyword = searchKeyword
         
@@ -140,7 +169,9 @@ class SearchResultViewController: UIViewController {
     }
 }
 
+
 // MARK: - Extensions
+
 extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResultViewModel.numberOfRowsInSection(searchResultViewModel.sectionCount)

@@ -17,16 +17,21 @@ protocol SearchHistoryViewDelegate: AnyObject {
 
 class SearchHistoryViewController: UIViewController {
     
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var searchHistoryTableView: UITableView!
     @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
     @IBOutlet weak var clearHistoryButton: UIButton!
     
     weak var delegate: SearchHistoryViewDelegate?
+    private var viewModel: SearchHistoryViewModel
     private let searchHistoryViewModel = SearchHistoryViewModel()
     private var disposeBag = DisposeBag()
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +39,26 @@ class SearchHistoryViewController: UIViewController {
         bind()
     }
     
+    
     // MARK: - Initializers
+    
+    init(_ viewModel: SearchHistoryViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: SearchHistoryViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
+    // MARK: - Setups
+    
     private func setupView() {
         setupSearchHistoryTableView()
     }
@@ -43,7 +67,6 @@ class SearchHistoryViewController: UIViewController {
         bindClearHistoryButton()
     }
     
-    // MARK: - Setups
     private func setupSearchHistoryTableView() {
         searchHistoryTableView.separatorStyle = .none
         searchHistoryTableView.tableFooterView = UIView()
@@ -55,7 +78,9 @@ class SearchHistoryViewController: UIViewController {
         searchHistoryTableView.delegate = self
     }
     
+    
     // MARK: - Binds
+    
     private func bindClearHistoryButton() {
         clearHistoryButton.rx.tap
             .asDriver()
@@ -68,7 +93,9 @@ class SearchHistoryViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     func updateSearchHistory() {
         searchHistoryViewModel.fetchSearchHistory()
             .observe(on: MainScheduler.instance)
@@ -88,7 +115,9 @@ class SearchHistoryViewController: UIViewController {
     }
 }
 
+
 // MARK: - Extensions
+
 extension SearchHistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchHistoryViewModel.numberOfRowsInSection(searchHistoryViewModel.sectionCount)

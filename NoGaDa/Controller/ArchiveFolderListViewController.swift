@@ -18,7 +18,9 @@ import Hero
 
 class ArchiveFolderListViewController: UIViewController {
 
-    // MARK: - Declaraiton
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -27,12 +29,14 @@ class ArchiveFolderListViewController: UIViewController {
     @IBOutlet weak var archiveFolderTableView: UITableView!
     
     weak var delegate: ArchiveFolderListViewDelegate?
-    private let viewModel = ArchiveFolderListViewModel()
+    private var viewModel: ArchiveFolderListViewModel
     private var disposeBag = DisposeBag()
     private let minimumAppbarHeight = 88 + SafeAreaInset.top
     private let archiveFolderTableViewTopInset: CGFloat = 36
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,7 +51,9 @@ class ArchiveFolderListViewController: UIViewController {
         unhighlightSelectedCell()
     }
     
+    
     // MARK: - Overrides
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -57,7 +63,26 @@ class ArchiveFolderListViewController: UIViewController {
         reloadArchiveFolderTableView()
     }
 
+    
     // MARK: - Initializers
+    
+    init(_ viewModel: ArchiveFolderListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: ArchiveFolderListViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
+    
     private func setupView() {
         self.hero.isEnabled = true
         
@@ -74,7 +99,6 @@ class ArchiveFolderListViewController: UIViewController {
         bindAppbarView()
     }
     
-    // MARK: - Setups
     private func setupAppbar() {
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         appbarView.hero.id = "appbar"
@@ -105,7 +129,9 @@ class ArchiveFolderListViewController: UIViewController {
         archiveFolderTableView.dataSource = self
     }
     
+    
     // MARK: - Binds
+    
     private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
@@ -143,7 +169,9 @@ class ArchiveFolderListViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     private func reloadArchiveFolderTableView() {
         viewModel.fetchFolders()
             .subscribe(onCompleted: { [weak self] in
@@ -187,13 +215,12 @@ class ArchiveFolderListViewController: UIViewController {
     
     public func presentArchiveSongListVC(indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Archive", bundle: nil)
-        guard let archiveSongListVC = storyboard.instantiateViewController(identifier: "archiveSongListStoryboard") as? ArchiveSongListViewController else {
-            return
+        let archiveSongListVC = storyboard.instantiateViewController(identifier: "archiveSongListStoryboard") { coder -> ArchiveSongListViewController in
+            let viewModel = ArchiveSongListViewModel(currentFolderId: self.viewModel.archiveFolderAtIndex(indexPath).id)
+            return .init(coder, viewModel) ?? ArchiveSongListViewController(.init())
         }
         
         archiveSongListVC.modalPresentationStyle = .fullScreen
-        let viewModel = ArchiveSongListViewModel(currentFolderId: viewModel.archiveFolderAtIndex(indexPath).id)
-        archiveSongListVC.viewModel = viewModel
         archiveSongListVC.delegate = self
         present(archiveSongListVC, animated: true, completion: nil)
     }
@@ -204,7 +231,9 @@ class ArchiveFolderListViewController: UIViewController {
     }
 }
 
+
 // MARK: - Extensions
+
 extension ArchiveFolderListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

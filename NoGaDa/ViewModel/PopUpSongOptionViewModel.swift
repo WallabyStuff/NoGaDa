@@ -16,6 +16,10 @@ class PopUpSongOptionViewModel {
     private let songFolderManager = SongFolderManager()
     public var parentViewController: UIViewController?
     
+    init() {
+        fatalError("You must give 'parentViewController' and 'selectedSong' paramenter to initialize")
+    }
+    
     init(parentViewController: UIViewController, selectedSong: ArchiveSong) {
         self.parentViewController = parentViewController
         self.selectedSong = selectedSong

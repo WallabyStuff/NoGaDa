@@ -14,7 +14,9 @@ import MessageUI
 
 class CreditViewController: UIViewController {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var contentScrollView: UIScrollView!
@@ -24,9 +26,11 @@ class CreditViewController: UIViewController {
     @IBOutlet weak var contactTextView: UITextView!
     
     private var disposeBag = DisposeBag()
-    private var creditViewModel = CreditViewModel()
+    private var viewModel: CreditViewModel
+    
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +38,26 @@ class CreditViewController: UIViewController {
         bind()
     }
     
+    
     // MARK: - Initializers
+    
+    init(_ viewModel: CreditViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init?(_ coder: NSCoder, _ viewModel: CreditViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
+    
     private func setupView() {
         setupHeaderLabel()
         setupContactUsBoxView()
@@ -47,9 +70,8 @@ class CreditViewController: UIViewController {
         bindContactUsBoxView()
     }
     
-    // MARK: - Setups
     private func setupHeaderLabel() {
-        headerLabel.text = creditViewModel.headerText
+        headerLabel.text = viewModel.headerText
     }
     
     private func setupContactUsBoxView() {
@@ -71,7 +93,9 @@ class CreditViewController: UIViewController {
         contactTextView.dataDetectorTypes = .all
     }
     
+    
     // MARK: Binds
+    
     private func bindExitButton() {
         exitButton.rx.tap
             .asDriver()
@@ -87,30 +111,33 @@ class CreditViewController: UIViewController {
                 if MFMailComposeViewController.canSendMail() {
                     let composeVC = MFMailComposeViewController()
                     
-                    composeVC.setToRecipients(vc.creditViewModel.emailRecipients)
-                    composeVC.setSubject(vc.creditViewModel.sendEmailErrorMessage)
+                    composeVC.setToRecipients(vc.viewModel.emailRecipients)
+                    composeVC.setSubject(vc.viewModel.sendEmailErrorMessage)
                     composeVC.setMessageBody("", isHTML: false)
                     
                     vc.present(composeVC, animated: true, completion: nil)
                 } else {
-                    print(vc.creditViewModel.sendEmailErrorMessage)
+                    print(vc.viewModel.sendEmailErrorMessage)
                 }
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
 }
 
+
 // MARK: Extensions
+
 extension CreditViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return creditViewModel.numberOfRowInSection(creditViewModel.sectionCount)
+        return viewModel.numberOfRowInSection(viewModel.sectionCount)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let resourceCell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconResourceCollectionCell", for: indexPath) as? IconResourceCollectionViewCell else { return UICollectionViewCell() }
         
-        let resourceItem = creditViewModel.resourceItemAtIndex(indexPath)
+        let resourceItem = viewModel.resourceItemAtIndex(indexPath)
         resourceCell.descriptionLabel.text  = resourceItem.description
         resourceCell.iconImageView.image    = resourceItem.image
         

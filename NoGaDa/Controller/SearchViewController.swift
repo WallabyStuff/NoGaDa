@@ -19,7 +19,9 @@ enum ContentsType {
 
 class SearchViewController: UIViewController {
 
-    // MARK: - Declaraiton
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -30,17 +32,18 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var contentsView: UIView!
     
-    public var viewModel: SearchViewModel?
+    private var viewModel: SearchViewModel
     private var disposeBag = DisposeBag()
-    private var searchHistoryVC = SearchHistoryViewController()
-    private var searchResultVC = SearchResultViewController()
+    private var searchHistoryVC: SearchHistoryViewController?
+    private var searchResultVC: SearchResultViewController?
     private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
+    
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupData()
         setupView()
         bind()
     }
@@ -50,7 +53,9 @@ class SearchViewController: UIViewController {
         searchTextField.becomeFirstResponder()
     }
     
+    
     // MARK: - Overrides
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -59,10 +64,25 @@ class SearchViewController: UIViewController {
         view.endEditing(true)
     }
 
+    
     // MARK: - Initializers
-    private func setupData() {
-        setupViewModel()
+    
+    init(_ viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
+    
+    init?(_ coder: NSCoder, _ viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setups
     
     private func setupView() {
         self.hero.isEnabled = true
@@ -73,19 +93,15 @@ class SearchViewController: UIViewController {
         setupSearchButton()
         setupBackButton()
         setupClearTextFieldButton()
-        setupContainerView()
         setupArchiveFloatingPanelView()
+        setupSearchHistoryVC()
+        setupSearchResultVC()
     }
     
     private func bind() {
         bindBackButton()
         bindFilterButton()
         bindClearTextFieldButton()
-    }
-    
-    // MARK: - Setups
-    private func setupViewModel() {
-        viewModel = SearchViewModel()
     }
     
     private func setupAppbarView() {
@@ -129,32 +145,47 @@ class SearchViewController: UIViewController {
         clearTextFieldButton.setPadding(width: 6)
     }
     
-    private func setupContainerView() {
-        let storyboard = UIStoryboard(name: "Search", bundle: nil)
-        searchHistoryVC = storyboard.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
-        searchResultVC = storyboard.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
-        
-        searchHistoryVC.delegate = self
-        searchResultVC.delegate = self
-        
-        addChild(searchHistoryVC)
-        addChild(searchResultVC)
-        
-        contentsView.addSubview(searchHistoryVC.view)
-        contentsView.addSubview(searchResultVC.view)
-
-        searchHistoryVC.didMove(toParent: self)
-        searchResultVC.didMove(toParent: self)
-        
-        searchHistoryVC.view.frame = contentsView.bounds
-        searchResultVC.view.frame = contentsView.bounds
-        
-        searchResultVC.view.isHidden = true
-    }
-    
     private func setupArchiveFloatingPanelView() {
         archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: self, delegate: self)
     }
+    
+    private func setupSearchHistoryVC() {
+        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        searchHistoryVC = storyboard.instantiateViewController(identifier: "searchHistoryStoryboard") { coder -> SearchHistoryViewController in
+            let viewModel = SearchHistoryViewModel()
+            return .init(coder, viewModel) ?? SearchHistoryViewController(viewModel)
+        }
+        
+        guard let searchHistoryVC = searchHistoryVC else {
+            return
+        }
+        
+        searchHistoryVC.delegate = self
+        addChild(searchHistoryVC)
+        contentsView.addSubview(searchHistoryVC.view)
+        searchHistoryVC.didMove(toParent: self)
+        searchHistoryVC.view.frame = contentsView.bounds
+    }
+    
+    private func setupSearchResultVC() {
+        let storyboard = UIStoryboard(name: "Search", bundle: nil)
+        searchResultVC = storyboard.instantiateViewController(identifier: "searchResultStoryboard") { coder -> SearchResultViewController in
+            let viewModel = SearchResultViewModel()
+            return .init(coder, viewModel) ?? SearchResultViewController(.init())
+        }
+        
+        guard let searchResultVC = searchResultVC else {
+            return
+        }
+        
+        searchResultVC.delegate = self
+        addChild(searchResultVC)
+        contentsView.addSubview(searchResultVC.view)
+        searchResultVC.didMove(toParent: self)
+        searchResultVC.view.frame = contentsView.bounds
+        searchResultVC.view.isHidden = true
+    }
+    
     
     // MARK: - Binds
     private func bindBackButton() {
@@ -182,7 +213,9 @@ class SearchViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    
     // MARK: - Methods
+    
     private func dismissKeyboardAndArchivePanel() {
         view.endEditing(true)
         archiveFolderFloatingPanelView?.hide(animated: true)
@@ -218,24 +251,26 @@ class SearchViewController: UIViewController {
         
         view.endEditing(true)
         
-        viewModel!.addSearchHistory(searchKeyword)
-        searchResultVC.setSearchResult(searchKeyword)
+        viewModel.addSearchHistory(searchKeyword)
+        searchResultVC?.setSearchResult(searchKeyword)
         replaceContents(type: .searchResult)
     }
     
     private func replaceContents(type: ContentsType) {
         if type == .searchHistory {
-            searchHistoryVC.updateSearchHistory()
-            searchHistoryVC.view.isHidden = false
-            searchResultVC.view.isHidden = true
+            searchHistoryVC?.updateSearchHistory()
+            searchHistoryVC?.view.isHidden = false
+            searchResultVC?.view.isHidden = true
         } else {
-            searchHistoryVC.view.isHidden = true
-            searchResultVC.view.isHidden = false
+            searchHistoryVC?.view.isHidden = true
+            searchResultVC?.view.isHidden = false
         }
     }
 }
 
+
 // MARK: - Extensions
+
 extension SearchViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         dismissKeyboardAndArchivePanel()
