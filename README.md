@@ -6,13 +6,11 @@
 
 
 <br><br>
-## Screenshots 📱
 ![Preview image](https://user-images.githubusercontent.com/63496607/145188498-1bd10f05-a5af-4aeb-becb-7ae61b230352.png)
 
----
 
 <br><br>
-## Why I made this 🤔
+## 🤔 Why I made this
 
 친구랑 노래방에 가서 노래를 불렀다. 그리고 우린 우연찮게 공통적인 고민을 하고 있다는 것을 알게 되었다. 
 
@@ -25,18 +23,18 @@
 나는 이것이 꽤나 불편하다고 느끼고 이런 번거로운 작업을 줄여주도록 tj 및 금영 노래방 노래를 검색하고 폴더를 만들어 음악 재생 앱에서 카테고리 별로 분류해서 저장하듯이 만들면 어떨까 하는 생각에 만들기 시작했다.
 
 <br><br>
-## Trouble shooting 💡
+## 💡 Trouble shooting
 
 - [Custom Segmented Control](https://www.notion.so/Custom-segmented-control-a9fb45beb3184d26a26a4cfa0714ef80) <br>
 
 
 <br><br>
-## Download 🛍
+## 🛍 Download 
 
 - [Appstore](https://apps.apple.com/kr/app/%EB%85%B8%EA%B0%80%EB%8B%A4-%EB%85%B8%EB%9E%98%EB%B0%A9-%EA%B0%80%EC%84%9C-%EB%8B%A4-%EB%B6%80%EB%A5%BC%EA%B1%B0%EC%95%BC-%EB%85%B8%EB%9E%98%EA%B2%80%EC%83%89-%EC%A0%80%EC%9E%A5/id1588373483?l=en)
 
 <br><br>
-# Used Tools 🛠
+## 🛠 Used Tools
 
 - **Appicon** - figma
 - **Design** - figma
@@ -44,7 +42,7 @@
 - **Preview Images** - figma
 
 <br><br>
-# Used pods 🥥
+## 🥥 Pods
 
 - [RxSwift](https://cocoapods.org/pods/RxSwift)
 - [RxCocoa](https://cocoapods.org/pods/RxCocoa)
