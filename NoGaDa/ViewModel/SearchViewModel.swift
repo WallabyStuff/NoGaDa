@@ -10,9 +10,9 @@ import RxSwift
 import RxCocoa
 
 class SearchViewModel {
-    
     private var disposeBag = DisposeBag()
     private let searchHistoryManager = SearchHistoryManager()
+    private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
     func addSearchHistory(_ keyword: String) {
         searchHistoryManager.addData(searchKeyword: keyword)

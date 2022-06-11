@@ -10,11 +10,11 @@ import RxSwift
 import RxCocoa
 
 class MainViewModel {
-    
     private var disposeBag = DisposeBag()
-    private let karaokeManager = KaraokeManager()
+    private let karaokeManager = KaraokeApiManager()
     private var updatedSongList = [Song]()
     private let songFolderManager = SongFolderManager()
+    private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
 }
 
 extension MainViewModel {
@@ -63,32 +63,8 @@ extension MainViewModel {
         return updatedSongList.count
     }
     
-    func updatedSongAtIndex(_ indexPath: IndexPath) -> UpdatedSongViewModel {
+    func updatedSongAtIndex(_ indexPath: IndexPath) -> Song {
         let song = updatedSongList[indexPath.row]
-        return UpdatedSongViewModel(song)
-    }
-}
-
-struct UpdatedSongViewModel {
-    var song: Song
-}
-
-extension UpdatedSongViewModel {
-    init(_ song: Song) {
-        self.song = song
-    }
-}
-
-extension UpdatedSongViewModel {
-    var title: String {
-        return song.title
-    }
-    
-    var singer: String {
-        return song.singer
-    }
-    
-    var songNumber: String {
-        return song.no
+        return song
     }
 }

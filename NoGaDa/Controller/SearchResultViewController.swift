@@ -17,76 +17,87 @@ protocol SearchResultViewDelegate: AnyObject {
 class SearchResultViewController: UIViewController {
 
     // MARK: - Declaration
-    let searchResultViewModel = SearchResultViewModel()
-    var disposeBag = DisposeBag()
-    weak var delegate: SearchResultViewDelegate?
-    var searchKeyword = ""
-    
     @IBOutlet weak var brandSelector: UISegmentedControl!
     @IBOutlet weak var searchResultContentView: UIView!
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var searchResultPlaceholderLabel: UILabel!
     @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
     
-    // MARK: - LifeCycle
+    weak var delegate: SearchResultViewDelegate?
+    private let searchResultViewModel = SearchResultViewModel()
+    private var disposeBag = DisposeBag()
+    private var searchKeyword = ""
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
-        initEventListener()
+        setupView()
+        bind()
     }
     
-    // MARK: - Override
+    // MARK: - Overrides
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         searchResultTableView.reloadData()
     }
     
-    // MARK: - Initialization
-    private func initView() {
-        // Search result ContentView
+    // MARK: - Initializers
+    private func setupView() {
+        setupSearchResultContentView()
+        setupBrandSelector()
+        setupSearchResultTableView()
+        setupLoadingIndicatorView()
+        setupSearchResultPlaceholderLabel()
+    }
+    
+    private func bind() {
+        bindBrandSelector()
+    }
+    
+    // MARK: - Setups
+    private func setupSearchResultContentView() {
         searchResultContentView.clipsToBounds = true
         searchResultContentView.layer.cornerRadius = 12
-        
-        // Brand Selector SegmentedControl
+    }
+    
+    private func setupBrandSelector() {
         brandSelector.setSelectedTextColor(ColorSet.segmentedControlSelectedTextColor)
         brandSelector.setDefaultTextColor(ColorSet.segmentedControlDefaultTextColor)
-        
-        // SearchResult TableView
+    }
+    
+    private func setupSearchResultTableView() {
         searchResultTableView.tableFooterView = UIView()
         searchResultTableView.separatorStyle = .none
         searchResultTableView.layer.cornerRadius = 16
         
-        // Search loading IndicatorView
+        let nibName = UINib(nibName: "SongTableViewCell", bundle: nil)
+        searchResultTableView.register(nibName, forCellReuseIdentifier: "searchResultTableViewCell")
+        searchResultTableView.dataSource = self
+        searchResultTableView.delegate = self
+    }
+    
+    private func setupLoadingIndicatorView() {
         searchIndicator.stopAnimatingAndHide()
-        
-        // Search result placeholder label
+    }
+    
+    private func setupSearchResultPlaceholderLabel() {
         searchResultPlaceholderLabel.text = "검색창에 제목이나 가수명으로 노래를 검색하세요!"
         searchResultPlaceholderLabel.isHidden = true
     }
     
-    private func initInstance() {
-        // SearchResult TableView
-        let searchResultCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
-        searchResultTableView.register(searchResultCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-        
-        // Brand Segmented Control Action
+    // MARK: - Binds
+    private func bindBrandSelector() {
         brandSelector.rx.selectedSegmentIndex
-            .bind(with: self) { vc, _ in
+            .asDriver()
+            .drive(with: self) { vc, _ in
                 // TODO - replace table cells according to brand catalog
                 vc.setSearchResult(vc.searchKeyword)
             }.disposed(by: disposeBag)
     }
     
-    private func initEventListener() {
-        
-    }
-    
-    // MARK: - Method
+    // MARK: - Methods
     public func setSearchResult(_ searchKeyword: String) {
         self.searchKeyword = searchKeyword
         
@@ -129,7 +140,7 @@ class SearchResultViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResultViewModel.numberOfRowsInSection(searchResultViewModel.sectionCount)

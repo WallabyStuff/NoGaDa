@@ -18,25 +18,25 @@ class BISegmentedControl: UIView {
     private let barIndicatorView = UIView()
     private var barIndicatorLeftAnchor: NSLayoutConstraint?
     private var barIndicatorwidthAnchor: NSLayoutConstraint?
-    var barIndicatorWidthProportion: CGFloat = 0.7
-    var barIndicatorColor: UIColor = ColorSet.updatedSongSelectorBarIndicatorColor
-    var barIndicatorHeight: CGFloat = 4
-    var currentPosition = 0
-    var segmentTintColor: UIColor = .black
-    var segmentDefaultColor: UIColor = .gray
-    var segmentFontSize: CGFloat = 17
+    public var barIndicatorWidthProportion: CGFloat = 0.7
+    public var barIndicatorColor: UIColor = ColorSet.updatedSongSelectorBarIndicatorColor
+    public var barIndicatorHeight: CGFloat = 4
+    public var currentPosition = 0
+    public var segmentTintColor: UIColor = .black
+    public var segmentDefaultColor: UIColor = .gray
+    public var segmentFontSize: CGFloat = 17
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureView()
+        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureView()
+        setup()
     }
     
-    private func configureView() {
+    private func setup() {
         configureBarIndicator()
         configureStackView()
         DispatchQueue.main.async {

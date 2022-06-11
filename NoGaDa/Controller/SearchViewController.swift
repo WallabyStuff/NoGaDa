@@ -20,12 +20,6 @@ enum ContentsType {
 class SearchViewController: UIViewController {
 
     // MARK: - Declaraiton
-    private var searchViewModel = SearchViewModel()
-    private var disposeBag = DisposeBag()
-    private var archiveFloatingPanel: ArchiveFloatingPanelView?
-    private var searchHistoryVC = SearchHistoryViewController()
-    private var searchResultVC = SearchResultViewController()
-    
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -36,16 +30,27 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var contentsView: UIView!
     
-    // MARK: - LifeCycle
+    public var viewModel: SearchViewModel?
+    private var disposeBag = DisposeBag()
+    private var searchHistoryVC = SearchHistoryViewController()
+    private var searchResultVC = SearchResultViewController()
+    private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
-        initEventListener()
+        setupData()
+        setupView()
+        bind()
     }
     
-    // MARK: - Override
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchTextField.becomeFirstResponder()
+    }
+    
+    // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -54,11 +59,36 @@ class SearchViewController: UIViewController {
         view.endEditing(true)
     }
 
-    // MARK: - Initialization
-    private func initView() {
+    // MARK: - Initializers
+    private func setupData() {
+        setupViewModel()
+    }
+    
+    private func setupView() {
         self.hero.isEnabled = true
         
-        // Appbar
+        setupAppbarView()
+        setupSearchBoxView()
+        setupSearchTextField()
+        setupSearchButton()
+        setupBackButton()
+        setupClearTextFieldButton()
+        setupContainerView()
+        setupArchiveFloatingPanelView()
+    }
+    
+    private func bind() {
+        bindBackButton()
+        bindFilterButton()
+        bindClearTextFieldButton()
+    }
+    
+    // MARK: - Setups
+    private func setupViewModel() {
+        viewModel = SearchViewModel()
+    }
+    
+    private func setupAppbarView() {
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28
         appbarView.layer.cornerCurve = .circular
@@ -66,113 +96,40 @@ class SearchViewController: UIViewController {
         appbarView.setAppbarShadow()
         view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
         
-        // Appbar height constraint
         appbarViewHeightConstraint.constant = 140 + SafeAreaInset.top
         
-        // Appbar Title Label
         appbarTitleLabel.hero.id = "appbarTitle"
-        
-        // SearchBox View
-        searchBoxView.hero.id = "searchBox"
+    }
+    
+    private func setupSearchBoxView() {
         searchBoxView.layer.cornerRadius = 12
         searchBoxView.layer.masksToBounds = true
         searchBoxView.setSearchBoxShadow()
-        
-        // Search TextField
+    }
+    
+    private func setupSearchTextField() {
         searchTextField.setPlaceholderColor(ColorSet.appbarTextfieldPlaceholderColor)
         searchTextField.setLeftPadding(width: 12)
         searchTextField.setRightPadding(width: 80)
-        
-        // Search Button
-        filterButton.hero.id = "searchBoxButton"
+        searchTextField.delegate = self
+    }
+    
+    private func setupSearchButton() {
         filterButton.layer.cornerRadius = 8
         filterButton.setPadding(width: 8)
         filterButton.setSearchBoxButtonShadow()
-        
-        // Back Button
+    }
+    
+    private func setupBackButton() {
         backButton.hero.modifiers = [.fade]
         backButton.setPadding(width: 4)
-        
-        // Clear search textfield Button
+    }
+    
+    private func setupClearTextFieldButton() {
         clearTextFieldButton.setPadding(width: 6)
-        
-        // Set up ContainerView
-        configureContainerView()
-        
-        // Archive floating panel
-        archiveFloatingPanel = ArchiveFloatingPanelView(vc: self)
     }
     
-    private func initInstance() {
-        // Search TextField
-        searchTextField.delegate = self
-        searchTextField.becomeFirstResponder()
-    }
-    
-    private func initEventListener() {
-        // Exit Button Tap Action
-        backButton.rx.tap
-            .bind(with: self) { vc, _ in
-                vc.dismiss(animated: true, completion: nil)
-            }.disposed(by: disposeBag)
-        
-        // Filter Button Tap Action
-        filterButton.rx.tap
-            .bind(with: self) { vc, _ in
-                vc.presentSearchFilterPopoverVC()
-            }.disposed(by: disposeBag)
-        
-        // Clear TextField Button Tap Action
-        clearTextFieldButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
-                vc.searchTextField.text = ""
-                vc.searchTextField.becomeFirstResponder()
-            }).disposed(by: disposeBag)
-    }
-    
-    // MARK: - Method
-    private func dismissKeyboardAndArchivePanel() {
-        view.endEditing(true)
-        archiveFloatingPanel?.hide(animated: true)
-    }
-    
-    private func presentSearchFilterPopoverVC() {
-        guard let searchFilterVC = storyboard?.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
-        
-        searchFilterVC.navigationController?.popoverPresentationController?.backgroundColor = .white
-        searchFilterVC.delegate = self
-        searchFilterVC.modalPresentationStyle = .popover
-        searchFilterVC.preferredContentSize = CGSize(width: 240, height: 160)
-        searchFilterVC.popoverPresentationController?.permittedArrowDirections = .up
-        searchFilterVC.popoverPresentationController?.sourceRect = filterButton.bounds
-        searchFilterVC.popoverPresentationController?.sourceView = filterButton
-        searchFilterVC.presentationController?.delegate = self
-        
-        present(searchFilterVC, animated: true, completion: nil)
-    }
-    
-    private func setSearchResult() {
-        guard let searchKeyword = searchTextField.text else {
-            return
-        }
-        
-        if searchKeyword.isEmpty {
-            return
-        }
-        
-        if !SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
-            presentSearchFilterPopoverVC()
-            return
-        }
-        
-        view.endEditing(true)
-        
-        searchViewModel.addSearchHistory(searchKeyword)
-        searchResultVC.setSearchResult(searchKeyword)
-        replaceContents(type: .searchResult)
-    }
-    
-    private func configureContainerView() {
+    private func setupContainerView() {
         searchHistoryVC = storyboard?.instantiateViewController(withIdentifier: "searchHistoryStoryboard") as! SearchHistoryViewController
         searchResultVC = storyboard?.instantiateViewController(withIdentifier: "searchResultStoryboard") as! SearchResultViewController
         
@@ -194,6 +151,76 @@ class SearchViewController: UIViewController {
         searchResultVC.view.isHidden = true
     }
     
+    private func setupArchiveFloatingPanelView() {
+        archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: self, delegate: self)
+    }
+    
+    // MARK: - Binds
+    private func bindBackButton() {
+        backButton.rx.tap
+            .asDriver()
+            .drive(with: self) { vc, _ in
+                vc.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindFilterButton() {
+        filterButton.rx.tap
+            .asDriver()
+            .drive(with: self) { vc, _ in
+                vc.presentSearchFilterPopoverVC()
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindClearTextFieldButton() {
+        clearTextFieldButton.rx.tap
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
+                vc.searchTextField.text = ""
+                vc.searchTextField.becomeFirstResponder()
+            }).disposed(by: disposeBag)
+    }
+    
+    // MARK: - Methods
+    private func dismissKeyboardAndArchivePanel() {
+        view.endEditing(true)
+        archiveFolderFloatingPanelView?.hide(animated: true)
+    }
+    
+    private func presentSearchFilterPopoverVC() {
+        guard let searchFilterVC = storyboard?.instantiateViewController(identifier: "popOverSearchFilterStoryboard") as? PopOverSearchFilterViewController else { return }
+        
+        searchFilterVC.navigationController?.popoverPresentationController?.backgroundColor = .white
+        searchFilterVC.delegate = self
+        searchFilterVC.modalPresentationStyle = .popover
+        searchFilterVC.preferredContentSize = CGSize(width: 240, height: 160)
+        searchFilterVC.popoverPresentationController?.permittedArrowDirections = .up
+        searchFilterVC.popoverPresentationController?.sourceRect = filterButton.bounds
+        searchFilterVC.popoverPresentationController?.sourceView = filterButton
+        searchFilterVC.presentationController?.delegate = self
+        
+        present(searchFilterVC, animated: true, completion: nil)
+    }
+    
+    private func setSearchResult() {
+        guard let searchKeyword = searchTextField.text?.trimmingCharacters(in: .whitespaces) else {
+            return
+        }
+        
+        if searchKeyword.isEmpty { return }
+        
+        if !SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
+            presentSearchFilterPopoverVC()
+            return
+        }
+        
+        view.endEditing(true)
+        
+        viewModel!.addSearchHistory(searchKeyword)
+        searchResultVC.setSearchResult(searchKeyword)
+        replaceContents(type: .searchResult)
+    }
+    
     private func replaceContents(type: ContentsType) {
         if type == .searchHistory {
             searchHistoryVC.updateSearchHistory()
@@ -206,7 +233,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SearchViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         dismissKeyboardAndArchivePanel()
@@ -238,7 +265,7 @@ extension SearchViewController: PopOverSearchFilterViewDelegate {
 
 extension SearchViewController: SearchResultViewDelegate {
     func searchResultView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedSongRowAt selectedSong: Song) {
-        archiveFloatingPanel?.show(selectedSong: selectedSong, animated: true)
+        archiveFolderFloatingPanelView?.show(selectedSong)
     }
 }
 
@@ -250,5 +277,11 @@ extension SearchViewController: SearchHistoryViewDelegate {
     func searchHistoryView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedHistoryRowAt selectedHistory: SearchHistory) {
         searchTextField.text = selectedHistory.keyword
         searchTextField.becomeFirstResponder()
+    }
+}
+
+extension SearchViewController: PopUpArchiveFolderViewDelegate {
+    func didSongAdded() {
+        archiveFolderFloatingPanelView?.hide(animated: true)
     }
 }

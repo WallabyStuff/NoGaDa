@@ -13,67 +13,75 @@ import RxCocoa
 class SettingViewController: UIViewController {
 
     // MARK: - Declaration
-    var disposeBag = DisposeBag()
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var searchFilterGroupView: UIView!
     @IBOutlet weak var etcGroupView: UIView!
     @IBOutlet weak var searchFilterTableView: UITableView!
     @IBOutlet weak var etcTableView: UITableView!
     
+    private var disposeBag = DisposeBag()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
-        initEventListener()
+        setupView()
+        bind()
     }
     
-    // MARK: - Intitialization
-    private func initView() {
-        // Search filter group View
+    // MARK: - Initializers
+    private func setupView() {
+        setupSearchFilterGroupView()
+        setupEtcGroupView()
+    }
+    
+    private func bind() {
+        bindExitButton()
+    }
+    
+    // MARK: - Setups
+    private func setupSearchFilterGroupView() {
         searchFilterGroupView.makeAsSettingGroupView()
-        searchFilterTableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.tableFooterView = UIView()
         searchFilterTableView.isScrollEnabled = false
+        searchFilterTableView.separatorColor = ColorSet.settingItemSeparatorColor
+        searchFilterTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 80)
         
-        // Etc group View
-        etcGroupView.makeAsSettingGroupView()
-        etcTableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        etcTableView.layer.cornerRadius = 20
-        etcTableView.tableFooterView = UIView()
-        etcTableView.isScrollEnabled = false
-    }
-    
-    private func initInstance() {
-        // Search filter TableView
-        let searchFilterCellNibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
-        searchFilterTableView.register(searchFilterCellNibName, forCellReuseIdentifier: "searchFilterTableCell")
+        let nibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
+        searchFilterTableView.register(nibName, forCellReuseIdentifier: "searchFilterTableCell")
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.dataSource = self
         searchFilterTableView.delegate = self
+    }
+    
+    private func setupEtcGroupView() {
+        etcGroupView.makeAsSettingGroupView()
+        etcTableView.layer.cornerRadius = 20
+        etcTableView.tableFooterView = UIView()
+        etcTableView.isScrollEnabled = false
+        etcTableView.separatorColor = ColorSet.settingItemSeparatorColor
+        etcTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 64)
         
-        // Etc TableView
-        let settingEtcCellNibName = UINib(nibName: "SettingEtcTableViewCell", bundle: nil)
-        etcTableView.register(settingEtcCellNibName, forCellReuseIdentifier: "settingEtcTableCell")
+        let nibName = UINib(nibName: "SettingEtcTableViewCell", bundle: nil)
+        etcTableView.register(nibName, forCellReuseIdentifier: "settingEtcTableCell")
         etcTableView.dataSource = self
         etcTableView.delegate = self
     }
     
-    private func initEventListener() {
-        // ExitButton Tap Action
+    // MARK: - Binds
+    private func bindExitButton() {
         exitButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
 }
 
-// MARK: - Extension
+// MARK: - Extensions
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
@@ -93,7 +101,6 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             let filterItem = SearchFilterItem.allCases[indexPath.row]
             
-            filterItemCell.selectionStyle = .none
             filterItemCell.contentView.backgroundColor = ColorSet.settingGroupBackgroundColor
             filterItemCell.titleLabel.textColor = ColorSet.textColor
             filterItemCell.titleLabel.text = filterItem.title
@@ -109,7 +116,6 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             let etcItem = SettingEtcItem.allCases[indexPath.row]
             
-            etcItemCell.selectionStyle = .none
             etcItemCell.titleLabel.text = etcItem.title
             etcItemCell.iconImageView.image = etcItem.icon
             etcItemCell.rx.tapGesture()

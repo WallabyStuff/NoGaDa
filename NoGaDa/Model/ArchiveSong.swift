@@ -38,3 +38,11 @@ class ArchiveSong: Object {
         return ["id", "no", "title", "singer", "brand", "composer", "lyricists", "release"]
     }
 }
+
+extension ArchiveSong {
+    func asSongType() -> Song {
+        let song = Song(brand: KaraokeBrand(rawValue: brand) ?? .tj, no: no, title: title, singer: singer, composer: composer, lyricist: lyricists, release: releaseDate)
+        
+        return song
+    }
+}

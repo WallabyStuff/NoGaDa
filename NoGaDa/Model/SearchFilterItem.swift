@@ -14,7 +14,7 @@ enum SearchFilterItem: String, CaseIterable {
     var title: String {
         switch self {
         case .searchWithTitle:
-            return "🎶 제목으로 검색"
+            return "🏷 제목으로 검색"
         case .searchWithSinger:
             return "🙋 가수명으로 검색"
         }

@@ -2,18 +2,7 @@
   "images" : [
     {
       "filename" : "music-note-1.svg",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "music-note.svg",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "music-note-2.svg",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {

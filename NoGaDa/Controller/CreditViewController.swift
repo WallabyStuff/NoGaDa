@@ -15,58 +15,72 @@ import MessageUI
 class CreditViewController: UIViewController {
 
     // MARK: - Declaration
-    private var disposeBag = DisposeBag()
-    private var creditViewModel = CreditViewModel()
-    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var contactUsBoxView: UIView!
     @IBOutlet weak var catactUsIconBoxView: UIView!
     @IBOutlet weak var iconResourceCollectionView: UICollectionView!
     @IBOutlet weak var contactTextView: UITextView!
     
+    private var disposeBag = DisposeBag()
+    private var creditViewModel = CreditViewModel()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initView()
-        initInstance()
-        initEventListener()
+        setupView()
+        bind()
     }
     
-    // MARK: - Initializer
-    private func initView() {
-        // Header label
+    // MARK: - Initializers
+    private func setupView() {
+        setupHeaderLabel()
+        setupContactUsBoxView()
+        setupIconResourceCollectionView()
+        setupContactTextView()
+    }
+    
+    private func bind() {
+        bindExitButton()
+        bindContactUsBoxView()
+    }
+    
+    // MARK: - Setups
+    private func setupHeaderLabel() {
         headerLabel.text = creditViewModel.headerText
-        
-        // ContactUs Box View
+    }
+    
+    private func setupContactUsBoxView() {
         contactUsBoxView.layer.cornerRadius = 20
         contactUsBoxView.makeAsSettingGroupView()
         catactUsIconBoxView.layer.cornerRadius = 12
-        
-        // Icon resource CollectionView
-        iconResourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
-        
-        // Contact Text View
-        contactTextView.dataDetectorTypes = .all
     }
     
-    private func initInstance() {
-        // Icon resource CollectionView
-        let iconResourceNibName = UINib(nibName: "IconResourceCollectionViewCell", bundle: nil)
-        iconResourceCollectionView.register(iconResourceNibName, forCellWithReuseIdentifier: "iconResourceCollectionCell")
+    private func setupIconResourceCollectionView() {
+        iconResourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+        
+        let nibName = UINib(nibName: "IconResourceCollectionViewCell", bundle: nil)
+        iconResourceCollectionView.register(nibName, forCellWithReuseIdentifier: "iconResourceCollectionCell")
         iconResourceCollectionView.dataSource = self
         iconResourceCollectionView.delegate = self
     }
     
-    private func initEventListener() {
-        // Exit button Tap Action
+    private func setupContactTextView() {
+        contactTextView.dataDetectorTypes = .all
+    }
+    
+    // MARK: Binds
+    private func bindExitButton() {
         exitButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
+            .asDriver()
+            .drive(with: self, onNext: { vc, _ in
                 vc.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
-        
-        // Contact us Tap Action
+    }
+    
+    private func bindContactUsBoxView() {
         contactUsBoxView.rx.tapGesture()
             .when(.recognized)
             .bind(with: self, onNext: { vc, _ in
@@ -84,10 +98,10 @@ class CreditViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    // MARK: - Method
+    // MARK: - Methods
 }
 
-// MARK: Extension
+// MARK: Extensions
 extension CreditViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return creditViewModel.numberOfRowInSection(creditViewModel.sectionCount)
