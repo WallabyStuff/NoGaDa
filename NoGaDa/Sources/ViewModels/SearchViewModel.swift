@@ -14,7 +14,7 @@ class SearchViewModel {
     private let searchHistoryManager = SearchHistoryManager()
     private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
-    func addSearchHistory(_ keyword: String) {
+    public func addSearchHistory(_ keyword: String) {
         searchHistoryManager.addData(searchKeyword: keyword)
             .subscribe()
             .disposed(by: disposeBag)

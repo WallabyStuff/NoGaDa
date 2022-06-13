@@ -20,6 +20,8 @@ class AddFolderViewController: UIViewController {
     
     // MARK: - Properteis
     
+    static let identifier = R.storyboard.folder.addFolderStoryboard.identifier
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var emojiTextFieldFrameView: UIView!
@@ -41,10 +43,6 @@ class AddFolderViewController: UIViewController {
     
     
     // MARK: - Overrides
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

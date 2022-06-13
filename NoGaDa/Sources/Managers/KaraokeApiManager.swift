@@ -127,7 +127,6 @@ class KaraokeApiManager {
     }
     
     public func fetchSong(titleOrSinger: String, brand: KaraokeBrand) -> Observable<[Song]> {
-        
         let fetchWithTitle      = fetchSong(title: titleOrSinger, brand: brand)
         let fetchWithSinger     = fetchSong(singer: titleOrSinger, brand: brand)
         

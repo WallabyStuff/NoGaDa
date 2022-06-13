@@ -6,65 +6,76 @@
 //
 
 import Foundation
+
 import RxSwift
 import RxCocoa
 
 class MainViewModel {
+    
+    
+    // MARK: - Properties
+    
     private var disposeBag = DisposeBag()
     private let karaokeManager = KaraokeApiManager()
-    private var updatedSongList = [Song]()
     private let songFolderManager = SongFolderManager()
-    private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
+    
+    public var showArchiveFolderFloatingView = PublishRelay<Song>()
+    
+    public var selectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
+    public var newUpdateSongs = BehaviorRelay<[Song]>(value: [])
+    public var isLoadingNewUpdateSongs = BehaviorRelay<Bool>(value: true)
+    public var newUpdateSongsErrorState = PublishRelay<String>()
+    
+    public var amountOfSavedSongs = PublishRelay<String>()
 }
 
 extension MainViewModel {
-    func fetchUpdatedSong(brand: KaraokeBrand) -> Completable {
-        return Completable.create { [weak self] completable in
-            guard let self = self else { return Disposables.create() }
-            
-            self.karaokeManager.fetchUpdatedSong(brand: brand)
-                .retry(3)
-                .subscribe(with: self, onNext: { strongSelf, updatedSongList in
-                    strongSelf.updatedSongList = updatedSongList
-                    completable(.completed)
-                }, onError: { vc, error  in
-                    completable(.error(error))
-                }).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
-    }
-    
-    var updatedSongCount: Int {
-        return updatedSongList.count
-    }
-    
-    func clearUpdatedSong() {
-        updatedSongList.removeAll()
-    }
-}
-
-extension MainViewModel {
-    var savedSongSize: Int {
-        return songFolderManager.getSongsCount()
-    }
-    
-    var savedSongSizeString: String {
-        return "총 \(savedSongSize)곡"
+    func fetchUpdatedSong() {
+        let selectedBrand = selectedKaraokeBrand.value
+        newUpdateSongs.accept([])
+        isLoadingNewUpdateSongs.accept(true)
+        
+        karaokeManager.fetchUpdatedSong(brand: selectedBrand)
+            .retry(3)
+            .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onNext: { strongSelf, songs in
+                if songs.isEmpty {
+                    strongSelf.newUpdateSongsErrorState.accept("업데이트 된 곡이 없습니다.")
+                } else {
+                    strongSelf.newUpdateSongsErrorState.accept("")
+                    strongSelf.newUpdateSongs.accept(songs)
+                }
+                
+                strongSelf.isLoadingNewUpdateSongs.accept(false)
+            }, onError: { strongSelf, error  in
+                strongSelf.newUpdateSongsErrorState.accept("오류가 발생했습니다.")
+                strongSelf.isLoadingNewUpdateSongs.accept(false)
+            }).disposed(by: disposeBag)
     }
 }
 
 extension MainViewModel {
-    var sectionCount: Int {
-        return 0
+    public func songItemSelectAction(_ indexPath: IndexPath) {
+        let song = newUpdateSongs.value[indexPath.row]
+        showArchiveFolderFloatingView.accept(song)
+    }
+}
+
+extension MainViewModel {
+    public func updateAmountOfSavedSongs() {
+        let text = "총 \(savedSongsAmount)곡"
+        amountOfSavedSongs.accept(text)
     }
     
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        return updatedSongList.count
+    private var savedSongsAmount: Int {
+        return songFolderManager.getAmountOfSongs()
     }
-    
-    func updatedSongAtIndex(_ indexPath: IndexPath) -> Song {
-        let song = updatedSongList[indexPath.row]
-        return song
+}
+
+extension MainViewModel {
+    public func updatedSelectedKaraokeBrank(_ karaokeBrand: KaraokeBrand) {
+        selectedKaraokeBrand.accept(karaokeBrand)
+        fetchUpdatedSong()
     }
 }

@@ -9,17 +9,25 @@ import UIKit
 
 class SearchFilterTableViewCell: UITableViewCell {
 
-    // MARK: - Delcaration
+    
+    // MARK: - Properties
+    
+    static let identifier = R.reuseIdentifier.searchFilterTableCell.identifier
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterSwitch: UISwitch!
 
+    
     // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initView()
     }
 
-    // MARK: - Initialization
+    
+    // MARK: - Initializers
+    
     private func initView() {
         titleLabel.text = ""
         filterSwitch.isOn = true

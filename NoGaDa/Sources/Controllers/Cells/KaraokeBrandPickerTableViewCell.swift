@@ -12,8 +12,8 @@ class KaraokeBrandPickerTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    static let identifier = R.reuseIdentifier.karaokeBrandTableCell.identifier
     @IBOutlet weak var brandNameLabel: UILabel!
-    static let identifier = "karaokeBrandTableCell"
     
     
     // MARK: - Lifecycle
@@ -24,7 +24,7 @@ class KaraokeBrandPickerTableViewCell: UITableViewCell {
     }
     
     
-    // MARK: - Initializers
+    // MARK: - Setups
     
     private func setupView() {
         brandNameLabel.text = ""

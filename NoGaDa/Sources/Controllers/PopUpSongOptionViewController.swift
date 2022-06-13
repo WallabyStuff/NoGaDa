@@ -94,8 +94,8 @@ class PopUpSongOptionViewController: UIViewController {
         optionTableView.separatorStyle = .none
         optionTableView.tableFooterView = UIView()
         
-        let nibName = UINib(nibName: "PopUpSongOptionTableViewCell", bundle: nil)
-        optionTableView.register(nibName, forCellReuseIdentifier: "popUpSongOptionTableCell")
+        let nibName = UINib(nibName: R.nib.popUpSongOptionTableViewCell.name, bundle: nil)
+        optionTableView.register(nibName, forCellReuseIdentifier: PopUpSongOptionTableViewCell.identifier)
         optionTableView.dataSource = self
         optionTableView.delegate = self
     }
@@ -132,10 +132,10 @@ class PopUpSongOptionViewController: UIViewController {
     // MARK: - Methods
     
     private func presentArchiveFolderVC(_ selectedSong: Song) {
-        let storyboard = UIStoryboard(name: "Folder", bundle: nil)
-        let archiveFolderVC = storyboard.instantiateViewController(identifier: "popUpArchiveStoryboard") { coder -> PopUpArchiveFolderListViewController in
-            let viewModel = PopUpArchiveFolderListViewModel()
-            return .init(coder, viewModel) ?? PopUpArchiveFolderListViewController(.init())
+        let storyboard = UIStoryboard(name: R.storyboard.folder.name, bundle: nil)
+        let archiveFolderVC = storyboard.instantiateViewController(identifier: PopUpArchiveFolderViewController.identifier) { coder -> PopUpArchiveFolderViewController in
+            let viewModel = PopUpArchiveFolderViewModel()
+            return .init(coder, viewModel) ?? PopUpArchiveFolderViewController(.init())
         }
         
         archiveFolderVC.delegate = self
@@ -175,7 +175,7 @@ extension PopUpSongOptionViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let optionCell = tableView.dequeueReusableCell(withIdentifier: "popUpSongOptionTableCell", for: indexPath) as? PopUpSongOptionTableViewCell else { return UITableViewCell() }
+        guard let optionCell = tableView.dequeueReusableCell(withIdentifier: PopUpSongOptionTableViewCell.identifier, for: indexPath) as? PopUpSongOptionTableViewCell else { return UITableViewCell() }
         
         let optionModel = viewModel.optionAtIndex(indexPath)
         optionCell.titleLabel.text = optionModel.title

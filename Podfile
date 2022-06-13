@@ -14,6 +14,7 @@ target 'NoGaDa' do
   pod 'RealmSwift'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftRater'
+  pod 'R.swift'
  
   target 'NoGaDaTests' do
     inherit! :search_paths

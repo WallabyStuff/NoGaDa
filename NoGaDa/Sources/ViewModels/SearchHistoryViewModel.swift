@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import RxSwift
 import RxCocoa
 
@@ -13,96 +14,49 @@ class SearchHistoryViewModel {
     
     private var disposeBag = DisposeBag()
     private let searchHistoryManager = SearchHistoryManager()
-    private var searchHistoryList = [SearchHistory]()
+    
+    public var searchHistories = BehaviorRelay<[SearchHistory]>(value: [])
+    public var didHistoryItemSelect = PublishRelay<SearchHistory>()
 }
 
 extension SearchHistoryViewModel {
-    func fetchSearchHistory() -> Completable {
-        return Completable.create { [weak self] observer in
-            guard let self = self else { return Disposables.create() }
-            
-            self.searchHistoryManager.fetchData()
-                .subscribe(onNext:{ searchHistoryList in
-                    self.searchHistoryList = searchHistoryList
-                    observer(.completed)
-                }, onError: { error in
-                    observer(.error(error))
-                }).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
+    public func fetchSearchHistory() {
+        searchHistories.accept([])
+        
+        searchHistoryManager.fetchData()
+            .subscribe(with: self, onSuccess: { strongSelf, histories in
+                strongSelf.searchHistories.accept(histories)
+            }, onFailure: { strongSelf, error in
+                print(error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
     
-    func deleteAllHistory() -> Completable {
-        return Completable.create { [weak self] observer in
-            guard let self = self else { return Disposables.create() }
-            
-            self.searchHistoryManager.deleteAll()
-                .subscribe(onCompleted: {
-                    observer(.completed)
-                }, onError: { error in
-                    observer(.error(error))
-                }).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
+    public func deleteHistory(_ index: Int) {
+        var histories = searchHistories.value
+        let selectedItem = histories.remove(at: index)
+        
+        searchHistoryManager.deleteData(selectedItem)
+            .subscribe(with: self, onCompleted: { strongSelf in
+                strongSelf.searchHistories.accept(histories)
+            }, onError: { strongSelf, error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: self.disposeBag)
     }
     
-    var searchHistoryCount: Int {
-        return searchHistoryList.count
-    }
-    
-    var isSearchHistoryEmpty: Bool {
-        if searchHistoryList.count == 0 {
-            return true
-        } else {
-            return false
-        }
+    public func deleteAllHistories() {
+        self.searchHistoryManager.deleteAll()
+            .subscribe(with: self, onCompleted: { strongSelf in
+                strongSelf.searchHistories.accept([])
+            }, onError: { strongSelf, error in
+                print(error.localizedDescription)
+            }).disposed(by: self.disposeBag)
     }
 }
 
 extension SearchHistoryViewModel {
-    var sectionCount: Int {
-        return 0
-    }
-    
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        return searchHistoryList.count
-    }
-    
-    func searchHistoryItemAtIndex(_ indexPath: IndexPath) -> SearchHistoryItemViewModel {
-        return SearchHistoryItemViewModel(searchHistoryList[indexPath.row])
-    }
-    
-    func deleteHistory(_ indexPath: IndexPath) -> Completable{
-        return Completable.create { [weak self] completable in
-            guard let self = self else { return Disposables.create() }
-            
-            self.searchHistoryManager.deleteData(self.searchHistoryList[indexPath.row].keyword)
-                .subscribe(onCompleted: {
-                    completable(.completed)
-                }, onError: { error in
-                    completable(.error(error))
-                })
-                .disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
-    }
-}
-
-struct SearchHistoryItemViewModel {
-    var searchHistory: SearchHistory
-}
-
-extension SearchHistoryItemViewModel {
-    init(_ searchHistory: SearchHistory) {
-        self.searchHistory = searchHistory
-    }
-}
-
-extension SearchHistoryItemViewModel {
-    var keyword: String {
-        return searchHistory.keyword
+    public func historyItemSelectAction(_ indexPath: IndexPath) {
+        let selectedItem = searchHistories.value[indexPath.row]
+        didHistoryItemSelect.accept(selectedItem)
     }
 }
