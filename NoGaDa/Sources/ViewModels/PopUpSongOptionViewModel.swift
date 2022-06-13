@@ -11,10 +11,17 @@ import RxSwift
 import RxCocoa
 
 class PopUpSongOptionViewModel {
+    
+    
+    // MARK: - Properties
+    
     public var selectedSong: ArchiveSong?
     private var disposeBag = DisposeBag()
     private let songFolderManager = SongFolderManager()
     public var parentViewController: UIViewController?
+    
+    
+    // MARK: - Initializers
     
     init() {
         fatalError("You must give 'parentViewController' and 'selectedSong' paramenter to initialize")

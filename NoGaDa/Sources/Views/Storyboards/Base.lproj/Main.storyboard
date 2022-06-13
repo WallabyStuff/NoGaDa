@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +13,7 @@
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainStoryboard" id="BYZ-38-t0r" customClass="MainViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,10 +123,10 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTa-UN-vg4" customClass="AppbarView" customModule="NoGaDa" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="176"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="132"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7c-mC-iEt">
-                                        <rect key="frame" x="20" y="104" width="350" height="52"/>
+                                        <rect key="frame" x="20" y="60" width="350" height="52"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGc-zW-LaH">
                                                 <rect key="frame" x="306" y="8" width="36" height="36"/>
@@ -158,13 +158,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노래방 가서 다 부를거야!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-ju-7zi">
-                                        <rect key="frame" x="169" y="58" width="193" height="24"/>
+                                        <rect key="frame" x="169" y="14" width="193" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" name="AppbarTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUl-qM-V9V">
-                                        <rect key="frame" x="20" y="56" width="28" height="28"/>
+                                        <rect key="frame" x="20" y="12" width="28" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="GjN-Bx-sh0"/>
                                             <constraint firstAttribute="width" constant="28" id="SgK-0O-AxA"/>
@@ -177,7 +177,7 @@
                                 <color key="backgroundColor" name="AppbarBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="DLU-ju-7zi" firstAttribute="centerY" secondItem="DUl-qM-V9V" secondAttribute="centerY" id="1RB-5P-Y7S"/>
-                                    <constraint firstAttribute="height" constant="176" id="IpF-S7-IP9"/>
+                                    <constraint firstAttribute="height" constant="132" id="IpF-S7-IP9"/>
                                     <constraint firstAttribute="trailing" secondItem="DLU-ju-7zi" secondAttribute="trailing" constant="28" id="JFt-cy-80r"/>
                                     <constraint firstItem="f7c-mC-iEt" firstAttribute="top" secondItem="DUl-qM-V9V" secondAttribute="bottom" constant="20" id="Mdx-z1-6Wz"/>
                                     <constraint firstItem="DUl-qM-V9V" firstAttribute="leading" secondItem="f7c-mC-iEt" secondAttribute="leading" id="Nug-lw-nBz"/>
@@ -200,6 +200,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Main" id="dBf-gf-Im0"/>
+                    <size key="freeformSize" width="390" height="844"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="appbarTitleLabel" destination="DLU-ju-7zi" id="rGG-sQ-dGg"/>
                         <outlet property="appbarView" destination="vTa-UN-vg4" id="jbO-mw-dVj"/>
@@ -209,13 +213,13 @@
                         <outlet property="brandSegmentedControl" destination="n9e-jd-iKq" id="XPR-0L-gVf"/>
                         <outlet property="mainContentScrollView" destination="ybw-gb-oEp" id="Hv7-cN-oJE"/>
                         <outlet property="mainContentScrollViewContentViewHeightConstraint" destination="RfP-0D-X1i" id="Jjy-pG-kDD"/>
+                        <outlet property="newUpdateSongErrorMessageLabel" destination="CxZ-Cq-9Qe" id="ZjY-75-4ZL"/>
+                        <outlet property="newUpdateSongLoadingIndicator" destination="PSy-Ae-0Dt" id="Tk0-aT-G7N"/>
+                        <outlet property="newUpdateSongTableView" destination="Hd8-bd-esb" id="mnT-Yl-TrC"/>
                         <outlet property="searchBoxView" destination="f7c-mC-iEt" id="EJv-gu-Pfb"/>
                         <outlet property="searchButton" destination="iGc-zW-LaH" id="Q0k-SV-Bds"/>
                         <outlet property="settingButton" destination="DUl-qM-V9V" id="z6z-Wf-S7p"/>
                         <outlet property="totalArchivedSongSizeLabel" destination="I8f-kb-mSm" id="grm-hV-G2l"/>
-                        <outlet property="updatedSongLoadingIndicator" destination="PSy-Ae-0Dt" id="Tk0-aT-G7N"/>
-                        <outlet property="updatedSongTableView" destination="Hd8-bd-esb" id="mnT-Yl-TrC"/>
-                        <outlet property="updatedsongLoadErrorMessageLabel" destination="CxZ-Cq-9Qe" id="ZjY-75-4ZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

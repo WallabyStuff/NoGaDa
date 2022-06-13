@@ -14,16 +14,19 @@ protocol PopOverSearchFilterViewDelegate: AnyObject {
     func popOverSearchFilterView(didTapApply: Bool)
 }
 
-class PopOverSearchFilterViewController: UIViewController {
-
+class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable {
+        
     
     // MARK: - Properties
     
-    @IBOutlet weak var filterItemTableView: UITableView!
+    typealias ViewModel = PopOverSearchFilterViewModel
+    static let identifier = R.storyboard.search.popOverSearchFilterStoryboard.identifier
+    
+    @IBOutlet weak var searchFilterTableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
     
     weak var delegate: PopOverSearchFilterViewDelegate?
-    private var disposeBag = DisposeBag()
+    var viewModel: PopOverSearchFilterViewModel
     
     
     // MARK: - Lifecycle
@@ -37,27 +40,39 @@ class PopOverSearchFilterViewController: UIViewController {
     
     // MARK: - Initializers
     
+    required init(_ viewModel: PopOverSearchFilterViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        dismiss(animated: true)
+    }
+    
+    required init?(_ coder: NSCoder, _ viewModel: PopOverSearchFilterViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("ViewModel has not been implemented")
+    }
+    
     
     // MARK: - Setups
     
     private func setupView() {
-        setupFilterItemTableView()
+        setupSearchFilterTableView()
         setupApplayButton()
     }
     
-    private func bind() {
-        bindApplyButton()
+    private func setupSearchFilterTableView() {
+        registerSearchFilterTableCell()
+        searchFilterTableView.tableFooterView = UIView()
+        searchFilterTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
+        searchFilterTableView.backgroundColor = .white
     }
     
-    private func setupFilterItemTableView() {
-        filterItemTableView.tableFooterView = UIView()
-        filterItemTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
-        filterItemTableView.backgroundColor = .white
-        
-        let nibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
-        filterItemTableView.register(nibName, forCellReuseIdentifier: "searchFilterTableCell")
-        filterItemTableView.dataSource = self
-        filterItemTableView.delegate = self
+    private func registerSearchFilterTableCell() {
+        let nibName = UINib(nibName: R.nib.searchFilterTableViewCell.name, bundle: nil)
+        searchFilterTableView.register(nibName, forCellReuseIdentifier: SearchFilterTableViewCell.identifier)
     }
     
     private func setupApplayButton() {
@@ -66,6 +81,11 @@ class PopOverSearchFilterViewController: UIViewController {
     
     
     // MARK: - Binds
+    
+    private func bind() {
+        bindApplyButton()
+        bindSearchFilterTableView()
+    }
     
     private func bindApplyButton() {
         applyButton.rx.tap
@@ -76,30 +96,18 @@ class PopOverSearchFilterViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    
-    // MARK: - Methods
-}
-
-
-// MARK: - Extensions
-
-extension PopOverSearchFilterViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SearchFilterItem.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let filterItemCell = tableView.dequeueReusableCell(withIdentifier: "searchFilterTableCell") as? SearchFilterTableViewCell else { return UITableViewCell() }
-        
-        let filterItem = SearchFilterItem.allCases[indexPath.row]
-        
-        filterItemCell.titleLabel.text      = filterItem.title
-        filterItemCell.filterSwitch.isOn    = filterItem.state
-        filterItemCell.filterSwitch.rx.controlEvent(.valueChanged)
-            .subscribe(with: self, onNext: { vc, _ in
-                UserDefaults.standard.set(!filterItem.state, forKey: filterItem.userDefaultKey)
-            }).disposed(by: disposeBag)
-        
-        return filterItemCell
+    private func bindSearchFilterTableView() {
+        viewModel.searchFilterItem
+            .bind(to: searchFilterTableView.rx.items(cellIdentifier: SearchFilterTableViewCell.identifier,
+                                                     cellType: SearchFilterTableViewCell.self)) { [weak self] index, item, cell in
+                guard let self = self else { return }
+                
+                cell.titleLabel.text = item.title
+                cell.filterSwitch.isOn = item.state
+                cell.filterSwitch.rx.controlEvent(.valueChanged)
+                    .subscribe(with: self, onNext: { vc, _ in
+                        UserDefaults.standard.set(!item.state, forKey: item.userDefaultKey)
+                    }).disposed(by: self.disposeBag)
+            }.disposed(by: disposeBag)
     }
 }

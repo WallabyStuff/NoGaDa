@@ -9,14 +9,20 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
     
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
+    static let identifier = R.reuseIdentifier.searchResultTableViewCell.identifier
+    
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var thumbnailPlaceholderImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var songNumberLabel: UILabel!
     
+    
     // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -29,7 +35,9 @@ class SongTableViewCell: UITableViewCell {
         singerLabel.releaseAccentColor(with: ColorSet.subTextColor)
     }
 
-    // MARK: - Initializers
+    
+    // MARK: - Setups
+    
     private func setupView() {
         thumbnailImageView.layer.cornerRadius = 16
         

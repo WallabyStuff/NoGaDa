@@ -11,85 +11,63 @@ import RxCocoa
 
 class SearchResultViewModel {
     
-    var disposeBag = DisposeBag()
-    var karaokeManager = KaraokeApiManager()
-    var searchResultSongList = [Song]()
+    
+    // MARK: - Properties
+    
+    private var disposeBag = DisposeBag()
+    private var karaokeManager = KaraokeApiManager()
+    private var searchKeyword = ""
+    
+    public var selectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
+    
+    public var searchResultSongs = BehaviorRelay<[Song]>(value: [])
+    public var isLoadingSearchResultSongs = BehaviorRelay<Bool>(value: false)
+    public var searchResultSongsErrorState = PublishRelay<String>()
+    public var didSelectSongItem = PublishRelay<Song>()
 }
 
 extension SearchResultViewModel {
-    func fetchSearchResult(keyword: String, brand: KaraokeBrand) -> Completable {
-        return Completable.create { [weak self] observer in
-            guard let self = self else { return Disposables.create() }
-            
-            self.karaokeManager.fetchSong(titleOrSinger: keyword, brand: brand)
-                .retry(3)
-                .subscribe(onNext: { searchResultSongList in
-                    self.searchResultSongList = searchResultSongList
-                    observer(.completed)
-                }, onError: { error in
-                    observer(.error(error))
-                }).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
+    public func fetchSearchResult(keyword: String) {
+        if keyword.isEmpty {
+            return
         }
-    }
-    
-    var searchResultSongCount: Int {
-        return searchResultSongList.count
-    }
-    
-    var isSearchResultSongEmpty: Bool {
-        if searchResultSongList.count == 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func clearSearchResult() {
-        searchResultSongList.removeAll()
+        
+        let karaokeBrand = selectedKaraokeBrand.value
+        searchKeyword = keyword
+        searchResultSongs.accept([])
+        isLoadingSearchResultSongs.accept(true)
+        
+        karaokeManager.fetchSong(titleOrSinger: keyword, brand: karaokeBrand)
+            .retry(3)
+            .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onNext: { strongSelf, songs in
+                if songs.isEmpty {
+                    strongSelf.searchResultSongsErrorState.accept("검색 결과가 없습니다.")
+                } else {
+                    strongSelf.searchResultSongs.accept(songs)
+                    strongSelf.searchResultSongsErrorState.accept("")
+                }
+                
+                strongSelf.isLoadingSearchResultSongs.accept(false)
+            }, onError: { strongSelf, error in
+                print(error.localizedDescription)
+                strongSelf.searchResultSongsErrorState.accept("오류가 발생했습니다.")
+                strongSelf.isLoadingSearchResultSongs.accept(false)
+            }).disposed(by: self.disposeBag)
     }
 }
 
 extension SearchResultViewModel {
-    var sectionCount: Int {
-        return 0
-    }
-    
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        return searchResultSongList.count
-    }
-    
-    func searchResultSongAtIndex(_ indexPath: IndexPath) -> SearchResultSongViewModel {
-        let song = searchResultSongList[indexPath.row]
-        return SearchResultSongViewModel(song)
+    public func songItemSelectAction(_ indexPath: IndexPath) {
+        let selectedSong = searchResultSongs.value[indexPath.row]
+        didSelectSongItem.accept(selectedSong)
     }
 }
 
-struct SearchResultSongViewModel {
-    var song: Song
-}
-
-extension SearchResultSongViewModel {
-    init(_ song: Song) {
-        self.song = song
-    }
-}
-
-extension SearchResultSongViewModel {
-    var title: String {
-        return song.title
-    }
-    
-    var singer: String {
-        return song.singer
-    }
-    
-    var brand: String {
-        return song.brand.localizedString
-    }
-    
-    var no: String {
-        return song.no
+extension SearchResultViewModel {
+    public func updateKaraokeBrand(_ karaokeBrand: KaraokeBrand) {
+        selectedKaraokeBrand.accept(karaokeBrand)
+        fetchSearchResult(keyword: searchKeyword)
     }
 }

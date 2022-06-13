@@ -14,6 +14,8 @@ class SearchHistoryTableViewCell: UITableViewCell {
     
     // MARK: - Properteis
     
+    static let identifier = R.reuseIdentifier.searchHistoryTableCell.identifier
+    
     private var disposeBag = DisposeBag()
     public var removeButtonTapAction: () -> Void = {}
     @IBOutlet weak var titleLabel: UILabel!

@@ -9,18 +9,26 @@ import UIKit
 
 class SettingEtcTableViewCell: UITableViewCell {
 
-    // MARK: - Declaration
+
+    // MARK: - Properties
+    
+    static let identifier = R.reuseIdentifier.settingEtcTableCell.identifier
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconBoxView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     
+    
     // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
     }
 
-    // MARK: - Initializers
+    
+    // MARK: - Setups
+    
     private func setupView() {
         titleLabel.text = ""
         iconBoxView.layer.cornerRadius = 12

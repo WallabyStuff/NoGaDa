@@ -9,14 +9,20 @@ import UIKit
 
 class FolderTableViewCell: UITableViewCell {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+
+    static let identifier = R.reuseIdentifier.folderTableViewCell.identifier
+    
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var titleEmojiLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
     public static let releaseAnimationDuration: CGFloat = 0.5
     
+    
     // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -28,7 +34,9 @@ class FolderTableViewCell: UITableViewCell {
         cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
     }
 
-    // MARK: - Initializers
+    
+    // MARK: - Setups
+    
     private func setupView() {
         cellContentView.layer.borderWidth = 1
         cellContentView.layer.borderColor = ColorSet.songCellStrokeColor.cgColor
@@ -39,7 +47,9 @@ class FolderTableViewCell: UITableViewCell {
     }
 }
 
+
 // MARK: - Extensions
+
 extension FolderTableViewCell {
     private var releaseAnimationDuration: CGFloat {
         return 0.2

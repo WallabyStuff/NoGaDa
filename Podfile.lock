@@ -48,6 +48,9 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - R.swift (6.1.0):
+    - R.swift.Library (~> 5.3.0)
+  - R.swift.Library (5.3.0)
   - Realm (10.20.0):
     - Realm/Headers (= 10.20.0)
   - Realm/Headers (10.20.0)
@@ -68,6 +71,7 @@ DEPENDENCIES:
   - FloatingPanel
   - Google-Mobile-Ads-SDK
   - Hero (= 1.6.0)
+  - R.swift
   - RealmSwift
   - RxCocoa
   - RxGesture
@@ -84,6 +88,8 @@ SPEC REPOS:
     - Hero
     - nanopb
     - PromisesObjC
+    - R.swift
+    - R.swift.Library
     - Realm
     - RealmSwift
     - RxCocoa
@@ -101,6 +107,8 @@ SPEC CHECKSUMS:
   Hero: 052b9b9bab68fc4e30cc04e5936eaf0de97b59d3
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
+  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Realm: ae32bdc1da7d19c7617e0400201a77acd4a211b9
   RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -109,6 +117,6 @@ SPEC CHECKSUMS:
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
 
-PODFILE CHECKSUM: 4f676568ccabc55b7599a228748a444bed96ba76
+PODFILE CHECKSUM: bde9b012ecfbcad8a935538287bd6a62a453b6c2
 
 COCOAPODS: 1.11.2

@@ -16,10 +16,13 @@ import Hero
     @objc optional func didFolderNameChanged()
 }
 
-class ArchiveSongListViewController: UIViewController {
+class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     
     
     // MARK: - Properties
+    
+    static let identifier = R.storyboard.archive.archiveSongStoryboard.identifier
+    typealias ViewModel = ArchiveSongViewModel
     
     @IBOutlet weak var appbarView: UIView!
     @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -30,8 +33,7 @@ class ArchiveSongListViewController: UIViewController {
     @IBOutlet weak var addSongButton: UIButton!
     
     weak var delegate: ArchiveSongListViewDelegate?
-    private var viewModel: ArchiveSongListViewModel
-    private var disposeBag = DisposeBag()
+    var viewModel: ViewModel
     private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
     private let archiveSongTableViewTopInset: CGFloat = 36
     
@@ -46,7 +48,6 @@ class ArchiveSongListViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         updateFolderNameIfNeeded()
         updateFolderTitleEmojiIfNeeded()
     }
@@ -54,13 +55,9 @@ class ArchiveSongListViewController: UIViewController {
     
     // MARK: - Overrides
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        setArchiveSong()
+        archiveSongTableView.reloadData()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -71,12 +68,12 @@ class ArchiveSongListViewController: UIViewController {
     
     // MARK: - Initialization
     
-    init(_ viewModel: ArchiveSongListViewModel) {
+    required init(_ viewModel: ArchiveSongViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
-    init?(_ coder: NSCoder, _ viewModel: ArchiveSongListViewModel) {
+    required init?(_ coder: NSCoder, _ viewModel: ArchiveSongViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -84,14 +81,12 @@ class ArchiveSongListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    
+
+
     // MARK: - Setups
     
     private func setupView() {
-        self.hero.isEnabled = true
-        
+        setupStatusBar()
         setupAppbarView()
         setupExitButton()
         setupArchiveSongTableView()
@@ -101,26 +96,16 @@ class ArchiveSongListViewController: UIViewController {
         setupSongOptionFloatingPanelView()
     }
     
-    private func bind() {
-        bindExitButton()
-        bindFolderTitleEmojiTextField()
-        bindAddSongButton()
-        bindArchiveSongTableView()
-        bindAppbarView()
+    private func setupStatusBar() {
+        view.fillStatusBar(color: R.color.accentColor()!)
     }
     
     private func setupAppbarView() {
-        view.fillStatusBar(color: ColorSet.appbarBackgroundColor)
-        
         appbarView.hero.id = "appbar"
         appbarView.layer.cornerRadius = 28
         appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
         appbarView.setAppbarShadow()
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.appbarViewHeightConstraint.constant = AppbarHeight.shared.min
-            self.appbarViewHeightConstraint.isActive = true
-        }
+        appbarViewHeightConstraint.constant = compactAppbarHeight
     }
     
     private func setupExitButton() {
@@ -129,21 +114,19 @@ class ArchiveSongListViewController: UIViewController {
     }
     
     private func setupArchiveSongTableView() {
+        registerArchiveSongTableCell()
         archiveSongTableView.tableFooterView = UIView()
         archiveSongTableView.separatorStyle = .none
         archiveSongTableView.layer.cornerRadius = 12
         archiveSongTableView.contentInset = UIEdgeInsets(top: archiveSongTableViewTopInset, left: 0, bottom: 100, right: 0)
         
-        let songCellNibName = UINib(nibName: "SongTableViewCell", bundle: nil)
-        archiveSongTableView.register(songCellNibName, forCellReuseIdentifier: "searchResultTableViewCell")
-        archiveSongTableView.dataSource = self
-        archiveSongTableView.delegate = self
-        
-        viewModel.fetchSongFolder()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onCompleted: { [weak self] in
-                self?.archiveSongTableView.reloadData()
-            }).disposed(by: disposeBag)
+        archiveSongTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+    }
+    
+    private func registerArchiveSongTableCell() {
+        let songCellNibName = UINib(nibName: R.nib.songTableViewCell.name, bundle: nil)
+        archiveSongTableView.register(songCellNibName, forCellReuseIdentifier: SongTableViewCell.identifier)
     }
     
     private func setupFolderTitleTextField() {
@@ -164,7 +147,7 @@ class ArchiveSongListViewController: UIViewController {
     
     private func setupAddSongButton() {
         addSongButton.makeAsCircle()
-        addSongButton.hero.modifiers = [.fade, .translate(y: SafeAreaInsets.bottom + 28)]
+        addSongButton.hero.modifiers = [.fade, .translate(y: view.safeAreaInsets.bottom + 28)]
         addSongButton.layer.shadowColor = ColorSet.floatingButtonBackgroundColor.cgColor
         addSongButton.layer.shadowOffset = .zero
         addSongButton.layer.shadowRadius = 20
@@ -177,6 +160,29 @@ class ArchiveSongListViewController: UIViewController {
     
     
     // MARK: - Binds
+    
+    private func bind() {
+        bindAppbarView()
+        bindExitButton()
+        bindFolderTitleEmojiTextField()
+        bindAddSongButton()
+        
+        bindArchiveSongTableView()
+        bindArchiveSongTableCell()
+    }
+    
+    private func bindAppbarView() {
+        archiveSongTableView.rx.contentOffset
+            .asDriver()
+            .drive(with: self, onNext: { vc, offset in
+                let changedY = offset.y + vc.archiveSongTableViewTopInset
+                let newAppbarHeight = vc.compactAppbarHeight - (changedY * 0.2)
+                
+                if newAppbarHeight >= vc.compactAppbarHeight {
+                    vc.appbarViewHeightConstraint.constant = newAppbarHeight
+                }
+            }).disposed(by: disposeBag)
+    }
     
     private func bindExitButton() {
         exitButton.rx.tap
@@ -207,84 +213,68 @@ class ArchiveSongListViewController: UIViewController {
         addSongButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in
-                vc.presentAddSongVC()
+                vc.viewModel.addSongButtonTapAction()
             }).disposed(by: disposeBag)
+        
+        viewModel.presentAddSongVC
+            .subscribe(with: self, onNext: { vc, currentFolder in
+                vc.presentAddSongVC(currentFolder)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindArchiveSongTableView() {
+        viewModel.songs
+            .bind(to: archiveSongTableView.rx.items(cellIdentifier: SongTableViewCell.identifier,
+                                                    cellType: SongTableViewCell.self)) { index, item, cell in
+                cell.titleLabel.text = item.title
+                cell.singerLabel.text = item.singer
+                cell.songNumberLabel.text = "\(item.brand) \(item.no)"
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindArchiveSongTableCell() {
         archiveSongTableView.rx.itemSelected
             .asDriver()
             .drive(with: self, onNext: { vc, indexPath in
-                let selectedSong = vc.viewModel.archiveSongAtIndex(indexPath)
-                vc.songOptionFloatingPanelView?.show(selectedSong)
+                vc.viewModel.songItemTapAction(indexPath)
             }).disposed(by: disposeBag)
-    }
-    
-    private func bindAppbarView() {
-        archiveSongTableView.rx.contentOffset
-            .asDriver()
-            .drive(with: self, onNext: { vc, offset in
-                let changedY = offset.y + vc.archiveSongTableViewTopInset
-                let newAppbarHeight = AppbarHeight.shared.min - (changedY * 0.2)
-                
-                if newAppbarHeight >= AppbarHeight.shared.min {
-                    vc.appbarViewHeightConstraint.constant = newAppbarHeight
-                }
-            }).disposed(by: disposeBag)
+        
+        viewModel.showSongOptionFlowtingPanelView
+            .subscribe(with: self, onNext: { vc, archiveSong in
+                vc.songOptionFloatingPanelView?.show(archiveSong)
+            })
+            .disposed(by: disposeBag)
     }
     
     
     // MARK: - Methods
     
-    private func setArchiveSong() {
-        viewModel.fetchSongFolder()
-            .subscribe(onCompleted: { [weak self] in
-                self?.archiveSongTableView.reloadData()
-            }).disposed(by: disposeBag)
-    }
-    
     private func updateFolderNameIfNeeded() {
-        guard let folderTitle = folderTitleTextField.text else {
+        guard let newTitle = folderTitleTextField.text else {
             return
         }
         
-        if folderTitle != viewModel.folderTitle {
-            viewModel.updateFolderTitle(folderTitle)
-                .subscribe(onCompleted: { [weak self] in
-                    self?.delegate?.didFolderNameChanged?()
-                }).disposed(by: disposeBag)
-        }
+        viewModel.updateFolderTitle(newTitle)
     }
     
     private func updateFolderTitleEmojiIfNeeded() {
-        guard let folderTitleEmoji = folderTitleEmojiTextField.text else { return }
-        
-        if folderTitleEmoji != viewModel.folderTitleEmoji {
-            viewModel.updateFolderTitleEmoji(folderTitleEmoji)
-                .subscribe(onCompleted: { [weak self] in
-                    self?.delegate?.didFolderNameChanged?()
-                }).disposed(by: disposeBag)
-        }
-    }
-    
-    private func reloadArchiveSongTableView() {
-        viewModel.fetchSongFolder()
-            .subscribe(with: self, onCompleted: { vc in
-                vc.archiveSongTableView.reloadData()
-            }).disposed(by: disposeBag)
-    }
-    
-    private func presentAddSongVC() {
-        let storyboard = UIStoryboard(name: "Archive", bundle: nil)
-        let addSongVC = storyboard.instantiateViewController(identifier: "addSongStoryboard") { [weak self] coder -> AddSongViewController in
-            guard let self = self else { return AddSongViewController(.init(targetFolderId: "")) }
-            
-            let viewModel = AddSongViewModel(targetFolderId: self.viewModel.currentFolderId)
-            return .init(coder, viewModel) ?? AddSongViewController(.init())
+        guard let newEmoji = folderTitleEmojiTextField.text else {
+            return
         }
         
-        addSongVC.delegate = self
+        viewModel.updateTitleEmoji(newEmoji)
+    }
+    
+    private func presentAddSongVC(_ archiveFolder: ArchiveFolder) {
+        let storyboard = UIStoryboard(name: R.storyboard.archive.name, bundle: nil)
+        let addSongVC = storyboard.instantiateViewController(identifier: AddSongViewController.identifier) { coder -> AddSongViewController in
+            let viewModel = AddSongViewModel(targetFolderId: archiveFolder.id)
+            return .init(coder, viewModel) ?? AddSongViewController(viewModel)
+        }
+        
         addSongVC.modalPresentationStyle = .fullScreen
+        addSongVC.delegate = self
         present(addSongVC, animated: true, completion: nil)
     }
 }
@@ -292,31 +282,14 @@ class ArchiveSongListViewController: UIViewController {
 
 // MARK: - Extensions
 
-extension ArchiveSongListViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection(viewModel.sectionCount)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let songCell = tableView.dequeueReusableCell(withIdentifier: "searchResultTableViewCell") as? SongTableViewCell else { return UITableViewCell() }
-        
-        let songViewModel = viewModel.archiveSongAtIndex(indexPath)
-        
-        songCell.titleLabel.text        = songViewModel.title
-        songCell.singerLabel.text       = songViewModel.singer
-        songCell.songNumberLabel.text   = "\(songViewModel.brand) \(songViewModel.no)"
-        
-        return songCell
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            viewModel.deleteSong(indexPath)
-                .observe(on: MainScheduler.instance)
-                .subscribe(onCompleted: { [weak self] in
-                    self?.archiveSongTableView.deleteRows(at: [indexPath], with: .left)
-                }).disposed(by: disposeBag)
+extension ArchiveSongViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, _ in
+            self?.viewModel.deleteSong(indexPath)
         }
+        let actions = [deleteAction]
+        
+        return .init(actions: actions)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -324,20 +297,20 @@ extension ArchiveSongListViewController: UITableViewDataSource, UITableViewDeleg
     }
 }
 
-extension ArchiveSongListViewController: AddSongViewDelegate {
+extension ArchiveSongViewController: AddSongViewDelegate {
     func didSongAdded() {
-        reloadArchiveSongTableView()
+        viewModel.fetchSongs()
     }
 }
 
-extension ArchiveSongListViewController: PopUpSongOptionViewDelegate {
+extension ArchiveSongViewController: PopUpSongOptionViewDelegate {
     func didSelectedSongRemoved() {
         songOptionFloatingPanelView?.hide(animated: true)
-        reloadArchiveSongTableView()
+        viewModel.fetchSongs()
     }
     
     func didSelectedItemMoved() {
         songOptionFloatingPanelView?.hide(animated: true)
-        reloadArchiveSongTableView()
+        viewModel.fetchSongs()
     }
 }

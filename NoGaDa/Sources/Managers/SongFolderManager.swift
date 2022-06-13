@@ -73,7 +73,7 @@ class SongFolderManager {
         }
     }
     
-    public func deleteData(archiveFolder: ArchiveFolder) -> Completable {
+    public func deleteData(_ archiveFolder: ArchiveFolder) -> Completable {
         return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
@@ -190,7 +190,7 @@ class SongFolderManager {
         return isExists
     }
     
-    public func getSongsCount() -> Int {
+    public func getAmountOfSongs() -> Int {
         do {
             let realmInstance = try Realm()
             let archivedSongs = realmInstance.objects(ArchiveSong.self)

@@ -10,10 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SettingViewController: UIViewController {
+class SettingViewController: BaseViewController {
 
     
     // MARK: - Properties
+    
+    static let identifier = R.storyboard.setting.settingStoryboard.identifier
     
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var searchFilterGroupView: UIView!
@@ -21,19 +23,21 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var searchFilterTableView: UITableView!
     @IBOutlet weak var etcTableView: UITableView!
     
-    private var disposeBag = DisposeBag()
-    
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
     }
 
     
     // MARK: - Setups
+    
+    private func setup() {
+        setupView()
+    }
     
     private func setupView() {
         setupSearchFilterGroupView()
@@ -45,32 +49,38 @@ class SettingViewController: UIViewController {
     }
     
     private func setupSearchFilterGroupView() {
+        registerSearchFilterTableCell()
         searchFilterGroupView.makeAsSettingGroupView()
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.tableFooterView = UIView()
         searchFilterTableView.isScrollEnabled = false
         searchFilterTableView.separatorColor = ColorSet.settingItemSeparatorColor
         searchFilterTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 80)
-        
-        let nibName = UINib(nibName: "SearchFilterTableViewCell", bundle: nil)
-        searchFilterTableView.register(nibName, forCellReuseIdentifier: "searchFilterTableCell")
         searchFilterTableView.layer.cornerRadius = 20
         searchFilterTableView.dataSource = self
         searchFilterTableView.delegate = self
     }
     
+    private func registerSearchFilterTableCell() {
+        let nibName = UINib(nibName: R.nib.searchFilterTableViewCell.name, bundle: nil)
+        searchFilterTableView.register(nibName, forCellReuseIdentifier: SearchFilterTableViewCell.identifier)
+    }
+    
     private func setupEtcGroupView() {
+        registerEtcTableCell()
         etcGroupView.makeAsSettingGroupView()
         etcTableView.layer.cornerRadius = 20
         etcTableView.tableFooterView = UIView()
         etcTableView.isScrollEnabled = false
         etcTableView.separatorColor = ColorSet.settingItemSeparatorColor
         etcTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 64)
-        
-        let nibName = UINib(nibName: "SettingEtcTableViewCell", bundle: nil)
-        etcTableView.register(nibName, forCellReuseIdentifier: "settingEtcTableCell")
         etcTableView.dataSource = self
         etcTableView.delegate = self
+    }
+    
+    private func registerEtcTableCell() {
+        let nibName = UINib(nibName: R.nib.settingEtcTableViewCell.name, bundle: nil)
+        etcTableView.register(nibName, forCellReuseIdentifier: SettingEtcTableViewCell.identifier)
     }
     
     
@@ -83,9 +93,6 @@ class SettingViewController: UIViewController {
                 vc.dismiss(animated: true, completion: nil)
             }).disposed(by: disposeBag)
     }
-    
-    
-    // MARK: - Methods
 }
 
 
@@ -106,7 +113,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case searchFilterTableView:
-            guard let filterItemCell = tableView.dequeueReusableCell(withIdentifier: "searchFilterTableCell") as? SearchFilterTableViewCell else { return UITableViewCell() }
+            guard let filterItemCell = tableView.dequeueReusableCell(withIdentifier: SearchFilterTableViewCell.identifier) as? SearchFilterTableViewCell else {
+                return UITableViewCell()
+            }
             
             let filterItem = SearchFilterItem.allCases[indexPath.row]
             
@@ -121,7 +130,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             return filterItemCell
         case etcTableView:
-            guard let etcItemCell = tableView.dequeueReusableCell(withIdentifier: "settingEtcTableCell") as? SettingEtcTableViewCell else { return UITableViewCell() }
+            guard let etcItemCell = tableView.dequeueReusableCell(withIdentifier: SettingEtcTableViewCell.identifier) as? SettingEtcTableViewCell else {
+                return UITableViewCell()
+            }
             
             let etcItem = SettingEtcItem.allCases[indexPath.row]
             
