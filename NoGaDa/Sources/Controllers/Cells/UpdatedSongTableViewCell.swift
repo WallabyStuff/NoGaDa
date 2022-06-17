@@ -9,24 +9,36 @@ import UIKit
 
 class UpdatedSongTableViewCell: UITableViewCell {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
+    static let identifier = R.reuseIdentifier.updatedSongTableViewCell.identifier
+    
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var thumbnailPlaceholderImageView: UIImageView!
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var songNumberLabel: UILabel!
     
+    
     // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupView()
+        setup()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
     }
 
+    
     // MARK: - Initializers
+    
+    private func setup() {
+        setupView()
+    }
+    
     private func setupView() {
         thumbnailImageView.layer.cornerRadius = 12
         

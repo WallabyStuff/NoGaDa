@@ -11,42 +11,44 @@ import RxSwift
 import RxCocoa
 
 protocol SearchHistoryViewDelegate: AnyObject {
-    func searchHistoryView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedHistoryRowAt selectedHistory: SearchHistory)
-    func searchHistoryView(_ tableView: Bool)
+    func didCallEndEditing()
+    func didHSelectistoryItem(_ keyword: String)
 }
 
-class SearchHistoryViewController: UIViewController {
+class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
     
     
     // MARK: - Properties
+    
+    typealias ViewModel = SearchHistoryViewModel
+    static let idnetifier = R.storyboard.search.searchHistoryStoryboard.identifier
     
     @IBOutlet weak var searchHistoryTableView: UITableView!
     @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
     @IBOutlet weak var clearHistoryButton: UIButton!
     
     weak var delegate: SearchHistoryViewDelegate?
-    private var viewModel: SearchHistoryViewModel
+    var viewModel: ViewModel
     private let searchHistoryViewModel = SearchHistoryViewModel()
-    private var disposeBag = DisposeBag()
     
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
     }
     
     
     // MARK: - Initializers
     
-    init(_ viewModel: SearchHistoryViewModel) {
+    required init(_ viewModel: SearchHistoryViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
-    init?(_ coder: NSCoder, _ viewModel: SearchHistoryViewModel) {
+    required init?(_ coder: NSCoder, _ viewModel: SearchHistoryViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -58,98 +60,82 @@ class SearchHistoryViewController: UIViewController {
 
     // MARK: - Setups
     
+    private func setup() {
+        setupView()
+        setupData()
+    }
+    
     private func setupView() {
         setupSearchHistoryTableView()
     }
     
-    private func bind() {
-        bindClearHistoryButton()
+    private func setupData() {
+        viewModel.fetchSearchHistory()
     }
     
     private func setupSearchHistoryTableView() {
+        registerSearchHistoryTableView()
         searchHistoryTableView.separatorStyle = .none
         searchHistoryTableView.tableFooterView = UIView()
-        updateSearchHistory()
-        
-        let nibName = UINib(nibName: "SearchHistoryTableViewCell", bundle: nil)
-        searchHistoryTableView.register(nibName, forCellReuseIdentifier: "searchHistoryTableCell")
-        searchHistoryTableView.dataSource = self
-        searchHistoryTableView.delegate = self
+        searchHistoryTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+    }
+    
+    private func registerSearchHistoryTableView() {
+        let nibName = UINib(nibName: R.nib.searchHistoryTableViewCell.name, bundle: nil)
+        searchHistoryTableView.register(nibName, forCellReuseIdentifier: SearchHistoryTableViewCell.identifier)
     }
     
     
     // MARK: - Binds
     
+    private func bind() {
+        bindSearchHistoryTableView()
+        bindSearchHistoryTableCell()
+        bindClearHistoryButton()
+    }
+
+    private func bindSearchHistoryTableView() {
+        viewModel.searchHistories
+            .bind(to: searchHistoryTableView.rx.items(cellIdentifier: SearchHistoryTableViewCell.identifier,
+                                                      cellType: SearchHistoryTableViewCell.self)) { [weak self] index, item, cell in
+                guard let self = self else { return }
+                
+                cell.titleLabel.text = item.keyword
+                cell.removeButtonTapAction = { [weak self] in
+                    self?.viewModel.deleteHistory(index)
+                }
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindSearchHistoryTableCell() {
+        searchHistoryTableView.rx.itemSelected
+            .subscribe(with: self, onNext: { vc, indexPath in
+                vc.viewModel.historyItemSelectAction(indexPath)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.didHistoryItemSelect
+            .subscribe(with: self, onNext: { vc, item in
+                vc.delegate?.didHSelectistoryItem(item.keyword)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func bindClearHistoryButton() {
         clearHistoryButton.rx.tap
             .asDriver()
             .drive(with: self, onNext: { vc, _ in
-                vc.searchHistoryViewModel.deleteAllHistory()
-                    .observe(on: MainScheduler.instance)
-                    .subscribe(onCompleted: { [weak vc] in
-                        vc?.updateSearchHistory()
-                    }).disposed(by: vc.disposeBag)
+                vc.viewModel.deleteAllHistories()
             }).disposed(by: disposeBag)
-    }
-    
-    
-    // MARK: - Methods
-    
-    func updateSearchHistory() {
-        searchHistoryViewModel.fetchSearchHistory()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onCompleted: { [weak self] in
-                self?.reloadSearchHistoryTableView()
-            }).disposed(by: disposeBag)
-    }
-    
-    private func reloadSearchHistoryTableView() {
-        if searchHistoryViewModel.isSearchHistoryEmpty {
-            searchHistoryTableViewPlaceholderLabel.isHidden = false
-            searchHistoryTableView.reloadData()
-        } else {
-            searchHistoryTableViewPlaceholderLabel.isHidden = true
-            searchHistoryTableView.reloadData()
-        }
     }
 }
 
 
 // MARK: - Extensions
 
-extension SearchHistoryViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchHistoryViewModel.numberOfRowsInSection(searchHistoryViewModel.sectionCount)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let searchHistoryCell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryTableCell") as? SearchHistoryTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        let searchHistoryItemVM = searchHistoryViewModel.searchHistoryItemAtIndex(indexPath)
-        
-        searchHistoryCell.titleLabel.text = searchHistoryItemVM.keyword
-        searchHistoryCell.removeButtonTapAction = { [weak self] in
-            guard let self = self else { return }
-            
-            self.searchHistoryViewModel.deleteHistory(indexPath)
-                .observe(on: MainScheduler.instance)
-                .subscribe(onCompleted: { [weak self] in
-                    self?.updateSearchHistory()
-                }).disposed(by: self.disposeBag)
-        }
-        
-        return searchHistoryCell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchHistoryItemVM = searchHistoryViewModel.searchHistoryItemAtIndex(indexPath)
-        
-        delegate?.searchHistoryView(tableView, didSelectRowAt: indexPath, selectedHistoryRowAt: searchHistoryItemVM.searchHistory)
-    }
-    
+extension SearchHistoryViewController: UITableViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        delegate?.searchHistoryView(true)
+        delegate?.didCallEndEditing()
     }
 }

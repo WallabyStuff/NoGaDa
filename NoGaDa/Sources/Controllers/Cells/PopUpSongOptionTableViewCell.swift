@@ -12,6 +12,8 @@ class PopUpSongOptionTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    static let identifier = R.reuseIdentifier.popUpSongOptionTableCell.identifier
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     

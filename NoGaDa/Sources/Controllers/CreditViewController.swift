@@ -33,7 +33,7 @@ class CreditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
     }
     
@@ -56,6 +56,10 @@ class CreditViewController: UIViewController {
     
     
     // MARK: - Setups
+    
+    private func setup() {
+        setupView()
+    }
     
     private func setupView() {
         setupHeaderLabel()
@@ -80,12 +84,15 @@ class CreditViewController: UIViewController {
     }
     
     private func setupIconResourceCollectionView() {
+        registerIconResourceCollectionCell()
         iconResourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
-        
-        let nibName = UINib(nibName: "IconResourceCollectionViewCell", bundle: nil)
-        iconResourceCollectionView.register(nibName, forCellWithReuseIdentifier: "iconResourceCollectionCell")
         iconResourceCollectionView.dataSource = self
         iconResourceCollectionView.delegate = self
+    }
+    
+    private func registerIconResourceCollectionCell() {
+        let nibName = UINib(nibName: R.nib.iconResourceCollectionViewCell.name, bundle: nil)
+        iconResourceCollectionView.register(nibName, forCellWithReuseIdentifier: IconResourceCollectionViewCell.identifier)
     }
     
     private func setupContactTextView() {
@@ -120,9 +127,6 @@ class CreditViewController: UIViewController {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
-    // MARK: - Methods
 }
 
 
@@ -134,7 +138,7 @@ extension CreditViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let resourceCell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconResourceCollectionCell", for: indexPath) as? IconResourceCollectionViewCell else { return UICollectionViewCell() }
+        guard let resourceCell = collectionView.dequeueReusableCell(withReuseIdentifier: IconResourceCollectionViewCell.identifier, for: indexPath) as? IconResourceCollectionViewCell else { return UICollectionViewCell() }
         
         let resourceItem = viewModel.resourceItemAtIndex(indexPath)
         resourceCell.descriptionLabel.text  = resourceItem.description

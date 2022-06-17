@@ -19,8 +19,9 @@ class SearchHistoryManager {
                 try realmInstance.write {
                     let searchHistory = SearchHistory(keyword: searchKeyword)
                     realmInstance.add(searchHistory, update: .modified)
-                    observer(.completed)
                 }
+                
+                observer(.completed)
             } catch {
                 observer(.error(error))
             }
@@ -29,37 +30,31 @@ class SearchHistoryManager {
         }
     }
     
-    public func fetchData() -> Observable<[SearchHistory]> {
-        return Observable.create { observer in
+    public func fetchData() -> Single<[SearchHistory]> {
+        return Single.create { observer in
             do {
                 let realmInstance = try Realm()
-                var searchHistoryList = Array(realmInstance.objects(SearchHistory.self))
-                searchHistoryList.sort { return $0.date > $1.date }
+                var histories = Array(realmInstance.objects(SearchHistory.self))
+                histories.sort { return $0.date > $1.date }
                 
-                observer.onNext(searchHistoryList)
-                observer.onCompleted()
+                observer(.success(histories))
             } catch {
-                observer.onError(error)
+                observer(.failure(error))
             }
             
             return Disposables.create()
         }
     }
     
-    public func deleteData(_ keyword: String) -> Completable {
+    public func deleteData(_ object: SearchHistory) -> Completable {
         return Completable.create { observer in
             do {
                 let realmInstance = try Realm()
-                let searchHistoryList = realmInstance.objects(SearchHistory.self)
-                
-                try searchHistoryList.forEach { searchHistory in
-                    if searchHistory.keyword == keyword {
-                        try realmInstance.write {
-                            realmInstance.delete(searchHistory)
-                            observer(.completed)
-                        }
-                    }
+                try realmInstance.write {
+                    realmInstance.delete(object)
                 }
+                
+                observer(.completed)
             } catch {
                 observer(.error(error))
             }
@@ -76,8 +71,9 @@ class SearchHistoryManager {
                 
                 try realmInstance.write {
                     realmInstance.delete(searchHistoryList)
-                    observer(.completed)
                 }
+                
+                observer(.completed)
             } catch {
                 observer(.error(error))
             }

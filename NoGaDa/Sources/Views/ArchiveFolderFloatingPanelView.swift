@@ -53,19 +53,20 @@ class ArchiveFolderFloatingPanelView {
     }
     
     private func prepareForShow(_ selectedSong: Song) {
-        let storyboard = UIStoryboard(name: "Folder", bundle: nil)
-        let archiveFolderListVC = storyboard.instantiateViewController(identifier: "popUpArchiveStoryboard") { coder -> PopUpArchiveFolderListViewController in
-            let viewModel = PopUpArchiveFolderListViewModel(selectedSong: selectedSong)
-            return .init(coder, viewModel) ?? PopUpArchiveFolderListViewController(.init())
-        }
+        let storyboard = UIStoryboard(name: R.storyboard.folder.name, bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: PopUpArchiveFolderViewController.identifier,
+                                                                  creator: { coder -> PopUpArchiveFolderViewController in
+            let viewModel = PopUpArchiveFolderViewModel(selectedSong: selectedSong)
+            return .init(coder, viewModel) ?? PopUpArchiveFolderViewController(.init())
+        })
         
-        archiveFolderListVC.delegate = contentViewDelegate
-        archiveFolderListVC.exitButtonAction = { [weak self] in
+        viewController.delegate = contentViewDelegate
+        viewController.exitButtonAction = { [weak self] in
             self?.hide(animated: true)
         }
         
         floatingPanel.removeFromParent()
-        floatingPanel.set(contentViewController: archiveFolderListVC)
+        floatingPanel.set(contentViewController: viewController)
         floatingPanel.addPanel(toParent: parentViewController!)
     }
 }

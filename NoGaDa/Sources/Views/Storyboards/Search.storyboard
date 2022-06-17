@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,20 +13,20 @@
         <!--노래 검색-->
         <scene sceneID="OJI-Bg-Qms">
             <objects>
-                <viewController storyboardIdentifier="searchStoryboard" title="노래 검색" id="ZXD-vL-W6R" customClass="SearchViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchStoryboard" title="노래 검색" id="ZXD-vL-W6R" customClass="SearchViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gwm-us-3n3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Pc-Jz-EhG">
-                                <rect key="frame" x="0.0" y="176" width="414" height="720"/>
+                                <rect key="frame" x="0.0" y="132" width="414" height="764"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrh-Nd-Kgp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="176"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJe-Xy-BIb">
-                                        <rect key="frame" x="20" y="56" width="28" height="28"/>
+                                        <rect key="frame" x="20" y="12" width="28" height="28"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="2Kx-Rd-xwG"/>
@@ -38,7 +38,7 @@
                                         </state>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-lQ-ELB">
-                                        <rect key="frame" x="20" y="104" width="374" height="52"/>
+                                        <rect key="frame" x="20" y="60" width="374" height="52"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목이나 가수명으로 노래를 검색하세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PHp-LK-s27">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="52"/>
@@ -85,7 +85,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노래 검색" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSo-Pn-J7s">
-                                        <rect key="frame" x="312" y="58" width="74" height="24"/>
+                                        <rect key="frame" x="312" y="14" width="74" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" name="AppbarTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -100,7 +100,7 @@
                                     <constraint firstItem="lLv-lQ-ELB" firstAttribute="top" secondItem="iJe-Xy-BIb" secondAttribute="bottom" constant="20" id="Nbk-yz-0Ii"/>
                                     <constraint firstAttribute="bottom" secondItem="lLv-lQ-ELB" secondAttribute="bottom" constant="20" id="Trt-JP-0Fz"/>
                                     <constraint firstAttribute="trailing" secondItem="GSo-Pn-J7s" secondAttribute="trailing" constant="28" id="e1U-nx-etw"/>
-                                    <constraint firstAttribute="height" constant="176" id="hBE-G0-1Xo"/>
+                                    <constraint firstAttribute="height" constant="132" id="hBE-G0-1Xo"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -117,6 +117,7 @@
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="appbarTitleLabel" destination="GSo-Pn-J7s" id="biK-yL-EZo"/>
                         <outlet property="appbarView" destination="Jrh-Nd-Kgp" id="O0n-TT-KL2"/>
@@ -136,7 +137,7 @@
         <!--Search History View Controller-->
         <scene sceneID="pYD-3B-Kyk">
             <objects>
-                <viewController storyboardIdentifier="searchHistoryStoryboard" id="Wjp-GZ-3Tf" customClass="SearchHistoryViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchHistoryStoryboard" id="Wjp-GZ-3Tf" customClass="SearchHistoryViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="01n-9f-Zhf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,7 +200,7 @@
         <!--Search Result View Controller-->
         <scene sceneID="Pvj-7V-Ma6">
             <objects>
-                <viewController storyboardIdentifier="searchResultStoryboard" id="BKD-Pf-a8g" customClass="SearchResultViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultStoryboard" id="BKD-Pf-a8g" customClass="SearchResultViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7M6-6M-Rrz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -263,9 +264,9 @@
                     <size key="freeformSize" width="414" height="720"/>
                     <connections>
                         <outlet property="brandSelector" destination="yAW-UH-SvE" id="eSl-jx-T1I"/>
-                        <outlet property="searchIndicator" destination="5Oq-iN-Qtu" id="kKT-Hi-hpQ"/>
+                        <outlet property="searchLoadingIndicator" destination="5Oq-iN-Qtu" id="kKT-Hi-hpQ"/>
                         <outlet property="searchResultContentView" destination="uFI-4m-euw" id="qfT-Pd-N3y"/>
-                        <outlet property="searchResultPlaceholderLabel" destination="OrZ-G0-aga" id="0Km-4L-S7j"/>
+                        <outlet property="searchResultMessageLabel" destination="OrZ-G0-aga" id="0Km-4L-S7j"/>
                         <outlet property="searchResultTableView" destination="IcV-Q2-WKI" id="30b-Pw-0UP"/>
                     </connections>
                 </viewController>
@@ -276,7 +277,7 @@
         <!--Pop Over Search Filter View Controller-->
         <scene sceneID="fgg-1N-1kF">
             <objects>
-                <viewController storyboardIdentifier="popOverSearchFilterStoryboard" id="jUa-aA-Jfx" customClass="PopOverSearchFilterViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PopOverSearchFilterStoryboard" id="jUa-aA-Jfx" customClass="PopOverSearchFilterViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dJo-WL-10g">
                         <rect key="frame" x="0.0" y="0.0" width="253" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -313,7 +314,7 @@
                     <size key="freeformSize" width="253" height="300"/>
                     <connections>
                         <outlet property="applyButton" destination="rRt-Tj-FAA" id="t9c-vy-LLS"/>
-                        <outlet property="filterItemTableView" destination="mi6-UC-hEl" id="odq-l9-wcq"/>
+                        <outlet property="searchFilterTableView" destination="mi6-UC-hEl" id="odq-l9-wcq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gto-R9-sO0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

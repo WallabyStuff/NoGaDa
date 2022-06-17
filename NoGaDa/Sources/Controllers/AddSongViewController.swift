@@ -21,6 +21,8 @@ class AddSongViewController: UIViewController {
     
     // MARK: - Properties
     
+    static let identifier = R.storyboard.archive.addSongStoryboard.identifier
+    
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var notificationView: UIView!
@@ -187,9 +189,11 @@ class AddSongViewController: UIViewController {
         Driver.combineLatest(songTitleOb, singerOb, resultSelector: { $0 && $1 })
             .drive(with: self, onNext: { vc, isAllTextFieldFilled in
                 if isAllTextFieldFilled {
+                    vc.confirmButton.isUserInteractionEnabled = true
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
                     vc.confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
                 } else {
+                    vc.confirmButton.isUserInteractionEnabled = false
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
                     vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
                 }

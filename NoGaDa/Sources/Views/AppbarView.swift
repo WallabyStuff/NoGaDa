@@ -10,22 +10,6 @@ import Hero
 import RxSwift
 import RxCocoa
 
-class AppbarHeight {
-    static let shared = AppbarHeight()
-    public var min: CGFloat = 80
-    public var max: CGFloat = 140
-    
-    public func configure() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            AppbarHeight.shared.min = self.min + SafeAreaInsets.top
-            AppbarHeight.shared.max = self.max + SafeAreaInsets.top
-        }
-    }
-    
-    private init() { }
-}
-
 class AppbarView: UIView {
     
     private var _roundCorners: UIRectCorner = []

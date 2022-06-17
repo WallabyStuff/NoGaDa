@@ -9,17 +9,25 @@ import UIKit
 
 class PopUpArchiveFolderTableViewCell: UITableViewCell {
 
-    // MARK: - Declaration
+    
+    // MARK: - Properties
+    
+    static let identifier = R.reuseIdentifier.popUpArchiveTableCell.identifier
+    
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
+    
     // MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupview()
     }
 
-    // MARK: - Initializers
+    
+    // MARK: - Setups
+    
     private func setupview() {
         // Selection View
         let selectionView = UIView(frame: self.frame)

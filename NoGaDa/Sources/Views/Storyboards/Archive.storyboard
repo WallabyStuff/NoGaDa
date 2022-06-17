@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9d0-Sb-VWw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9d0-Sb-VWw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Archive Folder List View Controller-->
+        <!--Archive Folder View Controller-->
         <scene sceneID="nuP-ZV-oK6">
             <objects>
-                <viewController storyboardIdentifier="archiveFolderListStoryboard" id="9d0-Sb-VWw" customClass="ArchiveFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArchiveFolderStoryboard" id="9d0-Sb-VWw" customClass="ArchiveFolderViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PPC-Kk-Rsu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,10 +22,10 @@
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vo-6m-7EM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7h-c3-Fhr">
-                                        <rect key="frame" x="352" y="82" width="34" height="34"/>
+                                        <rect key="frame" x="352" y="18" width="34" height="34"/>
                                         <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="34" id="6uc-OO-iha"/>
@@ -37,7 +37,7 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관함" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5S-ge-BSO">
-                                        <rect key="frame" x="20" y="82.5" width="320" height="33"/>
+                                        <rect key="frame" x="20" y="18.5" width="320" height="33"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                         <color key="textColor" name="AppbarTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="AppbarBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="144" id="0pU-Hj-a6g"/>
+                                    <constraint firstAttribute="height" constant="80" id="0pU-Hj-a6g"/>
                                     <constraint firstItem="b5S-ge-BSO" firstAttribute="centerY" secondItem="J7h-c3-Fhr" secondAttribute="centerY" id="6hp-Fk-dEv"/>
                                     <constraint firstItem="J7h-c3-Fhr" firstAttribute="leading" secondItem="b5S-ge-BSO" secondAttribute="trailing" constant="12" id="DDv-O8-hPO"/>
                                     <constraint firstItem="b5S-ge-BSO" firstAttribute="leading" secondItem="6Vo-6m-7EM" secondAttribute="leading" constant="20" id="Ima-8u-HrZ"/>
@@ -80,6 +80,10 @@
                             <constraint firstItem="6Vo-6m-7EM" firstAttribute="top" secondItem="PPC-Kk-Rsu" secondAttribute="top" id="mO5-Sa-jXf"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="addFolderButton" destination="6Gj-gl-IDl" id="f0E-T5-fL5"/>
                         <outlet property="appbarTitleLabel" destination="b5S-ge-BSO" id="NZD-ne-p25"/>
@@ -93,10 +97,10 @@
             </objects>
             <point key="canvasLocation" x="-5003" y="569"/>
         </scene>
-        <!--Archive Song List View Controller-->
+        <!--Archive Song View Controller-->
         <scene sceneID="gA0-cJ-1zE">
             <objects>
-                <viewController storyboardIdentifier="archiveSongListStoryboard" id="941-Vf-gFh" customClass="ArchiveSongListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArchiveSongStoryboard" id="941-Vf-gFh" customClass="ArchiveSongViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B0k-mA-1Iu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,10 +110,10 @@
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFF-MR-j6I">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="노래방 가서 부르고 싶은 노래" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zD2-Ua-lUY">
-                                        <rect key="frame" x="80" y="76" width="252" height="48"/>
+                                        <rect key="frame" x="80" y="12" width="252" height="48"/>
                                         <color key="backgroundColor" name="AppbarTextfieldBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Bx7-Kl-uy3"/>
@@ -119,7 +123,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="😀" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ITh-21-hGi" customClass="EmojiTextField" customModule="NoGaDa" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="76" width="48" height="48"/>
+                                        <rect key="frame" x="20" y="12" width="48" height="48"/>
                                         <color key="backgroundColor" name="AppbarTextfieldBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="4IS-pY-oVb"/>
@@ -130,7 +134,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agV-tb-iiv">
-                                        <rect key="frame" x="352" y="82" width="34" height="34"/>
+                                        <rect key="frame" x="352" y="18" width="34" height="34"/>
                                         <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="EY6-bT-As5"/>
@@ -144,7 +148,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="AppbarBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="144" id="4rh-LW-lLe"/>
+                                    <constraint firstAttribute="height" constant="80" id="4rh-LW-lLe"/>
                                     <constraint firstAttribute="bottom" secondItem="ITh-21-hGi" secondAttribute="bottom" constant="20" id="CKl-PP-GXh"/>
                                     <constraint firstItem="agV-tb-iiv" firstAttribute="leading" secondItem="zD2-Ua-lUY" secondAttribute="trailing" constant="20" id="QtQ-Z1-OMs"/>
                                     <constraint firstItem="ITh-21-hGi" firstAttribute="leading" secondItem="BFF-MR-j6I" secondAttribute="leading" constant="20" id="SmT-bK-9vF"/>
@@ -180,6 +184,10 @@
                             <constraint firstItem="zVI-xi-Lf6" firstAttribute="leading" secondItem="Bdq-4k-Qiz" secondAttribute="leading" id="x6A-mS-GGE"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="addSongButton" destination="Fcy-47-hih" id="KZF-xY-bxo"/>
                         <outlet property="appbarView" destination="BFF-MR-j6I" id="RLs-Q8-9cl"/>
@@ -197,7 +205,7 @@
         <!--Add Song View Controller-->
         <scene sceneID="dVK-Lb-AwU">
             <objects>
-                <viewController storyboardIdentifier="addSongStoryboard" id="o7W-rR-MwM" customClass="AddSongViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddSongStoryboard" id="o7W-rR-MwM" customClass="AddSongViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XTs-P9-lEW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -409,7 +417,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t2D-Wo-234">
-                                <rect key="frame" x="24" y="32" width="52" height="52"/>
+                                <rect key="frame" x="24" y="76" width="52" height="52"/>
                                 <color key="backgroundColor" name="SongThumbnailBackgroundColor"/>
                                 <color key="tintColor" name="SongThumbnailForegroundColor"/>
                                 <constraints>
@@ -418,19 +426,19 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCb-4V-ndH">
-                                <rect key="frame" x="88" y="38" width="248" height="19.5"/>
+                                <rect key="frame" x="88" y="82" width="248" height="19.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="singer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TV1-Pg-UAk">
-                                <rect key="frame" x="88" y="61.5" width="248" height="17"/>
+                                <rect key="frame" x="88" y="105.5" width="248" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" name="SubTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ur-fj-uXG">
-                                <rect key="frame" x="356" y="32" width="34" height="34"/>
+                                <rect key="frame" x="356" y="76" width="34" height="34"/>
                                 <color key="backgroundColor" name="AppbarExitButtonBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="5sc-ZE-dGV"/>
@@ -442,7 +450,7 @@
                                 </state>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music-note" translatesAutoresizingMaskIntoConstraints="NO" id="QNk-V9-im6">
-                                <rect key="frame" x="38" y="46" width="24" height="24"/>
+                                <rect key="frame" x="38" y="90" width="24" height="24"/>
                                 <color key="tintColor" name="SongThumbnailForegroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="pN1-v9-cA0"/>
@@ -450,14 +458,14 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d04-eD-mQ1">
-                                <rect key="frame" x="0.0" y="100" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="1"/>
                                 <color key="backgroundColor" name="SeparatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="n6B-ki-CRU"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OiJ-0s-mh5">
-                                <rect key="frame" x="0.0" y="101" width="414" height="687"/>
+                                <rect key="frame" x="0.0" y="145" width="414" height="677"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
                         </subviews>

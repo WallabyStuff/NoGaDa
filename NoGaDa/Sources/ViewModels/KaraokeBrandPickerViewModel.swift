@@ -7,9 +7,7 @@
 
 import UIKit
 
-class KaraokeBrandPickerViewModel {
-    
-}
+class KaraokeBrandPickerViewModel { }
 
 extension KaraokeBrandPickerViewModel {
     var sectionCount: Int {

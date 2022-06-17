@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="1954" y="1175"/>
         </scene>
-        <!--Pop Up Archive Folder List View Controller-->
+        <!--Pop Up Archive Folder View Controller-->
         <scene sceneID="w2F-vT-x9Z">
             <objects>
-                <viewController storyboardIdentifier="popUpArchiveStoryboard" id="kFq-eD-ZE7" customClass="PopUpArchiveFolderListViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popUpArchiveFolderStoryboard" id="kFq-eD-ZE7" customClass="PopUpArchiveFolderViewController" customModule="NoGaDa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="enW-TD-Mn3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
