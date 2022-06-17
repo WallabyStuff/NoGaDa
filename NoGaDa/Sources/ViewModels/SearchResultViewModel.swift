@@ -16,7 +16,7 @@ class SearchResultViewModel {
     
     private var disposeBag = DisposeBag()
     private var karaokeManager = KaraokeApiManager()
-    private var searchKeyword = ""
+    public var searchKeyword = ""
     
     public var selectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
     
