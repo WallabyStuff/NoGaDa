@@ -6,24 +6,54 @@
 //
 
 import UIKit
+
 import GoogleMobileAds
+import RxSwift
+import RxCocoa
 
 enum AdMobUnitID {
     static let testInterstitial = "ca-app-pub-3940256099942544/4411468910"
-    static let afterSaveSong = "ca-app-pub-3998172297943713/4233053278"
+    static let initialAd = "ca-app-pub-3998172297943713/4233053278"
 }
 
 class AdMobManager {
-    private var interstitial: GADInterstitialAd?
-    public var presentFrequency = 2
     
-    init() {
+    
+    // MARK: - Properties
+    
+    static let shared = AdMobManager()
+    private var interstitial: GADInterstitialAd?
+    public var presentFrequency = 1
+    
+    
+    // MARK: - Initializers
+    
+    private init() { }
+    
+    
+    // MARK: - Methods
+    
+    public func presentAd(vc: UIViewController) -> Completable {
         configureAdMob()
+        
+        return Completable.create { observer in
+            let request = GADRequest()
+            GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
+                                   request: request) { ad, error in
+                if let error = error {
+                    observer(.error(error))
+                } else {
+                    ad?.present(fromRootViewController: vc)
+                }
+            }
+            
+            return Disposables.create()
+        }
     }
     
-    private func configureAdMob() {
+    public func configureAdMob() {
         let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID: AdMobUnitID.afterSaveSong,
+        GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
                                request: request) { [weak self] ad, error in
             guard let self = self else { return }
             
@@ -35,22 +65,12 @@ class AdMobManager {
             self.interstitial = ad
         }
     }
-    
-    public func presentAdMob(vc: UIViewController) {
-        guard let interstitial = interstitial else {
-            print("Log ad is not loaded")
-            return
-        }
-        
-        if !admobUsageState() {
-            print("admob present now")
-            interstitial.present(fromRootViewController: vc)
-            configureAdMob()
-        }
-        
-        updateAdmobUsageCount()
-    }
-    
+}
+
+
+// MARK: - Admob frequency
+
+extension AdMobManager {
     private func admobUsageState() -> Bool {
         let currentUsageCount = UserDefaults.standard.integer(forKey: "admobUsageCount")
         

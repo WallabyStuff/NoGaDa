@@ -51,6 +51,10 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
+        
+        AdMobManager.shared.presentAd(vc: self)
+            .subscribe()
+            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {

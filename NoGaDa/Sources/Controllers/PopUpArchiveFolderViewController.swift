@@ -31,7 +31,6 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     weak var delegate: PopUpArchiveFolderViewDelegate?
     var viewModel: ViewModel
     public var exitButtonAction: () -> Void = {}
-    private let admobManager = AdMobManager()
     
     
     // MARK: - Lifecycle
@@ -170,7 +169,6 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     private func bindDidSongAdded() {
         viewModel.didSongAdded
             .subscribe(with: self, onNext: { vc, _ in
-                vc.admobManager.presentAdMob(vc: vc)
                 vc.delegate?.didSongAdded?()
             })
             .disposed(by: disposeBag)
