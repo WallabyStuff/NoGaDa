@@ -7,7 +7,9 @@
 
 import UIKit
 
+@objc
 protocol BISegmentedControlDelegate: AnyObject {
+    @objc optional
     func BISegmentedControl(didSelectSegmentAt index: Int)
 }
 
@@ -128,7 +130,7 @@ class BISegmentedControl: UIView {
             if segment.isInBound(point: tapPosition) {
                 currentPosition = index
                 changeIndicatorPosition()
-                delegate?.BISegmentedControl(didSelectSegmentAt: index)
+                delegate?.BISegmentedControl?(didSelectSegmentAt: index)
                 return
             }
         }
