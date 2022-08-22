@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxGesture
 
-class MainViewController: BaseViewController, ViewModelInjectable {
+class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveFolderViewDelegate {
 
     
     // MARK: Properties
@@ -52,9 +52,9 @@ class MainViewController: BaseViewController, ViewModelInjectable {
         self.viewModel = viewModel
         super.init(coder: coder)
         
-        AdMobManager.shared.presentAd(vc: self)
-            .subscribe()
-            .disposed(by: disposeBag)
+//        AdMobManager.shared.presentAd(vc: self)
+//            .subscribe()
+//            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -75,7 +75,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
         super.viewDidAppear(animated)
         hideSplashView()
         requestTrackingAuthorization()
-        viewModel.updateAmountOfSavedSongs()
         
         // Update constraints
         appbarView.setNeedsLayout()
@@ -94,11 +93,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     
     private func setup() {
         setupView()
-        setupData()
-    }
-    
-    private func setupData() {
-        viewModel.fetchUpdatedSong()
     }
     
     private func setupView() {
@@ -175,64 +169,145 @@ class MainViewController: BaseViewController, ViewModelInjectable {
         brandSegmentedControl.segmentFontSize = 14
         brandSegmentedControl.addSegment(title: "tj 업데이트")
         brandSegmentedControl.addSegment(title: "금영 업데이트")
-        brandSegmentedControl.delegate = self
+//        brandSegmentedControl.delegate = self
     }
     
     
     // MARK: - Bindss
     
     private func bind() {
-        bindSearchBoxView()
-        bindSearchButton()
-        bindArchiveShorcutView()
-        bindSettingButton()
         bindMainContentScrollView()
-
-        bindAmountOfSavedSongsSizeLabel()
         
-        bindNewUpdateSongTableView()
-        bindNewUpdateSongTableCell()
-        bindNewUpdateSongLoadingState()
-        bindNewUpdateSongsFailState()
         
-        bindShowArchiveFolderFloatingView()
-    }
-    
-    private func bindSearchBoxView() {
-        searchBoxView.rx.tapGesture()
-            .when(.recognized)
-            .bind(with: self) { vc, _ in
-                vc.presentSearchVC()
-            }.disposed(by: disposeBag)
+        // MARK: - Input
         
-        searchBoxView.rx.longPressGesture()
-            .when(.began)
-            .bind(with: self) { vc, _ in
-                vc.presentSearchVC()
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindSearchButton() {
-        searchButton.rx.tapGesture()
+        let tapSearchBar = Observable.merge(
+            searchBoxView.rx.tapGesture().when(.recognized)
+                .map { _ in return },
+            searchBoxView.rx.longPressGesture().when(.began)
+                .map { _ in return },
+            searchButton.rx.tap.asObservable()
+                .map { _ in return }
+        )
+        .asObservable()
+        
+        let tapArchiveFolderView = archiveShortcutView
+            .rx.tapGesture()
             .when(.recognized)
-            .bind(with: self) { vc, _ in
-                vc.presentSearchVC()
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveShorcutView() {
-        archiveShortcutView.rx.tapGesture()
-            .when(.recognized)
-            .bind(with: self) { vc, _ in
-                vc.presentArchiveFolderVC()
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindSettingButton() {
-        settingButton.rx.tap
-            .bind(with: self, onNext: { vc, _ in
-                vc.presentSettingVC()
-            }).disposed(by: disposeBag)
+            .map { _ in return }
+            .asObservable()
+        
+        let tapSettingButton = settingButton
+            .rx.tap
+            .map { _ in return }
+            .asObservable()
+        
+        let tapNewUpdateSongItem = newUpdateSongTableView
+            .rx.itemSelected
+            .asObservable()
+        
+        let changeSelectedKaraokeBrand = brandSegmentedControl
+            .rx.itemSelected
+            .map { index -> KaraokeBrand in
+                print("im working")
+                switch index {
+                case 0:
+                    return KaraokeBrand.tj
+                case 1:
+                    return KaraokeBrand.kumyoung
+                default:
+                    return KaraokeBrand.tj
+                }
+            }
+            .asObservable()
+            
+        let input = ViewModel.Input(
+            viewDidLoad: self.rx.viewDidLoad.asObservable(),
+            viewDidAppear: self.rx.viewDidAppear.asObservable(),
+            tapSearchBar: tapSearchBar,
+            tapArchiveFolderView: tapArchiveFolderView,
+            tapSettingButton: tapSettingButton,
+            tapNewUpdateSongItem: tapNewUpdateSongItem,
+            changeSelectedKaraokeBrand: changeSelectedKaraokeBrand)
+        
+        
+        // MARK: - Output
+        
+        let output = viewModel.transform(input: input)
+        
+        output.showSearchVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] isShowing in
+                if isShowing {
+                    self?.presentSearchVC()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.showArchiveFolderVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] isShowing in
+                if isShowing {
+                    self?.presentArchiveFolderVC()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.showSettingVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] isShowing in
+                if isShowing {
+                    self?.presentSettingVC()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.newUpdateSongs
+            .bind(to: newUpdateSongTableView.rx.items(cellIdentifier: UpdatedSongTableViewCell.identifier, cellType: UpdatedSongTableViewCell.self)) { index, song, cell in
+                cell.songTitleLabel.text = song.title
+                cell.songNumberLabel.text = song.no
+                cell.singerLabel.text = song.singer
+            }
+            .disposed(by: disposeBag)
+        
+        output.isLoadingNewUpdateSongs
+            .asDriver()
+            .drive(with: self, onNext: { vc, isLoading in
+                if isLoading {
+                    vc.newUpdateSongLoadingIndicator.isHidden = false
+                    vc.newUpdateSongLoadingIndicator.startAnimating()
+                } else {
+                    vc.newUpdateSongLoadingIndicator.isHidden = true
+                    vc.newUpdateSongLoadingIndicator.stopAnimating()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.newUpdateSongsErrorState
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, message in
+                if message.isEmpty {
+                    vc.newUpdateSongErrorMessageLabel.isHidden = true
+                } else {
+                    vc.newUpdateSongErrorMessageLabel.isHidden = false
+                    vc.newUpdateSongErrorMessageLabel.text = message
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.amountOfSavedSongs
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] amount in
+                self?.totalArchivedSongSizeLabel.text = amount
+            })
+            .disposed(by: disposeBag)
+        
+        output.showArchiveFolderFloadingView
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] song in
+                self?.showArchiveFolderFloatingView(song)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindMainContentScrollView() {
@@ -264,70 +339,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
                     vc.settingButton.alpha = 1
                 }
             }).disposed(by: disposeBag)
-    }
-
-    
-    
-    private func bindAmountOfSavedSongsSizeLabel() {
-        viewModel.amountOfSavedSongs
-            .subscribe(with: self, onNext: { vc, text in
-                vc.totalArchivedSongSizeLabel.text = text
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindNewUpdateSongTableView() {
-        viewModel.newUpdateSongs
-            .bind(to: newUpdateSongTableView.rx.items(cellIdentifier: UpdatedSongTableViewCell.identifier,
-                                                      cellType: UpdatedSongTableViewCell.self)) { index, song, cell in
-                cell.songTitleLabel.text = song.title
-                cell.songNumberLabel.text = song.no
-                cell.singerLabel.text = song.singer
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindNewUpdateSongTableCell() {
-        newUpdateSongTableView.rx.itemSelected
-            .asDriver()
-            .drive(with: self, onNext: { vc, indexPath in
-                vc.viewModel.songItemSelectAction(indexPath)
-            }).disposed(by: disposeBag)
-    }
-    
-    private func bindNewUpdateSongLoadingState() {
-        viewModel.isLoadingNewUpdateSongs
-            .subscribe(with: self, onNext: { vc, isLoading in
-                if isLoading {
-                    vc.newUpdateSongLoadingIndicator.isHidden = false
-                    vc.newUpdateSongLoadingIndicator.startAnimating()
-                } else {
-                    vc.newUpdateSongLoadingIndicator.isHidden = true
-                    vc.newUpdateSongLoadingIndicator.stopAnimating()
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindNewUpdateSongsFailState() {
-        viewModel.newUpdateSongsErrorState
-            .subscribe(with: self, onNext: { vc, message in
-                if message.isEmpty {
-                    vc.newUpdateSongErrorMessageLabel.isHidden = true
-                } else {
-                    vc.newUpdateSongErrorMessageLabel.isHidden = false
-                    vc.newUpdateSongErrorMessageLabel.text = message
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindShowArchiveFolderFloatingView() {
-        viewModel.showArchiveFolderFloatingView
-            .subscribe(with: self, onNext: { vc, song in
-                vc.showArchiveFolderFloatingView(song)
-            })
-            .disposed(by: disposeBag)
     }
     
     
@@ -381,25 +392,25 @@ class MainViewController: BaseViewController, ViewModelInjectable {
 
 // MARK: - Extensions
 
-extension MainViewController: PopUpArchiveFolderViewDelegate {
-    func didSongAdded() {
-        archiveFolderFloatingView?.hide(animated: true)
-        viewModel.updateAmountOfSavedSongs()
-    }
-}
-
-extension MainViewController: ArchiveFolderListViewDelegate {
-    func didFileChanged() {
-        viewModel.updateAmountOfSavedSongs()
-    }
-}
-
-extension MainViewController: BISegmentedControlDelegate {
-    func BISegmentedControl(didSelectSegmentAt index: Int) {
-        if index == 0 {
-            viewModel.updatedSelectedKaraokeBrank(.tj)
-        } else {
-            viewModel.updatedSelectedKaraokeBrank(.kumyoung)
-        }
-    }
-}
+//extension MainViewController: PopUpArchiveFolderViewDelegate {
+//    func didSongAdded() {
+//        archiveFolderFloatingView?.hide(animated: true)
+//        viewModel.updateAmountOfSavedSongs()
+//    }
+//}
+//
+//extension MainViewController: ArchiveFolderListViewDelegate {
+//    func didFileChanged() {
+//        viewModel.updateAmountOfSavedSongs()
+//    }
+//}
+//
+//extension MainViewController: BISegmentedControlDelegate {
+//    func BISegmentedControl(didSelectSegmentAt index: Int) {
+//        if index == 0 {
+//            viewModel.updatedSelectedKaraokeBrank(.tj)
+//        } else {
+//            viewModel.updatedSelectedKaraokeBrank(.kumyoung)
+//        }
+//    }
+//}
