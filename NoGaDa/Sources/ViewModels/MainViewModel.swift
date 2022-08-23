@@ -16,13 +16,16 @@ class MainViewModel: ViewModelType {
     // MARK: - Properties
     
     struct Input {
-        let viewDidLoad: Observable<Void>
-        let viewDidAppear: Observable<Bool>
-        let tapSearchBar: Observable<Void>
-        let tapArchiveFolderView: Observable<Void>
-        let tapSettingButton: Observable<Void>
-        let tapNewUpdateSongItem: Observable<IndexPath>
-        let changeSelectedKaraokeBrand: Observable<KaraokeBrand>
+        let viewDidLoad = PublishSubject<Void>()
+        let viewDidAppear = PublishSubject<Bool>()
+        let tapSearchBar = PublishSubject<Void>()
+        let tapArchiveFolderView = PublishSubject<Void>()
+        let tapSettingButton = PublishSubject<Void>()
+        let tapNewUpdateSongItem = PublishSubject<IndexPath>()
+        let changeSelectedKaraokeBrand = BehaviorSubject<KaraokeBrand>(value: .tj)
+        let didSongAdded = PublishRelay<Void>()
+        let didFileChanged = PublishRelay<Void>()
+        let didFolderNameChanged = PublishRelay<Void>()
     }
     
     struct Output {
@@ -37,56 +40,68 @@ class MainViewModel: ViewModelType {
         let showArchiveFolderFloadingView = PublishRelay<Song>()
     }
     
-    var disposeBag = DisposeBag()
+    private(set) var input: Input!
+    private(set) var output: Output!
+    private(set) var disposeBag = DisposeBag()
     private let karaokeManager = KaraokeApiManager()
     private let songFolderManager = SongFolderManager()
     
     
-    // MARK: - Transform
+    // MARK: - Initializers
     
-    func transform(input: Input) -> Output {
+    init() {
+        setupInputOutput()
+    }
+    
+    private func setupInputOutput() {
+        self.input = Input()
         let output = Output()
         
         Observable.merge(
-            input.viewDidAppear.map { _ in },
+            input.viewDidLoad,
             input.changeSelectedKaraokeBrand
                 .map { brand in
                     output.selectedKaraokeBrand.accept(brand)
                     print(brand)
                 }.asObservable()
-        ).map { _ in
-                output.newUpdateSongs.accept([])
-                output.isLoadingNewUpdateSongs.accept(true)
+        )
+        .map { _ in
+            output.newUpdateSongs.accept([])
+            output.isLoadingNewUpdateSongs.accept(true)
+        }
+        .flatMap({ [weak self] () -> Observable<[Song]> in
+            guard let self = self else { return .never() }
+            let selectedBrand = output.selectedKaraokeBrand.value
+            return self.karaokeManager.fetchUpdatedSong(brand: selectedBrand)
+        })
+        .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
+        .observe(on: MainScheduler.instance)
+        .subscribe(with: self, onNext: { strongSelf, songs  in
+            if songs.isEmpty {
+                output.newUpdateSongsErrorState.accept("업데이트 된 곡이 없습니다.")
+            } else {
+                output.newUpdateSongsErrorState.accept("")
+                output.newUpdateSongs.accept(songs)
             }
-            .flatMap({ [weak self] () -> Observable<[Song]> in
-                guard let self = self else { return .never() }
-                let selectedBrand = output.selectedKaraokeBrand.value
-                return self.karaokeManager.fetchUpdatedSong(brand: selectedBrand)
-            })
-            .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
-            .observe(on: MainScheduler.instance)
-            .subscribe(with: self, onNext: { strongSelf, songs  in
-                if songs.isEmpty {
-                    output.newUpdateSongsErrorState.accept("업데이트 된 곡이 없습니다.")
-                } else {
-                    output.newUpdateSongsErrorState.accept("")
-                    output.newUpdateSongs.accept(songs)
-                }
-
-                output.isLoadingNewUpdateSongs.accept(false)
-            }, onError: { strongSelf, error in
-                output.newUpdateSongsErrorState.accept("오류가 발생했습니다.")
-                output.isLoadingNewUpdateSongs.accept(false)
-            })
-            .disposed(by: disposeBag)
+            
+            output.isLoadingNewUpdateSongs.accept(false)
+        }, onError: { strongSelf, error in
+            output.newUpdateSongsErrorState.accept("오류가 발생했습니다.")
+            output.isLoadingNewUpdateSongs.accept(false)
+        })
+        .disposed(by: disposeBag)
         
-        input.viewDidAppear
-            .subscribe(onNext: { [weak self] _ in
-                let amount = self?.songFolderManager.getAmountOfSongs() ?? 0
-                let text = "총 \(amount)곡"
-                output.amountOfSavedSongs.accept(text)
-            })
-            .disposed(by: disposeBag)
+        Observable.merge(
+            input.viewDidAppear.map { _ in },
+            input.didSongAdded.asObservable(),
+            input.didFileChanged.asObservable()
+        )
+        .subscribe(onNext: { [weak self] _ in
+            let amount = self?.songFolderManager.getAmountOfSongs() ?? 0
+            let text = "총 \(amount)곡"
+            output.amountOfSavedSongs.accept(text)
+        })
+        .disposed(by: disposeBag)
         
         input.tapSearchBar
             .subscribe(onNext: {
@@ -113,6 +128,6 @@ class MainViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return output
+        self.output = output
     }
 }

@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxGesture
 
-class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveFolderViewDelegate {
+class MainViewController: BaseViewController, ViewModelInjectable {
 
     
     // MARK: Properties
@@ -52,6 +52,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
         self.viewModel = viewModel
         super.init(coder: coder)
         
+        // TODO: Remove this comment in release version
 //        AdMobManager.shared.presentAd(vc: self)
 //            .subscribe()
 //            .disposed(by: disposeBag)
@@ -169,19 +170,27 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
         brandSegmentedControl.segmentFontSize = 14
         brandSegmentedControl.addSegment(title: "tj 업데이트")
         brandSegmentedControl.addSegment(title: "금영 업데이트")
-//        brandSegmentedControl.delegate = self
     }
     
     
     // MARK: - Bindss
     
     private func bind() {
+        bindInputs()
+        bindOutputs()
         bindMainContentScrollView()
+    }
+    
+    private func bindInputs() {
+        self.rx.viewDidLoad
+            .bind(to: viewModel.input.viewDidLoad)
+            .disposed(by: disposeBag)
         
+        self.rx.viewDidAppear
+            .bind(to: viewModel.input.viewDidAppear)
+            .disposed(by: disposeBag)
         
-        // MARK: - Input
-        
-        let tapSearchBar = Observable.merge(
+        Observable.merge(
             searchBoxView.rx.tapGesture().when(.recognized)
                 .map { _ in return },
             searchBoxView.rx.longPressGesture().when(.began)
@@ -189,27 +198,31 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             searchButton.rx.tap.asObservable()
                 .map { _ in return }
         )
-        .asObservable()
+            .bind(to: viewModel.input.tapSearchBar)
+            .disposed(by: disposeBag)
         
-        let tapArchiveFolderView = archiveShortcutView
+        archiveShortcutView
             .rx.tapGesture()
             .when(.recognized)
             .map { _ in return }
-            .asObservable()
+            .bind(to: viewModel.input.tapArchiveFolderView)
+            .disposed(by: disposeBag)
         
-        let tapSettingButton = settingButton
+        settingButton
             .rx.tap
             .map { _ in return }
             .asObservable()
+            .bind(to: viewModel.input.tapSettingButton)
+            .disposed(by: disposeBag)
         
-        let tapNewUpdateSongItem = newUpdateSongTableView
+        newUpdateSongTableView
             .rx.itemSelected
-            .asObservable()
+            .bind(to: viewModel.input.tapNewUpdateSongItem)
+            .disposed(by: disposeBag)
         
-        let changeSelectedKaraokeBrand = brandSegmentedControl
+        brandSegmentedControl
             .rx.itemSelected
             .map { index -> KaraokeBrand in
-                print("im working")
                 switch index {
                 case 0:
                     return KaraokeBrand.tj
@@ -219,23 +232,12 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
                     return KaraokeBrand.tj
                 }
             }
-            .asObservable()
-            
-        let input = ViewModel.Input(
-            viewDidLoad: self.rx.viewDidLoad.asObservable(),
-            viewDidAppear: self.rx.viewDidAppear.asObservable(),
-            tapSearchBar: tapSearchBar,
-            tapArchiveFolderView: tapArchiveFolderView,
-            tapSettingButton: tapSettingButton,
-            tapNewUpdateSongItem: tapNewUpdateSongItem,
-            changeSelectedKaraokeBrand: changeSelectedKaraokeBrand)
-        
-        
-        // MARK: - Output
-        
-        let output = viewModel.transform(input: input)
-        
-        output.showSearchVC
+            .bind(to: viewModel.input.changeSelectedKaraokeBrand)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOutputs() {
+        viewModel.output.showSearchVC
             .asDriver(onErrorDriveWith: .never())
             .drive(onNext: { [weak self] isShowing in
                 if isShowing {
@@ -244,7 +246,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             })
             .disposed(by: disposeBag)
         
-        output.showArchiveFolderVC
+        viewModel.output.showArchiveFolderVC
             .asDriver(onErrorDriveWith: .never())
             .drive(onNext: { [weak self] isShowing in
                 if isShowing {
@@ -253,7 +255,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             })
             .disposed(by: disposeBag)
         
-        output.showSettingVC
+        viewModel.output.showSettingVC
             .asDriver(onErrorDriveWith: .never())
             .drive(onNext: { [weak self] isShowing in
                 if isShowing {
@@ -262,7 +264,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             })
             .disposed(by: disposeBag)
         
-        output.newUpdateSongs
+        viewModel.output.newUpdateSongs
             .bind(to: newUpdateSongTableView.rx.items(cellIdentifier: UpdatedSongTableViewCell.identifier, cellType: UpdatedSongTableViewCell.self)) { index, song, cell in
                 cell.songTitleLabel.text = song.title
                 cell.songNumberLabel.text = song.no
@@ -270,7 +272,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             }
             .disposed(by: disposeBag)
         
-        output.isLoadingNewUpdateSongs
+        viewModel.output.isLoadingNewUpdateSongs
             .asDriver()
             .drive(with: self, onNext: { vc, isLoading in
                 if isLoading {
@@ -283,7 +285,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             })
             .disposed(by: disposeBag)
         
-        output.newUpdateSongsErrorState
+        viewModel.output.newUpdateSongsErrorState
             .asDriver(onErrorDriveWith: .never())
             .drive(with: self, onNext: { vc, message in
                 if message.isEmpty {
@@ -295,14 +297,14 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             })
             .disposed(by: disposeBag)
         
-        output.amountOfSavedSongs
+        viewModel.output.amountOfSavedSongs
             .asDriver(onErrorDriveWith: .never())
             .drive(onNext: { [weak self] amount in
                 self?.totalArchivedSongSizeLabel.text = amount
             })
             .disposed(by: disposeBag)
         
-        output.showArchiveFolderFloadingView
+        viewModel.output.showArchiveFolderFloadingView
             .asDriver(onErrorDriveWith: .never())
             .drive(onNext: { [weak self] song in
                 self?.showArchiveFolderFloatingView(song)
@@ -363,6 +365,7 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
             return .init(coder, viewModel) ?? ArchiveFolderViewController(viewModel)
         }
         
+        archiveVC.delegate = self
         archiveVC.modalPresentationStyle = .fullScreen
         present(archiveVC, animated: true, completion: nil)
     }
@@ -392,25 +395,19 @@ class MainViewController: BaseViewController, ViewModelInjectable, PopUpArchiveF
 
 // MARK: - Extensions
 
-//extension MainViewController: PopUpArchiveFolderViewDelegate {
-//    func didSongAdded() {
-//        archiveFolderFloatingView?.hide(animated: true)
-//        viewModel.updateAmountOfSavedSongs()
-//    }
-//}
-//
-//extension MainViewController: ArchiveFolderListViewDelegate {
-//    func didFileChanged() {
-//        viewModel.updateAmountOfSavedSongs()
-//    }
-//}
-//
-//extension MainViewController: BISegmentedControlDelegate {
-//    func BISegmentedControl(didSelectSegmentAt index: Int) {
-//        if index == 0 {
-//            viewModel.updatedSelectedKaraokeBrank(.tj)
-//        } else {
-//            viewModel.updatedSelectedKaraokeBrank(.kumyoung)
-//        }
-//    }
-//}
+extension MainViewController: PopUpArchiveFolderViewDelegate {
+    func didSongAdded() {
+        archiveFolderFloatingView?.hide(animated: true)
+        Observable.just(Void())
+            .bind(to: viewModel.input.didSongAdded)
+            .dispose()
+    }
+}
+
+extension MainViewController: ArchiveFolderListViewDelegate {
+    func didFileChanged() {
+        Observable.just(Void())
+            .bind(to: viewModel.input.didFileChanged)
+            .dispose()
+    }
+}
