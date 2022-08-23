@@ -12,8 +12,10 @@ import RxCocoa
 import RxGesture
 import Hero
 
-@objc protocol ArchiveFolderListViewDelegate: AnyObject {
-    @objc optional func didFileChanged()
+@objc
+protocol ArchiveFolderListViewDelegate: AnyObject {
+    @objc optional
+    func didFileChanged()
 }
 
 class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
@@ -47,7 +49,6 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         unhighlightSelectedCell()
-        viewModel.fetchFolders()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,11 +84,6 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     
     private func setup() {
         setupView()
-        setupData()
-    }
-    
-    private func setupData() {
-        viewModel.fetchFolders()
     }
     
     private func setupView() {
@@ -145,11 +141,75 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     
     private func bind() {
         bindAppbarView()
-        bindExitButton()
-        bindAddFolderButton()
+        bindInput()
+        bindOutput()
+    }
+    
+    private func bindInput() {
+        self.rx.viewWillAppear
+            .bind(to: viewModel.input.viewWillAppear)
+            .disposed(by: disposeBag)
         
-        bindArchiveFolderTableView()
-        bindArchiveFolderTableCell()
+        exitButton
+            .rx.tap
+            .map { _ in }
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
+        
+        addFolderButton
+            .rx.tap
+            .map { _ in }
+            .bind(to: viewModel.input.tapAddFolderButton)
+            .disposed(by: disposeBag)
+        
+        archiveFolderTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapFolderItem)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOutput() {
+        viewModel.output.folders
+            .bind(to: archiveFolderTableView.rx.items(cellIdentifier: FolderTableViewCell.identifier,
+                                                      cellType: FolderTableViewCell.self)) { index, item, cell in
+                cell.titleEmojiLabel.text = item.titleEmoji
+                cell.titleLabel.text = item.title
+            }.disposed(by: disposeBag)
+        
+        viewModel.output.showingAddFolderVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.presentAddFolderView()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.showingArchiveSongVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] folder in
+                self?.presentArchiveSongVC(folder)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.showingDeleteFolderItemAlert
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] targetFolder in
+                self?.presentRemoveFolderAlert(targetFolder)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.didFolderEdited
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.delegate?.didFileChanged?()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindAppbarView() {
@@ -167,57 +227,21 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
             }).disposed(by: disposeBag)
     }
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.dismiss(animated: true, completion: nil)
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindAddFolderButton() {
-        addFolderButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.presentAddFolderView()
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveFolderTableView() {
-        viewModel.folders
-            .bind(to: archiveFolderTableView.rx.items(cellIdentifier: FolderTableViewCell.identifier,
-                                                      cellType: FolderTableViewCell.self)) { index, item, cell in
-                cell.titleEmojiLabel.text = item.titleEmoji
-                cell.titleLabel.text = item.title
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveFolderTableCell() {
-        archiveFolderTableView.rx.itemSelected
-            .asDriver()
-            .drive(with: self, onNext: { vc, indexPath in
-                vc.viewModel.folderItemSelectAction(indexPath)
-            }).disposed(by: disposeBag)
-        
-        viewModel.presentArchiveSongVC
-            .subscribe(with: self, onNext: { vc, archiveFolder in
-                vc.presentArchiveSongVC(archiveFolder)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     
     // MARK: - Methods
     
-    private func presentRemoveFolderAlert(_ indexPath: IndexPath) {
-        let targetFolder = viewModel.folderAt(indexPath)
+    private func presentRemoveFolderAlert(_ targetFolder: ArchiveFolder) {
         let removeFolderAlert = UIAlertController(title: "삭제",
                                                   message: "정말로 「\(targetFolder.titleEmoji)\(targetFolder.title)」 를 삭제하시겠습니까?",
                                                   preferredStyle: .alert)
 
         let cancelAction = UIAlertAction(title: "취소", style: .destructive)
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
-            self?.viewModel.deleteFolder(indexPath)
+            guard let self = self else { return }
+            
+            Observable.just(targetFolder)
+                .bind(to: self.viewModel.input.confirmDeleteFolder)
+                .dispose()
         }
 
         removeFolderAlert.addAction(confirmAction)
@@ -262,7 +286,10 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
 extension ArchiveFolderViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, _ in
-            self?.presentRemoveFolderAlert(indexPath)
+            guard let self = self else { return }
+            Observable.just(indexPath)
+                .bind(to: self.viewModel.input.deleteFolderItem)
+                .dispose()
         }
         let actions = [deleteAction]
         
@@ -272,13 +299,14 @@ extension ArchiveFolderViewController: UITableViewDelegate {
 
 extension ArchiveFolderViewController: ArchiveSongListViewDelegate {
     func didFolderNameChanged() {
-        viewModel.fetchFolders()
+        Observable.just(Void())
+            .bind(to: viewModel.input.editFolder)
+            .dispose()
     }
 }
 
 extension ArchiveFolderViewController: AddFolderViewDelegate {
     func didFolderAdded() {
-        viewModel.fetchFolders()
         delegate?.didFileChanged?()
     }
 }

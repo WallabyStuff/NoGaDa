@@ -12,6 +12,8 @@ protocol ViewModelType {
     associatedtype Input
     associatedtype Output
     
-    var disposeBag: DisposeBag { get set }
-    func transform(input: Input) -> Output
+    var input: Input! { get }
+    var output: Output! { get }
+    
+    var disposeBag: DisposeBag { get }
 }

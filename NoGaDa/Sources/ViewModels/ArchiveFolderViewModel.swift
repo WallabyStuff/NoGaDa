@@ -9,49 +9,97 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ArchiveFolderViewModel {
-    
+class ArchiveFolderViewModel: ViewModelType {
     
     // MARK: - Properties
     
-    private var disposeBag = DisposeBag()
+    struct Input {
+        let viewWillAppear = PublishSubject<Bool>()
+        let tapExitButton = PublishSubject<Void>()
+        let tapAddFolderButton = PublishSubject<Void>()
+        let tapFolderItem = PublishSubject<IndexPath>()
+        let deleteFolderItem = PublishRelay<IndexPath>()
+        let confirmDeleteFolder = PublishRelay<ArchiveFolder>()
+        let editFolder = PublishRelay<Void>()
+    }
+    
+    struct Output {
+        let folders = BehaviorRelay<[ArchiveFolder]>(value: [])
+        let showingAddFolderVC = PublishRelay<Void>()
+        let showingArchiveSongVC = PublishRelay<ArchiveFolder>()
+        let showingDeleteFolderItemAlert = PublishRelay<ArchiveFolder>()
+        let dismiss = PublishRelay<Void>()
+        let didFolderEdited = PublishRelay<Void>()
+    }
+    
+    private(set) var disposeBag = DisposeBag()
+    private(set) var input: Input!
+    private(set) var output: Output!
     private let folderManager = SongFolderManager()
     
-    public var folders = BehaviorRelay<[ArchiveFolder]>(value: [])
-    public var presentArchiveSongVC = PublishRelay<ArchiveFolder>()
-}
-
-extension ArchiveFolderViewModel {
-    public func fetchFolders() {
-        folderManager.fetchData()
-            .subscribe(with: self, onNext: { strongSelf, folders in
-                strongSelf.folders.accept(folders)
-            }, onError: { strongSelf, error in
-                print(error.localizedDescription)
-            }).disposed(by: self.disposeBag)
+    
+    // MARK: - Initializers
+    
+    init() {
+        setupInputOutput()
     }
     
-    public func deleteFolder(_ indexPath: IndexPath) {
-        var folders = folders.value
-        let selectedFolder = folders.remove(at: indexPath.row)
+    private func setupInputOutput() {
+        self.input = Input()
+        let output = Output()
         
-        folderManager.deleteData(selectedFolder)
-            .subscribe(with: self, onCompleted: { strongSelf in
-                strongSelf.folders.accept(folders)
-            }, onError: { strongSelf, error in
-                print(error.localizedDescription)
+        Observable.merge(
+            input.viewWillAppear.map { _ in },
+            output.didFolderEdited.asObservable(),
+            input.editFolder.asObservable()
+        )
+            .flatMap { (_) -> Observable<[ArchiveFolder]> in
+                let folderManager = SongFolderManager()
+                return folderManager.fetchData()
+            }
+            .subscribe(onNext: { folders in
+                output.folders.accept(folders)
             })
             .disposed(by: disposeBag)
-    }
-}
-
-extension ArchiveFolderViewModel {
-    public func folderItemSelectAction(_ indexPath: IndexPath) {
-        let selectedItem = folders.value[indexPath.row]
-        presentArchiveSongVC.accept(selectedItem)
-    }
-    
-    public func folderAt(_ indexPath: IndexPath) -> ArchiveFolder {
-        return folders.value[indexPath.row]
+        
+        input.tapExitButton
+            .subscribe(onNext: {
+                output.dismiss.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapAddFolderButton
+            .subscribe(onNext: {
+                output.showingAddFolderVC.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapFolderItem
+            .subscribe(onNext: { indexPath in
+                let selectedFolder = output.folders.value[indexPath.row]
+                output.showingArchiveSongVC.accept(selectedFolder)
+            })
+            .disposed(by: disposeBag)
+        
+        input.deleteFolderItem
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { indexPath in
+                let selectedFolder = output.folders.value[indexPath.row]
+                output.showingDeleteFolderItemAlert.accept(selectedFolder)
+            })
+            .disposed(by: disposeBag)
+        
+        input.confirmDeleteFolder
+            .flatMap { targetFolder -> Observable<Void> in
+                let folderManager = SongFolderManager()
+                return folderManager.deleteData(targetFolder)
+                    .andThen(.just(Void()))
+            }
+            .subscribe(onNext: {
+                output.didFolderEdited.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        self.output = output
     }
 }

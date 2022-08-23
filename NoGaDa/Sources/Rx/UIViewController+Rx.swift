@@ -15,6 +15,12 @@ extension Reactive where Base: UIViewController {
         return ControlEvent(events: source)
     }
     
+    var viewWillAppear: ControlEvent<Bool> {
+        let source = self.methodInvoked(#selector(Base.viewWillAppear(_:)))
+            .map { $0.first as? Bool ?? false }
+        return ControlEvent(events: source)
+    }
+    
     var viewDidAppear: ControlEvent<Bool> {
         let source = self.methodInvoked(#selector(Base.viewDidAppear(_:)))
             .map { $0.first as? Bool ?? false }
