@@ -13,7 +13,7 @@ import RxGesture
 import Hero
 
 @objc protocol ArchiveSongListViewDelegate: AnyObject {
-    @objc optional func didFolderNameChanged()
+    @objc optional func didFolderEdited()
 }
 
 class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
@@ -42,14 +42,8 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        updateFolderNameIfNeeded()
-        updateFolderTitleEmojiIfNeeded()
     }
     
     
@@ -84,6 +78,10 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
 
 
     // MARK: - Setups
+    
+    private func setup() {
+        setupView()
+    }
     
     private func setupView() {
         setupStatusBar()
@@ -162,36 +160,89 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     // MARK: - Binds
     
     private func bind() {
+        bindIntputs()
+        bindOutputs()
         bindAppbarView()
-        bindExitButton()
         bindFolderTitleEmojiTextField()
-        bindAddSongButton()
+    }
+    
+    private func bindIntputs() {
+        Observable.just(Void())
+            .bind(to: viewModel.input.viewDidLoad)
+            .disposed(by: disposeBag)
         
-        bindArchiveSongTableView()
-        bindArchiveSongTableCell()
+        self.rx.viewWillDisappear
+            .map { _ in }
+            .bind(to: viewModel.input.viewWillDissapear)
+            .disposed(by: disposeBag)
+        
+        exitButton
+            .rx.tap
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
+        
+        addSongButton
+            .rx.tap
+            .bind(to: viewModel.input.tapAddSongButton)
+            .disposed(by: disposeBag)
+        
+        archiveSongTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapSongItem)
+            .disposed(by: disposeBag)
+        
+        folderTitleEmojiTextField
+            .rx.text
+            .orEmpty
+            .bind(to: viewModel.input.folderEmoji)
+            .disposed(by: disposeBag)
+        
+        folderTitleTextField
+            .rx.text
+            .orEmpty
+            .bind(to: viewModel.input.folderTitle)
+            .disposed(by: disposeBag)
     }
     
-    private func bindAppbarView() {
-        archiveSongTableView.rx.contentOffset
-            .asDriver()
-            .drive(with: self, onNext: { vc, offset in
-                let changedY = offset.y + vc.archiveSongTableViewTopInset
-                let newAppbarHeight = vc.compactAppbarHeight - (changedY * 0.2)
-                
-                if newAppbarHeight >= vc.compactAppbarHeight {
-                    vc.appbarViewHeightConstraint.constant = newAppbarHeight
-                }
-            }).disposed(by: disposeBag)
+    private func bindOutputs() {
+        viewModel.output.archiveSongs
+            .bind(to: archiveSongTableView.rx.items(cellIdentifier: SongTableViewCell.identifier, cellType: SongTableViewCell.self)) { index, item, cell in
+                cell.titleLabel.text = item.title
+                cell.singerLabel.text = item.singer
+                cell.songNumberLabel.text = "\(item.brand) \(item.no)"
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.output.dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.showingAddSongVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] currentFolder in
+                self?.presentAddSongVC(currentFolder)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.showingSongOptionFloatingPanelView
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] song in
+                self?.songOptionFloatingPanelView?.show(song)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.didFolderEdited
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.delegate?.didFolderEdited?()
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.dismiss(animated: true, completion: nil)
-            }.disposed(by: disposeBag)
-    }
-    
+
     private func bindFolderTitleEmojiTextField() {
         folderTitleEmojiTextField.rx.text
             .asDriver()
@@ -208,63 +259,22 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
                 }
             }.disposed(by: disposeBag)
     }
-    
-    private func bindAddSongButton() {
-        addSongButton.rx.tap
+
+    private func bindAppbarView() {
+        archiveSongTableView.rx.contentOffset
             .asDriver()
-            .drive(with: self, onNext: { vc, _ in
-                vc.viewModel.addSongButtonTapAction()
+            .drive(with: self, onNext: { vc, offset in
+                let changedY = offset.y + vc.archiveSongTableViewTopInset
+                let newAppbarHeight = vc.compactAppbarHeight - (changedY * 0.2)
+                
+                if newAppbarHeight >= vc.compactAppbarHeight {
+                    vc.appbarViewHeightConstraint.constant = newAppbarHeight
+                }
             }).disposed(by: disposeBag)
-        
-        viewModel.presentAddSongVC
-            .subscribe(with: self, onNext: { vc, currentFolder in
-                vc.presentAddSongVC(currentFolder)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveSongTableView() {
-        viewModel.songs
-            .bind(to: archiveSongTableView.rx.items(cellIdentifier: SongTableViewCell.identifier,
-                                                    cellType: SongTableViewCell.self)) { index, item, cell in
-                cell.titleLabel.text = item.title
-                cell.singerLabel.text = item.singer
-                cell.songNumberLabel.text = "\(item.brand) \(item.no)"
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveSongTableCell() {
-        archiveSongTableView.rx.itemSelected
-            .asDriver()
-            .drive(with: self, onNext: { vc, indexPath in
-                vc.viewModel.songItemTapAction(indexPath)
-            }).disposed(by: disposeBag)
-        
-        viewModel.showSongOptionFlowtingPanelView
-            .subscribe(with: self, onNext: { vc, archiveSong in
-                vc.songOptionFloatingPanelView?.show(archiveSong)
-            })
-            .disposed(by: disposeBag)
     }
     
     
     // MARK: - Methods
-    
-    private func updateFolderNameIfNeeded() {
-        guard let newTitle = folderTitleTextField.text else {
-            return
-        }
-        
-        viewModel.updateFolderTitle(newTitle)
-    }
-    
-    private func updateFolderTitleEmojiIfNeeded() {
-        guard let newEmoji = folderTitleEmojiTextField.text else {
-            return
-        }
-        
-        viewModel.updateTitleEmoji(newEmoji)
-    }
     
     private func presentAddSongVC(_ archiveFolder: ArchiveFolder) {
         let storyboard = UIStoryboard(name: R.storyboard.archive.name, bundle: nil)
@@ -285,7 +295,10 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
 extension ArchiveSongViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, _ in
-            self?.viewModel.deleteSong(indexPath)
+            guard let self = self else { return }
+            Observable.just(indexPath)
+                .bind(to: self.viewModel.input.deleteSongItem)
+                .dispose()
         }
         let actions = [deleteAction]
         
@@ -299,18 +312,24 @@ extension ArchiveSongViewController: UITableViewDelegate {
 
 extension ArchiveSongViewController: AddSongViewDelegate {
     func didSongAdded() {
-        viewModel.fetchSongs()
+        Observable.just(Void())
+            .bind(to: viewModel.input.songItemEdited)
+            .dispose()
     }
 }
 
 extension ArchiveSongViewController: PopUpSongOptionViewDelegate {
     func didSelectedSongRemoved() {
         songOptionFloatingPanelView?.hide(animated: true)
-        viewModel.fetchSongs()
+        Observable.just(Void())
+            .bind(to: viewModel.input.songItemEdited)
+            .dispose()
     }
     
     func didSelectedItemMoved() {
         songOptionFloatingPanelView?.hide(animated: true)
-        viewModel.fetchSongs()
+        Observable.just(Void())
+            .bind(to: viewModel.input.songItemEdited)
+            .dispose()
     }
 }

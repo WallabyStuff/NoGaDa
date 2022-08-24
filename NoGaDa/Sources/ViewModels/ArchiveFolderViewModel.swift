@@ -11,10 +11,11 @@ import RxCocoa
 
 class ArchiveFolderViewModel: ViewModelType {
     
+    
     // MARK: - Properties
     
     struct Input {
-        let viewWillAppear = PublishSubject<Bool>()
+        let viewDidLoad = PublishRelay<Void>()
         let tapExitButton = PublishSubject<Void>()
         let tapAddFolderButton = PublishSubject<Void>()
         let tapFolderItem = PublishSubject<IndexPath>()
@@ -49,7 +50,7 @@ class ArchiveFolderViewModel: ViewModelType {
         let output = Output()
         
         Observable.merge(
-            input.viewWillAppear.map { _ in },
+            input.viewDidLoad.asObservable(),
             output.didFolderEdited.asObservable(),
             input.editFolder.asObservable()
         )
@@ -90,9 +91,9 @@ class ArchiveFolderViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.confirmDeleteFolder
-            .flatMap { targetFolder -> Observable<Void> in
-                let folderManager = SongFolderManager()
-                return folderManager.deleteData(targetFolder)
+            .flatMap { [weak self] targetFolder -> Observable<Void> in
+                guard let self = self else { return .never() }
+                return self.folderManager.deleteData(targetFolder)
                     .andThen(.just(Void()))
             }
             .subscribe(onNext: {
