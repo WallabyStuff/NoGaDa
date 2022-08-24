@@ -76,12 +76,6 @@ class AddFolderViewController: UIViewController {
         setupFolderTitleTextField()
     }
     
-    private func bind() {
-        bindConfirmButton()
-        bindConfirmButtonActivateState()
-        bindExitButton()
-    }
-    
     private func setupFolderTitleTextfield() {
         folderTitleTextField.delegate = self
         folderTitleTextField.returnKeyType = .done
@@ -108,50 +102,76 @@ class AddFolderViewController: UIViewController {
     
     // MARK: - Binds
     
-    private func bindConfirmButton() {
-        confirmButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                guard let title = vc.folderTitleTextField.text else { return }
-                guard let titleEmoji = vc.folderEmojiTextField.text else { return }
-                
-                vc.viewModel.addFolder(title, titleEmoji)
-                    .observe(on: MainScheduler.instance)
-                    .subscribe(onCompleted: { [weak vc] in
-                        vc?.delegate?.didFolderAdded()
-                        vc?.dismiss(animated: true, completion: nil)
-                    }).disposed(by: vc.disposeBag)
-            }.disposed(by: disposeBag)
+    private func bind() {
+        bindIntputs()
+        bindOutputs()
     }
     
-    private func bindConfirmButtonActivateState() {
-        let folderEmojiOb = folderEmojiTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
-        let folderTitleOb = folderTitleTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
+    private func bindIntputs() {
+        exitButton
+            .rx.tap
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
         
-        Driver.combineLatest(folderEmojiOb, folderTitleOb, resultSelector: { $0 && $1 })
-            .drive(with: self, onNext: { vc, isAllTextFieldFilled in
-                if isAllTextFieldFilled {
-                    vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
-                    vc.confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
+        folderEmojiTextField
+            .rx.text
+            .orEmpty
+            .bind(to: viewModel.input.folderEmoji)
+            .disposed(by: disposeBag)
+        
+        folderTitleTextField
+            .rx.text
+            .orEmpty
+            .bind(to: viewModel.input.folderTitle)
+            .disposed(by: disposeBag)
+        
+        confirmButton
+            .rx.tap
+            .bind(to: viewModel.input.tapConfirmButton)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOutputs() {
+        viewModel.output.dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.isConfirmButtonActive
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, isActive in
+                if isActive {
+                    vc.activeConfirmButton()
                 } else {
-                    vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
-                    vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
+                    vc.inactiveConfirmButton()
                 }
-                
-                vc.confirmButton.isEnabled = isAllTextFieldFilled
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.didFolderAdded
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.delegate?.didFolderAdded()
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.dismiss(animated: true, completion: nil)
-            }.disposed(by: disposeBag)
+    
+    // MARK: - Method
+    
+    private func activeConfirmButton() {
+        confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
+        confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
+        confirmButton.isEnabled = true
     }
     
-    
-    // MARK: - Methods
+    private func inactiveConfirmButton() {
+        confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
+        confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
+        confirmButton.isEnabled = true
+    }
 }
 
 
