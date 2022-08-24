@@ -182,7 +182,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     }
     
     private func bindInputs() {
-        self.rx.viewDidLoad
+        Observable.just(Void())
             .bind(to: viewModel.input.viewDidLoad)
             .disposed(by: disposeBag)
         
@@ -232,6 +232,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
                     return KaraokeBrand.tj
                 }
             }
+            .distinctUntilChanged()
             .bind(to: viewModel.input.changeSelectedKaraokeBrand)
             .disposed(by: disposeBag)
     }

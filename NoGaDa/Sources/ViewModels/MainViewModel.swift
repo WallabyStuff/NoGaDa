@@ -16,13 +16,13 @@ class MainViewModel: ViewModelType {
     // MARK: - Properties
     
     struct Input {
-        let viewDidLoad = PublishSubject<Void>()
+        let viewDidLoad = PublishRelay<Void>()
         let viewDidAppear = PublishSubject<Bool>()
         let tapSearchBar = PublishSubject<Void>()
         let tapArchiveFolderView = PublishSubject<Void>()
         let tapSettingButton = PublishSubject<Void>()
         let tapNewUpdateSongItem = PublishSubject<IndexPath>()
-        let changeSelectedKaraokeBrand = BehaviorSubject<KaraokeBrand>(value: .tj)
+        let changeSelectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
         let didSongAdded = PublishRelay<Void>()
         let didFileChanged = PublishRelay<Void>()
         let didFolderNameChanged = PublishRelay<Void>()
@@ -58,22 +58,21 @@ class MainViewModel: ViewModelType {
         let output = Output()
         
         Observable.merge(
-            input.viewDidLoad,
+            input.viewDidLoad.asObservable(),
             input.changeSelectedKaraokeBrand
                 .map { brand in
                     output.selectedKaraokeBrand.accept(brand)
-                    print(brand)
                 }.asObservable()
         )
         .map { _ in
             output.newUpdateSongs.accept([])
             output.isLoadingNewUpdateSongs.accept(true)
         }
-        .flatMap({ [weak self] () -> Observable<[Song]> in
+        .flatMap { [weak self] () -> Observable<[Song]> in
             guard let self = self else { return .never() }
             let selectedBrand = output.selectedKaraokeBrand.value
             return self.karaokeManager.fetchUpdatedSong(brand: selectedBrand)
-        })
+        }
         .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
         .observe(on: MainScheduler.instance)
         .subscribe(with: self, onNext: { strongSelf, songs  in

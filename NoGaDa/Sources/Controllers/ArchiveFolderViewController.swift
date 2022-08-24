@@ -80,6 +80,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
         fatalError("ViewModel has not been implemented")
     }
     
+    
     // MARK: - Setups
     
     private func setup() {
@@ -146,8 +147,8 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     }
     
     private func bindInput() {
-        self.rx.viewWillAppear
-            .bind(to: viewModel.input.viewWillAppear)
+        Observable.just(Void())
+            .bind(to: viewModel.input.viewDidLoad)
             .disposed(by: disposeBag)
         
         exitButton
@@ -298,7 +299,7 @@ extension ArchiveFolderViewController: UITableViewDelegate {
 }
 
 extension ArchiveFolderViewController: ArchiveSongListViewDelegate {
-    func didFolderNameChanged() {
+    func didFolderEdited() {
         Observable.just(Void())
             .bind(to: viewModel.input.editFolder)
             .dispose()
@@ -308,5 +309,8 @@ extension ArchiveFolderViewController: ArchiveSongListViewDelegate {
 extension ArchiveFolderViewController: AddFolderViewDelegate {
     func didFolderAdded() {
         delegate?.didFileChanged?()
+        Observable.just(Void())
+            .bind(to: viewModel.input.editFolder)
+            .dispose()
     }
 }
