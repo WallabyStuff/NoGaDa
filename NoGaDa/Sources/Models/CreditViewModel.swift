@@ -7,53 +7,69 @@
 
 import UIKit
 
-class CreditViewModel {
-    private var developerEmail = "avocado.34.131@gmail.com"
-}
+import RxSwift
+import RxCocoa
 
-extension CreditViewModel {
-    var headerText: String {
-        return "노가다\n노래방 가서 다 부를거야\n\nVersion \(appVersion)"
+class CreditViewModel: ViewModelType {
+    
+    
+    // MARK: - Properties
+    
+    struct Input {
+        let tapExitButton = PublishSubject<Void>()
+        let tapContactbutton = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        let dismiss = PublishRelay<Void>()
+        let showingMailComposeVC = PublishRelay<(recipients: [String], subject: String)>()
+        let iconResources = BehaviorRelay<[ResourceItem]>(value: ResourceItem.allCases)
+    }
+    
+    static let developerEmail = "avocado.34.131@gmail.com"
+    private(set) var input: Input!
+    private(set) var output: Output!
+    private(set) var disposeBag = DisposeBag()
+    
+    
+    // MARK: - Initializers
+    
+    init() {
+        setupInputOutput()
+    }
+    
+    
+    // MARK: - Setups
+    
+    private func setupInputOutput() {
+        let input = Input()
+        let output = Output()
+        
+        input.tapExitButton
+            .subscribe(onNext: {
+                output.dismiss.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapContactbutton
+            .subscribe(onNext: {
+                let recipients = [Self.developerEmail]
+                let subject = "노가다 앱 문의"
+                output.showingMailComposeVC.accept((recipients, subject))
+            })
+            .disposed(by: disposeBag)
+        
+        self.input = input
+        self.output = output
     }
 }
 
 extension CreditViewModel {
-    private var appVersion: String {
+    public var appVersion: String {
         if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             return appVersion
         } else {
             return "-.-.-"
         }
-    }
-}
-
-extension CreditViewModel {
-    var emailRecipients: [String] {
-        var emailList = [String]()
-        emailList.append(developerEmail)
-        
-        return emailList
-    }
-    
-    var snedEmailSubject: String {
-        return "문의"
-    }
-    
-    var sendEmailErrorMessage: String {
-        return "can't send an email because some reason"
-    }
-}
-
-extension CreditViewModel {
-    var sectionCount: Int {
-        return 0
-    }
-    
-    func numberOfRowInSection(_ section: Int) -> Int {
-        return ResourceItem.allCases.count
-    }
-    
-    func resourceItemAtIndex(_ indexPath: IndexPath) -> ResourceItem {
-        return ResourceItem.allCases[indexPath.row]
     }
 }
