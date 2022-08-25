@@ -249,8 +249,17 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
         
         view.endEditing(true)
         
+        guard let searchResultVC = searchResultVC else {
+            return
+        }
+        
+        
+//        searchResultVC?.viewModel.fetchSearchResult(keyword: searchKeyword)
+        Observable.just(searchKeyword)
+            .bind(to: searchResultVC.viewModel.input.search)
+            .disposed(by: disposeBag)
+        
         viewModel.addSearchHistory(searchKeyword)
-        searchResultVC?.viewModel.fetchSearchResult(keyword: searchKeyword)
         replaceContents(type: .searchResult)
     }
     

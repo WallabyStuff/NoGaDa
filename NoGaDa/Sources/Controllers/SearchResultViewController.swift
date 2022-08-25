@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 protocol SearchResultViewDelegate: AnyObject {
-//    func searchResultView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, selectedSongRowAt selectedSong: Song)
     func didSelectSongItem(_ selectedSong: Song)
 }
 
@@ -117,32 +116,38 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
     // MARK: - Binds
     
     private func bind() {
-        bindBrandSelector()
-        bindSearchResultTableView()
-        bindSearchResultTableCell()
-        bindSearchResultSongsLoadingState()
-        bindSearchResultSongsErrorState()
+        bindInputs()
+        bindOutputs()
     }
-    
-    private func bindBrandSelector() {
-        brandSelector.rx.selectedSegmentIndex
-            .asDriver()
-            .drive(with: self) { vc, index in
+
+    private func bindInputs() {
+        brandSelector
+            .rx.selectedSegmentIndex
+            .distinctUntilChanged()
+            .map { index -> KaraokeBrand in
                 if index == 0 {
-                    vc.viewModel.updateKaraokeBrand(.tj)
+                    return .tj
                 } else {
-                    vc.viewModel.updateKaraokeBrand(.kumyoung)
+                    return .kumyoung
                 }
-            }.disposed(by: disposeBag)
+            }
+            .bind(to: viewModel.input.changeKaraokeBrand)
+            .disposed(by: disposeBag)
+        
+        searchResultTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapSongItem)
+            .disposed(by: disposeBag)
     }
     
-    private func bindSearchResultTableView() {
-        viewModel.searchResultSongs
+    private func bindOutputs() {
+        viewModel.output
+            .searchResultSongs
             .bind(to: searchResultTableView.rx.items(cellIdentifier: SongTableViewCell.identifier,
                                                      cellType: SongTableViewCell.self)) { [weak self] index, item, cell in
                 guard let self = self else { return }
                 let searchKeyword = self.viewModel.searchKeyword
-                
+
                 cell.titleLabel.text = item.title
                 cell.singerLabel.text = item.singer
                 cell.songNumberLabel.text = "\(item.brand.localizedString) \(item.no)"
@@ -156,25 +161,19 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
                     cell.singerLabel.setAccentColor(string: searchKeyword)
                 }
             }.disposed(by: disposeBag)
-    }
-    
-    private func bindSearchResultTableCell() {
-        searchResultTableView.rx.itemSelected
-            .subscribe(with: self, onNext: { vc, indexPath in
-                vc.viewModel.songItemSelectAction(indexPath)
+        
+        viewModel.output
+            .didSelectSongItem
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] selectedSong in
+                self?.delegate?.didSelectSongItem(selectedSong)
             })
             .disposed(by: disposeBag)
         
-        viewModel.didSelectSongItem
-            .subscribe(with: self, onNext: { vc, selectedSong in
-                vc.delegate?.didSelectSongItem(selectedSong)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindSearchResultSongsLoadingState() {
-        viewModel.isLoadingSearchResultSongs
-            .subscribe(with: self, onNext: { vc, isLoading in
+        viewModel.output
+            .isLoading
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, isLoading in
                 if isLoading {
                     vc.searchLoadingIndicator.isHidden = false
                     vc.searchLoadingIndicator.startAnimating()
@@ -184,16 +183,16 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
                 }
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func bindSearchResultSongsErrorState() {
-        viewModel.searchResultSongsErrorState
-            .subscribe(with: self, onNext: { vc, message in
-                if message.isEmpty {
+        
+        viewModel.output
+            .searchResultErrorState
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, errorMessage in
+                if errorMessage.isEmpty {
                     vc.searchResultMessageLabel.isHidden = true
                 } else {
                     vc.searchResultMessageLabel.isHidden = false
-                    vc.searchResultMessageLabel.text = message
+                    vc.searchResultMessageLabel.text = errorMessage
                 }
             })
             .disposed(by: disposeBag)
