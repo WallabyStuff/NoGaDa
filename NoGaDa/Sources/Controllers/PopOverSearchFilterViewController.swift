@@ -10,7 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+@objc
 protocol PopOverSearchFilterViewDelegate: AnyObject {
+    @objc optional
     func popOverSearchFilterView(didTapApply: Bool)
 }
 
@@ -33,7 +35,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
     }
 
@@ -57,6 +59,10 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     
     
     // MARK: - Setups
+    
+    private func setup() {
+        setupView()
+    }
     
     private func setupView() {
         setupSearchFilterTableView()
@@ -83,21 +89,19 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     // MARK: - Binds
     
     private func bind() {
-        bindApplyButton()
-        bindSearchFilterTableView()
+        bindInputs()
+        bindOutput()
     }
     
-    private func bindApplyButton() {
-        applyButton.rx.tap
-            .asDriver()
-            .drive(with: self, onNext: { vc, _ in
-                vc.delegate?.popOverSearchFilterView(didTapApply: true)
-                vc.dismiss(animated: true, completion: nil)
-            }).disposed(by: disposeBag)
+    private func bindInputs() {
+        applyButton
+            .rx.tap
+            .bind(to: viewModel.input.tapApplyButton)
+            .disposed(by: disposeBag)
     }
     
-    private func bindSearchFilterTableView() {
-        viewModel.searchFilterItem
+    private func bindOutput() {
+        viewModel.output.serachFilterItems
             .bind(to: searchFilterTableView.rx.items(cellIdentifier: SearchFilterTableViewCell.identifier,
                                                      cellType: SearchFilterTableViewCell.self)) { [weak self] index, item, cell in
                 guard let self = self else { return }
@@ -109,5 +113,19 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
                         UserDefaults.standard.set(!item.state, forKey: item.userDefaultKey)
                     }).disposed(by: self.disposeBag)
             }.disposed(by: disposeBag)
+        
+        viewModel.output.didTapApplyButton
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] bool in
+                self?.delegate?.popOverSearchFilterView?(didTapApply: bool)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
