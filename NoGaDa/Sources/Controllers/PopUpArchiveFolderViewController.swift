@@ -63,11 +63,6 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     
     private func setup() {
         setupView()
-        setupData()
-    }
-    
-    private func setupData() {
-        viewModel.fetchFolder()
     }
     
     private func setupView() {
@@ -90,9 +85,6 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
         archiveFolderTableView.layer.cornerRadius = 8
         archiveFolderTableView.tableFooterView = UIView()
         archiveFolderTableView.separatorInset = UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0)
-        
-        archiveFolderTableView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
     }
     
     private func registerArchiveFolderTableCell() {
@@ -108,68 +100,79 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     // MARK: - Binds
     
     private func bind() {
-        bindAddFolderButton()
-        bindExitButton()
-        bindArchiveFolderTableView()
-        bindArchiveFolderTableCell()
-        bindPresentAlreadyExistsAlert()
-        bindPlayNotificationFeedback()
-        bindDidSongAdded()
+        bindInputs()
+        bindOutputs()
     }
     
-    private func bindAddFolderButton() {
-        addFolderButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.presentAddFolderVC()
-            }.disposed(by: disposeBag)
+    private func bindInputs() {
+        Observable.just(Void())
+            .bind(to: viewModel.input.viewDidLoad)
+            .disposed(by: disposeBag)
+        
+        archiveFolderTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapFolderItem)
+            .disposed(by: disposeBag)
+        
+        addFolderButton
+            .rx.tap
+            .bind(to: viewModel.input.tapAddFolderButton)
+            .disposed(by: disposeBag)
+        
+        exitButton
+            .rx.tap
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
     }
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self) { vc, _ in
-                vc.exitButtonAction()
-            }.disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveFolderTableView() {
-        viewModel.folders
+    private func bindOutputs() {
+        viewModel.output.folders
             .bind(to: archiveFolderTableView.rx.items(cellIdentifier: PopUpArchiveFolderTableViewCell.identifier,
                                                       cellType: PopUpArchiveFolderTableViewCell.self)) { index, item, cell in
                 cell.titleLabel.text = item.title
                 cell.emojiLabel.text = item.titleEmoji
             }.disposed(by: disposeBag)
-    }
-    
-    private func bindArchiveFolderTableCell() {
-        archiveFolderTableView.rx.itemSelected
-            .asDriver()
-            .drive(with: self, onNext: { vc, indexPath in
-                vc.presentAddSongAlert(indexPath)
-            }).disposed(by: disposeBag)
-    }
-    
-    private func bindPresentAlreadyExistsAlert() {
-        viewModel.presentAlreadyExitstAlert
-            .subscribe(with: self, onNext: { vc, _ in
-                vc.presentAlreadyExitstAlert()
+        
+        viewModel.output.showingAddSongAlert
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] song, targetFolder in
+                self?.presentAddSongAlert(song: song,
+                                          targetFolder: targetFolder)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func bindPlayNotificationFeedback() {
-        viewModel.playNotificationFeedback
-            .subscribe(with: self, onNext: { vc, type in
+        
+        viewModel.output.showingAddFolderVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.presentAddFolderVC()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.didSongAdded
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.delegate?.didSongAdded?()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.playHapticFeedback
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { type in
                 HapticFeedbackManager.playNotificationFeedback(type)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func bindDidSongAdded() {
-        viewModel.didSongAdded
-            .subscribe(with: self, onNext: { vc, _ in
-                vc.delegate?.didSongAdded?()
+        
+        viewModel.output.showingAlearyExistsAlert
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.presentAlreadyExitstAlert()
             })
             .disposed(by: disposeBag)
     }
@@ -188,39 +191,22 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
         present(addFolderVC, animated: true, completion: nil)
     }
     
-    public func presentRemoveFolderAlert(_ indexPath: IndexPath) {
-        let selectedFolder = viewModel.folderAt(indexPath)
-        let removeFolderAlert = UIAlertController(title: "삭제",
-                                                  message: "정말로 「\(selectedFolder.titleEmoji)\(selectedFolder.title)」 를 삭제하시겠습니까?",
-                                                  preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
-        let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
-            self?.viewModel.removeFolderAction(indexPath)
-        }
-        
-        removeFolderAlert.addAction(confirmAction)
-        removeFolderAlert.addAction(cancelAction)
-        present(removeFolderAlert, animated: true, completion: nil)
-    }
-    
-    public func presentAddSongAlert(_ indexPath: IndexPath) {
-        let selectedSong = viewModel.selectedSong
-        let targetFolder = viewModel.folderAt(indexPath)
-        
+    public func presentAddSongAlert(song: Song, targetFolder: ArchiveFolder) {
         let addSongAlert = UIAlertController(title: "저장",
-                                             message: "「\(selectedSong.title)」를 「\(targetFolder.title)」에 저장하시겠습니까?",
+                                             message: "「\(song.title)」를 「\(targetFolder.title)」에 저장하시겠습니까?",
                                              preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "취소", style: .destructive)
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
-            self?.viewModel.addSongAction(indexPath)
+            guard let self = self else { return }
+            Observable.just((song, targetFolder))
+                .bind(to: self.viewModel.input.confirmAddSongButton)
+                .disposed(by: self.disposeBag)
         }
         
         addSongAlert.addAction(confirmAction)
         addSongAlert.addAction(cancelAction)
         present(addSongAlert, animated: true, completion: nil)
-        
     }
     
     public func presentAlreadyExitstAlert()  {
@@ -237,16 +223,10 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
 
 // MARK: - Extensions
 
-extension PopUpArchiveFolderViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            presentRemoveFolderAlert(indexPath)
-        }
-    }
-}
-
 extension PopUpArchiveFolderViewController: AddFolderViewDelegate {
     func didFolderAdded() {
-        viewModel.fetchFolder()
+        Observable.just(Void())
+            .bind(to: viewModel.input.didFolderAdded)
+            .dispose()
     }
 }
