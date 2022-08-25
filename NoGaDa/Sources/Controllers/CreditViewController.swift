@@ -13,7 +13,7 @@ import RxGesture
 import MessageUI
 
 class CreditViewController: UIViewController {
-
+    
     
     // MARK: - Properties
     
@@ -68,13 +68,8 @@ class CreditViewController: UIViewController {
         setupContactTextView()
     }
     
-    private func bind() {
-        bindExitButton()
-        bindContactUsBoxView()
-    }
-    
     private func setupHeaderLabel() {
-        headerLabel.text = viewModel.headerText
+        headerLabel.text = "노가다\n노래방 가서 다 부를거야\n\nVersion \(viewModel.appVersion)"
     }
     
     private func setupContactUsBoxView() {
@@ -86,8 +81,6 @@ class CreditViewController: UIViewController {
     private func setupIconResourceCollectionView() {
         registerIconResourceCollectionCell()
         iconResourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
-        iconResourceCollectionView.dataSource = self
-        iconResourceCollectionView.delegate = self
     }
     
     private func registerIconResourceCollectionCell() {
@@ -102,54 +95,59 @@ class CreditViewController: UIViewController {
     
     // MARK: Binds
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self, onNext: { vc, _ in
-                vc.dismiss(animated: true, completion: nil)
-            }).disposed(by: disposeBag)
+    private func bind() {
+        bindInputs()
+        bindOutputs()
     }
     
-    private func bindContactUsBoxView() {
-        contactUsBoxView.rx.tapGesture()
+    private func bindInputs() {
+        exitButton
+            .rx.tap
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
+        
+        contactUsBoxView
+            .rx.tapGesture()
             .when(.recognized)
-            .bind(with: self, onNext: { vc, _ in
+            .map { _ in }
+            .bind(to: viewModel.input.tapContactbutton)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOutputs() {
+        viewModel.output.dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.showingMailComposeVC
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, mailInfo  in
                 if MFMailComposeViewController.canSendMail() {
                     let composeVC = MFMailComposeViewController()
-                    
-                    composeVC.setToRecipients(vc.viewModel.emailRecipients)
-                    composeVC.setSubject(vc.viewModel.sendEmailErrorMessage)
+                    composeVC.setToRecipients(mailInfo.recipients)
+                    composeVC.setSubject(mailInfo.subject)
                     composeVC.setMessageBody("", isHTML: false)
-                    
                     vc.present(composeVC, animated: true, completion: nil)
                 } else {
-                    print(vc.viewModel.sendEmailErrorMessage)
+                    print("can't send an email because of some reason")
                 }
-            }).disposed(by: disposeBag)
-    }
-}
-
-
-// MARK: Extensions
-
-extension CreditViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfRowInSection(viewModel.sectionCount)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let resourceCell = collectionView.dequeueReusableCell(withReuseIdentifier: IconResourceCollectionViewCell.identifier, for: indexPath) as? IconResourceCollectionViewCell else { return UICollectionViewCell() }
+            })
+            .disposed(by: disposeBag)
         
-        let resourceItem = viewModel.resourceItemAtIndex(indexPath)
-        resourceCell.descriptionLabel.text  = resourceItem.description
-        resourceCell.iconImageView.image    = resourceItem.image
-        
-        resourceCell.rx.tapGesture()
-            .when(.recognized)
-            .bind(with: self, onNext: { vc, _ in
-                resourceItem.openLink(vc: vc)
-            }).disposed(by: disposeBag)
-        
-        return resourceCell
+        viewModel.output.iconResources
+            .bind(to: iconResourceCollectionView.rx.items(cellIdentifier: IconResourceCollectionViewCell.identifier, cellType: IconResourceCollectionViewCell.self)) { [weak self] index, item, cell in
+                guard let self = self else { return }
+                cell.descriptionLabel.text = item.description
+                cell.iconImageView.image = item.image
+                cell.rx.tapGesture()
+                    .when(.recognized)
+                    .bind(with: self, onNext: { vc, _ in
+                        item.openLink(vc: vc)
+                    }).disposed(by: self.disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
 }
