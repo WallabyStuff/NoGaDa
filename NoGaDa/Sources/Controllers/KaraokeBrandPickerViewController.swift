@@ -30,7 +30,7 @@ class KaraokeBrandPickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
     }
 
@@ -54,12 +54,12 @@ class KaraokeBrandPickerViewController: UIViewController {
     
     // MARK: - Setups
     
-    private func setupView() {
-        setupBrandPickerTableView()
+    private func setup() {
+        setupView()
     }
     
-    private func bind() {
-        bindBrandPickerTableView()
+    private func setupView() {
+        setupBrandPickerTableView()
     }
     
     private func setupBrandPickerTableView() {
@@ -71,38 +71,45 @@ class KaraokeBrandPickerViewController: UIViewController {
         
         let nibName = UINib(nibName: R.nib.karaokeBrandPickerTableViewCell.name, bundle: nil)
         brandPickerTableView.register(nibName, forCellReuseIdentifier: KaraokeBrandPickerTableViewCell.identifier)
-        brandPickerTableView.dataSource = self
-        brandPickerTableView.delegate = self
     }
     
     
     // MARK: - Bidns
     
-    private func bindBrandPickerTableView() {
-        brandPickerTableView.rx.itemSelected
-            .asDriver()
-            .drive(with: self, onNext: { vc,indexPath in
-                vc.delegate?.didBrandSelected(vc.viewModel.brandForRowAt(indexPath))
-                vc.dismiss(animated: true)
-            }).disposed(by: disposeBag)
-    }
-}
-
-
-// MARK: Extensions
-
-extension KaraokeBrandPickerViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRowsInSection(section)
+    private func bind() {
+        bindInputs()
+        bindOutputs()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: KaraokeBrandPickerTableViewCell.identifier, for: indexPath) as? KaraokeBrandPickerTableViewCell else {
-            return UITableViewCell()
-        }
+    private func bindInputs() {
+        brandPickerTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapKaraokeBrandItem)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOutputs() {
+        viewModel.output
+            .karaokeBrands
+            .bind(to: brandPickerTableView.rx.items(cellIdentifier: KaraokeBrandPickerTableViewCell.identifier, cellType: KaraokeBrandPickerTableViewCell.self)) { index, brand, cell in
+                cell.brandNameLabel.text = brand.localizedString
+            }
+            .disposed(by: disposeBag)
         
-        cell.brandNameLabel.text = viewModel.brandForRowAt(indexPath).localizedString
+        viewModel.output
+            .didTapKaraokeBrandItem
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, brand in
+                vc.delegate?.didBrandSelected(brand)
+            })
+            .disposed(by: disposeBag)
         
-        return cell
+        viewModel.output
+            .dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, _ in
+                vc.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
