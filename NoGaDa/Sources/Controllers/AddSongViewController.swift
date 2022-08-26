@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
 import RxGesture
@@ -36,14 +37,13 @@ class AddSongViewController: UIViewController {
     weak var delegate: AddSongViewDelegate?
     private var viewModel: AddSongViewModel
     private var disposeBag = DisposeBag()
-    private var selectedBrand: KaraokeBrand = .tj
     
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setup()
         bind()
     }
     
@@ -84,6 +84,10 @@ class AddSongViewController: UIViewController {
     
     // MARK: - Setups
     
+    private func setup() {
+        setupView()
+    }
+    
     private func setupView() {
         setupExitButton()
         setupConfirmButton()
@@ -95,17 +99,6 @@ class AddSongViewController: UIViewController {
         setupContentScrollView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    private func bind() {
-        bindExitButton()
-        bindSongTitleTextField()
-        bindSingerTextField()
-        bindSongNumberTextField()
-        bindConfirmButtonActivateState()
-        bindContentView()
-        bindConfirmButton()
-        bindBrandPickerButton()
     }
     
     private func setupExitButton() {
@@ -150,43 +143,82 @@ class AddSongViewController: UIViewController {
     
     // MARK: - Binds
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.dismiss(animated: true, completion: nil)
-            }).disposed(by: disposeBag)
+    private func bind() {
+        bindInputs()
+        bindOutputs()
     }
     
-    private func bindSongTitleTextField() {
-        songTitleTextField.rx.controlEvent(.editingDidEndOnExit)
+    private func bindInputs() {
+        songTitleTextField
+            .rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .bind(to: viewModel.input.songTitle)
+            .disposed(by: disposeBag)
+        
+        songTitleTextField
+            .rx.controlEvent(.editingDidEndOnExit)
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.singerTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
-    }
-    
-    private func bindSingerTextField() {
-        singerTextField.rx.controlEvent(.editingDidEndOnExit)
+        
+        singerTextField
+            .rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .bind(to: viewModel.input.singerName)
+            .disposed(by: disposeBag)
+        
+        singerTextField
+            .rx.controlEvent(.editingDidEndOnExit)
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.songNumberTextField.becomeFirstResponder()
             }).disposed(by: disposeBag)
-    }
-    
-    private func bindSongNumberTextField() {
-        songNumberTextField.rx.controlEvent(.editingDidEndOnExit)
+        
+        songNumberTextField
+            .rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .bind(to: viewModel.input.songNumber)
+            .disposed(by: disposeBag)
+        
+        songNumberTextField
+            .rx.controlEvent(.editingDidEndOnExit)
             .asDriver()
             .drive(with: self, onNext: { vc,_ in
                 vc.view.endEditing(true)
             }).disposed(by: disposeBag)
+        
+        contentView
+            .rx.tapGesture()
+            .when(.recognized)
+            .bind(with: self, onNext: { vc,_ in
+                vc.view.endEditing(true)
+            }).disposed(by: disposeBag)
+        
+        brandPickerButton
+            .rx.tap
+            .bind(to: viewModel.input.tapBrandPickerButton)
+            .disposed(by: disposeBag)
+        
+        exitButton
+            .rx.tap
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
+        
+        confirmButton
+            .rx.tap
+            .bind(to: viewModel.input.tapConfirmButton)
+            .disposed(by: disposeBag)
     }
     
-    private func bindConfirmButtonActivateState() {
-        let songTitleOb = songTitleTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
-        let singerOb = singerTextField.rx.text.orEmpty.asDriver().map { !$0.isEmpty }
-        
-        Driver.combineLatest(songTitleOb, singerOb, resultSelector: { $0 && $1 })
+    private func bindOutputs() {
+        viewModel.output
+            .confirmButtonActiveState
+            .distinctUntilChanged()
+            .asDriver(onErrorDriveWith: .never())
             .drive(with: self, onNext: { vc, isAllTextFieldFilled in
                 if isAllTextFieldFilled {
                     vc.confirmButton.isUserInteractionEnabled = true
@@ -197,55 +229,52 @@ class AddSongViewController: UIViewController {
                     vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
                     vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
                 }
-            }).disposed(by: disposeBag)
-    }
-    
-    private func bindContentView() {
-        contentView.rx.tapGesture()
-            .when(.recognized)
-            .bind(with: self, onNext: { vc,_ in
-                vc.view.endEditing(true)
-            }).disposed(by: disposeBag)
-    }
-    
-    private func bindConfirmButton() {
-        confirmButton.rx.tap
-            .asDriver()
-            .drive(with: self, onNext: { vc,_ in
-                vc.addSong()
-            }).disposed(by: disposeBag)
-    }
-    
-    private func bindBrandPickerButton() {
-        brandPickerButton.rx.tap
-            .asDriver()
-            .drive(with: self, onNext: { vc,_ in
-                vc.showBrandPickerVC()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .showingBrandPickerView
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.showBrandPickerVC()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .karaokeBrand
+            .distinctUntilChanged()
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] brand in
+                self?.brandPickerButton.setTitle(brand.localizedString, for: .normal)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .succeedToAddSong
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.delegate?.didSongAdded?()
+            })
+            .disposed(by: disposeBag)
     }
     
     
     // MARK: - Methods
     
-    private func addSong() {
-        let songTitle = songTitleTextField.text ?? ""
-        let singer = singerTextField.text ?? ""
-        let songNumber = songNumberTextField.text ?? ""
-
-        viewModel.addSong(title: songTitle,
-                                 singer: singer,
-                                 songNumber: songNumber,
-                                 brand: selectedBrand)
-            .subscribe(onCompleted: { [weak self] in
-                // Success to add a new song
-                self?.delegate?.didSongAdded?()
-                self?.dismiss(animated: true, completion: nil)
-            }).disposed(by: disposeBag)
-    }
-    
     private func showBrandPickerVC() {
         let storyboard = UIStoryboard(name: "Archive", bundle: nil)
-        guard let brandPickerVC = storyboard.instantiateViewController(withIdentifier: "karaokeBrandPickerStoryboard") as? KaraokeBrandPickerViewController else { return }
+        let brandPickerVC = storyboard.instantiateViewController(identifier: "karaokeBrandPickerStoryboard", creator: { coder -> KaraokeBrandPickerViewController in
+            let viewModel = KaraokeBrandPickerViewModel()
+            return .init(coder, viewModel) ?? KaraokeBrandPickerViewController(viewModel)
+        })
         
         brandPickerVC.modalPresentationStyle = .popover
         brandPickerVC.preferredContentSize = CGSize(width: 140, height: 87) // two 44height of cells - 1height of separator height
@@ -254,7 +283,6 @@ class AddSongViewController: UIViewController {
         brandPickerVC.popoverPresentationController?.sourceView = brandPickerButton
         brandPickerVC.presentationController?.delegate = self
         brandPickerVC.delegate = self
-        
         present(brandPickerVC, animated: true)
     }
     
@@ -291,7 +319,8 @@ extension AddSongViewController: UIPopoverPresentationControllerDelegate {
 
 extension AddSongViewController: BrandPickerViewDelegaet {
     func didBrandSelected(_ selectedBrand: KaraokeBrand) {
-        self.selectedBrand = selectedBrand
-        brandPickerButton.setTitle(selectedBrand.localizedString, for: .normal)
+        Observable.just(selectedBrand)
+            .bind(to: viewModel.input.changeKaraokeBrand)
+            .disposed(by: disposeBag)
     }
 }

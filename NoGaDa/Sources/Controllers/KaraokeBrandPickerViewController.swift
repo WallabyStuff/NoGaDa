@@ -69,7 +69,7 @@ class KaraokeBrandPickerViewController: UIViewController {
         brandPickerTableView.showsVerticalScrollIndicator = false
         brandPickerTableView.isScrollEnabled = false
         
-        let nibName = UINib(nibName: KaraokeBrandPickerTableViewCell.identifier, bundle: nil)
+        let nibName = UINib(nibName: R.nib.karaokeBrandPickerTableViewCell.name, bundle: nil)
         brandPickerTableView.register(nibName, forCellReuseIdentifier: KaraokeBrandPickerTableViewCell.identifier)
         brandPickerTableView.dataSource = self
         brandPickerTableView.delegate = self
