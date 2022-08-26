@@ -10,13 +10,30 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class PopUpSongOptionViewModel {
+class PopUpSongOptionViewModel: ViewModelType {
     
     
     // MARK: - Properties
     
-    public var selectedSong: ArchiveSong?
-    private var disposeBag = DisposeBag()
+    struct Input {
+        let viewDidLoad = PublishRelay<Void>()
+        let tapOptionItem = PublishSubject<IndexPath>()
+        let tapExitButton = PublishSubject<Void>()
+        let deleteSong = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        let dismiss = PublishRelay<Void>()
+        let options = BehaviorRelay<[SongOption]>(value: [])
+        let showingFolderFloatingPanelView = PublishRelay<ArchiveSong>()
+        let showingDeleteSongAlert = PublishRelay<ArchiveSong>()
+        let didSelectedSongItemEdited = PublishRelay<Void>()
+    }
+    
+    private(set) var input: Input!
+    private(set) var output: Output!
+    private(set) var disposeBag = DisposeBag()
+    public var selectedSong: ArchiveSong
     private let songFolderManager = SongFolderManager()
     public var parentViewController: UIViewController?
     
@@ -24,12 +41,62 @@ class PopUpSongOptionViewModel {
     // MARK: - Initializers
     
     init() {
-        fatalError("You must give 'parentViewController' and 'selectedSong' paramenter to initialize")
+        fatalError("selectedSong has not been implemented")
     }
     
-    init(parentViewController: UIViewController, selectedSong: ArchiveSong) {
-        self.parentViewController = parentViewController
+    init(selectedSong: ArchiveSong) {
         self.selectedSong = selectedSong
+        setupInputOutput()
+    }
+    
+    // MARK: - Setups
+    
+    private func setupInputOutput() {
+        let input = Input()
+        let output = Output()
+        
+        input.viewDidLoad
+            .subscribe(with: self, onNext: { strongSelf, _  in
+                output.options.accept(strongSelf.songOptions)
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapExitButton
+            .subscribe(onNext: {
+                output.dismiss.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapOptionItem
+            .subscribe(with: self, onNext: { strongSelf, indexPath in
+                switch indexPath.row {
+                case 0:
+                    output.showingFolderFloatingPanelView
+                        .accept(strongSelf.selectedSong)
+                    break
+                case 1:
+                    output.showingDeleteSongAlert
+                        .accept(strongSelf.selectedSong)
+                    break
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        input.deleteSong
+            .flatMap { [weak self] () -> Observable<Void> in
+                guard let self = self else { return .never() }
+                return self.songFolderManager.deleteSong(song: self.selectedSong)
+                    .andThen(.just(Void()))
+            }
+            .subscribe(onNext: {
+                output.didSelectedSongItemEdited.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        self.input = input
+        self.output = output
     }
 }
 
@@ -48,30 +115,10 @@ extension PopUpSongOptionViewModel {
 }
 
 extension PopUpSongOptionViewModel {
-    var songOptions: [SongOption] {
+    private var songOptions: [SongOption] {
         let moveToOtherFolder = MoveToOtherFolder()
         let removeFromFolder = RemoveFromFolder()
         
         return [moveToOtherFolder, removeFromFolder]
-    }
-}
-
-extension PopUpSongOptionViewModel {
-    func deleteSong() -> Completable {
-        return Completable.create { [weak self] observer in
-            guard let self = self,
-                  let selectedSong = self.selectedSong else {
-                  return Disposables.create()
-              }
-            
-            self.songFolderManager.deleteSong(song: selectedSong)
-                .subscribe(onCompleted: {
-                    observer(.completed)
-                }, onError: { error in
-                    observer(.error(error))
-                }).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
     }
 }
