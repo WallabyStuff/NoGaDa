@@ -253,8 +253,6 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
             return
         }
         
-        
-//        searchResultVC?.viewModel.fetchSearchResult(keyword: searchKeyword)
         Observable.just(searchKeyword)
             .bind(to: searchResultVC.viewModel.input.search)
             .disposed(by: disposeBag)
@@ -264,15 +262,24 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
     }
     
     private func replaceContents(type: ContentsType) {
+        guard let searchHistoryVC = searchHistoryVC,
+              let searchResultVC = searchResultVC else {
+            return
+        }
+
         if type == .searchHistory {
             // Show search result
-            searchHistoryVC?.view.isHidden = false
-            searchResultVC?.view.isHidden = true
+            searchHistoryVC.view.isHidden = false
+            searchResultVC.view.isHidden = true
         } else {
             // Show search history
-            searchHistoryVC?.viewModel.fetchSearchHistory()
-            searchHistoryVC?.view.isHidden = true
-            searchResultVC?.view.isHidden = false
+            searchHistoryVC.view.isHidden = true
+            searchResultVC.view.isHidden = false
+            
+            // Refresh saerch history
+            Observable.just(Void())
+                .bind(to: searchHistoryVC.viewModel.input.refresh)
+                .disposed(by: disposeBag)
         }
     }
     
