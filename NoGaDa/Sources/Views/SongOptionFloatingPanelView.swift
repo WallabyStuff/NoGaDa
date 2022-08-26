@@ -69,9 +69,10 @@ class SongOptionFloatingPanelView {
         
         let songOptionVC = storyboard.instantiateViewController(identifier: "popUpSongOptionStoryboard") { [weak self] coder -> PopUpSongOptionViewController in
             guard let self = self else { return PopUpSongOptionViewController(.init()) }
-            
-            let viewModel = PopUpSongOptionViewModel(parentViewController: self.parentViewController!, selectedSong: selectedSong)
-            return .init(coder, viewModel) ?? PopUpSongOptionViewController(.init())
+            let viewModel = PopUpSongOptionViewModel(selectedSong: selectedSong)
+            return .init(coder,
+                         parentVC: self.parentViewController!,
+                         viewModel: viewModel) ?? PopUpSongOptionViewController(viewModel)
         }
         
         songOptionVC.delegate = contentViewDelegate

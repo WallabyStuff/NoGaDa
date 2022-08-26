@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
 
@@ -28,6 +29,8 @@ class PopUpSongOptionViewController: UIViewController {
     weak var delegate: PopUpSongOptionViewDelegate?
     private var viewModel: PopUpSongOptionViewModel
     private var disposeBag = DisposeBag()
+    private var parentVC: UIViewController
+    
     public var exitButtonAction: () -> Void = {}
     private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
     
@@ -45,10 +48,12 @@ class PopUpSongOptionViewController: UIViewController {
     
     init(_ viewModel: PopUpSongOptionViewModel) {
         self.viewModel = viewModel
+        self.parentVC = UIViewController()
         super.init(nibName: nil, bundle: nil)
     }
     
-    init?(_ coder: NSCoder, _ viewModel: PopUpSongOptionViewModel) {
+    init?(_ coder: NSCoder, parentVC: UIViewController, viewModel: PopUpSongOptionViewModel) {
+        self.parentVC = parentVC
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -69,11 +74,6 @@ class PopUpSongOptionViewController: UIViewController {
         setupArchiveFolderFloatingPanelView()
     }
     
-    private func bind() {
-        bindExitButton()
-        bindOptionTableView()
-    }
-    
     private func setupExitButton() {
         exitButton.makeAsCircle()
     }
@@ -83,11 +83,11 @@ class PopUpSongOptionViewController: UIViewController {
     }
     
     private func setupSongTitleLabel() {
-        songTitleLabel.text = viewModel.selectedSong?.title
+        songTitleLabel.text = viewModel.selectedSong.title
     }
     
     private func setupSingerLabel() {
-        singerLabel.text = viewModel.selectedSong?.singer
+        singerLabel.text = viewModel.selectedSong.singer
     }
     
     private func setupOptionTableView() {
@@ -101,31 +101,63 @@ class PopUpSongOptionViewController: UIViewController {
     }
     
     private func setupArchiveFolderFloatingPanelView() {
-        archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: viewModel.parentViewController ?? self, delegate: self)
+        archiveFolderFloatingPanelView = ArchiveFolderFloatingPanelView(parentViewController: parentVC, delegate: self)
     }
     
     
     // MARK: - Binds
     
-    private func bindExitButton() {
-        exitButton.rx.tap
-            .asDriver()
-            .drive(with: self, onNext: { vc, _ in
-                vc.exitButtonAction()
-            }).disposed(by: disposeBag)
+    private func bind() {
+        bindInputs()
+        bindOutputs()
+    }
+
+    private func bindInputs() {
+        exitButton
+            .rx.tap
+            .bind(to: viewModel.input.tapExitButton)
+            .disposed(by: disposeBag)
+        
+        optionTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapOptionItem)
+            .disposed(by: disposeBag)
     }
     
-    private func bindOptionTableView() {
-        optionTableView.rx.itemSelected
-            .asDriver()
-            .drive(with: self, onNext: { vc, indexPath in
-                if indexPath.row == 0 {
-                    guard let selectedSong = vc.viewModel.selectedSong?.asSongType() else { return }
-                    vc.archiveFolderFloatingPanelView?.show(selectedSong)
-                } else {
-                    vc.presentRemoveAlert()
-                }
-            }).disposed(by: disposeBag)
+    private func bindOutputs() {
+        viewModel.output
+            .dismiss
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                self?.exitButtonAction()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .showingFolderFloatingPanelView
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, song in
+                let song = song.asSongType()
+                vc.archiveFolderFloatingPanelView?.show(song)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .showingDeleteSongAlert
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, song in
+                vc.presentRemoveAlert(song)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output
+            .didSelectedSongItemEdited
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, _ in
+                vc.archiveFolderFloatingPanelView?.hide(animated: true)
+                vc.delegate?.didSelectedItemMoved?()
+            })
+            .disposed(by: disposeBag)
     }
     
     
@@ -142,11 +174,14 @@ class PopUpSongOptionViewController: UIViewController {
         present(archiveFolderVC, animated: true, completion: nil)
     }
     
-    private func presentRemoveAlert() {
-        let removeAlert = UIAlertController(title: "삭제", message: "정말 「\(viewModel.selectedSong!.title)」 를 삭제하시겠습니까?", preferredStyle: .alert)
+    private func presentRemoveAlert(_ song: ArchiveSong) {
+        let removeAlert = UIAlertController(title: "삭제", message: "정말 「\(song.title)」 를 삭제하시겠습니까?", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] action in
-            self?.deletedSelectedSong()
+            guard let self = self else { return }
+            Observable.just(Void())
+                .bind(to: self.viewModel.input.deleteSong)
+                .dispose()
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .destructive, handler: nil)
@@ -155,14 +190,6 @@ class PopUpSongOptionViewController: UIViewController {
         removeAlert.addAction(cancelAction)
         
         present(removeAlert, animated: true)
-    }
-    
-    private func deletedSelectedSong() {
-        viewModel.deleteSong()
-            .subscribe(with: self, onCompleted: { vc in
-                vc.archiveFolderFloatingPanelView?.hide(animated: true)
-                vc.delegate?.didSelectedItemMoved?()
-            }).disposed(by: disposeBag)
     }
 }
 
@@ -189,7 +216,8 @@ extension PopUpSongOptionViewController: PopUpArchiveFolderViewDelegate {
     func didSongAdded() {
         archiveFolderFloatingPanelView?.hide(animated: true)
         archiveFolderFloatingPanelView = nil
-        
-        deletedSelectedSong()
+        Observable.just(Void())
+            .bind(to: viewModel.input.deleteSong)
+            .disposed(by: disposeBag)
     }
 }
