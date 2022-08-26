@@ -10,53 +10,91 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SearchHistoryViewModel {
+class SearchHistoryViewModel: ViewModelType {
     
-    private var disposeBag = DisposeBag()
+    
+    // MARK: - Properties
+    
+    struct Input {
+        let viewDidLoad = PublishRelay<Void>()
+        let refresh = PublishRelay<Void>()
+        let tapHistoryItem = PublishSubject<IndexPath>()
+        let tapClearHistoryButton = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        let searchHistories = BehaviorRelay<[SearchHistory]>(value: [])
+        let didTapHistoryItem = PublishRelay<SearchHistory>()
+    }
+    
+    private(set) var input: Input!
+    private(set) var output: Output!
+    private(set) var disposeBag = DisposeBag()
     private let searchHistoryManager = SearchHistoryManager()
     
-    public var searchHistories = BehaviorRelay<[SearchHistory]>(value: [])
-    public var didHistoryItemSelect = PublishRelay<SearchHistory>()
+    
+    // MARK: - Initializers
+    
+    init() {
+        setupInputOutput()
+    }
+    
+    
+    // MARK: - Setups
+    
+    private func setupInputOutput() {
+        let input = Input()
+        let output = Output()
+        
+        Observable.merge(
+            input.viewDidLoad.asObservable(),
+            input.refresh.asObservable()
+        )
+            .flatMap { [weak self] () -> Single<[SearchHistory]> in
+                guard let self = self else { return .never() }
+                return self.searchHistoryManager
+                    .fetchData()
+            }
+            .subscribe(onNext: { searchHistories in
+                output.searchHistories.accept(searchHistories)
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapHistoryItem
+            .subscribe(onNext: { indexPath in
+                let selectedItem = output.searchHistories.value[indexPath.row]
+                output.didTapHistoryItem.accept(selectedItem)
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapClearHistoryButton
+            .flatMap { [weak self] () -> Observable<Void> in
+                guard let self = self else { return .never() }
+                return self.searchHistoryManager
+                    .deleteAll()
+                    .andThen(.just(Void()))
+            }
+            .subscribe(onNext: {
+                output.searchHistories.accept([])
+            })
+            .disposed(by: disposeBag)
+        
+        self.input = input
+        self.output = output
+    }
 }
 
 extension SearchHistoryViewModel {
-    public func fetchSearchHistory() {
-        searchHistories.accept([])
-        
-        searchHistoryManager.fetchData()
-            .subscribe(with: self, onSuccess: { strongSelf, histories in
-                strongSelf.searchHistories.accept(histories)
-            }, onFailure: { strongSelf, error in
-                print(error.localizedDescription)
-            }).disposed(by: disposeBag)
-    }
-    
     public func deleteHistory(_ index: Int) {
-        var histories = searchHistories.value
+        var histories = output.searchHistories.value
         let selectedItem = histories.remove(at: index)
         
         searchHistoryManager.deleteData(selectedItem)
             .subscribe(with: self, onCompleted: { strongSelf in
-                strongSelf.searchHistories.accept(histories)
+                strongSelf.output.searchHistories.accept(histories)
             }, onError: { strongSelf, error in
                 print(error.localizedDescription)
             })
             .disposed(by: self.disposeBag)
-    }
-    
-    public func deleteAllHistories() {
-        self.searchHistoryManager.deleteAll()
-            .subscribe(with: self, onCompleted: { strongSelf in
-                strongSelf.searchHistories.accept([])
-            }, onError: { strongSelf, error in
-                print(error.localizedDescription)
-            }).disposed(by: self.disposeBag)
-    }
-}
-
-extension SearchHistoryViewModel {
-    public func historyItemSelectAction(_ indexPath: IndexPath) {
-        let selectedItem = searchHistories.value[indexPath.row]
-        didHistoryItemSelect.accept(selectedItem)
     }
 }

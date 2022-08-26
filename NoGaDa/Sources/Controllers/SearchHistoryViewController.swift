@@ -62,15 +62,10 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
     
     private func setup() {
         setupView()
-        setupData()
     }
     
     private func setupView() {
         setupSearchHistoryTableView()
-    }
-    
-    private func setupData() {
-        viewModel.fetchSearchHistory()
     }
     
     private func setupSearchHistoryTableView() {
@@ -90,13 +85,24 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
     // MARK: - Binds
     
     private func bind() {
-        bindSearchHistoryTableView()
-        bindSearchHistoryTableCell()
-        bindClearHistoryButton()
+        bindInputs()
+        bindOutputs()
     }
-
-    private func bindSearchHistoryTableView() {
-        viewModel.searchHistories
+    
+    private func bindInputs() {
+        Observable.just(Void())
+            .bind(to: viewModel.input.viewDidLoad)
+            .disposed(by: disposeBag)
+        
+        clearHistoryButton
+            .rx.tap
+            .bind(to: viewModel.input.tapClearHistoryButton)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOutputs() {
+        viewModel.output
+            .searchHistories
             .bind(to: searchHistoryTableView.rx.items(cellIdentifier: SearchHistoryTableViewCell.identifier,
                                                       cellType: SearchHistoryTableViewCell.self)) { [weak self] index, item, cell in
                 guard let self = self else { return }
@@ -106,28 +112,15 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
                     self?.viewModel.deleteHistory(index)
                 }
             }.disposed(by: disposeBag)
-    }
-    
-    private func bindSearchHistoryTableCell() {
-        searchHistoryTableView.rx.itemSelected
-            .subscribe(with: self, onNext: { vc, indexPath in
-                vc.viewModel.historyItemSelectAction(indexPath)
-            })
-            .disposed(by: disposeBag)
         
-        viewModel.didHistoryItemSelect
-            .subscribe(with: self, onNext: { vc, item in
-                vc.delegate?.didHSelectistoryItem(item.keyword)
+        viewModel.output
+            .didTapHistoryItem
+            .asDriver(onErrorDriveWith: .never())
+            .drive(with: self, onNext: { vc, historyItem in
+                let keyword = historyItem.keyword
+                vc.delegate?.didHSelectistoryItem(keyword)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func bindClearHistoryButton() {
-        clearHistoryButton.rx.tap
-            .asDriver()
-            .drive(with: self, onNext: { vc, _ in
-                vc.viewModel.deleteAllHistories()
-            }).disposed(by: disposeBag)
     }
 }
 
