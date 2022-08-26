@@ -6,14 +6,41 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
 
-
-class AddSongViewModel {
-    private var disposeBag = DisposeBag()
+class AddSongViewModel: ViewModelType {
+    
+    
+    // MARK: - Properties
+    
+    struct Input {
+        let songTitle = BehaviorRelay<String>(value: "")
+        let singerName = BehaviorRelay<String>(value: "")
+        let songNumber = BehaviorRelay<String>(value: "")
+        let changeKaraokeBrand = PublishRelay<KaraokeBrand>()
+        let tapBrandPickerButton = PublishSubject<Void>()
+        let tapExitButton = PublishSubject<Void>()
+        let tapConfirmButton = PublishSubject<Void>()
+    }
+    
+    struct Output {
+        let dismiss = PublishRelay<Void>()
+        let showingBrandPickerView = PublishRelay<Void>()
+        let confirmButtonActiveState = BehaviorRelay<Bool>(value: false)
+        let karaokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
+        let succeedToAddSong = PublishRelay<Void>()
+    }
+    
+    private(set) var input: Input!
+    private(set) var output: Output!
+    private(set) var disposeBag = DisposeBag()
     private var targetFolderId: String?
     private var songFolderManager = SongFolderManager()
+    
+    
+    // MARK: - Initializers
     
     init() {
         fatalError("You must give 'targetFolderId' to initialize")
@@ -21,35 +48,79 @@ class AddSongViewModel {
     
     init(targetFolderId: String) {
         self.targetFolderId = targetFolderId
+        setupInputOutput()
     }
-}
-
-extension AddSongViewModel {
-    public func addSong(title: String, singer: String, songNumber: String, brand: KaraokeBrand) -> Completable {
-        return Completable.create { [weak self] observer in
-            guard let self = self,
-                  let targetFolderId = self.targetFolderId else {
-                      return Disposables.create()
-                  }
-            
-            self.songFolderManager.fetchData(targetFolderId)
-                .subscribe(onNext: { folder in
-                    let song = Song(brand: brand,
-                                    no: songNumber,
-                                    title: title,
-                                    singer: singer,
-                                    composer: "",
-                                    lyricist: "",
-                                    release: "")
-                    
-                    self.songFolderManager.addSong(songFolder: folder, song: song)
-                        .subscribe(onCompleted: {
-                            observer(.completed)
-                        }).disposed(by: self.disposeBag)
-                }).disposed(by: self.disposeBag)
-            
-            return Disposables.create()
-        }
+    
+    
+    // MARK: - Setups
+    
+    private func setupInputOutput() {
+        let input = Input()
+        let output = Output()
+        
+        Observable.combineLatest(
+            input.songTitle,
+            input.singerName,
+            resultSelector: { !$0.isEmpty && !$1.isEmpty }
+        ).subscribe(onNext: { isAllTextFieldFilled in
+            if isAllTextFieldFilled {
+                output.confirmButtonActiveState.accept(true)
+            } else {
+                output.confirmButtonActiveState.accept(false)
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        input.changeKaraokeBrand
+            .subscribe(onNext: { selectedBrand in
+                output.karaokeBrand.accept(selectedBrand)
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapBrandPickerButton
+            .subscribe(onNext: {
+                output.showingBrandPickerView.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapExitButton
+            .subscribe(onNext: {
+                output.succeedToAddSong.accept(Void())
+                output.dismiss.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        input.tapConfirmButton
+            .flatMap { [weak self] () -> Observable<ArchiveFolder> in
+                guard let self = self,
+                      let targetFolderId = self.targetFolderId else {
+                    return .never()
+                }
+                
+                return self.songFolderManager
+                    .fetchData(targetFolderId)
+            }
+            .flatMap { [weak self] folder -> Observable<Void> in
+                guard let self = self else { return .never() }
+                let song = Song(brand: output.karaokeBrand.value,
+                                no: input.songNumber.value,
+                                title: input.songTitle.value,
+                                singer: input.singerName.value,
+                                composer: "",
+                                lyricist: "",
+                                release: "")
+                return self.songFolderManager
+                    .addSong(songFolder: folder, song: song)
+                    .andThen(.just(Void()))
+            }
+            .subscribe(onNext: {
+                output.succeedToAddSong.accept(Void())
+                output.dismiss.accept(Void())
+            })
+            .disposed(by: disposeBag)
+        
+        self.input = input
+        self.output = output
     }
 }
 
