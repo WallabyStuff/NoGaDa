@@ -101,7 +101,7 @@
 		8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */; };
 		8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703933275FECE3001D10A6 /* CreditViewModel.swift */; };
 		8E79DC4128BB73B0000B4874 /* AnimateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4028BB73B0000B4874 /* AnimateButton.swift */; };
-		8E79DC4328BB73CE000B4874 /* UIView+TapAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4228BB73CE000B4874 /* UIView+TapAnimate.swift */; };
+		8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */; };
 		8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4428BB7858000B4874 /* AnimateView.swift */; };
 		8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */; };
 		8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */; };
@@ -244,7 +244,7 @@
 		8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightingTextfield.swift; sourceTree = "<group>"; };
 		8E703933275FECE3001D10A6 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
 		8E79DC4028BB73B0000B4874 /* AnimateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateButton.swift; sourceTree = "<group>"; };
-		8E79DC4228BB73CE000B4874 /* UIView+TapAnimate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TapAnimate.swift"; sourceTree = "<group>"; };
+		8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TapScaleAnimation.swift"; sourceTree = "<group>"; };
 		8E79DC4428BB7858000B4874 /* AnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
 		8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToTop.swift"; sourceTree = "<group>"; };
 		8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Toggle.swift"; sourceTree = "<group>"; };
@@ -563,7 +563,7 @@
 				8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */,
 				8E33F4032857A08900B6E6EE /* UIView+StatusBar.swift */,
 				8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */,
-				8E79DC4228BB73CE000B4874 /* UIView+TapAnimate.swift */,
+				8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -931,7 +931,7 @@
 				8E6C95E92767B37B00667C01 /* PopUpSongOptionViewModel.swift in Sources */,
 				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
 				8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */,
-				8E79DC4328BB73CE000B4874 /* UIView+TapAnimate.swift in Sources */,
+				8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,
 				8E33F4042857A08900B6E6EE /* UIView+StatusBar.swift in Sources */,
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,
