@@ -69,7 +69,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpE-WO-btC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpE-WO-btC" customClass="AnimateButton" customModule="NoGaDa" customModuleProvider="target">
                                 <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
@@ -164,7 +164,7 @@
                                 <color key="backgroundColor" name="PopUpArchiveBackgroundColor"/>
                                 <color key="separatorColor" name="AccentSubColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBe-ZC-ecj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBe-ZC-ecj" customClass="AnimateButton" customModule="NoGaDa" customModuleProvider="target">
                                 <rect key="frame" x="20" y="778" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonReversedBackgroundColor"/>
                                 <constraints>

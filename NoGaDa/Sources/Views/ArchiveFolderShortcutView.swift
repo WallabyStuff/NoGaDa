@@ -7,7 +7,10 @@
 
 import UIKit
 
-class ArchiveFolderShortcutView: UIView {
+class ArchiveFolderShortcutView: AnimateView {
+    
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,6 +22,9 @@ class ArchiveFolderShortcutView: UIView {
         setup()
     }
     
+    
+    // MARK: - Setups
+    
     private func setup() {
         backgroundColor = ColorSet.archiveShortcutBackgroundColor
         layer.cornerRadius = 20
@@ -26,29 +32,23 @@ class ArchiveFolderShortcutView: UIView {
 }
 
 extension ArchiveFolderShortcutView {
-    
-    var releaseAnimationDuration: CGFloat {
-        return 0.3
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
-        backgroundColor = ColorSet.archiveShortcutSelectedBackgroundColor
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.backgroundColor = ColorSet.archiveShortcutSelectedBackgroundColor
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-        UIView.animate(withDuration: releaseAnimationDuration) {
+        UIView.animate(withDuration: 0.3) {
             self.backgroundColor = ColorSet.archiveShortcutBackgroundColor
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        
-        UIView.animate(withDuration: releaseAnimationDuration) {
+        UIView.animate(withDuration: 0.3) {
             self.backgroundColor = ColorSet.archiveShortcutBackgroundColor
         }
     }
