@@ -62,7 +62,7 @@
                                                 <rect key="frame" x="0.0" y="180" width="390" height="452"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hd8-bd-esb">
-                                                        <rect key="frame" x="0.0" y="64" width="390" height="320"/>
+                                                        <rect key="frame" x="12" y="64" width="366" height="320"/>
                                                         <color key="backgroundColor" name="BackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="320" id="yTA-cM-Kcj"/>
@@ -89,10 +89,10 @@
                                                 <constraints>
                                                     <constraint firstItem="CxZ-Cq-9Qe" firstAttribute="leading" secondItem="9sg-9f-vmL" secondAttribute="leading" constant="20" id="3J6-Rl-SoA"/>
                                                     <constraint firstItem="PSy-Ae-0Dt" firstAttribute="centerY" secondItem="Hd8-bd-esb" secondAttribute="centerY" id="AuJ-mR-k13"/>
-                                                    <constraint firstItem="Hd8-bd-esb" firstAttribute="leading" secondItem="9sg-9f-vmL" secondAttribute="leading" id="HXm-rn-L5x"/>
+                                                    <constraint firstItem="Hd8-bd-esb" firstAttribute="leading" secondItem="9sg-9f-vmL" secondAttribute="leading" constant="12" id="HXm-rn-L5x"/>
                                                     <constraint firstAttribute="trailing" secondItem="CxZ-Cq-9Qe" secondAttribute="trailing" constant="20" id="Hak-Ge-r2e"/>
                                                     <constraint firstItem="CxZ-Cq-9Qe" firstAttribute="centerY" secondItem="Hd8-bd-esb" secondAttribute="centerY" id="KWP-7p-QR4"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Hd8-bd-esb" secondAttribute="trailing" id="LYT-UH-sJe"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Hd8-bd-esb" secondAttribute="trailing" constant="12" id="LYT-UH-sJe"/>
                                                     <constraint firstItem="PSy-Ae-0Dt" firstAttribute="centerX" secondItem="Hd8-bd-esb" secondAttribute="centerX" id="R5o-98-JNB"/>
                                                     <constraint firstItem="n9e-jd-iKq" firstAttribute="top" secondItem="9sg-9f-vmL" secondAttribute="top" id="bgA-ic-aYJ"/>
                                                     <constraint firstItem="n9e-jd-iKq" firstAttribute="leading" secondItem="9sg-9f-vmL" secondAttribute="leading" constant="20" id="eKp-UG-3kz"/>
