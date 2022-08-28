@@ -57,21 +57,25 @@ extension FolderTableViewCell {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
-        cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.cellContentView.backgroundColor = ColorSet.songCellSelectedBackgroundColor
+            self.cellContentView.scaleDown()
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-        self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+            self.cellContentView.releaseScale()
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        
         UIView.animate(withDuration: releaseAnimationDuration) {
             self.cellContentView.backgroundColor = ColorSet.songCellBackgroundColor
+            self.cellContentView.releaseScale()
         }
     }
 }

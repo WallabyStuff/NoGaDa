@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="bottom" secondItem="J7h-c3-Fhr" secondAttribute="bottom" constant="28" id="wL0-eg-08C"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Gj-gl-IDl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Gj-gl-IDl" customClass="AnimateButton" customModule="NoGaDa" customModuleProvider="target">
                                 <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
@@ -227,7 +227,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="xmark" catalog="system"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tC3-dh-UPR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tC3-dh-UPR" customClass="AnimateButton" customModule="NoGaDa" customModuleProvider="target">
                                 <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
