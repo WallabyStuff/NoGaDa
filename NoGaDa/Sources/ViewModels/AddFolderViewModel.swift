@@ -36,10 +36,10 @@ class AddFolderViewModel: ViewModelType {
     // MARK: - Initializers
     
     init() {
-        setupIntputOutput()
+        setupInputOutput()
     }
     
-    private func setupIntputOutput() {
+    private func setupInputOutput() {
         let input = Input()
         let output = Output()
         

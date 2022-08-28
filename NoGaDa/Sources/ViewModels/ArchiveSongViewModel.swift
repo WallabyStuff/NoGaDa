@@ -51,13 +51,13 @@ class ArchiveSongViewModel: ViewModelType {
     
     init(currentFolder: ArchiveFolder) {
         self.currentFolder = currentFolder
-        setupIntputOutput()
+        setupInputOutput()
     }
     
     
     // MARK: - Setups
     
-    private func setupIntputOutput() {
+    private func setupInputOutput() {
         self.input = Input()
         let output = Output()
         
