@@ -98,6 +98,11 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
             .rx.tap
             .bind(to: viewModel.input.tapClearHistoryButton)
             .disposed(by: disposeBag)
+        
+        searchHistoryTableView
+            .rx.itemSelected
+            .bind(to: viewModel.input.tapHistoryItem)
+            .disposed(by: disposeBag)
     }
     
     private func bindOutputs() {
