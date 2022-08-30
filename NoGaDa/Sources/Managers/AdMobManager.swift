@@ -34,8 +34,6 @@ class AdMobManager {
   // MARK: - Methods
   
   public func presentAd(vc: UIViewController) -> Completable {
-    configureAdMob()
-    
     return Completable.create { observer in
       let request = GADRequest()
       GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
@@ -51,18 +49,27 @@ class AdMobManager {
     }
   }
   
-  public func configureAdMob() {
-    let request = GADRequest()
-    GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
-                           request: request) { [weak self] ad, error in
-      guard let self = self else { return }
-      
-      if let error = error {
-        print(error)
-        return
+  public func testPresentAd(vc: UIViewController) {
+    self.interstitial?.present(fromRootViewController: vc)
+  }
+  
+  public func configureAdMob() -> Completable {
+    return Completable.create { [weak self] observer in
+      guard let self = self else { return Disposables.create() }
+      let request = GADRequest()
+      GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
+                             request: request) { [weak self] ad, error in
+        guard let self = self else { return }
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
+        
+        self.interstitial = ad
+        observer(.completed)
       }
       
-      self.interstitial = ad
+      return Disposables.create()
     }
   }
 }

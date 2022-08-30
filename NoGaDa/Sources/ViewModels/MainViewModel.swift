@@ -22,7 +22,7 @@ class MainViewModel: ViewModelType {
     let tapArchiveFolderView = PublishSubject<Void>()
     let tapSettingButton = PublishSubject<Void>()
     let tapNewUpdateSongItem = PublishSubject<IndexPath>()
-    let changeSelectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
+    let changeSelectedKaraokeBrand = PublishRelay<KaraokeBrand>()
     let didSongAdded = PublishRelay<Void>()
     let didFileChanged = PublishRelay<Void>()
     let didFolderNameChanged = PublishRelay<Void>()
@@ -38,6 +38,7 @@ class MainViewModel: ViewModelType {
     let showArchiveFolderVC = PublishRelay<Bool>()
     let showSettingVC = PublishRelay<Bool>()
     let showArchiveFolderFloadingView = PublishRelay<Song>()
+    let showInitialAd = PublishRelay<Void>()
   }
   
   private(set) var input: Input!
@@ -59,7 +60,7 @@ class MainViewModel: ViewModelType {
     
     Observable.merge(
       input.viewDidLoad.asObservable(),
-      input.changeSelectedKaraokeBrand
+      input.changeSelectedKaraokeBrand.asObservable()
         .map { brand in
           output.selectedKaraokeBrand.accept(brand)
         }.asObservable()
@@ -89,6 +90,15 @@ class MainViewModel: ViewModelType {
       output.isLoadingNewUpdateSongs.accept(false)
     })
     .disposed(by: disposeBag)
+    
+    Observable.zip(
+      input.viewDidLoad,
+      input.viewDidAppear
+    )
+      .subscribe(onNext: { _ in
+        output.showInitialAd.accept(Void())
+      })
+      .disposed(by: disposeBag)
     
     Observable.merge(
       input.viewDidAppear.map { _ in },
