@@ -59,7 +59,7 @@ class AddSongViewController: UIViewController {
     
     if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
       traitCollection.performAsCurrent {
-        brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
+        brandPickerButton.layer.borderColor = R.color.brandPopUpButtonBorderColor()!.cgColor
       }
     }
   }
@@ -133,7 +133,7 @@ class AddSongViewController: UIViewController {
   private func setupBrandPickerButton() {
     brandPickerButton.layer.cornerRadius = 12
     brandPickerButton.layer.borderWidth = 1
-    brandPickerButton.layer.borderColor = ColorSet.brandPopUpButtonBorderColor.cgColor
+    brandPickerButton.layer.borderColor = R.color.brandPopUpButtonBorderColor()!.cgColor
   }
   
   private func setupContentScrollView() {
@@ -222,12 +222,12 @@ class AddSongViewController: UIViewController {
       .drive(with: self, onNext: { vc, isAllTextFieldFilled in
         if isAllTextFieldFilled {
           vc.confirmButton.isUserInteractionEnabled = true
-          vc.confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
-          vc.confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
+          vc.confirmButton.backgroundColor = R.color.addFolderButtonBackgroundColor()
+          vc.confirmButton.setTitleColor(R.color.addFolderButtonForegroundColor(), for: .normal)
         } else {
           vc.confirmButton.isUserInteractionEnabled = false
-          vc.confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
-          vc.confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
+          vc.confirmButton.backgroundColor = R.color.addFolderButtonDisabledBackgroundColor()
+          vc.confirmButton.setTitleColor(R.color.disabledTextColor(), for: .normal)
         }
       })
       .disposed(by: disposeBag)

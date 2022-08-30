@@ -87,8 +87,8 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupBrandSelector() {
-    brandSelector.setSelectedTextColor(ColorSet.segmentedControlSelectedTextColor)
-    brandSelector.setDefaultTextColor(ColorSet.segmentedControlDefaultTextColor)
+    brandSelector.setSelectedTextColor(R.color.segmentedControlSelectedTextColor()!)
+    brandSelector.setDefaultTextColor(R.color.segmentedControlDefaultTextColor()!)
   }
   
   private func setupSearchResultTableView() {

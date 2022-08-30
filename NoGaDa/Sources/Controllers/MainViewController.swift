@@ -163,9 +163,9 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupBrandSegmentedControl() {
-    brandSegmentedControl.segmentTintColor = ColorSet.updatedSongSelectorSelectedTextColor
-    brandSegmentedControl.segmentDefaultColor = ColorSet.updatedSongSelectorUnSelectedTextColor
-    brandSegmentedControl.barIndicatorColor = ColorSet.updatedSongSelectorBarIndicatorColor
+    brandSegmentedControl.segmentTintColor = R.color.updatedSongSelectorSelectedTextColor()!
+    brandSegmentedControl.segmentDefaultColor = R.color.updatedSongSelectorUnSelectedTextColor()!
+    brandSegmentedControl.barIndicatorColor = R.color.updatedSongSelectorBarIndicatorColor()!
     brandSegmentedControl.barIndicatorHeight = 3
     brandSegmentedControl.segmentFontSize = 14
     brandSegmentedControl.addSegment(title: "tj 업데이트")

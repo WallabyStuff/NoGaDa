@@ -8,31 +8,31 @@
 import UIKit
 
 class PopUpArchiveFolderTableViewCell: UITableViewCell {
-
-    
-    // MARK: - Properties
-    
-    static let identifier = R.reuseIdentifier.popUpArchiveTableCell.identifier
-    
-    @IBOutlet weak var emojiLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    
-    // MARK: - Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupview()
-    }
-
-    
-    // MARK: - Setups
-    
-    private func setupview() {
-        // Selection View
-        let selectionView = UIView(frame: self.frame)
-        selectionView.layer.cornerRadius = 8
-        selectionView.backgroundColor = ColorSet.popUpArchiveSeparatorColor
-        self.selectedBackgroundView = selectionView
-    }
+  
+  
+  // MARK: - Properties
+  
+  static let identifier = R.reuseIdentifier.popUpArchiveTableCell.identifier
+  
+  @IBOutlet weak var emojiLabel: UILabel!
+  @IBOutlet weak var titleLabel: UILabel!
+  
+  
+  // MARK: - Lifecycle
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setupview()
+  }
+  
+  
+  // MARK: - Setups
+  
+  private func setupview() {
+    // Selection View
+    let selectionView = UIView(frame: self.frame)
+    selectionView.layer.cornerRadius = 8
+    selectionView.backgroundColor = R.color.popUpArchiveSeparatorColor()!
+    self.selectedBackgroundView = selectionView
+  }
 }

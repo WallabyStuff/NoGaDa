@@ -96,7 +96,7 @@ class AddFolderViewController: UIViewController {
   
   private func setupFolderTitleTextField() {
     folderTitleTextField.setLeftPadding(width: 8)
-    folderTitleTextField.setPlaceholderColor(ColorSet.textFieldPlaceholderColor)
+    folderTitleTextField.setPlaceholderColor(R.color.textFieldPlaceholderColor()!)
   }
   
   
@@ -162,14 +162,14 @@ class AddFolderViewController: UIViewController {
   // MARK: - Method
   
   private func activeConfirmButton() {
-    confirmButton.backgroundColor = ColorSet.addFolderButtonBackgroundColor
-    confirmButton.setTitleColor(ColorSet.addFolderButtonForegroundColor, for: .normal)
+    confirmButton.backgroundColor = R.color.addFolderButtonBackgroundColor()
+    confirmButton.setTitleColor(R.color.addFolderButtonForegroundColor(), for: .normal)
     confirmButton.isEnabled = true
   }
   
   private func inactiveConfirmButton() {
-    confirmButton.backgroundColor = ColorSet.addFolderButtonDisabledBackgroundColor
-    confirmButton.setTitleColor(ColorSet.disabledTextColor, for: .normal)
+    confirmButton.backgroundColor = R.color.addFolderButtonDisabledBackgroundColor()
+    confirmButton.setTitleColor(R.color.disabledTextColor(), for: .normal)
     confirmButton.isEnabled = true
   }
 }

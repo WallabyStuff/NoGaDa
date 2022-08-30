@@ -43,7 +43,6 @@
 		4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4956CE2F26F467060007523B /* LaunchScreen.storyboard */; };
 		4956CE3C26F467060007523B /* NoGaDaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE3B26F467060007523B /* NoGaDaTests.swift */; };
 		4956CE4726F467060007523B /* NoGaDaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE4626F467060007523B /* NoGaDaUITests.swift */; };
-		4956CE5926F476450007523B /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5826F476450007523B /* ColorSet.swift */; };
 		4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5C26F4940A0007523B /* SearchViewController.swift */; };
 		4956CE5F26F494730007523B /* ArchiveFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */; };
 		4956CE6126F494870007523B /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
@@ -183,7 +182,6 @@
 		4956CE4226F467060007523B /* NoGaDaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoGaDaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4956CE4626F467060007523B /* NoGaDaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoGaDaUITests.swift; sourceTree = "<group>"; };
 		4956CE4826F467060007523B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4956CE5826F476450007523B /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		4956CE5C26F4940A0007523B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderViewController.swift; sourceTree = "<group>"; };
 		4956CE6026F494870007523B /* ArchiveSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongViewController.swift; sourceTree = "<group>"; };
@@ -450,7 +448,6 @@
 		4956CE5626F469F30007523B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4956CE5826F476450007523B /* ColorSet.swift */,
 				49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */,
 				49C6DC7C270382620094403B /* SettingEtcItem.swift */,
 				49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */,
@@ -881,7 +878,6 @@
 				493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */,
 				8E33F3F828546F7000B6E6EE /* ViewModelInjectable.swift in Sources */,
 				49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */,
-				4956CE5926F476450007523B /* ColorSet.swift in Sources */,
 				49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */,
 				4992C7622721B3D6006045FF /* AddFolderViewModel.swift in Sources */,
 				495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */,

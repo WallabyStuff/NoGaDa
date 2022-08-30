@@ -54,7 +54,7 @@ class SettingViewController: BaseViewController {
     searchFilterTableView.layer.cornerRadius = 20
     searchFilterTableView.tableFooterView = UIView()
     searchFilterTableView.isScrollEnabled = false
-    searchFilterTableView.separatorColor = ColorSet.settingItemSeparatorColor
+    searchFilterTableView.separatorColor = R.color.settingItemSeparatorColor()
     searchFilterTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 80)
     searchFilterTableView.layer.cornerRadius = 20
     searchFilterTableView.dataSource = self
@@ -72,7 +72,7 @@ class SettingViewController: BaseViewController {
     etcTableView.layer.cornerRadius = 20
     etcTableView.tableFooterView = UIView()
     etcTableView.isScrollEnabled = false
-    etcTableView.separatorColor = ColorSet.settingItemSeparatorColor
+    etcTableView.separatorColor = R.color.settingItemSeparatorColor()
     etcTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 64)
     etcTableView.dataSource = self
     etcTableView.delegate = self
@@ -119,8 +119,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
       
       let filterItem = SearchFilterItem.allCases[indexPath.row]
       
-      filterItemCell.contentView.backgroundColor = ColorSet.settingGroupBackgroundColor
-      filterItemCell.titleLabel.textColor = ColorSet.textColor
+      filterItemCell.contentView.backgroundColor = R.color.settingGroupBackgroundColor()
+      filterItemCell.titleLabel.textColor = R.color.textColor()
       filterItemCell.titleLabel.text = filterItem.title
       filterItemCell.filterSwitch.isOn    = filterItem.state
       filterItemCell.filterSwitch.rx.controlEvent(.valueChanged)

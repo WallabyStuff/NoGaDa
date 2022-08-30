@@ -35,7 +35,7 @@ class ArchiveFolderFloatingPanelView {
     floatingPanel.contentMode = .fitToBounds
     floatingPanel.backdropView.dismissalTapGestureRecognizer.isEnabled = true
     floatingPanel.surfaceView.appearance = appearance
-    floatingPanel.surfaceView.grabberHandle.barColor = ColorSet.floatingPanelHandleColor
+    floatingPanel.surfaceView.grabberHandle.barColor = R.color.floatingPanelHandleColor()!
     floatingPanel.layout = ArchiveSongFloatingPanelLayout()
   }
   

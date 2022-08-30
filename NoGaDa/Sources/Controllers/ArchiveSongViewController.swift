@@ -146,7 +146,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   private func setupAddSongButton() {
     addSongButton.makeAsCircle()
     addSongButton.hero.modifiers = [.fade, .translate(y: view.safeAreaInsets.bottom + 28)]
-    addSongButton.layer.shadowColor = ColorSet.floatingButtonBackgroundColor.cgColor
+    addSongButton.layer.shadowColor = R.color.floatingButtonBackgroundColor()!.cgColor
     addSongButton.layer.shadowOffset = .zero
     addSongButton.layer.shadowRadius = 20
     addSongButton.layer.shadowOpacity = 0.25
