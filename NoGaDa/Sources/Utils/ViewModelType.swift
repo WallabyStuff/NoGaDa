@@ -9,11 +9,11 @@ import Foundation
 import RxSwift
 
 protocol ViewModelType {
-    associatedtype Input
-    associatedtype Output
-    
-    var input: Input! { get }
-    var output: Output! { get }
-    
-    var disposeBag: DisposeBag { get }
+  associatedtype Input
+  associatedtype Output
+  
+  var input: Input! { get }
+  var output: Output! { get }
+  
+  var disposeBag: DisposeBag { get }
 }

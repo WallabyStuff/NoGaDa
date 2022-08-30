@@ -8,15 +8,15 @@
 import UIKit
 
 class AppbarHeight {
-    static var compactAppbarHeight: CGFloat {
-        return safeAreaTop + 80
-    }
-    
-    static var regularAppbarHeight: CGFloat {
-        return safeAreaTop + 132
-    }
-    
-    static var safeAreaTop: CGFloat {
-        return UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
-    }
+  static var compactAppbarHeight: CGFloat {
+    return safeAreaTop + 80
+  }
+  
+  static var regularAppbarHeight: CGFloat {
+    return safeAreaTop + 132
+  }
+  
+  static var safeAreaTop: CGFloat {
+    return UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
+  }
 }

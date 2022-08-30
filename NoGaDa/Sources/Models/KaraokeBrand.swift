@@ -8,24 +8,24 @@
 import UIKit
 
 enum KaraokeBrand: String, Codable, CaseIterable {
-    case tj       = "tj"
-    case kumyoung = "kumyoung"
-    
-    var path: String {
-        switch self {
-        case .tj:
-            return "/tj.json"
-        case .kumyoung:
-            return "/kumyoung.json"
-        }
+  case tj       = "tj"
+  case kumyoung = "kumyoung"
+  
+  var path: String {
+    switch self {
+    case .tj:
+      return "/tj.json"
+    case .kumyoung:
+      return "/kumyoung.json"
     }
-    
-    var localizedString: String {
-        switch self {
-        case .tj:
-            return "tj"
-        case .kumyoung:
-            return "금영"
-        }
+  }
+  
+  var localizedString: String {
+    switch self {
+    case .tj:
+      return "tj"
+    case .kumyoung:
+      return "금영"
     }
+  }
 }

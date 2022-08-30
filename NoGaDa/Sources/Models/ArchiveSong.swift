@@ -9,40 +9,40 @@ import UIKit
 import RealmSwift
 
 class ArchiveSong: Object {
-    @objc dynamic var id:           String = UUID().uuidString
-    @objc dynamic var no:           String = ""
-    @objc dynamic var title:        String = ""
-    @objc dynamic var singer:       String = ""
-    @objc dynamic var brand:        String = ""
-    @objc dynamic var composer:     String = ""
-    @objc dynamic var lyricists:    String = ""
-    @objc dynamic var releaseDate:  String = ""
+  @objc dynamic var id:           String = UUID().uuidString
+  @objc dynamic var no:           String = ""
+  @objc dynamic var title:        String = ""
+  @objc dynamic var singer:       String = ""
+  @objc dynamic var brand:        String = ""
+  @objc dynamic var composer:     String = ""
+  @objc dynamic var lyricists:    String = ""
+  @objc dynamic var releaseDate:  String = ""
+  
+  convenience init(no: String, title: String, singer: String, brand: String, composer: String, lyricists: String, releaseDate: String) {
+    self.init()
     
-    convenience init(no: String, title: String, singer: String, brand: String, composer: String, lyricists: String, releaseDate: String) {
-        self.init()
-        
-        self.no             = no
-        self.title          = title
-        self.singer         = singer
-        self.brand          = brand
-        self.composer       = composer
-        self.lyricists      = lyricists
-        self.releaseDate    = releaseDate
-    }
-    
-    override class func primaryKey() -> String? {
-        return "id"
-    }
-    
-    override class func indexedProperties() -> [String] {
-        return ["id", "no", "title", "singer", "brand", "composer", "lyricists", "release"]
-    }
+    self.no             = no
+    self.title          = title
+    self.singer         = singer
+    self.brand          = brand
+    self.composer       = composer
+    self.lyricists      = lyricists
+    self.releaseDate    = releaseDate
+  }
+  
+  override class func primaryKey() -> String? {
+    return "id"
+  }
+  
+  override class func indexedProperties() -> [String] {
+    return ["id", "no", "title", "singer", "brand", "composer", "lyricists", "release"]
+  }
 }
 
 extension ArchiveSong {
-    func asSongType() -> Song {
-        let song = Song(brand: KaraokeBrand(rawValue: brand) ?? .tj, no: no, title: title, singer: singer, composer: composer, lyricist: lyricists, release: releaseDate)
-        
-        return song
-    }
+  func asSongType() -> Song {
+    let song = Song(brand: KaraokeBrand(rawValue: brand) ?? .tj, no: no, title: title, singer: singer, composer: composer, lyricist: lyricists, release: releaseDate)
+    
+    return song
+  }
 }

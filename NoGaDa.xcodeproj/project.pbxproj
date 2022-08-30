@@ -408,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */,
+				8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */,
 				4956CE2826F467040007523B /* MainViewController.swift */,
 				4956CE5C26F4940A0007523B /* SearchViewController.swift */,
 				4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */,
@@ -423,7 +424,6 @@
 				8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */,
 				8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */,
 				493BCBE126F4BAC00096422A /* Cells */,
-				8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

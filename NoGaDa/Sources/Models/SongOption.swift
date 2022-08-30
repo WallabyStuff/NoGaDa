@@ -8,16 +8,16 @@
 import UIKit
 
 protocol SongOption {
-    var title: String { get }
-    var icon: UIImage { get }
+  var title: String { get }
+  var icon: UIImage { get }
 }
 
 struct MoveToOtherFolder: SongOption {
-    var title: String = "다른 폴더로 이동"
-    var icon: UIImage = UIImage(named: "folder")!
+  var title: String = "다른 폴더로 이동"
+  var icon: UIImage = UIImage(named: "folder")!
 }
 
 struct RemoveFromFolder: SongOption {
-    var title: String = "삭제"
-    var icon: UIImage = UIImage(named: "trash-bin")!
+  var title: String = "삭제"
+  var icon: UIImage = UIImage(named: "trash-bin")!
 }

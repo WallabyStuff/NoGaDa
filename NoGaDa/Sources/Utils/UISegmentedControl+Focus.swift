@@ -8,11 +8,11 @@
 import UIKit
 
 extension UISegmentedControl {
-    func setSelectedTextColor(_ color: UIColor) {
-        self.setTitleTextAttributes([.foregroundColor : color], for: .selected)
-    }
-    
-    func setDefaultTextColor(_ color: UIColor) {
-        self.setTitleTextAttributes([.foregroundColor : color], for: .normal)
-    }
+  func setSelectedTextColor(_ color: UIColor) {
+    self.setTitleTextAttributes([.foregroundColor : color], for: .selected)
+  }
+  
+  func setDefaultTextColor(_ color: UIColor) {
+    self.setTitleTextAttributes([.foregroundColor : color], for: .normal)
+  }
 }
