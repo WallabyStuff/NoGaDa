@@ -42,10 +42,10 @@ class AppbarView: UIView {
     let path = UIBezierPath(roundedRect: frame,
                             byRoundingCorners: _roundCorners,
                             cornerRadii: CGSize(width: _cornerRadius, height: _cornerRadius))
-    maskLayer.fillColor = ColorSet.appbarBackgroundColor.cgColor
+    maskLayer.fillColor = R.color.appbarBackgroundColor()!.cgColor
     maskLayer.frame = bounds
     maskLayer.path = path.cgPath
-    maskLayer.shadowColor = ColorSet.appbarBackgroundColor.cgColor
+    maskLayer.shadowColor = R.color.appbarBackgroundColor()!.cgColor
     maskLayer.shadowOffset = .zero
     maskLayer.shadowRadius = 2
     maskLayer.shadowOpacity = 0.2

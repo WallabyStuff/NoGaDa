@@ -33,7 +33,7 @@ class SplashView: UIView {
   
   private func setupSplashView(vc: UIViewController) {
     vc.view.addSubview(self)
-    backgroundColor = ColorSet.splashBackgroundColor
+    backgroundColor = R.color.splashBackgroundColor()
     translatesAutoresizingMaskIntoConstraints = false
     topAnchor.constraint(equalTo: vc.view.topAnchor).isActive = true
     bottomAnchor.constraint(equalTo: vc.view.bottomAnchor).isActive = true

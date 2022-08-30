@@ -45,7 +45,7 @@ class HighlightingTextfield: UITextField {
   private func bind() {
     self.rx.controlEvent(.editingDidBegin)
       .bind(onNext: { [weak self] in
-        self?.hightlightTextField(ColorSet.accentColor)
+        self?.hightlightTextField(R.color.accentColor()!)
       }).disposed(by: disposeBag)
     
     self.rx.controlEvent(.editingDidEnd)
