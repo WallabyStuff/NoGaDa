@@ -8,9 +8,9 @@
 import UIKit
 
 enum KaraokeAPIPath: String {
-    case basePath     = "https://api.manana.kr/karaoke"
-    case song         = "/song"
-    case singer       = "/singer"
-    case tj           = "/tj.json"
-    case kumyoung     = "/kumyoung.json"
+  case basePath     = "https://api.manana.kr/karaoke"
+  case song         = "/song"
+  case singer       = "/singer"
+  case tj           = "/tj.json"
+  case kumyoung     = "/kumyoung.json"
 }

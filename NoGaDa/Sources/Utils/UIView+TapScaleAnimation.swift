@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIView {
-    func scaleDown() {
-        self.transform = .init(scaleX: 0.975, y: 0.975)
-    }
-    
-    func releaseScale() {
-        self.transform = .init(scaleX: 1, y: 1)
-    }
+  func scaleDown() {
+    self.transform = .init(scaleX: 0.975, y: 0.975)
+  }
+  
+  func releaseScale() {
+    self.transform = .init(scaleX: 1, y: 1)
+  }
 }

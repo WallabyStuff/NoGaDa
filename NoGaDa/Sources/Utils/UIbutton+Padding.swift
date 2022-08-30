@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIButton {
-    func setPadding(width: CGFloat) {
-        self.imageEdgeInsets = UIEdgeInsets(top: width, left: width, bottom: width, right: width)
-    }
+  func setPadding(width: CGFloat) {
+    self.imageEdgeInsets = UIEdgeInsets(top: width, left: width, bottom: width, right: width)
+  }
 }
 
