@@ -36,7 +36,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var newUpdateSongLoadingIndicator: UIActivityIndicatorView!
   
   var viewModel: ViewModel
-  private let splashView = SplashView()
   private var archiveFolderFloatingView: ArchiveFolderFloatingPanelView?
   
   
@@ -51,11 +50,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(coder: coder)
-    
-    // TODO: Remove this comment in release version
-    //        AdMobManager.shared.presentAd(vc: self)
-    //            .subscribe()
-    //            .disposed(by: disposeBag)
   }
   
   required init?(coder: NSCoder) {
@@ -67,14 +61,12 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    splashView.show(vc: self)
     setup()
     bind()
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    hideSplashView()
     requestTrackingAuthorization()
     
     // Update constraints
@@ -170,6 +162,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     brandSegmentedControl.segmentFontSize = 14
     brandSegmentedControl.addSegment(title: "tj 업데이트")
     brandSegmentedControl.addSegment(title: "금영 업데이트")
+    brandSegmentedControl.setSelected(index: 0)
   }
   
   
@@ -245,6 +238,17 @@ class MainViewController: BaseViewController, ViewModelInjectable {
           self?.presentSearchVC()
         }
       })
+      .disposed(by: disposeBag)
+    
+    viewModel.output
+      .showInitialAd
+      .flatMap { [weak self] _ -> Observable<Void> in
+        guard let self = self else { return .empty() }
+        return AdMobManager.shared.presentAd(vc: self)
+          .andThen(.just(Void()))
+      }
+      .asDriver(onErrorDriveWith: .never())
+      .drive()
       .disposed(by: disposeBag)
     
     viewModel.output.showArchiveFolderVC
@@ -378,12 +382,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     }
     
     present(settingVC, animated: true, completion: nil)
-  }
-  
-  private func hideSplashView() {
-    splashView.hide { [weak self] in
-      self?.newUpdateSongTableView.flashScrollIndicators()
-    }
   }
   
   private func showArchiveFolderFloatingView(_ selectedSong: Song) {

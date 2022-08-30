@@ -47,7 +47,6 @@
 		4956CE5F26F494730007523B /* ArchiveFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */; };
 		4956CE6126F494870007523B /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
 		4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6226F494990007523B /* AddFolderViewController.swift */; };
-		496BE2AF27173D5300CFD96D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496BE2AE27173D5300CFD96D /* SplashView.swift */; };
 		4989A72626F8863C00A98B63 /* KaraokeApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */; };
 		4992C7622721B3D6006045FF /* AddFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7612721B3D6006045FF /* AddFolderViewModel.swift */; };
 		4992C7642721B86F006045FF /* PopUpArchiveFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */; };
@@ -102,6 +101,7 @@
 		8E79DC4128BB73B0000B4874 /* AnimateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4028BB73B0000B4874 /* AnimateButton.swift */; };
 		8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */; };
 		8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4428BB7858000B4874 /* AnimateView.swift */; };
+		8E79DC4928BDF1D8000B4874 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */; };
 		8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */; };
 		8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */; };
 		8E98D77D2826DB380056CED4 /* UILabel+AccentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */; };
@@ -186,7 +186,6 @@
 		4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderViewController.swift; sourceTree = "<group>"; };
 		4956CE6026F494870007523B /* ArchiveSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongViewController.swift; sourceTree = "<group>"; };
 		4956CE6226F494990007523B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
-		496BE2AE27173D5300CFD96D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeApiManager.swift; sourceTree = "<group>"; };
 		4992C7612721B3D6006045FF /* AddFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewModel.swift; sourceTree = "<group>"; };
 		4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderViewModel.swift; sourceTree = "<group>"; };
@@ -244,6 +243,7 @@
 		8E79DC4028BB73B0000B4874 /* AnimateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateButton.swift; sourceTree = "<group>"; };
 		8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TapScaleAnimation.swift"; sourceTree = "<group>"; };
 		8E79DC4428BB7858000B4874 /* AnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
+		8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToTop.swift"; sourceTree = "<group>"; };
 		8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Toggle.swift"; sourceTree = "<group>"; };
 		8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+AccentColor.swift"; sourceTree = "<group>"; };
@@ -407,6 +407,7 @@
 			children = (
 				8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */,
 				8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */,
+				8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */,
 				4956CE2826F467040007523B /* MainViewController.swift */,
 				4956CE5C26F4940A0007523B /* SearchViewController.swift */,
 				4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */,
@@ -434,7 +435,6 @@
 				49C6DC32270298E30094403B /* AppbarView.swift */,
 				4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */,
 				493F232D270DEA4700A618DC /* ArchiveFolderFloatingPanelView.swift */,
-				496BE2AE27173D5300CFD96D /* SplashView.swift */,
 				8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */,
 				8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */,
 				8E79DC4028BB73B0000B4874 /* AnimateButton.swift */,
@@ -852,6 +852,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E79DC4928BDF1D8000B4874 /* SplashViewController.swift in Sources */,
 				8E98D78A2826DD000056CED4 /* UIView+Decorate.swift in Sources */,
 				4992C7642721B86F006045FF /* PopUpArchiveFolderViewModel.swift in Sources */,
 				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
@@ -884,7 +885,6 @@
 				8E70392E275F2D15001D10A6 /* AddSongViewController.swift in Sources */,
 				8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */,
 				493BCBE026F4B2890096422A /* PopUpArchiveFolderViewController.swift in Sources */,
-				496BE2AF27173D5300CFD96D /* SplashView.swift in Sources */,
 				8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */,
 				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
 				49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */,
