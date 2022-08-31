@@ -17,7 +17,7 @@ class MainViewModel: ViewModelType {
   
   struct Input {
     let viewDidLoad = PublishRelay<Void>()
-    let viewDidAppear = PublishSubject<Bool>()
+    let viewDidAppear = BehaviorRelay<Void>(value: Void())
     let tapSearchBar = PublishSubject<Void>()
     let tapArchiveFolderView = PublishSubject<Void>()
     let tapSettingButton = PublishSubject<Void>()
@@ -65,6 +65,7 @@ class MainViewModel: ViewModelType {
           output.selectedKaraokeBrand.accept(brand)
         }.asObservable()
     )
+    .debug("🚀")
     .map { _ in
       output.newUpdateSongs.accept([])
       output.isLoadingNewUpdateSongs.accept(true)
