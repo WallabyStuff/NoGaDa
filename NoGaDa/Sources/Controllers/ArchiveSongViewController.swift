@@ -115,7 +115,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     registerArchiveSongTableCell()
     archiveSongTableView.tableFooterView = UIView()
     archiveSongTableView.separatorStyle = .none
-    archiveSongTableView.layer.cornerRadius = 12
+    archiveSongTableView.layer.cornerRadius = 20
     archiveSongTableView.contentInset = UIEdgeInsets(top: archiveSongTableViewTopInset, left: 0, bottom: 100, right: 0)
     
     archiveSongTableView.rx.setDelegate(self)

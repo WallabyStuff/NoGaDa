@@ -47,7 +47,7 @@ class SongTableViewCell: UITableViewCell {
     
     let selectedView = UIView()
     selectedView.backgroundColor = R.color.songCellSelectedBackgroundColor()
-    selectedView.layer.cornerRadius = 12
+    selectedView.layer.cornerRadius = 20
     selectedBackgroundView = selectedView
   }
 }
