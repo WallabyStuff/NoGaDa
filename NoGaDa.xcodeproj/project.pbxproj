@@ -102,6 +102,7 @@
 		8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */; };
 		8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4428BB7858000B4874 /* AnimateView.swift */; };
 		8E79DC4928BDF1D8000B4874 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */; };
+		8E79DC4B28BFCFF0000B4874 /* DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */; };
 		8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */; };
 		8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */; };
 		8E98D77D2826DB380056CED4 /* UILabel+AccentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */; };
@@ -244,6 +245,7 @@
 		8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TapScaleAnimation.swift"; sourceTree = "<group>"; };
 		8E79DC4428BB7858000B4874 /* AnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
 		8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKey.swift; sourceTree = "<group>"; };
 		8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToTop.swift"; sourceTree = "<group>"; };
 		8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Toggle.swift"; sourceTree = "<group>"; };
 		8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+AccentColor.swift"; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 				8E70392F275F466D001D10A6 /* AddSongViewModel.swift */,
 				8E703933275FECE3001D10A6 /* CreditViewModel.swift */,
 				8E6C95EA2767B43700667C01 /* SongOption.swift */,
+				8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */,
 				491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */,
 				493F232E270DEA4700A618DC /* ArchiveFolderFloatingPanelView.swift in Sources */,
+				8E79DC4B28BFCFF0000B4874 /* DefaultsKey.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* ArchiveSongFloatingPanelLayout.swift in Sources */,
 				4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */,
 				8E6C95E027679BB400667C01 /* SongOptionFloatingPanelView.swift in Sources */,

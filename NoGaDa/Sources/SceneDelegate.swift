@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window = UIWindow(windowScene: windowScene)
     window?.rootViewController = splashViewController
     window?.makeKeyAndVisible()
+    
+    countUpAppLaunchCount()
   }
 }
 
@@ -23,5 +25,10 @@ extension SceneDelegate {
   private var splashViewController: UIViewController {
     let viewController = SplashViewController()
     return viewController
+  }
+  
+  private func countUpAppLaunchCount() {
+    let value = UserDefaults.standard.integer(forKey: DefaultsKey.launchCount.name)
+    UserDefaults.standard.set(value + 1, forKey: DefaultsKey.launchCount.name)
   }
 }

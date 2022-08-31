@@ -247,11 +247,11 @@ class MainViewController: BaseViewController, ViewModelInjectable {
       .showInitialAd
       .asDriver(onErrorDriveWith: .never())
       .drive(with: self, onNext: { vc, _  in
-        AdMobManager.shared.presentAd(vc: vc)
+        AdMobManager.shared.presentInitialAd(vc: vc)
       })
       .disposed(by: disposeBag)
     #endif
-    
+
     viewModel.output.showArchiveFolderVC
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] isShowing in

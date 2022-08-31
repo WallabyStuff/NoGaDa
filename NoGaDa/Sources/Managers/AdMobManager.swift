@@ -33,7 +33,13 @@ class AdMobManager {
   
   // MARK: - Methods
   
-  public func presentAd(vc: UIViewController) {
+  public func presentInitialAd(vc: UIViewController) {
+    // Skip ad for first time users
+    let value = UserDefaults.standard.integer(forKey: DefaultsKey.launchCount.name)
+    if value == 1 {
+      return
+    }
+    
     let request = GADRequest()
     GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
                            request: request) { ad, error in
