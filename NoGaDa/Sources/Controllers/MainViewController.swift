@@ -240,16 +240,16 @@ class MainViewController: BaseViewController, ViewModelInjectable {
       })
       .disposed(by: disposeBag)
     
+    #if DEBUG
+    #else
     viewModel.output
       .showInitialAd
-      .flatMap { [weak self] _ -> Observable<Void> in
-        guard let self = self else { return .empty() }
-        return AdMobManager.shared.presentAd(vc: self)
-          .andThen(.just(Void()))
-      }
       .asDriver(onErrorDriveWith: .never())
-      .drive()
+      .drive(with: self, onNext: { vc, _  in
+        AdMobManager.shared.presentAd(vc: vc)
+      })
       .disposed(by: disposeBag)
+    #endif
     
     viewModel.output.showArchiveFolderVC
       .asDriver(onErrorDriveWith: .never())

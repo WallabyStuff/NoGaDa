@@ -36,7 +36,7 @@ class SplashViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    startPreProcess()
+    presentMainViewController()
   }
   
   
@@ -69,14 +69,6 @@ class SplashViewController: UIViewController {
   
   // MARK: - Methods
   
-  private func startPreProcess() {
-    AdMobManager.shared.configureAdMob()
-      .subscribe(with: self, onCompleted: { vc in
-        vc.presentMainViewController()
-      })
-      .disposed(by: disposeBag)
-  }
-  
   private func presentMainViewController() {
     let storyboard = UIStoryboard(name: R.storyboard.main.name, bundle: nil)
     let viewController = storyboard.instantiateViewController(identifier: MainViewController.identifier,
@@ -85,7 +77,7 @@ class SplashViewController: UIViewController {
       return .init(coder, viewModel) ?? MainViewController(viewModel)
     })
     
-    viewController.modalPresentationStyle = .fullScreen
-    present(viewController, animated: true)
+    self.view.window?.rootViewController = viewController
+    self.view.window?.makeKeyAndVisible()
   }
 }

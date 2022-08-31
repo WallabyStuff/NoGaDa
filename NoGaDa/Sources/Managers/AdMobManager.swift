@@ -33,44 +33,20 @@ class AdMobManager {
   
   // MARK: - Methods
   
-  public func presentAd(vc: UIViewController) -> Completable {
-    return Completable.create { observer in
-      let request = GADRequest()
-      GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
-                             request: request) { ad, error in
-        if let error = error {
-          observer(.error(error))
-        } else {
-          ad?.present(fromRootViewController: vc)
-        }
+  public func presentAd(vc: UIViewController) {
+    let request = GADRequest()
+    GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
+                           request: request) { ad, error in
+      if let error = error {
+        print(error.localizedDescription)
+      } else {
+        ad?.present(fromRootViewController: vc)
       }
-      
-      return Disposables.create()
     }
   }
   
   public func testPresentAd(vc: UIViewController) {
     self.interstitial?.present(fromRootViewController: vc)
-  }
-  
-  public func configureAdMob() -> Completable {
-    return Completable.create { [weak self] observer in
-      guard let self = self else { return Disposables.create() }
-      let request = GADRequest()
-      GADInterstitialAd.load(withAdUnitID: AdMobUnitID.initialAd,
-                             request: request) { [weak self] ad, error in
-        guard let self = self else { return }
-        if let error = error {
-          print(error.localizedDescription)
-          return
-        }
-        
-        self.interstitial = ad
-        observer(.completed)
-      }
-      
-      return Disposables.create()
-    }
   }
 }
 
