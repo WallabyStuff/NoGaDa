@@ -221,15 +221,15 @@
                                 <rect key="frame" x="0.0" y="79" width="414" height="641"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IcV-Q2-WKI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="641"/>
+                                        <rect key="frame" x="12" y="0.0" width="390" height="641"/>
                                         <color key="backgroundColor" name="BackgroundColor"/>
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="IcV-Q2-WKI" firstAttribute="leading" secondItem="uFI-4m-euw" secondAttribute="leading" id="2Qi-hL-GY0"/>
+                                    <constraint firstItem="IcV-Q2-WKI" firstAttribute="leading" secondItem="uFI-4m-euw" secondAttribute="leading" constant="12" id="2Qi-hL-GY0"/>
                                     <constraint firstAttribute="bottom" secondItem="IcV-Q2-WKI" secondAttribute="bottom" id="6aq-wh-xMU"/>
                                     <constraint firstItem="IcV-Q2-WKI" firstAttribute="top" secondItem="uFI-4m-euw" secondAttribute="top" id="frR-ga-16N"/>
-                                    <constraint firstAttribute="trailing" secondItem="IcV-Q2-WKI" secondAttribute="trailing" id="hbh-96-VbZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="IcV-Q2-WKI" secondAttribute="trailing" constant="12" id="hbh-96-VbZ"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="5Oq-iN-Qtu">

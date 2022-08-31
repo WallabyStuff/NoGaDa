@@ -7,49 +7,49 @@
 
 import UIKit
 
-class ArchiveFolderShortcutView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    private func setup() {
-        backgroundColor = ColorSet.archiveShortcutBackgroundColor
-        layer.cornerRadius = 20
-    }
+class ArchiveFolderShortcutView: AnimateView {
+  
+  
+  // MARK: - Initializers
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setup()
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    setup()
+  }
+  
+  
+  // MARK: - Setups
+  
+  private func setup() {
+    backgroundColor = R.color.archiveShortcutBackgroundColor()
+    layer.cornerRadius = 20
+  }
 }
 
 extension ArchiveFolderShortcutView {
-    
-    var releaseAnimationDuration: CGFloat {
-        return 0.3
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+      self.backgroundColor = R.color.archiveShortcutSelectedBackgroundColor()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        backgroundColor = ColorSet.archiveShortcutSelectedBackgroundColor
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    UIView.animate(withDuration: 0.3) {
+      self.backgroundColor = R.color.archiveShortcutBackgroundColor()
     }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        UIView.animate(withDuration: releaseAnimationDuration) {
-            self.backgroundColor = ColorSet.archiveShortcutBackgroundColor
-        }
+  }
+  
+  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesCancelled(touches, with: event)
+    UIView.animate(withDuration: 0.3) {
+      self.backgroundColor = R.color.archiveShortcutBackgroundColor()
     }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        
-        UIView.animate(withDuration: releaseAnimationDuration) {
-            self.backgroundColor = ColorSet.archiveShortcutBackgroundColor
-        }
-    }
+  }
 }

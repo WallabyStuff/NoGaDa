@@ -9,16 +9,16 @@ import UIKit
 import RealmSwift
 
 class SearchHistory: Object {
-    @objc dynamic var keyword: String = ""
-    @objc dynamic var date: Date = Date()
+  @objc dynamic var keyword: String = ""
+  @objc dynamic var date: Date = Date()
+  
+  convenience init(keyword: String) {
+    self.init()
     
-    convenience init(keyword: String) {
-        self.init()
-        
-        self.keyword = keyword
-    }
-    
-    override class func primaryKey() -> String? {
-        return "keyword"
-    }
+    self.keyword = keyword
+  }
+  
+  override class func primaryKey() -> String? {
+    return "keyword"
+  }
 }

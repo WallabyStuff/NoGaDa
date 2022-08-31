@@ -10,67 +10,67 @@ import RxSwift
 import RxCocoa
 
 class SearchHistoryTableViewCell: UITableViewCell {
-    
-    
-    // MARK: - Properteis
-    
-    static let identifier = R.reuseIdentifier.searchHistoryTableCell.identifier
-    
-    private var disposeBag = DisposeBag()
-    public var removeButtonTapAction: () -> Void = {}
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var removeButton: UIButton!
-    
-    
-    // MARK: - Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupView()
-        bind()
-    }
-
-    
-    // MARK: - Initializers
-    
-    private func setupView() {
-        titleLabel.text = ""
-        selectionStyle = .none
-    }
-    
-    private func bind() {
-        removeButton.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.removeButtonTapAction()
-            }).disposed(by: disposeBag)
-    }
+  
+  
+  // MARK: - Properteis
+  
+  static let identifier = R.reuseIdentifier.searchHistoryTableCell.identifier
+  
+  private var disposeBag = DisposeBag()
+  public var removeButtonTapAction: () -> Void = {}
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var removeButton: UIButton!
+  
+  
+  // MARK: - Lifecycle
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setupView()
+    bind()
+  }
+  
+  
+  // MARK: - Initializers
+  
+  private func setupView() {
+    titleLabel.text = ""
+    selectionStyle = .none
+  }
+  
+  private func bind() {
+    removeButton.rx.tap
+      .bind(onNext: { [weak self] in
+        self?.removeButtonTapAction()
+      }).disposed(by: disposeBag)
+  }
 }
 
 
 // MARK: - Extensions
 
 extension SearchHistoryTableViewCell {
-    private var releaseAnimationDuration: CGFloat {
-        return 0.2
-    }
+  private var releaseAnimationDuration: CGFloat {
+    return 0.2
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        backgroundColor = ColorSet.songCellSelectedBackgroundColor
-    }
+    backgroundColor = R.color.songCellSelectedBackgroundColor()
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        self.backgroundColor = ColorSet.backgroundColor
-    }
+    self.backgroundColor = R.color.backgroundColor()
+  }
+  
+  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesCancelled(touches, with: event)
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        
-        UIView.animate(withDuration: releaseAnimationDuration) {
-            self.backgroundColor = ColorSet.backgroundColor
-        }
+    UIView.animate(withDuration: releaseAnimationDuration) {
+      self.backgroundColor = R.color.backgroundColor()
     }
+  }
 }

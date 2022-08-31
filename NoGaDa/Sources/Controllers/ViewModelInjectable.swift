@@ -8,17 +8,17 @@
 import UIKit
 
 protocol ViewModelInjectable {
-    
-    
-    // MARK: - Properties
-    
-    associatedtype ViewModel: AnyObject
-    var viewModel: ViewModel { get set }
-    
-    
-    // MARK: - Initializers
-    
-    init(_ viewModel: ViewModel)
-    
-    init?(_ coder: NSCoder, _ viewModel: ViewModel)
+  
+  
+  // MARK: - Properties
+  
+  associatedtype ViewModel: AnyObject
+  var viewModel: ViewModel { get set }
+  
+  
+  // MARK: - Initializers
+  
+  init(_ viewModel: ViewModel)
+  
+  init?(_ coder: NSCoder, _ viewModel: ViewModel)
 }

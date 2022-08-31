@@ -9,65 +9,100 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SearchResultViewModel {
+class SearchResultViewModel: ViewModelType {
+  
+  
+  // MARK: - Properties
+  
+  struct Input {
+    let changeKaraokeBrand = PublishRelay<KaraokeBrand>()
+    let search = PublishRelay<String>()
+    let tapSongItem = PublishSubject<IndexPath>()
+  }
+  
+  struct Output {
+    let searchKeyword = BehaviorRelay<String>(value: "")
+    let selectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
+    let searchResultSongs = BehaviorRelay<[Song]>(value: [])
+    let isLoading = BehaviorRelay<Bool>(value: false)
+    let searchResultErrorState = PublishRelay<String>()
+    let didSelectSongItem = PublishRelay<Song>()
+  }
+  
+  private(set) var input: Input!
+  private(set) var output: Output!
+  private(set) var disposeBag = DisposeBag()
+  private var karaokeManager = KaraokeApiManager()
+  
+  
+  // MARK: - Initializers
+  
+  init() {
+    setupInputOutput()
+  }
+  
+  
+  // MARK: - Setups
+  
+  private func setupInputOutput() {
+    let input = Input()
+    let output = Output()
     
-    
-    // MARK: - Properties
-    
-    private var disposeBag = DisposeBag()
-    private var karaokeManager = KaraokeApiManager()
-    public var searchKeyword = ""
-    
-    public var selectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
-    
-    public var searchResultSongs = BehaviorRelay<[Song]>(value: [])
-    public var isLoadingSearchResultSongs = BehaviorRelay<Bool>(value: false)
-    public var searchResultSongsErrorState = PublishRelay<String>()
-    public var didSelectSongItem = PublishRelay<Song>()
-}
-
-extension SearchResultViewModel {
-    public func fetchSearchResult(keyword: String) {
-        if keyword.isEmpty {
-            return
+    Observable.merge(
+      input.search
+        .map { keyword in
+          output.searchKeyword.accept(keyword)
+        },
+      input.changeKaraokeBrand
+        .skip(1)
+        .map { karaokeBrand in
+          output.selectedKaraokeBrand.accept(karaokeBrand)
         }
-        
-        let karaokeBrand = selectedKaraokeBrand.value
-        searchKeyword = keyword
-        searchResultSongs.accept([])
-        isLoadingSearchResultSongs.accept(true)
-        
-        karaokeManager.fetchSong(titleOrSinger: keyword, brand: karaokeBrand)
-            .retry(3)
-            .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
-            .observe(on: MainScheduler.instance)
-            .subscribe(with: self, onNext: { strongSelf, songs in
-                if songs.isEmpty {
-                    strongSelf.searchResultSongsErrorState.accept("검색 결과가 없습니다.")
-                } else {
-                    strongSelf.searchResultSongs.accept(songs)
-                    strongSelf.searchResultSongsErrorState.accept("")
-                }
-                
-                strongSelf.isLoadingSearchResultSongs.accept(false)
-            }, onError: { strongSelf, error in
-                print(error.localizedDescription)
-                strongSelf.searchResultSongsErrorState.accept("오류가 발생했습니다.")
-                strongSelf.isLoadingSearchResultSongs.accept(false)
-            }).disposed(by: self.disposeBag)
+    )
+    .map {
+      output.searchResultErrorState.accept("")
+      output.isLoading.accept(true)
+      output.searchResultSongs.accept([])
     }
+    .flatMap { [weak self] () -> Observable<[Song]> in
+      guard let self = self else { return .empty() }
+      if output.searchKeyword.value.isEmpty {
+        return .empty()
+      }
+      
+      return self.karaokeManager.fetchSong(titleOrSinger: output.searchKeyword.value,
+                                           brand: output.selectedKaraokeBrand.value)
+    }
+    .subscribe(onNext: { songs in
+      output.isLoading.accept(false)
+      
+      if songs.isEmpty {
+        output.searchResultErrorState.accept("검색 결과가 없습니다")
+      } else {
+        output.searchResultErrorState.accept("")
+        output.searchResultSongs.accept(songs)
+      }
+    }, onError: { error in
+      print(error.localizedDescription)
+      output.isLoading.accept(false)
+      output.searchResultErrorState.accept("오류가 발생했습니다")
+    })
+    .disposed(by: disposeBag)
+    
+    input.tapSongItem
+      .subscribe(onNext: { indexPath in
+        let selectedSong = output.searchResultSongs.value[indexPath.row]
+        output.didSelectSongItem.accept(selectedSong)
+      })
+      .disposed(by: disposeBag)
+    
+    self.input = input
+    self.output = output
+  }
 }
 
 extension SearchResultViewModel {
-    public func songItemSelectAction(_ indexPath: IndexPath) {
-        let selectedSong = searchResultSongs.value[indexPath.row]
-        didSelectSongItem.accept(selectedSong)
-    }
-}
-
-extension SearchResultViewModel {
-    public func updateKaraokeBrand(_ karaokeBrand: KaraokeBrand) {
-        selectedKaraokeBrand.accept(karaokeBrand)
-        fetchSearchResult(keyword: searchKeyword)
-    }
+  public var searchKeyword: String {
+    return output.searchKeyword.value
+  }
 }

@@ -19,19 +19,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVi-v8-OyC">
-                        <rect key="frame" x="92" y="16" width="42" height="19.5"/>
+                        <rect key="frame" x="84" y="16" width="42" height="19.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <color key="textColor" name="TextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xip-d2-MYg">
-                        <rect key="frame" x="92" y="43.5" width="42" height="17"/>
+                        <rect key="frame" x="84" y="43.5" width="42" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" name="SubTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="song no" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gF-7m-Etz">
-                        <rect key="frame" x="146" y="33.5" width="233" height="17"/>
+                        <rect key="frame" x="138" y="33.5" width="249" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="Ux2-vZ-cBj"/>
                         </constraints>
@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YEO-7e-KIh">
-                        <rect key="frame" x="20" y="12" width="60" height="60"/>
+                        <rect key="frame" x="12" y="12" width="60" height="60"/>
                         <color key="backgroundColor" name="SongThumbnailBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="0bn-jN-znQ"/>
@@ -48,7 +48,7 @@
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music-note" translatesAutoresizingMaskIntoConstraints="NO" id="VjY-4q-wcq">
-                        <rect key="frame" x="36" y="28" width="28" height="28"/>
+                        <rect key="frame" x="28" y="28" width="28" height="28"/>
                         <color key="tintColor" name="SongThumbnailForegroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="9JK-VX-imz"/>
@@ -63,10 +63,10 @@
                     <constraint firstItem="2gF-7m-Etz" firstAttribute="leading" secondItem="xip-d2-MYg" secondAttribute="trailing" constant="12" id="EZI-0Z-0j0"/>
                     <constraint firstItem="gVi-v8-OyC" firstAttribute="leading" secondItem="YEO-7e-KIh" secondAttribute="trailing" constant="12" id="HAI-5V-vxn"/>
                     <constraint firstItem="gVi-v8-OyC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="JZR-Hc-phb"/>
-                    <constraint firstItem="YEO-7e-KIh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="a2S-wb-48b"/>
+                    <constraint firstItem="YEO-7e-KIh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="a2S-wb-48b"/>
                     <constraint firstItem="2gF-7m-Etz" firstAttribute="leading" secondItem="gVi-v8-OyC" secondAttribute="trailing" constant="12" id="mYj-BU-0LC"/>
                     <constraint firstItem="2gF-7m-Etz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rrm-RD-LeR"/>
-                    <constraint firstAttribute="trailing" secondItem="2gF-7m-Etz" secondAttribute="trailing" constant="20" id="ujs-M0-iKW"/>
+                    <constraint firstAttribute="trailing" secondItem="2gF-7m-Etz" secondAttribute="trailing" constant="12" id="ujs-M0-iKW"/>
                     <constraint firstItem="VjY-4q-wcq" firstAttribute="centerX" secondItem="YEO-7e-KIh" secondAttribute="centerX" id="vQH-gA-vII"/>
                     <constraint firstItem="YEO-7e-KIh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xkz-da-clT"/>
                 </constraints>

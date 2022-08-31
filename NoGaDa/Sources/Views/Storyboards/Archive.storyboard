@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="bottom" secondItem="J7h-c3-Fhr" secondAttribute="bottom" constant="28" id="wL0-eg-08C"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Gj-gl-IDl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Gj-gl-IDl" customClass="AnimateButton" customModule="NoGaDa" customModuleProvider="target">
                                 <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
@@ -106,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zVI-xi-Lf6">
-                                <rect key="frame" x="0.0" y="116" width="414" height="780"/>
+                                <rect key="frame" x="12" y="116" width="390" height="780"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFF-MR-j6I">
@@ -177,11 +177,11 @@
                             <constraint firstItem="BFF-MR-j6I" firstAttribute="leading" secondItem="Bdq-4k-Qiz" secondAttribute="leading" id="D3B-Rj-5SO"/>
                             <constraint firstItem="zVI-xi-Lf6" firstAttribute="top" secondItem="Bdq-4k-Qiz" secondAttribute="top" constant="72" id="OKb-KN-f93"/>
                             <constraint firstItem="Bdq-4k-Qiz" firstAttribute="bottom" secondItem="Fcy-47-hih" secondAttribute="bottom" constant="28" id="RGt-ZS-PLG"/>
-                            <constraint firstItem="Bdq-4k-Qiz" firstAttribute="trailing" secondItem="zVI-xi-Lf6" secondAttribute="trailing" id="g3l-yN-OD1"/>
+                            <constraint firstItem="Bdq-4k-Qiz" firstAttribute="trailing" secondItem="zVI-xi-Lf6" secondAttribute="trailing" constant="12" id="g3l-yN-OD1"/>
                             <constraint firstItem="BFF-MR-j6I" firstAttribute="trailing" secondItem="Bdq-4k-Qiz" secondAttribute="trailing" id="k5I-sf-vVA"/>
                             <constraint firstItem="Bdq-4k-Qiz" firstAttribute="trailing" secondItem="Fcy-47-hih" secondAttribute="trailing" constant="20" id="plP-hi-g5F"/>
                             <constraint firstAttribute="bottom" secondItem="zVI-xi-Lf6" secondAttribute="bottom" id="v48-86-3Z5"/>
-                            <constraint firstItem="zVI-xi-Lf6" firstAttribute="leading" secondItem="Bdq-4k-Qiz" secondAttribute="leading" id="x6A-mS-GGE"/>
+                            <constraint firstItem="zVI-xi-Lf6" firstAttribute="leading" secondItem="Bdq-4k-Qiz" secondAttribute="leading" constant="12" id="x6A-mS-GGE"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="896"/>
@@ -227,7 +227,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="xmark" catalog="system"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tC3-dh-UPR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tC3-dh-UPR" customClass="AnimateButton" customModule="NoGaDa" customModuleProvider="target">
                                 <rect key="frame" x="20" y="798" width="374" height="48"/>
                                 <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
                                 <constraints>
@@ -535,7 +535,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dE0-rp-g65" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2818" y="657"/>
+            <point key="canvasLocation" x="-2818.1159420289855" y="656.58482142857144"/>
         </scene>
     </scenes>
     <resources>
