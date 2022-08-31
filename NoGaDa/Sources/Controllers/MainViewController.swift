@@ -176,7 +176,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   private func bindInputs() {
     Observable.just(Void())
-      .debug("👍")
       .bind(to: viewModel.input.viewDidLoad)
       .disposed(by: disposeBag)
     
