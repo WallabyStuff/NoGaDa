@@ -20,20 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate {
-//  private var mainViewController: UIViewController {
-//    let storyboard = UIStoryboard(name: R.storyboard.main.name, bundle: nil)
-//    let viewController = storyboard.instantiateViewController(identifier: MainViewController.identifier,
-//                                                              creator: { coder -> MainViewController in
-//      let viewModel = MainViewModel()
-//      return .init(coder, viewModel) ?? MainViewController(viewModel)
-//    })
-//
-//    return viewController
-//  }
-  
   private var splashViewController: UIViewController {
     let viewController = SplashViewController()
     return viewController
   }
 }
-
