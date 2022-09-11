@@ -47,7 +47,7 @@ class UpdatedSongTableViewCell: UITableViewCell {
     songNumberLabel.text    = ""
     
     let selectedView = UIView()
-    selectedView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    selectedView.backgroundColor = R.color.backgroundBasicSelected()!
     selectedView.layer.cornerRadius = 12
     selectedBackgroundView = selectedView
   }

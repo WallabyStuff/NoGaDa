@@ -31,7 +31,7 @@ class KaraokeBrandPickerTableViewCell: UITableViewCell {
     
     let selectedView = UIView()
     selectedView.bounds = bounds
-    selectedView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    selectedView.backgroundColor = R.color.accentYellowDark()
     selectedBackgroundView = selectedView
   }
 }

@@ -33,7 +33,7 @@ class PopUpSongOptionTableViewCell: UITableViewCell {
     iconImageView.image = UIImage()
     
     let selectionView = UIView(frame: self.bounds)
-    selectionView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    selectionView.backgroundColor = R.color.backgroundBasicSelected()!
     selectedBackgroundView = selectionView
   }
 }

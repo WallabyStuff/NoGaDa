@@ -121,7 +121,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupSearchTextField() {
-    searchTextField.setPlaceholderColor(R.color.appbarTextfieldPlaceholderColor()!)
+    searchTextField.setPlaceholderColor(R.color.textTertiary()!)
     searchTextField.setLeftPadding(width: 12)
     searchTextField.setRightPadding(width: 80)
     searchTextField.delegate = self

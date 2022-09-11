@@ -13,7 +13,7 @@ extension UILabel {
     
     DispatchQueue.global(qos: .background).async {
       let attributedString = NSMutableAttributedString(string: text)
-      attributedString.addAttribute(.foregroundColor, value: R.color.textAccentColor()!,
+      attributedString.addAttribute(.foregroundColor, value: R.color.accentPink()!,
                                     range: (text.lowercased() as NSString).range(of: string.lowercased()))
       
       DispatchQueue.main.async {
