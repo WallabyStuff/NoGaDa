@@ -338,7 +338,7 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		493BCBE226F4BAC30096422A /* Celld */ = {
+		493BCBE226F4BAC30096422A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */,
@@ -352,7 +352,7 @@
 				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
 				8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */,
 			);
-			path = Celld;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		4956CE1826F467040007523B = {
@@ -476,7 +476,7 @@
 				8E03596027D79F43006A77CA /* Archive.storyboard */,
 				8E03596227D79F8C006A77CA /* Search.storyboard */,
 				8E03596427D7A25C006A77CA /* Folder.storyboard */,
-				493BCBE226F4BAC30096422A /* Celld */,
+				493BCBE226F4BAC30096422A /* Cells */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

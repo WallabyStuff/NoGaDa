@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZXD-vL-W6R">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +19,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Pc-Jz-EhG">
                                 <rect key="frame" x="0.0" y="132" width="414" height="764"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundBasic"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrh-Nd-Kgp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
@@ -32,9 +31,9 @@
                                             <constraint firstAttribute="height" constant="28" id="2Kx-Rd-xwG"/>
                                             <constraint firstAttribute="width" constant="28" id="dTo-ci-LTj"/>
                                         </constraints>
-                                        <color key="tintColor" name="AppbarTextColor"/>
+                                        <color key="tintColor" name="IconWhite"/>
                                         <state key="normal" image="back-arrow">
-                                            <color key="titleColor" name="ExitButtonForegroundColor"/>
+                                            <color key="titleColor" name="IconWhite"/>
                                         </state>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-lQ-ELB">
@@ -46,18 +45,18 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="FHv-1a-idy"/>
                                                 </constraints>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="TextBlack"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTS-JZ-avD">
                                                 <rect key="frame" x="330" y="8" width="36" height="36"/>
-                                                <color key="backgroundColor" name="AppbarBackgroundColor"/>
+                                                <color key="backgroundColor" name="AccentPurple"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="36" id="5VN-5D-Cdu"/>
                                                     <constraint firstAttribute="height" constant="36" id="UsO-3s-iau"/>
                                                 </constraints>
-                                                <color key="tintColor" name="AppbarTextColor"/>
+                                                <color key="tintColor" name="IconWhite"/>
                                                 <state key="normal" image="sort-line"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cS6-LY-Te5">
@@ -66,12 +65,12 @@
                                                     <constraint firstAttribute="height" constant="28" id="V9h-qp-0gv"/>
                                                     <constraint firstAttribute="width" constant="28" id="XUj-36-C1U"/>
                                                 </constraints>
-                                                <color key="tintColor" name="ClearTextfieldButtonColor"/>
+                                                <color key="tintColor" name="IconSecondary"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="xmark" catalog="system"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="AppbarTextfieldBackgroundColor"/>
+                                        <color key="backgroundColor" name="BackgroundWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="PHp-LK-s27" secondAttribute="trailing" id="Gaw-l7-60m"/>
                                             <constraint firstItem="xTS-JZ-avD" firstAttribute="leading" secondItem="cS6-LY-Te5" secondAttribute="trailing" constant="4" id="OjZ-wN-ppp"/>
@@ -87,11 +86,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="노래 검색" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSo-Pn-J7s">
                                         <rect key="frame" x="312" y="14" width="74" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <color key="textColor" name="AppbarTextColor"/>
+                                        <color key="textColor" name="TextWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="AppbarBackgroundColor"/>
+                                <color key="backgroundColor" name="AccentPurple"/>
                                 <constraints>
                                     <constraint firstItem="lLv-lQ-ELB" firstAttribute="leading" secondItem="Jrh-Nd-Kgp" secondAttribute="leading" constant="20" id="A3h-LT-LqT"/>
                                     <constraint firstAttribute="trailing" secondItem="lLv-lQ-ELB" secondAttribute="trailing" constant="20" id="FtY-xG-Bx4"/>
@@ -105,7 +104,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="11m-PV-5Zs"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundBasic"/>
                         <constraints>
                             <constraint firstItem="Jrh-Nd-Kgp" firstAttribute="trailing" secondItem="11m-PV-5Zs" secondAttribute="trailing" id="2BS-jw-E5t"/>
                             <constraint firstItem="5Pc-Jz-EhG" firstAttribute="leading" secondItem="11m-PV-5Zs" secondAttribute="leading" id="M7O-IG-gfP"/>
@@ -144,18 +143,18 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="taA-qS-gD6">
                                 <rect key="frame" x="0.0" y="76" width="414" height="644"/>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundBasic"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색기록" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNy-56-Bel">
                                 <rect key="frame" x="20" y="28" width="59" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" name="TextColor"/>
+                                <color key="textColor" name="TextBasic"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 기록이 없습니다" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoz-X7-fR9">
                                 <rect key="frame" x="132.5" y="349.5" width="149" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                <color key="textColor" name="TextFieldPlaceholderColor"/>
+                                <color key="textColor" name="TextSecondary"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAc-bU-Pcy">
@@ -167,12 +166,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="모두삭제">
-                                    <color key="titleColor" name="SubTextColor"/>
+                                    <color key="titleColor" name="TextSecondary"/>
                                 </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OMb-3A-hJJ"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundBasic"/>
                         <constraints>
                             <constraint firstItem="RNy-56-Bel" firstAttribute="leading" secondItem="OMb-3A-hJJ" secondAttribute="leading" constant="20" id="29w-zj-1hm"/>
                             <constraint firstItem="xoz-X7-fR9" firstAttribute="centerY" secondItem="01n-9f-Zhf" secondAttribute="centerY" id="6R8-A6-c04"/>
@@ -207,7 +206,7 @@
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yAW-UH-SvE">
                                 <rect key="frame" x="125" y="28" width="164" height="32"/>
-                                <color key="backgroundColor" name="SegmentedControlBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundSecondary"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="164" id="lt4-8A-FWj"/>
                                 </constraints>
@@ -215,14 +214,14 @@
                                     <segment title="tj"/>
                                     <segment title="금영"/>
                                 </segments>
-                                <color key="selectedSegmentTintColor" name="SegmentedControlAccentColor"/>
+                                <color key="selectedSegmentTintColor" name="AccentYellow"/>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFI-4m-euw">
                                 <rect key="frame" x="0.0" y="79" width="414" height="641"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IcV-Q2-WKI">
                                         <rect key="frame" x="12" y="0.0" width="390" height="641"/>
-                                        <color key="backgroundColor" name="BackgroundColor"/>
+                                        <color key="backgroundColor" name="BackgroundBasic"/>
                                     </tableView>
                                 </subviews>
                                 <constraints>
@@ -234,7 +233,7 @@
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="5Oq-iN-Qtu">
                                 <rect key="frame" x="197" y="350" width="20" height="20"/>
-                                <color key="color" name="LoadingIndicatorColor"/>
+                                <color key="color" name="IconBasicSecondary"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색창에 제목이나 가수명으로 노래를 검색하세요!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrZ-G0-aga">
                                 <rect key="frame" x="97" y="338.5" width="220" height="43"/>
@@ -242,12 +241,12 @@
                                     <constraint firstAttribute="width" constant="220" id="LXy-Jc-ZDh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                <color key="textColor" name="TextFieldPlaceholderColor"/>
+                                <color key="textColor" name="TextSecondary"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jey-2K-SGz"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundBasic"/>
                         <constraints>
                             <constraint firstItem="OrZ-G0-aga" firstAttribute="centerX" secondItem="7M6-6M-Rrz" secondAttribute="centerX" id="9Oc-kM-7bi"/>
                             <constraint firstItem="5Oq-iN-Qtu" firstAttribute="centerY" secondItem="7M6-6M-Rrz" secondAttribute="centerY" id="Khs-nJ-Xn6"/>
@@ -284,23 +283,23 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mi6-UC-hEl">
                                 <rect key="frame" x="0.0" y="12" width="253" height="220"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="BackgroundWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRt-Tj-FAA">
                                 <rect key="frame" x="12" y="244" width="229" height="44"/>
-                                <color key="backgroundColor" name="AddFolderButtonBackgroundColor"/>
+                                <color key="backgroundColor" name="AccentYellow"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="B3n-K0-y49"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="tintColor" name="AddFolderButtonForegroundColor"/>
+                                <color key="tintColor" name="TextBlack"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="적용"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="H0L-y4-w3b"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="BackgroundWhite"/>
                         <constraints>
                             <constraint firstItem="mi6-UC-hEl" firstAttribute="leading" secondItem="H0L-y4-w3b" secondAttribute="leading" id="0vX-ho-l5Q"/>
                             <constraint firstItem="mi6-UC-hEl" firstAttribute="top" secondItem="dJo-WL-10g" secondAttribute="top" constant="12" id="5Sc-RD-Mfa"/>
@@ -326,50 +325,41 @@
         <image name="back-arrow" width="492" height="492"/>
         <image name="sort-line" width="512" height="512"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
-        <namedColor name="AddFolderButtonBackgroundColor">
-            <color red="1" green="0.85199999809265137" blue="0.38299998641014099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="AccentPurple">
+            <color red="0.31000000238418579" green="0.31799998879432678" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="AddFolderButtonForegroundColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="AppbarBackgroundColor">
-            <color red="0.31200000643730164" green="0.31600001454353333" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="AppbarTextColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="AppbarTextfieldBackgroundColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="BackgroundColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ClearTextfieldButtonColor">
-            <color red="0.41999998688697815" green="0.45899999141693115" blue="0.51399999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ExitButtonForegroundColor">
-            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="LoadingIndicatorColor">
-            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="SegmentedControlAccentColor">
+        <namedColor name="AccentYellow">
             <color red="1" green="0.85100001096725464" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="SegmentedControlBackgroundColor">
-            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="BackgroundBasic">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="SubTextColor">
-            <color red="0.57999998331069946" green="0.57599997520446777" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="BackgroundSecondary">
+            <color red="0.95899999141693115" green="0.9649999737739563" blue="0.97500002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="TextColor">
+        <namedColor name="BackgroundWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="IconBasicSecondary">
+            <color red="0.63700002431869507" green="0.64899998903274536" blue="0.67100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="IconSecondary">
+            <color red="0.55400002002716064" green="0.60399997234344482" blue="0.69999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="IconWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextBasic">
             <color red="0.20000000298023224" green="0.23899999260902405" blue="0.29399999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="TextFieldPlaceholderColor">
-            <color red="0.41999998688697815" green="0.45899999141693115" blue="0.51399999856948853" alpha="0.30000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="TextBlack">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="TextSecondary">
+            <color red="0.57999998331069946" green="0.57599997520446777" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

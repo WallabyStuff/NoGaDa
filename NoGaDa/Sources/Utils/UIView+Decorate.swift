@@ -13,7 +13,7 @@ extension UIView {
   }
   
   func setAppbarShadow() {
-    self.layer.shadowColor = R.color.appbarBackgroundColor()!.cgColor
+    self.layer.shadowColor = R.color.accentPurple()!.cgColor
     self.layer.shadowOffset = .zero
     self.layer.shadowRadius = 12
     self.layer.shadowOpacity = 0.4
@@ -27,31 +27,24 @@ extension UIView {
   }
   
   func setSearchBoxButtonShadow() {
-    self.layer.shadowColor = R.color.appbarBackgroundColor()!.cgColor
+    self.layer.shadowColor = R.color.accentPurple()!.cgColor
     self.layer.shadowOffset = .zero
     self.layer.shadowRadius = 4
     self.layer.shadowOpacity = 0.3
   }
   
   func setExitButtonShadow() {
-    self.layer.shadowColor = R.color.appbarExitButtonBackgroundColor()!.cgColor
+    self.layer.shadowColor = R.color.accentPurple()!.cgColor
     self.layer.shadowOffset = .zero
     self.layer.shadowRadius = 16
     self.layer.shadowOpacity = 0.2
   }
   
   func setReversedExitButtonShadow() {
-    self.layer.shadowColor = R.color.appbarBackgroundColor()!.cgColor
+    self.layer.shadowColor = R.color.iconBasic()!.cgColor
     self.layer.shadowOffset = .zero
     self.layer.shadowRadius = 20
     self.layer.shadowOpacity = 0.4
-  }
-  
-  func setSongNumberBoxShadow() {
-    self.layer.shadowColor = R.color.songCellNumberBoxShadowColor()!.cgColor
-    self.layer.shadowOffset = CGSize(width: 0, height: 4)
-    self.layer.shadowRadius = 12
-    self.layer.shadowOpacity = 1
   }
   
   func makeAsSettingGroupView() {

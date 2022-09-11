@@ -52,7 +52,7 @@ class SplashViewController: UIViewController {
   }
   
   private func setupBaseView() {
-    self.view.backgroundColor = R.color.splashBackgroundColor()
+    self.view.backgroundColor = R.color.accentYellow()!
   }
   
   private func setupSplashImageView() {

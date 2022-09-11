@@ -31,7 +31,7 @@ class FolderTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    cellContentView.layer.borderColor = R.color.songCellStrokeColor()!.cgColor
+    cellContentView.layer.borderColor = R.color.lineBasic()!.cgColor
   }
   
   
@@ -39,7 +39,7 @@ class FolderTableViewCell: UITableViewCell {
   
   private func setupView() {
     cellContentView.layer.borderWidth = 1
-    cellContentView.layer.borderColor = R.color.songCellStrokeColor()!.cgColor
+    cellContentView.layer.borderColor = R.color.lineBasic()!.cgColor
     cellContentView.layer.cornerRadius = 12
     
     titleEmojiLabel.text    = ""
@@ -58,7 +58,7 @@ extension FolderTableViewCell {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-      self.cellContentView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+      self.cellContentView.backgroundColor = R.color.backgroundBasicSelected()
       self.cellContentView.scaleDown()
     }
   }
@@ -66,7 +66,7 @@ extension FolderTableViewCell {
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
     UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-      self.cellContentView.backgroundColor = R.color.songCellBackgroundColor()
+      self.cellContentView.backgroundColor = R.color.backgroundSecondary()
       self.cellContentView.releaseScale()
     }
   }
@@ -74,7 +74,7 @@ extension FolderTableViewCell {
   override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesCancelled(touches, with: event)
     UIView.animate(withDuration: releaseAnimationDuration) {
-      self.cellContentView.backgroundColor = R.color.songCellBackgroundColor()
+      self.cellContentView.backgroundColor = R.color.backgroundSecondary()
       self.cellContentView.releaseScale()
     }
   }

@@ -31,8 +31,8 @@ class SongTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    titleLabel.releaseAccentColor(with: R.color.textColor()!)
-    singerLabel.releaseAccentColor(with: R.color.subTextColor()!)
+    titleLabel.releaseAccentColor(with: R.color.textBasic()!)
+    singerLabel.releaseAccentColor(with: R.color.textSecondary()!)
   }
   
   
@@ -46,7 +46,7 @@ class SongTableViewCell: UITableViewCell {
     singerLabel.text        = ""
     
     let selectedView = UIView()
-    selectedView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    selectedView.backgroundColor = R.color.backgroundBasicSelected()
     selectedView.layer.cornerRadius = 20
     selectedBackgroundView = selectedView
   }

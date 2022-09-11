@@ -36,7 +36,7 @@ class SettingEtcTableViewCell: UITableViewCell {
     
     let selectedView = UIView()
     selectedView.bounds = bounds
-    selectedView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    selectedView.backgroundColor = R.color.backgroundBasicSelected()!
     selectedBackgroundView = selectedView
   }
 }

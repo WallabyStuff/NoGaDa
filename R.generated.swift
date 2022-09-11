@@ -150,122 +150,54 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 57 colors.
+  /// This `R.color` struct is generated, and contains static references to 23 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
-    /// Color `AddFolderButtonBackgroundColor`.
-    static let addFolderButtonBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AddFolderButtonBackgroundColor")
-    /// Color `AddFolderButtonDisabledBackgroundColor`.
-    static let addFolderButtonDisabledBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AddFolderButtonDisabledBackgroundColor")
-    /// Color `AddFolderButtonForegroundColor`.
-    static let addFolderButtonForegroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AddFolderButtonForegroundColor")
-    /// Color `AddFolderButtonReversedBackgroundColor`.
-    static let addFolderButtonReversedBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AddFolderButtonReversedBackgroundColor")
-    /// Color `AddFolderButtonReversedForegroundColor`.
-    static let addFolderButtonReversedForegroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AddFolderButtonReversedForegroundColor")
-    /// Color `AppbarBackgroundColor`.
-    static let appbarBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AppbarBackgroundColor")
-    /// Color `AppbarExitButtonBackgroundColor`.
-    static let appbarExitButtonBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AppbarExitButtonBackgroundColor")
-    /// Color `AppbarTextColor`.
-    static let appbarTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AppbarTextColor")
-    /// Color `AppbarTextfieldBackgroundColor`.
-    static let appbarTextfieldBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AppbarTextfieldBackgroundColor")
-    /// Color `AppbarTextfieldPlaceholderColor`.
-    static let appbarTextfieldPlaceholderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AppbarTextfieldPlaceholderColor")
-    /// Color `AppbarTextfieldTextColor`.
-    static let appbarTextfieldTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AppbarTextfieldTextColor")
-    /// Color `ArchiveShortcutBackgroundColor`.
-    static let archiveShortcutBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ArchiveShortcutBackgroundColor")
-    /// Color `ArchiveShortcutPlaceholderColor`.
-    static let archiveShortcutPlaceholderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ArchiveShortcutPlaceholderColor")
-    /// Color `ArchiveShortcutSelectedBackgroundColor`.
-    static let archiveShortcutSelectedBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ArchiveShortcutSelectedBackgroundColor")
-    /// Color `BackgroundColor`.
-    static let backgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundColor")
-    /// Color `BrandPopUpButtonBorderColor`.
-    static let brandPopUpButtonBorderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "BrandPopUpButtonBorderColor")
-    /// Color `ClearTextfieldButtonColor`.
-    static let clearTextfieldButtonColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "ClearTextfieldButtonColor")
-    /// Color `DisabledTextColor`.
-    static let disabledTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "DisabledTextColor")
-    /// Color `FloatingButtonBackgroundColor`.
-    static let floatingButtonBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "FloatingButtonBackgroundColor")
-    /// Color `FloatingButtonForegroundColor`.
-    static let floatingButtonForegroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "FloatingButtonForegroundColor")
-    /// Color `FloatingPanelHandleColor`.
-    static let floatingPanelHandleColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "FloatingPanelHandleColor")
-    /// Color `IconResourceBoxBackgroundColor`.
-    static let iconResourceBoxBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconResourceBoxBackgroundColor")
-    /// Color `NotificationViewBakcgroundColor`.
-    static let notificationViewBakcgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "NotificationViewBakcgroundColor")
-    /// Color `NotificationViewCloseButtonColor`.
-    static let notificationViewCloseButtonColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "NotificationViewCloseButtonColor")
-    /// Color `PopOverBackgroundColor`.
-    static let popOverBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "PopOverBackgroundColor")
-    /// Color `PopUpArchiveBackgroundColor`.
-    static let popUpArchiveBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "PopUpArchiveBackgroundColor")
-    /// Color `PopUpArchiveSeparatorColor`.
-    static let popUpArchiveSeparatorColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "PopUpArchiveSeparatorColor")
-    /// Color `SegmentedControlAccentColor`.
-    static let segmentedControlAccentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SegmentedControlAccentColor")
-    /// Color `SegmentedControlBackgroundColor`.
-    static let segmentedControlBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SegmentedControlBackgroundColor")
-    /// Color `SegmentedControlDefaultTextColor`.
-    static let segmentedControlDefaultTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SegmentedControlDefaultTextColor")
-    /// Color `SegmentedControlSelectedTextColor`.
-    static let segmentedControlSelectedTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SegmentedControlSelectedTextColor")
-    /// Color `SeparatorColor`.
-    static let separatorColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SeparatorColor")
-    /// Color `SettingGroupBackgroundColor`.
-    static let settingGroupBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SettingGroupBackgroundColor")
-    /// Color `SettingGroupHeaderTextColor`.
-    static let settingGroupHeaderTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SettingGroupHeaderTextColor")
-    /// Color `SettingIconBoxBackgroundColor`.
-    static let settingIconBoxBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SettingIconBoxBackgroundColor")
-    /// Color `SettingIconBoxForegroundColor`.
-    static let settingIconBoxForegroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SettingIconBoxForegroundColor")
-    /// Color `SettingItemSeparatorColor`.
-    static let settingItemSeparatorColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SettingItemSeparatorColor")
-    /// Color `SongCellBackgroundColor`.
-    static let songCellBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellBackgroundColor")
-    /// Color `SongCellForegroundColor`.
-    static let songCellForegroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellForegroundColor")
-    /// Color `SongCellNumberBoxBackgroundColor`.
-    static let songCellNumberBoxBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellNumberBoxBackgroundColor")
-    /// Color `SongCellNumberBoxShadowColor`.
-    static let songCellNumberBoxShadowColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellNumberBoxShadowColor")
-    /// Color `SongCellNumberBoxStrokeColor`.
-    static let songCellNumberBoxStrokeColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellNumberBoxStrokeColor")
-    /// Color `SongCellNumberTextColor`.
-    static let songCellNumberTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellNumberTextColor")
-    /// Color `SongCellSelectedBackgroundColor`.
-    static let songCellSelectedBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellSelectedBackgroundColor")
-    /// Color `SongCellStrokeColor`.
-    static let songCellStrokeColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongCellStrokeColor")
-    /// Color `SongThumbnailBackgroundColor`.
-    static let songThumbnailBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongThumbnailBackgroundColor")
-    /// Color `SongThumbnailForegroundColor`.
-    static let songThumbnailForegroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SongThumbnailForegroundColor")
-    /// Color `SplashBackgroundColor`.
-    static let splashBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SplashBackgroundColor")
-    /// Color `SubTextColor`.
-    static let subTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "SubTextColor")
-    /// Color `TextAccentColor`.
-    static let textAccentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextAccentColor")
-    /// Color `TextColor`.
-    static let textColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextColor")
-    /// Color `TextFieldBackgroundColor`.
-    static let textFieldBackgroundColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextFieldBackgroundColor")
-    /// Color `TextFieldPlaceholderColor`.
-    static let textFieldPlaceholderColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextFieldPlaceholderColor")
-    /// Color `UpdatedSongSelectorBarIndicatorColor`.
-    static let updatedSongSelectorBarIndicatorColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "UpdatedSongSelectorBarIndicatorColor")
-    /// Color `UpdatedSongSelectorSelectedTextColor`.
-    static let updatedSongSelectorSelectedTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "UpdatedSongSelectorSelectedTextColor")
-    /// Color `UpdatedSongSelectorUnSelectedTextColor`.
-    static let updatedSongSelectorUnSelectedTextColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "UpdatedSongSelectorUnSelectedTextColor")
+    /// Color `AccentPink`.
+    static let accentPink = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPink")
+    /// Color `AccentPurpleLight`.
+    static let accentPurpleLight = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPurpleLight")
+    /// Color `AccentPurple`.
+    static let accentPurple = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPurple")
+    /// Color `AccentYellowDark`.
+    static let accentYellowDark = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellowDark")
+    /// Color `AccentYellowDarker`.
+    static let accentYellowDarker = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellowDarker")
+    /// Color `AccentYellowDisable`.
+    static let accentYellowDisable = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellowDisable")
+    /// Color `AccentYellow`.
+    static let accentYellow = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellow")
+    /// Color `BackgroundBasicSelected`.
+    static let backgroundBasicSelected = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundBasicSelected")
+    /// Color `BackgroundBasic`.
+    static let backgroundBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundBasic")
+    /// Color `BackgroundSecondary`.
+    static let backgroundSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundSecondary")
+    /// Color `BackgroundWhite`.
+    static let backgroundWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundWhite")
+    /// Color `IconBasicSecondary`.
+    static let iconBasicSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBasicSecondary")
+    /// Color `IconBasic`.
+    static let iconBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBasic")
+    /// Color `IconBlack`.
+    static let iconBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBlack")
+    /// Color `IconSecondary`.
+    static let iconSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconSecondary")
+    /// Color `IconWhite`.
+    static let iconWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconWhite")
+    /// Color `LineBasic`.
+    static let lineBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "LineBasic")
+    /// Color `TextBasic`.
+    static let textBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextBasic")
+    /// Color `TextBlack`.
+    static let textBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextBlack")
+    /// Color `TextSecondary`.
+    static let textSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextSecondary")
+    /// Color `TextTertiary`.
+    static let textTertiary = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextTertiary")
+    /// Color `TextWhite`.
+    static let textWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextWhite")
 
     #if os(iOS) || os(tvOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
@@ -277,506 +209,200 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AddFolderButtonBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentPink", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func addFolderButtonBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.addFolderButtonBackgroundColor, compatibleWith: traitCollection)
+    static func accentPink(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentPink, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AddFolderButtonDisabledBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentPurple", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func addFolderButtonDisabledBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.addFolderButtonDisabledBackgroundColor, compatibleWith: traitCollection)
+    static func accentPurple(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentPurple, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AddFolderButtonForegroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentPurpleLight", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func addFolderButtonForegroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.addFolderButtonForegroundColor, compatibleWith: traitCollection)
+    static func accentPurpleLight(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentPurpleLight, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AddFolderButtonReversedBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellow", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func addFolderButtonReversedBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.addFolderButtonReversedBackgroundColor, compatibleWith: traitCollection)
+    static func accentYellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentYellow, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AddFolderButtonReversedForegroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellowDark", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func addFolderButtonReversedForegroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.addFolderButtonReversedForegroundColor, compatibleWith: traitCollection)
+    static func accentYellowDark(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentYellowDark, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AppbarBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellowDarker", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func appbarBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.appbarBackgroundColor, compatibleWith: traitCollection)
+    static func accentYellowDarker(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentYellowDarker, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AppbarExitButtonBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellowDisable", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func appbarExitButtonBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.appbarExitButtonBackgroundColor, compatibleWith: traitCollection)
+    static func accentYellowDisable(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentYellowDisable, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AppbarTextColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundBasic", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func appbarTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.appbarTextColor, compatibleWith: traitCollection)
+    static func backgroundBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.backgroundBasic, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AppbarTextfieldBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundBasicSelected", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func appbarTextfieldBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.appbarTextfieldBackgroundColor, compatibleWith: traitCollection)
+    static func backgroundBasicSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.backgroundBasicSelected, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AppbarTextfieldPlaceholderColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundSecondary", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func appbarTextfieldPlaceholderColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.appbarTextfieldPlaceholderColor, compatibleWith: traitCollection)
+    static func backgroundSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.backgroundSecondary, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AppbarTextfieldTextColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundWhite", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func appbarTextfieldTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.appbarTextfieldTextColor, compatibleWith: traitCollection)
+    static func backgroundWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.backgroundWhite, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "ArchiveShortcutBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconBasic", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func archiveShortcutBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.archiveShortcutBackgroundColor, compatibleWith: traitCollection)
+    static func iconBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.iconBasic, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "ArchiveShortcutPlaceholderColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconBasicSecondary", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func archiveShortcutPlaceholderColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.archiveShortcutPlaceholderColor, compatibleWith: traitCollection)
+    static func iconBasicSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.iconBasicSecondary, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "ArchiveShortcutSelectedBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconBlack", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func archiveShortcutSelectedBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.archiveShortcutSelectedBackgroundColor, compatibleWith: traitCollection)
+    static func iconBlack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.iconBlack, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "BackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconSecondary", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func backgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.backgroundColor, compatibleWith: traitCollection)
+    static func iconSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.iconSecondary, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "BrandPopUpButtonBorderColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconWhite", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func brandPopUpButtonBorderColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.brandPopUpButtonBorderColor, compatibleWith: traitCollection)
+    static func iconWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.iconWhite, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "ClearTextfieldButtonColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "LineBasic", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func clearTextfieldButtonColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.clearTextfieldButtonColor, compatibleWith: traitCollection)
+    static func lineBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.lineBasic, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "DisabledTextColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextBasic", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func disabledTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.disabledTextColor, compatibleWith: traitCollection)
+    static func textBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.textBasic, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "FloatingButtonBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextBlack", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func floatingButtonBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.floatingButtonBackgroundColor, compatibleWith: traitCollection)
+    static func textBlack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.textBlack, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "FloatingButtonForegroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextSecondary", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func floatingButtonForegroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.floatingButtonForegroundColor, compatibleWith: traitCollection)
+    static func textSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.textSecondary, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "FloatingPanelHandleColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextTertiary", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func floatingPanelHandleColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.floatingPanelHandleColor, compatibleWith: traitCollection)
+    static func textTertiary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.textTertiary, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "IconResourceBoxBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextWhite", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
-    static func iconResourceBoxBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.iconResourceBoxBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "NotificationViewBakcgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func notificationViewBakcgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.notificationViewBakcgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "NotificationViewCloseButtonColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func notificationViewCloseButtonColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.notificationViewCloseButtonColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "PopOverBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func popOverBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.popOverBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "PopUpArchiveBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func popUpArchiveBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.popUpArchiveBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "PopUpArchiveSeparatorColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func popUpArchiveSeparatorColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.popUpArchiveSeparatorColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SegmentedControlAccentColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func segmentedControlAccentColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.segmentedControlAccentColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SegmentedControlBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func segmentedControlBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.segmentedControlBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SegmentedControlDefaultTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func segmentedControlDefaultTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.segmentedControlDefaultTextColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SegmentedControlSelectedTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func segmentedControlSelectedTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.segmentedControlSelectedTextColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SeparatorColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func separatorColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.separatorColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SettingGroupBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func settingGroupBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.settingGroupBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SettingGroupHeaderTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func settingGroupHeaderTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.settingGroupHeaderTextColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SettingIconBoxBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func settingIconBoxBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.settingIconBoxBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SettingIconBoxForegroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func settingIconBoxForegroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.settingIconBoxForegroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SettingItemSeparatorColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func settingItemSeparatorColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.settingItemSeparatorColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellForegroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellForegroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellForegroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellNumberBoxBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellNumberBoxBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellNumberBoxBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellNumberBoxShadowColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellNumberBoxShadowColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellNumberBoxShadowColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellNumberBoxStrokeColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellNumberBoxStrokeColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellNumberBoxStrokeColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellNumberTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellNumberTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellNumberTextColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellSelectedBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellSelectedBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellSelectedBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongCellStrokeColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songCellStrokeColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songCellStrokeColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongThumbnailBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songThumbnailBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songThumbnailBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SongThumbnailForegroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func songThumbnailForegroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.songThumbnailForegroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SplashBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func splashBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.splashBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "SubTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func subTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.subTextColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextAccentColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textAccentColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textAccentColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextFieldBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textFieldBackgroundColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textFieldBackgroundColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextFieldPlaceholderColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textFieldPlaceholderColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textFieldPlaceholderColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "UpdatedSongSelectorBarIndicatorColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func updatedSongSelectorBarIndicatorColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.updatedSongSelectorBarIndicatorColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "UpdatedSongSelectorSelectedTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func updatedSongSelectorSelectedTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.updatedSongSelectorSelectedTextColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "UpdatedSongSelectorUnSelectedTextColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func updatedSongSelectorUnSelectedTextColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.updatedSongSelectorUnSelectedTextColor, compatibleWith: traitCollection)
+    static func textWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.textWhite, compatibleWith: traitCollection)
     }
     #endif
 
@@ -789,450 +415,178 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AddFolderButtonBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentPink", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func addFolderButtonBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.addFolderButtonBackgroundColor.name)
+    static func accentPink(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentPink.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AddFolderButtonDisabledBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentPurple", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func addFolderButtonDisabledBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.addFolderButtonDisabledBackgroundColor.name)
+    static func accentPurple(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentPurple.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AddFolderButtonForegroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentPurpleLight", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func addFolderButtonForegroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.addFolderButtonForegroundColor.name)
+    static func accentPurpleLight(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentPurpleLight.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AddFolderButtonReversedBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellow", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func addFolderButtonReversedBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.addFolderButtonReversedBackgroundColor.name)
+    static func accentYellow(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentYellow.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AddFolderButtonReversedForegroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellowDark", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func addFolderButtonReversedForegroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.addFolderButtonReversedForegroundColor.name)
+    static func accentYellowDark(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentYellowDark.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AppbarBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellowDarker", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func appbarBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.appbarBackgroundColor.name)
+    static func accentYellowDarker(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentYellowDarker.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AppbarExitButtonBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "AccentYellowDisable", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func appbarExitButtonBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.appbarExitButtonBackgroundColor.name)
+    static func accentYellowDisable(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentYellowDisable.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AppbarTextColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundBasic", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func appbarTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.appbarTextColor.name)
+    static func backgroundBasic(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.backgroundBasic.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AppbarTextfieldBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundBasicSelected", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func appbarTextfieldBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.appbarTextfieldBackgroundColor.name)
+    static func backgroundBasicSelected(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.backgroundBasicSelected.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AppbarTextfieldPlaceholderColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundSecondary", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func appbarTextfieldPlaceholderColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.appbarTextfieldPlaceholderColor.name)
+    static func backgroundSecondary(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.backgroundSecondary.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "AppbarTextfieldTextColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "BackgroundWhite", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func appbarTextfieldTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.appbarTextfieldTextColor.name)
+    static func backgroundWhite(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.backgroundWhite.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "ArchiveShortcutBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconBasic", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func archiveShortcutBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.archiveShortcutBackgroundColor.name)
+    static func iconBasic(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.iconBasic.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "ArchiveShortcutPlaceholderColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconBasicSecondary", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func archiveShortcutPlaceholderColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.archiveShortcutPlaceholderColor.name)
+    static func iconBasicSecondary(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.iconBasicSecondary.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "ArchiveShortcutSelectedBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconBlack", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func archiveShortcutSelectedBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.archiveShortcutSelectedBackgroundColor.name)
+    static func iconBlack(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.iconBlack.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "BackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconSecondary", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func backgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.backgroundColor.name)
+    static func iconSecondary(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.iconSecondary.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "BrandPopUpButtonBorderColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "IconWhite", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func brandPopUpButtonBorderColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.brandPopUpButtonBorderColor.name)
+    static func iconWhite(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.iconWhite.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "ClearTextfieldButtonColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "LineBasic", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func clearTextfieldButtonColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.clearTextfieldButtonColor.name)
+    static func lineBasic(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.lineBasic.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "DisabledTextColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextBasic", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func disabledTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.disabledTextColor.name)
+    static func textBasic(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.textBasic.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "FloatingButtonBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextBlack", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func floatingButtonBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.floatingButtonBackgroundColor.name)
+    static func textBlack(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.textBlack.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "FloatingButtonForegroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextSecondary", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func floatingButtonForegroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.floatingButtonForegroundColor.name)
+    static func textSecondary(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.textSecondary.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "FloatingPanelHandleColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextTertiary", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func floatingPanelHandleColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.floatingPanelHandleColor.name)
+    static func textTertiary(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.textTertiary.name)
     }
     #endif
 
     #if os(watchOS)
-    /// `UIColor(named: "IconResourceBoxBackgroundColor", bundle: ..., traitCollection: ...)`
+    /// `UIColor(named: "TextWhite", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
-    static func iconResourceBoxBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.iconResourceBoxBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "NotificationViewBakcgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func notificationViewBakcgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.notificationViewBakcgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "NotificationViewCloseButtonColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func notificationViewCloseButtonColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.notificationViewCloseButtonColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "PopOverBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func popOverBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.popOverBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "PopUpArchiveBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func popUpArchiveBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.popUpArchiveBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "PopUpArchiveSeparatorColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func popUpArchiveSeparatorColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.popUpArchiveSeparatorColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SegmentedControlAccentColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func segmentedControlAccentColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.segmentedControlAccentColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SegmentedControlBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func segmentedControlBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.segmentedControlBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SegmentedControlDefaultTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func segmentedControlDefaultTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.segmentedControlDefaultTextColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SegmentedControlSelectedTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func segmentedControlSelectedTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.segmentedControlSelectedTextColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SeparatorColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func separatorColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.separatorColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SettingGroupBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func settingGroupBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.settingGroupBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SettingGroupHeaderTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func settingGroupHeaderTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.settingGroupHeaderTextColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SettingIconBoxBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func settingIconBoxBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.settingIconBoxBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SettingIconBoxForegroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func settingIconBoxForegroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.settingIconBoxForegroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SettingItemSeparatorColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func settingItemSeparatorColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.settingItemSeparatorColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellForegroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellForegroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellForegroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellNumberBoxBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellNumberBoxBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellNumberBoxBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellNumberBoxShadowColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellNumberBoxShadowColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellNumberBoxShadowColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellNumberBoxStrokeColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellNumberBoxStrokeColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellNumberBoxStrokeColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellNumberTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellNumberTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellNumberTextColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellSelectedBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellSelectedBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellSelectedBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongCellStrokeColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songCellStrokeColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songCellStrokeColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongThumbnailBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songThumbnailBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songThumbnailBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SongThumbnailForegroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func songThumbnailForegroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.songThumbnailForegroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SplashBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func splashBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.splashBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "SubTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func subTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.subTextColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextAccentColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textAccentColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textAccentColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextFieldBackgroundColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textFieldBackgroundColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textFieldBackgroundColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextFieldPlaceholderColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textFieldPlaceholderColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textFieldPlaceholderColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "UpdatedSongSelectorBarIndicatorColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func updatedSongSelectorBarIndicatorColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.updatedSongSelectorBarIndicatorColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "UpdatedSongSelectorSelectedTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func updatedSongSelectorSelectedTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.updatedSongSelectorSelectedTextColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "UpdatedSongSelectorUnSelectedTextColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func updatedSongSelectorUnSelectedTextColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.updatedSongSelectorUnSelectedTextColor.name)
+    static func textWhite(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.textWhite.name)
     }
     #endif
 
@@ -2326,9 +1680,10 @@ struct _R: Rswift.Validatable {
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "magnifyingglass") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'magnifyingglass' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") } }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SubTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SubTextColor' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
         }
       }
 
@@ -2349,10 +1704,9 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if UIKit.UIImage(named: "information.fill", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'information.fill' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "SettingGroupBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingGroupBackgroundColor' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SettingIconBoxBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingIconBoxBackgroundColor' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SettingIconBoxForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingIconBoxForegroundColor' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
         }
       }
 
@@ -2373,11 +1727,11 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if UIKit.UIImage(named: "music-note", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'music-note' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SongThumbnailBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SongThumbnailBackgroundColor' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SongThumbnailForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SongThumbnailForegroundColor' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SubTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SubTextColor' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurpleLight", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurpleLight' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
         }
       }
 
@@ -2398,11 +1752,11 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if UIKit.UIImage(named: "music-note", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'music-note' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SongThumbnailBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SongThumbnailBackgroundColor' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SongThumbnailForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SongThumbnailForegroundColor' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SubTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SubTextColor' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurpleLight", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurpleLight' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
         }
       }
 
@@ -2473,26 +1827,20 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "plus", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'plus' is used in storyboard 'Archive', but couldn't be loaded.") }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Archive', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AddFolderButtonBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AddFolderButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonForegroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarExitButtonBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarExitButtonBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextfieldBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextfieldBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextfieldTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextfieldTextColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "CreateFolderButtonForegroundColor1", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'CreateFolderButtonForegroundColor1' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "ExitButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'ExitButtonForegroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "FloatingButtonBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'FloatingButtonBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "FloatingButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'FloatingButtonForegroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "NotificationViewBakcgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'NotificationViewBakcgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "PopOverBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'PopOverBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SeparatorColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SeparatorColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SongThumbnailBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SongThumbnailBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SongThumbnailForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SongThumbnailForegroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SubTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SubTextColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextFieldBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextFieldBackgroundColor' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurpleLight", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurpleLight' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBlack' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "LineBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'LineBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBlack' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Archive', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
         }
         if _R.storyboard.archive().addSongStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'addSongStoryboard' could not be loaded from storyboard 'Archive' as 'AddSongViewController'.") }
         if _R.storyboard.archive().archiveFolderStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'archiveFolderStoryboard' could not be loaded from storyboard 'Archive' as 'ArchiveFolderViewController'.") }
@@ -2526,19 +1874,15 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "folder-filled", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'folder-filled' is used in storyboard 'Folder', but couldn't be loaded.") }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Folder', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentSubColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentSubColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AddFolderButtonBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonBackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AddFolderButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonForegroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AddFolderButtonReversedBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonReversedBackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarBackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarExitButtonBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarExitButtonBackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "CreateFolderButtonForegroundColor1", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'CreateFolderButtonForegroundColor1' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "ExitButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'ExitButtonForegroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "PopUpArchiveBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'PopUpArchiveBackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextFieldBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextFieldBackgroundColor' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBlack' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Folder', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBlack' is used in storyboard 'Folder', but couldn't be loaded.") }
         }
         if _R.storyboard.folder().addFolderStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'addFolderStoryboard' could not be loaded from storyboard 'Folder' as 'AddFolderViewController'.") }
         if _R.storyboard.folder().popUpArchiveFolderStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'popUpArchiveFolderStoryboard' could not be loaded from storyboard 'Folder' as 'PopUpArchiveFolderViewController'.") }
@@ -2583,15 +1927,16 @@ struct _R: Rswift.Validatable {
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "magnifyingglass") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'magnifyingglass' is used in storyboard 'Main', but couldn't be loaded.") } }
         if UIKit.UIImage(named: "setting", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'setting' is used in storyboard 'Main', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AppbarBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarBackgroundColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextfieldBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextfieldBackgroundColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextfieldPlaceholderColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextfieldPlaceholderColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "ArchiveShortcutBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'ArchiveShortcutBackgroundColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "ArchiveShortcutPlaceholderColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'ArchiveShortcutPlaceholderColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "LoadingIndicatorColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'LoadingIndicatorColor' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextFieldPlaceholderColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextFieldPlaceholderColor' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentYellowDarker", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellowDarker' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBasicSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextTertiary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextTertiary' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextWhite' is used in storyboard 'Main', but couldn't be loaded.") }
         }
         if _R.storyboard.main().mainStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'mainStoryboard' could not be loaded from storyboard 'Main' as 'MainViewController'.") }
       }
@@ -2632,20 +1977,18 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "sort-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'sort-line' is used in storyboard 'Search', but couldn't be loaded.") }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Search', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AddFolderButtonBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonBackgroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AddFolderButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AddFolderButtonForegroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarBackgroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AppbarTextfieldBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AppbarTextfieldBackgroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "ClearTextfieldButtonColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'ClearTextfieldButtonColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "ExitButtonForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'ExitButtonForegroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "LoadingIndicatorColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'LoadingIndicatorColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SegmentedControlAccentColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SegmentedControlAccentColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SegmentedControlBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SegmentedControlBackgroundColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SubTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SubTextColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextFieldPlaceholderColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextFieldPlaceholderColor' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBasicSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBlack' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextWhite' is used in storyboard 'Search', but couldn't be loaded.") }
         }
         if _R.storyboard.search().popOverSearchFilterStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'popOverSearchFilterStoryboard' could not be loaded from storyboard 'Search' as 'PopOverSearchFilterViewController'.") }
         if _R.storyboard.search().searchHistoryStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'searchHistoryStoryboard' could not be loaded from storyboard 'Search' as 'SearchHistoryViewController'.") }
@@ -2679,12 +2022,14 @@ struct _R: Rswift.Validatable {
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Setting', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "AccentColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SettingGroupBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingGroupBackgroundColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SettingGroupHeaderTextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingGroupHeaderTextColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SettingIconBoxBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingIconBoxBackgroundColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "SettingIconBoxForegroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SettingIconBoxForegroundColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextColor' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasicSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasicSelected' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextTertiary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextTertiary' is used in storyboard 'Setting', but couldn't be loaded.") }
         }
         if _R.storyboard.setting().creditStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'creditStoryboard' could not be loaded from storyboard 'Setting' as 'CreditViewController'.") }
         if _R.storyboard.setting().settingStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'settingStoryboard' could not be loaded from storyboard 'Setting' as 'SettingViewController'.") }
