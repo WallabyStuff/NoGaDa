@@ -2018,15 +2018,12 @@ struct _R: Rswift.Validatable {
       }
 
       static func validate() throws {
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "phone.fill") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'phone.fill' is used in storyboard 'Setting', but couldn't be loaded.") } }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Setting', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "AccentColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentColor' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasicSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasicSelected' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "TextTertiary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextTertiary' is used in storyboard 'Setting', but couldn't be loaded.") }

@@ -124,8 +124,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ag3-Cv-hgd">
-                                <rect key="frame" x="20" y="76" width="59" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <rect key="frame" x="24" y="72" width="72.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                 <color key="textColor" name="TextBasic"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -140,7 +140,7 @@
                                 <state key="normal" image="xmark" catalog="system"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWN-nV-Goc">
-                                <rect key="frame" x="0.0" y="124" width="414" height="578"/>
+                                <rect key="frame" x="0.0" y="124" width="414" height="654"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHE-6A-PQM">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
@@ -172,7 +172,7 @@ Contact : middleyks@hanmail.net</string>
                                                 <rect key="frame" x="0.0" y="360.5" width="414" height="200"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eJO-Pa-ks0">
-                                                        <rect key="frame" x="0.0" y="25" width="414" height="175"/>
+                                                        <rect key="frame" x="0.0" y="28.5" width="414" height="171.5"/>
                                                         <color key="backgroundColor" name="BackgroundBasic"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="24" minimumInteritemSpacing="24" id="ys5-YO-eVO">
                                                             <size key="itemSize" width="88" height="116"/>
@@ -182,9 +182,9 @@ Contact : middleyks@hanmail.net</string>
                                                         </collectionViewFlowLayout>
                                                         <cells/>
                                                     </collectionView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="image・icon resources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yM-8t-PPT">
-                                                        <rect key="frame" x="117" y="0.0" width="180" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yM-8t-PPT">
+                                                        <rect key="frame" x="24" y="0.0" width="89" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                                         <color key="textColor" name="TextBasic"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -192,11 +192,11 @@ Contact : middleyks@hanmail.net</string>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="8yM-8t-PPT" firstAttribute="top" secondItem="3eD-NM-Sdt" secondAttribute="top" id="AaJ-3R-cfk"/>
-                                                    <constraint firstItem="8yM-8t-PPT" firstAttribute="centerX" secondItem="3eD-NM-Sdt" secondAttribute="centerX" id="C25-Ee-ADl"/>
                                                     <constraint firstAttribute="height" constant="200" id="EUf-KI-URF"/>
+                                                    <constraint firstItem="8yM-8t-PPT" firstAttribute="leading" secondItem="3eD-NM-Sdt" secondAttribute="leading" constant="24" id="RbZ-w9-iWZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="eJO-Pa-ks0" secondAttribute="trailing" id="Usn-je-0Zd"/>
                                                     <constraint firstAttribute="bottom" secondItem="eJO-Pa-ks0" secondAttribute="bottom" id="bfE-5h-cwK"/>
-                                                    <constraint firstItem="eJO-Pa-ks0" firstAttribute="top" secondItem="8yM-8t-PPT" secondAttribute="bottom" constant="4" id="uqe-q2-aLu"/>
+                                                    <constraint firstItem="eJO-Pa-ks0" firstAttribute="top" secondItem="8yM-8t-PPT" secondAttribute="bottom" constant="8" id="uqe-q2-aLu"/>
                                                     <constraint firstItem="eJO-Pa-ks0" firstAttribute="leading" secondItem="3eD-NM-Sdt" secondAttribute="leading" id="zfR-fY-lyg"/>
                                                 </constraints>
                                             </view>
@@ -221,53 +221,14 @@ Contact : middleyks@hanmail.net</string>
                                     <constraint firstItem="VHE-6A-PQM" firstAttribute="top" secondItem="ZWN-nV-Goc" secondAttribute="top" id="N57-MI-oGz"/>
                                     <constraint firstItem="VHE-6A-PQM" firstAttribute="centerX" secondItem="ZWN-nV-Goc" secondAttribute="centerX" id="dFu-pV-qgX"/>
                                     <constraint firstAttribute="trailing" secondItem="VHE-6A-PQM" secondAttribute="trailing" id="dk9-ga-H9v"/>
-                                    <constraint firstAttribute="bottom" secondItem="VHE-6A-PQM" secondAttribute="bottom" constant="-76" id="k7S-Mb-U5D"/>
+                                    <constraint firstAttribute="bottom" secondItem="VHE-6A-PQM" secondAttribute="bottom" id="uee-nl-gNQ"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6V-QE-w4p">
-                                <rect key="frame" x="0.0" y="702" width="414" height="140"/>
+                                <rect key="frame" x="0.0" y="778" width="414" height="64"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DvN-3k-giv">
-                                        <rect key="frame" x="28" y="20" width="358" height="60"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csF-de-lpi">
-                                                <rect key="frame" x="16" y="21.5" width="75" height="17"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" name="TextBasic"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfs-gB-VEG">
-                                                <rect key="frame" x="310" y="12" width="36" height="36"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aPA-yh-dSN">
-                                                        <rect key="frame" x="10" y="11.5" width="16" height="13.5"/>
-                                                        <color key="tintColor" name="IconBasic"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="16" id="UZx-A9-dAj"/>
-                                                            <constraint firstAttribute="width" constant="16" id="f2u-oj-Tc0"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                </subviews>
-                                                <color key="backgroundColor" name="BackgroundBasicSelected"/>
-                                                <constraints>
-                                                    <constraint firstItem="aPA-yh-dSN" firstAttribute="centerX" secondItem="cfs-gB-VEG" secondAttribute="centerX" id="4Sf-9u-DIM"/>
-                                                    <constraint firstAttribute="width" constant="36" id="5W2-LG-tNN"/>
-                                                    <constraint firstAttribute="height" constant="36" id="GbY-24-CSN"/>
-                                                    <constraint firstItem="aPA-yh-dSN" firstAttribute="centerY" secondItem="cfs-gB-VEG" secondAttribute="centerY" id="HB3-mu-9GW"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" name="BackgroundSecondary"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="R5X-Ny-V4o"/>
-                                            <constraint firstItem="cfs-gB-VEG" firstAttribute="centerY" secondItem="DvN-3k-giv" secondAttribute="centerY" id="aVM-aM-Fnx"/>
-                                            <constraint firstItem="csF-de-lpi" firstAttribute="leading" secondItem="DvN-3k-giv" secondAttribute="leading" constant="16" id="tWg-P6-rs2"/>
-                                            <constraint firstItem="csF-de-lpi" firstAttribute="centerY" secondItem="DvN-3k-giv" secondAttribute="centerY" id="uNs-Mt-LII"/>
-                                            <constraint firstAttribute="trailing" secondItem="cfs-gB-VEG" secondAttribute="trailing" constant="12" id="za8-x5-lmd"/>
-                                        </constraints>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © LeeSeunggi All Right Reserved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNE-HY-6fA">
-                                        <rect key="frame" x="20" y="97.5" width="374" height="14.5"/>
+                                        <rect key="frame" x="20" y="21.5" width="374" height="14.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" name="TextTertiary"/>
                                         <nil key="highlightedColor"/>
@@ -277,11 +238,8 @@ Contact : middleyks@hanmail.net</string>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="QNE-HY-6fA" secondAttribute="bottom" constant="28" id="LYl-Sb-rzg"/>
                                     <constraint firstItem="QNE-HY-6fA" firstAttribute="leading" secondItem="Y6V-QE-w4p" secondAttribute="leading" constant="20" id="fCe-Lq-qiT"/>
-                                    <constraint firstAttribute="trailing" secondItem="DvN-3k-giv" secondAttribute="trailing" constant="28" id="hNr-FF-nf8"/>
-                                    <constraint firstItem="DvN-3k-giv" firstAttribute="leading" secondItem="Y6V-QE-w4p" secondAttribute="leading" constant="28" id="q7p-dM-qEk"/>
-                                    <constraint firstItem="DvN-3k-giv" firstAttribute="top" secondItem="Y6V-QE-w4p" secondAttribute="top" constant="20" id="uUV-w0-Ab6"/>
                                     <constraint firstAttribute="trailing" secondItem="QNE-HY-6fA" secondAttribute="trailing" constant="20" id="vFr-yO-I3R"/>
-                                    <constraint firstAttribute="height" constant="140" id="wJJ-AT-EeW"/>
+                                    <constraint firstAttribute="height" constant="64" id="wJJ-AT-EeW"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -290,26 +248,24 @@ Contact : middleyks@hanmail.net</string>
                         <constraints>
                             <constraint firstItem="Y6V-QE-w4p" firstAttribute="trailing" secondItem="w0e-x2-fpR" secondAttribute="trailing" id="3Bk-VT-CdR"/>
                             <constraint firstItem="Y6V-QE-w4p" firstAttribute="leading" secondItem="w0e-x2-fpR" secondAttribute="leading" id="4Iw-fx-9nV"/>
-                            <constraint firstItem="ag3-Cv-hgd" firstAttribute="leading" secondItem="w0e-x2-fpR" secondAttribute="leading" constant="20" id="5eW-UW-WxV"/>
+                            <constraint firstItem="ag3-Cv-hgd" firstAttribute="leading" secondItem="w0e-x2-fpR" secondAttribute="leading" constant="24" id="5eW-UW-WxV"/>
                             <constraint firstItem="Y6V-QE-w4p" firstAttribute="top" secondItem="ZWN-nV-Goc" secondAttribute="bottom" id="7gy-4f-klb"/>
                             <constraint firstAttribute="bottom" secondItem="Y6V-QE-w4p" secondAttribute="bottom" id="8nC-Sl-0Vi"/>
                             <constraint firstItem="ZWN-nV-Goc" firstAttribute="top" secondItem="Ugz-YN-a0T" secondAttribute="bottom" constant="24" id="Cml-YQ-vJs"/>
                             <constraint firstItem="ZWN-nV-Goc" firstAttribute="trailing" secondItem="w0e-x2-fpR" secondAttribute="trailing" id="Qy2-hg-V6E"/>
                             <constraint firstItem="ZWN-nV-Goc" firstAttribute="leading" secondItem="w0e-x2-fpR" secondAttribute="leading" id="TI1-GF-jrp"/>
                             <constraint firstItem="w0e-x2-fpR" firstAttribute="trailing" secondItem="Ugz-YN-a0T" secondAttribute="trailing" constant="20" id="jXN-AY-orO"/>
-                            <constraint firstItem="ag3-Cv-hgd" firstAttribute="top" secondItem="w0e-x2-fpR" secondAttribute="top" constant="32" id="oyh-rT-5Gs"/>
+                            <constraint firstItem="ag3-Cv-hgd" firstAttribute="top" secondItem="w0e-x2-fpR" secondAttribute="top" constant="28" id="oyh-rT-5Gs"/>
                             <constraint firstItem="Ugz-YN-a0T" firstAttribute="top" secondItem="w0e-x2-fpR" secondAttribute="top" constant="28" id="vgJ-bN-5DR"/>
                         </constraints>
                     </view>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="catactUsIconBoxView" destination="cfs-gB-VEG" id="dbR-r3-KKK"/>
                         <outlet property="contactTextView" destination="CcU-OK-fJr" id="7PX-0m-uEo"/>
-                        <outlet property="contactUsBoxView" destination="DvN-3k-giv" id="lXT-Zg-3dh"/>
                         <outlet property="contentScrollView" destination="ZWN-nV-Goc" id="qFb-TN-a4H"/>
                         <outlet property="exitButton" destination="Ugz-YN-a0T" id="LG8-ZS-iKg"/>
                         <outlet property="headerLabel" destination="C8Q-Bx-AoI" id="3dn-8g-mcD"/>
-                        <outlet property="iconResourceCollectionView" destination="eJO-Pa-ks0" id="zI8-ac-vG1"/>
+                        <outlet property="resourceCollectionView" destination="eJO-Pa-ks0" id="zI8-ac-vG1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qp3-8d-4YG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -318,7 +274,6 @@ Contact : middleyks@hanmail.net</string>
         </scene>
     </scenes>
     <resources>
-        <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
             <color red="0.31200000643730164" green="0.31600001454353333" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -329,14 +284,8 @@ Contact : middleyks@hanmail.net</string>
         <namedColor name="BackgroundBasic">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="BackgroundBasicSelected">
-            <color red="0.90600001811981201" green="0.91399997472763062" blue="0.93800002336502075" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BackgroundSecondary">
             <color red="0.95899999141693115" green="0.9649999737739563" blue="0.97500002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="IconBasic">
-            <color red="0.20000000298023224" green="0.23899999260902405" blue="0.29399999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextBasic">
             <color red="0.20000000298023224" green="0.23899999260902405" blue="0.29399999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
