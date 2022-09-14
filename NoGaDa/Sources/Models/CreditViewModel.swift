@@ -51,14 +51,6 @@ class CreditViewModel: ViewModelType {
       })
       .disposed(by: disposeBag)
     
-    input.tapContactbutton
-      .subscribe(onNext: {
-        let recipients = [Self.developerEmail]
-        let subject = "노가다 앱 문의"
-        output.showingMailComposeVC.accept((recipients, subject))
-      })
-      .disposed(by: disposeBag)
-    
     self.input = input
     self.output = output
   }
