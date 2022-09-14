@@ -46,12 +46,4 @@ extension UIView {
     self.layer.shadowRadius = 20
     self.layer.shadowOpacity = 0.4
   }
-  
-  func makeAsSettingGroupView() {
-    self.layer.cornerRadius = 20
-    self.layer.shadowColor = UIColor.gray.cgColor
-    self.layer.shadowOffset = .zero
-    self.layer.shadowRadius = 20
-    self.layer.shadowOpacity = 0.1
-  }
 }

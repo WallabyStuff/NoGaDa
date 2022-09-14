@@ -56,9 +56,9 @@
 		4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */; };
 		49C6DC33270298E30094403B /* AppbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppbarView.swift */; };
 		49C6DC75270372F40094403B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC74270372F40094403B /* SettingViewController.swift */; };
-		49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */; };
-		49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */; };
-		49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC7C270382620094403B /* SettingEtcItem.swift */; };
+		49C6DC7A270381910094403B /* SettingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingItemTableViewCell.swift */; };
+		49C6DC7B270381910094403B /* SettingItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingItemTableViewCell.xib */; };
+		49C6DC7D270382620094403B /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC7C270382620094403B /* SettingItem.swift */; };
 		49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */; };
 		49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */; };
 		49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B126FC68F30024C5F9 /* Song.swift */; };
@@ -66,8 +66,6 @@
 		49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */; };
 		49D1D6B826FC6C0E0024C5F9 /* ArchiveFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */; };
 		49D1D6BC26FC70720024C5F9 /* SongFolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */; };
-		49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */; };
-		49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */; };
 		49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */; };
 		49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */; };
 		49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6EB5A270E0F3200610383 /* AdMobManager.swift */; };
@@ -77,6 +75,9 @@
 		8E03596327D79F8C006A77CA /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596227D79F8C006A77CA /* Search.storyboard */; };
 		8E03596527D7A25C006A77CA /* Folder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596427D7A25C006A77CA /* Folder.storyboard */; };
 		8E14E8EB27D49E2D008F18B8 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */; };
+		8E25076428D1EB3300756AB1 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */; };
+		8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */; };
+		8E25076828D1ED3400756AB1 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25076728D1ED3400756AB1 /* SettingViewModel.swift */; };
 		8E33F3F828546F7000B6E6EE /* ViewModelInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */; };
 		8E33F3FB28547C7200B6E6EE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FA28547C7200B6E6EE /* R.generated.swift */; };
 		8E33F3FD2854978D00B6E6EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */; };
@@ -196,9 +197,9 @@
 		4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderShortcutView.swift; sourceTree = "<group>"; };
 		49C6DC32270298E30094403B /* AppbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarView.swift; sourceTree = "<group>"; };
 		49C6DC74270372F40094403B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcTableViewCell.swift; sourceTree = "<group>"; };
-		49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingEtcTableViewCell.xib; sourceTree = "<group>"; };
-		49C6DC7C270382620094403B /* SettingEtcItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcItem.swift; sourceTree = "<group>"; };
+		49C6DC78270381910094403B /* SettingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemTableViewCell.swift; sourceTree = "<group>"; };
+		49C6DC79270381910094403B /* SettingItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingItemTableViewCell.xib; sourceTree = "<group>"; };
+		49C6DC7C270382620094403B /* SettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItem.swift; sourceTree = "<group>"; };
 		49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrand.swift; sourceTree = "<group>"; };
 		49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeAPIErrMessage.swift; sourceTree = "<group>"; };
 		49D1D6B126FC68F30024C5F9 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -206,8 +207,6 @@
 		49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSong.swift; sourceTree = "<group>"; };
 		49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolder.swift; sourceTree = "<group>"; };
 		49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFolderManager.swift; sourceTree = "<group>"; };
-		49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterTableViewCell.swift; sourceTree = "<group>"; };
-		49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
 		49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterItem.swift; sourceTree = "<group>"; };
 		49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewController.swift; sourceTree = "<group>"; };
 		49E6EB5A270E0F3200610383 /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
@@ -221,6 +220,9 @@
 		8E03596227D79F8C006A77CA /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		8E03596427D7A25C006A77CA /* Folder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Folder.storyboard; sourceTree = "<group>"; };
 		8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
+		8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
+		8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterTableViewCell.swift; sourceTree = "<group>"; };
+		8E25076728D1ED3400756AB1 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelInjectable.swift; sourceTree = "<group>"; };
 		8E33F3FA28547C7200B6E6EE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				8E6C95E82767B37B00667C01 /* PopUpSongOptionViewModel.swift */,
 				8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */,
 				8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */,
+				8E25076728D1ED3400756AB1 /* SettingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -328,12 +331,12 @@
 				493BCBE826F4CEA10096422A /* SongTableViewCell.swift */,
 				493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */,
 				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
-				49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */,
-				49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */,
+				49C6DC78270381910094403B /* SettingItemTableViewCell.swift */,
 				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
 				495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */,
 				8E6C95E42767B18500667C01 /* PopUpSongOptionTableViewCell.swift */,
 				8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */,
+				8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -346,11 +349,11 @@
 				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
 				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
 				8E6C95E52767B18500667C01 /* PopUpSongOptionTableViewCell.xib */,
-				49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */,
-				49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */,
+				49C6DC79270381910094403B /* SettingItemTableViewCell.xib */,
 				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
 				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
 				8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */,
+				8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -451,7 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */,
-				49C6DC7C270382620094403B /* SettingEtcItem.swift */,
+				49C6DC7C270382620094403B /* SettingItem.swift */,
 				49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */,
 				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
 				49D1D6B126FC68F30024C5F9 /* Song.swift */,
@@ -694,6 +697,7 @@
 				4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */,
 				4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */,
 				8E03595D27D799B9006A77CA /* Setting.storyboard in Resources */,
+				8E25076428D1EB3300756AB1 /* SearchFilterTableViewCell.xib in Resources */,
 				8E03596327D79F8C006A77CA /* Search.storyboard in Resources */,
 				493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */,
 				493BCBF126F4EBCF0096422A /* UpdatedSongTableViewCell.xib in Resources */,
@@ -703,8 +707,7 @@
 				8E03596127D79F43006A77CA /* Archive.storyboard in Resources */,
 				8E6C95E72767B18500667C01 /* PopUpSongOptionTableViewCell.xib in Resources */,
 				495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */,
-				49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */,
-				49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */,
+				49C6DC7B270381910094403B /* SettingItemTableViewCell.xib in Resources */,
 				8E03596527D7A25C006A77CA /* Folder.storyboard in Resources */,
 				493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */,
 				491A6D062707026C00E41D5B /* InfoPlist.strings in Resources */,
@@ -874,6 +877,7 @@
 				8E98D7812826DBA60056CED4 /* UITextField+Padding.swift in Sources */,
 				8E6C95EB2767B43700667C01 /* SongOption.swift in Sources */,
 				49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */,
+				8E25076828D1ED3400756AB1 /* SettingViewModel.swift in Sources */,
 				49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */,
 				49484D042720BD7D00EC12B3 /* ArchiveSongViewModel.swift in Sources */,
 				49C6DC33270298E30094403B /* AppbarView.swift in Sources */,
@@ -904,7 +908,7 @@
 				8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */,
 				8E33F3FF2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift in Sources */,
 				49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */,
-				49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */,
+				49C6DC7A270381910094403B /* SettingItemTableViewCell.swift in Sources */,
 				8E98D77F2826DB830056CED4 /* UISegmentedControl+Focus.swift in Sources */,
 				49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */,
 				491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */,
@@ -918,18 +922,18 @@
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
 				4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */,
 				8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */,
-				49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */,
+				49C6DC7D270382620094403B /* SettingItem.swift in Sources */,
 				495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */,
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
 				49484D022720B6D500EC12B3 /* ArchiveFolderViewModel.swift in Sources */,
+				8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */,
 				8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */,
 				8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */,
 				493BCBF026F4EBCF0096422A /* UpdatedSongTableViewCell.swift in Sources */,
 				4956CE5F26F494730007523B /* ArchiveFolderViewController.swift in Sources */,
 				8E3CE87328B2776F00C3DD27 /* BISegmentedControl+Rx.swift in Sources */,
 				8E6C95E92767B37B00667C01 /* PopUpSongOptionViewModel.swift in Sources */,
-				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
 				8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */,
 				8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,

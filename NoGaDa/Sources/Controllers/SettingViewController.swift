@@ -13,15 +13,36 @@ import RxCocoa
 class SettingViewController: BaseViewController {
   
   
+  // MARK: Types
+  
+  typealias ViewModel = SettingViewModel
+  
+  
   // MARK: - Properties
   
   static let identifier = R.storyboard.setting.settingStoryboard.identifier
   
+  private var viewModel: ViewModel
   @IBOutlet weak var exitButton: UIButton!
-  @IBOutlet weak var searchFilterGroupView: UIView!
-  @IBOutlet weak var etcGroupView: UIView!
-  @IBOutlet weak var searchFilterTableView: UITableView!
-  @IBOutlet weak var etcTableView: UITableView!
+  @IBOutlet weak var settingItemTableView: UITableView!
+  
+  
+  // MARK: - Initializers
+  
+  required init(_ viewModel: ViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+    dismiss(animated: true)
+  }
+  
+  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
+    self.viewModel = viewModel
+    super.init(coder: coder)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("ViewModel has not been implemented")
+  }
   
   
   // MARK: - Lifecycle
@@ -40,113 +61,53 @@ class SettingViewController: BaseViewController {
   }
   
   private func setupView() {
-    setupSearchFilterGroupView()
-    setupEtcGroupView()
-  }
-  
-  private func bind() {
-    bindExitButton()
-  }
-  
-  private func setupSearchFilterGroupView() {
-    registerSearchFilterTableCell()
-    searchFilterGroupView.makeAsSettingGroupView()
-    searchFilterTableView.layer.cornerRadius = 20
-    searchFilterTableView.tableFooterView = UIView()
-    searchFilterTableView.isScrollEnabled = false
-    searchFilterTableView.separatorColor = R.color.lineBasic()
-    searchFilterTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 80)
-    searchFilterTableView.layer.cornerRadius = 20
-    searchFilterTableView.dataSource = self
-    searchFilterTableView.delegate = self
-  }
-  
-  private func registerSearchFilterTableCell() {
-    let nibName = UINib(nibName: R.nib.searchFilterTableViewCell.name, bundle: nil)
-    searchFilterTableView.register(nibName, forCellReuseIdentifier: SearchFilterTableViewCell.identifier)
-  }
-  
-  private func setupEtcGroupView() {
-    registerEtcTableCell()
-    etcGroupView.makeAsSettingGroupView()
-    etcTableView.layer.cornerRadius = 20
-    etcTableView.tableFooterView = UIView()
-    etcTableView.isScrollEnabled = false
-    etcTableView.separatorColor = R.color.lineBasic()
-    etcTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 64)
-    etcTableView.dataSource = self
-    etcTableView.delegate = self
-  }
-  
-  private func registerEtcTableCell() {
-    let nibName = UINib(nibName: R.nib.settingEtcTableViewCell.name, bundle: nil)
-    etcTableView.register(nibName, forCellReuseIdentifier: SettingEtcTableViewCell.identifier)
+    setupSettingItemTableView()
   }
   
   
   // MARK: - Binds
   
-  private func bindExitButton() {
-    exitButton.rx.tap
-      .asDriver()
-      .drive(with: self, onNext: { vc, _ in
-        vc.dismiss(animated: true, completion: nil)
-      }).disposed(by: disposeBag)
-  }
-}
-
-
-// MARK: - Extensions
-
-extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    switch tableView {
-    case searchFilterTableView:
-      return SearchFilterItem.allCases.count
-    case etcTableView:
-      return SettingEtcItem.allCases.count
-    default:
-      return 0
-    }
+  private func bind() {
+    bindInputs()
+    bindOutputs()
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch tableView {
-    case searchFilterTableView:
-      guard let filterItemCell = tableView.dequeueReusableCell(withIdentifier: SearchFilterTableViewCell.identifier) as? SearchFilterTableViewCell else {
-        return UITableViewCell()
+  private func bindInputs() {
+    exitButton.rx.tap
+      .bind(to: viewModel.input.tapExitButton)
+      .disposed(by: disposeBag)
+  }
+  
+  private func bindOutputs() {
+    viewModel.output.dismiss
+      .asDriver(onErrorDriveWith: .never())
+      .drive(with: self, onNext: { vc, _ in
+        vc.dismiss(animated: true)
+      })
+      .disposed(by: disposeBag)
+    
+    viewModel.output.settingItems
+      .bind(to: settingItemTableView.rx.items(cellIdentifier: SettingItemTableViewCell.identifier, cellType: SettingItemTableViewCell.self)) { index, item, cell in
+        cell.configure(item: item)
+        cell.itemSelectAction = { [weak self] in
+          guard let self = self else { return }
+          item.action(vc: self)
+        }
       }
-      
-      let filterItem = SearchFilterItem.allCases[indexPath.row]
-      
-      filterItemCell.contentView.backgroundColor = R.color.backgroundSecondary()
-      filterItemCell.titleLabel.textColor = R.color.textBasic()
-      filterItemCell.titleLabel.text = filterItem.title
-      filterItemCell.filterSwitch.isOn    = filterItem.state
-      filterItemCell.filterSwitch.rx.controlEvent(.valueChanged)
-        .subscribe(with: self, onNext: { vc, _ in
-          UserDefaults.standard.set(!filterItem.state, forKey: filterItem.userDefaultKey)
-        }).disposed(by: disposeBag)
-      
-      return filterItemCell
-    case etcTableView:
-      guard let etcItemCell = tableView.dequeueReusableCell(withIdentifier: SettingEtcTableViewCell.identifier) as? SettingEtcTableViewCell else {
-        return UITableViewCell()
-      }
-      
-      let etcItem = SettingEtcItem.allCases[indexPath.row]
-      
-      etcItemCell.titleLabel.text = etcItem.title
-      etcItemCell.iconImageView.image = etcItem.icon
-      etcItemCell.rx.tapGesture()
-        .when(.recognized)
-        .bind(with: self, onNext: { vc, _ in
-          etcItem.action(vc: vc)
-        }).disposed(by: disposeBag)
-      
-      return etcItemCell
-    default:
-      return UITableViewCell()
-    }
+      .disposed(by: disposeBag)
+  }
+  
+  private func setupSettingItemTableView() {
+    registerEtcTableCell()
+    settingItemTableView.layer.cornerRadius = 16
+    settingItemTableView.tableFooterView = UIView()
+    settingItemTableView.isScrollEnabled = false
+    settingItemTableView.separatorStyle = .none
+    settingItemTableView.contentInset = .init(top: 12, left: 0, bottom: 12, right: 0)
+  }
+  
+  private func registerEtcTableCell() {
+    let nibName = UINib(nibName: R.nib.settingItemTableViewCell.name, bundle: nil)
+    settingItemTableView.register(nibName, forCellReuseIdentifier: SettingItemTableViewCell.identifier)
   }
 }
