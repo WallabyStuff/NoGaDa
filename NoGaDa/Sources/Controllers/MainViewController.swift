@@ -378,11 +378,12 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   func presentSettingVC() {
     let storyboard = UIStoryboard(name: R.storyboard.setting.name, bundle: nil)
-    guard let settingVC = storyboard.instantiateViewController(withIdentifier: SettingViewController.identifier) as? SettingViewController else {
-      return
+    let viewController = storyboard.instantiateViewController(identifier: SettingViewController.identifier) { coder -> SettingViewController in
+      let viewModel = SettingViewModel()
+      return SettingViewController(coder, viewModel) ?? .init(viewModel)
     }
     
-    present(settingVC, animated: true, completion: nil)
+    present(viewController, animated: true, completion: nil)
   }
   
   private func showArchiveFolderFloatingView(_ selectedSong: Song) {

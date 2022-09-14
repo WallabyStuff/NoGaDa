@@ -8,10 +8,12 @@
 import UIKit
 import MessageUI
 
-enum SettingEtcItem: String, CaseIterable {
-  case credit     = "credit"
-  case bugReport  = "bug report"
-  
+enum SettingItem: CaseIterable {
+  case credit
+  case bugReport
+}
+
+extension SettingItem {
   var title: String {
     switch self {
     case .credit:
@@ -20,16 +22,32 @@ enum SettingEtcItem: String, CaseIterable {
       return "버그 리포트"
     }
   }
-  
+}
+
+extension SettingItem {
   var icon: UIImage {
     switch self {
     case .credit:
-      return UIImage(named: "information.fill")!
+      return R.image.informationFill()!
     case .bugReport:
-      return UIImage(systemName: "ladybug.fill")!
+      return R.image.email()!
     }
   }
-  
+}
+
+extension SettingItem
+{
+  var iconContainerColor: UIColor {
+    switch self {
+    case .credit:
+      return R.color.accentBlue()!
+    case .bugReport:
+      return R.color.accentOrange()!
+    }
+  }
+}
+
+extension SettingItem {
   func action(vc: UIViewController) {
     switch self {
     case .credit:

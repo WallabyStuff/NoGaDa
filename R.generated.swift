@@ -150,10 +150,14 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 23 colors.
+  /// This `R.color` struct is generated, and contains static references to 28 colors.
   struct color {
+    /// Color `AccentBlue`.
+    static let accentBlue = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentBlue")
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
+    /// Color `AccentOrange`.
+    static let accentOrange = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentOrange")
     /// Color `AccentPink`.
     static let accentPink = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPink")
     /// Color `AccentPurpleLight`.
@@ -176,6 +180,10 @@ struct R: Rswift.Validatable {
     static let backgroundSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundSecondary")
     /// Color `BackgroundWhite`.
     static let backgroundWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundWhite")
+    /// Color `Basic`.
+    static let basic = Rswift.ColorResource(bundle: R.hostingBundle, name: "Basic")
+    /// Color `Black`.
+    static let black = Rswift.ColorResource(bundle: R.hostingBundle, name: "Black")
     /// Color `IconBasicSecondary`.
     static let iconBasicSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBasicSecondary")
     /// Color `IconBasic`.
@@ -198,6 +206,17 @@ struct R: Rswift.Validatable {
     static let textTertiary = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextTertiary")
     /// Color `TextWhite`.
     static let textWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextWhite")
+    /// Color `White`.
+    static let white = Rswift.ColorResource(bundle: R.hostingBundle, name: "White")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "AccentBlue", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func accentBlue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentBlue, compatibleWith: traitCollection)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
@@ -205,6 +224,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func accentColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.accentColor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "AccentOrange", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func accentOrange(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.accentOrange, compatibleWith: traitCollection)
     }
     #endif
 
@@ -308,6 +336,24 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "Basic", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func basic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.basic, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "Black", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func black(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.black, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIColor(named: "IconBasic", bundle: ..., traitCollection: ...)`
     @available(tvOS 11.0, *)
     @available(iOS 11.0, *)
@@ -406,11 +452,36 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "White", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.white, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "AccentBlue", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func accentBlue(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentBlue.name)
+    }
+    #endif
+
     #if os(watchOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
     static func accentColor(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.accentColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "AccentOrange", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func accentOrange(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.accentOrange.name)
     }
     #endif
 
@@ -503,6 +574,22 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(watchOS)
+    /// `UIColor(named: "Basic", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func basic(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.basic.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "Black", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func black(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.black.name)
+    }
+    #endif
+
+    #if os(watchOS)
     /// `UIColor(named: "IconBasic", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
     static func iconBasic(_: Void = ()) -> UIKit.UIColor? {
@@ -590,10 +677,18 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(watchOS)
+    /// `UIColor(named: "White", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func white(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.white.name)
+    }
+    #endif
+
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 11 images.
+  /// This `R.image` struct is generated, and contains static references to 13 images.
   struct image {
     /// Image `ArchiveShortcutBackgroundImage`.
     static let archiveShortcutBackgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "ArchiveShortcutBackgroundImage")
@@ -601,6 +696,10 @@ struct R: Rswift.Validatable {
     static let splashImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "SplashImage")
     /// Image `back-arrow`.
     static let backArrow = Rswift.ImageResource(bundle: R.hostingBundle, name: "back-arrow")
+    /// Image `chevron-right`.
+    static let chevronRight = Rswift.ImageResource(bundle: R.hostingBundle, name: "chevron-right")
+    /// Image `email`.
+    static let email = Rswift.ImageResource(bundle: R.hostingBundle, name: "email")
     /// Image `folder-filled`.
     static let folderFilled = Rswift.ImageResource(bundle: R.hostingBundle, name: "folder-filled")
     /// Image `folder`.
@@ -636,6 +735,20 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "back-arrow", bundle: ..., traitCollection: ...)`
     static func backArrow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.backArrow, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "chevron-right", bundle: ..., traitCollection: ...)`
+    static func chevronRight(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.chevronRight, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "email", bundle: ..., traitCollection: ...)`
+    static func email(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.email, compatibleWith: traitCollection)
     }
     #endif
 
@@ -744,8 +857,8 @@ struct R: Rswift.Validatable {
     static let searchFilterTableViewCell = _R.nib._SearchFilterTableViewCell()
     /// Nib `SearchHistoryTableViewCell`.
     static let searchHistoryTableViewCell = _R.nib._SearchHistoryTableViewCell()
-    /// Nib `SettingEtcTableViewCell`.
-    static let settingEtcTableViewCell = _R.nib._SettingEtcTableViewCell()
+    /// Nib `SettingItemTableViewCell`.
+    static let settingItemTableViewCell = _R.nib._SettingItemTableViewCell()
     /// Nib `SongTableViewCell`.
     static let songTableViewCell = _R.nib._SongTableViewCell()
     /// Nib `UpdatedSongTableViewCell`.
@@ -808,10 +921,10 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UINib(name: "SettingEtcTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.settingEtcTableViewCell) instead")
-    static func settingEtcTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.settingEtcTableViewCell)
+    /// `UINib(name: "SettingItemTableViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.settingItemTableViewCell) instead")
+    static func settingItemTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.settingItemTableViewCell)
     }
     #endif
 
@@ -859,8 +972,8 @@ struct R: Rswift.Validatable {
       return R.nib.searchHistoryTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchHistoryTableViewCell
     }
 
-    static func settingEtcTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingEtcTableViewCell? {
-      return R.nib.settingEtcTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingEtcTableViewCell
+    static func settingItemTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingItemTableViewCell? {
+      return R.nib.settingItemTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingItemTableViewCell
     }
 
     static func songTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SongTableViewCell? {
@@ -893,7 +1006,7 @@ struct R: Rswift.Validatable {
     /// Reuse identifier `searchHistoryTableCell`.
     static let searchHistoryTableCell: Rswift.ReuseIdentifier<SearchHistoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "searchHistoryTableCell")
     /// Reuse identifier `settingEtcTableCell`.
-    static let settingEtcTableCell: Rswift.ReuseIdentifier<SettingEtcTableViewCell> = Rswift.ReuseIdentifier(identifier: "settingEtcTableCell")
+    static let settingEtcTableCell: Rswift.ReuseIdentifier<SettingItemTableViewCell> = Rswift.ReuseIdentifier(identifier: "settingEtcTableCell")
     /// Reuse identifier `updatedSongTableViewCell`.
     static let updatedSongTableViewCell: Rswift.ReuseIdentifier<UpdatedSongTableViewCell> = Rswift.ReuseIdentifier(identifier: "updatedSongTableViewCell")
 
@@ -1576,7 +1689,7 @@ struct _R: Rswift.Validatable {
   struct nib: Rswift.Validatable {
     static func validate() throws {
       try _SearchHistoryTableViewCell.validate()
-      try _SettingEtcTableViewCell.validate()
+      try _SettingItemTableViewCell.validate()
       try _SongTableViewCell.validate()
       try _UpdatedSongTableViewCell.validate()
     }
@@ -1690,23 +1803,26 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    struct _SettingEtcTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
-      typealias ReusableType = SettingEtcTableViewCell
+    struct _SettingItemTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
+      typealias ReusableType = SettingItemTableViewCell
 
       let bundle = R.hostingBundle
       let identifier = "settingEtcTableCell"
-      let name = "SettingEtcTableViewCell"
+      let name = "SettingItemTableViewCell"
 
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingEtcTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingEtcTableViewCell
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingItemTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingItemTableViewCell
       }
 
       static func validate() throws {
-        if UIKit.UIImage(named: "information.fill", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'information.fill' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "chevron-right", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'chevron-right' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "information.fill", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'information.fill' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SettingEtcTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "BackgroundBlue", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBlue' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconSecondary' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
         }
       }
 
@@ -2025,7 +2141,6 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
           if UIKit.UIColor(named: "TextTertiary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextTertiary' is used in storyboard 'Setting', but couldn't be loaded.") }
         }
         if _R.storyboard.setting().creditStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'creditStoryboard' could not be loaded from storyboard 'Setting' as 'CreditViewController'.") }
