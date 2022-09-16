@@ -12,33 +12,59 @@ import RxCocoa
 
 class AppbarView: UIView {
   
+  // MARK: - Properties
+  
   private var _roundCorners: UIRectCorner = []
   private var _cornerRadius: CGFloat = 0
   private let maskLayer = CAShapeLayer()
   private let shadowLayer = CALayer()
   
+  
+  // MARK: - Initializer
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
+    setup()
     configure(cornerRadius: _cornerRadius, roundCorners: _roundCorners)
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    setup()
     configure(cornerRadius: _cornerRadius, roundCorners: _roundCorners)
   }
+  
+  
+  // MARK: - LifeCycle
   
   override func layoutSubviews() {
     super.layoutSubviews()
     configure(cornerRadius: _cornerRadius, roundCorners: _roundCorners)
   }
   
-  func configure(cornerRadius: CGFloat = 0, roundCorners: UIRectCorner = []) {
+  
+  // MARK: - Setup
+  
+  private func setup() {
+    setupView()
+  }
+  
+  private func setupView() {
+    setupHero()
+  }
+  
+  private func setupHero() {
     hero.id = "appbar"
-    
+  }
+  
+  
+  // MARK: - Method
+  
+  func configure(cornerRadius: CGFloat = 0, roundCorners: UIRectCorner = []) {
     _cornerRadius = cornerRadius
     _roundCorners = roundCorners
     
-    // Mask the corner
+    // Mask corners
     let path = UIBezierPath(roundedRect: frame,
                             byRoundingCorners: _roundCorners,
                             cornerRadii: CGSize(width: _cornerRadius, height: _cornerRadius))
