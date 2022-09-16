@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxGesture
+import SafeAreaBrush
 
 class MainViewController: BaseViewController, ViewModelInjectable {
   
@@ -102,7 +103,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    view.fillStatusBar(color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentColor()!)
   }
   
   private func setupAppbarView() {

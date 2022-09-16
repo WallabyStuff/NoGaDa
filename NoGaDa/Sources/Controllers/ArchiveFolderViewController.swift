@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import Hero
+import SafeAreaBrush
 
 @objc
 protocol ArchiveFolderListViewDelegate: AnyObject {
@@ -98,7 +99,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    view.fillStatusBar(color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentColor()!)
   }
   
   private func setupAppbar() {

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06C6F6B48F58F30837E8A596 /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6873F83FC069DBDADA7CBF7F /* Pods_NoGaDa_NoGaDaUITests.framework */; };
-		22675E4DC94DA537D8C1CA74 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B9F841F3EB03735370B8BA9 /* Pods_NoGaDaTests.framework */; };
+		3D8E6C0D76607FA4D9609A16 /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9E8FC13AF35865E0849099 /* Pods_NoGaDa_NoGaDaUITests.framework */; };
 		491A6D062707026C00E41D5B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 491A6D082707026C00E41D5B /* InfoPlist.strings */; };
 		491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */; };
 		493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */; };
@@ -70,6 +69,7 @@
 		49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */; };
 		49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6EB5A270E0F3200610383 /* AdMobManager.swift */; };
 		49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FB0D0927038DED00AE3A9F /* CreditViewController.swift */; };
+		827612548276D1D4579AC3E6 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443916A43E9F0D6AB9465775 /* Pods_NoGaDaTests.framework */; };
 		8E03595D27D799B9006A77CA /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03595C27D799B9006A77CA /* Setting.storyboard */; };
 		8E03596127D79F43006A77CA /* Archive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596027D79F43006A77CA /* Archive.storyboard */; };
 		8E03596327D79F8C006A77CA /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596227D79F8C006A77CA /* Search.storyboard */; };
@@ -84,7 +84,6 @@
 		8E33F3FF2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */; };
 		8E33F4002857980500B6E6EE /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
 		8E33F40228579C0C00B6E6EE /* AppbarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */; };
-		8E33F4042857A08900B6E6EE /* UIView+StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F4032857A08900B6E6EE /* UIView+StatusBar.swift */; };
 		8E3CE86D28B251A100C3DD27 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */; };
 		8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */; };
 		8E3CE87328B2776F00C3DD27 /* BISegmentedControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */; };
@@ -118,7 +117,7 @@
 		8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */; };
 		8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */; };
 		8EFA4D902786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */; };
-		EC86F35FA1048DBBFF87B880 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F4823EF896D2CDD235013 /* Pods_NoGaDa.framework */; };
+		B64965F39C096725E73F7F7B /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B819D386E093DBF9E5581652 /* Pods_NoGaDa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,8 +138,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0332DD93DD171EB6D07A964B /* Pods-NoGaDaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4422EEB87FDF2468201579D4 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		0E9B9E8008EC932056A50088 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
+		1AF0C37E8EFB9B938D8E5B1F /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
+		23B67690683402CC33D6C68C /* Pods-NoGaDaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		28492401199A725060492183 /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
+		443916A43E9F0D6AB9465775 /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		491A6D022707021600E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		491A6D032707021600E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		491A6D072707026C00E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -211,10 +213,7 @@
 		49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewController.swift; sourceTree = "<group>"; };
 		49E6EB5A270E0F3200610383 /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
 		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
-		5B9F841F3EB03735370B8BA9 /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6873F83FC069DBDADA7CBF7F /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A2F4823EF896D2CDD235013 /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C2E94127F2C1AA383479D47 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
+		5182A86E93F59215ADB1A7EB /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8E03595C27D799B9006A77CA /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		8E03596027D79F43006A77CA /* Archive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Archive.storyboard; sourceTree = "<group>"; };
 		8E03596227D79F8C006A77CA /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
@@ -228,7 +227,6 @@
 		8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewModel.swift; sourceTree = "<group>"; };
 		8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarHeight.swift; sourceTree = "<group>"; };
-		8E33F4032857A08900B6E6EE /* UIView+StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+StatusBar.swift"; sourceTree = "<group>"; };
 		8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BISegmentedControl+Rx.swift"; sourceTree = "<group>"; };
@@ -262,9 +260,9 @@
 		8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewModel.swift; sourceTree = "<group>"; };
 		8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerTableViewCell.swift; sourceTree = "<group>"; };
 		8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KaraokeBrandPickerTableViewCell.xib; sourceTree = "<group>"; };
-		B0F2D7A9D03359BF67336EC9 /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
-		E813BE03032CBEB614D9CC28 /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
-		F13EA33DA5EBF1B0593B93DF /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B819D386E093DBF9E5581652 /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2DE01F1DAE4E170A97EB0FF /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CF9E8FC13AF35865E0849099 /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,7 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC86F35FA1048DBBFF87B880 /* Pods_NoGaDa.framework in Frameworks */,
+				B64965F39C096725E73F7F7B /* Pods_NoGaDa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22675E4DC94DA537D8C1CA74 /* Pods_NoGaDaTests.framework in Frameworks */,
+				827612548276D1D4579AC3E6 /* Pods_NoGaDaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,19 +286,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06C6F6B48F58F30837E8A596 /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */,
+				3D8E6C0D76607FA4D9609A16 /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		25C2821479803CAD119AC155 /* Frameworks */ = {
+		2F0FF07B818431D68599FF24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8A2F4823EF896D2CDD235013 /* Pods_NoGaDa.framework */,
-				6873F83FC069DBDADA7CBF7F /* Pods_NoGaDa_NoGaDaUITests.framework */,
-				5B9F841F3EB03735370B8BA9 /* Pods_NoGaDaTests.framework */,
+				B819D386E093DBF9E5581652 /* Pods_NoGaDa.framework */,
+				CF9E8FC13AF35865E0849099 /* Pods_NoGaDa_NoGaDaUITests.framework */,
+				443916A43E9F0D6AB9465775 /* Pods_NoGaDaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -366,7 +364,7 @@
 				4956CE4526F467060007523B /* NoGaDaUITests */,
 				4956CE2226F467040007523B /* Products */,
 				92EF67CED36C18763E116A46 /* Pods */,
-				25C2821479803CAD119AC155 /* Frameworks */,
+				2F0FF07B818431D68599FF24 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -564,7 +562,6 @@
 				8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */,
 				8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */,
 				8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */,
-				8E33F4032857A08900B6E6EE /* UIView+StatusBar.swift */,
 				8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */,
 				8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */,
 			);
@@ -574,12 +571,12 @@
 		92EF67CED36C18763E116A46 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8C2E94127F2C1AA383479D47 /* Pods-NoGaDa.debug.xcconfig */,
-				B0F2D7A9D03359BF67336EC9 /* Pods-NoGaDa.release.xcconfig */,
-				4422EEB87FDF2468201579D4 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */,
-				F13EA33DA5EBF1B0593B93DF /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */,
-				0332DD93DD171EB6D07A964B /* Pods-NoGaDaTests.debug.xcconfig */,
-				E813BE03032CBEB614D9CC28 /* Pods-NoGaDaTests.release.xcconfig */,
+				0E9B9E8008EC932056A50088 /* Pods-NoGaDa.debug.xcconfig */,
+				1AF0C37E8EFB9B938D8E5B1F /* Pods-NoGaDa.release.xcconfig */,
+				C2DE01F1DAE4E170A97EB0FF /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */,
+				5182A86E93F59215ADB1A7EB /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */,
+				23B67690683402CC33D6C68C /* Pods-NoGaDaTests.debug.xcconfig */,
+				28492401199A725060492183 /* Pods-NoGaDaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -591,12 +588,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE4B26F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDa" */;
 			buildPhases = (
-				8B89F334D55D61A4B6EF8C6E /* [CP] Check Pods Manifest.lock */,
+				928016AF6085C8F1182EE601 /* [CP] Check Pods Manifest.lock */,
 				8E33F3F928547C0E00B6E6EE /* R.Swift */,
 				4956CE1D26F467040007523B /* Sources */,
 				4956CE1E26F467040007523B /* Frameworks */,
 				4956CE1F26F467040007523B /* Resources */,
-				326D097C09E59B326BEDC7DE /* [CP] Embed Pods Frameworks */,
+				4F78B649A167267C195B7635 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -611,7 +608,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE4E26F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDaTests" */;
 			buildPhases = (
-				8B8BFB9087F61F161C135EA8 /* [CP] Check Pods Manifest.lock */,
+				61A11370C0D4F4026CE623F9 /* [CP] Check Pods Manifest.lock */,
 				4956CE3326F467060007523B /* Sources */,
 				4956CE3426F467060007523B /* Frameworks */,
 				4956CE3526F467060007523B /* Resources */,
@@ -630,11 +627,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE5126F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDaUITests" */;
 			buildPhases = (
-				DD1020FA1DDE0F37EC495D79 /* [CP] Check Pods Manifest.lock */,
+				9F52C826681B58826DEC8EAA /* [CP] Check Pods Manifest.lock */,
 				4956CE3E26F467060007523B /* Sources */,
 				4956CE3F26F467060007523B /* Frameworks */,
 				4956CE4026F467060007523B /* Resources */,
-				7C96C2DA4D80E8FDF1EDF739 /* [CP] Embed Pods Frameworks */,
+				30401D7C1988A0575B1E2FEE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -732,24 +729,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		326D097C09E59B326BEDC7DE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7C96C2DA4D80E8FDF1EDF739 /* [CP] Embed Pods Frameworks */ = {
+		30401D7C1988A0575B1E2FEE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -766,29 +746,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B89F334D55D61A4B6EF8C6E /* [CP] Check Pods Manifest.lock */ = {
+		4F78B649A167267C195B7635 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NoGaDa-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B8BFB9087F61F161C135EA8 /* [CP] Check Pods Manifest.lock */ = {
+		61A11370C0D4F4026CE623F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -829,7 +804,29 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
-		DD1020FA1DDE0F37EC495D79 /* [CP] Check Pods Manifest.lock */ = {
+		928016AF6085C8F1182EE601 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoGaDa-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F52C826681B58826DEC8EAA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -937,7 +934,6 @@
 				8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */,
 				8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,
-				8E33F4042857A08900B6E6EE /* UIView+StatusBar.swift in Sources */,
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,
 				8E98D7902826DD5D0056CED4 /* UIbutton+Padding.swift in Sources */,
 				8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */,
@@ -1132,7 +1128,7 @@
 		};
 		4956CE4C26F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C2E94127F2C1AA383479D47 /* Pods-NoGaDa.debug.xcconfig */;
+			baseConfigurationReference = 0E9B9E8008EC932056A50088 /* Pods-NoGaDa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1155,7 +1151,7 @@
 		};
 		4956CE4D26F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0F2D7A9D03359BF67336EC9 /* Pods-NoGaDa.release.xcconfig */;
+			baseConfigurationReference = 1AF0C37E8EFB9B938D8E5B1F /* Pods-NoGaDa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1178,7 +1174,7 @@
 		};
 		4956CE4F26F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0332DD93DD171EB6D07A964B /* Pods-NoGaDaTests.debug.xcconfig */;
+			baseConfigurationReference = 23B67690683402CC33D6C68C /* Pods-NoGaDaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1201,7 +1197,7 @@
 		};
 		4956CE5026F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E813BE03032CBEB614D9CC28 /* Pods-NoGaDaTests.release.xcconfig */;
+			baseConfigurationReference = 28492401199A725060492183 /* Pods-NoGaDaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1224,7 +1220,7 @@
 		};
 		4956CE5226F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4422EEB87FDF2468201579D4 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */;
+			baseConfigurationReference = C2DE01F1DAE4E170A97EB0FF /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1245,7 +1241,7 @@
 		};
 		4956CE5326F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F13EA33DA5EBF1B0593B93DF /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */;
+			baseConfigurationReference = 5182A86E93F59215ADB1A7EB /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
