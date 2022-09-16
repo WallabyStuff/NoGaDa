@@ -99,7 +99,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    fillSafeArea(position: .top, color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentColor()!, insertAt: 0)
   }
   
   private func setupAppbar() {

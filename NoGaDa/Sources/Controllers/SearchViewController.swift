@@ -99,7 +99,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    fillSafeArea(position: .top, color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentPurple()!, insertAt: 0)
   }
   
   private func setupAppbarView() {
