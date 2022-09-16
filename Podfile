@@ -15,6 +15,7 @@ target 'NoGaDa' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftRater'
   pod 'R.swift'
+  pod 'SafeAreaBrush'
  
   target 'NoGaDaTests' do
     inherit! :search_paths

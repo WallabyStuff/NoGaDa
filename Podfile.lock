@@ -65,6 +65,7 @@ PODS:
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
+  - SafeAreaBrush (1.0.3)
   - SwiftRater (1.8.0)
 
 DEPENDENCIES:
@@ -76,6 +77,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxGesture
   - RxSwift
+  - SafeAreaBrush
   - SwiftRater
 
 SPEC REPOS:
@@ -96,6 +98,7 @@ SPEC REPOS:
     - RxGesture
     - RxRelay
     - RxSwift
+    - SafeAreaBrush
     - SwiftRater
 
 SPEC CHECKSUMS:
@@ -115,8 +118,9 @@ SPEC CHECKSUMS:
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SafeAreaBrush: 13ada0b25dcfdde8f110f46b1d34dc017b01b12c
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
 
-PODFILE CHECKSUM: 78282a0d3c4865f726a217aaac4900f564bea15e
+PODFILE CHECKSUM: 12219f04cffa2fb1e1795c4c8e2a03c34af9425f
 
 COCOAPODS: 1.11.3
