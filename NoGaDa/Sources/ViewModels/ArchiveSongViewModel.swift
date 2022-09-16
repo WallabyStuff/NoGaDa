@@ -70,7 +70,7 @@ class ArchiveSongViewModel: ViewModelType {
       return self.folderManager.fetchData(self.currentFolder.id)
     }
     .subscribe(onNext: { folder in
-      let songs = Array(folder.songs)
+      let songs = Array(folder.songs.reversed())
       output.archiveSongs.accept(songs)
     })
     .disposed(by: disposeBag)
