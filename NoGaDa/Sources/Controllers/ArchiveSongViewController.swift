@@ -100,7 +100,6 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupAppbarView() {
-    appbarView.hero.id = "appbar"
     appbarView.layer.cornerRadius = 28
     appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
     appbarView.setAppbarShadow()

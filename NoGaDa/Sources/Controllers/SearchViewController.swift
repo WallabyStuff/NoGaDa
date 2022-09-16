@@ -103,7 +103,6 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupAppbarView() {
-    appbarView.hero.id = "appbar"
     appbarView.layer.cornerRadius = 28
     appbarView.layer.cornerCurve = .circular
     appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner])
