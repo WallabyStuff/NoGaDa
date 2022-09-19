@@ -9,10 +9,18 @@ import UIKit
 
 class UpdatedSongTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Cosntants
   
   static let identifier = R.reuseIdentifier.updatedSongTableViewCell.identifier
+  
+  struct Metric {
+    static let thumbnailImageViewCornerRadius = 12.f
+    
+    static let selectedViewCornerRadius = 12.f
+  }
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var thumbnailPlaceholderImageView: UIImageView!
@@ -30,6 +38,10 @@ class UpdatedSongTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
+    
+    songTitleLabel.text = ""
+    singerLabel.text = ""
+    songNumberLabel.text = ""
   }
   
   
@@ -40,15 +52,18 @@ class UpdatedSongTableViewCell: UITableViewCell {
   }
   
   private func setupView() {
-    thumbnailImageView.layer.cornerRadius = 12
-    
-    songTitleLabel.text     = ""
-    singerLabel.text        = ""
-    songNumberLabel.text    = ""
-    
+    setupThumbnailImageView()
+    setupSelectedView()
+  }
+  
+  private func setupThumbnailImageView() {
+    thumbnailImageView.layer.cornerRadius = Metric.thumbnailImageViewCornerRadius
+  }
+  
+  private func setupSelectedView() {
     let selectedView = UIView()
     selectedView.backgroundColor = R.color.backgroundBasicSelected()!
-    selectedView.layer.cornerRadius = 12
+    selectedView.layer.cornerRadius = Metric.selectedViewCornerRadius
     selectedBackgroundView = selectedView
   }
 }
