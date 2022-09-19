@@ -22,10 +22,31 @@ protocol ArchiveFolderListViewDelegate: AnyObject {
 class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.storyboard.archive.archiveFolderStoryboard.identifier
+  
+  struct Metric {
+    static let archiveFolderTableViewTopInset = 36.f
+    
+    static let appbarViewCornerRadius = 28.f
+    
+    static let addFolderButtonCornerRadius = 12.f
+  }
+  
+  
+  // MARK: - Types
+  
   typealias ViewModel = ArchiveFolderViewModel
+  
+  
+  // MARK: - Properties
+  
+  weak var delegate: ArchiveFolderListViewDelegate?
+  var viewModel: ViewModel
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var appbarView: UIView!
   @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -33,10 +54,6 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var addFolderButton: UIButton!
   @IBOutlet weak var archiveFolderTableView: UITableView!
-  
-  weak var delegate: ArchiveFolderListViewDelegate?
-  var viewModel: ViewModel
-  private let archiveFolderTableViewTopInset: CGFloat = 36
   
   
   // MARK: - Lifecycle
@@ -103,7 +120,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupAppbar() {
-    appbarView.layer.cornerRadius = 28
+    appbarView.layer.cornerRadius = Metric.appbarViewCornerRadius
     appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
     appbarView.setAppbarShadow()
     appbarViewHeightConstraint.constant = compactAppbarHeight
@@ -114,7 +131,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupAddFolderButton() {
-    addFolderButton.layer.cornerRadius = 12
+    addFolderButton.layer.cornerRadius = Metric.addFolderButtonCornerRadius
     addFolderButton.hero.modifiers = [.translate(y: 20), .fade]
   }
   
@@ -127,7 +144,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     registerArchiveFolderCell()
     archiveFolderTableView.separatorStyle = .none
     archiveFolderTableView.tableFooterView = UIView()
-    archiveFolderTableView.contentInset = UIEdgeInsets(top: archiveFolderTableViewTopInset, left: 0, bottom: 0, right: 0)
+    archiveFolderTableView.contentInset = UIEdgeInsets(top: Metric.archiveFolderTableViewTopInset, left: 0, bottom: 0, right: 0)
     archiveFolderTableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
   }
@@ -219,7 +236,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
       .drive(with: self, onNext: { vc, offset in
         let compactAppbarHeight = vc.compactAppbarHeight
         
-        let changedY = offset.y + vc.archiveFolderTableViewTopInset
+        let changedY = offset.y + Metric.archiveFolderTableViewTopInset
         let newAppbarHeight = compactAppbarHeight - (changedY * 0.2)
         
         if newAppbarHeight >= vc.compactAppbarHeight {
