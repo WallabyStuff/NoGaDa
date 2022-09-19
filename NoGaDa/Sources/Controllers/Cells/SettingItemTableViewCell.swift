@@ -6,22 +6,34 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
 
 class SettingItemTableViewCell: UITableViewCell {
   
+  // MARK: - Constants
+  
+  static let identifier = R.reuseIdentifier.settingEtcTableCell.identifier
+  
+  struct Metric {
+    static let iconConainterViewCornerRadius = 12.f
+    
+    static let selectedViewCornerRadius = 12.f
+  }
+  
   
   // MARK: - Properties
   
-  static let identifier = R.reuseIdentifier.settingEtcTableCell.identifier
+  private var disposeBag = DisposeBag()
+  var itemSelectAction: () -> Void = {}
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var iconContainerView: UIView!
   @IBOutlet weak var iconImageView: UIImageView!
-
-  private var disposeBag = DisposeBag()
-  var itemSelectAction: () -> Void = {}
   
   
   // MARK: - Lifecycle
@@ -32,6 +44,8 @@ class SettingItemTableViewCell: UITableViewCell {
   }
   
   override func prepareForReuse() {
+    super.prepareForReuse()
+    
     titleLabel.text = ""
     iconImageView.image = nil
     itemSelectAction = {}
@@ -47,14 +61,14 @@ class SettingItemTableViewCell: UITableViewCell {
   }
   
   private func setupIconContainerView() {
-    iconContainerView.layer.cornerRadius = 12
+    iconContainerView.layer.cornerRadius = Metric.iconConainterViewCornerRadius
   }
   
   private func setupSelectedView() {
     let selectedView = UIView()
     selectedView.bounds = bounds
     selectedView.backgroundColor = R.color.backgroundBasicSelected()!
-    selectedView.layer.cornerRadius = 12
+    selectedView.layer.cornerRadius = Metric.selectedViewCornerRadius
     selectedBackgroundView = selectedView
   }
 
