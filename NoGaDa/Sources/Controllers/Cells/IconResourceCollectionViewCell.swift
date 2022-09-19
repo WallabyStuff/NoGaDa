@@ -9,10 +9,16 @@ import UIKit
 
 class IconResourceCollectionViewCell: UICollectionViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.iconResourceCollectionCell.identifier
+  
+  struct Metric {
+    static let cellContentViewCornerRadius = 12.f
+  }
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var cellContentView: UIView!
   @IBOutlet weak var descriptionLabel: UILabel!
@@ -26,10 +32,21 @@ class IconResourceCollectionViewCell: UICollectionViewCell {
     setupView()
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    descriptionLabel.text = ""
+    iconImageView.image = nil
+  }
+  
   
   // MARK: - Setups
   
   private func setupView() {
-    cellContentView.layer.cornerRadius = 12
+    setupCellContentView()
+  }
+  
+  private func setupCellContentView() {
+    cellContentView.layer.cornerRadius = Metric.cellContentViewCornerRadius
   }
 }
