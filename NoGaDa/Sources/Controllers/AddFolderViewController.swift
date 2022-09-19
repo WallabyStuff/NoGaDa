@@ -15,22 +15,42 @@ import RxGesture
   @objc func didFolderAdded()
 }
 
-class AddFolderViewController: UIViewController {
+class AddFolderViewController: BaseViewController {
+  
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.folder.addFolderStoryboard.identifier
+  
+  struct Metric {
+    static let confirmButtonCornerRadius = 12.f
+    
+    static let emojiTextFieldFrameViewCornerRaidus = 20.f
+    
+    static let folderTitleTextFieldLeftPadding = 8.f
+    
+    static let confirmButtonActiveAlpha = 1.f
+    static let confirmButtonInactiveAlpha = 0.2.f
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = AddFolderViewModel
   
   
   // MARK: - Properteis
   
-  static let identifier = R.storyboard.folder.addFolderStoryboard.identifier
+  weak var delegate: AddFolderViewDelegate?
+  private let viewModel: ViewModel
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var confirmButton: UIButton!
   @IBOutlet weak var emojiTextFieldFrameView: UIView!
   @IBOutlet weak var folderEmojiTextField: EmojiTextField!
   @IBOutlet weak var folderTitleTextField: HighlightingTextfield!
-  
-  weak var delegate: AddFolderViewDelegate?
-  private let viewModel: AddFolderViewModel
-  private var disposeBag = DisposeBag()
   
   
   // MARK: - Lifecycle
@@ -51,12 +71,12 @@ class AddFolderViewController: UIViewController {
   
   // MARK: - Initializers
   
-  init(_ viewModel: AddFolderViewModel) {
+  init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
-  init?(_ coder: NSCoder, _ viewModel: AddFolderViewModel) {
+  init?(_ coder: NSCoder, _ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(coder: coder)
   }
@@ -82,7 +102,7 @@ class AddFolderViewController: UIViewController {
   }
   
   private func setupConfirmButton() {
-    confirmButton.layer.cornerRadius = 12
+    confirmButton.layer.cornerRadius = Metric.confirmButtonCornerRadius
   }
   
   private func setupExitButton() {
@@ -91,11 +111,11 @@ class AddFolderViewController: UIViewController {
   }
   
   private func setupEmojiTextFieldFrameView() {
-    emojiTextFieldFrameView.layer.cornerRadius = 20
+    emojiTextFieldFrameView.layer.cornerRadius = Metric.emojiTextFieldFrameViewCornerRaidus
   }
   
   private func setupFolderTitleTextField() {
-    folderTitleTextField.setLeftPadding(width: 8)
+    folderTitleTextField.setLeftPadding(width: Metric.folderTitleTextFieldLeftPadding)
     folderTitleTextField.setPlaceholderColor(R.color.textTertiary()!)
   }
   
@@ -162,12 +182,12 @@ class AddFolderViewController: UIViewController {
   // MARK: - Method
   
   private func activeConfirmButton() {
-    confirmButton.alpha = 1
+    confirmButton.alpha = Metric.confirmButtonActiveAlpha
     confirmButton.isEnabled = true
   }
   
   private func inactiveConfirmButton() {
-    confirmButton.alpha = 0.2
+    confirmButton.alpha = Metric.confirmButtonInactiveAlpha
     confirmButton.isEnabled = false
   }
 }
