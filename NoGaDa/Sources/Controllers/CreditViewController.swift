@@ -12,19 +12,34 @@ import RxCocoa
 import RxGesture
 import MessageUI
 
-class CreditViewController: UIViewController {
+class CreditViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Cosntants
+  
+  static let identifier = R.storyboard.setting.creditStoryboard.identifier
+  
+  struct Metric {
+    static let resourceCollectionViewLeftInset = 28.f
+    static let resourceCollectionViewRightInset = 28.f
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = CreditViewModel
   
   // MARK: - Properties
+  
+  var viewModel: ViewModel
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var headerLabel: UILabel!
   @IBOutlet weak var contentScrollView: UIScrollView!
   @IBOutlet weak var resourceCollectionView: UICollectionView!
   @IBOutlet weak var contactTextView: UITextView!
-  
-  private var disposeBag = DisposeBag()
-  private var viewModel: CreditViewModel
   
   
   // MARK: - Lifecycle
@@ -38,12 +53,12 @@ class CreditViewController: UIViewController {
   
   // MARK: - Initializers
   
-  init(_ viewModel: CreditViewModel) {
+  required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
-  init?(_ coder: NSCoder, _ viewModel: CreditViewModel) {
+  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(coder: coder)
   }
@@ -70,7 +85,7 @@ class CreditViewController: UIViewController {
   
   private func setupIconResourceCollectionView() {
     registerIconResourceCollectionCell()
-    resourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+    resourceCollectionView.contentInset = UIEdgeInsets(top: 0, left: Metric.resourceCollectionViewLeftInset, bottom: 0, right: Metric.resourceCollectionViewRightInset)
   }
   
   private func registerIconResourceCollectionCell() {
