@@ -11,13 +11,23 @@ import RxCocoa
 
 class SearchHistoryTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properteis
+  // MARK: - Cosntants
   
   static let identifier = R.reuseIdentifier.searchHistoryTableCell.identifier
   
+  struct Metric {
+    static let tapReleaseAnimationDuration = 0.2.f
+  }
+  
+  
+  // MARK: - Properteis
+  
   private var disposeBag = DisposeBag()
   public var removeButtonTapAction: () -> Void = {}
+  
+  
+  // MARK: - UI
+  
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var removeButton: UIButton!
   
@@ -26,17 +36,18 @@ class SearchHistoryTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    setupView()
     bind()
   }
   
-  
-  // MARK: - Initializers
-  
-  private func setupView() {
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
     titleLabel.text = ""
     selectionStyle = .none
   }
+  
+  
+  // MARK: - Binds
   
   private func bind() {
     removeButton.rx.tap
@@ -47,13 +58,9 @@ class SearchHistoryTableViewCell: UITableViewCell {
 }
 
 
-// MARK: - Extensions
+// MARK: - Tap Aniamtions
 
 extension SearchHistoryTableViewCell {
-  private var releaseAnimationDuration: CGFloat {
-    return 0.2
-  }
-  
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     backgroundColor = R.color.backgroundBasicSelected()!
@@ -66,7 +73,7 @@ extension SearchHistoryTableViewCell {
   
   override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesCancelled(touches, with: event)
-    UIView.animate(withDuration: releaseAnimationDuration) {
+    UIView.animate(withDuration: Metric.tapReleaseAnimationDuration) {
       self.backgroundColor = R.color.backgroundBasic()!
     }
   }
