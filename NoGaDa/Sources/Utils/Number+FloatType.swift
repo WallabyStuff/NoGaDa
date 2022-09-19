@@ -5,7 +5,7 @@
 //  Created by 이승기 on 2022/09/19.
 //
 
-import Foundation
+import UIKit
 
 public extension IntegerLiteralType {
   var f: CGFloat {
