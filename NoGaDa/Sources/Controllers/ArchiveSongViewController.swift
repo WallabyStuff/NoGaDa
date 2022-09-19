@@ -19,11 +19,39 @@ import SafeAreaBrush
 
 class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.archive.archiveSongStoryboard.identifier
+  
+  struct Metric {
+    static let archiveSongTableViewTopInset = 36.f
+    
+    static let archiveSongTableViewCornerRadius = 20.f
+    static let archiveSongTableViewBottomInset = 100.f
+    
+    static let folderTitleTextFieldCornerRadius = 12.f
+    static let folderTitleTextFieldLeftPadding = 16.f
+    static let folderTitleTextFieldRightPadding = 16.f
+    
+    static let folderTitleEmojiTextFieldCornerRadius = 16.f
+    
+    static let addSongButtonShadowRadius = 20.f
+    static let addSongButtonShadowOpacity: Float = 0.25
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = ArchiveSongViewModel
+  
   
   // MARK: - Properties
   
-  static let identifier = R.storyboard.archive.archiveSongStoryboard.identifier
-  typealias ViewModel = ArchiveSongViewModel
+  weak var delegate: ArchiveSongListViewDelegate?
+  var viewModel: ViewModel
+  
+
+  // MARK: - UI
   
   @IBOutlet weak var appbarView: UIView!
   @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -32,11 +60,8 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var folderTitleTextField: UITextField!
   @IBOutlet weak var archiveSongTableView: UITableView!
   @IBOutlet weak var addSongButton: UIButton!
-  
-  weak var delegate: ArchiveSongListViewDelegate?
-  var viewModel: ViewModel
+
   private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
-  private let archiveSongTableViewTopInset: CGFloat = 36
   
   
   // MARK: - Lifecycle
@@ -115,8 +140,8 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     registerArchiveSongTableCell()
     archiveSongTableView.tableFooterView = UIView()
     archiveSongTableView.separatorStyle = .none
-    archiveSongTableView.layer.cornerRadius = 20
-    archiveSongTableView.contentInset = UIEdgeInsets(top: archiveSongTableViewTopInset, left: 0, bottom: 100, right: 0)
+    archiveSongTableView.layer.cornerRadius = Metric.archiveSongTableViewCornerRadius
+    archiveSongTableView.contentInset = UIEdgeInsets(top: Metric.archiveSongTableViewTopInset, left: 0, bottom: Metric.archiveSongTableViewBottomInset, right: 0)
     
     archiveSongTableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
@@ -128,16 +153,16 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupFolderTitleTextField() {
-    folderTitleTextField.layer.cornerRadius = 12
-    folderTitleTextField.setLeftPadding(width: 16)
-    folderTitleTextField.setRightPadding(width: 16)
+    folderTitleTextField.layer.cornerRadius = Metric.folderTitleTextFieldCornerRadius
+    folderTitleTextField.setLeftPadding(width: Metric.folderTitleTextFieldLeftPadding)
+    folderTitleTextField.setRightPadding(width: Metric.folderTitleTextFieldRightPadding)
     folderTitleTextField.setSearchBoxShadow()
     folderTitleTextField.hero.modifiers = [.fade, .translate(y: -12)]
     folderTitleTextField.text = viewModel.folderTitle
   }
   
   private func setupTitleEmojiTextField() {
-    folderTitleEmojiTextField.layer.cornerRadius = 16
+    folderTitleEmojiTextField.layer.cornerRadius = Metric.folderTitleEmojiTextFieldCornerRadius
     folderTitleEmojiTextField.setSearchBoxShadow()
     folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: -12)]
     folderTitleEmojiTextField.text = viewModel.folderTitleEmoji
@@ -148,8 +173,8 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     addSongButton.hero.modifiers = [.fade, .translate(y: view.safeAreaInsets.bottom + 28)]
     addSongButton.layer.shadowColor = R.color.backgroundBasic()!.cgColor
     addSongButton.layer.shadowOffset = .zero
-    addSongButton.layer.shadowRadius = 20
-    addSongButton.layer.shadowOpacity = 0.25
+    addSongButton.layer.shadowRadius = Metric.addSongButtonShadowRadius
+    addSongButton.layer.shadowOpacity = Metric.addSongButtonShadowOpacity
   }
   
   private func setupSongOptionFloatingPanelView() {
@@ -264,7 +289,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     archiveSongTableView.rx.contentOffset
       .asDriver()
       .drive(with: self, onNext: { vc, offset in
-        let changedY = offset.y + vc.archiveSongTableViewTopInset
+        let changedY = offset.y + Metric.archiveSongTableViewTopInset
         let newAppbarHeight = vc.compactAppbarHeight - (changedY * 0.2)
         
         if newAppbarHeight >= vc.compactAppbarHeight {

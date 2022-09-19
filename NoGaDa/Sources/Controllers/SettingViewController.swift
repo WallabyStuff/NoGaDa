@@ -12,6 +12,16 @@ import RxCocoa
 
 class SettingViewController: BaseViewController {
   
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.setting.settingStoryboard.identifier
+  
+  struct Metric {
+    static let settingItemTableViewCornerRadius = 16.f
+    static let settingItemTableViewTopInset = 12.f
+    static let settingItemTableViewBottomInset = 12.f
+  }
+  
   
   // MARK: Types
   
@@ -20,9 +30,11 @@ class SettingViewController: BaseViewController {
   
   // MARK: - Properties
   
-  static let identifier = R.storyboard.setting.settingStoryboard.identifier
-  
   private var viewModel: ViewModel
+  
+  
+  // MARK: - UI
+  
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var settingItemTableView: UITableView!
   
@@ -99,11 +111,11 @@ class SettingViewController: BaseViewController {
   
   private func setupSettingItemTableView() {
     registerEtcTableCell()
-    settingItemTableView.layer.cornerRadius = 16
+    settingItemTableView.layer.cornerRadius = Metric.settingItemTableViewCornerRadius
     settingItemTableView.tableFooterView = UIView()
     settingItemTableView.isScrollEnabled = false
     settingItemTableView.separatorStyle = .none
-    settingItemTableView.contentInset = .init(top: 12, left: 0, bottom: 12, right: 0)
+    settingItemTableView.contentInset = .init(top: Metric.settingItemTableViewTopInset, left: 0, bottom: Metric.settingItemTableViewBottomInset, right: 0)
   }
   
   private func registerEtcTableCell() {

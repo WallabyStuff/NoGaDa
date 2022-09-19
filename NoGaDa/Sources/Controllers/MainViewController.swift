@@ -14,11 +14,38 @@ import SafeAreaBrush
 
 class MainViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Constants
   
-  // MARK: Properties
+  static let identifier = R.storyboard.main.mainStoryboard.identifier
+  
+  fileprivate struct Metric {
+    static let appbarCornerRadius = 28.f
+    
+    static let settingButtonPadding = 4.f
+    
+    static let searchBoxCornerRadius = 12.f
+    static let searchButtonCornerRadius = 8.f
+    
+    static let archiveShortcutViewCornerRadius = 20.f
+    
+    static let newUpdateSongTableViewCornerRadius = 20.f
+    
+    static let brandSegmentedControlFontSize = 14.f
+    static let brandSegmentedControlBarIndicatorHeight = 3.f
+  }
+  
+  
+  // MARK: - Types
   
   typealias ViewModel = MainViewModel
-  static let identifier = R.storyboard.main.mainStoryboard.identifier
+  
+  
+  // MARK: - Properties
+  
+  var viewModel: ViewModel
+  
+  
+  // MARK: UI
   
   @IBOutlet weak var appbarView: AppbarView!
   @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
@@ -36,7 +63,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var newUpdateSongErrorMessageLabel: UILabel!
   @IBOutlet weak var newUpdateSongLoadingIndicator: UIActivityIndicatorView!
   
-  var viewModel: ViewModel
   private var archiveFolderFloatingView: ArchiveFolderFloatingPanelView?
   
   
@@ -108,7 +134,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   private func setupAppbarView() {
     appbarView.backgroundColor = .clear
-    appbarView.configure(cornerRadius: 28, roundCorners: [.bottomRight])
+    appbarView.configure(cornerRadius: Metric.appbarCornerRadius, roundCorners: [.bottomRight])
     appbarView.setAppbarShadow()
     appbarViewHeightConstraint.constant = regularAppbarHeight
     mainContentScrollView.contentInset = UIEdgeInsets(top: regularAppbarHeight,
@@ -121,7 +147,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupSettingButton() {
-    settingButton.setPadding(width: 4)
+    settingButton.setPadding(width: Metric.settingButtonPadding)
   }
   
   private func setupMainContentScrollView() {
@@ -129,23 +155,23 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupSearchTextField() {
-    searchBoxView.layer.cornerRadius = 12
+    searchBoxView.layer.cornerRadius = Metric.searchBoxCornerRadius
     searchBoxView.setSearchBoxShadow()
   }
   
   private func setupSearchButton() {
-    searchButton.layer.cornerRadius = 8
+    searchButton.layer.cornerRadius = Metric.searchButtonCornerRadius
     searchButton.setSearchBoxButtonShadow()
   }
   
   private func setupArchiveShortcutBackgroundImageView() {
-    archiveShortcutBackgroundImageView.layer.cornerRadius = 20
+    archiveShortcutBackgroundImageView.layer.cornerRadius = Metric.archiveShortcutViewCornerRadius
     archiveShortcutBackgroundImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
   }
   
   private func setupNewUpdateSongTableView() {
     registerNewUpdateSongTableView()
-    newUpdateSongTableView.layer.cornerRadius = 12
+    newUpdateSongTableView.layer.cornerRadius = Metric.newUpdateSongTableViewCornerRadius
     newUpdateSongTableView.tableFooterView = UIView()
     newUpdateSongTableView.separatorStyle = .none
   }
@@ -159,8 +185,8 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     brandSegmentedControl.segmentTintColor = R.color.textBasic()!
     brandSegmentedControl.segmentDefaultColor = R.color.textSecondary()!
     brandSegmentedControl.barIndicatorColor = R.color.accentPink()!
-    brandSegmentedControl.barIndicatorHeight = 3
-    brandSegmentedControl.segmentFontSize = 14
+    brandSegmentedControl.barIndicatorHeight = Metric.brandSegmentedControlBarIndicatorHeight
+    brandSegmentedControl.segmentFontSize = Metric.brandSegmentedControlFontSize
     brandSegmentedControl.addSegment(title: "tj 업데이트")
     brandSegmentedControl.addSegment(title: "금영 업데이트")
     brandSegmentedControl.setSelected(index: 0)

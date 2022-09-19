@@ -17,19 +17,27 @@ protocol SearchHistoryViewDelegate: AnyObject {
 
 class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Constants
+  
+  static let idnetifier = R.storyboard.search.searchHistoryStoryboard.identifier
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = SearchHistoryViewModel
+
   
   // MARK: - Properties
   
-  typealias ViewModel = SearchHistoryViewModel
-  static let idnetifier = R.storyboard.search.searchHistoryStoryboard.identifier
+  weak var delegate: SearchHistoryViewDelegate?
+  var viewModel: ViewModel
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var searchHistoryTableView: UITableView!
   @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
   @IBOutlet weak var clearHistoryButton: UIButton!
-  
-  weak var delegate: SearchHistoryViewDelegate?
-  var viewModel: ViewModel
-  private let searchHistoryViewModel = SearchHistoryViewModel()
   
   
   // MARK: - Lifecycle
@@ -43,12 +51,12 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Initializers
   
-  required init(_ viewModel: SearchHistoryViewModel) {
+  required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
-  required init?(_ coder: NSCoder, _ viewModel: SearchHistoryViewModel) {
+  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(coder: coder)
   }

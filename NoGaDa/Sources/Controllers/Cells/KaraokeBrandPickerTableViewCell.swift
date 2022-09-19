@@ -9,10 +9,13 @@ import UIKit
 
 class KaraokeBrandPickerTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.karaokeBrandTableCell.identifier
+  
+  
+  // MARK: - UI
+  
   @IBOutlet weak var brandNameLabel: UILabel!
   
   
@@ -23,12 +26,20 @@ class KaraokeBrandPickerTableViewCell: UITableViewCell {
     setupView()
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    brandNameLabel.text = ""
+  }
+  
   
   // MARK: - Setups
   
   private func setupView() {
-    brandNameLabel.text = ""
-    
+    setupSelectedView()
+  }
+  
+  private func setupSelectedView() {
     let selectedView = UIView()
     selectedView.bounds = bounds
     selectedView.backgroundColor = R.color.accentYellowDark()

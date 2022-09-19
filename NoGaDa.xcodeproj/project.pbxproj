@@ -87,6 +87,7 @@
 		8E3CE86D28B251A100C3DD27 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */; };
 		8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */; };
 		8E3CE87328B2776F00C3DD27 /* BISegmentedControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */; };
+		8E661B7628D82D8E006D9116 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E661B7528D82D8E006D9116 /* Number+FloatType.swift */; };
 		8E6C95DE276797D100667C01 /* PopUpSongOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */; };
 		8E6C95E027679BB400667C01 /* SongOptionFloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */; };
 		8E6C95E22767A8F900667C01 /* SongOptionFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95E12767A8F900667C01 /* SongOptionFloatingPanelLayout.swift */; };
@@ -230,6 +231,7 @@
 		8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BISegmentedControl+Rx.swift"; sourceTree = "<group>"; };
+		8E661B7528D82D8E006D9116 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
 		8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSongOptionViewController.swift; sourceTree = "<group>"; };
 		8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOptionFloatingPanelView.swift; sourceTree = "<group>"; };
 		8E6C95E12767A8F900667C01 /* SongOptionFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOptionFloatingPanelLayout.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */,
 				8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */,
 				8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */,
+				8E661B7528D82D8E006D9116 /* Number+FloatType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */,
 				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
 				49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */,
+				8E661B7628D82D8E006D9116 /* Number+FloatType.swift in Sources */,
 				49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */,
 				4956CE2926F467040007523B /* MainViewController.swift in Sources */,
 				49D1D6BC26FC70720024C5F9 /* SongFolderManager.swift in Sources */,

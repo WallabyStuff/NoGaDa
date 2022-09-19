@@ -9,10 +9,18 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.searchResultTableViewCell.identifier
+  
+  struct Metric {
+    static let thumbnailImageViewCornerRadius = 16.f
+    
+    static let selectedViewCornerRadius = 20.f
+  }
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var thumbnailPlaceholderImageView: UIImageView!
@@ -33,21 +41,27 @@ class SongTableViewCell: UITableViewCell {
     
     titleLabel.releaseAccentColor(with: R.color.textBasic()!)
     singerLabel.releaseAccentColor(with: R.color.textSecondary()!)
+    songNumberLabel.text = ""
+    titleLabel.text = ""
+    singerLabel.text = ""
   }
   
   
   // MARK: - Setups
   
   private func setupView() {
-    thumbnailImageView.layer.cornerRadius = 16
-    
-    songNumberLabel.text    = ""
-    titleLabel.text         = ""
-    singerLabel.text        = ""
-    
+    setupThumbnailImageView()
+    setupSelectedView()
+  }
+  
+  private func setupThumbnailImageView() {
+    thumbnailImageView.layer.cornerRadius = Metric.thumbnailImageViewCornerRadius
+  }
+  
+  private func setupSelectedView() {
     let selectedView = UIView()
     selectedView.backgroundColor = R.color.backgroundBasicSelected()
-    selectedView.layer.cornerRadius = 20
+    selectedView.layer.cornerRadius = Metric.selectedViewCornerRadius
     selectedBackgroundView = selectedView
   }
 }
