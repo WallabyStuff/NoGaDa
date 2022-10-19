@@ -114,6 +114,7 @@
 		8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */; };
 		8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */; };
 		8E98D7902826DD5D0056CED4 /* UIbutton+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */; };
+		8EB6ACFD2900465400076C25 /* String+KoreanPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */; };
 		8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */; };
 		8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */; };
 		8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */; };
@@ -258,6 +259,7 @@
 		8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurfaceAppearance+PanelShadow.swift"; sourceTree = "<group>"; };
 		8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+CenterAlign.swift"; sourceTree = "<group>"; };
 		8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIbutton+Padding.swift"; sourceTree = "<group>"; };
+		8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+KoreanPolicy.swift"; sourceTree = "<group>"; };
 		8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewController.swift; sourceTree = "<group>"; };
 		8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewModel.swift; sourceTree = "<group>"; };
 		8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */,
 				8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */,
 				8E661B7528D82D8E006D9116 /* Number+FloatType.swift */,
+				8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
 				49484D022720B6D500EC12B3 /* ArchiveFolderViewModel.swift in Sources */,
+				8EB6ACFD2900465400076C25 /* String+KoreanPolicy.swift in Sources */,
 				8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */,
 				8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */,
 				8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */,

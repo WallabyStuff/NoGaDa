@@ -51,6 +51,10 @@ class SearchResultViewModel: ViewModelType {
     Observable.merge(
       input.search
         .map { keyword in
+          var keyword = keyword
+          if keyword.isKorean() {
+            keyword.removeAllEmptySpaces()
+          }
           output.searchKeyword.accept(keyword)
         },
       input.changeKaraokeBrand
