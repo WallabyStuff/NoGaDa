@@ -27,7 +27,6 @@
 		49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */; };
 		49484D022720B6D500EC12B3 /* ArchiveFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */; };
 		49484D042720BD7D00EC12B3 /* ArchiveSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */; };
-		4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */; };
 		495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334302711DE37003F64DE /* SearchResultViewController.swift */; };
 		495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334322711DE4B003F64DE /* SearchHistoryViewController.swift */; };
 		495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */; };
@@ -167,7 +166,6 @@
 		49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
 		49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderViewModel.swift; sourceTree = "<group>"; };
 		49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongViewModel.swift; sourceTree = "<group>"; };
-		4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BISegmentedControl.swift; sourceTree = "<group>"; };
 		495334302711DE37003F64DE /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		495334322711DE4B003F64DE /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -438,7 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
-				4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */,
 				49C6DC32270298E30094403B /* AppbarView.swift */,
 				4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */,
 				493F232D270DEA4700A618DC /* ArchiveFolderFloatingPanelView.swift */,
@@ -924,7 +921,6 @@
 				8E98D7842826DBD40056CED4 /* UITextField+PlaceholderColor.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
-				4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */,
 				8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */,
 				49C6DC7D270382620094403B /* SettingItem.swift in Sources */,
 				495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */,

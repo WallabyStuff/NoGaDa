@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -78,7 +78,7 @@
                                                         <rect key="frame" x="185" y="214" width="20" height="20"/>
                                                         <color key="color" name="IconBasicSecondary"/>
                                                     </activityIndicatorView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9e-jd-iKq" customClass="BISegmentedControl" customModule="NoGaDa" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9e-jd-iKq" customClass="BISegmentedControl" customModule="BISegmentedControl">
                                                         <rect key="frame" x="20" y="0.0" width="160" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="lka-Ct-Cfx"/>
@@ -229,7 +229,7 @@
     </scenes>
     <resources>
         <image name="ArchiveShortcutBackgroundImage" width="1024" height="717"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="setting" width="512" height="512"/>
         <namedColor name="AccentPurple">
             <color red="0.31000000238418579" green="0.31799998879432678" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
