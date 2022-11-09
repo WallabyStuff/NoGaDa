@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import BISegmentedControl
 
 class RxBISegmentedControlDelegateProxy: DelegateProxy<BISegmentedControl, BISegmentedControlDelegate>,
                                          DelegateProxyType,

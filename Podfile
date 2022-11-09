@@ -16,6 +16,7 @@ target 'NoGaDa' do
   pod 'SwiftRater'
   pod 'R.swift'
   pod 'SafeAreaBrush'
+  pod 'BISegmentedControl'
  
   target 'NoGaDaTests' do
     inherit! :search_paths

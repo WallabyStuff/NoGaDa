@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxGesture
 import SafeAreaBrush
+import BISegmentedControl
 
 class MainViewController: BaseViewController, ViewModelInjectable {
   
@@ -31,7 +32,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     static let newUpdateSongTableViewCornerRadius = 20.f
     
     static let brandSegmentedControlFontSize = 14.f
-    static let brandSegmentedControlBarIndicatorHeight = 3.f
+    static let brandSegmentedControlBarIndicatorHeight = 4.f
   }
   
   
@@ -182,13 +183,15 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupBrandSegmentedControl() {
-    brandSegmentedControl.segmentTintColor = R.color.textBasic()!
-    brandSegmentedControl.segmentDefaultColor = R.color.textSecondary()!
+    brandSegmentedControl.barIndicatorWidthProportion = 0.7
+    brandSegmentedControl.focusedTextColor = R.color.textBasic()!
+    brandSegmentedControl.defaultTextColor = R.color.textSecondary()!
     brandSegmentedControl.barIndicatorColor = R.color.accentPink()!
     brandSegmentedControl.barIndicatorHeight = Metric.brandSegmentedControlBarIndicatorHeight
-    brandSegmentedControl.segmentFontSize = Metric.brandSegmentedControlFontSize
-    brandSegmentedControl.addSegment(title: "tj 업데이트")
-    brandSegmentedControl.addSegment(title: "금영 업데이트")
+    brandSegmentedControl.defaultFontSize = Metric.brandSegmentedControlFontSize
+    brandSegmentedControl.focusedFontSize = Metric.brandSegmentedControlFontSize
+    brandSegmentedControl.addItem(title: "tj 업데이트")
+    brandSegmentedControl.addItem(title: "금영 업데이트")
     brandSegmentedControl.setSelected(index: 0)
   }
   
