@@ -52,7 +52,7 @@
 		4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */; };
 		4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD6270471CB005F0D85 /* ResourceItem.swift */; };
 		4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */; };
-		49C6DC33270298E30094403B /* AppbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppbarView.swift */; };
+		49C6DC33270298E30094403B /* AppBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppBarView.swift */; };
 		49C6DC75270372F40094403B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC74270372F40094403B /* SettingViewController.swift */; };
 		49C6DC7A270381910094403B /* SettingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingItemTableViewCell.swift */; };
 		49C6DC7B270381910094403B /* SettingItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingItemTableViewCell.xib */; };
@@ -82,7 +82,7 @@
 		8E33F3FD2854978D00B6E6EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */; };
 		8E33F3FF2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */; };
 		8E33F4002857980500B6E6EE /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
-		8E33F40228579C0C00B6E6EE /* AppbarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */; };
+		8E33F40228579C0C00B6E6EE /* AppBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F40128579C0C00B6E6EE /* AppBarHeight.swift */; };
 		8E3CE86D28B251A100C3DD27 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */; };
 		8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */; };
 		8E3CE87328B2776F00C3DD27 /* BISegmentedControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */; };
@@ -197,7 +197,7 @@
 		4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconResourceCollectionViewCell.xib; sourceTree = "<group>"; };
 		4997CFD6270471CB005F0D85 /* ResourceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceItem.swift; sourceTree = "<group>"; };
 		4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderShortcutView.swift; sourceTree = "<group>"; };
-		49C6DC32270298E30094403B /* AppbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarView.swift; sourceTree = "<group>"; };
+		49C6DC32270298E30094403B /* AppBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarView.swift; sourceTree = "<group>"; };
 		49C6DC74270372F40094403B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		49C6DC78270381910094403B /* SettingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemTableViewCell.swift; sourceTree = "<group>"; };
 		49C6DC79270381910094403B /* SettingItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 		8E33F3FA28547C7200B6E6EE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewModel.swift; sourceTree = "<group>"; };
-		8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarHeight.swift; sourceTree = "<group>"; };
+		8E33F40128579C0C00B6E6EE /* AppBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarHeight.swift; sourceTree = "<group>"; };
 		8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BISegmentedControl+Rx.swift"; sourceTree = "<group>"; };
@@ -436,7 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
-				49C6DC32270298E30094403B /* AppbarView.swift */,
+				49C6DC32270298E30094403B /* AppBarView.swift */,
 				4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */,
 				493F232D270DEA4700A618DC /* ArchiveFolderFloatingPanelView.swift */,
 				8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */,
@@ -562,7 +562,7 @@
 				8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */,
 				8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */,
 				8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */,
-				8E33F40128579C0C00B6E6EE /* AppbarHeight.swift */,
+				8E33F40128579C0C00B6E6EE /* AppBarHeight.swift */,
 				8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */,
 				8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */,
 				8E661B7528D82D8E006D9116 /* Number+FloatType.swift */,
@@ -880,7 +880,7 @@
 				8E25076828D1ED3400756AB1 /* SettingViewModel.swift in Sources */,
 				49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */,
 				49484D042720BD7D00EC12B3 /* ArchiveSongViewModel.swift in Sources */,
-				49C6DC33270298E30094403B /* AppbarView.swift in Sources */,
+				49C6DC33270298E30094403B /* AppBarView.swift in Sources */,
 				493BCBF326F642630096422A /* EmojiTextField.swift in Sources */,
 				8E14E8EB27D49E2D008F18B8 /* HapticFeedbackManager.swift in Sources */,
 				493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */,
@@ -941,7 +941,7 @@
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,
 				8E98D7902826DD5D0056CED4 /* UIbutton+Padding.swift in Sources */,
 				8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */,
-				8E33F40228579C0C00B6E6EE /* AppbarHeight.swift in Sources */,
+				8E33F40228579C0C00B6E6EE /* AppBarHeight.swift in Sources */,
 				8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */,
 				8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */,
 				8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */,

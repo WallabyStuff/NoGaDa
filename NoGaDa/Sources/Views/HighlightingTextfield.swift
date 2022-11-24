@@ -45,12 +45,12 @@ class HighlightingTextfield: UITextField {
   private func bind() {
     self.rx.controlEvent(.editingDidBegin)
       .bind(onNext: { [weak self] in
-        self?.hightlightTextField(R.color.accentColor()!)
+        self?.highlightTextField(R.color.accentColor()!)
       }).disposed(by: disposeBag)
     
     self.rx.controlEvent(.editingDidEnd)
       .bind(onNext: { [weak self] in
-        self?.unhightlightTextField()
+        self?.unhighlightTextField()
       }).disposed(by: disposeBag)
   }
   
@@ -61,12 +61,12 @@ class HighlightingTextfield: UITextField {
 // MARK: - Extensions
 
 extension HighlightingTextfield {
-  func hightlightTextField(_ color: UIColor) {
+  func highlightTextField(_ color: UIColor) {
     layer.borderWidth = 1
     layer.borderColor = color.cgColor
   }
   
-  func unhightlightTextField() {
+  func unhighlightTextField() {
     layer.borderWidth = 0
   }
 }

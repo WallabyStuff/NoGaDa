@@ -17,7 +17,7 @@ class SettingItemTableViewCell: UITableViewCell {
   static let identifier = R.reuseIdentifier.settingEtcTableCell.identifier
   
   struct Metric {
-    static let iconConainterViewCornerRadius = 12.f
+    static let iconContainerViewCornerRadius = 12.f
     
     static let selectedViewCornerRadius = 12.f
   }
@@ -61,7 +61,7 @@ class SettingItemTableViewCell: UITableViewCell {
   }
   
   private func setupIconContainerView() {
-    iconContainerView.layer.cornerRadius = Metric.iconConainterViewCornerRadius
+    iconContainerView.layer.cornerRadius = Metric.iconContainerViewCornerRadius
   }
   
   private func setupSelectedView() {

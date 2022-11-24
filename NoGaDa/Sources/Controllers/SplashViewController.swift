@@ -24,7 +24,7 @@ class SplashViewController: UIViewController {
   // MARK: - Properties
   
   private var disposeBag = DisposeBag()
-  private var didupdateConstraints = false
+  private var didUpdateConstraints = false
   
   
   // MARK: - LifeCycles

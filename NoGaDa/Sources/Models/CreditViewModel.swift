@@ -17,7 +17,7 @@ class CreditViewModel: ViewModelType {
   
   struct Input {
     let tapExitButton = PublishSubject<Void>()
-    let tapContactbutton = PublishSubject<Void>()
+    let tapContactButton = PublishSubject<Void>()
   }
   
   struct Output {

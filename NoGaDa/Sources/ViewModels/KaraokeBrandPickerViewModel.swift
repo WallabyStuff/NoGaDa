@@ -30,7 +30,7 @@ class KaraokeBrandPickerViewModel: ViewModelType {
   private(set) var disposeBag = DisposeBag()
   
   
-  // MARK: - Initializsers
+  // MARK: - Initializers
   
   init() {
     setupInputOutput()

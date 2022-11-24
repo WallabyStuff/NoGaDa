@@ -10,13 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol BrandPickerViewDelegaet: AnyObject {
+protocol BrandPickerViewDelegate: AnyObject {
   func didBrandSelected(_ selectedBrand: KaraokeBrand)
 }
 
 class KaraokeBrandPickerViewController: BaseViewController, ViewModelInjectable {
   
-  // MARK: - Cosntants
+  // MARK: - Constants
   
   static let identifier = R.storyboard.archive.karaokeBrandPickerStoryboard.identifier
   
@@ -33,7 +33,7 @@ class KaraokeBrandPickerViewController: BaseViewController, ViewModelInjectable 
   
   // MARK: - Properties
   
-  weak var delegate: BrandPickerViewDelegaet?
+  weak var delegate: BrandPickerViewDelegate?
   var viewModel: KaraokeBrandPickerViewModel
   
   
@@ -51,7 +51,7 @@ class KaraokeBrandPickerViewController: BaseViewController, ViewModelInjectable 
   }
   
   
-  // MARK: - Intializations
+  // MARK: - Initializers
   
   required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -93,7 +93,7 @@ class KaraokeBrandPickerViewController: BaseViewController, ViewModelInjectable 
   }
 
   
-  // MARK: - Bidns
+  // MARK: - Binds
   
   private func bind() {
     bindInputs()

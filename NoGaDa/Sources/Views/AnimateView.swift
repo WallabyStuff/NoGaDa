@@ -10,7 +10,7 @@ import UIKit
 class AnimateView: UIView {
   
   
-  // MARK: - Touch event Aniamtions
+  // MARK: - Touch event Animations
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)

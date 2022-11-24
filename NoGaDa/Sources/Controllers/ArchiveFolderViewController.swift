@@ -29,7 +29,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   struct Metric {
     static let archiveFolderTableViewTopInset = 36.f
     
-    static let appbarViewCornerRadius = 28.f
+    static let appBarViewCornerRadius = 28.f
     
     static let addFolderButtonCornerRadius = 12.f
   }
@@ -48,7 +48,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - UI
   
-  @IBOutlet weak var appbarView: UIView!
+  @IBOutlet weak var appBarView: UIView!
   @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var appbarTitleLabel: UILabel!
   @IBOutlet weak var exitButton: UIButton!
@@ -108,8 +108,8 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   private func setupView() {
     self.hero.isEnabled = true
     setupStatusBar()
-    setupAppbar()
-    setupAppbarTitleLabel()
+    setupAppBar()
+    setupAppBarTitleLabel()
     setupAddFolderButton()
     setupExitButton()
     setupArchiveFolderTableView()
@@ -119,14 +119,14 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     fillSafeArea(position: .top, color: R.color.accentColor()!, insertAt: 0)
   }
   
-  private func setupAppbar() {
-    appbarView.layer.cornerRadius = Metric.appbarViewCornerRadius
-    appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = compactAppbarHeight
+  private func setupAppBar() {
+    appBarView.layer.cornerRadius = Metric.appBarViewCornerRadius
+    appBarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+    appBarView.setAppBarShadow()
+    appbarViewHeightConstraint.constant = compactAppBarHeight
   }
   
-  private func setupAppbarTitleLabel() {
+  private func setupAppBarTitleLabel() {
     appbarTitleLabel.hero.id = "appbarTitle"
   }
   
@@ -234,12 +234,12 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     archiveFolderTableView.rx.contentOffset
       .asDriver()
       .drive(with: self, onNext: { vc, offset in
-        let compactAppbarHeight = vc.compactAppbarHeight
+        let compactAppbarHeight = vc.compactAppBarHeight
         
         let changedY = offset.y + Metric.archiveFolderTableViewTopInset
         let newAppbarHeight = compactAppbarHeight - (changedY * 0.2)
         
-        if newAppbarHeight >= vc.compactAppbarHeight {
+        if newAppbarHeight >= vc.compactAppBarHeight {
           vc.appbarViewHeightConstraint.constant = newAppbarHeight
         }
       }).disposed(by: disposeBag)

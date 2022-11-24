@@ -28,7 +28,7 @@ class PopUpArchiveFolderTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    setupview()
+    setupView()
   }
   
   override func prepareForReuse() {
@@ -41,7 +41,7 @@ class PopUpArchiveFolderTableViewCell: UITableViewCell {
   
   // MARK: - Setups
   
-  private func setupview() {
+  private func setupView() {
     setupSelectedView()
   }
   

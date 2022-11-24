@@ -11,7 +11,7 @@ import RxCocoa
 
 class SearchHistoryTableViewCell: UITableViewCell {
   
-  // MARK: - Cosntants
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.searchHistoryTableCell.identifier
   
@@ -20,7 +20,7 @@ class SearchHistoryTableViewCell: UITableViewCell {
   }
   
   
-  // MARK: - Properteis
+  // MARK: - Properties
   
   private var disposeBag = DisposeBag()
   public var removeButtonTapAction: () -> Void = {}

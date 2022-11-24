@@ -14,7 +14,7 @@ import MessageUI
 
 class CreditViewController: BaseViewController, ViewModelInjectable {
   
-  // MARK: - Cosntants
+  // MARK: - Constants
   
   static let identifier = R.storyboard.setting.creditStoryboard.identifier
   

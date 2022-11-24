@@ -12,7 +12,7 @@ extension UIView {
     self.layer.cornerRadius = self.frame.width / 2
   }
   
-  func setAppbarShadow() {
+  func setAppBarShadow() {
     self.layer.shadowColor = R.color.accentPurple()!.cgColor
     self.layer.shadowOffset = .zero
     self.layer.shadowRadius = 12

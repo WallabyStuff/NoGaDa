@@ -17,8 +17,8 @@ class BaseViewController: UIViewController {
   // MARK: - Properties
   
   var disposeBag = DisposeBag()
-  let compactAppbarHeight: CGFloat = AppbarHeight.compactAppbarHeight
-  let regularAppbarHeight: CGFloat = AppbarHeight.regularAppbarHeight
+  let compactAppBarHeight: CGFloat = AppBarHeight.compactAppBarHeight
+  let regularAppBarHeight: CGFloat = AppBarHeight.regularAppBarHeight
   
   
   // MARK: - StatusBarStyle

@@ -348,7 +348,7 @@ extension AddSongViewController: UIPopoverPresentationControllerDelegate {
   }
 }
 
-extension AddSongViewController: BrandPickerViewDelegaet {
+extension AddSongViewController: BrandPickerViewDelegate {
   func didBrandSelected(_ selectedBrand: KaraokeBrand) {
     Observable.just(selectedBrand)
       .bind(to: viewModel.input.changeKaraokeBrand)

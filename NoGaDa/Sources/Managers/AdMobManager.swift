@@ -57,10 +57,10 @@ class AdMobManager {
 }
 
 
-// MARK: - Admob frequency
+// MARK: - AdMob frequency
 
 extension AdMobManager {
-  private func admobUsageState() -> Bool {
+  private func adMobUsageState() -> Bool {
     let currentUsageCount = UserDefaults.standard.integer(forKey: "admobUsageCount")
     
     if currentUsageCount % presentFrequency == 0 {
@@ -70,7 +70,7 @@ extension AdMobManager {
     }
   }
   
-  private func updateAdmobUsageCount() {
+  private func updateAdMobUsageCount() {
     let currentUsageState = UserDefaults.standard.integer(forKey: "admobUsageCount")
     UserDefaults.standard.set(currentUsageState + 1, forKey: "admobUsageCount")
   }
