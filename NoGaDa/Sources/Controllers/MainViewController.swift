@@ -20,7 +20,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   static let identifier = R.storyboard.main.mainStoryboard.identifier
   
   fileprivate struct Metric {
-    static let appbarCornerRadius = 28.f
+    static let appBarCornerRadius = 28.f
     
     static let settingButtonPadding = 4.f
     
@@ -29,7 +29,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     
     static let archiveShortcutViewCornerRadius = 20.f
     
-    static let newUpdateSongTableViewCornerRadius = 20.f
+    static let newUpdateSongTableViewCornerRadius = 20.f 
     
     static let brandSegmentedControlFontSize = 14.f
     static let brandSegmentedControlBarIndicatorHeight = 4.f
@@ -48,9 +48,9 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: UI
   
-  @IBOutlet weak var appbarView: AppbarView!
-  @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var appbarTitleLabel: UILabel!
+  @IBOutlet weak var appBarView: AppBarView!
+  @IBOutlet weak var appBarViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var appBarTitleLabel: UILabel!
   @IBOutlet weak var settingButton: UIButton!
   @IBOutlet weak var mainContentScrollView: UIScrollView!
   @IBOutlet weak var mainContentScrollViewContentViewHeightConstraint: NSLayoutConstraint!
@@ -98,7 +98,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     requestTrackingAuthorization()
     
     // Update constraints
-    appbarView.setNeedsLayout()
+    appBarView.setNeedsLayout()
   }
   
   
@@ -118,8 +118,8 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   private func setupView() {
     setupStatusBar()
-    setupAppbarView()
-    setupAppbarTitleLabel()
+    setupAppBarView()
+    setupAppBarTitleLabel()
     setupSettingButton()
     setupMainContentScrollView()
     setupSearchTextField()
@@ -133,18 +133,18 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     fillSafeArea(position: .top, color: R.color.accentPurple()!, insertAt: 0)
   }
   
-  private func setupAppbarView() {
-    appbarView.backgroundColor = .clear
-    appbarView.configure(cornerRadius: Metric.appbarCornerRadius, roundCorners: [.bottomRight])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = regularAppbarHeight
-    mainContentScrollView.contentInset = UIEdgeInsets(top: regularAppbarHeight,
+  private func setupAppBarView() {
+    appBarView.backgroundColor = .clear
+    appBarView.configure(cornerRadius: Metric.appBarCornerRadius, roundCorners: [.bottomRight])
+    appBarView.setAppBarShadow()
+    appBarViewHeightConstraint.constant = regularAppBarHeight
+    mainContentScrollView.contentInset = UIEdgeInsets(top: regularAppBarHeight,
                                                       left: 0, bottom: 0, right: 0)
     mainContentScrollView.scrollToTop(animated: true)
   }
   
-  private func setupAppbarTitleLabel() {
-    appbarTitleLabel.hero.id = "appbarTitle"
+  private func setupAppBarTitleLabel() {
+    appBarTitleLabel.hero.id = "appbarTitle"
   }
   
   private func setupSettingButton() {
@@ -196,7 +196,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Bindss
+  // MARK: - Binds
   
   private func bind() {
     bindInputs()
@@ -352,28 +352,28 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     mainContentScrollView.rx.contentOffset
       .asDriver()
       .drive(with: self, onNext: { vc, offset in
-        let compactAppbarHeight = vc.compactAppbarHeight
-        let regularAppbarHeight = vc.regularAppbarHeight
-        let changedY = offset.y + regularAppbarHeight
+        let compactAppBarHeight = vc.compactAppBarHeight
+        let regularAppBarHeight = vc.regularAppBarHeight
+        let changedY = offset.y + regularAppBarHeight
         
         if -regularAppbarHeight < offset.y {
-          // Shrink Appbar
-          if regularAppbarHeight - changedY >= compactAppbarHeight {
-            let modifiedAppbarHeight: CGFloat = regularAppbarHeight - changedY
-            vc.appbarViewHeightConstraint.constant = modifiedAppbarHeight
+          // Shrink AppBar
+          if regularAppBarHeight - changedY >= compactAppBarHeight {
+            let modifiedAppbarHeight: CGFloat = regularAppBarHeight - changedY
+            vc.appBarViewHeightConstraint.constant = modifiedAppbarHeight
             
-            let appbarTitleLabelAlpha: CGFloat = 1 - (regularAppbarHeight - modifiedAppbarHeight) / (regularAppbarHeight - compactAppbarHeight)
-            vc.appbarTitleLabel.alpha = appbarTitleLabelAlpha
+            let appbarTitleLabelAlpha: CGFloat = 1 - (regularAppBarHeight - modifiedAppbarHeight) / (regularAppBarHeight - compactAppBarHeight)
+            vc.appBarTitleLabel.alpha = appbarTitleLabelAlpha
             vc.settingButton.alpha = appbarTitleLabelAlpha
           } else {
-            vc.appbarViewHeightConstraint.constant = compactAppbarHeight
-            vc.appbarTitleLabel.alpha = 0
+            vc.appBarViewHeightConstraint.constant = compactAppBarHeight
+            vc.appBarTitleLabel.alpha = 0
             vc.settingButton.alpha = 0
           }
         } else {
           // Stretch Appbar
-          vc.appbarViewHeightConstraint.constant = regularAppbarHeight - changedY * 0.2
-          vc.appbarTitleLabel.alpha = 1
+          vc.appBarViewHeightConstraint.constant = regularAppBarHeight - changedY * 0.2
+          vc.appBarTitleLabel.alpha = 1
           vc.settingButton.alpha = 1
         }
       }).disposed(by: disposeBag)

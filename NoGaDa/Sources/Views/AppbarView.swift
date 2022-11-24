@@ -10,7 +10,7 @@ import Hero
 import RxSwift
 import RxCocoa
 
-class AppbarView: UIView {
+class AppBarView: UIView {
   
   // MARK: - Properties
   

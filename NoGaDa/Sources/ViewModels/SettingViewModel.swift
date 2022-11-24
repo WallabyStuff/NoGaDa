@@ -31,13 +31,13 @@ class SettingViewModel: ViewModelType {
   // MARK: - Initializers
   
   init() {
-    setupIntoutOutput()
+    setupInputOutput()
   }
   
   
   // MARK: - Setups
   
-  private func setupIntoutOutput() {
+  private func setupInputOutput() {
     self.input = Input()
     let output = Output()
     

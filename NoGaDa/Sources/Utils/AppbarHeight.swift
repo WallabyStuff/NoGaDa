@@ -7,12 +7,12 @@
 
 import UIKit
 
-class AppbarHeight {
-  static var compactAppbarHeight: CGFloat {
+class AppBarHeight {
+  static var compactAppBarHeight: CGFloat {
     return safeAreaTop + 80
   }
   
-  static var regularAppbarHeight: CGFloat {
+  static var regularAppBarHeight: CGFloat {
     return safeAreaTop + 132
   }
   

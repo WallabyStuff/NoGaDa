@@ -116,7 +116,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
     self.hero.isEnabled = true
     
     setupStatusBar()
-    setupAppbarView()
+    setupAppBarView()
     setupAppbarTitleLabel()
     setupSearchBoxView()
     setupSearchTextField()
@@ -132,12 +132,12 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
     fillSafeArea(position: .top, color: R.color.accentPurple()!, insertAt: 0)
   }
   
-  private func setupAppbarView() {
+  private func setupAppBarView() {
     appbarView.layer.cornerRadius = Metric.appbarViewCornerRadius
     appbarView.layer.cornerCurve = .circular
     appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = regularAppbarHeight
+    appbarView.setAppBarShadow()
+    appbarViewHeightConstraint.constant = regularAppBarHeight
   }
   
   private func setupAppbarTitleLabel() {
@@ -178,7 +178,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   
   private func setupSearchHistoryVC() {
     let storyboard = UIStoryboard(name: R.storyboard.search.name, bundle: nil)
-    let searchHistoryVC = storyboard.instantiateViewController(identifier: SearchHistoryViewController.idnetifier) { coder -> SearchHistoryViewController in
+    let searchHistoryVC = storyboard.instantiateViewController(identifier: SearchHistoryViewController.identifier) { coder -> SearchHistoryViewController in
       let viewModel = SearchHistoryViewModel()
       return .init(coder, viewModel) ?? SearchHistoryViewController(viewModel)
     }
@@ -369,7 +369,7 @@ extension SearchViewController: SearchHistoryViewDelegate {
     dismissKeyboardAndArchivePanel()
   }
   
-  func didHSelectistoryItem(_ keyword: String) {
+  func didSelectHistoryItem(_ keyword: String) {
     searchTextField.text = keyword
     setSearchResult()
   }

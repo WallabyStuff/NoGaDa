@@ -9,7 +9,7 @@ import UIKit
 
 class UpdatedSongTableViewCell: UITableViewCell {
   
-  // MARK: - Cosntants
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.updatedSongTableViewCell.identifier
   

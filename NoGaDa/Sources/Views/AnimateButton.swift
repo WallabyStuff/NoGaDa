@@ -9,8 +9,7 @@ import UIKit
 
 class AnimateButton: UIButton {
   
-  
-  // MARK: - Matrics
+  // MARK: - Metrics
   
   static let ANIMATION_DURATION_TAP: CGFloat = 0.2
   static let ANIMATION_DURATION_RELEASE_TAP: CGFloat = 0.15

@@ -12,14 +12,14 @@ import RxCocoa
 
 protocol SearchHistoryViewDelegate: AnyObject {
   func didCallEndEditing()
-  func didHSelectistoryItem(_ keyword: String)
+  func didSelectHistoryItem(_ keyword: String)
 }
 
 class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
-  static let idnetifier = R.storyboard.search.searchHistoryStoryboard.identifier
+  static let identifier = R.storyboard.search.searchHistoryStoryboard.identifier
   
   
   // MARK: - Types
@@ -131,7 +131,7 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
       .asDriver(onErrorDriveWith: .never())
       .drive(with: self, onNext: { vc, historyItem in
         let keyword = historyItem.keyword
-        vc.delegate?.didHSelectistoryItem(keyword)
+        vc.delegate?.didSelectHistoryItem(keyword)
       })
       .disposed(by: disposeBag)
   }

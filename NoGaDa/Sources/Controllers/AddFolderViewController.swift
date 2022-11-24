@@ -24,7 +24,7 @@ class AddFolderViewController: BaseViewController {
   struct Metric {
     static let confirmButtonCornerRadius = 12.f
     
-    static let emojiTextFieldFrameViewCornerRaidus = 20.f
+    static let emojiTextFieldFrameViewCornerRadius = 20.f
     
     static let folderTitleTextFieldLeftPadding = 8.f
     
@@ -38,7 +38,7 @@ class AddFolderViewController: BaseViewController {
   typealias ViewModel = AddFolderViewModel
   
   
-  // MARK: - Properteis
+  // MARK: - Properties
   
   weak var delegate: AddFolderViewDelegate?
   private let viewModel: ViewModel
@@ -111,7 +111,7 @@ class AddFolderViewController: BaseViewController {
   }
   
   private func setupEmojiTextFieldFrameView() {
-    emojiTextFieldFrameView.layer.cornerRadius = Metric.emojiTextFieldFrameViewCornerRaidus
+    emojiTextFieldFrameView.layer.cornerRadius = Metric.emojiTextFieldFrameViewCornerRadius
   }
   
   private func setupFolderTitleTextField() {

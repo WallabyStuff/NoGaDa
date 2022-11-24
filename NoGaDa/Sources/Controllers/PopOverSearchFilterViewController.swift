@@ -82,7 +82,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   
   private func setupView() {
     setupSearchFilterTableView()
-    setupApplayButton()
+    setupApplyButton()
   }
   
   private func setupSearchFilterTableView() {
@@ -97,7 +97,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     searchFilterTableView.register(nibName, forCellReuseIdentifier: SearchFilterTableViewCell.identifier)
   }
   
-  private func setupApplayButton() {
+  private func setupApplyButton() {
     applyButton.layer.cornerRadius = Metric.applyButtonCornerRadius
   }
   
@@ -117,7 +117,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   }
   
   private func bindOutput() {
-    viewModel.output.serachFilterItems
+    viewModel.output.searchFilterItems
       .bind(to: searchFilterTableView.rx.items(cellIdentifier: SearchFilterTableViewCell.identifier,
                                                cellType: SearchFilterTableViewCell.self)) { [weak self] index, item, cell in
         guard let self = self else { return }
