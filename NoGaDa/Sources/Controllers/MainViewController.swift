@@ -29,7 +29,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     
     static let archiveShortcutViewCornerRadius = 20.f
     
-    static let newUpdateSongTableViewCornerRadius = 20.f 
+    static let newUpdateSongTableViewCornerRadius = 12.f 
     
     static let brandSegmentedControlFontSize = 14.f
     static let brandSegmentedControlBarIndicatorHeight = 4.f
@@ -356,7 +356,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
         let regularAppBarHeight = vc.regularAppBarHeight
         let changedY = offset.y + regularAppBarHeight
         
-        if -regularAppbarHeight < offset.y {
+        if -regularAppBarHeight < offset.y {
           // Shrink AppBar
           if regularAppBarHeight - changedY >= compactAppBarHeight {
             let modifiedAppbarHeight: CGFloat = regularAppBarHeight - changedY

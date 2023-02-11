@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,14 +43,14 @@
                         <color key="textColor" name="TextBasic"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1I-wS-x1q">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1I-wS-x1q">
                         <rect key="frame" x="72" y="12" width="66.5" height="17"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" name="TextBasic"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghA-0s-BGA">
-                        <rect key="frame" x="72" y="37" width="66.5" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghA-0s-BGA">
+                        <rect key="frame" x="72" y="35" width="66.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" name="TextSecondary"/>
                         <nil key="highlightedColor"/>
@@ -62,11 +62,12 @@
                     <constraint firstItem="h1I-wS-x1q" firstAttribute="leading" secondItem="TIG-Fa-kaQ" secondAttribute="trailing" constant="12" id="8dw-Zp-iCL"/>
                     <constraint firstAttribute="trailing" secondItem="Asg-ob-dZ8" secondAttribute="trailing" constant="12" id="BLY-3I-xaf"/>
                     <constraint firstItem="Asg-ob-dZ8" firstAttribute="leading" secondItem="ghA-0s-BGA" secondAttribute="trailing" constant="12" id="Ee9-S5-dDY"/>
-                    <constraint firstItem="ghA-0s-BGA" firstAttribute="top" secondItem="h1I-wS-x1q" secondAttribute="bottom" constant="8" id="JbJ-XO-QXo"/>
-                    <constraint firstItem="TIG-Fa-kaQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OYb-Ni-6zC"/>
+                    <constraint firstItem="ghA-0s-BGA" firstAttribute="top" secondItem="h1I-wS-x1q" secondAttribute="bottom" constant="6" id="JbJ-XO-QXo"/>
+                    <constraint firstItem="h1I-wS-x1q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="TTI-VK-4Cb"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ghA-0s-BGA" secondAttribute="bottom" constant="14" id="Ykj-le-jBA"/>
                     <constraint firstItem="vZm-CR-O5B" firstAttribute="centerY" secondItem="TIG-Fa-kaQ" secondAttribute="centerY" id="edx-if-Fec"/>
-                    <constraint firstItem="h1I-wS-x1q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="gra-na-hal"/>
                     <constraint firstItem="Asg-ob-dZ8" firstAttribute="leading" secondItem="h1I-wS-x1q" secondAttribute="trailing" constant="12" id="hXV-Cv-HJx"/>
+                    <constraint firstItem="TIG-Fa-kaQ" firstAttribute="top" secondItem="h1I-wS-x1q" secondAttribute="top" constant="-4" id="mX0-F6-ebv"/>
                     <constraint firstItem="ghA-0s-BGA" firstAttribute="leading" secondItem="TIG-Fa-kaQ" secondAttribute="trailing" constant="12" id="qST-eG-WyX"/>
                     <constraint firstItem="Asg-ob-dZ8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xjr-Zx-gvA"/>
                 </constraints>
