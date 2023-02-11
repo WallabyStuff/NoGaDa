@@ -306,7 +306,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
       searchHistoryVC.view.isHidden = true
       searchResultVC.view.isHidden = false
       
-      // Refresh saerch history
+      // Refresh search history
       Observable.just(Void())
         .bind(to: searchHistoryVC.viewModel.input.refresh)
         .disposed(by: disposeBag)

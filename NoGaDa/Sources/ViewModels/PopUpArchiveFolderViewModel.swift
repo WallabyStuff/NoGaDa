@@ -33,7 +33,7 @@ class PopUpArchiveFolderViewModel: ViewModelType {
     let dismiss = PublishRelay<Void>()
     let didSongAdded = PublishRelay<Void>()
     let playHapticFeedback = PublishRelay<UINotificationFeedbackGenerator.FeedbackType>()
-    let showingAlearyExistsAlert = PublishRelay<Void>()
+    let showingAlreadyExistsAlert = PublishRelay<Void>()
   }
   
   private(set) var input: Input!
@@ -110,7 +110,7 @@ class PopUpArchiveFolderViewModel: ViewModelType {
         output.didSongAdded.accept(Void())
         output.playHapticFeedback.accept(.success)
       }, onError: { _ in
-        output.showingAlearyExistsAlert.accept(Void())
+        output.showingAlreadyExistsAlert.accept(Void())
       })
       .disposed(by: disposeBag)
     
