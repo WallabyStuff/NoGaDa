@@ -171,7 +171,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     viewModel.output.dismiss
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] in
-        self?.dismiss(animated: true)
+        self?.exitButtonAction()
       })
       .disposed(by: disposeBag)
     
@@ -189,10 +189,10 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
       })
       .disposed(by: disposeBag)
     
-    viewModel.output.showingAlearyExistsAlert
+    viewModel.output.showingAlreadyExistsAlert
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] in
-        self?.presentAlreadyExitstAlert()
+        self?.presentAlreadyExistsAlert()
       })
       .disposed(by: disposeBag)
   }
@@ -229,7 +229,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     present(addSongAlert, animated: true, completion: nil)
   }
   
-  public func presentAlreadyExitstAlert()  {
+  public func presentAlreadyExistsAlert()  {
     let alreadyExistsAlert = UIAlertController(title: "알림",
                                                message: "이미 저장된 곡입니다.",
                                                preferredStyle: .alert)
