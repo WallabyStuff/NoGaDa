@@ -10,20 +10,36 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol BrandPickerViewDelegaet: AnyObject {
+protocol BrandPickerViewDelegate: AnyObject {
   func didBrandSelected(_ selectedBrand: KaraokeBrand)
 }
 
-class KaraokeBrandPickerViewController: UIViewController {
+class KaraokeBrandPickerViewController: BaseViewController, ViewModelInjectable {
+  
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.archive.karaokeBrandPickerStoryboard.identifier
+  
+  struct Metric {
+    static let brandPickerTableViewSeparatorLeftInset = 8.f
+    static let brandPickerTableviewSeparatorRightInset = 8.f
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = KaraokeBrandPickerViewModel
   
   
   // MARK: - Properties
   
-  @IBOutlet weak var brandPickerTableView: UITableView!
+  weak var delegate: BrandPickerViewDelegate?
+  var viewModel: KaraokeBrandPickerViewModel
   
-  weak var delegate: BrandPickerViewDelegaet?
-  private let viewModel: KaraokeBrandPickerViewModel
-  private var disposeBag = DisposeBag()
+  
+  // MARK: - UI
+  
+  @IBOutlet weak var brandPickerTableView: UITableView!
   
   
   // MARK: - Lifecycle
@@ -35,14 +51,14 @@ class KaraokeBrandPickerViewController: UIViewController {
   }
   
   
-  // MARK: - Intializations
+  // MARK: - Initializers
   
-  init(_ viewModel: KaraokeBrandPickerViewModel) {
+  required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
-  init?(_ coder: NSCoder, _ viewModel: KaraokeBrandPickerViewModel) {
+  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(coder: coder)
   }
@@ -63,18 +79,21 @@ class KaraokeBrandPickerViewController: UIViewController {
   }
   
   private func setupBrandPickerTableView() {
+    registerBrandPickerTableViewCell()
     brandPickerTableView.tableFooterView = UIView()
     brandPickerTableView.separatorStyle = .singleLine
-    brandPickerTableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+    brandPickerTableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.brandPickerTableViewSeparatorLeftInset, bottom: 0, right: Metric.brandPickerTableviewSeparatorRightInset)
     brandPickerTableView.showsVerticalScrollIndicator = false
     brandPickerTableView.isScrollEnabled = false
-    
+  }
+  
+  private func registerBrandPickerTableViewCell() {
     let nibName = UINib(nibName: R.nib.karaokeBrandPickerTableViewCell.name, bundle: nil)
     brandPickerTableView.register(nibName, forCellReuseIdentifier: KaraokeBrandPickerTableViewCell.identifier)
   }
+
   
-  
-  // MARK: - Bidns
+  // MARK: - Binds
   
   private func bind() {
     bindInputs()

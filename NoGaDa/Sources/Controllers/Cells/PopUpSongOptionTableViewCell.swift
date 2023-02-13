@@ -9,10 +9,12 @@ import UIKit
 
 class PopUpSongOptionTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.popUpSongOptionTableCell.identifier
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var iconImageView: UIImageView!
@@ -25,15 +27,23 @@ class PopUpSongOptionTableViewCell: UITableViewCell {
     setupView()
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    titleLabel.text = ""
+    iconImageView.image = nil
+  }
   
-  // MARK: - Initializers
+  
+  // MARK: - Setups
   
   private func setupView() {
-    titleLabel.text = ""
-    iconImageView.image = UIImage()
-    
+    setupSelectedView()
+  }
+  
+  private func setupSelectedView() {
     let selectionView = UIView(frame: self.bounds)
-    selectionView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    selectionView.backgroundColor = R.color.backgroundBasicSelected()!
     selectedBackgroundView = selectionView
   }
 }

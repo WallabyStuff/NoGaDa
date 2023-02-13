@@ -9,6 +9,11 @@ import UIKit
 
 class AnimateButton: UIButton {
   
+  // MARK: - Metrics
+  
+  static let ANIMATION_DURATION_TAP: CGFloat = 0.2
+  static let ANIMATION_DURATION_RELEASE_TAP: CGFloat = 0.15
+  
   
   // MARK: - Initializers
   
@@ -38,13 +43,17 @@ class AnimateButton: UIButton {
   // MARK: - Methods
   
   @objc func didTapButton(_ sender: Any) {
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+    UIView.animate(withDuration: Self.ANIMATION_DURATION_TAP,
+                   delay: 0,
+                   options: .curveEaseInOut) {
       self.scaleDown()
     }
   }
   
   @objc func didTapRelease(_ sender: Any) {
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+    UIView.animate(withDuration: Self.ANIMATION_DURATION_RELEASE_TAP,
+                   delay: 0,
+                   options: .curveEaseInOut) {
       self.releaseScale()
     }
   }

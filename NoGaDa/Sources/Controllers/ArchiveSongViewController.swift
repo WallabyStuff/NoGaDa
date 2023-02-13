@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import Hero
+import SafeAreaBrush
 
 @objc protocol ArchiveSongListViewDelegate: AnyObject {
   @objc optional func didFolderEdited()
@@ -18,24 +19,49 @@ import Hero
 
 class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.archive.archiveSongStoryboard.identifier
+  
+  struct Metric {
+    static let archiveSongTableViewTopInset = 36.f
+    
+    static let archiveSongTableViewCornerRadius = 20.f
+    static let archiveSongTableViewBottomInset = 100.f
+    
+    static let folderTitleTextFieldCornerRadius = 12.f
+    static let folderTitleTextFieldLeftPadding = 16.f
+    static let folderTitleTextFieldRightPadding = 16.f
+    
+    static let folderTitleEmojiTextFieldCornerRadius = 16.f
+    
+    static let addSongButtonShadowRadius = 20.f
+    static let addSongButtonShadowOpacity: Float = 0.25
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = ArchiveSongViewModel
+  
   
   // MARK: - Properties
   
-  static let identifier = R.storyboard.archive.archiveSongStoryboard.identifier
-  typealias ViewModel = ArchiveSongViewModel
+  weak var delegate: ArchiveSongListViewDelegate?
+  var viewModel: ViewModel
   
-  @IBOutlet weak var appbarView: UIView!
-  @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
+
+  // MARK: - UI
+  
+  @IBOutlet weak var appBarView: UIView!
+  @IBOutlet weak var appBarViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var folderTitleEmojiTextField: EmojiTextField!
   @IBOutlet weak var folderTitleTextField: UITextField!
   @IBOutlet weak var archiveSongTableView: UITableView!
   @IBOutlet weak var addSongButton: UIButton!
-  
-  weak var delegate: ArchiveSongListViewDelegate?
-  var viewModel: ViewModel
+
   private var songOptionFloatingPanelView: SongOptionFloatingPanelView?
-  private let archiveSongTableViewTopInset: CGFloat = 36
   
   
   // MARK: - Lifecycle
@@ -85,7 +111,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   
   private func setupView() {
     setupStatusBar()
-    setupAppbarView()
+    setupAppBarView()
     setupExitButton()
     setupArchiveSongTableView()
     setupFolderTitleTextField()
@@ -95,15 +121,14 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    view.fillStatusBar(color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentColor()!, insertAt: 0)
   }
   
-  private func setupAppbarView() {
-    appbarView.hero.id = "appbar"
-    appbarView.layer.cornerRadius = 28
-    appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = compactAppbarHeight
+  private func setupAppBarView() {
+    appBarView.layer.cornerRadius = 28
+    appBarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+    appBarView.setAppBarShadow()
+    appBarViewHeightConstraint.constant = compactAppBarHeight
   }
   
   private func setupExitButton() {
@@ -115,8 +140,8 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     registerArchiveSongTableCell()
     archiveSongTableView.tableFooterView = UIView()
     archiveSongTableView.separatorStyle = .none
-    archiveSongTableView.layer.cornerRadius = 20
-    archiveSongTableView.contentInset = UIEdgeInsets(top: archiveSongTableViewTopInset, left: 0, bottom: 100, right: 0)
+    archiveSongTableView.layer.cornerRadius = Metric.archiveSongTableViewCornerRadius
+    archiveSongTableView.contentInset = UIEdgeInsets(top: Metric.archiveSongTableViewTopInset, left: 0, bottom: Metric.archiveSongTableViewBottomInset, right: 0)
     
     archiveSongTableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
@@ -128,16 +153,16 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupFolderTitleTextField() {
-    folderTitleTextField.layer.cornerRadius = 12
-    folderTitleTextField.setLeftPadding(width: 16)
-    folderTitleTextField.setRightPadding(width: 16)
+    folderTitleTextField.layer.cornerRadius = Metric.folderTitleTextFieldCornerRadius
+    folderTitleTextField.setLeftPadding(width: Metric.folderTitleTextFieldLeftPadding)
+    folderTitleTextField.setRightPadding(width: Metric.folderTitleTextFieldRightPadding)
     folderTitleTextField.setSearchBoxShadow()
     folderTitleTextField.hero.modifiers = [.fade, .translate(y: -12)]
     folderTitleTextField.text = viewModel.folderTitle
   }
   
   private func setupTitleEmojiTextField() {
-    folderTitleEmojiTextField.layer.cornerRadius = 16
+    folderTitleEmojiTextField.layer.cornerRadius = Metric.folderTitleEmojiTextFieldCornerRadius
     folderTitleEmojiTextField.setSearchBoxShadow()
     folderTitleEmojiTextField.hero.modifiers = [.fade, .translate(y: -12)]
     folderTitleEmojiTextField.text = viewModel.folderTitleEmoji
@@ -146,34 +171,34 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   private func setupAddSongButton() {
     addSongButton.makeAsCircle()
     addSongButton.hero.modifiers = [.fade, .translate(y: view.safeAreaInsets.bottom + 28)]
-    addSongButton.layer.shadowColor = R.color.floatingButtonBackgroundColor()!.cgColor
+    addSongButton.layer.shadowColor = R.color.backgroundBasic()!.cgColor
     addSongButton.layer.shadowOffset = .zero
-    addSongButton.layer.shadowRadius = 20
-    addSongButton.layer.shadowOpacity = 0.25
+    addSongButton.layer.shadowRadius = Metric.addSongButtonShadowRadius
+    addSongButton.layer.shadowOpacity = Metric.addSongButtonShadowOpacity
   }
   
   private func setupSongOptionFloatingPanelView() {
-    songOptionFloatingPanelView = SongOptionFloatingPanelView(parentViewConroller: self, delegate: self)
+    songOptionFloatingPanelView = SongOptionFloatingPanelView(parentViewController: self, delegate: self)
   }
   
   
   // MARK: - Binds
   
   private func bind() {
-    bindIntputs()
+    bindInputs()
     bindOutputs()
-    bindAppbarView()
+    bindAppBarView()
     bindFolderTitleEmojiTextField()
   }
   
-  private func bindIntputs() {
+  private func bindInputs() {
     Observable.just(Void())
       .bind(to: viewModel.input.viewDidLoad)
       .disposed(by: disposeBag)
     
     self.rx.viewWillDisappear
       .map { _ in }
-      .bind(to: viewModel.input.viewWillDissapear)
+      .bind(to: viewModel.input.viewWillDisappear)
       .disposed(by: disposeBag)
     
     exitButton
@@ -260,15 +285,15 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
       }.disposed(by: disposeBag)
   }
   
-  private func bindAppbarView() {
+  private func bindAppBarView() {
     archiveSongTableView.rx.contentOffset
       .asDriver()
       .drive(with: self, onNext: { vc, offset in
-        let changedY = offset.y + vc.archiveSongTableViewTopInset
-        let newAppbarHeight = vc.compactAppbarHeight - (changedY * 0.2)
+        let changedY = offset.y + Metric.archiveSongTableViewTopInset
+        let newAppBarHeight = vc.compactAppBarHeight - (changedY * 0.2)
         
-        if newAppbarHeight >= vc.compactAppbarHeight {
-          vc.appbarViewHeightConstraint.constant = newAppbarHeight
+        if newAppBarHeight >= vc.compactAppBarHeight {
+          vc.appBarViewHeightConstraint.constant = newAppBarHeight
         }
       }).disposed(by: disposeBag)
   }

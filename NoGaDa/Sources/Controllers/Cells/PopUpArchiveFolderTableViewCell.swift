@@ -9,10 +9,16 @@ import UIKit
 
 class PopUpArchiveFolderTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.popUpArchiveTableCell.identifier
+  
+  struct Metric {
+    static let selectedViewCornerRadius = 8.f
+  }
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var emojiLabel: UILabel!
   @IBOutlet weak var titleLabel: UILabel!
@@ -22,17 +28,27 @@ class PopUpArchiveFolderTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    setupview()
+    setupView()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    emojiLabel.text = ""
+    titleLabel.text = ""
   }
   
   
   // MARK: - Setups
   
-  private func setupview() {
-    // Selection View
+  private func setupView() {
+    setupSelectedView()
+  }
+  
+  private func setupSelectedView() {
     let selectionView = UIView(frame: self.frame)
-    selectionView.layer.cornerRadius = 8
-    selectionView.backgroundColor = R.color.popUpArchiveSeparatorColor()!
+    selectionView.layer.cornerRadius = Metric.selectedViewCornerRadius
+    selectionView.backgroundColor = R.color.accentYellowDark()!
     self.selectedBackgroundView = selectionView
   }
 }

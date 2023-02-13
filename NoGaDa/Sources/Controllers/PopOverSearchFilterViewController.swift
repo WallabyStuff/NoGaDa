@@ -18,17 +18,33 @@ protocol PopOverSearchFilterViewDelegate: AnyObject {
 
 class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.search.popOverSearchFilterStoryboard.identifier
+  
+  struct Metric {
+    static let searchFilterTableViewSeparatorLeftInset = 12.f
+    static let searchFilterTableViewSeparatorRightInset = 80.f
+    
+    static let applyButtonCornerRadius = 12.f
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = PopOverSearchFilterViewModel
+  
   
   // MARK: - Properties
   
-  typealias ViewModel = PopOverSearchFilterViewModel
-  static let identifier = R.storyboard.search.popOverSearchFilterStoryboard.identifier
+  weak var delegate: PopOverSearchFilterViewDelegate?
+  var viewModel: PopOverSearchFilterViewModel
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var searchFilterTableView: UITableView!
   @IBOutlet weak var applyButton: UIButton!
-  
-  weak var delegate: PopOverSearchFilterViewDelegate?
-  var viewModel: PopOverSearchFilterViewModel
   
   
   // MARK: - Lifecycle
@@ -66,13 +82,13 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   
   private func setupView() {
     setupSearchFilterTableView()
-    setupApplayButton()
+    setupApplyButton()
   }
   
   private func setupSearchFilterTableView() {
     registerSearchFilterTableCell()
     searchFilterTableView.tableFooterView = UIView()
-    searchFilterTableView.separatorInset  = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 80)
+    searchFilterTableView.separatorInset  = UIEdgeInsets(top: 0, left: Metric.searchFilterTableViewSeparatorLeftInset, bottom: 0, right: Metric.searchFilterTableViewSeparatorRightInset)
     searchFilterTableView.backgroundColor = .white
   }
   
@@ -81,8 +97,8 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     searchFilterTableView.register(nibName, forCellReuseIdentifier: SearchFilterTableViewCell.identifier)
   }
   
-  private func setupApplayButton() {
-    applyButton.layer.cornerRadius = 12
+  private func setupApplyButton() {
+    applyButton.layer.cornerRadius = Metric.applyButtonCornerRadius
   }
   
   
@@ -101,7 +117,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   }
   
   private func bindOutput() {
-    viewModel.output.serachFilterItems
+    viewModel.output.searchFilterItems
       .bind(to: searchFilterTableView.rx.items(cellIdentifier: SearchFilterTableViewCell.identifier,
                                                cellType: SearchFilterTableViewCell.self)) { [weak self] index, item, cell in
         guard let self = self else { return }

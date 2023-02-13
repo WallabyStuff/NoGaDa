@@ -10,15 +10,14 @@ import FloatingPanel
 
 class SongOptionFloatingPanelView {
   
-  
   // MARK: - Properties
   
   private var floatingPanel = FloatingPanelController()
   private weak var parentViewController: UIViewController?
   private weak var contentViewDelegate: PopUpSongOptionViewDelegate?
   
-  init(parentViewConroller: UIViewController, delegate: PopUpSongOptionViewDelegate) {
-    self.parentViewController = parentViewConroller
+  init(parentViewController: UIViewController, delegate: PopUpSongOptionViewDelegate) {
+    self.parentViewController = parentViewController
     self.contentViewDelegate = delegate
     
     setup()

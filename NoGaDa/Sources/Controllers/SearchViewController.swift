@@ -11,20 +11,52 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import Hero
+import SafeAreaBrush
 
-enum ContentsType {
-  case searchHistory
-  case searchResult
-}
+
 
 class SearchViewController: BaseViewController, ViewModelInjectable {
+  
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.search.searchStoryboard.identifier
+  
+  struct Metric {
+    static let appbarViewCornerRadius = 28.f
+    
+    static let searchBoxViewCornerRadius = 12.f
+    
+    static let searchTextFieldLeftPadding = 12.f
+    static let searchTextFieldRightPadding = 80.f
+    
+    static let filterButtonCornerRadius = 8.f
+    static let filterButtonPadding = 8.f
+    
+    static let backButtonPadding = 4.f
+    
+    static let clearTextFieldButtonPadding = 6.f
+    
+    static let searchFilterContentSize = CGSize(width: 240, height: 160)
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = SearchViewModel
   
   
   // MARK: - Properties
   
-  static let identifier = R.storyboard.search.searchStoryboard.identifier
-  typealias ViewModel = SearchViewModel
+  var viewModel: SearchViewModel
   
+  enum ContentsType {
+    case searchHistory
+    case searchResult
+  }
+
+  
+  // MARK: - UI
+
   @IBOutlet weak var appbarView: UIView!
   @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var appbarTitleLabel: UILabel!
@@ -35,7 +67,6 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var filterButton: UIButton!
   @IBOutlet weak var contentsView: UIView!
   
-  var viewModel: SearchViewModel
   private var searchHistoryVC: SearchHistoryViewController?
   private var searchResultVC: SearchResultViewController?
   private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
@@ -85,7 +116,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
     self.hero.isEnabled = true
     
     setupStatusBar()
-    setupAppbarView()
+    setupAppBarView()
     setupAppbarTitleLabel()
     setupSearchBoxView()
     setupSearchTextField()
@@ -98,16 +129,15 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    view.fillStatusBar(color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentPurple()!, insertAt: 0)
   }
   
-  private func setupAppbarView() {
-    appbarView.hero.id = "appbar"
-    appbarView.layer.cornerRadius = 28
+  private func setupAppBarView() {
+    appbarView.layer.cornerRadius = Metric.appbarViewCornerRadius
     appbarView.layer.cornerCurve = .circular
     appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = regularAppbarHeight
+    appbarView.setAppBarShadow()
+    appbarViewHeightConstraint.constant = regularAppBarHeight
   }
   
   private func setupAppbarTitleLabel() {
@@ -115,31 +145,31 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupSearchBoxView() {
-    searchBoxView.layer.cornerRadius = 12
+    searchBoxView.layer.cornerRadius = Metric.searchBoxViewCornerRadius
     searchBoxView.layer.masksToBounds = true
     searchBoxView.setSearchBoxShadow()
   }
   
   private func setupSearchTextField() {
-    searchTextField.setPlaceholderColor(R.color.appbarTextfieldPlaceholderColor()!)
-    searchTextField.setLeftPadding(width: 12)
-    searchTextField.setRightPadding(width: 80)
+    searchTextField.setPlaceholderColor(R.color.textTertiary()!)
+    searchTextField.setLeftPadding(width: Metric.searchTextFieldLeftPadding)
+    searchTextField.setRightPadding(width: Metric.searchTextFieldRightPadding)
     searchTextField.delegate = self
   }
   
   private func setupSearchButton() {
-    filterButton.layer.cornerRadius = 8
-    filterButton.setPadding(width: 8)
+    filterButton.layer.cornerRadius = Metric.filterButtonCornerRadius
+    filterButton.setPadding(width: Metric.filterButtonPadding)
     filterButton.setSearchBoxButtonShadow()
   }
   
   private func setupBackButton() {
     backButton.hero.modifiers = [.fade]
-    backButton.setPadding(width: 4)
+    backButton.setPadding(width: Metric.backButtonPadding)
   }
   
   private func setupClearTextFieldButton() {
-    clearTextFieldButton.setPadding(width: 6)
+    clearTextFieldButton.setPadding(width: Metric.clearTextFieldButtonPadding)
   }
   
   private func setupArchiveFloatingPanelView() {
@@ -148,7 +178,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   
   private func setupSearchHistoryVC() {
     let storyboard = UIStoryboard(name: R.storyboard.search.name, bundle: nil)
-    let searchHistoryVC = storyboard.instantiateViewController(identifier: SearchHistoryViewController.idnetifier) { coder -> SearchHistoryViewController in
+    let searchHistoryVC = storyboard.instantiateViewController(identifier: SearchHistoryViewController.identifier) { coder -> SearchHistoryViewController in
       let viewModel = SearchHistoryViewModel()
       return .init(coder, viewModel) ?? SearchHistoryViewController(viewModel)
     }
@@ -232,7 +262,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
     viewController.navigationController?.popoverPresentationController?.backgroundColor = .white
     viewController.delegate = self
     viewController.modalPresentationStyle = .popover
-    viewController.preferredContentSize = CGSize(width: 240, height: 160)
+    viewController.preferredContentSize = Metric.searchFilterContentSize
     viewController.popoverPresentationController?.permittedArrowDirections = .up
     viewController.popoverPresentationController?.sourceRect = filterButton.bounds
     viewController.popoverPresentationController?.sourceView = filterButton
@@ -276,7 +306,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
       searchHistoryVC.view.isHidden = true
       searchResultVC.view.isHidden = false
       
-      // Refresh saerch history
+      // Refresh search history
       Observable.just(Void())
         .bind(to: searchHistoryVC.viewModel.input.refresh)
         .disposed(by: disposeBag)
@@ -339,7 +369,7 @@ extension SearchViewController: SearchHistoryViewDelegate {
     dismissKeyboardAndArchivePanel()
   }
   
-  func didHSelectistoryItem(_ keyword: String) {
+  func didSelectHistoryItem(_ keyword: String) {
     searchTextField.text = keyword
     setSearchResult()
   }

@@ -11,10 +11,12 @@ target 'NoGaDa' do
   pod 'RxGesture'
   pod 'Hero', '1.6.0'
   pod 'FloatingPanel'
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 10'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftRater'
   pod 'R.swift'
+  pod 'SafeAreaBrush'
+  pod 'BISegmentedControl'
  
   target 'NoGaDaTests' do
     inherit! :search_paths

@@ -15,10 +15,31 @@ import RxCocoa
   @objc optional func didSelectedItemMoved()
 }
 
-class PopUpSongOptionViewController: UIViewController {
+class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
+  
+  
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.archive.popUpSongOptionStoryboard.identifier
+  
+  struct Metric {
+    static let songThumbnailImageViewCornerRadius = 12.f
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = PopUpSongOptionViewModel
   
   
   // MARK: - Properties
+  
+  weak var delegate: PopUpSongOptionViewDelegate?
+  var viewModel: PopUpSongOptionViewModel
+  public var exitButtonAction: () -> Void = {}
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var songThumbnailImageView: UIImageView!
   @IBOutlet weak var exitButton: UIButton!
@@ -26,12 +47,7 @@ class PopUpSongOptionViewController: UIViewController {
   @IBOutlet weak var singerLabel: UILabel!
   @IBOutlet weak var optionTableView: UITableView!
   
-  weak var delegate: PopUpSongOptionViewDelegate?
-  private var viewModel: PopUpSongOptionViewModel
-  private var disposeBag = DisposeBag()
   private var parentVC: UIViewController
-  
-  public var exitButtonAction: () -> Void = {}
   private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
   
   
@@ -46,20 +62,24 @@ class PopUpSongOptionViewController: UIViewController {
   
   // MARK: - Initializers
   
-  init(_ viewModel: PopUpSongOptionViewModel) {
+  required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     self.parentVC = UIViewController()
     super.init(nibName: nil, bundle: nil)
   }
   
-  init?(_ coder: NSCoder, parentVC: UIViewController, viewModel: PopUpSongOptionViewModel) {
+  required init?(_ coder: NSCoder, parentVC: UIViewController, viewModel: ViewModel) {
     self.parentVC = parentVC
     self.viewModel = viewModel
     super.init(coder: coder)
   }
   
+  required init?(_ coder: NSCoder, _ viewModel: PopUpSongOptionViewModel) {
+    fatalError("Parent ViewController has not been implemented")
+  }
+  
   required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    fatalError("ViewModel has not been implemented")
   }
   
   
@@ -79,7 +99,7 @@ class PopUpSongOptionViewController: UIViewController {
   }
   
   private func setupSongThumbnailImageView() {
-    songThumbnailImageView.layer.cornerRadius = 12
+    songThumbnailImageView.layer.cornerRadius = Metric.songThumbnailImageViewCornerRadius
   }
   
   private func setupSongTitleLabel() {

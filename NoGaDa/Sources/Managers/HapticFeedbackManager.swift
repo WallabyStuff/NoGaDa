@@ -13,8 +13,8 @@ class HapticFeedbackManager { }
 // MARK: - Notification Feedback
 extension HapticFeedbackManager {
   static func playNotificationFeedback(_ type: UINotificationFeedbackGenerator.FeedbackType) {
-    let generatr = UINotificationFeedbackGenerator()
-    generatr.notificationOccurred(type)
+    let generator = UINotificationFeedbackGenerator()
+    generator.notificationOccurred(type)
   }
 }
 

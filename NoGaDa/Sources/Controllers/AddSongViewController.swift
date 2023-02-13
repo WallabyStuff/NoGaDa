@@ -17,12 +17,49 @@ import Hero
   @objc optional func didSongAdded()
 }
 
-class AddSongViewController: UIViewController {
+class AddSongViewController: BaseViewController, ViewModelInjectable {
+  
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.archive.addSongStoryboard.identifier
+  
+  // MARK: - Types
+  
+  typealias ViewModel = AddSongViewModel
+  
+  struct Metric {
+    static let confirmButtonCornerRadius = 12.f
+    
+    static let notificationViewCornerRadius = 12.f
+    
+    static let songTitleTextFieldLeftPadding = 12.f
+    static let songTitleTextFieldRightPadding = 12.f
+    
+    static let singerTextFieldLeftPadding = 12.f
+    static let singerTextFieldRightPadding = 12.f
+    
+    static let songNumberTextFieldLeftPadding = 12.f
+    static let songNumberTextFieldRightPadding = 12.f
+    
+    static let brandPickerButtonCornerRadius = 12.f
+    static let brandPickerButtonBorderWidth = 1.f
+    static let brandPickerContentSize = CGSize(width: 140, height: 87)
+    // two 44px height of cells - 1px height of separator
+    
+    static let confirmButtonActiveAlpha = 1.f
+    static let confirmButtonInactiveAlpha = 0.2.f
+    
+    static let keyboardAreaHeight = 150.f
+  }
   
   
   // MARK: - Properties
   
-  static let identifier = R.storyboard.archive.addSongStoryboard.identifier
+  weak var delegate: AddSongViewDelegate?
+  var viewModel: ViewModel
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var confirmButton: UIButton!
@@ -33,10 +70,6 @@ class AddSongViewController: UIViewController {
   @IBOutlet weak var brandPickerButton: UIButton!
   @IBOutlet weak var contentScrollView: UIScrollView!
   @IBOutlet weak var contentView: UIView!
-  
-  weak var delegate: AddSongViewDelegate?
-  private var viewModel: AddSongViewModel
-  private var disposeBag = DisposeBag()
   
   
   // MARK: - Lifecycle
@@ -59,7 +92,7 @@ class AddSongViewController: UIViewController {
     
     if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
       traitCollection.performAsCurrent {
-        brandPickerButton.layer.borderColor = R.color.brandPopUpButtonBorderColor()!.cgColor
+        brandPickerButton.layer.borderColor = R.color.lineBasic()!.cgColor
       }
     }
   }
@@ -67,12 +100,12 @@ class AddSongViewController: UIViewController {
   
   // MARK: - Initializers
   
-  init(_ viewModel: AddSongViewModel) {
+  required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
-  init?(_ coder: NSCoder, _ viewModel: AddSongViewModel) {
+  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(coder: coder)
   }
@@ -107,33 +140,33 @@ class AddSongViewController: UIViewController {
   }
   
   private func setupConfirmButton() {
-    confirmButton.layer.cornerRadius = 12
+    confirmButton.layer.cornerRadius = Metric.confirmButtonCornerRadius
     confirmButton.hero.modifiers = [.translate(y: 20), .fade]
   }
   
   private func setupNotificationView() {
-    notificationView.layer.cornerRadius = 12
+    notificationView.layer.cornerRadius = Metric.notificationViewCornerRadius
   }
   
   private func setupSongTitleTextField() {
-    songTitleTextField.setLeftPadding(width: 12)
-    songTitleTextField.setRightPadding(width: 12)
+    songTitleTextField.setLeftPadding(width: Metric.songTitleTextFieldLeftPadding)
+    songTitleTextField.setRightPadding(width: Metric.songTitleTextFieldRightPadding)
   }
   
   private func setupSingerTextField() {
-    singerTextField.setLeftPadding(width: 12)
-    singerTextField.setRightPadding(width: 12)
+    singerTextField.setLeftPadding(width: Metric.singerTextFieldLeftPadding)
+    singerTextField.setRightPadding(width: Metric.singerTextFieldRightPadding)
   }
   
   private func setupSongNumberTextField() {
-    songNumberTextField.setLeftPadding(width: 12)
-    songNumberTextField.setRightPadding(width: 12)
+    songNumberTextField.setLeftPadding(width: Metric.songNumberTextFieldLeftPadding)
+    songNumberTextField.setRightPadding(width: Metric.songNumberTextFieldRightPadding)
   }
   
   private func setupBrandPickerButton() {
-    brandPickerButton.layer.cornerRadius = 12
-    brandPickerButton.layer.borderWidth = 1
-    brandPickerButton.layer.borderColor = R.color.brandPopUpButtonBorderColor()!.cgColor
+    brandPickerButton.layer.cornerRadius = Metric.brandPickerButtonCornerRadius
+    brandPickerButton.layer.borderWidth = Metric.brandPickerButtonBorderWidth
+    brandPickerButton.layer.borderColor = R.color.lineBasic()!.cgColor
   }
   
   private func setupContentScrollView() {
@@ -221,13 +254,11 @@ class AddSongViewController: UIViewController {
       .asDriver(onErrorDriveWith: .never())
       .drive(with: self, onNext: { vc, isAllTextFieldFilled in
         if isAllTextFieldFilled {
+          vc.confirmButton.alpha = Metric.confirmButtonActiveAlpha
           vc.confirmButton.isUserInteractionEnabled = true
-          vc.confirmButton.backgroundColor = R.color.addFolderButtonBackgroundColor()
-          vc.confirmButton.setTitleColor(R.color.addFolderButtonForegroundColor(), for: .normal)
         } else {
+          vc.confirmButton.alpha = Metric.confirmButtonInactiveAlpha
           vc.confirmButton.isUserInteractionEnabled = false
-          vc.confirmButton.backgroundColor = R.color.addFolderButtonDisabledBackgroundColor()
-          vc.confirmButton.setTitleColor(R.color.disabledTextColor(), for: .normal)
         }
       })
       .disposed(by: disposeBag)
@@ -277,7 +308,7 @@ class AddSongViewController: UIViewController {
     })
     
     brandPickerVC.modalPresentationStyle = .popover
-    brandPickerVC.preferredContentSize = CGSize(width: 140, height: 87) // two 44height of cells - 1height of separator height
+    brandPickerVC.preferredContentSize = Metric.brandPickerContentSize
     brandPickerVC.popoverPresentationController?.permittedArrowDirections = .right
     brandPickerVC.popoverPresentationController?.sourceRect = brandPickerButton.bounds
     brandPickerVC.popoverPresentationController?.sourceView = brandPickerButton
@@ -288,7 +319,7 @@ class AddSongViewController: UIViewController {
   
   @objc
   private func keyboardWillShow(_ sender: Notification) {
-    view.frame.origin.y = -150
+    view.frame.origin.y = -Metric.keyboardAreaHeight
   }
   
   @objc
@@ -317,7 +348,7 @@ extension AddSongViewController: UIPopoverPresentationControllerDelegate {
   }
 }
 
-extension AddSongViewController: BrandPickerViewDelegaet {
+extension AddSongViewController: BrandPickerViewDelegate {
   func didBrandSelected(_ selectedBrand: KaraokeBrand) {
     Observable.just(selectedBrand)
       .bind(to: viewModel.input.changeKaraokeBrand)

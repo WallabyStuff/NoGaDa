@@ -17,19 +17,35 @@ protocol SearchResultViewDelegate: AnyObject {
 class SearchResultViewController: BaseViewController, ViewModelInjectable {
   
   
-  // MARK: - Properties
+  // MARK: - Constants
+  
+  static let identifier = R.storyboard.search.searchResultStoryboard.identifier
+  
+  struct Metric {
+    static let searchResultContentViewCornerRadius = 12.f
+    
+    static let searchResultTableViewCornerRadius = 16.f
+  }
+  
+  
+  // MARK: - Types
   
   typealias ViewModel = SearchResultViewModel
-  static let identifier = R.storyboard.search.searchResultStoryboard.identifier
+  
+  
+  // MARK: - Properties
+  
+  weak var delegate: SearchResultViewDelegate?
+  var viewModel: ViewModel
+
+  
+  // MARK: - UI
   
   @IBOutlet weak var brandSelector: UISegmentedControl!
   @IBOutlet weak var searchResultContentView: UIView!
   @IBOutlet weak var searchResultTableView: UITableView!
   @IBOutlet weak var searchResultMessageLabel: UILabel!
   @IBOutlet weak var searchLoadingIndicator: UIActivityIndicatorView!
-  
-  weak var delegate: SearchResultViewDelegate?
-  var viewModel: ViewModel
   
   
   // MARK: - Lifecycle
@@ -83,19 +99,19 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   
   private func setupSearchResultContentView() {
     searchResultContentView.clipsToBounds = true
-    searchResultContentView.layer.cornerRadius = 12
+    searchResultContentView.layer.cornerRadius = Metric.searchResultContentViewCornerRadius
   }
   
   private func setupBrandSelector() {
-    brandSelector.setSelectedTextColor(R.color.segmentedControlSelectedTextColor()!)
-    brandSelector.setDefaultTextColor(R.color.segmentedControlDefaultTextColor()!)
+    brandSelector.setSelectedTextColor(R.color.textBlack()!)
+    brandSelector.setDefaultTextColor(R.color.textSecondary()!)
   }
   
   private func setupSearchResultTableView() {
     registerSearchResultTableView()
     searchResultTableView.tableFooterView = UIView()
     searchResultTableView.separatorStyle = .none
-    searchResultTableView.layer.cornerRadius = 16
+    searchResultTableView.layer.cornerRadius = Metric.searchResultTableViewCornerRadius
   }
   
   private func registerSearchResultTableView() {

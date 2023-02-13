@@ -17,7 +17,7 @@ class CreditViewModel: ViewModelType {
   
   struct Input {
     let tapExitButton = PublishSubject<Void>()
-    let tapContactbutton = PublishSubject<Void>()
+    let tapContactButton = PublishSubject<Void>()
   }
   
   struct Output {
@@ -48,14 +48,6 @@ class CreditViewModel: ViewModelType {
     input.tapExitButton
       .subscribe(onNext: {
         output.dismiss.accept(Void())
-      })
-      .disposed(by: disposeBag)
-    
-    input.tapContactbutton
-      .subscribe(onNext: {
-        let recipients = [Self.developerEmail]
-        let subject = "노가다 앱 문의"
-        output.showingMailComposeVC.accept((recipients, subject))
       })
       .disposed(by: disposeBag)
     

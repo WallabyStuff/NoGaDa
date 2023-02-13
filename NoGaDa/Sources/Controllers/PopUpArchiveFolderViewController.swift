@@ -18,19 +18,38 @@ import RxGesture
 
 class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.storyboard.folder.popUpArchiveFolderStoryboard.identifier
+  
+  struct Metric {
+    static let addFolderButtonCornerRadius = 12.f
+    static let addFolderButtonShadowOffset = CGSize(width: 0, height: 4)
+    static let addFolderButtonShadowRadius = 4.f
+    static let addFolderButtonShadowOpacity: Float = 0.1
+    
+    static let archiveFolderTableView = 8.f
+    static let archiveFolderTableViewLeftInset = 44.f
+  }
+  
+  
+  // MARK: - Types
+  
   typealias ViewModel = PopUpArchiveFolderViewModel
   
-  @IBOutlet weak var exitButton: UIButton!
-  @IBOutlet weak var addFolderButton: UIButton!
-  @IBOutlet weak var archiveFolderTableView: UITableView!
+  
+  // MARK: - Properties
   
   weak var delegate: PopUpArchiveFolderViewDelegate?
   var viewModel: ViewModel
   public var exitButtonAction: () -> Void = {}
+
+  
+  // MARK: - UI
+  
+  @IBOutlet weak var exitButton: UIButton!
+  @IBOutlet weak var addFolderButton: UIButton!
+  @IBOutlet weak var archiveFolderTableView: UITableView!
   
   
   // MARK: - Lifecycle
@@ -73,18 +92,19 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
   }
   
   private func setupAddFolderButton() {
-    addFolderButton.layer.cornerRadius = 12
+    addFolderButton.layer.cornerRadius = Metric.addFolderButtonCornerRadius
     addFolderButton.layer.shadowColor = UIColor.gray.cgColor
-    addFolderButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-    addFolderButton.layer.shadowRadius = 4
-    addFolderButton.layer.shadowOpacity = 0.1
+    addFolderButton.layer.shadowOffset = Metric.addFolderButtonShadowOffset
+    addFolderButton.layer.shadowRadius = Metric.addFolderButtonShadowRadius
+    addFolderButton.layer.shadowOpacity = Metric.addFolderButtonShadowOpacity
   }
   
   private func setupArchiveFolderTableView() {
     registerArchiveFolderTableCell()
-    archiveFolderTableView.layer.cornerRadius = 8
+    archiveFolderTableView.layer.cornerRadius = Metric.archiveFolderTableView
     archiveFolderTableView.tableFooterView = UIView()
-    archiveFolderTableView.separatorInset = UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0)
+    archiveFolderTableView.separatorInset = UIEdgeInsets(top: 0, left: Metric.archiveFolderTableViewLeftInset, bottom: 0, right: 0)
+    archiveFolderTableView.separatorColor = R.color.accentYellowDark()
   }
   
   private func registerArchiveFolderTableCell() {
@@ -151,7 +171,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     viewModel.output.dismiss
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] in
-        self?.dismiss(animated: true)
+        self?.exitButtonAction()
       })
       .disposed(by: disposeBag)
     
@@ -169,10 +189,10 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
       })
       .disposed(by: disposeBag)
     
-    viewModel.output.showingAlearyExistsAlert
+    viewModel.output.showingAlreadyExistsAlert
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] in
-        self?.presentAlreadyExitstAlert()
+        self?.presentAlreadyExistsAlert()
       })
       .disposed(by: disposeBag)
   }
@@ -209,7 +229,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     present(addSongAlert, animated: true, completion: nil)
   }
   
-  public func presentAlreadyExitstAlert()  {
+  public func presentAlreadyExistsAlert()  {
     let alreadyExistsAlert = UIAlertController(title: "알림",
                                                message: "이미 저장된 곡입니다.",
                                                preferredStyle: .alert)

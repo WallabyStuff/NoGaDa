@@ -17,7 +17,7 @@ class ArchiveSongViewModel: ViewModelType {
   
   struct Input {
     let viewDidLoad = PublishSubject<Void>()
-    let viewWillDissapear = PublishSubject<Void>()
+    let viewWillDisappear = PublishSubject<Void>()
     let tapExitButton = PublishSubject<Void>()
     let tapAddSongButton = PublishSubject<Void>()
     let tapSongItem = PublishSubject<IndexPath>()
@@ -70,12 +70,12 @@ class ArchiveSongViewModel: ViewModelType {
       return self.folderManager.fetchData(self.currentFolder.id)
     }
     .subscribe(onNext: { folder in
-      let songs = Array(folder.songs)
+      let songs = Array(folder.songs.reversed())
       output.archiveSongs.accept(songs)
     })
     .disposed(by: disposeBag)
     
-    input.viewWillDissapear
+    input.viewWillDisappear
       .subscribe(onNext: { [weak self] in
         guard let self = self else { return }
         let isFolderEmojiUpdated = self.updateFolderEmojiIfNeeded()

@@ -10,18 +10,47 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxGesture
+import SafeAreaBrush
+import BISegmentedControl
 
 class MainViewController: BaseViewController, ViewModelInjectable {
   
+  // MARK: - Constants
   
-  // MARK: Properties
-  
-  typealias ViewModel = MainViewModel
   static let identifier = R.storyboard.main.mainStoryboard.identifier
   
-  @IBOutlet weak var appbarView: AppbarView!
-  @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var appbarTitleLabel: UILabel!
+  fileprivate struct Metric {
+    static let appBarCornerRadius = 28.f
+    
+    static let settingButtonPadding = 4.f
+    
+    static let searchBoxCornerRadius = 12.f
+    static let searchButtonCornerRadius = 8.f
+    
+    static let archiveShortcutViewCornerRadius = 20.f
+    
+    static let newUpdateSongTableViewCornerRadius = 12.f 
+    
+    static let brandSegmentedControlFontSize = 14.f
+    static let brandSegmentedControlBarIndicatorHeight = 4.f
+  }
+  
+  
+  // MARK: - Types
+  
+  typealias ViewModel = MainViewModel
+  
+  
+  // MARK: - Properties
+  
+  var viewModel: ViewModel
+  
+  
+  // MARK: UI
+  
+  @IBOutlet weak var appBarView: AppBarView!
+  @IBOutlet weak var appBarViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var appBarTitleLabel: UILabel!
   @IBOutlet weak var settingButton: UIButton!
   @IBOutlet weak var mainContentScrollView: UIScrollView!
   @IBOutlet weak var mainContentScrollViewContentViewHeightConstraint: NSLayoutConstraint!
@@ -35,7 +64,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var newUpdateSongErrorMessageLabel: UILabel!
   @IBOutlet weak var newUpdateSongLoadingIndicator: UIActivityIndicatorView!
   
-  var viewModel: ViewModel
   private var archiveFolderFloatingView: ArchiveFolderFloatingPanelView?
   
   
@@ -70,7 +98,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     requestTrackingAuthorization()
     
     // Update constraints
-    appbarView.setNeedsLayout()
+    appBarView.setNeedsLayout()
   }
   
   
@@ -90,8 +118,8 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   private func setupView() {
     setupStatusBar()
-    setupAppbarView()
-    setupAppbarTitleLabel()
+    setupAppBarView()
+    setupAppBarTitleLabel()
     setupSettingButton()
     setupMainContentScrollView()
     setupSearchTextField()
@@ -102,25 +130,25 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupStatusBar() {
-    view.fillStatusBar(color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentPurple()!, insertAt: 0)
   }
   
-  private func setupAppbarView() {
-    appbarView.backgroundColor = .clear
-    appbarView.configure(cornerRadius: 28, roundCorners: [.bottomRight])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = regularAppbarHeight
-    mainContentScrollView.contentInset = UIEdgeInsets(top: regularAppbarHeight,
+  private func setupAppBarView() {
+    appBarView.backgroundColor = .clear
+    appBarView.configure(cornerRadius: Metric.appBarCornerRadius, roundCorners: [.bottomRight])
+    appBarView.setAppBarShadow()
+    appBarViewHeightConstraint.constant = regularAppBarHeight
+    mainContentScrollView.contentInset = UIEdgeInsets(top: regularAppBarHeight,
                                                       left: 0, bottom: 0, right: 0)
     mainContentScrollView.scrollToTop(animated: true)
   }
   
-  private func setupAppbarTitleLabel() {
-    appbarTitleLabel.hero.id = "appbarTitle"
+  private func setupAppBarTitleLabel() {
+    appBarTitleLabel.hero.id = "appbarTitle"
   }
   
   private func setupSettingButton() {
-    settingButton.setPadding(width: 4)
+    settingButton.setPadding(width: Metric.settingButtonPadding)
   }
   
   private func setupMainContentScrollView() {
@@ -128,23 +156,23 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupSearchTextField() {
-    searchBoxView.layer.cornerRadius = 12
+    searchBoxView.layer.cornerRadius = Metric.searchBoxCornerRadius
     searchBoxView.setSearchBoxShadow()
   }
   
   private func setupSearchButton() {
-    searchButton.layer.cornerRadius = 8
+    searchButton.layer.cornerRadius = Metric.searchButtonCornerRadius
     searchButton.setSearchBoxButtonShadow()
   }
   
   private func setupArchiveShortcutBackgroundImageView() {
-    archiveShortcutBackgroundImageView.layer.cornerRadius = 20
+    archiveShortcutBackgroundImageView.layer.cornerRadius = Metric.archiveShortcutViewCornerRadius
     archiveShortcutBackgroundImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
   }
   
   private func setupNewUpdateSongTableView() {
     registerNewUpdateSongTableView()
-    newUpdateSongTableView.layer.cornerRadius = 12
+    newUpdateSongTableView.layer.cornerRadius = Metric.newUpdateSongTableViewCornerRadius
     newUpdateSongTableView.tableFooterView = UIView()
     newUpdateSongTableView.separatorStyle = .none
   }
@@ -155,18 +183,20 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupBrandSegmentedControl() {
-    brandSegmentedControl.segmentTintColor = R.color.updatedSongSelectorSelectedTextColor()!
-    brandSegmentedControl.segmentDefaultColor = R.color.updatedSongSelectorUnSelectedTextColor()!
-    brandSegmentedControl.barIndicatorColor = R.color.updatedSongSelectorBarIndicatorColor()!
-    brandSegmentedControl.barIndicatorHeight = 3
-    brandSegmentedControl.segmentFontSize = 14
-    brandSegmentedControl.addSegment(title: "tj 업데이트")
-    brandSegmentedControl.addSegment(title: "금영 업데이트")
+    brandSegmentedControl.barIndicatorWidthProportion = 0.7
+    brandSegmentedControl.focusedTextColor = R.color.textBasic()!
+    brandSegmentedControl.defaultTextColor = R.color.textSecondary()!
+    brandSegmentedControl.barIndicatorColor = R.color.accentPink()!
+    brandSegmentedControl.barIndicatorHeight = Metric.brandSegmentedControlBarIndicatorHeight
+    brandSegmentedControl.defaultFontSize = Metric.brandSegmentedControlFontSize
+    brandSegmentedControl.focusedFontSize = Metric.brandSegmentedControlFontSize
+    brandSegmentedControl.addItem(title: "tj 업데이트")
+    brandSegmentedControl.addItem(title: "금영 업데이트")
     brandSegmentedControl.setSelected(index: 0)
   }
   
   
-  // MARK: - Bindss
+  // MARK: - Binds
   
   private func bind() {
     bindInputs()
@@ -322,28 +352,28 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     mainContentScrollView.rx.contentOffset
       .asDriver()
       .drive(with: self, onNext: { vc, offset in
-        let compactAppbarHeight = vc.compactAppbarHeight
-        let regularAppbarHeight = vc.regularAppbarHeight
-        let changedY = offset.y + regularAppbarHeight
+        let compactAppBarHeight = vc.compactAppBarHeight
+        let regularAppBarHeight = vc.regularAppBarHeight
+        let changedY = offset.y + regularAppBarHeight
         
-        if -regularAppbarHeight < offset.y {
-          // Shrink Appbar
-          if regularAppbarHeight - changedY >= compactAppbarHeight {
-            let modifiedAppbarHeight: CGFloat = regularAppbarHeight - changedY
-            vc.appbarViewHeightConstraint.constant = modifiedAppbarHeight
+        if -regularAppBarHeight < offset.y {
+          // Shrink AppBar
+          if regularAppBarHeight - changedY >= compactAppBarHeight {
+            let modifiedAppbarHeight: CGFloat = regularAppBarHeight - changedY
+            vc.appBarViewHeightConstraint.constant = modifiedAppbarHeight
             
-            let appbarTitleLabelAlpha: CGFloat = 1 - (regularAppbarHeight - modifiedAppbarHeight) / (regularAppbarHeight - compactAppbarHeight)
-            vc.appbarTitleLabel.alpha = appbarTitleLabelAlpha
+            let appbarTitleLabelAlpha: CGFloat = 1 - (regularAppBarHeight - modifiedAppbarHeight) / (regularAppBarHeight - compactAppBarHeight)
+            vc.appBarTitleLabel.alpha = appbarTitleLabelAlpha
             vc.settingButton.alpha = appbarTitleLabelAlpha
           } else {
-            vc.appbarViewHeightConstraint.constant = compactAppbarHeight
-            vc.appbarTitleLabel.alpha = 0
+            vc.appBarViewHeightConstraint.constant = compactAppBarHeight
+            vc.appBarTitleLabel.alpha = 0
             vc.settingButton.alpha = 0
           }
         } else {
           // Stretch Appbar
-          vc.appbarViewHeightConstraint.constant = regularAppbarHeight - changedY * 0.2
-          vc.appbarTitleLabel.alpha = 1
+          vc.appBarViewHeightConstraint.constant = regularAppBarHeight - changedY * 0.2
+          vc.appBarTitleLabel.alpha = 1
           vc.settingButton.alpha = 1
         }
       }).disposed(by: disposeBag)
@@ -378,11 +408,12 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   func presentSettingVC() {
     let storyboard = UIStoryboard(name: R.storyboard.setting.name, bundle: nil)
-    guard let settingVC = storyboard.instantiateViewController(withIdentifier: SettingViewController.identifier) as? SettingViewController else {
-      return
+    let viewController = storyboard.instantiateViewController(identifier: SettingViewController.identifier) { coder -> SettingViewController in
+      let viewModel = SettingViewModel()
+      return SettingViewController(coder, viewModel) ?? .init(viewModel)
     }
     
-    present(settingVC, animated: true, completion: nil)
+    present(viewController, animated: true, completion: nil)
   }
   
   private func showArchiveFolderFloatingView(_ selectedSong: Song) {

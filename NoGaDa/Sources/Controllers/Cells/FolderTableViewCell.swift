@@ -9,16 +9,24 @@ import UIKit
 
 class FolderTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.folderTableViewCell.identifier
+  
+  struct Metric {
+    static let tapAnimationDuration = 0.2.f
+    static let tapReleaseAnimationDuration = 0.15.f
+    
+    static let cellContentViewCornerRadius = 12.f
+    static let cellContentViewBorderWidth = 1.f
+  }
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var cellContentView: UIView!
   @IBOutlet weak var titleEmojiLabel: UILabel!
   @IBOutlet weak var titleLabel: UILabel!
-  
-  public static let releaseAnimationDuration: CGFloat = 0.5
   
   
   // MARK: - Lifecycle
@@ -31,50 +39,46 @@ class FolderTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    cellContentView.layer.borderColor = R.color.songCellStrokeColor()!.cgColor
+    cellContentView.layer.borderColor = R.color.lineBasic()!.cgColor
+    titleEmojiLabel.text = ""
+    titleLabel.text = ""
   }
   
   
   // MARK: - Setups
   
   private func setupView() {
-    cellContentView.layer.borderWidth = 1
-    cellContentView.layer.borderColor = R.color.songCellStrokeColor()!.cgColor
-    cellContentView.layer.cornerRadius = 12
-    
-    titleEmojiLabel.text    = ""
-    titleLabel.text         = ""
+    cellContentView.layer.borderWidth = Metric.cellContentViewBorderWidth
+    cellContentView.layer.borderColor = R.color.lineBasic()!.cgColor
+    cellContentView.layer.cornerRadius = Metric.cellContentViewCornerRadius
   }
 }
 
 
-// MARK: - Extensions
+// MARK: - Touch Animation
 
 extension FolderTableViewCell {
-  private var releaseAnimationDuration: CGFloat {
-    return 0.2
-  }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-      self.cellContentView.backgroundColor = R.color.songCellSelectedBackgroundColor()
+    UIView.animate(withDuration: Metric.tapAnimationDuration, delay: 0, options: .curveEaseInOut) {
+      self.cellContentView.backgroundColor = R.color.backgroundBasicSelected()
       self.cellContentView.scaleDown()
     }
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-      self.cellContentView.backgroundColor = R.color.songCellBackgroundColor()
+    UIView.animate(withDuration: Metric.tapReleaseAnimationDuration, delay: 0, options: .curveEaseInOut) {
+      self.cellContentView.backgroundColor = R.color.backgroundSecondary()
       self.cellContentView.releaseScale()
     }
   }
   
   override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesCancelled(touches, with: event)
-    UIView.animate(withDuration: releaseAnimationDuration) {
-      self.cellContentView.backgroundColor = R.color.songCellBackgroundColor()
+    UIView.animate(withDuration: Metric.tapReleaseAnimationDuration, delay: 0, options: .curveEaseInOut) {
+      self.cellContentView.backgroundColor = R.color.backgroundSecondary()
       self.cellContentView.releaseScale()
     }
   }

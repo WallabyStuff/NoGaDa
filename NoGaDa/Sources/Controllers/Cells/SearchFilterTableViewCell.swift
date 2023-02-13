@@ -9,10 +9,12 @@ import UIKit
 
 class SearchFilterTableViewCell: UITableViewCell {
   
-  
-  // MARK: - Properties
+  // MARK: - Cosntants
   
   static let identifier = R.reuseIdentifier.searchFilterTableCell.identifier
+  
+  
+  // MARK: - UI
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var filterSwitch: UISwitch!
@@ -22,15 +24,20 @@ class SearchFilterTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    initView()
+    setupView()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    titleLabel.text = ""
+    filterSwitch.isOn = true
   }
   
   
-  // MARK: - Initializers
+  // MARK: - Setups
   
-  private func initView() {
-    titleLabel.text = ""
-    filterSwitch.isOn = true
+  private func setupView() {
     selectionStyle = .none
   }
 }

@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import Hero
+import SafeAreaBrush
 
 @objc
 protocol ArchiveFolderListViewDelegate: AnyObject {
@@ -21,21 +22,38 @@ protocol ArchiveFolderListViewDelegate: AnyObject {
 class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   
-  // MARK: - Properties
+  // MARK: - Constants
   
   static let identifier = R.storyboard.archive.archiveFolderStoryboard.identifier
+  
+  struct Metric {
+    static let archiveFolderTableViewTopInset = 36.f
+    
+    static let appBarViewCornerRadius = 28.f
+    
+    static let addFolderButtonCornerRadius = 12.f
+  }
+  
+  
+  // MARK: - Types
+  
   typealias ViewModel = ArchiveFolderViewModel
   
-  @IBOutlet weak var appbarView: UIView!
+  
+  // MARK: - Properties
+  
+  weak var delegate: ArchiveFolderListViewDelegate?
+  var viewModel: ViewModel
+  
+  
+  // MARK: - UI
+  
+  @IBOutlet weak var appBarView: UIView!
   @IBOutlet weak var appbarViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var appbarTitleLabel: UILabel!
   @IBOutlet weak var exitButton: UIButton!
   @IBOutlet weak var addFolderButton: UIButton!
   @IBOutlet weak var archiveFolderTableView: UITableView!
-  
-  weak var delegate: ArchiveFolderListViewDelegate?
-  var viewModel: ViewModel
-  private let archiveFolderTableViewTopInset: CGFloat = 36
   
   
   // MARK: - Lifecycle
@@ -90,31 +108,30 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   private func setupView() {
     self.hero.isEnabled = true
     setupStatusBar()
-    setupAppbar()
-    setupAppbarTitleLabel()
+    setupAppBar()
+    setupAppBarTitleLabel()
     setupAddFolderButton()
     setupExitButton()
     setupArchiveFolderTableView()
   }
   
   private func setupStatusBar() {
-    view.fillStatusBar(color: R.color.accentColor()!)
+    fillSafeArea(position: .top, color: R.color.accentColor()!, insertAt: 0)
   }
   
-  private func setupAppbar() {
-    appbarView.hero.id = "appbar"
-    appbarView.layer.cornerRadius = 28
-    appbarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
-    appbarView.setAppbarShadow()
-    appbarViewHeightConstraint.constant = compactAppbarHeight
+  private func setupAppBar() {
+    appBarView.layer.cornerRadius = Metric.appBarViewCornerRadius
+    appBarView.layer.maskedCorners = CACornerMask([.layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+    appBarView.setAppBarShadow()
+    appbarViewHeightConstraint.constant = compactAppBarHeight
   }
   
-  private func setupAppbarTitleLabel() {
+  private func setupAppBarTitleLabel() {
     appbarTitleLabel.hero.id = "appbarTitle"
   }
   
   private func setupAddFolderButton() {
-    addFolderButton.layer.cornerRadius = 12
+    addFolderButton.layer.cornerRadius = Metric.addFolderButtonCornerRadius
     addFolderButton.hero.modifiers = [.translate(y: 20), .fade]
   }
   
@@ -127,7 +144,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     registerArchiveFolderCell()
     archiveFolderTableView.separatorStyle = .none
     archiveFolderTableView.tableFooterView = UIView()
-    archiveFolderTableView.contentInset = UIEdgeInsets(top: archiveFolderTableViewTopInset, left: 0, bottom: 0, right: 0)
+    archiveFolderTableView.contentInset = UIEdgeInsets(top: Metric.archiveFolderTableViewTopInset, left: 0, bottom: 0, right: 0)
     archiveFolderTableView.rx.setDelegate(self)
       .disposed(by: disposeBag)
   }
@@ -217,12 +234,12 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     archiveFolderTableView.rx.contentOffset
       .asDriver()
       .drive(with: self, onNext: { vc, offset in
-        let compactAppbarHeight = vc.compactAppbarHeight
+        let compactAppbarHeight = vc.compactAppBarHeight
         
-        let changedY = offset.y + vc.archiveFolderTableViewTopInset
+        let changedY = offset.y + Metric.archiveFolderTableViewTopInset
         let newAppbarHeight = compactAppbarHeight - (changedY * 0.2)
         
-        if newAppbarHeight >= vc.compactAppbarHeight {
+        if newAppbarHeight >= vc.compactAppBarHeight {
           vc.appbarViewHeightConstraint.constant = newAppbarHeight
         }
       }).disposed(by: disposeBag)
