@@ -42,7 +42,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.11.0)"
   - GoogleUtilities/Reachability (7.11.0):
     - GoogleUtilities/Logger
-  - Hero (1.6.0)
+  - Hero (1.6.2)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -68,17 +68,17 @@ PODS:
   - SwiftRater (2.1.0)
 
 DEPENDENCIES:
-  - BISegmentedControl
-  - FloatingPanel
+  - BISegmentedControl (~> 0.1.1)
+  - FloatingPanel (~> 2.6.0)
   - Google-Mobile-Ads-SDK
-  - Hero (= 1.6.0)
-  - R.swift
-  - RealmSwift (~> 10)
-  - RxCocoa
-  - RxGesture
-  - RxSwift
-  - SafeAreaBrush
-  - SwiftRater
+  - Hero (~> 1.6.2)
+  - R.swift (~> 7.2.4)
+  - RealmSwift
+  - RxCocoa (~> 6.5.0)
+  - RxGesture (~> 4.0.4)
+  - RxSwift (~> 6.5.0)
+  - SafeAreaBrush (~> 1.0.4)
+  - SwiftRater (~> 2.1.0)
 
 SPEC REPOS:
   trunk:
@@ -108,7 +108,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 40c70a7d89013f0eca72006c4b9732163ea4cdae
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
-  Hero: 052b9b9bab68fc4e30cc04e5936eaf0de97b59d3
+  Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   R.swift: 681bb9135f482e7a81d9d27445b837fef5467e11
@@ -121,6 +121,6 @@ SPEC CHECKSUMS:
   SafeAreaBrush: 282315ce500e436c04b2c26b46e8ac0ad4288bbd
   SwiftRater: 23f3c60a468daf3cad69447b67e42d6f5261331f
 
-PODFILE CHECKSUM: 5e06340a6fc54158fa9bc098ac5384879d4fcffd
+PODFILE CHECKSUM: d9c057de2e607d2394f14d6c2db89dfae2f4279c
 
 COCOAPODS: 1.11.3
