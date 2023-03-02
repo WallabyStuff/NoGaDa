@@ -4,2156 +4,819 @@
 //
 
 import Foundation
-import Rswift
+import RswiftResources
 import UIKit
 
-/// This `R` struct is generated and contains references to static resources.
-struct R: Rswift.Validatable {
-  fileprivate static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap { Locale(identifier: $0) } ?? Locale.current
-  fileprivate static let hostingBundle = Bundle(for: R.Class.self)
+private class BundleFinder {}
+let R = _R(bundle: Bundle(for: BundleFinder.self))
 
-  /// Find first language and bundle for which the table exists
-  fileprivate static func localeBundle(tableName: String, preferredLanguages: [String]) -> (Foundation.Locale, Foundation.Bundle)? {
-    // Filter preferredLanguages to localizations, use first locale
-    var languages = preferredLanguages
-      .map { Locale(identifier: $0) }
-      .prefix(1)
-      .flatMap { locale -> [String] in
-        if hostingBundle.localizations.contains(locale.identifier) {
-          if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
-            return [locale.identifier, language]
-          } else {
-            return [locale.identifier]
-          }
-        } else if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
-          return [language]
-        } else {
-          return []
-        }
-      }
+struct _R {
+  let bundle: Foundation.Bundle
 
-    // If there's no languages, use development language as backstop
-    if languages.isEmpty {
-      if let developmentLocalization = hostingBundle.developmentLocalization {
-        languages = [developmentLocalization]
-      }
-    } else {
-      // Insert Base as second item (between locale identifier and languageCode)
-      languages.insert("Base", at: 1)
+  let reuseIdentifier = reuseIdentifier()
 
-      // Add development language as backstop
-      if let developmentLocalization = hostingBundle.developmentLocalization {
-        languages.append(developmentLocalization)
-      }
-    }
+  var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
+  var color: color { .init(bundle: bundle) }
+  var image: image { .init(bundle: bundle) }
+  var info: info { .init(bundle: bundle) }
+  var nib: nib { .init(bundle: bundle) }
+  var storyboard: storyboard { .init(bundle: bundle) }
 
-    // Find first language for which table exists
-    // Note: key might not exist in chosen language (in that case, key will be shown)
-    for language in languages {
-      if let lproj = hostingBundle.url(forResource: language, withExtension: "lproj"),
-         let lbundle = Bundle(url: lproj)
-      {
-        let strings = lbundle.url(forResource: tableName, withExtension: "strings")
-        let stringsdict = lbundle.url(forResource: tableName, withExtension: "stringsdict")
-
-        if strings != nil || stringsdict != nil {
-          return (Locale(identifier: language), lbundle)
-        }
-      }
-    }
-
-    // If table is available in main bundle, don't look for localized resources
-    let strings = hostingBundle.url(forResource: tableName, withExtension: "strings", subdirectory: nil, localization: nil)
-    let stringsdict = hostingBundle.url(forResource: tableName, withExtension: "stringsdict", subdirectory: nil, localization: nil)
-
-    if strings != nil || stringsdict != nil {
-      return (applicationLocale, hostingBundle)
-    }
-
-    // If table is not found for requested languages, key will be shown
-    return nil
+  func string(bundle: Foundation.Bundle) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: nil)
+  }
+  func string(locale: Foundation.Locale) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: locale)
+  }
+  func string(preferredLanguages: [String], locale: Locale? = nil) -> string {
+    .init(bundle: bundle, preferredLanguages: preferredLanguages, locale: locale)
+  }
+  func color(bundle: Foundation.Bundle) -> color {
+    .init(bundle: bundle)
+  }
+  func image(bundle: Foundation.Bundle) -> image {
+    .init(bundle: bundle)
+  }
+  func info(bundle: Foundation.Bundle) -> info {
+    .init(bundle: bundle)
+  }
+  func nib(bundle: Foundation.Bundle) -> nib {
+    .init(bundle: bundle)
+  }
+  func storyboard(bundle: Foundation.Bundle) -> storyboard {
+    .init(bundle: bundle)
+  }
+  func validate() throws {
+    try self.nib.validate()
+    try self.storyboard.validate()
   }
 
-  /// Load string from Info.plist file
-  fileprivate static func infoPlistString(path: [String], key: String) -> String? {
-    var dict = hostingBundle.infoDictionary
-    for step in path {
-      guard let obj = dict?[step] as? [String: Any] else { return nil }
-      dict = obj
-    }
-    return dict?[key] as? String
+  struct project {
+    let developmentRegion = "en"
   }
 
-  static func validate() throws {
-    try intern.validate()
+  /// This `_R.string` struct is generated, and contains static references to 3 localization tables.
+  struct string {
+    let bundle: Foundation.Bundle
+    let preferredLanguages: [String]?
+    let locale: Locale?
+    var infoPlist: infoPlist { .init(source: .init(bundle: bundle, tableName: "InfoPlist", preferredLanguages: preferredLanguages, locale: locale)) }
+    var launchScreen: launchScreen { .init(source: .init(bundle: bundle, tableName: "LaunchScreen", preferredLanguages: preferredLanguages, locale: locale)) }
+    var main: main { .init(source: .init(bundle: bundle, tableName: "Main", preferredLanguages: preferredLanguages, locale: locale)) }
+
+    func infoPlist(preferredLanguages: [String]) -> infoPlist {
+      .init(source: .init(bundle: bundle, tableName: "InfoPlist", preferredLanguages: preferredLanguages, locale: locale))
+    }
+    func launchScreen(preferredLanguages: [String]) -> launchScreen {
+      .init(source: .init(bundle: bundle, tableName: "LaunchScreen", preferredLanguages: preferredLanguages, locale: locale))
+    }
+    func main(preferredLanguages: [String]) -> main {
+      .init(source: .init(bundle: bundle, tableName: "Main", preferredLanguages: preferredLanguages, locale: locale))
+    }
+
+
+    /// This `_R.string.infoPlist` struct is generated, and contains static references to 1 localization keys.
+    struct infoPlist {
+      let source: RswiftResources.StringResource.Source
+
+      /// en translation: NoGaDa
+      ///
+      /// Key: CFBundleDisplayName
+      ///
+      /// Locales: ko, en
+      var cfBundleDisplayName: RswiftResources.StringResource { .init(key: "CFBundleDisplayName", tableName: "InfoPlist", source: source, developmentValue: "NoGaDa", comment: nil) }
+    }
+
+    /// This `_R.string.launchScreen` struct is generated, and contains static references to 0 localization keys.
+    struct launchScreen {
+      let source: RswiftResources.StringResource.Source
+    }
+
+    /// This `_R.string.main` struct is generated, and contains static references to 32 localization keys.
+    struct main {
+      let source: RswiftResources.StringResource.Source
+
+      /// ko translation: 제목이나 가수명으로 노래를 검색하세요
+      ///
+      /// Key: 4Jq-qh-3mw.text
+      ///
+      /// Locales: ko
+      var jqQh3mwText: RswiftResources.StringResource { .init(key: "4Jq-qh-3mw.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Contact us
+      ///
+      /// Key: 6P6-Kw-gij.text
+      ///
+      /// Locales: ko
+      var p6KwGijText: RswiftResources.StringResource { .init(key: "6P6-Kw-gij.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 폴더 이름
+      ///
+      /// Key: 7w4-j5-IR6.placeholder
+      ///
+      /// Locales: ko
+      var w4J5IR6Placeholder: RswiftResources.StringResource { .init(key: "7w4-j5-IR6.placeholder", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 새 폴더
+      ///
+      /// Key: C4h-cQ-6N2.text
+      ///
+      /// Locales: ko
+      var c4hCQ6N2Text: RswiftResources.StringResource { .init(key: "C4h-cQ-6N2.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: + 새 폴더 생성
+      ///
+      /// Key: Cbk-yG-6kt.normalTitle
+      ///
+      /// Locales: ko
+      var cbkYG6ktNormalTitle: RswiftResources.StringResource { .init(key: "Cbk-yG-6kt.normalTitle", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 😀
+      ///
+      /// Key: Cpu-J9-uYf.text
+      ///
+      /// Locales: ko
+      var cpuJ9UYfText: RswiftResources.StringResource { .init(key: "Cpu-J9-uYf.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 오류가 발생했습니다.
+      ///
+      /// Key: CxZ-Cq-9Qe.text
+      ///
+      /// Locales: ko
+      var cxZCq9QeText: RswiftResources.StringResource { .init(key: "CxZ-Cq-9Qe.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 노래방 가서 다 부를거야!
+      ///
+      /// Key: DLU-ju-7zi.text
+      ///
+      /// Locales: ko
+      var dluJu7ziText: RswiftResources.StringResource { .init(key: "DLU-ju-7zi.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: tj
+      ///
+      /// Key: HWm-DX-mxj.segmentTitles[0]
+      ///
+      /// Locales: ko
+      var hWmDXMxjSegmentTitles0: RswiftResources.StringResource { .init(key: "HWm-DX-mxj.segmentTitles[0]", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 금영
+      ///
+      /// Key: HWm-DX-mxj.segmentTitles[1]
+      ///
+      /// Locales: ko
+      var hWmDXMxjSegmentTitles1: RswiftResources.StringResource { .init(key: "HWm-DX-mxj.segmentTitles[1]", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 제목이나 가수명으로 노래를 검색하세요
+      ///
+      /// Key: I1L-Kc-4uI.placeholder
+      ///
+      /// Locales: ko
+      var i1LKc4uIPlaceholder: RswiftResources.StringResource { .init(key: "I1L-Kc-4uI.placeholder", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 총 --곡
+      ///
+      /// Key: I8f-kb-mSm.text
+      ///
+      /// Locales: ko
+      var i8fKbMSmText: RswiftResources.StringResource { .init(key: "I8f-kb-mSm.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Credit
+      ///
+      /// Key: J4O-zs-k0K.text
+      ///
+      /// Locales: ko
+      var j4OZsK0KText: RswiftResources.StringResource { .init(key: "J4O-zs-k0K.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 적용
+      ///
+      /// Key: KXr-bc-Zdo.normalTitle
+      ///
+      /// Locales: ko
+      var kXrBcZdoNormalTitle: RswiftResources.StringResource { .init(key: "KXr-bc-Zdo.normalTitle", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Setting
+      ///
+      /// Key: M4g-7J-YGo.text
+      ///
+      /// Locales: ko
+      var m4g7JYGoText: RswiftResources.StringResource { .init(key: "M4g-7J-YGo.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 기타
+      ///
+      /// Key: SVo-nP-6mw.text
+      ///
+      /// Locales: ko
+      var sVoNP6mwText: RswiftResources.StringResource { .init(key: "SVo-nP-6mw.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 보관함
+      ///
+      /// Key: UOS-9k-ADV.text
+      ///
+      /// Locales: ko
+      var uos9kADVText: RswiftResources.StringResource { .init(key: "UOS-9k-ADV.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 노래방 가서 부르고 싶은 노래
+      ///
+      /// Key: VpG-sO-j57.text
+      ///
+      /// Locales: ko
+      var vpGSOJ57Text: RswiftResources.StringResource { .init(key: "VpG-sO-j57.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 보관함 바로가기
+      ///
+      /// Key: Ysc-M8-Y7u.text
+      ///
+      /// Locales: ko
+      var yscM8Y7uText: RswiftResources.StringResource { .init(key: "Ysc-M8-Y7u.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 보관함
+      ///
+      /// Key: asG-Yn-m5w.text
+      ///
+      /// Locales: ko
+      var asGYnM5wText: RswiftResources.StringResource { .init(key: "asG-Yn-m5w.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: + 새 폴더 생성
+      ///
+      /// Key: bTv-E6-Q0q.normalTitle
+      ///
+      /// Locales: ko
+      var bTvE6Q0qNormalTitle: RswiftResources.StringResource { .init(key: "bTv-E6-Q0q.normalTitle", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 노래 검색
+      ///
+      /// Key: cQ5-Pr-b1K.text
+      ///
+      /// Locales: ko
+      var cQ5PrB1KText: RswiftResources.StringResource { .init(key: "cQ5-Pr-b1K.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Main
+      ///
+      /// Key: dBf-gf-Im0.title
+      ///
+      /// Locales: ko
+      var dBfGfIm0Title: RswiftResources.StringResource { .init(key: "dBf-gf-Im0.title", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 확인
+      ///
+      /// Key: fSo-Bc-Q9v.normalTitle
+      ///
+      /// Locales: ko
+      var fSoBcQ9vNormalTitle: RswiftResources.StringResource { .init(key: "fSo-Bc-Q9v.normalTitle", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Developer : Lee Seunggi Ui/Ux Design: Lee Seunggi Contact : avocado34.131@gmail.com   Api Contributor : Yun KwangSeon Contact : middleyks@hanmail.net
+      ///
+      /// Key: gjp-Oi-p6X.text
+      ///
+      /// Locales: ko
+      var gjpOiP6XText: RswiftResources.StringResource { .init(key: "gjp-Oi-p6X.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Used resources
+      ///
+      /// Key: hgy-DL-w7S.text
+      ///
+      /// Locales: ko
+      var hgyDLW7SText: RswiftResources.StringResource { .init(key: "hgy-DL-w7S.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 검색필터
+      ///
+      /// Key: hkW-sj-9w7.text
+      ///
+      /// Locales: ko
+      var hkWSj9w7Text: RswiftResources.StringResource { .init(key: "hkW-sj-9w7.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 노래 검색
+      ///
+      /// Key: lvi-2L-p6a.title
+      ///
+      /// Locales: ko
+      var lvi2LP6aTitle: RswiftResources.StringResource { .init(key: "lvi-2L-p6a.title", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 검색 결과가 없습니다.
+      ///
+      /// Key: nd8-5P-dIH.text
+      ///
+      /// Locales: ko
+      var nd85PDIHText: RswiftResources.StringResource { .init(key: "nd8-5P-dIH.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 노가다 노래방 가서 다 부를거야  version 1.0.0
+      ///
+      /// Key: skd-ZX-9Km.text
+      ///
+      /// Locales: ko
+      var skdZX9KmText: RswiftResources.StringResource { .init(key: "skd-ZX-9Km.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: Copyright © LeeSeunggi All Right Reserved
+      ///
+      /// Key: suC-8F-fRQ.text
+      ///
+      /// Locales: ko
+      var suC8FFRQText: RswiftResources.StringResource { .init(key: "suC-8F-fRQ.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+
+      /// ko translation: 😃
+      ///
+      /// Key: zbA-aj-vX6.text
+      ///
+      /// Locales: ko
+      var zbAAjVX6Text: RswiftResources.StringResource { .init(key: "zbA-aj-vX6.text", tableName: "Main", source: source, developmentValue: nil, comment: nil) }
+    }
   }
 
-  #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 6 storyboards.
-  struct storyboard {
-    /// Storyboard `Archive`.
-    static let archive = _R.storyboard.archive()
-    /// Storyboard `Folder`.
-    static let folder = _R.storyboard.folder()
-    /// Storyboard `LaunchScreen`.
-    static let launchScreen = _R.storyboard.launchScreen()
-    /// Storyboard `Main`.
-    static let main = _R.storyboard.main()
-    /// Storyboard `Search`.
-    static let search = _R.storyboard.search()
-    /// Storyboard `Setting`.
-    static let setting = _R.storyboard.setting()
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Archive", bundle: ...)`
-    static func archive(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.archive)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Folder", bundle: ...)`
-    static func folder(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.folder)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
-    static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Main", bundle: ...)`
-    static func main(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.main)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Search", bundle: ...)`
-    static func search(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.search)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Setting", bundle: ...)`
-    static func setting(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.setting)
-    }
-    #endif
-
-    fileprivate init() {}
-  }
-  #endif
-
-  /// This `R.color` struct is generated, and contains static references to 28 colors.
+  /// This `_R.color` struct is generated, and contains static references to 28 colors.
   struct color {
+    let bundle: Foundation.Bundle
+
     /// Color `AccentBlue`.
-    static let accentBlue = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentBlue")
+    var accentBlue: RswiftResources.ColorResource { .init(name: "AccentBlue", path: [], bundle: bundle) }
+
     /// Color `AccentColor`.
-    static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
+    var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
+
     /// Color `AccentOrange`.
-    static let accentOrange = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentOrange")
+    var accentOrange: RswiftResources.ColorResource { .init(name: "AccentOrange", path: [], bundle: bundle) }
+
     /// Color `AccentPink`.
-    static let accentPink = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPink")
-    /// Color `AccentPurpleLight`.
-    static let accentPurpleLight = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPurpleLight")
+    var accentPink: RswiftResources.ColorResource { .init(name: "AccentPink", path: [], bundle: bundle) }
+
     /// Color `AccentPurple`.
-    static let accentPurple = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentPurple")
-    /// Color `AccentYellowDark`.
-    static let accentYellowDark = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellowDark")
-    /// Color `AccentYellowDarker`.
-    static let accentYellowDarker = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellowDarker")
-    /// Color `AccentYellowDisable`.
-    static let accentYellowDisable = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellowDisable")
+    var accentPurple: RswiftResources.ColorResource { .init(name: "AccentPurple", path: [], bundle: bundle) }
+
+    /// Color `AccentPurpleLight`.
+    var accentPurpleLight: RswiftResources.ColorResource { .init(name: "AccentPurpleLight", path: [], bundle: bundle) }
+
     /// Color `AccentYellow`.
-    static let accentYellow = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentYellow")
-    /// Color `BackgroundBasicSelected`.
-    static let backgroundBasicSelected = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundBasicSelected")
+    var accentYellow: RswiftResources.ColorResource { .init(name: "AccentYellow", path: [], bundle: bundle) }
+
+    /// Color `AccentYellowDark`.
+    var accentYellowDark: RswiftResources.ColorResource { .init(name: "AccentYellowDark", path: [], bundle: bundle) }
+
+    /// Color `AccentYellowDarker`.
+    var accentYellowDarker: RswiftResources.ColorResource { .init(name: "AccentYellowDarker", path: [], bundle: bundle) }
+
+    /// Color `AccentYellowDisable`.
+    var accentYellowDisable: RswiftResources.ColorResource { .init(name: "AccentYellowDisable", path: [], bundle: bundle) }
+
     /// Color `BackgroundBasic`.
-    static let backgroundBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundBasic")
+    var backgroundBasic: RswiftResources.ColorResource { .init(name: "BackgroundBasic", path: [], bundle: bundle) }
+
+    /// Color `BackgroundBasicSelected`.
+    var backgroundBasicSelected: RswiftResources.ColorResource { .init(name: "BackgroundBasicSelected", path: [], bundle: bundle) }
+
     /// Color `BackgroundSecondary`.
-    static let backgroundSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundSecondary")
+    var backgroundSecondary: RswiftResources.ColorResource { .init(name: "BackgroundSecondary", path: [], bundle: bundle) }
+
     /// Color `BackgroundWhite`.
-    static let backgroundWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "BackgroundWhite")
+    var backgroundWhite: RswiftResources.ColorResource { .init(name: "BackgroundWhite", path: [], bundle: bundle) }
+
     /// Color `Basic`.
-    static let basic = Rswift.ColorResource(bundle: R.hostingBundle, name: "Basic")
+    var basic: RswiftResources.ColorResource { .init(name: "Basic", path: [], bundle: bundle) }
+
     /// Color `Black`.
-    static let black = Rswift.ColorResource(bundle: R.hostingBundle, name: "Black")
-    /// Color `IconBasicSecondary`.
-    static let iconBasicSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBasicSecondary")
+    var black: RswiftResources.ColorResource { .init(name: "Black", path: [], bundle: bundle) }
+
     /// Color `IconBasic`.
-    static let iconBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBasic")
+    var iconBasic: RswiftResources.ColorResource { .init(name: "IconBasic", path: [], bundle: bundle) }
+
+    /// Color `IconBasicSecondary`.
+    var iconBasicSecondary: RswiftResources.ColorResource { .init(name: "IconBasicSecondary", path: [], bundle: bundle) }
+
     /// Color `IconBlack`.
-    static let iconBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconBlack")
+    var iconBlack: RswiftResources.ColorResource { .init(name: "IconBlack", path: [], bundle: bundle) }
+
     /// Color `IconSecondary`.
-    static let iconSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconSecondary")
+    var iconSecondary: RswiftResources.ColorResource { .init(name: "IconSecondary", path: [], bundle: bundle) }
+
     /// Color `IconWhite`.
-    static let iconWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "IconWhite")
+    var iconWhite: RswiftResources.ColorResource { .init(name: "IconWhite", path: [], bundle: bundle) }
+
     /// Color `LineBasic`.
-    static let lineBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "LineBasic")
+    var lineBasic: RswiftResources.ColorResource { .init(name: "LineBasic", path: [], bundle: bundle) }
+
     /// Color `TextBasic`.
-    static let textBasic = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextBasic")
+    var textBasic: RswiftResources.ColorResource { .init(name: "TextBasic", path: [], bundle: bundle) }
+
     /// Color `TextBlack`.
-    static let textBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextBlack")
+    var textBlack: RswiftResources.ColorResource { .init(name: "TextBlack", path: [], bundle: bundle) }
+
     /// Color `TextSecondary`.
-    static let textSecondary = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextSecondary")
+    var textSecondary: RswiftResources.ColorResource { .init(name: "TextSecondary", path: [], bundle: bundle) }
+
     /// Color `TextTertiary`.
-    static let textTertiary = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextTertiary")
+    var textTertiary: RswiftResources.ColorResource { .init(name: "TextTertiary", path: [], bundle: bundle) }
+
     /// Color `TextWhite`.
-    static let textWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "TextWhite")
+    var textWhite: RswiftResources.ColorResource { .init(name: "TextWhite", path: [], bundle: bundle) }
+
     /// Color `White`.
-    static let white = Rswift.ColorResource(bundle: R.hostingBundle, name: "White")
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentBlue", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentBlue(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentBlue, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentOrange", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentOrange(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentOrange, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentPink", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentPink(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentPink, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentPurple", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentPurple(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentPurple, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentPurpleLight", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentPurpleLight(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentPurpleLight, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentYellow", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentYellow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentYellow, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentYellowDark", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentYellowDark(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentYellowDark, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentYellowDarker", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentYellowDarker(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentYellowDarker, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentYellowDisable", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentYellowDisable(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentYellowDisable, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "BackgroundBasic", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func backgroundBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.backgroundBasic, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "BackgroundBasicSelected", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func backgroundBasicSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.backgroundBasicSelected, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "BackgroundSecondary", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func backgroundSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.backgroundSecondary, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "BackgroundWhite", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func backgroundWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.backgroundWhite, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "Basic", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func basic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.basic, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "Black", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func black(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.black, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "IconBasic", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func iconBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.iconBasic, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "IconBasicSecondary", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func iconBasicSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.iconBasicSecondary, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "IconBlack", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func iconBlack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.iconBlack, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "IconSecondary", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func iconSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.iconSecondary, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "IconWhite", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func iconWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.iconWhite, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "LineBasic", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func lineBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.lineBasic, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextBasic", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textBasic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textBasic, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextBlack", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textBlack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textBlack, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextSecondary", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textSecondary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textSecondary, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextTertiary", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textTertiary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textTertiary, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "TextWhite", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func textWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.textWhite, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "White", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.white, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentBlue", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentBlue(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentBlue.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentColor.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentOrange", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentOrange(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentOrange.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentPink", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentPink(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentPink.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentPurple", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentPurple(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentPurple.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentPurpleLight", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentPurpleLight(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentPurpleLight.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentYellow", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentYellow(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentYellow.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentYellowDark", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentYellowDark(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentYellowDark.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentYellowDarker", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentYellowDarker(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentYellowDarker.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentYellowDisable", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentYellowDisable(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentYellowDisable.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "BackgroundBasic", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func backgroundBasic(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.backgroundBasic.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "BackgroundBasicSelected", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func backgroundBasicSelected(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.backgroundBasicSelected.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "BackgroundSecondary", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func backgroundSecondary(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.backgroundSecondary.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "BackgroundWhite", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func backgroundWhite(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.backgroundWhite.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "Basic", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func basic(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.basic.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "Black", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func black(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.black.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "IconBasic", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func iconBasic(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.iconBasic.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "IconBasicSecondary", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func iconBasicSecondary(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.iconBasicSecondary.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "IconBlack", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func iconBlack(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.iconBlack.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "IconSecondary", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func iconSecondary(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.iconSecondary.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "IconWhite", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func iconWhite(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.iconWhite.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "LineBasic", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func lineBasic(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.lineBasic.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextBasic", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textBasic(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textBasic.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextBlack", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textBlack(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textBlack.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextSecondary", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textSecondary(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textSecondary.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextTertiary", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textTertiary(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textTertiary.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "TextWhite", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func textWhite(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.textWhite.name)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "White", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func white(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.white.name)
-    }
-    #endif
-
-    fileprivate init() {}
+    var white: RswiftResources.ColorResource { .init(name: "White", path: [], bundle: bundle) }
   }
 
-  /// This `R.image` struct is generated, and contains static references to 13 images.
+  /// This `_R.image` struct is generated, and contains static references to 13 images.
   struct image {
+    let bundle: Foundation.Bundle
+
     /// Image `ArchiveShortcutBackgroundImage`.
-    static let archiveShortcutBackgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "ArchiveShortcutBackgroundImage")
+    var archiveShortcutBackgroundImage: RswiftResources.ImageResource { .init(name: "ArchiveShortcutBackgroundImage", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `SplashImage`.
-    static let splashImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "SplashImage")
+    var splashImage: RswiftResources.ImageResource { .init(name: "SplashImage", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `back-arrow`.
-    static let backArrow = Rswift.ImageResource(bundle: R.hostingBundle, name: "back-arrow")
+    var backArrow: RswiftResources.ImageResource { .init(name: "back-arrow", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `chevron-right`.
-    static let chevronRight = Rswift.ImageResource(bundle: R.hostingBundle, name: "chevron-right")
+    var chevronRight: RswiftResources.ImageResource { .init(name: "chevron-right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `email`.
-    static let email = Rswift.ImageResource(bundle: R.hostingBundle, name: "email")
-    /// Image `folder-filled`.
-    static let folderFilled = Rswift.ImageResource(bundle: R.hostingBundle, name: "folder-filled")
+    var email: RswiftResources.ImageResource { .init(name: "email", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `folder`.
-    static let folder = Rswift.ImageResource(bundle: R.hostingBundle, name: "folder")
+    var folder: RswiftResources.ImageResource { .init(name: "folder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `folder-filled`.
+    var folderFilled: RswiftResources.ImageResource { .init(name: "folder-filled", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `information.fill`.
-    static let informationFill = Rswift.ImageResource(bundle: R.hostingBundle, name: "information.fill")
+    var informationFill: RswiftResources.ImageResource { .init(name: "information.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `music-note`.
-    static let musicNote = Rswift.ImageResource(bundle: R.hostingBundle, name: "music-note")
+    var musicNote: RswiftResources.ImageResource { .init(name: "music-note", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `plus`.
-    static let plus = Rswift.ImageResource(bundle: R.hostingBundle, name: "plus")
+    var plus: RswiftResources.ImageResource { .init(name: "plus", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `setting`.
-    static let setting = Rswift.ImageResource(bundle: R.hostingBundle, name: "setting")
+    var setting: RswiftResources.ImageResource { .init(name: "setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `sort-line`.
-    static let sortLine = Rswift.ImageResource(bundle: R.hostingBundle, name: "sort-line")
+    var sortLine: RswiftResources.ImageResource { .init(name: "sort-line", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `trash-bin`.
-    static let trashBin = Rswift.ImageResource(bundle: R.hostingBundle, name: "trash-bin")
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "ArchiveShortcutBackgroundImage", bundle: ..., traitCollection: ...)`
-    static func archiveShortcutBackgroundImage(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.archiveShortcutBackgroundImage, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "SplashImage", bundle: ..., traitCollection: ...)`
-    static func splashImage(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.splashImage, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "back-arrow", bundle: ..., traitCollection: ...)`
-    static func backArrow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.backArrow, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "chevron-right", bundle: ..., traitCollection: ...)`
-    static func chevronRight(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.chevronRight, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "email", bundle: ..., traitCollection: ...)`
-    static func email(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.email, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "folder", bundle: ..., traitCollection: ...)`
-    static func folder(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.folder, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "folder-filled", bundle: ..., traitCollection: ...)`
-    static func folderFilled(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.folderFilled, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "information.fill", bundle: ..., traitCollection: ...)`
-    static func informationFill(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.informationFill, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "music-note", bundle: ..., traitCollection: ...)`
-    static func musicNote(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.musicNote, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "plus", bundle: ..., traitCollection: ...)`
-    static func plus(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.plus, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "setting", bundle: ..., traitCollection: ...)`
-    static func setting(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.setting, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "sort-line", bundle: ..., traitCollection: ...)`
-    static func sortLine(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sortLine, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "trash-bin", bundle: ..., traitCollection: ...)`
-    static func trashBin(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.trashBin, compatibleWith: traitCollection)
-    }
-    #endif
-
-    fileprivate init() {}
+    var trashBin: RswiftResources.ImageResource { .init(name: "trash-bin", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `R.info` struct is generated, and contains static references to 1 properties.
+  /// This `_R.info` struct is generated, and contains static references to 1 properties.
   struct info {
+    let bundle: Foundation.Bundle
+    var uiApplicationSceneManifest: uiApplicationSceneManifest { .init(bundle: bundle) }
+
+    func uiApplicationSceneManifest(bundle: Foundation.Bundle) -> uiApplicationSceneManifest {
+      .init(bundle: bundle)
+    }
+
     struct uiApplicationSceneManifest {
-      static let _key = "UIApplicationSceneManifest"
-      static let uiApplicationSupportsMultipleScenes = false
+      let bundle: Foundation.Bundle
+
+      let uiApplicationSupportsMultipleScenes: Bool = false
+
+      var _key: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest"], key: "_key") ?? "UIApplicationSceneManifest" }
+      var uiSceneConfigurations: uiSceneConfigurations { .init(bundle: bundle) }
+
+      func uiSceneConfigurations(bundle: Foundation.Bundle) -> uiSceneConfigurations {
+        .init(bundle: bundle)
+      }
 
       struct uiSceneConfigurations {
-        static let _key = "UISceneConfigurations"
+        let bundle: Foundation.Bundle
+        var _key: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations"], key: "_key") ?? "UISceneConfigurations" }
+        var uiWindowSceneSessionRoleApplication: uiWindowSceneSessionRoleApplication { .init(bundle: bundle) }
+
+        func uiWindowSceneSessionRoleApplication(bundle: Foundation.Bundle) -> uiWindowSceneSessionRoleApplication {
+          .init(bundle: bundle)
+        }
 
         struct uiWindowSceneSessionRoleApplication {
-          struct defaultConfiguration {
-            static let _key = "Default Configuration"
-            static let uiSceneConfigurationName = infoPlistString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication", "Default Configuration"], key: "UISceneConfigurationName") ?? "Default Configuration"
-            static let uiSceneDelegateClassName = infoPlistString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication", "Default Configuration"], key: "UISceneDelegateClassName") ?? "$(PRODUCT_MODULE_NAME).SceneDelegate"
+          let bundle: Foundation.Bundle
+          var defaultConfiguration: defaultConfiguration { .init(bundle: bundle) }
 
-            fileprivate init() {}
+          func defaultConfiguration(bundle: Foundation.Bundle) -> defaultConfiguration {
+            .init(bundle: bundle)
           }
 
-          fileprivate init() {}
+          struct defaultConfiguration {
+            let bundle: Foundation.Bundle
+            var uiSceneConfigurationName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneConfigurationName") ?? "Default Configuration" }
+            var uiSceneDelegateClassName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneDelegateClassName") ?? "$(PRODUCT_MODULE_NAME).SceneDelegate" }
+          }
         }
-
-        fileprivate init() {}
       }
-
-      fileprivate init() {}
     }
-
-    fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 10 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 10 nibs.
   struct nib {
+    let bundle: Foundation.Bundle
+
     /// Nib `FolderTableViewCell`.
-    static let folderTableViewCell = _R.nib._FolderTableViewCell()
+    var folderTableViewCell: RswiftResources.NibReferenceReuseIdentifier<FolderTableViewCell, FolderTableViewCell> { .init(name: "FolderTableViewCell", bundle: bundle, identifier: "folderTableViewCell") }
+
     /// Nib `IconResourceCollectionViewCell`.
-    static let iconResourceCollectionViewCell = _R.nib._IconResourceCollectionViewCell()
+    var iconResourceCollectionViewCell: RswiftResources.NibReferenceReuseIdentifier<IconResourceCollectionViewCell, IconResourceCollectionViewCell> { .init(name: "IconResourceCollectionViewCell", bundle: bundle, identifier: "iconResourceCollectionCell") }
+
     /// Nib `KaraokeBrandPickerTableViewCell`.
-    static let karaokeBrandPickerTableViewCell = _R.nib._KaraokeBrandPickerTableViewCell()
+    var karaokeBrandPickerTableViewCell: RswiftResources.NibReferenceReuseIdentifier<KaraokeBrandPickerTableViewCell, KaraokeBrandPickerTableViewCell> { .init(name: "KaraokeBrandPickerTableViewCell", bundle: bundle, identifier: "karaokeBrandTableCell") }
+
     /// Nib `PopUpArchiveFolderTableViewCell`.
-    static let popUpArchiveFolderTableViewCell = _R.nib._PopUpArchiveFolderTableViewCell()
+    var popUpArchiveFolderTableViewCell: RswiftResources.NibReferenceReuseIdentifier<PopUpArchiveFolderTableViewCell, PopUpArchiveFolderTableViewCell> { .init(name: "PopUpArchiveFolderTableViewCell", bundle: bundle, identifier: "popUpArchiveTableCell") }
+
     /// Nib `PopUpSongOptionTableViewCell`.
-    static let popUpSongOptionTableViewCell = _R.nib._PopUpSongOptionTableViewCell()
+    var popUpSongOptionTableViewCell: RswiftResources.NibReferenceReuseIdentifier<PopUpSongOptionTableViewCell, PopUpSongOptionTableViewCell> { .init(name: "PopUpSongOptionTableViewCell", bundle: bundle, identifier: "popUpSongOptionTableCell") }
+
     /// Nib `SearchFilterTableViewCell`.
-    static let searchFilterTableViewCell = _R.nib._SearchFilterTableViewCell()
+    var searchFilterTableViewCell: RswiftResources.NibReferenceReuseIdentifier<SearchFilterTableViewCell, SearchFilterTableViewCell> { .init(name: "SearchFilterTableViewCell", bundle: bundle, identifier: "searchFilterTableCell") }
+
     /// Nib `SearchHistoryTableViewCell`.
-    static let searchHistoryTableViewCell = _R.nib._SearchHistoryTableViewCell()
+    var searchHistoryTableViewCell: RswiftResources.NibReferenceReuseIdentifier<SearchHistoryTableViewCell, SearchHistoryTableViewCell> { .init(name: "SearchHistoryTableViewCell", bundle: bundle, identifier: "searchHistoryTableCell") }
+
     /// Nib `SettingItemTableViewCell`.
-    static let settingItemTableViewCell = _R.nib._SettingItemTableViewCell()
+    var settingItemTableViewCell: RswiftResources.NibReferenceReuseIdentifier<SettingItemTableViewCell, SettingItemTableViewCell> { .init(name: "SettingItemTableViewCell", bundle: bundle, identifier: "settingEtcTableCell") }
+
     /// Nib `SongTableViewCell`.
-    static let songTableViewCell = _R.nib._SongTableViewCell()
+    var songTableViewCell: RswiftResources.NibReferenceReuseIdentifier<SongTableViewCell, SongTableViewCell> { .init(name: "SongTableViewCell", bundle: bundle, identifier: "SearchResultTableViewCell") }
+
     /// Nib `UpdatedSongTableViewCell`.
-    static let updatedSongTableViewCell = _R.nib._UpdatedSongTableViewCell()
+    var updatedSongTableViewCell: RswiftResources.NibReferenceReuseIdentifier<UpdatedSongTableViewCell, UpdatedSongTableViewCell> { .init(name: "UpdatedSongTableViewCell", bundle: bundle, identifier: "updatedSongTableViewCell") }
 
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "FolderTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.folderTableViewCell) instead")
-    static func folderTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.folderTableViewCell)
+    func validate() throws {
+      if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'FolderTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in nib 'FolderTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'FolderTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in nib 'IconResourceCollectionViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'IconResourceCollectionViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundWhite' is used in nib 'KaraokeBrandPickerTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in nib 'KaraokeBrandPickerTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AccentYellow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellow' is used in nib 'PopUpArchiveFolderTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in nib 'PopUpArchiveFolderTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'PopUpSongOptionTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'PopUpSongOptionTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in nib 'SearchFilterTableViewCell', but couldn't be loaded.") }
+      if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "magnifyingglass") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'magnifyingglass' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") } }
+      if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'xmark' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") } }
+      if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "IconBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "chevron-right", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chevron-right' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "information.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'information.fill' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundBlue", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBlue' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "IconSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconSecondary' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "music-note", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'music-note' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AccentPurpleLight", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurpleLight' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "music-note", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'music-note' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AccentPurpleLight", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurpleLight' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
     }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "IconResourceCollectionViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.iconResourceCollectionViewCell) instead")
-    static func iconResourceCollectionViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.iconResourceCollectionViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "KaraokeBrandPickerTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.karaokeBrandPickerTableViewCell) instead")
-    static func karaokeBrandPickerTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.karaokeBrandPickerTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "PopUpArchiveFolderTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.popUpArchiveFolderTableViewCell) instead")
-    static func popUpArchiveFolderTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.popUpArchiveFolderTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "PopUpSongOptionTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.popUpSongOptionTableViewCell) instead")
-    static func popUpSongOptionTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.popUpSongOptionTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "SearchFilterTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.searchFilterTableViewCell) instead")
-    static func searchFilterTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.searchFilterTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "SearchHistoryTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.searchHistoryTableViewCell) instead")
-    static func searchHistoryTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.searchHistoryTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "SettingItemTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.settingItemTableViewCell) instead")
-    static func settingItemTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.settingItemTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "SongTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.songTableViewCell) instead")
-    static func songTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.songTableViewCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "UpdatedSongTableViewCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.updatedSongTableViewCell) instead")
-    static func updatedSongTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.updatedSongTableViewCell)
-    }
-    #endif
-
-    static func folderTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> FolderTableViewCell? {
-      return R.nib.folderTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? FolderTableViewCell
-    }
-
-    static func iconResourceCollectionViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> IconResourceCollectionViewCell? {
-      return R.nib.iconResourceCollectionViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? IconResourceCollectionViewCell
-    }
-
-    static func karaokeBrandPickerTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KaraokeBrandPickerTableViewCell? {
-      return R.nib.karaokeBrandPickerTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KaraokeBrandPickerTableViewCell
-    }
-
-    static func popUpArchiveFolderTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PopUpArchiveFolderTableViewCell? {
-      return R.nib.popUpArchiveFolderTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PopUpArchiveFolderTableViewCell
-    }
-
-    static func popUpSongOptionTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PopUpSongOptionTableViewCell? {
-      return R.nib.popUpSongOptionTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PopUpSongOptionTableViewCell
-    }
-
-    static func searchFilterTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SearchFilterTableViewCell? {
-      return R.nib.searchFilterTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchFilterTableViewCell
-    }
-
-    static func searchHistoryTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SearchHistoryTableViewCell? {
-      return R.nib.searchHistoryTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchHistoryTableViewCell
-    }
-
-    static func settingItemTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingItemTableViewCell? {
-      return R.nib.settingItemTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingItemTableViewCell
-    }
-
-    static func songTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SongTableViewCell? {
-      return R.nib.songTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SongTableViewCell
-    }
-
-    static func updatedSongTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UpdatedSongTableViewCell? {
-      return R.nib.updatedSongTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UpdatedSongTableViewCell
-    }
-
-    fileprivate init() {}
   }
 
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 10 reuse identifiers.
+  /// This `_R.reuseIdentifier` struct is generated, and contains static references to 10 reuse identifiers.
   struct reuseIdentifier {
-    /// Reuse identifier `SearchResultTableViewCell`.
-    static let searchResultTableViewCell: Rswift.ReuseIdentifier<SongTableViewCell> = Rswift.ReuseIdentifier(identifier: "SearchResultTableViewCell")
+
     /// Reuse identifier `folderTableViewCell`.
-    static let folderTableViewCell: Rswift.ReuseIdentifier<FolderTableViewCell> = Rswift.ReuseIdentifier(identifier: "folderTableViewCell")
+    let folderTableViewCell: RswiftResources.ReuseIdentifier<FolderTableViewCell> = .init(identifier: "folderTableViewCell")
+
     /// Reuse identifier `iconResourceCollectionCell`.
-    static let iconResourceCollectionCell: Rswift.ReuseIdentifier<IconResourceCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "iconResourceCollectionCell")
+    let iconResourceCollectionCell: RswiftResources.ReuseIdentifier<IconResourceCollectionViewCell> = .init(identifier: "iconResourceCollectionCell")
+
     /// Reuse identifier `karaokeBrandTableCell`.
-    static let karaokeBrandTableCell: Rswift.ReuseIdentifier<KaraokeBrandPickerTableViewCell> = Rswift.ReuseIdentifier(identifier: "karaokeBrandTableCell")
+    let karaokeBrandTableCell: RswiftResources.ReuseIdentifier<KaraokeBrandPickerTableViewCell> = .init(identifier: "karaokeBrandTableCell")
+
     /// Reuse identifier `popUpArchiveTableCell`.
-    static let popUpArchiveTableCell: Rswift.ReuseIdentifier<PopUpArchiveFolderTableViewCell> = Rswift.ReuseIdentifier(identifier: "popUpArchiveTableCell")
+    let popUpArchiveTableCell: RswiftResources.ReuseIdentifier<PopUpArchiveFolderTableViewCell> = .init(identifier: "popUpArchiveTableCell")
+
     /// Reuse identifier `popUpSongOptionTableCell`.
-    static let popUpSongOptionTableCell: Rswift.ReuseIdentifier<PopUpSongOptionTableViewCell> = Rswift.ReuseIdentifier(identifier: "popUpSongOptionTableCell")
+    let popUpSongOptionTableCell: RswiftResources.ReuseIdentifier<PopUpSongOptionTableViewCell> = .init(identifier: "popUpSongOptionTableCell")
+
     /// Reuse identifier `searchFilterTableCell`.
-    static let searchFilterTableCell: Rswift.ReuseIdentifier<SearchFilterTableViewCell> = Rswift.ReuseIdentifier(identifier: "searchFilterTableCell")
+    let searchFilterTableCell: RswiftResources.ReuseIdentifier<SearchFilterTableViewCell> = .init(identifier: "searchFilterTableCell")
+
     /// Reuse identifier `searchHistoryTableCell`.
-    static let searchHistoryTableCell: Rswift.ReuseIdentifier<SearchHistoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "searchHistoryTableCell")
+    let searchHistoryTableCell: RswiftResources.ReuseIdentifier<SearchHistoryTableViewCell> = .init(identifier: "searchHistoryTableCell")
+
+    /// Reuse identifier `SearchResultTableViewCell`.
+    let searchResultTableViewCell: RswiftResources.ReuseIdentifier<SongTableViewCell> = .init(identifier: "SearchResultTableViewCell")
+
     /// Reuse identifier `settingEtcTableCell`.
-    static let settingEtcTableCell: Rswift.ReuseIdentifier<SettingItemTableViewCell> = Rswift.ReuseIdentifier(identifier: "settingEtcTableCell")
+    let settingEtcTableCell: RswiftResources.ReuseIdentifier<SettingItemTableViewCell> = .init(identifier: "settingEtcTableCell")
+
     /// Reuse identifier `updatedSongTableViewCell`.
-    static let updatedSongTableViewCell: Rswift.ReuseIdentifier<UpdatedSongTableViewCell> = Rswift.ReuseIdentifier(identifier: "updatedSongTableViewCell")
-
-    fileprivate init() {}
+    let updatedSongTableViewCell: RswiftResources.ReuseIdentifier<UpdatedSongTableViewCell> = .init(identifier: "updatedSongTableViewCell")
   }
 
-  /// This `R.string` struct is generated, and contains static references to 3 localization tables.
-  struct string {
-    /// This `R.string.infoPlist` struct is generated, and contains static references to 1 localization keys.
-    struct infoPlist {
-      /// en translation: NoGaDa
-      ///
-      /// Locales: ko, en
-      static let cfBundleDisplayName = Rswift.StringResource(key: "CFBundleDisplayName", tableName: "InfoPlist", bundle: R.hostingBundle, locales: ["ko", "en"], comment: nil)
+  /// This `_R.storyboard` struct is generated, and contains static references to 6 storyboards.
+  struct storyboard {
+    let bundle: Foundation.Bundle
+    var archive: archive { .init(bundle: bundle) }
+    var folder: folder { .init(bundle: bundle) }
+    var launchScreen: launchScreen { .init(bundle: bundle) }
+    var main: main { .init(bundle: bundle) }
+    var search: search { .init(bundle: bundle) }
+    var setting: setting { .init(bundle: bundle) }
 
-      /// en translation: NoGaDa
-      ///
-      /// Locales: ko, en
-      static func cfBundleDisplayName(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("CFBundleDisplayName", tableName: "InfoPlist", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "InfoPlist", preferredLanguages: preferredLanguages) else {
-          return "CFBundleDisplayName"
-        }
-
-        return NSLocalizedString("CFBundleDisplayName", tableName: "InfoPlist", bundle: bundle, comment: "")
-      }
-
-      fileprivate init() {}
+    func archive(bundle: Foundation.Bundle) -> archive {
+      .init(bundle: bundle)
+    }
+    func folder(bundle: Foundation.Bundle) -> folder {
+      .init(bundle: bundle)
+    }
+    func launchScreen(bundle: Foundation.Bundle) -> launchScreen {
+      .init(bundle: bundle)
+    }
+    func main(bundle: Foundation.Bundle) -> main {
+      .init(bundle: bundle)
+    }
+    func search(bundle: Foundation.Bundle) -> search {
+      .init(bundle: bundle)
+    }
+    func setting(bundle: Foundation.Bundle) -> setting {
+      .init(bundle: bundle)
+    }
+    func validate() throws {
+      try self.archive.validate()
+      try self.folder.validate()
+      try self.launchScreen.validate()
+      try self.main.validate()
+      try self.search.validate()
+      try self.setting.validate()
     }
 
-    /// This `R.string.launchScreen` struct is generated, and contains static references to 0 localization keys.
-    struct launchScreen {
-      fileprivate init() {}
-    }
 
-    /// This `R.string.main` struct is generated, and contains static references to 32 localization keys.
-    struct main {
-      /// ko translation: + 새 폴더 생성
-      ///
-      /// Locales: ko
-      static let bTvE6Q0qNormalTitle = Rswift.StringResource(key: "bTv-E6-Q0q.normalTitle", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: + 새 폴더 생성
-      ///
-      /// Locales: ko
-      static let cbkYG6ktNormalTitle = Rswift.StringResource(key: "Cbk-yG-6kt.normalTitle", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Contact us
-      ///
-      /// Locales: ko
-      static let p6KwGijText = Rswift.StringResource(key: "6P6-Kw-gij.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Copyright © LeeSeunggi All Right Reserved
-      ///
-      /// Locales: ko
-      static let suC8FFRQText = Rswift.StringResource(key: "suC-8F-fRQ.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Credit
-      ///
-      /// Locales: ko
-      static let j4OZsK0KText = Rswift.StringResource(key: "J4O-zs-k0K.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Developer : Lee Seunggi Ui/Ux Design: Lee Seunggi Contact : avocado34.131@gmail.com   Api Contributor : Yun KwangSeon Contact : middleyks@hanmail.net
-      ///
-      /// Locales: ko
-      static let gjpOiP6XText = Rswift.StringResource(key: "gjp-Oi-p6X.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Main
-      ///
-      /// Locales: ko
-      static let dBfGfIm0Title = Rswift.StringResource(key: "dBf-gf-Im0.title", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Setting
-      ///
-      /// Locales: ko
-      static let m4g7JYGoText = Rswift.StringResource(key: "M4g-7J-YGo.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: Used resources
-      ///
-      /// Locales: ko
-      static let hgyDLW7SText = Rswift.StringResource(key: "hgy-DL-w7S.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: tj
-      ///
-      /// Locales: ko
-      static let hWmDXMxjSegmentTitles0 = Rswift.StringResource(key: "HWm-DX-mxj.segmentTitles[0]", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 검색 결과가 없습니다.
-      ///
-      /// Locales: ko
-      static let nd85PDIHText = Rswift.StringResource(key: "nd8-5P-dIH.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 검색필터
-      ///
-      /// Locales: ko
-      static let hkWSj9w7Text = Rswift.StringResource(key: "hkW-sj-9w7.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 금영
-      ///
-      /// Locales: ko
-      static let hWmDXMxjSegmentTitles1 = Rswift.StringResource(key: "HWm-DX-mxj.segmentTitles[1]", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 기타
-      ///
-      /// Locales: ko
-      static let sVoNP6mwText = Rswift.StringResource(key: "SVo-nP-6mw.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 노가다 노래방 가서 다 부를거야  version 1.0.0
-      ///
-      /// Locales: ko
-      static let skdZX9KmText = Rswift.StringResource(key: "skd-ZX-9Km.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 노래 검색
-      ///
-      /// Locales: ko
-      static let cQ5PrB1KText = Rswift.StringResource(key: "cQ5-Pr-b1K.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 노래 검색
-      ///
-      /// Locales: ko
-      static let lvi2LP6aTitle = Rswift.StringResource(key: "lvi-2L-p6a.title", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 노래방 가서 다 부를거야!
-      ///
-      /// Locales: ko
-      static let dluJu7ziText = Rswift.StringResource(key: "DLU-ju-7zi.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 노래방 가서 부르고 싶은 노래
-      ///
-      /// Locales: ko
-      static let vpGSOJ57Text = Rswift.StringResource(key: "VpG-sO-j57.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 보관함
-      ///
-      /// Locales: ko
-      static let asGYnM5wText = Rswift.StringResource(key: "asG-Yn-m5w.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 보관함
-      ///
-      /// Locales: ko
-      static let uos9kADVText = Rswift.StringResource(key: "UOS-9k-ADV.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 보관함 바로가기
-      ///
-      /// Locales: ko
-      static let yscM8Y7uText = Rswift.StringResource(key: "Ysc-M8-Y7u.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 새 폴더
-      ///
-      /// Locales: ko
-      static let c4hCQ6N2Text = Rswift.StringResource(key: "C4h-cQ-6N2.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 오류가 발생했습니다.
-      ///
-      /// Locales: ko
-      static let cxZCq9QeText = Rswift.StringResource(key: "CxZ-Cq-9Qe.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 적용
-      ///
-      /// Locales: ko
-      static let kXrBcZdoNormalTitle = Rswift.StringResource(key: "KXr-bc-Zdo.normalTitle", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 제목이나 가수명으로 노래를 검색하세요
-      ///
-      /// Locales: ko
-      static let i1LKc4uIPlaceholder = Rswift.StringResource(key: "I1L-Kc-4uI.placeholder", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 제목이나 가수명으로 노래를 검색하세요
-      ///
-      /// Locales: ko
-      static let jqQh3mwText = Rswift.StringResource(key: "4Jq-qh-3mw.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 총 --곡
-      ///
-      /// Locales: ko
-      static let i8fKbMSmText = Rswift.StringResource(key: "I8f-kb-mSm.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 폴더 이름
-      ///
-      /// Locales: ko
-      static let w4J5IR6Placeholder = Rswift.StringResource(key: "7w4-j5-IR6.placeholder", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 확인
-      ///
-      /// Locales: ko
-      static let fSoBcQ9vNormalTitle = Rswift.StringResource(key: "fSo-Bc-Q9v.normalTitle", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 😀
-      ///
-      /// Locales: ko
-      static let cpuJ9UYfText = Rswift.StringResource(key: "Cpu-J9-uYf.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-      /// ko translation: 😃
-      ///
-      /// Locales: ko
-      static let zbAAjVX6Text = Rswift.StringResource(key: "zbA-aj-vX6.text", tableName: "Main", bundle: R.hostingBundle, locales: ["ko"], comment: nil)
-
-      /// ko translation: + 새 폴더 생성
-      ///
-      /// Locales: ko
-      static func bTvE6Q0qNormalTitle(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("bTv-E6-Q0q.normalTitle", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "bTv-E6-Q0q.normalTitle"
-        }
-
-        return NSLocalizedString("bTv-E6-Q0q.normalTitle", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: + 새 폴더 생성
-      ///
-      /// Locales: ko
-      static func cbkYG6ktNormalTitle(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("Cbk-yG-6kt.normalTitle", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "Cbk-yG-6kt.normalTitle"
-        }
-
-        return NSLocalizedString("Cbk-yG-6kt.normalTitle", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Contact us
-      ///
-      /// Locales: ko
-      static func p6KwGijText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("6P6-Kw-gij.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "6P6-Kw-gij.text"
-        }
-
-        return NSLocalizedString("6P6-Kw-gij.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Copyright © LeeSeunggi All Right Reserved
-      ///
-      /// Locales: ko
-      static func suC8FFRQText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("suC-8F-fRQ.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "suC-8F-fRQ.text"
-        }
-
-        return NSLocalizedString("suC-8F-fRQ.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Credit
-      ///
-      /// Locales: ko
-      static func j4OZsK0KText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("J4O-zs-k0K.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "J4O-zs-k0K.text"
-        }
-
-        return NSLocalizedString("J4O-zs-k0K.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Developer : Lee Seunggi Ui/Ux Design: Lee Seunggi Contact : avocado34.131@gmail.com   Api Contributor : Yun KwangSeon Contact : middleyks@hanmail.net
-      ///
-      /// Locales: ko
-      static func gjpOiP6XText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("gjp-Oi-p6X.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "gjp-Oi-p6X.text"
-        }
-
-        return NSLocalizedString("gjp-Oi-p6X.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Main
-      ///
-      /// Locales: ko
-      static func dBfGfIm0Title(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("dBf-gf-Im0.title", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "dBf-gf-Im0.title"
-        }
-
-        return NSLocalizedString("dBf-gf-Im0.title", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Setting
-      ///
-      /// Locales: ko
-      static func m4g7JYGoText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("M4g-7J-YGo.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "M4g-7J-YGo.text"
-        }
-
-        return NSLocalizedString("M4g-7J-YGo.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: Used resources
-      ///
-      /// Locales: ko
-      static func hgyDLW7SText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("hgy-DL-w7S.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "hgy-DL-w7S.text"
-        }
-
-        return NSLocalizedString("hgy-DL-w7S.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: tj
-      ///
-      /// Locales: ko
-      static func hWmDXMxjSegmentTitles0(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("HWm-DX-mxj.segmentTitles[0]", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "HWm-DX-mxj.segmentTitles[0]"
-        }
-
-        return NSLocalizedString("HWm-DX-mxj.segmentTitles[0]", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 검색 결과가 없습니다.
-      ///
-      /// Locales: ko
-      static func nd85PDIHText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("nd8-5P-dIH.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "nd8-5P-dIH.text"
-        }
-
-        return NSLocalizedString("nd8-5P-dIH.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 검색필터
-      ///
-      /// Locales: ko
-      static func hkWSj9w7Text(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("hkW-sj-9w7.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "hkW-sj-9w7.text"
-        }
-
-        return NSLocalizedString("hkW-sj-9w7.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 금영
-      ///
-      /// Locales: ko
-      static func hWmDXMxjSegmentTitles1(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("HWm-DX-mxj.segmentTitles[1]", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "HWm-DX-mxj.segmentTitles[1]"
-        }
-
-        return NSLocalizedString("HWm-DX-mxj.segmentTitles[1]", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 기타
-      ///
-      /// Locales: ko
-      static func sVoNP6mwText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("SVo-nP-6mw.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "SVo-nP-6mw.text"
-        }
-
-        return NSLocalizedString("SVo-nP-6mw.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 노가다 노래방 가서 다 부를거야  version 1.0.0
-      ///
-      /// Locales: ko
-      static func skdZX9KmText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("skd-ZX-9Km.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "skd-ZX-9Km.text"
-        }
-
-        return NSLocalizedString("skd-ZX-9Km.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 노래 검색
-      ///
-      /// Locales: ko
-      static func cQ5PrB1KText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("cQ5-Pr-b1K.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "cQ5-Pr-b1K.text"
-        }
-
-        return NSLocalizedString("cQ5-Pr-b1K.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 노래 검색
-      ///
-      /// Locales: ko
-      static func lvi2LP6aTitle(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("lvi-2L-p6a.title", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "lvi-2L-p6a.title"
-        }
-
-        return NSLocalizedString("lvi-2L-p6a.title", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 노래방 가서 다 부를거야!
-      ///
-      /// Locales: ko
-      static func dluJu7ziText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("DLU-ju-7zi.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "DLU-ju-7zi.text"
-        }
-
-        return NSLocalizedString("DLU-ju-7zi.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 노래방 가서 부르고 싶은 노래
-      ///
-      /// Locales: ko
-      static func vpGSOJ57Text(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("VpG-sO-j57.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "VpG-sO-j57.text"
-        }
-
-        return NSLocalizedString("VpG-sO-j57.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 보관함
-      ///
-      /// Locales: ko
-      static func asGYnM5wText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("asG-Yn-m5w.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "asG-Yn-m5w.text"
-        }
-
-        return NSLocalizedString("asG-Yn-m5w.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 보관함
-      ///
-      /// Locales: ko
-      static func uos9kADVText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("UOS-9k-ADV.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "UOS-9k-ADV.text"
-        }
-
-        return NSLocalizedString("UOS-9k-ADV.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 보관함 바로가기
-      ///
-      /// Locales: ko
-      static func yscM8Y7uText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("Ysc-M8-Y7u.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "Ysc-M8-Y7u.text"
-        }
-
-        return NSLocalizedString("Ysc-M8-Y7u.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 새 폴더
-      ///
-      /// Locales: ko
-      static func c4hCQ6N2Text(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("C4h-cQ-6N2.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "C4h-cQ-6N2.text"
-        }
-
-        return NSLocalizedString("C4h-cQ-6N2.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 오류가 발생했습니다.
-      ///
-      /// Locales: ko
-      static func cxZCq9QeText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("CxZ-Cq-9Qe.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "CxZ-Cq-9Qe.text"
-        }
-
-        return NSLocalizedString("CxZ-Cq-9Qe.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 적용
-      ///
-      /// Locales: ko
-      static func kXrBcZdoNormalTitle(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("KXr-bc-Zdo.normalTitle", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "KXr-bc-Zdo.normalTitle"
-        }
-
-        return NSLocalizedString("KXr-bc-Zdo.normalTitle", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 제목이나 가수명으로 노래를 검색하세요
-      ///
-      /// Locales: ko
-      static func i1LKc4uIPlaceholder(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("I1L-Kc-4uI.placeholder", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "I1L-Kc-4uI.placeholder"
-        }
-
-        return NSLocalizedString("I1L-Kc-4uI.placeholder", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 제목이나 가수명으로 노래를 검색하세요
-      ///
-      /// Locales: ko
-      static func jqQh3mwText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("4Jq-qh-3mw.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "4Jq-qh-3mw.text"
-        }
-
-        return NSLocalizedString("4Jq-qh-3mw.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 총 --곡
-      ///
-      /// Locales: ko
-      static func i8fKbMSmText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("I8f-kb-mSm.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "I8f-kb-mSm.text"
-        }
-
-        return NSLocalizedString("I8f-kb-mSm.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 폴더 이름
-      ///
-      /// Locales: ko
-      static func w4J5IR6Placeholder(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("7w4-j5-IR6.placeholder", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "7w4-j5-IR6.placeholder"
-        }
-
-        return NSLocalizedString("7w4-j5-IR6.placeholder", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 확인
-      ///
-      /// Locales: ko
-      static func fSoBcQ9vNormalTitle(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("fSo-Bc-Q9v.normalTitle", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "fSo-Bc-Q9v.normalTitle"
-        }
-
-        return NSLocalizedString("fSo-Bc-Q9v.normalTitle", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 😀
-      ///
-      /// Locales: ko
-      static func cpuJ9UYfText(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("Cpu-J9-uYf.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "Cpu-J9-uYf.text"
-        }
-
-        return NSLocalizedString("Cpu-J9-uYf.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      /// ko translation: 😃
-      ///
-      /// Locales: ko
-      static func zbAAjVX6Text(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("zbA-aj-vX6.text", tableName: "Main", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Main", preferredLanguages: preferredLanguages) else {
-          return "zbA-aj-vX6.text"
-        }
-
-        return NSLocalizedString("zbA-aj-vX6.text", tableName: "Main", bundle: bundle, comment: "")
-      }
-
-      fileprivate init() {}
-    }
-
-    fileprivate init() {}
-  }
-
-  fileprivate struct intern: Rswift.Validatable {
-    fileprivate static func validate() throws {
-      try _R.validate()
-    }
-
-    fileprivate init() {}
-  }
-
-  fileprivate class Class {}
-
-  fileprivate init() {}
-}
-
-struct _R: Rswift.Validatable {
-  static func validate() throws {
-    #if os(iOS) || os(tvOS)
-    try nib.validate()
-    #endif
-    #if os(iOS) || os(tvOS)
-    try storyboard.validate()
-    #endif
-  }
-
-  #if os(iOS) || os(tvOS)
-  struct nib: Rswift.Validatable {
-    static func validate() throws {
-      try _SearchHistoryTableViewCell.validate()
-      try _SettingItemTableViewCell.validate()
-      try _SongTableViewCell.validate()
-      try _UpdatedSongTableViewCell.validate()
-    }
-
-    struct _FolderTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = FolderTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "folderTableViewCell"
-      let name = "FolderTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> FolderTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? FolderTableViewCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _IconResourceCollectionViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = IconResourceCollectionViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "iconResourceCollectionCell"
-      let name = "IconResourceCollectionViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> IconResourceCollectionViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? IconResourceCollectionViewCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _KaraokeBrandPickerTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = KaraokeBrandPickerTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "karaokeBrandTableCell"
-      let name = "KaraokeBrandPickerTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KaraokeBrandPickerTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KaraokeBrandPickerTableViewCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _PopUpArchiveFolderTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = PopUpArchiveFolderTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "popUpArchiveTableCell"
-      let name = "PopUpArchiveFolderTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PopUpArchiveFolderTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PopUpArchiveFolderTableViewCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _PopUpSongOptionTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = PopUpSongOptionTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "popUpSongOptionTableCell"
-      let name = "PopUpSongOptionTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PopUpSongOptionTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PopUpSongOptionTableViewCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _SearchFilterTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = SearchFilterTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "searchFilterTableCell"
-      let name = "SearchFilterTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SearchFilterTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchFilterTableViewCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _SearchHistoryTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
-      typealias ReusableType = SearchHistoryTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "searchHistoryTableCell"
-      let name = "SearchHistoryTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SearchHistoryTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchHistoryTableViewCell
-      }
-
-      static func validate() throws {
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "magnifyingglass") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'magnifyingglass' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") } }
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") } }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in nib 'SearchHistoryTableViewCell', but couldn't be loaded.") }
-        }
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _SettingItemTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
-      typealias ReusableType = SettingItemTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "settingEtcTableCell"
-      let name = "SettingItemTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingItemTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingItemTableViewCell
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "chevron-right", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'chevron-right' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "information.fill", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'information.fill' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBlue", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBlue' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconSecondary' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-        }
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _SongTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
-      typealias ReusableType = SongTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "SearchResultTableViewCell"
-      let name = "SongTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SongTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SongTableViewCell
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "music-note", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'music-note' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentPurpleLight", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurpleLight' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in nib 'SongTableViewCell', but couldn't be loaded.") }
-        }
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _UpdatedSongTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
-      typealias ReusableType = UpdatedSongTableViewCell
-
-      let bundle = R.hostingBundle
-      let identifier = "updatedSongTableViewCell"
-      let name = "UpdatedSongTableViewCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UpdatedSongTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UpdatedSongTableViewCell
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "music-note", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'music-note' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentPurpleLight", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurpleLight' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in nib 'UpdatedSongTableViewCell', but couldn't be loaded.") }
-        }
-      }
-
-      fileprivate init() {}
-    }
-
-    fileprivate init() {}
-  }
-  #endif
-
-  #if os(iOS) || os(tvOS)
-  struct storyboard: Rswift.Validatable {
-    static func validate() throws {
-      #if os(iOS) || os(tvOS)
-      try archive.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
-      try folder.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
-      try launchScreen.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
-      try main.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
-      try search.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
-      try setting.validate()
-      #endif
-    }
-
-    #if os(iOS) || os(tvOS)
-    struct archive: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    /// Storyboard `Archive`.
+    struct archive: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
       typealias InitialController = ArchiveFolderViewController
 
-      let addSongStoryboard = StoryboardViewControllerResource<AddSongViewController>(identifier: "AddSongStoryboard")
-      let archiveFolderStoryboard = StoryboardViewControllerResource<ArchiveFolderViewController>(identifier: "ArchiveFolderStoryboard")
-      let archiveSongStoryboard = StoryboardViewControllerResource<ArchiveSongViewController>(identifier: "ArchiveSongStoryboard")
-      let bundle = R.hostingBundle
-      let karaokeBrandPickerStoryboard = StoryboardViewControllerResource<KaraokeBrandPickerViewController>(identifier: "karaokeBrandPickerStoryboard")
+      let bundle: Foundation.Bundle
+
       let name = "Archive"
-      let popUpSongOptionStoryboard = StoryboardViewControllerResource<PopUpSongOptionViewController>(identifier: "popUpSongOptionStoryboard")
 
-      func addSongStoryboard(_: Void = ()) -> AddSongViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: addSongStoryboard)
+      var addSongStoryboard: RswiftResources.StoryboardViewControllerIdentifier<AddSongViewController> { .init(identifier: "AddSongStoryboard", storyboard: name, bundle: bundle) }
+      var archiveFolderStoryboard: RswiftResources.StoryboardViewControllerIdentifier<ArchiveFolderViewController> { .init(identifier: "ArchiveFolderStoryboard", storyboard: name, bundle: bundle) }
+      var archiveSongStoryboard: RswiftResources.StoryboardViewControllerIdentifier<ArchiveSongViewController> { .init(identifier: "ArchiveSongStoryboard", storyboard: name, bundle: bundle) }
+      var karaokeBrandPickerStoryboard: RswiftResources.StoryboardViewControllerIdentifier<KaraokeBrandPickerViewController> { .init(identifier: "karaokeBrandPickerStoryboard", storyboard: name, bundle: bundle) }
+      var popUpSongOptionStoryboard: RswiftResources.StoryboardViewControllerIdentifier<PopUpSongOptionViewController> { .init(identifier: "popUpSongOptionStoryboard", storyboard: name, bundle: bundle) }
+
+      func validate() throws {
+        if UIKit.UIImage(named: "music-note", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'music-note' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "plus", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'plus' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'xmark' is used in storyboard 'Archive', but couldn't be loaded.") } }
+        if UIKit.UIColor(named: "AccentPurple", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurple' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentPurpleLight", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurpleLight' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentYellow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellow' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBlack' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "LineBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'LineBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
+        if addSongStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'addSongStoryboard' could not be loaded from storyboard 'Archive' as 'AddSongViewController'.") }
+        if archiveFolderStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'archiveFolderStoryboard' could not be loaded from storyboard 'Archive' as 'ArchiveFolderViewController'.") }
+        if archiveSongStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'archiveSongStoryboard' could not be loaded from storyboard 'Archive' as 'ArchiveSongViewController'.") }
+        if karaokeBrandPickerStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'karaokeBrandPickerStoryboard' could not be loaded from storyboard 'Archive' as 'KaraokeBrandPickerViewController'.") }
+        if popUpSongOptionStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popUpSongOptionStoryboard' could not be loaded from storyboard 'Archive' as 'PopUpSongOptionViewController'.") }
       }
-
-      func archiveFolderStoryboard(_: Void = ()) -> ArchiveFolderViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: archiveFolderStoryboard)
-      }
-
-      func archiveSongStoryboard(_: Void = ()) -> ArchiveSongViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: archiveSongStoryboard)
-      }
-
-      func karaokeBrandPickerStoryboard(_: Void = ()) -> KaraokeBrandPickerViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: karaokeBrandPickerStoryboard)
-      }
-
-      func popUpSongOptionStoryboard(_: Void = ()) -> PopUpSongOptionViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: popUpSongOptionStoryboard)
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "music-note", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'music-note' is used in storyboard 'Archive', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "plus", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'plus' is used in storyboard 'Archive', but couldn't be loaded.") }
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Archive', but couldn't be loaded.") } }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentPurpleLight", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurpleLight' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBlack' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "LineBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'LineBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBlack' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Archive', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextWhite' is used in storyboard 'Archive', but couldn't be loaded.") }
-        }
-        if _R.storyboard.archive().addSongStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'addSongStoryboard' could not be loaded from storyboard 'Archive' as 'AddSongViewController'.") }
-        if _R.storyboard.archive().archiveFolderStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'archiveFolderStoryboard' could not be loaded from storyboard 'Archive' as 'ArchiveFolderViewController'.") }
-        if _R.storyboard.archive().archiveSongStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'archiveSongStoryboard' could not be loaded from storyboard 'Archive' as 'ArchiveSongViewController'.") }
-        if _R.storyboard.archive().karaokeBrandPickerStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'karaokeBrandPickerStoryboard' could not be loaded from storyboard 'Archive' as 'KaraokeBrandPickerViewController'.") }
-        if _R.storyboard.archive().popUpSongOptionStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'popUpSongOptionStoryboard' could not be loaded from storyboard 'Archive' as 'PopUpSongOptionViewController'.") }
-      }
-
-      fileprivate init() {}
     }
-    #endif
 
-    #if os(iOS) || os(tvOS)
-    struct folder: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    /// Storyboard `Folder`.
+    struct folder: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
       typealias InitialController = PopUpArchiveFolderViewController
 
-      let addFolderStoryboard = StoryboardViewControllerResource<AddFolderViewController>(identifier: "addFolderStoryboard")
-      let bundle = R.hostingBundle
+      let bundle: Foundation.Bundle
+
       let name = "Folder"
-      let popUpArchiveFolderStoryboard = StoryboardViewControllerResource<PopUpArchiveFolderViewController>(identifier: "popUpArchiveFolderStoryboard")
 
-      func addFolderStoryboard(_: Void = ()) -> AddFolderViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: addFolderStoryboard)
+      var addFolderStoryboard: RswiftResources.StoryboardViewControllerIdentifier<AddFolderViewController> { .init(identifier: "addFolderStoryboard", storyboard: name, bundle: bundle) }
+      var popUpArchiveFolderStoryboard: RswiftResources.StoryboardViewControllerIdentifier<PopUpArchiveFolderViewController> { .init(identifier: "popUpArchiveFolderStoryboard", storyboard: name, bundle: bundle) }
+
+      func validate() throws {
+        if UIKit.UIImage(named: "folder-filled", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'folder-filled' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'xmark' is used in storyboard 'Folder', but couldn't be loaded.") } }
+        if UIKit.UIColor(named: "AccentPurple", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurple' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentYellow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellow' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBlack' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in storyboard 'Folder', but couldn't be loaded.") }
+        if addFolderStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'addFolderStoryboard' could not be loaded from storyboard 'Folder' as 'AddFolderViewController'.") }
+        if popUpArchiveFolderStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popUpArchiveFolderStoryboard' could not be loaded from storyboard 'Folder' as 'PopUpArchiveFolderViewController'.") }
       }
-
-      func popUpArchiveFolderStoryboard(_: Void = ()) -> PopUpArchiveFolderViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: popUpArchiveFolderStoryboard)
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "folder-filled", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'folder-filled' is used in storyboard 'Folder', but couldn't be loaded.") }
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Folder', but couldn't be loaded.") } }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBlack' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Folder', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBlack' is used in storyboard 'Folder', but couldn't be loaded.") }
-        }
-        if _R.storyboard.folder().addFolderStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'addFolderStoryboard' could not be loaded from storyboard 'Folder' as 'AddFolderViewController'.") }
-        if _R.storyboard.folder().popUpArchiveFolderStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'popUpArchiveFolderStoryboard' could not be loaded from storyboard 'Folder' as 'PopUpArchiveFolderViewController'.") }
-      }
-
-      fileprivate init() {}
     }
-    #endif
 
-    #if os(iOS) || os(tvOS)
-    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    /// Storyboard `LaunchScreen`.
+    struct launchScreen: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
       typealias InitialController = UIKit.UIViewController
 
-      let bundle = R.hostingBundle
+      let bundle: Foundation.Bundle
+
       let name = "LaunchScreen"
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "SplashImage", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'SplashImage' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "SplashBackgroundColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'SplashBackgroundColor' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
-        }
+      func validate() throws {
+        if UIKit.UIImage(named: "SplashImage", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'SplashImage' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "SplashBackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SplashBackgroundColor' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
       }
-
-      fileprivate init() {}
     }
-    #endif
 
-    #if os(iOS) || os(tvOS)
-    struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    /// Storyboard `Main`.
+    struct main: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
       typealias InitialController = MainViewController
 
-      let bundle = R.hostingBundle
-      let mainStoryboard = StoryboardViewControllerResource<MainViewController>(identifier: "MainStoryboard")
+      let bundle: Foundation.Bundle
+
       let name = "Main"
 
-      func mainStoryboard(_: Void = ()) -> MainViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: mainStoryboard)
-      }
+      var mainStoryboard: RswiftResources.StoryboardViewControllerIdentifier<MainViewController> { .init(identifier: "MainStoryboard", storyboard: name, bundle: bundle) }
 
-      static func validate() throws {
-        if UIKit.UIImage(named: "ArchiveShortcutBackgroundImage", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ArchiveShortcutBackgroundImage' is used in storyboard 'Main', but couldn't be loaded.") }
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "magnifyingglass") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'magnifyingglass' is used in storyboard 'Main', but couldn't be loaded.") } }
-        if UIKit.UIImage(named: "setting", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'setting' is used in storyboard 'Main', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentYellowDarker", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellowDarker' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBasicSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextTertiary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextTertiary' is used in storyboard 'Main', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextWhite' is used in storyboard 'Main', but couldn't be loaded.") }
-        }
-        if _R.storyboard.main().mainStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'mainStoryboard' could not be loaded from storyboard 'Main' as 'MainViewController'.") }
+      func validate() throws {
+        if UIKit.UIImage(named: "ArchiveShortcutBackgroundImage", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ArchiveShortcutBackgroundImage' is used in storyboard 'Main', but couldn't be loaded.") }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "magnifyingglass") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'magnifyingglass' is used in storyboard 'Main', but couldn't be loaded.") } }
+        if UIKit.UIImage(named: "setting", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'setting' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentPurple", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurple' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentYellow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellow' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentYellowDarker", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellowDarker' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconBasicSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextTertiary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextTertiary' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextWhite' is used in storyboard 'Main', but couldn't be loaded.") }
+        if mainStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'mainStoryboard' could not be loaded from storyboard 'Main' as 'MainViewController'.") }
       }
-
-      fileprivate init() {}
     }
-    #endif
 
-    #if os(iOS) || os(tvOS)
-    struct search: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    /// Storyboard `Search`.
+    struct search: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
       typealias InitialController = SearchViewController
 
-      let bundle = R.hostingBundle
+      let bundle: Foundation.Bundle
+
       let name = "Search"
-      let popOverSearchFilterStoryboard = StoryboardViewControllerResource<PopOverSearchFilterViewController>(identifier: "PopOverSearchFilterStoryboard")
-      let searchHistoryStoryboard = StoryboardViewControllerResource<SearchHistoryViewController>(identifier: "SearchHistoryStoryboard")
-      let searchResultStoryboard = StoryboardViewControllerResource<SearchResultViewController>(identifier: "SearchResultStoryboard")
-      let searchStoryboard = StoryboardViewControllerResource<SearchViewController>(identifier: "SearchStoryboard")
 
-      func popOverSearchFilterStoryboard(_: Void = ()) -> PopOverSearchFilterViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: popOverSearchFilterStoryboard)
+      var popOverSearchFilterStoryboard: RswiftResources.StoryboardViewControllerIdentifier<PopOverSearchFilterViewController> { .init(identifier: "PopOverSearchFilterStoryboard", storyboard: name, bundle: bundle) }
+      var searchHistoryStoryboard: RswiftResources.StoryboardViewControllerIdentifier<SearchHistoryViewController> { .init(identifier: "SearchHistoryStoryboard", storyboard: name, bundle: bundle) }
+      var searchResultStoryboard: RswiftResources.StoryboardViewControllerIdentifier<SearchResultViewController> { .init(identifier: "SearchResultStoryboard", storyboard: name, bundle: bundle) }
+      var searchStoryboard: RswiftResources.StoryboardViewControllerIdentifier<SearchViewController> { .init(identifier: "SearchStoryboard", storyboard: name, bundle: bundle) }
+
+      func validate() throws {
+        if UIKit.UIImage(named: "back-arrow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'back-arrow' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "sort-line", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'sort-line' is used in storyboard 'Search', but couldn't be loaded.") }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'xmark' is used in storyboard 'Search', but couldn't be loaded.") } }
+        if UIKit.UIColor(named: "AccentPurple", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurple' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentYellow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellow' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconBasicSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextWhite' is used in storyboard 'Search', but couldn't be loaded.") }
+        if popOverSearchFilterStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popOverSearchFilterStoryboard' could not be loaded from storyboard 'Search' as 'PopOverSearchFilterViewController'.") }
+        if searchHistoryStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'searchHistoryStoryboard' could not be loaded from storyboard 'Search' as 'SearchHistoryViewController'.") }
+        if searchResultStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'searchResultStoryboard' could not be loaded from storyboard 'Search' as 'SearchResultViewController'.") }
+        if searchStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'searchStoryboard' could not be loaded from storyboard 'Search' as 'SearchViewController'.") }
       }
-
-      func searchHistoryStoryboard(_: Void = ()) -> SearchHistoryViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: searchHistoryStoryboard)
-      }
-
-      func searchResultStoryboard(_: Void = ()) -> SearchResultViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: searchResultStoryboard)
-      }
-
-      func searchStoryboard(_: Void = ()) -> SearchViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: searchStoryboard)
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "back-arrow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'back-arrow' is used in storyboard 'Search', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "sort-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'sort-line' is used in storyboard 'Search', but couldn't be loaded.") }
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Search', but couldn't be loaded.") } }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentYellow", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentYellow' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundWhite' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconBasicSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "IconWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'IconWhite' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBlack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBlack' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextWhite", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextWhite' is used in storyboard 'Search', but couldn't be loaded.") }
-        }
-        if _R.storyboard.search().popOverSearchFilterStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'popOverSearchFilterStoryboard' could not be loaded from storyboard 'Search' as 'PopOverSearchFilterViewController'.") }
-        if _R.storyboard.search().searchHistoryStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'searchHistoryStoryboard' could not be loaded from storyboard 'Search' as 'SearchHistoryViewController'.") }
-        if _R.storyboard.search().searchResultStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'searchResultStoryboard' could not be loaded from storyboard 'Search' as 'SearchResultViewController'.") }
-        if _R.storyboard.search().searchStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'searchStoryboard' could not be loaded from storyboard 'Search' as 'SearchViewController'.") }
-      }
-
-      fileprivate init() {}
     }
-    #endif
 
-    #if os(iOS) || os(tvOS)
-    struct setting: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    /// Storyboard `Setting`.
+    struct setting: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
       typealias InitialController = SettingViewController
 
-      let bundle = R.hostingBundle
-      let creditStoryboard = StoryboardViewControllerResource<CreditViewController>(identifier: "creditStoryboard")
+      let bundle: Foundation.Bundle
+
       let name = "Setting"
-      let settingStoryboard = StoryboardViewControllerResource<SettingViewController>(identifier: "settingStoryboard")
 
-      func creditStoryboard(_: Void = ()) -> CreditViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: creditStoryboard)
+      var creditStoryboard: RswiftResources.StoryboardViewControllerIdentifier<CreditViewController> { .init(identifier: "creditStoryboard", storyboard: name, bundle: bundle) }
+      var settingStoryboard: RswiftResources.StoryboardViewControllerIdentifier<SettingViewController> { .init(identifier: "settingStoryboard", storyboard: name, bundle: bundle) }
+
+      func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'xmark' is used in storyboard 'Setting', but couldn't be loaded.") } }
+        if UIKit.UIColor(named: "AccentColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentColor' is used in storyboard 'Setting', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentPurple", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentPurple' is used in storyboard 'Setting', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "BackgroundSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextTertiary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextTertiary' is used in storyboard 'Setting', but couldn't be loaded.") }
+        if creditStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'creditStoryboard' could not be loaded from storyboard 'Setting' as 'CreditViewController'.") }
+        if settingStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'settingStoryboard' could not be loaded from storyboard 'Setting' as 'SettingViewController'.") }
       }
-
-      func settingStoryboard(_: Void = ()) -> SettingViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: settingStoryboard)
-      }
-
-      static func validate() throws {
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "xmark") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'xmark' is used in storyboard 'Setting', but couldn't be loaded.") } }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "AccentColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentColor' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "AccentPurple", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'AccentPurple' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "BackgroundSecondary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'BackgroundSecondary' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextBasic", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextBasic' is used in storyboard 'Setting', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "TextTertiary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'TextTertiary' is used in storyboard 'Setting', but couldn't be loaded.") }
-        }
-        if _R.storyboard.setting().creditStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'creditStoryboard' could not be loaded from storyboard 'Setting' as 'CreditViewController'.") }
-        if _R.storyboard.setting().settingStoryboard() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'settingStoryboard' could not be loaded from storyboard 'Setting' as 'SettingViewController'.") }
-      }
-
-      fileprivate init() {}
     }
-    #endif
-
-    fileprivate init() {}
   }
-  #endif
-
-  fileprivate init() {}
 }
