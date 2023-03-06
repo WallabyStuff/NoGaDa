@@ -36,7 +36,7 @@ class SearchHistoryTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    bind()
+    setup()
   }
   
   override func prepareForReuse() {
@@ -47,6 +47,20 @@ class SearchHistoryTableViewCell: UITableViewCell {
   }
   
   
+  // MARK: - Setups
+  
+  private func setup() {
+    setupSelectedView()
+    bind()
+  }
+  
+  private func setupSelectedView() {
+    let selectedView = UIView()
+    selectedView.backgroundColor = R.color.backgroundBasicSelected()
+    selectedBackgroundView = selectedView
+  }
+  
+  
   // MARK: - Binds
   
   private func bind() {
@@ -54,27 +68,5 @@ class SearchHistoryTableViewCell: UITableViewCell {
       .bind(onNext: { [weak self] in
         self?.removeButtonTapAction()
       }).disposed(by: disposeBag)
-  }
-}
-
-
-// MARK: - Tap Aniamtions
-
-extension SearchHistoryTableViewCell {
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
-    backgroundColor = R.color.backgroundBasicSelected()!
-  }
-  
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesEnded(touches, with: event)
-    self.backgroundColor = R.color.backgroundBasic()!
-  }
-  
-  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesCancelled(touches, with: event)
-    UIView.animate(withDuration: Metric.tapReleaseAnimationDuration) {
-      self.backgroundColor = R.color.backgroundBasic()!
-    }
   }
 }
