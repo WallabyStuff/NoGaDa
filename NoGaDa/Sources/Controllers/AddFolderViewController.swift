@@ -117,6 +117,7 @@ class AddFolderViewController: BaseViewController {
   private func setupFolderTitleTextField() {
     folderTitleTextField.setLeftPadding(width: Metric.folderTitleTextFieldLeftPadding)
     folderTitleTextField.setPlaceholderColor(R.color.textTertiary()!)
+    folderTitleTextField.becomeFirstResponder()
   }
   
   
