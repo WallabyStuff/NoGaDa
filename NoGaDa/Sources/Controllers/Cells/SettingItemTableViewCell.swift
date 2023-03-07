@@ -32,7 +32,6 @@ class SettingItemTableViewCell: UITableViewCell {
   // MARK: - UI
   
   @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var iconContainerView: UIView!
   @IBOutlet weak var iconImageView: UIImageView!
   
   
@@ -55,13 +54,8 @@ class SettingItemTableViewCell: UITableViewCell {
   // MARK: - Setups
   
   private func setupView() {
-    setupIconContainerView()
     setupSelectedView()
     setupAction()
-  }
-  
-  private func setupIconContainerView() {
-    iconContainerView.layer.cornerRadius = Metric.iconContainerViewCornerRadius
   }
   
   private func setupSelectedView() {
@@ -87,6 +81,5 @@ class SettingItemTableViewCell: UITableViewCell {
   func configure(item: SettingItem) {
     titleLabel.text = item.title
     iconImageView.image = item.icon
-    iconContainerView.backgroundColor = item.iconContainerColor
   }
 }

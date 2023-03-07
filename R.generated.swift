@@ -427,8 +427,8 @@ struct _R {
     /// Image `chevron-right`.
     var chevronRight: RswiftResources.ImageResource { .init(name: "chevron-right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `email`.
-    var email: RswiftResources.ImageResource { .init(name: "email", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `conversation`.
+    var conversation: RswiftResources.ImageResource { .init(name: "conversation", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `folder`.
     var folder: RswiftResources.ImageResource { .init(name: "folder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -436,8 +436,8 @@ struct _R {
     /// Image `folder-filled`.
     var folderFilled: RswiftResources.ImageResource { .init(name: "folder-filled", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `information.fill`.
-    var informationFill: RswiftResources.ImageResource { .init(name: "information.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `information`.
+    var information: RswiftResources.ImageResource { .init(name: "information", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `music-note`.
     var musicNote: RswiftResources.ImageResource { .init(name: "music-note", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -559,7 +559,6 @@ struct _R {
       if UIKit.UIImage(named: "chevron-right", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chevron-right' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "information.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'information.fill' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "BackgroundBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "BackgroundBlue", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundBlue' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "IconSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconSecondary' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in nib 'SettingItemTableViewCell', but couldn't be loaded.") }
