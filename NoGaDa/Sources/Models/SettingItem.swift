@@ -28,9 +28,9 @@ extension SettingItem {
   var icon: UIImage {
     switch self {
     case .credit:
-      return R.image.informationFill()!
+      return R.image.information()!
     case .bugReport:
-      return R.image.email()!
+      return R.image.conversation()!
     }
   }
 }
