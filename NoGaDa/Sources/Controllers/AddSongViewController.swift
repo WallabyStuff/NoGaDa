@@ -28,6 +28,7 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   typealias ViewModel = AddSongViewModel
   
   struct Metric {
+    static let commonTextFieldHeight = 44.f
     static let confirmButtonCornerRadius = 12.f
     
     static let notificationViewCornerRadius = 12.f
@@ -49,7 +50,8 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
     static let confirmButtonActiveAlpha = 1.f
     static let confirmButtonInactiveAlpha = 0.2.f
     
-    static let keyboardAreaHeight = 150.f
+    static let headerLabelTopMargin = 28.f
+    static let keyboardTextFieldSpacing = 12.f
   }
   
   
@@ -57,6 +59,7 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   
   weak var delegate: AddSongViewDelegate?
   var viewModel: ViewModel
+  private var activeTextField: UITextField?
   
   
   // MARK: - UI
@@ -68,8 +71,8 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   @IBOutlet weak var singerTextField: HighlightingTextfield!
   @IBOutlet weak var songNumberTextField: HighlightingTextfield!
   @IBOutlet weak var brandPickerButton: UIButton!
-  @IBOutlet weak var contentScrollView: UIScrollView!
   @IBOutlet weak var contentView: UIView!
+  @IBOutlet weak var headerLabelTopConstraint: NSLayoutConstraint!
   
   
   // MARK: - Lifecycle
@@ -129,9 +132,6 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
     setupSingerTextField()
     setupSongNumberTextField()
     setupBrandPickerButton()
-    setupContentScrollView()
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
   
   private func setupExitButton() {
@@ -149,16 +149,19 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupSongTitleTextField() {
+    songTitleTextField.delegate = self
     songTitleTextField.setLeftPadding(width: Metric.songTitleTextFieldLeftPadding)
     songTitleTextField.setRightPadding(width: Metric.songTitleTextFieldRightPadding)
   }
   
   private func setupSingerTextField() {
+    singerTextField.delegate = self
     singerTextField.setLeftPadding(width: Metric.singerTextFieldLeftPadding)
     singerTextField.setRightPadding(width: Metric.singerTextFieldRightPadding)
   }
   
   private func setupSongNumberTextField() {
+    songNumberTextField.delegate = self
     songNumberTextField.setLeftPadding(width: Metric.songNumberTextFieldLeftPadding)
     songNumberTextField.setRightPadding(width: Metric.songNumberTextFieldRightPadding)
   }
@@ -169,16 +172,13 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
     brandPickerButton.layer.borderColor = R.color.lineBasic()!.cgColor
   }
   
-  private func setupContentScrollView() {
-    contentScrollView.delegate = self
-  }
-  
   
   // MARK: - Binds
   
   private func bind() {
     bindInputs()
     bindOutputs()
+    bindKeyboardActions()
   }
   
   private func bindInputs() {
@@ -297,6 +297,11 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
       .disposed(by: disposeBag)
   }
   
+  private func bindKeyboardActions() {
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+  }
+  
   
   // MARK: - Methods
   
@@ -318,29 +323,45 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   @objc
-  private func keyboardWillShow(_ sender: Notification) {
-    view.frame.origin.y = -Metric.keyboardAreaHeight
+  private func keyboardWillShow(_ notification: Notification) {
+    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+       let activeTextField = activeTextField {
+      let keyboardRectangle = keyboardFrame.cgRectValue
+      let keyboardHeight = keyboardRectangle.height
+
+      let convertedPoint = activeTextField.convert(activeTextField.bounds.origin, from: nil)
+      let updateKeyboardPositionThresholdY = abs(convertedPoint.y)
+      
+      let keyboardTopY = view.frame.height - keyboardHeight
+      let textFieldBottomY = updateKeyboardPositionThresholdY + Metric.commonTextFieldHeight
+
+      if keyboardTopY < textFieldBottomY {
+        let gap = textFieldBottomY - keyboardTopY
+        adjustViewPositionY(constant: -(gap - headerLabelTopConstraint.constant + Metric.keyboardTextFieldSpacing))
+      }
+    }
   }
   
   @objc
   private func keyboardWillHide(_ sender: Notification) {
-    view.frame.origin.y = 0
+    adjustViewPositionY(constant: Metric.headerLabelTopMargin)
   }
   
   @objc
   private func didTapDoneButton(_ sender: Any) {
     view.endEditing(true)
   }
+  
+  private func adjustViewPositionY(constant: CGFloat) {
+    headerLabelTopConstraint.constant = constant
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
+    }
+  }
 }
 
 
 // MARK: - Extensions
-
-extension AddSongViewController: UIScrollViewDelegate {
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    view.endEditing(true)
-  }
-}
 
 extension AddSongViewController: UIPopoverPresentationControllerDelegate {
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -353,5 +374,11 @@ extension AddSongViewController: BrandPickerViewDelegate {
     Observable.just(selectedBrand)
       .bind(to: viewModel.input.changeKaraokeBrand)
       .disposed(by: disposeBag)
+  }
+}
+
+extension AddSongViewController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    activeTextField = textField
   }
 }
