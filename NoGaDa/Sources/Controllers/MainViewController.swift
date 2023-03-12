@@ -90,7 +90,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    bind()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -114,6 +113,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   private func setup() {
     setupView()
+    bind()
   }
   
   private func setupView() {
