@@ -100,6 +100,10 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
     }
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .default
+  }
+  
   
   // MARK: - Initializers
   
