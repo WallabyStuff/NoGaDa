@@ -297,55 +297,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		491C19BF271D89EC00D4DEB9 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */,
-				49484CFB2720766100EC12B3 /* SearchViewModel.swift */,
-				49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */,
-				49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */,
-				4992C7612721B3D6006045FF /* AddFolderViewModel.swift */,
-				4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */,
-				49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */,
-				49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */,
-				8E6C95E82767B37B00667C01 /* PopUpSongOptionViewModel.swift */,
-				8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */,
-				8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */,
-				8E25076728D1ED3400756AB1 /* SettingViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		493BCBE126F4BAC00096422A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */,
-				493BCBE826F4CEA10096422A /* SongTableViewCell.swift */,
-				493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */,
-				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
-				49C6DC78270381910094403B /* SettingItemTableViewCell.swift */,
-				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
-				495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */,
-				8E6C95E42767B18500667C01 /* PopUpSongOptionTableViewCell.swift */,
-				8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */,
-				8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		493BCBE226F4BAC30096422A /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */,
 				493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */,
+				493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */,
 				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
-				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
+				493BCBE826F4CEA10096422A /* SongTableViewCell.swift */,
+				493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */,
+				493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */,
 				8E6C95E52767B18500667C01 /* PopUpSongOptionTableViewCell.xib */,
+				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
 				49C6DC79270381910094403B /* SettingItemTableViewCell.xib */,
+				49C6DC78270381910094403B /* SettingItemTableViewCell.swift */,
 				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
+				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
 				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
+				495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */,
+				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
+				8E6C95E42767B18500667C01 /* PopUpSongOptionTableViewCell.swift */,
 				8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */,
+				8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */,
 				8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */,
+				8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -399,29 +373,42 @@
 			path = NoGaDaUITests;
 			sourceTree = "<group>";
 		};
-		4956CE5426F469E30007523B /* Controllers */ = {
+		4956CE5426F469E30007523B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */,
 				8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */,
 				8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */,
 				4956CE2826F467040007523B /* MainViewController.swift */,
+				491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */,
 				4956CE5C26F4940A0007523B /* SearchViewController.swift */,
+				49484CFB2720766100EC12B3 /* SearchViewModel.swift */,
 				4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */,
+				49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */,
 				4956CE6026F494870007523B /* ArchiveSongViewController.swift */,
+				49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */,
 				4956CE6226F494990007523B /* AddFolderViewController.swift */,
+				4992C7612721B3D6006045FF /* AddFolderViewModel.swift */,
 				493BCBDF26F4B2890096422A /* PopUpArchiveFolderViewController.swift */,
+				4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */,
 				49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */,
+				8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */,
 				49C6DC74270372F40094403B /* SettingViewController.swift */,
+				8E25076728D1ED3400756AB1 /* SettingViewModel.swift */,
 				49FB0D0927038DED00AE3A9F /* CreditViewController.swift */,
+				8E703933275FECE3001D10A6 /* CreditViewModel.swift */,
 				495334302711DE37003F64DE /* SearchResultViewController.swift */,
+				49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */,
 				495334322711DE4B003F64DE /* SearchHistoryViewController.swift */,
+				49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */,
 				8E70392D275F2D15001D10A6 /* AddSongViewController.swift */,
+				8E70392F275F466D001D10A6 /* AddSongViewModel.swift */,
 				8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */,
+				8E6C95E82767B37B00667C01 /* PopUpSongOptionViewModel.swift */,
 				8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */,
-				493BCBE126F4BAC00096422A /* Cells */,
+				8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		4956CE5526F469F00007523B /* Views */ = {
@@ -435,6 +422,8 @@
 				8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */,
 				8E79DC4028BB73B0000B4874 /* AnimateButton.swift */,
 				8E79DC4428BB7858000B4874 /* AnimateView.swift */,
+				4956CE5426F469E30007523B /* ViewControllers */,
+				493BCBE126F4BAC00096422A /* Cells */,
 				4956CE5726F469FA0007523B /* Storyboards */,
 				8E6C95E32767A90200667C01 /* FloatingPanelLayouts */,
 			);
@@ -454,8 +443,6 @@
 				49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */,
 				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
 				4953343E2712C503003F64DE /* SearchHistory.swift */,
-				8E70392F275F466D001D10A6 /* AddSongViewModel.swift */,
-				8E703933275FECE3001D10A6 /* CreditViewModel.swift */,
 				8E6C95EA2767B43700667C01 /* SongOption.swift */,
 				8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */,
 			);
@@ -470,7 +457,6 @@
 				8E03596027D79F43006A77CA /* Archive.storyboard */,
 				8E03596227D79F8C006A77CA /* Search.storyboard */,
 				8E03596427D7A25C006A77CA /* Folder.storyboard */,
-				493BCBE226F4BAC30096422A /* Cells */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -513,8 +499,6 @@
 				4989A72426F8862A00A98B63 /* Managers */,
 				4956CE5626F469F30007523B /* Models */,
 				4956CE5526F469F00007523B /* Views */,
-				4956CE5426F469E30007523B /* Controllers */,
-				491C19BF271D89EC00D4DEB9 /* ViewModels */,
 				8EF0500A2826D82F00166223 /* Utils */,
 				8E3CE86F28B26CA700C3DD27 /* Rx */,
 				8EF050092826D7E600166223 /* SupportingFiles */,

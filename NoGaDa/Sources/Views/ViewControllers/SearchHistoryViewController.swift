@@ -10,10 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-//protocol SearchHistoryViewDelegate: AnyObject {
-//  func didSelectHistoryItem(_ keyword: String)
-//}
-
 class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
