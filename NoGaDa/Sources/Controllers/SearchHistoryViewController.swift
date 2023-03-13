@@ -36,7 +36,7 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   // MARK: - UI
   
   @IBOutlet weak var searchHistoryTableView: UITableView!
-  @IBOutlet weak var searchHistoryTableViewPlaceholderLabel: UILabel!
+  @IBOutlet weak var searchHistoryPlaceholderLabel: UILabel!
   @IBOutlet weak var clearHistoryButton: UIButton!
   
   
@@ -45,7 +45,6 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    bind()
   }
   
   
@@ -70,6 +69,7 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   private func setup() {
     setupView()
+    bind()
   }
   
   private func setupView() {
@@ -121,8 +121,9 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   private func bindOutputs() {
     viewModel.output
       .searchHistories
-      .bind(to: searchHistoryTableView.rx.items(cellIdentifier: SearchHistoryTableViewCell.identifier,
-                                                cellType: SearchHistoryTableViewCell.self)) { [weak self] index, item, cell in
+      .bind(to: searchHistoryTableView.rx.items(
+        cellIdentifier: SearchHistoryTableViewCell.identifier,
+        cellType: SearchHistoryTableViewCell.self)) { [weak self] index, item, cell in
         guard let self = self else { return }
         
         cell.titleLabel.text = item.keyword
@@ -130,6 +131,17 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
           self?.viewModel.deleteHistory(index)
         }
       }.disposed(by: disposeBag)
+    
+    viewModel.output
+      .searchHistories
+      .subscribe(with: self, onNext: { vc, histories in
+        if histories.isEmpty {
+          vc.searchHistoryPlaceholderLabel.isHidden = false
+        } else {
+          vc.searchHistoryPlaceholderLabel.isHidden = true
+        }
+      })
+      .disposed(by: disposeBag)
     
     viewModel.output
       .didTapHistoryItem

@@ -142,7 +142,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="taA-qS-gD6">
-                                <rect key="frame" x="0.0" y="76" width="414" height="610"/>
+                                <rect key="frame" x="0.0" y="72.5" width="414" height="647.5"/>
                                 <color key="backgroundColor" name="BackgroundBasic"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색기록" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNy-56-Bel">
@@ -158,7 +158,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAc-bU-Pcy">
-                                <rect key="frame" x="334" y="28" width="60" height="28"/>
+                                <rect key="frame" x="334" y="24.5" width="60" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="aUp-e6-hrN"/>
                                     <constraint firstAttribute="width" constant="60" id="wO9-Wx-c2l"/>
@@ -179,8 +179,8 @@
                             <constraint firstItem="taA-qS-gD6" firstAttribute="top" secondItem="PAc-bU-Pcy" secondAttribute="bottom" constant="20" id="HEt-Lt-jSn"/>
                             <constraint firstItem="OMb-3A-hJJ" firstAttribute="trailing" secondItem="PAc-bU-Pcy" secondAttribute="trailing" constant="20" id="Uzr-nx-XaK"/>
                             <constraint firstItem="taA-qS-gD6" firstAttribute="trailing" secondItem="OMb-3A-hJJ" secondAttribute="trailing" id="VB9-pR-viZ"/>
-                            <constraint firstItem="taA-qS-gD6" firstAttribute="bottom" secondItem="OMb-3A-hJJ" secondAttribute="bottom" id="jGG-4H-koO"/>
-                            <constraint firstItem="PAc-bU-Pcy" firstAttribute="top" secondItem="01n-9f-Zhf" secondAttribute="top" constant="28" id="oLi-vY-csY"/>
+                            <constraint firstItem="PAc-bU-Pcy" firstAttribute="centerY" secondItem="RNy-56-Bel" secondAttribute="centerY" id="Zry-9s-NNK"/>
+                            <constraint firstItem="taA-qS-gD6" firstAttribute="bottom" secondItem="01n-9f-Zhf" secondAttribute="bottom" id="jGG-4H-koO"/>
                             <constraint firstItem="taA-qS-gD6" firstAttribute="leading" secondItem="OMb-3A-hJJ" secondAttribute="leading" id="pNm-pt-ut0"/>
                             <constraint firstItem="xoz-X7-fR9" firstAttribute="centerX" secondItem="01n-9f-Zhf" secondAttribute="centerX" id="yQA-v6-x4C"/>
                         </constraints>
@@ -188,8 +188,8 @@
                     <size key="freeformSize" width="414" height="720"/>
                     <connections>
                         <outlet property="clearHistoryButton" destination="PAc-bU-Pcy" id="9vf-ep-VJi"/>
+                        <outlet property="searchHistoryPlaceholderLabel" destination="xoz-X7-fR9" id="A49-ue-XTs"/>
                         <outlet property="searchHistoryTableView" destination="taA-qS-gD6" id="dsM-W3-RuS"/>
-                        <outlet property="searchHistoryTableViewPlaceholderLabel" destination="xoz-X7-fR9" id="A49-ue-XTs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ju7-w1-NvT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
