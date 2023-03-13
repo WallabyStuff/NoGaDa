@@ -10,10 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol SearchHistoryViewDelegate: AnyObject {
-  func didCallEndEditing()
-  func didSelectHistoryItem(_ keyword: String)
-}
+//protocol SearchHistoryViewDelegate: AnyObject {
+//  func didSelectHistoryItem(_ keyword: String)
+//}
 
 class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
@@ -29,8 +28,9 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Properties
   
-  weak var delegate: SearchHistoryViewDelegate?
+//  weak var delegate: SearchHistoryViewDelegate?
   var viewModel: ViewModel
+  public var historyItemSelectActionHandler: ((_ term: String) -> Void)? = nil
   
   
   // MARK: - UI
@@ -80,8 +80,6 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
     registerSearchHistoryTableView()
     searchHistoryTableView.separatorStyle = .none
     searchHistoryTableView.tableFooterView = UIView()
-    searchHistoryTableView.rx.setDelegate(self)
-      .disposed(by: disposeBag)
   }
   
   private func registerSearchHistoryTableView() {
@@ -111,6 +109,13 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
       .rx.itemSelected
       .bind(to: viewModel.input.tapHistoryItem)
       .disposed(by: disposeBag)
+    
+    searchHistoryTableView.rx.didScroll
+      .asDriver()
+      .drive(onNext: { _ in
+        NotificationCenter.default.post(name: .hideKeyboard, object: nil)
+      })
+      .disposed(by: disposeBag)
   }
   
   private func bindOutputs() {
@@ -130,18 +135,18 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
       .didTapHistoryItem
       .asDriver(onErrorDriveWith: .never())
       .drive(with: self, onNext: { vc, historyItem in
-        let keyword = historyItem.keyword
-        vc.delegate?.didSelectHistoryItem(keyword)
+        let term = historyItem.keyword
+        vc.historyItemSelectActionHandler?(term)
       })
       .disposed(by: disposeBag)
   }
-}
-
-
-// MARK: - Extensions
-
-extension SearchHistoryViewController: UITableViewDelegate {
-  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    delegate?.didCallEndEditing()
+  
+  
+  // MARK: - Methods
+  
+  public func refresh() {
+    Observable.just(Void())
+      .bind(to: viewModel.input.refresh)
+      .dispose()
   }
 }

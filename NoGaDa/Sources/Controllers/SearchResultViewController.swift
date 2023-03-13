@@ -20,13 +20,10 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   // MARK: - Constants
   
   static let identifier = R.storyboard.search.searchResultStoryboard.identifier
-  
   struct Metric {
-    static let searchResultContentViewCornerRadius = 12.f
-    
-    static let searchResultTableViewCornerRadius = 16.f
+    static let searchResultTableViewTopInset = 24.f
   }
-  
+
   
   // MARK: - Types
   
@@ -41,7 +38,6 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - UI
   
-  @IBOutlet weak var brandSelector: UISegmentedControl!
   @IBOutlet weak var searchResultContentView: UIView!
   @IBOutlet weak var searchResultTableView: UITableView!
   @IBOutlet weak var searchResultMessageLabel: UILabel!
@@ -90,28 +86,22 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func setupView() {
-    setupSearchResultContentView()
-    setupBrandSelector()
     setupSearchResultTableView()
     setupLoadingIndicatorView()
     setupSearchResultPlaceholderLabel()
-  }
-  
-  private func setupSearchResultContentView() {
-    searchResultContentView.clipsToBounds = true
-    searchResultContentView.layer.cornerRadius = Metric.searchResultContentViewCornerRadius
-  }
-  
-  private func setupBrandSelector() {
-    brandSelector.setSelectedTextColor(R.color.textBlack()!)
-    brandSelector.setDefaultTextColor(R.color.textSecondary()!)
   }
   
   private func setupSearchResultTableView() {
     registerSearchResultTableView()
     searchResultTableView.tableFooterView = UIView()
     searchResultTableView.separatorStyle = .none
-    searchResultTableView.layer.cornerRadius = Metric.searchResultTableViewCornerRadius
+    
+    searchResultTableView.clipsToBounds = false
+    searchResultTableView.contentInset = .init(
+      top: Metric.searchResultTableViewTopInset,
+      left: 0,
+      bottom: 0,
+      right: 0)
   }
   
   private func registerSearchResultTableView() {
@@ -137,30 +127,25 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   }
   
   private func bindInputs() {
-    brandSelector
-      .rx.selectedSegmentIndex
-      .distinctUntilChanged()
-      .map { index -> KaraokeBrand in
-        if index == 0 {
-          return .tj
-        } else {
-          return .kumyoung
-        }
-      }
-      .bind(to: viewModel.input.changeKaraokeBrand)
-      .disposed(by: disposeBag)
-    
     searchResultTableView
       .rx.itemSelected
       .bind(to: viewModel.input.tapSongItem)
       .disposed(by: disposeBag)
+    
+    searchResultTableView.rx.didScroll
+      .asDriver()
+      .drive(onNext: { _ in
+        NotificationCenter.default.post(name: .hideKeyboard, object: nil)
+      })
+    .disposed(by: disposeBag)
   }
   
   private func bindOutputs() {
     viewModel.output
       .searchResultSongs
-      .bind(to: searchResultTableView.rx.items(cellIdentifier: SongTableViewCell.identifier,
-                                               cellType: SongTableViewCell.self)) { [weak self] index, item, cell in
+      .bind(to: searchResultTableView.rx.items(
+        cellIdentifier: SongTableViewCell.identifier,
+        cellType: SongTableViewCell.self)) { [weak self] index, item, cell in
         guard let self = self else { return }
         let searchKeyword = self.viewModel.searchKeyword
         
@@ -181,8 +166,8 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
     viewModel.output
       .didSelectSongItem
       .asDriver(onErrorDriveWith: .never())
-      .drive(onNext: { [weak self] selectedSong in
-        self?.delegate?.didSelectSongItem(selectedSong)
+      .drive(with: self, onNext: { vc, selectedSong in
+        vc.delegate?.didSelectSongItem(selectedSong)
       })
       .disposed(by: disposeBag)
     
@@ -211,6 +196,15 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
           vc.searchResultMessageLabel.text = errorMessage
         }
       })
+      .disposed(by: disposeBag)
+  }
+  
+  
+  // MARK: - Methods
+  
+  public func setSearchResult(_ term: String) {
+    Observable.just(term)
+      .bind(to: viewModel.input.search)
       .disposed(by: disposeBag)
   }
 }

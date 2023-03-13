@@ -10,12 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-@objc
-protocol PopOverSearchFilterViewDelegate: AnyObject {
-  @objc optional
-  func popOverSearchFilterView(didTapApply: Bool)
-}
-
 class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
@@ -37,12 +31,13 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   
   // MARK: - Properties
   
-  weak var delegate: PopOverSearchFilterViewDelegate?
   var viewModel: PopOverSearchFilterViewModel
+  public var applyActionHandler: (() -> Void)? = nil
   
   
   // MARK: - UI
   
+  @IBOutlet weak var brandSelector: UISegmentedControl!
   @IBOutlet weak var searchFilterTableView: UITableView!
   @IBOutlet weak var applyButton: UIButton!
   
@@ -83,6 +78,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   private func setupView() {
     setupSearchFilterTableView()
     setupApplyButton()
+    setupBrandSelector()
   }
   
   private func setupSearchFilterTableView() {
@@ -101,6 +97,11 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     applyButton.layer.cornerRadius = Metric.applyButtonCornerRadius
   }
   
+  private func setupBrandSelector() {
+    brandSelector.setSelectedTextColor(.black)
+    brandSelector.setDefaultTextColor(.darkGray)
+  }
+  
   
   // MARK: - Binds
   
@@ -110,9 +111,20 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   }
   
   private func bindInputs() {
-    applyButton
-      .rx.tap
+    applyButton.rx.tap
       .bind(to: viewModel.input.tapApplyButton)
+      .disposed(by: disposeBag)
+    
+    brandSelector.rx.selectedSegmentIndex
+      .distinctUntilChanged()
+      .map { index -> KaraokeBrand in
+        if index == 0 {
+          return .tj
+        } else {
+          return .kumyoung
+        }
+      }
+      .bind(to: viewModel.input.updateKaraokeBrand)
       .disposed(by: disposeBag)
   }
   
@@ -133,7 +145,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     viewModel.output.didTapApplyButton
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] bool in
-        self?.delegate?.popOverSearchFilterView?(didTapApply: bool)
+        self?.applyActionHandler?()
       })
       .disposed(by: disposeBag)
     

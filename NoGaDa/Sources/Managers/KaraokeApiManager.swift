@@ -52,10 +52,15 @@ class KaraokeApiManager {
     }
   }
   
-  public func fetchSong(title: String, brand: KaraokeBrand) -> Observable<[Song]> {
+  public func fetchSong(term: String, brand: KaraokeBrand) -> Observable<[Song]> {
     return Observable.create { observer in
       DispatchQueue.global(qos: .background).async {
-        let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(title)\(brand.path)".urlEncode()
+        var term = term
+        if term.isKorean() {
+          term.removeAllEmptySpaces()
+        }
+        
+        let fullPath = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(term)\(brand.path)".urlEncode()
         
         guard let url = URL(string: fullPath) else {
           observer.onError(KaraokeAPIErrMessage.urlParsingError)
@@ -127,7 +132,7 @@ class KaraokeApiManager {
   }
   
   public func fetchSong(titleOrSinger: String, brand: KaraokeBrand) -> Observable<[Song]> {
-    let fetchWithTitle      = fetchSong(title: titleOrSinger, brand: brand)
+    let fetchWithTitle      = fetchSong(term: titleOrSinger, brand: brand)
     let fetchWithSinger     = fetchSong(singer: titleOrSinger, brand: brand)
     
     return Observable.create { [weak self] observer in
@@ -144,7 +149,7 @@ class KaraokeApiManager {
         }).disposed(by: self.disposeBag)
       } else if SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
         // Search with title
-        self.fetchSong(title: titleOrSinger, brand: brand)
+        self.fetchSong(term: titleOrSinger, brand: brand)
           .subscribe(onNext: { searchResultSongList in
             observer.onNext(searchResultSongList)
           }, onError: { error in

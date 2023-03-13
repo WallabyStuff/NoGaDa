@@ -51,10 +51,6 @@ class SearchResultViewModel: ViewModelType {
     Observable.merge(
       input.search
         .map { keyword in
-          var keyword = keyword
-          if keyword.isKorean() {
-            keyword.removeAllEmptySpaces()
-          }
           output.searchKeyword.accept(keyword)
         },
       input.changeKaraokeBrand
@@ -64,6 +60,7 @@ class SearchResultViewModel: ViewModelType {
         }
     )
     .map {
+      // Start loading
       output.searchResultErrorState.accept("")
       output.isLoading.accept(true)
       output.searchResultSongs.accept([])
@@ -87,7 +84,6 @@ class SearchResultViewModel: ViewModelType {
         output.searchResultSongs.accept(songs)
       }
     }, onError: { error in
-      print(error.localizedDescription)
       output.isLoading.accept(false)
       output.searchResultErrorState.accept("오류가 발생했습니다")
     })
