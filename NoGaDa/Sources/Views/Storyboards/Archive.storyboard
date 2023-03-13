@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dSu-i0-Hg5">
-                                <rect key="frame" x="0.0" y="131" width="414" height="731"/>
+                                <rect key="frame" x="0.0" y="131" width="414" height="765"/>
                                 <color key="backgroundColor" name="BackgroundBasic"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vo-6m-7EM">
@@ -74,7 +74,7 @@
                             <constraint firstItem="1wk-hr-3DA" firstAttribute="bottom" secondItem="6Gj-gl-IDl" secondAttribute="bottom" constant="16" id="FVT-A7-EBW"/>
                             <constraint firstItem="6Vo-6m-7EM" firstAttribute="leading" secondItem="1wk-hr-3DA" secondAttribute="leading" id="Hb3-bN-VVC"/>
                             <constraint firstItem="dSu-i0-Hg5" firstAttribute="leading" secondItem="1wk-hr-3DA" secondAttribute="leading" id="NvD-O6-9M2"/>
-                            <constraint firstItem="1wk-hr-3DA" firstAttribute="bottom" secondItem="dSu-i0-Hg5" secondAttribute="bottom" id="R9Y-9z-h3x"/>
+                            <constraint firstAttribute="bottom" secondItem="dSu-i0-Hg5" secondAttribute="bottom" id="R9Y-9z-h3x"/>
                             <constraint firstItem="6Gj-gl-IDl" firstAttribute="leading" secondItem="1wk-hr-3DA" secondAttribute="leading" constant="20" id="Ubt-Uq-MhW"/>
                             <constraint firstItem="dSu-i0-Hg5" firstAttribute="top" secondItem="1wk-hr-3DA" secondAttribute="top" constant="72" id="fiW-Ns-S8l"/>
                             <constraint firstItem="6Vo-6m-7EM" firstAttribute="top" secondItem="PPC-Kk-Rsu" secondAttribute="top" id="mO5-Sa-jXf"/>
