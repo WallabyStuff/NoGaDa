@@ -44,7 +44,7 @@ class MainViewModel: ViewModelType {
   private(set) var input: Input!
   private(set) var output: Output!
   private(set) var disposeBag = DisposeBag()
-  private let karaokeManager = KaraokeApiManager()
+  private let karaokeApiService = KaraokeApiService()
   private let songFolderManager = SongFolderManager()
   
   
@@ -69,10 +69,10 @@ class MainViewModel: ViewModelType {
       output.newUpdateSongs.accept([])
       output.isLoadingNewUpdateSongs.accept(true)
     }
-    .flatMap { [weak self] () -> Observable<[Song]> in
+    .flatMap { [weak self] () -> Single<[Song]> in
       guard let self = self else { return .never() }
       let selectedBrand = output.selectedKaraokeBrand.value
-      return self.karaokeManager.fetchUpdatedSong(brand: selectedBrand)
+      return self.karaokeApiService.fetchUpdatedSong(brand: selectedBrand)
     }
     .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
     .observe(on: MainScheduler.instance)

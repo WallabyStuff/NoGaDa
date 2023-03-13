@@ -46,7 +46,7 @@
 		4956CE5F26F494730007523B /* ArchiveFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */; };
 		4956CE6126F494870007523B /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
 		4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6226F494990007523B /* AddFolderViewController.swift */; };
-		4989A72626F8863C00A98B63 /* KaraokeApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */; };
+		4989A72626F8863C00A98B63 /* KaraokeApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeApiService.swift */; };
 		4992C7622721B3D6006045FF /* AddFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7612721B3D6006045FF /* AddFolderViewModel.swift */; };
 		4992C7642721B86F006045FF /* PopUpArchiveFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */; };
 		4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */; };
@@ -190,7 +190,7 @@
 		4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderViewController.swift; sourceTree = "<group>"; };
 		4956CE6026F494870007523B /* ArchiveSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongViewController.swift; sourceTree = "<group>"; };
 		4956CE6226F494990007523B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
-		4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeApiManager.swift; sourceTree = "<group>"; };
+		4989A72526F8863C00A98B63 /* KaraokeApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeApiService.swift; sourceTree = "<group>"; };
 		4992C7612721B3D6006045FF /* AddFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewModel.swift; sourceTree = "<group>"; };
 		4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderViewModel.swift; sourceTree = "<group>"; };
 		4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconResourceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -478,7 +478,7 @@
 		4989A72426F8862A00A98B63 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */,
+				4989A72526F8863C00A98B63 /* KaraokeApiService.swift */,
 				49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */,
 				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
 				4953343A271204C4003F64DE /* SearchHistoryManager.swift */,
@@ -876,7 +876,7 @@
 				8E6C95DE276797D100667C01 /* PopUpSongOptionViewController.swift in Sources */,
 				8E6C95E22767A8F900667C01 /* SongOptionFloatingPanelLayout.swift in Sources */,
 				4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */,
-				4989A72626F8863C00A98B63 /* KaraokeApiManager.swift in Sources */,
+				4989A72626F8863C00A98B63 /* KaraokeApiService.swift in Sources */,
 				8E98D7812826DBA60056CED4 /* UITextField+Padding.swift in Sources */,
 				8E6C95EB2767B43700667C01 /* SongOption.swift in Sources */,
 				49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */,

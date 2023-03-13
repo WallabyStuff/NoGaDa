@@ -32,7 +32,7 @@ class SearchResultViewModel: ViewModelType {
   private(set) var input: Input!
   private(set) var output: Output!
   private(set) var disposeBag = DisposeBag()
-  private var karaokeManager = KaraokeApiManager()
+  private var karaokeApiService = KaraokeApiService()
   
   
   // MARK: - Initializers
@@ -65,15 +65,16 @@ class SearchResultViewModel: ViewModelType {
       output.isLoading.accept(true)
       output.searchResultSongs.accept([])
     }
-    .flatMap { [weak self] () -> Observable<[Song]> in
-      guard let self = self else { return .empty() }
+    .flatMap { [weak self] () -> Single<[Song]> in
+      guard let self = self else { return .just([]) }
       if output.searchKeyword.value.isEmpty {
-        return .empty()
+        return .just([])
       }
       
-      return self.karaokeManager.fetchSong(titleOrSinger: output.searchKeyword.value,
-                                           brand: output.selectedKaraokeBrand.value)
+      return self.karaokeApiService.fetchSong(titleOrSinger: output.searchKeyword.value, brand: output.selectedKaraokeBrand.value)
     }
+    .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
+    .observe(on: MainScheduler.instance)
     .subscribe(onNext: { songs in
       output.isLoading.accept(false)
       
