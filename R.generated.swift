@@ -424,11 +424,11 @@ struct _R {
     /// Image `back-arrow`.
     var backArrow: RswiftResources.ImageResource { .init(name: "back-arrow", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `chat`.
+    var chat: RswiftResources.ImageResource { .init(name: "chat", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `chevron-right`.
     var chevronRight: RswiftResources.ImageResource { .init(name: "chevron-right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `conversation`.
-    var conversation: RswiftResources.ImageResource { .init(name: "conversation", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `folder`.
     var folder: RswiftResources.ImageResource { .init(name: "folder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -436,8 +436,8 @@ struct _R {
     /// Image `folder-filled`.
     var folderFilled: RswiftResources.ImageResource { .init(name: "folder-filled", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `information`.
-    var information: RswiftResources.ImageResource { .init(name: "information", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `form`.
+    var form: RswiftResources.ImageResource { .init(name: "form", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `music-note`.
     var musicNote: RswiftResources.ImageResource { .init(name: "music-note", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -726,7 +726,7 @@ struct _R {
       let name = "LaunchScreen"
       func validate() throws {
         if UIKit.UIImage(named: "SplashImage", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'SplashImage' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
-        if UIKit.UIColor(named: "SplashBackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SplashBackgroundColor' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "AccentYellow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentYellow' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
       }
     }
 

@@ -28,9 +28,9 @@ extension SettingItem {
   var icon: UIImage {
     switch self {
     case .credit:
-      return R.image.information()!
+      return R.image.form()!
     case .bugReport:
-      return R.image.conversation()!
+      return R.image.chat()!
     }
   }
 }
@@ -40,9 +40,9 @@ extension SettingItem
   var iconContainerColor: UIColor {
     switch self {
     case .credit:
-      return R.color.accentBlue()!
+      return R.color.iconBasic()!
     case .bugReport:
-      return R.color.accentOrange()!
+      return R.color.iconBasic()!
     }
   }
 }

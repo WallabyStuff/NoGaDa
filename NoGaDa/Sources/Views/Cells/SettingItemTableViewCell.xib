@@ -27,16 +27,16 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmm-PY-ZoK">
-                        <rect key="frame" x="52" y="15.5" width="279" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="48" y="15.5" width="283" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" name="TextBasic"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="information.fill" translatesAutoresizingMaskIntoConstraints="NO" id="JiR-6P-80h">
-                        <rect key="frame" x="12" y="10" width="32" height="32"/>
+                        <rect key="frame" x="12" y="10" width="24" height="32"/>
                         <color key="tintColor" name="IconWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="32" id="0TT-Nb-Oxi"/>
+                            <constraint firstAttribute="width" constant="24" id="0TT-Nb-Oxi"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="5y3-wS-ENs"/>
                         </constraints>
                     </imageView>
@@ -48,7 +48,7 @@
                     <constraint firstItem="JiR-6P-80h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="gUY-gV-h8y"/>
                     <constraint firstItem="Vuu-lI-rkK" firstAttribute="leading" secondItem="Wmm-PY-ZoK" secondAttribute="trailing" constant="12" id="gg7-0A-IPX"/>
                     <constraint firstItem="JiR-6P-80h" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sJg-nE-XOf"/>
-                    <constraint firstItem="Wmm-PY-ZoK" firstAttribute="leading" secondItem="JiR-6P-80h" secondAttribute="trailing" constant="8" id="yEn-UE-kix"/>
+                    <constraint firstItem="Wmm-PY-ZoK" firstAttribute="leading" secondItem="JiR-6P-80h" secondAttribute="trailing" constant="12" id="yEn-UE-kix"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

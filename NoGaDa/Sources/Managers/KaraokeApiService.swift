@@ -154,7 +154,7 @@ class KaraokeApiService {
           }, onError: { error in
             observer(.failure(error))
           })
-          .disposed(by: disposeBag)
+          .disposed(by: self.disposeBag)
         
       } else {
         // Search with singer
@@ -164,7 +164,7 @@ class KaraokeApiService {
           }, onError: { error in
             observer(.failure(error))
           })
-          .disposed(by: disposeBag)
+          .disposed(by: self.disposeBag)
       }
 
       return Disposables.create()
