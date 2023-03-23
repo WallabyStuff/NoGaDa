@@ -13,8 +13,8 @@ class ArchiveFolderFloatingPanelView {
   // MARK: - Properties
   
   private var floatingPanel = FloatingPanelController()
-  private var parentViewController: UIViewController?
-  private var contentViewDelegate: PopUpArchiveFolderViewDelegate?
+  private weak var parentViewController: UIViewController?
+  private weak var contentViewDelegate: PopUpArchiveFolderViewDelegate?
   
   
   // MARK: - Initializers
