@@ -15,14 +15,12 @@ class SearchResultViewModel: ViewModelType {
   // MARK: - Properties
   
   struct Input {
-    let changeKaraokeBrand = PublishRelay<KaraokeBrand>()
     let search = PublishRelay<String>()
     let tapSongItem = PublishSubject<IndexPath>()
   }
   
   struct Output {
-    let searchKeyword = BehaviorRelay<String>(value: "")
-    let selectedKaraokeBrand = BehaviorRelay<KaraokeBrand>(value: .tj)
+    let searchTerm = BehaviorRelay<String>(value: "")
     let searchResultSongs = BehaviorRelay<[Song]>(value: [])
     let isLoading = BehaviorRelay<Bool>(value: false)
     let searchResultErrorState = PublishRelay<String>()
@@ -48,47 +46,40 @@ class SearchResultViewModel: ViewModelType {
     let input = Input()
     let output = Output()
     
-    Observable.merge(
-      input.search
-        .map { keyword in
-          output.searchKeyword.accept(keyword)
-        },
-      input.changeKaraokeBrand
-        .skip(1)
-        .map { karaokeBrand in
-          output.selectedKaraokeBrand.accept(karaokeBrand)
-        }
-    )
-    .map {
-      // Start loading
-      output.searchResultErrorState.accept("")
-      output.isLoading.accept(true)
-      output.searchResultSongs.accept([])
-    }
-    .flatMap { [weak self] () -> Single<[Song]> in
-      guard let self = self else { return .just([]) }
-      if output.searchKeyword.value.isEmpty {
-        return .just([])
-      }
-      
-      return self.karaokeApiService.fetchSong(titleOrSinger: output.searchKeyword.value, brand: output.selectedKaraokeBrand.value)
-    }
-    .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
-    .observe(on: MainScheduler.instance)
-    .subscribe(onNext: { songs in
-      output.isLoading.accept(false)
-      
-      if songs.isEmpty {
-        output.searchResultErrorState.accept("검색 결과가 없습니다")
-      } else {
+    input.search
+      .map { term in
+        output.searchTerm.accept(term)
+        // Start loading
         output.searchResultErrorState.accept("")
-        output.searchResultSongs.accept(songs)
+        output.isLoading.accept(true)
+        output.searchResultSongs.accept([])
       }
-    }, onError: { error in
-      output.isLoading.accept(false)
-      output.searchResultErrorState.accept("오류가 발생했습니다")
-    })
-    .disposed(by: disposeBag)
+      .flatMap { [weak self] () -> Single<[Song]> in
+        guard let self = self else { return .just([]) }
+        if output.searchTerm.value.isEmpty {
+          return .just([])
+        }
+        
+        return self.karaokeApiService.fetchSong(
+          titleOrSinger: output.searchTerm.value,
+          brand: UserDefaultsManager.searchBrand)
+      }
+      .subscribe(on: ConcurrentDispatchQueueScheduler.init(qos: .background))
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { songs in
+        output.isLoading.accept(false)
+        
+        if songs.isEmpty {
+          output.searchResultErrorState.accept("검색 결과가 없습니다")
+        } else {
+          output.searchResultErrorState.accept("")
+          output.searchResultSongs.accept(songs)
+        }
+      }, onError: { error in
+        output.isLoading.accept(false)
+        output.searchResultErrorState.accept("오류가 발생했습니다")
+      })
+      .disposed(by: disposeBag)
     
     input.tapSongItem
       .subscribe(onNext: { indexPath in
@@ -104,6 +95,6 @@ class SearchResultViewModel: ViewModelType {
 
 extension SearchResultViewModel {
   public var searchKeyword: String {
-    return output.searchKeyword.value
+    return output.searchTerm.value
   }
 }

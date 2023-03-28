@@ -20,7 +20,6 @@ class PopOverSearchFilterViewModel: ViewModelType {
   }
   
   struct Output {
-    let brand = BehaviorRelay(value: KaraokeBrand.tj)
     let searchFilterItems = BehaviorRelay<[SearchFilterItem]>(value: SearchFilterItem.allCases)
     let didTapApplyButton = PublishRelay<Bool>()
     let dismiss = PublishRelay<Void>()
@@ -48,12 +47,11 @@ class PopOverSearchFilterViewModel: ViewModelType {
       })
       .disposed(by: disposeBag)
     
-    // TODO: - Need to be implemented
-//    input.updateKaraokeBrand
-//      .subscribe(onNext: { brand in
-//        
-//      })
-//      .disposed(by: disposeBag)
+    input.updateKaraokeBrand
+      .subscribe(onNext: { brand in
+        UserDefaultsManager.searchBrand = brand
+      })
+      .disposed(by: disposeBag)
     
     self.input = input
     self.output = output

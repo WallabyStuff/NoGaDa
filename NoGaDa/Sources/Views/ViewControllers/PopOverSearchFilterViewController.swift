@@ -100,6 +100,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   private func setupBrandSelector() {
     brandSelector.setSelectedTextColor(.black)
     brandSelector.setDefaultTextColor(.darkGray)
+    brandSelector.selectedSegmentIndex = UserDefaultsManager.searchBrand == .tj ? 0 : 1
   }
   
   

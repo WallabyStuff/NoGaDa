@@ -114,6 +114,8 @@
 		8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */; };
 		8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */; };
 		8E98D7902826DD5D0056CED4 /* UIbutton+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */; };
+		8EAEBD2A29D315A600FA51A4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAEBD2929D315A600FA51A4 /* UserDefaultsManager.swift */; };
+		8EAEBD2C29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */; };
 		8EB6ACFD2900465400076C25 /* String+KoreanPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */; };
 		8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */; };
 		8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */; };
@@ -258,6 +260,8 @@
 		8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurfaceAppearance+PanelShadow.swift"; sourceTree = "<group>"; };
 		8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+CenterAlign.swift"; sourceTree = "<group>"; };
 		8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIbutton+Padding.swift"; sourceTree = "<group>"; };
+		8EAEBD2929D315A600FA51A4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PropertyWrapper.swift"; sourceTree = "<group>"; };
 		8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+KoreanPolicy.swift"; sourceTree = "<group>"; };
 		8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewController.swift; sourceTree = "<group>"; };
 		8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewModel.swift; sourceTree = "<group>"; };
@@ -469,6 +473,7 @@
 				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
 				4953343A271204C4003F64DE /* SearchHistoryManager.swift */,
 				8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */,
+				8EAEBD2929D315A600FA51A4 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				8E661B7528D82D8E006D9116 /* Number+FloatType.swift */,
 				8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */,
 				8E3BF02229BEF90D007EB57A /* NotificaitonName+Default.swift */,
+				8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -895,6 +901,7 @@
 				49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */,
 				8E33F3FD2854978D00B6E6EE /* BaseViewController.swift in Sources */,
 				8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */,
+				8EAEBD2C29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift in Sources */,
 				8E33F3FF2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift in Sources */,
 				49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */,
 				49C6DC7A270381910094403B /* SettingItemTableViewCell.swift in Sources */,
@@ -931,6 +938,7 @@
 				8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */,
 				8E33F40228579C0C00B6E6EE /* AppBarHeight.swift in Sources */,
 				8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */,
+				8EAEBD2A29D315A600FA51A4 /* UserDefaultsManager.swift in Sources */,
 				8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */,
 				8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */,
 				49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */,

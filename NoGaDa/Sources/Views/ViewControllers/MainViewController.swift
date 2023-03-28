@@ -192,7 +192,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     brandSegmentedControl.focusedFontSize = Metric.brandSegmentedControlFontSize
     brandSegmentedControl.addItem(title: "tj 업데이트")
     brandSegmentedControl.addItem(title: "금영 업데이트")
-    brandSegmentedControl.setSelected(index: 0)
   }
   
   
