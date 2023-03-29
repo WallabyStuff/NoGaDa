@@ -752,7 +752,6 @@ struct _R {
         if UIKit.UIColor(named: "IconBasicSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconBasicSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIColor(named: "IconWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconWhite' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIColor(named: "TextTertiary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextTertiary' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIColor(named: "TextWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextWhite' is used in storyboard 'Main', but couldn't be loaded.") }
         if mainStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'mainStoryboard' could not be loaded from storyboard 'Main' as 'MainViewController'.") }
       }
@@ -785,6 +784,7 @@ struct _R {
         if UIKit.UIColor(named: "TextBasic", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBasic' is used in storyboard 'Search', but couldn't be loaded.") }
         if UIKit.UIColor(named: "TextBlack", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextBlack' is used in storyboard 'Search', but couldn't be loaded.") }
         if UIKit.UIColor(named: "TextSecondary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextSecondary' is used in storyboard 'Search', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextTertiary", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextTertiary' is used in storyboard 'Search', but couldn't be loaded.") }
         if UIKit.UIColor(named: "TextWhite", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextWhite' is used in storyboard 'Search', but couldn't be loaded.") }
         if popOverSearchFilterStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'popOverSearchFilterStoryboard' could not be loaded from storyboard 'Search' as 'PopOverSearchFilterViewController'.") }
         if searchHistoryStoryboard() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'searchHistoryStoryboard' could not be loaded from storyboard 'Search' as 'SearchHistoryViewController'.") }
