@@ -64,4 +64,34 @@ class SongTableViewCell: UITableViewCell {
     selectedView.layer.cornerRadius = Metric.selectedViewCornerRadius
     selectedBackgroundView = selectedView
   }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: Song, term: String = "") {
+    titleLabel.text = item.title
+    singerLabel.text = item.singer
+    songNumberLabel.text = "\(item.brand.localizedString) \(item.no)"
+    
+    highlightSearchTerm(term: term)
+  }
+  
+  public func highlightSearchTerm(term: String = "") {
+    let searchWithTitle = UserDefaultsManager.searchWithTitle
+    let searchWithSinger = UserDefaultsManager.searchWithSinger
+    
+    if searchWithTitle == true &&
+        searchWithSinger == true {
+      titleLabel.setAccentColor(string: term)
+      singerLabel.setAccentColor(string: term)
+    }
+    else if searchWithTitle == false &&
+              searchWithSinger == true {
+      singerLabel.setAccentColor(string: term)
+    }
+    else if searchWithTitle == true &&
+              searchWithSinger == false {
+      titleLabel.setAccentColor(string: term)
+    }
+  }
 }

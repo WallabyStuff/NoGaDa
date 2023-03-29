@@ -82,8 +82,8 @@ class SearchViewModel: ViewModelType {
     input.search
       .subscribe(onNext: { _ in
         // Show search filter if all search filters are toggled off
-        if SearchFilterItem.searchWithTitle.state == false &&
-            SearchFilterItem.searchWithSinger.state == false {
+        if UserDefaultsManager.searchWithTitle == false &&
+            UserDefaultsManager.searchWithSinger == false {
           output.isSearchFilterShowing.accept(true)
           return
         }

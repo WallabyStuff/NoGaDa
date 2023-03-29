@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import RxSwift
 
 class SearchFilterTableViewCell: UITableViewCell {
   
-  // MARK: - Cosntants
+  // MARK: - Constants
   
   static let identifier = R.reuseIdentifier.searchFilterTableCell.identifier
+  
+  
+  // MARK: - Properties
+  
+  private var disposeBag = DisposeBag()
+  private var item: (any SearchFilterItem)?
   
   
   // MARK: - UI
@@ -30,8 +37,8 @@ class SearchFilterTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     
-    titleLabel.text = ""
-    filterSwitch.isOn = true
+    titleLabel.text = item?.title
+    filterSwitch.isOn = item?.state ?? true
   }
   
   
@@ -39,5 +46,17 @@ class SearchFilterTableViewCell: UITableViewCell {
   
   private func setupView() {
     selectionStyle = .none
+  }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: SearchFilterItem) {
+    titleLabel.text = item.title
+    filterSwitch.isOn = item.state
+    filterSwitch.rx.controlEvent(.valueChanged)
+      .subscribe(onNext: { _ in
+        item.toggleState()
+      }).disposed(by: self.disposeBag)
   }
 }

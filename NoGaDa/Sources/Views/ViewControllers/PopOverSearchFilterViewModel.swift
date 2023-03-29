@@ -20,7 +20,10 @@ class PopOverSearchFilterViewModel: ViewModelType {
   }
   
   struct Output {
-    let searchFilterItems = BehaviorRelay<[SearchFilterItem]>(value: SearchFilterItem.allCases)
+    let searchFilterItems = BehaviorRelay<[SearchFilterItem]>(value: [
+      SearchWithTitleItem(),
+      SearchWithSingerItem()
+    ])
     let didTapApplyButton = PublishRelay<Bool>()
     let dismiss = PublishRelay<Void>()
   }
