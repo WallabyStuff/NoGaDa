@@ -222,13 +222,12 @@ extension PopUpSongOptionViewController: UITableViewDataSource, UITableViewDeleg
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let optionCell = tableView.dequeueReusableCell(withIdentifier: PopUpSongOptionTableViewCell.identifier, for: indexPath) as? PopUpSongOptionTableViewCell else { return UITableViewCell() }
-    
-    let optionModel = viewModel.optionAtIndex(indexPath)
-    optionCell.titleLabel.text = optionModel.title
-    optionCell.iconImageView.image = optionModel.icon
-    
-    return optionCell
+    guard let cell = tableView.dequeueReusableCell(
+      withIdentifier: PopUpSongOptionTableViewCell.identifier,
+      for: indexPath) as? PopUpSongOptionTableViewCell else { return UITableViewCell() }
+    let item = viewModel.optionAtIndex(indexPath)
+    cell.configure(item)
+    return cell
   }
 }
 

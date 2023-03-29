@@ -147,10 +147,10 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
   
   private func bindOutputs() {
     viewModel.output.folders
-      .bind(to: archiveFolderTableView.rx.items(cellIdentifier: PopUpArchiveFolderTableViewCell.identifier,
-                                                cellType: PopUpArchiveFolderTableViewCell.self)) { index, item, cell in
-        cell.titleLabel.text = item.title
-        cell.emojiLabel.text = item.titleEmoji
+      .bind(to: archiveFolderTableView.rx.items(
+        cellIdentifier: PopUpArchiveFolderTableViewCell.identifier,
+        cellType: PopUpArchiveFolderTableViewCell.self)) { _, item, cell in
+          cell.configure(item)
       }.disposed(by: disposeBag)
     
     viewModel.output.showingAddSongAlert

@@ -46,4 +46,12 @@ class PopUpSongOptionTableViewCell: UITableViewCell {
     selectionView.backgroundColor = R.color.backgroundBasicSelected()!
     selectedBackgroundView = selectionView
   }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: SongOption) {
+    titleLabel.text = item.title
+    iconImageView.image = item.icon
+  }
 }

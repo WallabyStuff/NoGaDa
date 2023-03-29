@@ -120,13 +120,11 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
       .bind(to: searchHistoryTableView.rx.items(
         cellIdentifier: SearchHistoryTableViewCell.identifier,
         cellType: SearchHistoryTableViewCell.self)) { [weak self] index, item, cell in
-        guard let self = self else { return }
-        
-        cell.titleLabel.text = item.keyword
-        cell.removeButtonTapAction = { [weak self] in
-          self?.viewModel.deleteHistory(index)
-        }
-      }.disposed(by: disposeBag)
+          guard let self = self else { return }
+          cell.configure(item) { [weak self] in
+            self?.viewModel.deleteHistory(index)
+          }
+        }.disposed(by: disposeBag)
     
     viewModel.output
       .searchHistories

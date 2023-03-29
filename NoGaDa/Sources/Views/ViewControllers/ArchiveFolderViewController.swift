@@ -188,10 +188,10 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   private func bindOutput() {
     viewModel.output.folders
-      .bind(to: archiveFolderTableView.rx.items(cellIdentifier: FolderTableViewCell.identifier,
-                                                cellType: FolderTableViewCell.self)) { index, item, cell in
-        cell.titleEmojiLabel.text = item.titleEmoji
-        cell.titleLabel.text = item.title
+      .bind(to: archiveFolderTableView.rx.items(
+        cellIdentifier: FolderTableViewCell.identifier,
+        cellType: FolderTableViewCell.self)) { _, item, cell in
+          cell.configure(item)
       }.disposed(by: disposeBag)
     
     viewModel.output.showingAddFolderVC

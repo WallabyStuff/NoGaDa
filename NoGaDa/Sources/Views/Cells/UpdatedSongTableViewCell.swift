@@ -66,4 +66,13 @@ class UpdatedSongTableViewCell: UITableViewCell {
     selectedView.layer.cornerRadius = Metric.selectedViewCornerRadius
     selectedBackgroundView = selectedView
   }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: Song) {
+    songTitleLabel.text = item.title
+    songNumberLabel.text = item.no
+    singerLabel.text = item.singer
+  }
 }
