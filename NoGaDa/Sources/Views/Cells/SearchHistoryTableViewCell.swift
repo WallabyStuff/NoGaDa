@@ -23,7 +23,7 @@ class SearchHistoryTableViewCell: UITableViewCell {
   // MARK: - Properties
   
   private var disposeBag = DisposeBag()
-  public var removeButtonTapAction: () -> Void = {}
+  private var removeButtonActionHandler: (() -> Void)? = nil
   
   
   // MARK: - UI
@@ -66,7 +66,15 @@ class SearchHistoryTableViewCell: UITableViewCell {
   private func bind() {
     removeButton.rx.tap
       .bind(onNext: { [weak self] in
-        self?.removeButtonTapAction()
+        self?.removeButtonActionHandler?()
       }).disposed(by: disposeBag)
+  }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: SearchHistory, removeButtonActionHandler: (() -> Void)? = nil) {
+    self.removeButtonActionHandler = removeButtonActionHandler
+    titleLabel.text = item.keyword
   }
 }
