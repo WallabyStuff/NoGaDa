@@ -52,6 +52,14 @@ class FolderTableViewCell: UITableViewCell {
     cellContentView.layer.borderColor = R.color.lineBasic()!.cgColor
     cellContentView.layer.cornerRadius = Metric.cellContentViewCornerRadius
   }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: ArchiveFolder) {
+    titleEmojiLabel.text = item.titleEmoji
+    titleLabel.text = item.title
+  }
 }
 
 
