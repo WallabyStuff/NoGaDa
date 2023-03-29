@@ -231,12 +231,12 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   
   private func bindOutputs() {
     viewModel.output.archiveSongs
-      .bind(to: archiveSongTableView.rx.items(cellIdentifier: SongTableViewCell.identifier, cellType: SongTableViewCell.self)) { index, item, cell in
-        cell.titleLabel.text = item.title
-        cell.singerLabel.text = item.singer
-        cell.songNumberLabel.text = "\(item.brand) \(item.no)"
-      }
-      .disposed(by: disposeBag)
+      .bind(to: archiveSongTableView.rx.items(
+        cellIdentifier: SongTableViewCell.identifier,
+        cellType: SongTableViewCell.self)) { _, item, cell in
+          cell.configure(item.asSongType())
+        }
+        .disposed(by: disposeBag)
     
     viewModel.output.dismiss
       .asDriver(onErrorDriveWith: .never())
