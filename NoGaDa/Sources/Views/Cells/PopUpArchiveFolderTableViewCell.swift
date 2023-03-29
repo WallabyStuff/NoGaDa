@@ -51,4 +51,12 @@ class PopUpArchiveFolderTableViewCell: UITableViewCell {
     selectionView.backgroundColor = R.color.accentYellowDark()!
     self.selectedBackgroundView = selectionView
   }
+  
+  
+  // MARK: - Methods
+  
+  public func configure(_ item: ArchiveFolder) {
+    titleLabel.text = item.title
+    emojiLabel.text = item.titleEmoji
+  }
 }
