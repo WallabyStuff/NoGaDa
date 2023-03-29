@@ -131,17 +131,11 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   
   private func bindOutput() {
     viewModel.output.searchFilterItems
-      .bind(to: searchFilterTableView.rx.items(cellIdentifier: SearchFilterTableViewCell.identifier,
-                                               cellType: SearchFilterTableViewCell.self)) { [weak self] index, item, cell in
-        guard let self = self else { return }
-        
-        cell.titleLabel.text = item.title
-        cell.filterSwitch.isOn = item.state
-        cell.filterSwitch.rx.controlEvent(.valueChanged)
-          .subscribe(with: self, onNext: { vc, _ in
-            UserDefaults.standard.set(!item.state, forKey: item.userDefaultKey)
-          }).disposed(by: self.disposeBag)
-      }.disposed(by: disposeBag)
+      .bind(to: searchFilterTableView.rx.items(
+        cellIdentifier: SearchFilterTableViewCell.identifier,
+        cellType: SearchFilterTableViewCell.self)) { index, item, cell in
+          cell.configure(item)
+        }.disposed(by: disposeBag)
     
     viewModel.output.didTapApplyButton
       .asDriver(onErrorDriveWith: .never())

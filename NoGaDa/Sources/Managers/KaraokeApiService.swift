@@ -136,9 +136,13 @@ class KaraokeApiService {
     return Single.create { [weak self] observer in
       guard let self = self else { return Disposables.create() }
 
-      if SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
+      if UserDefaultsManager.searchWithTitle == true &&
+          UserDefaultsManager.searchWithSinger == true {
         // Search with singer & title
-        Observable.combineLatest(fetchWithTitle, fetchWithSinger, resultSelector: { resultWithTitle, resultWithSinger in
+        Observable.combineLatest(
+          fetchWithTitle,
+          fetchWithSinger,
+          resultSelector: { resultWithTitle, resultWithSinger in
           return Array(Set(resultWithTitle).union(Set(resultWithSinger))).sorted{ $0.title < $1.title }
         }).subscribe(onNext: { combinedSongResultList in
           observer(.success(combinedSongResultList))
@@ -146,7 +150,9 @@ class KaraokeApiService {
           observer(.failure(error))
         }).disposed(by: self.disposeBag)
         
-      } else if SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
+      }
+      else if UserDefaultsManager.searchWithTitle == true &&
+                UserDefaultsManager.searchWithSinger == false {
         // Search with title
         fetchWithTitle
           .subscribe(onNext: { songs in
@@ -156,7 +162,9 @@ class KaraokeApiService {
           })
           .disposed(by: self.disposeBag)
         
-      } else {
+      }
+      else if UserDefaultsManager.searchWithTitle == false &&
+                UserDefaultsManager.searchWithSinger == true {
         // Search with singer
         fetchWithSinger
           .subscribe(onNext: { songs in

@@ -146,22 +146,11 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
       .bind(to: searchResultTableView.rx.items(
         cellIdentifier: SongTableViewCell.identifier,
         cellType: SongTableViewCell.self)) { [weak self] index, item, cell in
-        guard let self = self else { return }
-        let searchKeyword = self.viewModel.searchKeyword
-        
-        cell.titleLabel.text = item.title
-        cell.singerLabel.text = item.singer
-        cell.songNumberLabel.text = "\(item.brand.localizedString) \(item.no)"
-        
-        if !SearchFilterItem.searchWithTitle.state && SearchFilterItem.searchWithSinger.state {
-          cell.singerLabel.setAccentColor(string: searchKeyword)
-        } else if SearchFilterItem.searchWithTitle.state && !SearchFilterItem.searchWithSinger.state {
-          cell.titleLabel.setAccentColor(string: searchKeyword)
-        } else {
-          cell.titleLabel.setAccentColor(string: searchKeyword)
-          cell.singerLabel.setAccentColor(string: searchKeyword)
+          guard let self = self else { return }
+          let searchTerm = self.viewModel.searchKeyword
+          cell.configure(item, term: searchTerm)
         }
-      }.disposed(by: disposeBag)
+        .disposed(by: disposeBag)
     
     viewModel.output
       .didSelectSongItem
