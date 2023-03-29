@@ -300,12 +300,12 @@ class MainViewController: BaseViewController, ViewModelInjectable {
       .disposed(by: disposeBag)
     
     viewModel.output.newUpdateSongs
-      .bind(to: newUpdateSongTableView.rx.items(cellIdentifier: UpdatedSongTableViewCell.identifier, cellType: UpdatedSongTableViewCell.self)) { index, song, cell in
-        cell.songTitleLabel.text = song.title
-        cell.songNumberLabel.text = song.no
-        cell.singerLabel.text = song.singer
-      }
-      .disposed(by: disposeBag)
+      .bind(to: newUpdateSongTableView.rx.items(
+        cellIdentifier: UpdatedSongTableViewCell.identifier,
+        cellType: UpdatedSongTableViewCell.self)) { index, item, cell in
+          cell.configure(item)
+        }
+        .disposed(by: disposeBag)
     
     viewModel.output.isLoadingNewUpdateSongs
       .asDriver()
