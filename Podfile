@@ -1,27 +1,45 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-  use_frameworks!
+platform :ios, '13.0'
+use_frameworks!
 
 target 'NoGaDa' do
-  # Comment the next line if you don't want to use dynamic frameworks
-
   # Pods for NoGaDa
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'RxGesture'
-  pod 'Hero', '1.6.0'
-  pod 'FloatingPanel'
+  # Rx
+  pod 'RxSwift',            '~> 6.5.0'
+  pod 'RxCocoa',            '~> 6.5.0'
+  pod 'RxGesture',          '~> 4.0.4'
+  
+  # UI
+  pod 'Hero',               '~> 1.6.2'
+  pod 'FloatingPanel',      '~> 2.6.0'
+  pod 'SafeAreaBrush',      '~> 1.0.4'
+  pod 'BISegmentedControl', '~> 0.1.1'
+  pod 'SwiftRater',         '~> 2.1.0'
+  
+  # Database
   pod 'RealmSwift'
+  
+  # AdMob
   pod 'Google-Mobile-Ads-SDK'
-  pod 'SwiftRater'
- 
+  
+  # Conventions
+  pod 'R.swift',            '~> 7.2.4'
+  
   target 'NoGaDaTests' do
     inherit! :search_paths
     # Pods for testing
   end
-
+  
   target 'NoGaDaUITests' do
     # Pods for testing
   end
+  
+end
 
+# Limit minimum deployment target version
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
 end

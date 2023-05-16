@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		393B6C42BDC08B5C64170379 /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFF6C2C4282DE5B487B8D08 /* Pods_NoGaDa_NoGaDaUITests.framework */; };
+		461683717C7501E28C67266C /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85329178414729E8C29EE6DF /* Pods_NoGaDaTests.framework */; };
 		491A6D062707026C00E41D5B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 491A6D082707026C00E41D5B /* InfoPlist.strings */; };
 		491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */; };
 		493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */; };
 		493576C026F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */; };
-		493BCBE026F4B2890096422A /* PopUpArchiveFolderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBDF26F4B2890096422A /* PopUpArchiveFolderListViewController.swift */; };
+		493BCBE026F4B2890096422A /* PopUpArchiveFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBDF26F4B2890096422A /* PopUpArchiveFolderViewController.swift */; };
 		493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */; };
 		493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */; };
 		493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493BCBE826F4CEA10096422A /* SongTableViewCell.swift */; };
@@ -25,9 +25,8 @@
 		49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFB2720766100EC12B3 /* SearchViewModel.swift */; };
 		49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */; };
 		49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */; };
-		49484D022720B6D500EC12B3 /* ArchiveFolderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D012720B6D500EC12B3 /* ArchiveFolderListViewModel.swift */; };
-		49484D042720BD7D00EC12B3 /* ArchiveSongListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D032720BD7D00EC12B3 /* ArchiveSongListViewModel.swift */; };
-		4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */; };
+		49484D022720B6D500EC12B3 /* ArchiveFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */; };
+		49484D042720BD7D00EC12B3 /* ArchiveSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */; };
 		495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334302711DE37003F64DE /* SearchResultViewController.swift */; };
 		495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334322711DE4B003F64DE /* SearchHistoryViewController.swift */; };
 		495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */; };
@@ -42,24 +41,22 @@
 		4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4956CE2F26F467060007523B /* LaunchScreen.storyboard */; };
 		4956CE3C26F467060007523B /* NoGaDaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE3B26F467060007523B /* NoGaDaTests.swift */; };
 		4956CE4726F467060007523B /* NoGaDaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE4626F467060007523B /* NoGaDaUITests.swift */; };
-		4956CE5926F476450007523B /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5826F476450007523B /* ColorSet.swift */; };
 		4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5C26F4940A0007523B /* SearchViewController.swift */; };
-		4956CE5F26F494730007523B /* ArchiveFolderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveFolderListViewController.swift */; };
-		4956CE6126F494870007523B /* ArchiveSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongListViewController.swift */; };
+		4956CE5F26F494730007523B /* ArchiveFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */; };
+		4956CE6126F494870007523B /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
 		4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6226F494990007523B /* AddFolderViewController.swift */; };
-		496BE2AF27173D5300CFD96D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496BE2AE27173D5300CFD96D /* SplashView.swift */; };
-		4989A72626F8863C00A98B63 /* KaraokeApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */; };
+		4989A72626F8863C00A98B63 /* KaraokeApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4989A72526F8863C00A98B63 /* KaraokeApiService.swift */; };
 		4992C7622721B3D6006045FF /* AddFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7612721B3D6006045FF /* AddFolderViewModel.swift */; };
-		4992C7642721B86F006045FF /* PopUpArchiveFolderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7632721B86F006045FF /* PopUpArchiveFolderListViewModel.swift */; };
+		4992C7642721B86F006045FF /* PopUpArchiveFolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */; };
 		4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */; };
 		4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */; };
 		4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997CFD6270471CB005F0D85 /* ResourceItem.swift */; };
 		4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */; };
-		49C6DC33270298E30094403B /* AppbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppbarView.swift */; };
+		49C6DC33270298E30094403B /* AppBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC32270298E30094403B /* AppBarView.swift */; };
 		49C6DC75270372F40094403B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC74270372F40094403B /* SettingViewController.swift */; };
-		49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */; };
-		49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */; };
-		49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC7C270382620094403B /* SettingEtcItem.swift */; };
+		49C6DC7A270381910094403B /* SettingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC78270381910094403B /* SettingItemTableViewCell.swift */; };
+		49C6DC7B270381910094403B /* SettingItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C6DC79270381910094403B /* SettingItemTableViewCell.xib */; };
+		49C6DC7D270382620094403B /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6DC7C270382620094403B /* SettingItem.swift */; };
 		49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */; };
 		49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */; };
 		49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B126FC68F30024C5F9 /* Song.swift */; };
@@ -67,18 +64,30 @@
 		49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */; };
 		49D1D6B826FC6C0E0024C5F9 /* ArchiveFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */; };
 		49D1D6BC26FC70720024C5F9 /* SongFolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */; };
-		49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */; };
-		49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */; };
 		49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */; };
 		49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */; };
 		49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6EB5A270E0F3200610383 /* AdMobManager.swift */; };
 		49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FB0D0927038DED00AE3A9F /* CreditViewController.swift */; };
-		8153FCF94A99DFA2D72D5FB3 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */; };
+		5C8F797F27E6BFD7151CF9BE /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 858D76BDAE9106A74A54E4ED /* Pods_NoGaDa_NoGaDaUITests.framework */; };
 		8E03595D27D799B9006A77CA /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03595C27D799B9006A77CA /* Setting.storyboard */; };
 		8E03596127D79F43006A77CA /* Archive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596027D79F43006A77CA /* Archive.storyboard */; };
 		8E03596327D79F8C006A77CA /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596227D79F8C006A77CA /* Search.storyboard */; };
 		8E03596527D7A25C006A77CA /* Folder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E03596427D7A25C006A77CA /* Folder.storyboard */; };
 		8E14E8EB27D49E2D008F18B8 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */; };
+		8E25076428D1EB3300756AB1 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */; };
+		8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */; };
+		8E25076828D1ED3400756AB1 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25076728D1ED3400756AB1 /* SettingViewModel.swift */; };
+		8E33F3F828546F7000B6E6EE /* ViewModelInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */; };
+		8E33F3FB28547C7200B6E6EE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FA28547C7200B6E6EE /* R.generated.swift */; };
+		8E33F3FD2854978D00B6E6EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */; };
+		8E33F3FF2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */; };
+		8E33F4002857980500B6E6EE /* ArchiveSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956CE6026F494870007523B /* ArchiveSongViewController.swift */; };
+		8E33F40228579C0C00B6E6EE /* AppBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F40128579C0C00B6E6EE /* AppBarHeight.swift */; };
+		8E3BF02329BEF90D007EB57A /* NotificaitonName+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BF02229BEF90D007EB57A /* NotificaitonName+Default.swift */; };
+		8E3CE86D28B251A100C3DD27 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */; };
+		8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */; };
+		8E3CE87328B2776F00C3DD27 /* BISegmentedControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */; };
+		8E661B7628D82D8E006D9116 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E661B7528D82D8E006D9116 /* Number+FloatType.swift */; };
 		8E6C95DE276797D100667C01 /* PopUpSongOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */; };
 		8E6C95E027679BB400667C01 /* SongOptionFloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */; };
 		8E6C95E22767A8F900667C01 /* SongOptionFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6C95E12767A8F900667C01 /* SongOptionFloatingPanelLayout.swift */; };
@@ -90,23 +99,29 @@
 		8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70392F275F466D001D10A6 /* AddSongViewModel.swift */; };
 		8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */; };
 		8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E703933275FECE3001D10A6 /* CreditViewModel.swift */; };
+		8E79DC4128BB73B0000B4874 /* AnimateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4028BB73B0000B4874 /* AnimateButton.swift */; };
+		8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */; };
+		8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4428BB7858000B4874 /* AnimateView.swift */; };
+		8E79DC4928BDF1D8000B4874 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */; };
+		8E79DC4B28BFCFF0000B4874 /* DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */; };
 		8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */; };
 		8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */; };
 		8E98D77D2826DB380056CED4 /* UILabel+AccentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */; };
 		8E98D77F2826DB830056CED4 /* UISegmentedControl+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D77E2826DB830056CED4 /* UISegmentedControl+Focus.swift */; };
 		8E98D7812826DBA60056CED4 /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7802826DBA60056CED4 /* UITextField+Padding.swift */; };
 		8E98D7842826DBD40056CED4 /* UITextField+PlaceholderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7832826DBD40056CED4 /* UITextField+PlaceholderColor.swift */; };
-		8E98D7882826DCC80056CED4 /* UIView+StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7872826DCC80056CED4 /* UIView+StatusBar.swift */; };
 		8E98D78A2826DD000056CED4 /* UIView+Decorate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D7892826DD000056CED4 /* UIView+Decorate.swift */; };
 		8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */; };
 		8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */; };
 		8E98D7902826DD5D0056CED4 /* UIbutton+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */; };
-		8EF0500C2826D87700166223 /* SafeAreaInsetes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF0500B2826D87700166223 /* SafeAreaInsetes.swift */; };
+		8EAEBD2A29D315A600FA51A4 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAEBD2929D315A600FA51A4 /* UserDefaultsManager.swift */; };
+		8EAEBD2C29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */; };
+		8EB6ACFD2900465400076C25 /* String+KoreanPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */; };
 		8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */; };
 		8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */; };
 		8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */; };
 		8EFA4D902786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */; };
-		C69D67261F6FF37CF9B86903 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE908B65C08BA3AFF5EA0DAD /* Pods_NoGaDa.framework */; };
+		8FE883F263C4A53CE2EF7B3D /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F4F8954EB91444969051B1 /* Pods_NoGaDa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,8 +142,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2C6CC7D817FF235750F4D014 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		48DCC73032651C543E666C7C /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		01E1F44977FBE85E81D2BDC7 /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
+		44A645E470148090EBAAC120 /* Pods-NoGaDaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		473EFA2A67E0D8FA9AB6C940 /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
 		491A6D022707021600E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		491A6D032707021600E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		491A6D072707026C00E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -136,7 +152,7 @@
 		491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderTableViewCell.swift; sourceTree = "<group>"; };
 		493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpArchiveFolderTableViewCell.xib; sourceTree = "<group>"; };
-		493BCBDF26F4B2890096422A /* PopUpArchiveFolderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderListViewController.swift; sourceTree = "<group>"; };
+		493BCBDF26F4B2890096422A /* PopUpArchiveFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderViewController.swift; sourceTree = "<group>"; };
 		493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderTableViewCell.xib; sourceTree = "<group>"; };
 		493BCBE826F4CEA10096422A /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
@@ -149,9 +165,8 @@
 		49484CFB2720766100EC12B3 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
-		49484D012720B6D500EC12B3 /* ArchiveFolderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderListViewModel.swift; sourceTree = "<group>"; };
-		49484D032720BD7D00EC12B3 /* ArchiveSongListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongListViewModel.swift; sourceTree = "<group>"; };
-		4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BISegmentedControl.swift; sourceTree = "<group>"; };
+		49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderViewModel.swift; sourceTree = "<group>"; };
+		49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongViewModel.swift; sourceTree = "<group>"; };
 		495334302711DE37003F64DE /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		495334322711DE4B003F64DE /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,24 +187,22 @@
 		4956CE4226F467060007523B /* NoGaDaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoGaDaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4956CE4626F467060007523B /* NoGaDaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoGaDaUITests.swift; sourceTree = "<group>"; };
 		4956CE4826F467060007523B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4956CE5826F476450007523B /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		4956CE5C26F4940A0007523B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		4956CE5E26F494730007523B /* ArchiveFolderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderListViewController.swift; sourceTree = "<group>"; };
-		4956CE6026F494870007523B /* ArchiveSongListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongListViewController.swift; sourceTree = "<group>"; };
+		4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderViewController.swift; sourceTree = "<group>"; };
+		4956CE6026F494870007523B /* ArchiveSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSongViewController.swift; sourceTree = "<group>"; };
 		4956CE6226F494990007523B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
-		496BE2AE27173D5300CFD96D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeApiManager.swift; sourceTree = "<group>"; };
+		4989A72526F8863C00A98B63 /* KaraokeApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeApiService.swift; sourceTree = "<group>"; };
 		4992C7612721B3D6006045FF /* AddFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewModel.swift; sourceTree = "<group>"; };
-		4992C7632721B86F006045FF /* PopUpArchiveFolderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderListViewModel.swift; sourceTree = "<group>"; };
+		4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpArchiveFolderViewModel.swift; sourceTree = "<group>"; };
 		4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconResourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconResourceCollectionViewCell.xib; sourceTree = "<group>"; };
 		4997CFD6270471CB005F0D85 /* ResourceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceItem.swift; sourceTree = "<group>"; };
 		4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderShortcutView.swift; sourceTree = "<group>"; };
-		49C6DC32270298E30094403B /* AppbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppbarView.swift; sourceTree = "<group>"; };
+		49C6DC32270298E30094403B /* AppBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarView.swift; sourceTree = "<group>"; };
 		49C6DC74270372F40094403B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcTableViewCell.swift; sourceTree = "<group>"; };
-		49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingEtcTableViewCell.xib; sourceTree = "<group>"; };
-		49C6DC7C270382620094403B /* SettingEtcItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEtcItem.swift; sourceTree = "<group>"; };
+		49C6DC78270381910094403B /* SettingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemTableViewCell.swift; sourceTree = "<group>"; };
+		49C6DC79270381910094403B /* SettingItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingItemTableViewCell.xib; sourceTree = "<group>"; };
+		49C6DC7C270382620094403B /* SettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItem.swift; sourceTree = "<group>"; };
 		49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrand.swift; sourceTree = "<group>"; };
 		49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeAPIErrMessage.swift; sourceTree = "<group>"; };
 		49D1D6B126FC68F30024C5F9 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -197,19 +210,31 @@
 		49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSong.swift; sourceTree = "<group>"; };
 		49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolder.swift; sourceTree = "<group>"; };
 		49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFolderManager.swift; sourceTree = "<group>"; };
-		49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterTableViewCell.swift; sourceTree = "<group>"; };
-		49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
 		49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterItem.swift; sourceTree = "<group>"; };
 		49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewController.swift; sourceTree = "<group>"; };
 		49E6EB5A270E0F3200610383 /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
 		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
-		535D138E38520FF8441D8FDC /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
-		67EF086622F185807A9B411D /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
+		79D2AA8F9CEBBC0C26AE9B3C /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		85329178414729E8C29EE6DF /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		858D76BDAE9106A74A54E4ED /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E03595C27D799B9006A77CA /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		8E03596027D79F43006A77CA /* Archive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Archive.storyboard; sourceTree = "<group>"; };
 		8E03596227D79F8C006A77CA /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		8E03596427D7A25C006A77CA /* Folder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Folder.storyboard; sourceTree = "<group>"; };
 		8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
+		8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
+		8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterTableViewCell.swift; sourceTree = "<group>"; };
+		8E25076728D1ED3400756AB1 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelInjectable.swift; sourceTree = "<group>"; };
+		8E33F3FA28547C7200B6E6EE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewModel.swift; sourceTree = "<group>"; };
+		8E33F40128579C0C00B6E6EE /* AppBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarHeight.swift; sourceTree = "<group>"; };
+		8E3BF02229BEF90D007EB57A /* NotificaitonName+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificaitonName+Default.swift"; sourceTree = "<group>"; };
+		8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BISegmentedControl+Rx.swift"; sourceTree = "<group>"; };
+		8E661B7528D82D8E006D9116 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
 		8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSongOptionViewController.swift; sourceTree = "<group>"; };
 		8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOptionFloatingPanelView.swift; sourceTree = "<group>"; };
 		8E6C95E12767A8F900667C01 /* SongOptionFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOptionFloatingPanelLayout.swift; sourceTree = "<group>"; };
@@ -221,27 +246,31 @@
 		8E70392F275F466D001D10A6 /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
 		8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightingTextfield.swift; sourceTree = "<group>"; };
 		8E703933275FECE3001D10A6 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
+		8E79DC4028BB73B0000B4874 /* AnimateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateButton.swift; sourceTree = "<group>"; };
+		8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TapScaleAnimation.swift"; sourceTree = "<group>"; };
+		8E79DC4428BB7858000B4874 /* AnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
+		8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKey.swift; sourceTree = "<group>"; };
 		8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ScrollToTop.swift"; sourceTree = "<group>"; };
 		8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Toggle.swift"; sourceTree = "<group>"; };
 		8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+AccentColor.swift"; sourceTree = "<group>"; };
 		8E98D77E2826DB830056CED4 /* UISegmentedControl+Focus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Focus.swift"; sourceTree = "<group>"; };
 		8E98D7802826DBA60056CED4 /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
 		8E98D7832826DBD40056CED4 /* UITextField+PlaceholderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+PlaceholderColor.swift"; sourceTree = "<group>"; };
-		8E98D7872826DCC80056CED4 /* UIView+StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+StatusBar.swift"; sourceTree = "<group>"; };
 		8E98D7892826DD000056CED4 /* UIView+Decorate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Decorate.swift"; sourceTree = "<group>"; };
 		8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SurfaceAppearance+PanelShadow.swift"; sourceTree = "<group>"; };
 		8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+CenterAlign.swift"; sourceTree = "<group>"; };
 		8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIbutton+Padding.swift"; sourceTree = "<group>"; };
-		8EF0500B2826D87700166223 /* SafeAreaInsetes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInsetes.swift; sourceTree = "<group>"; };
+		8EAEBD2929D315A600FA51A4 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PropertyWrapper.swift"; sourceTree = "<group>"; };
+		8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+KoreanPolicy.swift"; sourceTree = "<group>"; };
 		8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewController.swift; sourceTree = "<group>"; };
 		8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewModel.swift; sourceTree = "<group>"; };
 		8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerTableViewCell.swift; sourceTree = "<group>"; };
 		8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KaraokeBrandPickerTableViewCell.xib; sourceTree = "<group>"; };
-		9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		992C5409F902D4E2EB68D8D7 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
-		9AFF6C2C4282DE5B487B8D08 /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE908B65C08BA3AFF5EA0DAD /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD3B8FA9B5169E105270B6BC /* Pods-NoGaDaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6F4F8954EB91444969051B1 /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B87FA080BAAD2F4D4F8831B0 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
+		D0F38766027A7A7C454C4446 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C69D67261F6FF37CF9B86903 /* Pods_NoGaDa.framework in Frameworks */,
+				8FE883F263C4A53CE2EF7B3D /* Pods_NoGaDa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8153FCF94A99DFA2D72D5FB3 /* Pods_NoGaDaTests.framework in Frameworks */,
+				461683717C7501E28C67266C /* Pods_NoGaDaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,72 +294,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				393B6C42BDC08B5C64170379 /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */,
+				5C8F797F27E6BFD7151CF9BE /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		33FECC2836EA2BC200C4A8B1 /* Frameworks */ = {
+		34AE40E04D6DF58D3CF80B84 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE908B65C08BA3AFF5EA0DAD /* Pods_NoGaDa.framework */,
-				9AFF6C2C4282DE5B487B8D08 /* Pods_NoGaDa_NoGaDaUITests.framework */,
-				9777A66B14CDFCBDFE6AE3BB /* Pods_NoGaDaTests.framework */,
+				B6F4F8954EB91444969051B1 /* Pods_NoGaDa.framework */,
+				858D76BDAE9106A74A54E4ED /* Pods_NoGaDa_NoGaDaUITests.framework */,
+				85329178414729E8C29EE6DF /* Pods_NoGaDaTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		491C19BF271D89EC00D4DEB9 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */,
-				49484CFB2720766100EC12B3 /* SearchViewModel.swift */,
-				49484D012720B6D500EC12B3 /* ArchiveFolderListViewModel.swift */,
-				49484D032720BD7D00EC12B3 /* ArchiveSongListViewModel.swift */,
-				4992C7612721B3D6006045FF /* AddFolderViewModel.swift */,
-				4992C7632721B86F006045FF /* PopUpArchiveFolderListViewModel.swift */,
-				49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */,
-				49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */,
-				8E6C95E82767B37B00667C01 /* PopUpSongOptionViewModel.swift */,
-				8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		493BCBE126F4BAC00096422A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */,
 				493BCBE326F4BAEF0096422A /* FolderTableViewCell.swift */,
+				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
 				493BCBE826F4CEA10096422A /* SongTableViewCell.swift */,
+				493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */,
 				493BCBEE26F4EBCF0096422A /* UpdatedSongTableViewCell.swift */,
+				8E6C95E52767B18500667C01 /* PopUpSongOptionTableViewCell.xib */,
 				493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */,
-				49D4CD4826F9E25B000D2E28 /* SearchFilterTableViewCell.swift */,
-				49C6DC78270381910094403B /* SettingEtcTableViewCell.swift */,
+				49C6DC79270381910094403B /* SettingItemTableViewCell.xib */,
+				49C6DC78270381910094403B /* SettingItemTableViewCell.swift */,
+				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
 				4997CFD22704705B005F0D85 /* IconResourceCollectionViewCell.swift */,
+				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
 				495334342711FE75003F64DE /* SearchHistoryTableViewCell.swift */,
+				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
 				8E6C95E42767B18500667C01 /* PopUpSongOptionTableViewCell.swift */,
+				8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */,
 				8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */,
+				8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */,
+				8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		493BCBE226F4BAC30096422A /* Celld */ = {
-			isa = PBXGroup;
-			children = (
-				493BCBEF26F4EBCF0096422A /* UpdatedSongTableViewCell.xib */,
-				493BCBE426F4BAEF0096422A /* FolderTableViewCell.xib */,
-				493BCBE926F4CEA10096422A /* SongTableViewCell.xib */,
-				493576BE26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.xib */,
-				8E6C95E52767B18500667C01 /* PopUpSongOptionTableViewCell.xib */,
-				49D4CD4926F9E25B000D2E28 /* SearchFilterTableViewCell.xib */,
-				49C6DC79270381910094403B /* SettingEtcTableViewCell.xib */,
-				4997CFD32704705B005F0D85 /* IconResourceCollectionViewCell.xib */,
-				495334352711FE75003F64DE /* SearchHistoryTableViewCell.xib */,
-				8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */,
-			);
-			path = Celld;
 			sourceTree = "<group>";
 		};
 		4956CE1826F467040007523B = {
@@ -341,7 +346,7 @@
 				4956CE4526F467060007523B /* NoGaDaUITests */,
 				4956CE2226F467040007523B /* Products */,
 				92EF67CED36C18763E116A46 /* Pods */,
-				33FECC2836EA2BC200C4A8B1 /* Frameworks */,
+				34AE40E04D6DF58D3CF80B84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -382,39 +387,57 @@
 			path = NoGaDaUITests;
 			sourceTree = "<group>";
 		};
-		4956CE5426F469E30007523B /* Controllers */ = {
+		4956CE5426F469E30007523B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */,
+				8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */,
+				8E79DC4828BDF1D8000B4874 /* SplashViewController.swift */,
 				4956CE2826F467040007523B /* MainViewController.swift */,
+				491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */,
 				4956CE5C26F4940A0007523B /* SearchViewController.swift */,
-				4956CE5E26F494730007523B /* ArchiveFolderListViewController.swift */,
-				4956CE6026F494870007523B /* ArchiveSongListViewController.swift */,
+				49484CFB2720766100EC12B3 /* SearchViewModel.swift */,
+				4956CE5E26F494730007523B /* ArchiveFolderViewController.swift */,
+				49484D012720B6D500EC12B3 /* ArchiveFolderViewModel.swift */,
+				4956CE6026F494870007523B /* ArchiveSongViewController.swift */,
+				49484D032720BD7D00EC12B3 /* ArchiveSongViewModel.swift */,
 				4956CE6226F494990007523B /* AddFolderViewController.swift */,
-				493BCBDF26F4B2890096422A /* PopUpArchiveFolderListViewController.swift */,
+				4992C7612721B3D6006045FF /* AddFolderViewModel.swift */,
+				493BCBDF26F4B2890096422A /* PopUpArchiveFolderViewController.swift */,
+				4992C7632721B86F006045FF /* PopUpArchiveFolderViewModel.swift */,
 				49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */,
+				8E33F3FE2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift */,
 				49C6DC74270372F40094403B /* SettingViewController.swift */,
+				8E25076728D1ED3400756AB1 /* SettingViewModel.swift */,
 				49FB0D0927038DED00AE3A9F /* CreditViewController.swift */,
+				8E703933275FECE3001D10A6 /* CreditViewModel.swift */,
 				495334302711DE37003F64DE /* SearchResultViewController.swift */,
+				49484CFD2720791900EC12B3 /* SearchResultViewModel.swift */,
 				495334322711DE4B003F64DE /* SearchHistoryViewController.swift */,
+				49484CFF2720880400EC12B3 /* SearchHistoryViewModel.swift */,
 				8E70392D275F2D15001D10A6 /* AddSongViewController.swift */,
+				8E70392F275F466D001D10A6 /* AddSongViewModel.swift */,
 				8E6C95DD276797D100667C01 /* PopUpSongOptionViewController.swift */,
+				8E6C95E82767B37B00667C01 /* PopUpSongOptionViewModel.swift */,
 				8EFA4D7C2784B015009A8256 /* KaraokeBrandPickerViewController.swift */,
-				493BCBE126F4BAC00096422A /* Cells */,
+				8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		4956CE5526F469F00007523B /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
-				4950FEAA26FB9E9F0093B553 /* BISegmentedControl.swift */,
-				49C6DC32270298E30094403B /* AppbarView.swift */,
+				49C6DC32270298E30094403B /* AppBarView.swift */,
 				4997D01627059FD3005F0D85 /* ArchiveFolderShortcutView.swift */,
 				493F232D270DEA4700A618DC /* ArchiveFolderFloatingPanelView.swift */,
-				496BE2AE27173D5300CFD96D /* SplashView.swift */,
 				8E703931275FA59B001D10A6 /* HighlightingTextfield.swift */,
 				8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */,
+				8E79DC4028BB73B0000B4874 /* AnimateButton.swift */,
+				8E79DC4428BB7858000B4874 /* AnimateView.swift */,
+				4956CE5426F469E30007523B /* ViewControllers */,
+				493BCBE126F4BAC00096422A /* Cells */,
 				4956CE5726F469FA0007523B /* Storyboards */,
 				8E6C95E32767A90200667C01 /* FloatingPanelLayouts */,
 			);
@@ -424,9 +447,8 @@
 		4956CE5626F469F30007523B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4956CE5826F476450007523B /* ColorSet.swift */,
 				49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */,
-				49C6DC7C270382620094403B /* SettingEtcItem.swift */,
+				49C6DC7C270382620094403B /* SettingItem.swift */,
 				49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */,
 				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
 				49D1D6B126FC68F30024C5F9 /* Song.swift */,
@@ -435,9 +457,8 @@
 				49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */,
 				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
 				4953343E2712C503003F64DE /* SearchHistory.swift */,
-				8E70392F275F466D001D10A6 /* AddSongViewModel.swift */,
-				8E703933275FECE3001D10A6 /* CreditViewModel.swift */,
 				8E6C95EA2767B43700667C01 /* SongOption.swift */,
+				8E79DC4A28BFCFF0000B4874 /* DefaultsKey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,7 +471,6 @@
 				8E03596027D79F43006A77CA /* Archive.storyboard */,
 				8E03596227D79F8C006A77CA /* Search.storyboard */,
 				8E03596427D7A25C006A77CA /* Folder.storyboard */,
-				493BCBE226F4BAC30096422A /* Celld */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -458,13 +478,23 @@
 		4989A72426F8862A00A98B63 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				4989A72526F8863C00A98B63 /* KaraokeApiManager.swift */,
+				4989A72526F8863C00A98B63 /* KaraokeApiService.swift */,
 				49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */,
 				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
 				4953343A271204C4003F64DE /* SearchHistoryManager.swift */,
 				8E14E8EA27D49E2D008F18B8 /* HapticFeedbackManager.swift */,
+				8EAEBD2929D315A600FA51A4 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		8E3CE86F28B26CA700C3DD27 /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				8E3CE87028B26CC700C3DD27 /* UIViewController+Rx.swift */,
+				8E3CE87228B2776F00C3DD27 /* BISegmentedControl+Rx.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 		8E6C95E32767A90200667C01 /* FloatingPanelLayouts */ = {
@@ -484,9 +514,8 @@
 				4989A72426F8862A00A98B63 /* Managers */,
 				4956CE5626F469F30007523B /* Models */,
 				4956CE5526F469F00007523B /* Views */,
-				4956CE5426F469E30007523B /* Controllers */,
-				491C19BF271D89EC00D4DEB9 /* ViewModels */,
 				8EF0500A2826D82F00166223 /* Utils */,
+				8E3CE86F28B26CA700C3DD27 /* Rx */,
 				8EF050092826D7E600166223 /* SupportingFiles */,
 			);
 			path = Sources;
@@ -505,6 +534,7 @@
 		8EF050092826D7E600166223 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				8E33F3FA28547C7200B6E6EE /* R.generated.swift */,
 				4956CE3226F467060007523B /* Info.plist */,
 			);
 			path = SupportingFiles;
@@ -513,18 +543,23 @@
 		8EF0500A2826D82F00166223 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8EF0500B2826D87700166223 /* SafeAreaInsetes.swift */,
 				8E98D7782826DAED0056CED4 /* UIScrollView+ScrollToTop.swift */,
 				8E98D77A2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift */,
 				8E98D77C2826DB380056CED4 /* UILabel+AccentColor.swift */,
 				8E98D77E2826DB830056CED4 /* UISegmentedControl+Focus.swift */,
 				8E98D7802826DBA60056CED4 /* UITextField+Padding.swift */,
 				8E98D7832826DBD40056CED4 /* UITextField+PlaceholderColor.swift */,
-				8E98D7872826DCC80056CED4 /* UIView+StatusBar.swift */,
 				8E98D7892826DD000056CED4 /* UIView+Decorate.swift */,
 				8E98D78B2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift */,
 				8E98D78D2826DD480056CED4 /* UITextView+CenterAlign.swift */,
 				8E98D78F2826DD5D0056CED4 /* UIbutton+Padding.swift */,
+				8E33F40128579C0C00B6E6EE /* AppBarHeight.swift */,
+				8E3CE86C28B251A100C3DD27 /* ViewModelType.swift */,
+				8E79DC4228BB73CE000B4874 /* UIView+TapScaleAnimation.swift */,
+				8E661B7528D82D8E006D9116 /* Number+FloatType.swift */,
+				8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */,
+				8E3BF02229BEF90D007EB57A /* NotificaitonName+Default.swift */,
+				8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -532,12 +567,12 @@
 		92EF67CED36C18763E116A46 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				992C5409F902D4E2EB68D8D7 /* Pods-NoGaDa.debug.xcconfig */,
-				535D138E38520FF8441D8FDC /* Pods-NoGaDa.release.xcconfig */,
-				2C6CC7D817FF235750F4D014 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */,
-				48DCC73032651C543E666C7C /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */,
-				FD3B8FA9B5169E105270B6BC /* Pods-NoGaDaTests.debug.xcconfig */,
-				67EF086622F185807A9B411D /* Pods-NoGaDaTests.release.xcconfig */,
+				B87FA080BAAD2F4D4F8831B0 /* Pods-NoGaDa.debug.xcconfig */,
+				01E1F44977FBE85E81D2BDC7 /* Pods-NoGaDa.release.xcconfig */,
+				79D2AA8F9CEBBC0C26AE9B3C /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */,
+				D0F38766027A7A7C454C4446 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */,
+				44A645E470148090EBAAC120 /* Pods-NoGaDaTests.debug.xcconfig */,
+				473EFA2A67E0D8FA9AB6C940 /* Pods-NoGaDaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -549,11 +584,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE4B26F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDa" */;
 			buildPhases = (
-				8F3B957648F7DE1757A2262A /* [CP] Check Pods Manifest.lock */,
+				50C40C8822EC8CDF6CAEFC6C /* [CP] Check Pods Manifest.lock */,
+				8E33F3F928547C0E00B6E6EE /* R.Swift */,
 				4956CE1D26F467040007523B /* Sources */,
 				4956CE1E26F467040007523B /* Frameworks */,
 				4956CE1F26F467040007523B /* Resources */,
-				0CE4C823302608B3C7B13420 /* [CP] Embed Pods Frameworks */,
+				35E8E1555695C4F71EF33BC2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -568,7 +604,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE4E26F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDaTests" */;
 			buildPhases = (
-				75C99F90DCBB37D131D3ADF3 /* [CP] Check Pods Manifest.lock */,
+				316302CF701AC608A9EA81B8 /* [CP] Check Pods Manifest.lock */,
 				4956CE3326F467060007523B /* Sources */,
 				4956CE3426F467060007523B /* Frameworks */,
 				4956CE3526F467060007523B /* Resources */,
@@ -587,11 +623,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE5126F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDaUITests" */;
 			buildPhases = (
-				F36D087A7F899B2C6CFE336B /* [CP] Check Pods Manifest.lock */,
+				F9232C0A21D51DAB28D7278A /* [CP] Check Pods Manifest.lock */,
 				4956CE3E26F467060007523B /* Sources */,
 				4956CE3F26F467060007523B /* Frameworks */,
 				4956CE4026F467060007523B /* Resources */,
-				650FE809A0CDA35FAECEBC7D /* [CP] Embed Pods Frameworks */,
+				F71590E996D6A1888B4A8322 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -654,6 +690,7 @@
 				4956CE3126F467060007523B /* LaunchScreen.storyboard in Resources */,
 				4997CFD52704705B005F0D85 /* IconResourceCollectionViewCell.xib in Resources */,
 				8E03595D27D799B9006A77CA /* Setting.storyboard in Resources */,
+				8E25076428D1EB3300756AB1 /* SearchFilterTableViewCell.xib in Resources */,
 				8E03596327D79F8C006A77CA /* Search.storyboard in Resources */,
 				493BCBEB26F4CEA10096422A /* SongTableViewCell.xib in Resources */,
 				493BCBF126F4EBCF0096422A /* UpdatedSongTableViewCell.xib in Resources */,
@@ -663,8 +700,7 @@
 				8E03596127D79F43006A77CA /* Archive.storyboard in Resources */,
 				8E6C95E72767B18500667C01 /* PopUpSongOptionTableViewCell.xib in Resources */,
 				495334372711FE75003F64DE /* SearchHistoryTableViewCell.xib in Resources */,
-				49D4CD4B26F9E25C000D2E28 /* SearchFilterTableViewCell.xib in Resources */,
-				49C6DC7B270381910094403B /* SettingEtcTableViewCell.xib in Resources */,
+				49C6DC7B270381910094403B /* SettingItemTableViewCell.xib in Resources */,
 				8E03596527D7A25C006A77CA /* Folder.storyboard in Resources */,
 				493BCBE626F4BAEF0096422A /* FolderTableViewCell.xib in Resources */,
 				491A6D062707026C00E41D5B /* InfoPlist.strings in Resources */,
@@ -689,41 +725,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CE4C823302608B3C7B13420 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		650FE809A0CDA35FAECEBC7D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		75C99F90DCBB37D131D3ADF3 /* [CP] Check Pods Manifest.lock */ = {
+		316302CF701AC608A9EA81B8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -745,7 +747,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F3B957648F7DE1757A2262A /* [CP] Check Pods Manifest.lock */ = {
+		35E8E1555695C4F71EF33BC2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50C40C8822EC8CDF6CAEFC6C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -767,7 +786,43 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F36D087A7F899B2C6CFE336B /* [CP] Check Pods Manifest.lock */ = {
+		8E33F3F928547C0E00B6E6EE /* R.Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = R.Swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+		F71590E996D6A1888B4A8322 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9232C0A21D51DAB28D7278A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -796,12 +851,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF0500C2826D87700166223 /* SafeAreaInsetes.swift in Sources */,
+				8E79DC4928BDF1D8000B4874 /* SplashViewController.swift in Sources */,
 				8E98D78A2826DD000056CED4 /* UIView+Decorate.swift in Sources */,
-				4992C7642721B86F006045FF /* PopUpArchiveFolderListViewModel.swift in Sources */,
+				4992C7642721B86F006045FF /* PopUpArchiveFolderViewModel.swift in Sources */,
 				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
 				495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */,
-				4956CE6126F494870007523B /* ArchiveSongListViewController.swift in Sources */,
+				8E79DC4128BB73B0000B4874 /* AnimateButton.swift in Sources */,
+				4956CE6126F494870007523B /* ArchiveSongViewController.swift in Sources */,
+				8E33F3FB28547C7200B6E6EE /* R.generated.swift in Sources */,
 				8E6C95E62767B18500667C01 /* PopUpSongOptionTableViewCell.swift in Sources */,
 				8E703934275FECE3001D10A6 /* CreditViewModel.swift in Sources */,
 				493BCBEA26F4CEA10096422A /* SongTableViewCell.swift in Sources */,
@@ -809,67 +866,79 @@
 				8E6C95DE276797D100667C01 /* PopUpSongOptionViewController.swift in Sources */,
 				8E6C95E22767A8F900667C01 /* SongOptionFloatingPanelLayout.swift in Sources */,
 				4956CE5D26F4940A0007523B /* SearchViewController.swift in Sources */,
-				4989A72626F8863C00A98B63 /* KaraokeApiManager.swift in Sources */,
+				4989A72626F8863C00A98B63 /* KaraokeApiService.swift in Sources */,
 				8E98D7812826DBA60056CED4 /* UITextField+Padding.swift in Sources */,
 				8E6C95EB2767B43700667C01 /* SongOption.swift in Sources */,
 				49484CFE2720791900EC12B3 /* SearchResultViewModel.swift in Sources */,
+				8E25076828D1ED3400756AB1 /* SettingViewModel.swift in Sources */,
 				49D4CD4D26F9E448000D2E28 /* SearchFilterItem.swift in Sources */,
-				49484D042720BD7D00EC12B3 /* ArchiveSongListViewModel.swift in Sources */,
-				49C6DC33270298E30094403B /* AppbarView.swift in Sources */,
+				49484D042720BD7D00EC12B3 /* ArchiveSongViewModel.swift in Sources */,
+				49C6DC33270298E30094403B /* AppBarView.swift in Sources */,
 				493BCBF326F642630096422A /* EmojiTextField.swift in Sources */,
+				8E3BF02329BEF90D007EB57A /* NotificaitonName+Default.swift in Sources */,
 				8E14E8EB27D49E2D008F18B8 /* HapticFeedbackManager.swift in Sources */,
 				493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */,
+				8E33F3F828546F7000B6E6EE /* ViewModelInjectable.swift in Sources */,
 				49D4CD4F26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift in Sources */,
-				4956CE5926F476450007523B /* ColorSet.swift in Sources */,
 				49E6EB5B270E0F3200610383 /* AdMobManager.swift in Sources */,
 				4992C7622721B3D6006045FF /* AddFolderViewModel.swift in Sources */,
 				495334312711DE37003F64DE /* SearchResultViewController.swift in Sources */,
 				8E70392E275F2D15001D10A6 /* AddSongViewController.swift in Sources */,
 				8E703932275FA59B001D10A6 /* HighlightingTextfield.swift in Sources */,
-				493BCBE026F4B2890096422A /* PopUpArchiveFolderListViewController.swift in Sources */,
-				496BE2AF27173D5300CFD96D /* SplashView.swift in Sources */,
+				493BCBE026F4B2890096422A /* PopUpArchiveFolderViewController.swift in Sources */,
 				8E703930275F466D001D10A6 /* AddSongViewModel.swift in Sources */,
 				4997CFD42704705B005F0D85 /* IconResourceCollectionViewCell.swift in Sources */,
 				49D1D6B226FC68F30024C5F9 /* Song.swift in Sources */,
+				8E661B7628D82D8E006D9116 /* Number+FloatType.swift in Sources */,
 				49D1D6AE26FC686D0024C5F9 /* KaraokeBrand.swift in Sources */,
 				4956CE2926F467040007523B /* MainViewController.swift in Sources */,
 				49D1D6BC26FC70720024C5F9 /* SongFolderManager.swift in Sources */,
 				4956CE2526F467040007523B /* AppDelegate.swift in Sources */,
 				8E98D77D2826DB380056CED4 /* UILabel+AccentColor.swift in Sources */,
 				4956CE6326F494990007523B /* AddFolderViewController.swift in Sources */,
+				8E3CE86D28B251A100C3DD27 /* ViewModelType.swift in Sources */,
 				49D1D6B826FC6C0E0024C5F9 /* ArchiveFolder.swift in Sources */,
 				49D1D6B026FC689D0024C5F9 /* KaraokeAPIErrMessage.swift in Sources */,
+				8E33F3FD2854978D00B6E6EE /* BaseViewController.swift in Sources */,
 				8E98D7792826DAED0056CED4 /* UIScrollView+ScrollToTop.swift in Sources */,
+				8EAEBD2C29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift in Sources */,
+				8E33F3FF2854A54000B6E6EE /* PopOverSearchFilterViewModel.swift in Sources */,
 				49484D002720880400EC12B3 /* SearchHistoryViewModel.swift in Sources */,
-				49C6DC7A270381910094403B /* SettingEtcTableViewCell.swift in Sources */,
+				49C6DC7A270381910094403B /* SettingItemTableViewCell.swift in Sources */,
 				8E98D77F2826DB830056CED4 /* UISegmentedControl+Focus.swift in Sources */,
 				49484CFC2720766100EC12B3 /* SearchViewModel.swift in Sources */,
 				491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */,
 				493F232E270DEA4700A618DC /* ArchiveFolderFloatingPanelView.swift in Sources */,
+				8E79DC4B28BFCFF0000B4874 /* DefaultsKey.swift in Sources */,
 				493BCBED26F4E2AB0096422A /* ArchiveSongFloatingPanelLayout.swift in Sources */,
 				4997D01727059FD3005F0D85 /* ArchiveFolderShortcutView.swift in Sources */,
 				8E6C95E027679BB400667C01 /* SongOptionFloatingPanelView.swift in Sources */,
 				8E98D7842826DBD40056CED4 /* UITextField+PlaceholderColor.swift in Sources */,
 				4956CE2726F467040007523B /* SceneDelegate.swift in Sources */,
 				49D1D6B426FC69660024C5F9 /* KaraokeAPIPath.swift in Sources */,
-				4950FEAB26FB9E9F0093B553 /* BISegmentedControl.swift in Sources */,
 				8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */,
-				49C6DC7D270382620094403B /* SettingEtcItem.swift in Sources */,
+				49C6DC7D270382620094403B /* SettingItem.swift in Sources */,
 				495334362711FE75003F64DE /* SearchHistoryTableViewCell.swift in Sources */,
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
-				49484D022720B6D500EC12B3 /* ArchiveFolderListViewModel.swift in Sources */,
+				49484D022720B6D500EC12B3 /* ArchiveFolderViewModel.swift in Sources */,
+				8EB6ACFD2900465400076C25 /* String+KoreanPolicy.swift in Sources */,
+				8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */,
+				8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */,
 				8E98D77B2826DB1F0056CED4 /* UIActivityIndicatorView+Toggle.swift in Sources */,
 				493BCBF026F4EBCF0096422A /* UpdatedSongTableViewCell.swift in Sources */,
-				4956CE5F26F494730007523B /* ArchiveFolderListViewController.swift in Sources */,
-				8E98D7882826DCC80056CED4 /* UIView+StatusBar.swift in Sources */,
+				4956CE5F26F494730007523B /* ArchiveFolderViewController.swift in Sources */,
+				8E3CE87328B2776F00C3DD27 /* BISegmentedControl+Rx.swift in Sources */,
 				8E6C95E92767B37B00667C01 /* PopUpSongOptionViewModel.swift in Sources */,
-				49D4CD4A26F9E25C000D2E28 /* SearchFilterTableViewCell.swift in Sources */,
 				8E98D78E2826DD480056CED4 /* UITextView+CenterAlign.swift in Sources */,
+				8E79DC4328BB73CE000B4874 /* UIView+TapScaleAnimation.swift in Sources */,
 				4997CFD7270471CB005F0D85 /* ResourceItem.swift in Sources */,
 				49D1D6B626FC69770024C5F9 /* ArchiveSong.swift in Sources */,
 				8E98D7902826DD5D0056CED4 /* UIbutton+Padding.swift in Sources */,
 				8E98D78C2826DD280056CED4 /* SurfaceAppearance+PanelShadow.swift in Sources */,
+				8E33F40228579C0C00B6E6EE /* AppBarHeight.swift in Sources */,
+				8E79DC4528BB7858000B4874 /* AnimateView.swift in Sources */,
+				8EAEBD2A29D315A600FA51A4 /* UserDefaultsManager.swift in Sources */,
 				8EFA4D7D2784B015009A8256 /* KaraokeBrandPickerViewController.swift in Sources */,
 				8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */,
 				49FB0D0A27038DED00AE3A9F /* CreditViewController.swift in Sources */,
@@ -880,6 +949,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E33F4002857980500B6E6EE /* ArchiveSongViewController.swift in Sources */,
 				4956CE3C26F467060007523B /* NoGaDaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1058,12 +1128,12 @@
 		};
 		4956CE4C26F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 992C5409F902D4E2EB68D8D7 /* Pods-NoGaDa.debug.xcconfig */;
+			baseConfigurationReference = B87FA080BAAD2F4D4F8831B0 /* Pods-NoGaDa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 497P4L97SV;
 				INFOPLIST_FILE = "$(SRCROOT)/NoGaDa/Sources/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1071,7 +1141,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MuffinLabs.NoGaDa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1081,12 +1151,12 @@
 		};
 		4956CE4D26F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 535D138E38520FF8441D8FDC /* Pods-NoGaDa.release.xcconfig */;
+			baseConfigurationReference = 01E1F44977FBE85E81D2BDC7 /* Pods-NoGaDa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 497P4L97SV;
 				INFOPLIST_FILE = "$(SRCROOT)/NoGaDa/Sources/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1094,7 +1164,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MuffinLabs.NoGaDa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1104,7 +1174,7 @@
 		};
 		4956CE4F26F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD3B8FA9B5169E105270B6BC /* Pods-NoGaDaTests.debug.xcconfig */;
+			baseConfigurationReference = 44A645E470148090EBAAC120 /* Pods-NoGaDaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1127,7 +1197,7 @@
 		};
 		4956CE5026F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67EF086622F185807A9B411D /* Pods-NoGaDaTests.release.xcconfig */;
+			baseConfigurationReference = 473EFA2A67E0D8FA9AB6C940 /* Pods-NoGaDaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1150,7 +1220,7 @@
 		};
 		4956CE5226F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C6CC7D817FF235750F4D014 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */;
+			baseConfigurationReference = 79D2AA8F9CEBBC0C26AE9B3C /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1171,7 +1241,7 @@
 		};
 		4956CE5326F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48DCC73032651C543E666C7C /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */;
+			baseConfigurationReference = D0F38766027A7A7C454C4446 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

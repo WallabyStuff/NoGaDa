@@ -8,8 +8,8 @@
 import UIKit
 
 enum KaraokeAPIErrMessage: String, Error {
-    case urlParsingError    = "Error: fail to parsing url string"
-    case didNotReceiveData  = "Error: did not receive data"
-    case httpRequestFailure = "Error: HTTP request failed"
-    case jsonParsingError   = "Error: JSON Data Parsing failed"
+  case urlParsingError    = "Error: fail to parsing url string"
+  case didNotReceiveData  = "Error: did not receive data"
+  case httpRequestFailure = "Error: HTTP request failed"
+  case jsonParsingError   = "Error: JSON Data Parsing failed"
 }
