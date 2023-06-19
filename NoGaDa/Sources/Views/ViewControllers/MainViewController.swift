@@ -339,7 +339,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
       })
       .disposed(by: disposeBag)
     
-    viewModel.output.showArchiveFolderFloadingView
+    viewModel.output.showArchiveFolderFloatingView
       .asDriver(onErrorDriveWith: .never())
       .drive(onNext: { [weak self] song in
         self?.showArchiveFolderFloatingView(song)

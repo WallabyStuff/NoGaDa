@@ -37,7 +37,7 @@ class MainViewModel: ViewModelType {
     let showSearchVC = PublishRelay<Bool>()
     let showArchiveFolderVC = PublishRelay<Bool>()
     let showSettingVC = PublishRelay<Bool>()
-    let showArchiveFolderFloadingView = PublishRelay<Song>()
+    let showArchiveFolderFloatingView = PublishRelay<Song>()
     let showInitialAd = PublishRelay<Void>()
   }
   
@@ -133,7 +133,7 @@ class MainViewModel: ViewModelType {
     input.tapNewUpdateSongItem
       .subscribe(onNext: { indexPath in
         let selectedSong = output.newUpdateSongs.value[indexPath.row]
-        output.showArchiveFolderFloadingView.accept(selectedSong)
+        output.showArchiveFolderFloatingView.accept(selectedSong)
       })
       .disposed(by: disposeBag)
     
