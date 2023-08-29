@@ -1,0 +1,31 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Build test
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Start building a project 🛠️
+      - uses: actions/checkout@v3
+      
+      - name: Set up Xcode
+        uses: actions/setup-xcode@v1.5.1
+        with:
+          xcode-version: '14.3'
+      
+      - name: Install dependencies
+        run: |
+          pod deintegrate
+          pod install
+      
+      - name: Build
+        run: |
+          xcodebuild build -project ../../NoGaDa.xcworspace
+

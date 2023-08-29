@@ -111,4 +111,10 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+
+
+# R.Swift
+R.generated.swift
+
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,cocoapods

@@ -7,34 +7,38 @@
 
 import UIKit
 
-enum SearchFilterItem: String, CaseIterable {
-  case searchWithTitle    = "searchWithTitle"
-  case searchWithSinger   = "searchWithSinger"
+protocol SearchFilterItem {
+  var title: String { get }
+  var state: Bool { get }
+  func toggleState()
+}
+
+
+// MARK: - Search with Title
+
+struct SearchWithTitleItem: SearchFilterItem {
   
-  var title: String {
-    switch self {
-    case .searchWithTitle:
-      return "🏷 제목으로 검색"
-    case .searchWithSinger:
-      return "🙋 가수 명으로 검색"
-    }
-  }
-  
+  var title: String = "🏷 제목으로 검색"
   var state: Bool {
-    switch self {
-    case .searchWithTitle:
-      return UserDefaults.standard.bool(forKey: SearchFilterItem.searchWithTitle.rawValue)
-    case .searchWithSinger:
-      return UserDefaults.standard.bool(forKey: SearchFilterItem.searchWithSinger.rawValue)
-    }
+    UserDefaultsManager.searchWithTitle
   }
   
-  var userDefaultKey: String {
-    switch self {
-    case .searchWithTitle:
-      return SearchFilterItem.searchWithTitle.rawValue
-    case .searchWithSinger:
-      return SearchFilterItem.searchWithSinger.rawValue
-    }
+  func toggleState() {
+    UserDefaultsManager.searchWithTitle.toggle()
+  }
+}
+
+
+// MARK: - Search with Singer
+
+struct SearchWithSingerItem: SearchFilterItem {
+  
+  var title: String = "🙋 가수 명으로 검색"
+  var state: Bool {
+    UserDefaultsManager.searchWithSinger
+  }
+  
+  func toggleState() {
+    UserDefaultsManager.searchWithSinger.toggle()
   }
 }

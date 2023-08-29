@@ -10,15 +10,23 @@ import FloatingPanel
 
 class ArchiveFolderFloatingPanelView {
   
+  // MARK: - Properties
+  
   private var floatingPanel = FloatingPanelController()
-  private var parentViewController: UIViewController?
-  private var contentViewDelegate: PopUpArchiveFolderViewDelegate?
+  private weak var parentViewController: UIViewController?
+  private weak var contentViewDelegate: PopUpArchiveFolderViewDelegate?
+  
+  
+  // MARK: - Initializers
   
   init(parentViewController: UIViewController, delegate: PopUpArchiveFolderViewDelegate) {
     self.parentViewController = parentViewController
     self.contentViewDelegate = delegate
     setup()
   }
+  
+  
+  // MARK: - Setups
   
   private func setup() {
     let appearance = SurfaceAppearance()
@@ -38,6 +46,9 @@ class ArchiveFolderFloatingPanelView {
     floatingPanel.surfaceView.grabberHandle.barColor = R.color.accentYellowDark()!
     floatingPanel.layout = ArchiveSongFloatingPanelLayout()
   }
+  
+  
+  // MARK: - Methods
   
   public func show(_ selectedSong: Song) {
     prepareForShow(selectedSong)
