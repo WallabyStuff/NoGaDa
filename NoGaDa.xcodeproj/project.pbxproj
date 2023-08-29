@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05D8A3E946ADA38F493D8FDD /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F69530B709BECF0E29DFE19 /* Pods_NoGaDa_NoGaDaUITests.framework */; };
-		444789F7F6C15C05DBCA375A /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB8ED8864099403B2747B98 /* Pods_NoGaDa.framework */; };
+		3C5150819556110E4C9FD4A4 /* Pods_NoGaDa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4102AB51B143615D98392DD /* Pods_NoGaDa.framework */; };
 		491A6D062707026C00E41D5B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 491A6D082707026C00E41D5B /* InfoPlist.strings */; };
 		491C19C1271D89FD00D4DEB9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C19C0271D89FD00D4DEB9 /* MainViewModel.swift */; };
 		493576BF26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493576BD26F70419008CB6DA /* PopUpArchiveFolderTableViewCell.swift */; };
@@ -121,7 +120,8 @@
 		8EFA4D7F2784B074009A8256 /* KaraokeBrandPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */; };
 		8EFA4D8F2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */; };
 		8EFA4D902786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */; };
-		9C9482B9DE2E1E8A6A6CBB20 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1307E2DBCCDFFE984FC8A91 /* Pods_NoGaDaTests.framework */; };
+		98C36B12F79286D555375451 /* Pods_NoGaDaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE16EEE7308A04079100A207 /* Pods_NoGaDaTests.framework */; };
+		C051DEA605203ABC36409CDA /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FEE5C8C410A155C6EF96951 /* Pods_NoGaDa_NoGaDaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,8 +142,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1C3745FBAB8056AF01AFDCC6 /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
-		1F6A6382E5BDEE5127BCE065 /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
+		07CAA96E8400BBB75B6643F2 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2DBEC17980675F5034B39413 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
+		3FEE5C8C410A155C6EF96951 /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		491A6D022707021600E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		491A6D032707021600E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		491A6D072707026C00E41D5B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -213,10 +214,8 @@
 		49D4CD4E26F9E5ED000D2E28 /* PopOverSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverSearchFilterViewController.swift; sourceTree = "<group>"; };
 		49E6EB5A270E0F3200610383 /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
 		49FB0D0927038DED00AE3A9F /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
-		73DCBAB5E9D8B4D046C98E71 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.release.xcconfig"; sourceTree = "<group>"; };
-		7A97FA837346152377815A14 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7EB8ED8864099403B2747B98 /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B0457ED2C12F5239E2AA7D8 /* Pods-NoGaDa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.debug.xcconfig"; sourceTree = "<group>"; };
+		77831074813A4D362C38F4BB /* Pods-NoGaDaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		856F694A7C3BFF36184C7997 /* Pods-NoGaDa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa.release.xcconfig"; path = "Target Support Files/Pods-NoGaDa/Pods-NoGaDa.release.xcconfig"; sourceTree = "<group>"; };
 		8E03595C27D799B9006A77CA /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		8E03596027D79F43006A77CA /* Archive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Archive.storyboard; sourceTree = "<group>"; };
 		8E03596227D79F8C006A77CA /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
@@ -268,9 +267,10 @@
 		8EFA4D7E2784B074009A8256 /* KaraokeBrandPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerViewModel.swift; sourceTree = "<group>"; };
 		8EFA4D8D2786C589009A8256 /* KaraokeBrandPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaraokeBrandPickerTableViewCell.swift; sourceTree = "<group>"; };
 		8EFA4D8E2786C589009A8256 /* KaraokeBrandPickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KaraokeBrandPickerTableViewCell.xib; sourceTree = "<group>"; };
-		9F69530B709BECF0E29DFE19 /* Pods_NoGaDa_NoGaDaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa_NoGaDaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1307E2DBCCDFFE984FC8A91 /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDC2B22F1AE41EC102EF31CD /* Pods-NoGaDaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AE16EEE7308A04079100A207 /* Pods_NoGaDaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E660BC963D3A9F849EF3D16D /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; path = "Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F4102AB51B143615D98392DD /* Pods_NoGaDa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoGaDa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2F15E8AE44AF844AF0DADA /* Pods-NoGaDaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoGaDaTests.release.xcconfig"; path = "Target Support Files/Pods-NoGaDaTests/Pods-NoGaDaTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				444789F7F6C15C05DBCA375A /* Pods_NoGaDa.framework in Frameworks */,
+				3C5150819556110E4C9FD4A4 /* Pods_NoGaDa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C9482B9DE2E1E8A6A6CBB20 /* Pods_NoGaDaTests.framework in Frameworks */,
+				98C36B12F79286D555375451 /* Pods_NoGaDaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D8A3E946ADA38F493D8FDD /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */,
+				C051DEA605203ABC36409CDA /* Pods_NoGaDa_NoGaDaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +336,7 @@
 				4956CE4526F467060007523B /* NoGaDaUITests */,
 				4956CE2226F467040007523B /* Products */,
 				92EF67CED36C18763E116A46 /* Pods */,
-				5F03FE58C8C13998BB70E7B2 /* Frameworks */,
+				EAC2D702DC0301D378C46CEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -478,16 +478,6 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		5F03FE58C8C13998BB70E7B2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7EB8ED8864099403B2747B98 /* Pods_NoGaDa.framework */,
-				9F69530B709BECF0E29DFE19 /* Pods_NoGaDa_NoGaDaUITests.framework */,
-				F1307E2DBCCDFFE984FC8A91 /* Pods_NoGaDaTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		8E3CE86F28B26CA700C3DD27 /* Rx */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,14 +557,24 @@
 		92EF67CED36C18763E116A46 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B0457ED2C12F5239E2AA7D8 /* Pods-NoGaDa.debug.xcconfig */,
-				1C3745FBAB8056AF01AFDCC6 /* Pods-NoGaDa.release.xcconfig */,
-				7A97FA837346152377815A14 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */,
-				73DCBAB5E9D8B4D046C98E71 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */,
-				FDC2B22F1AE41EC102EF31CD /* Pods-NoGaDaTests.debug.xcconfig */,
-				1F6A6382E5BDEE5127BCE065 /* Pods-NoGaDaTests.release.xcconfig */,
+				2DBEC17980675F5034B39413 /* Pods-NoGaDa.debug.xcconfig */,
+				856F694A7C3BFF36184C7997 /* Pods-NoGaDa.release.xcconfig */,
+				E660BC963D3A9F849EF3D16D /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */,
+				07CAA96E8400BBB75B6643F2 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */,
+				77831074813A4D362C38F4BB /* Pods-NoGaDaTests.debug.xcconfig */,
+				FD2F15E8AE44AF844AF0DADA /* Pods-NoGaDaTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EAC2D702DC0301D378C46CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4102AB51B143615D98392DD /* Pods_NoGaDa.framework */,
+				3FEE5C8C410A155C6EF96951 /* Pods_NoGaDa_NoGaDaUITests.framework */,
+				AE16EEE7308A04079100A207 /* Pods_NoGaDaTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,12 +584,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE4B26F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDa" */;
 			buildPhases = (
-				1ECDBA0054B5D9DF4A803C0C /* [CP] Check Pods Manifest.lock */,
+				A9B98DCE2D1FAA1FC1182517 /* [CP] Check Pods Manifest.lock */,
 				8E33F3F928547C0E00B6E6EE /* R.Swift */,
 				4956CE1D26F467040007523B /* Sources */,
 				4956CE1E26F467040007523B /* Frameworks */,
 				4956CE1F26F467040007523B /* Resources */,
-				1817A60BBCBBB47A71CC1193 /* [CP] Embed Pods Frameworks */,
+				27383498E8380C2732F5DA26 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -604,7 +604,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE4E26F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDaTests" */;
 			buildPhases = (
-				14EEBE098DEF976E9C9FB935 /* [CP] Check Pods Manifest.lock */,
+				92BB2438C28EE87DFF79B8F4 /* [CP] Check Pods Manifest.lock */,
 				4956CE3326F467060007523B /* Sources */,
 				4956CE3426F467060007523B /* Frameworks */,
 				4956CE3526F467060007523B /* Resources */,
@@ -623,11 +623,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4956CE5126F467060007523B /* Build configuration list for PBXNativeTarget "NoGaDaUITests" */;
 			buildPhases = (
-				01C9D06646205A7D384950D3 /* [CP] Check Pods Manifest.lock */,
+				F37533C4014B83B48546D85F /* [CP] Check Pods Manifest.lock */,
 				4956CE3E26F467060007523B /* Sources */,
 				4956CE3F26F467060007523B /* Frameworks */,
 				4956CE4026F467060007523B /* Resources */,
-				E6FD1104E8E39DC990C78AFC /* [CP] Embed Pods Frameworks */,
+				8607F7F6F040D44B73A88D05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -725,51 +725,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01C9D06646205A7D384950D3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NoGaDa-NoGaDaUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		14EEBE098DEF976E9C9FB935 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NoGaDaTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1817A60BBCBBB47A71CC1193 /* [CP] Embed Pods Frameworks */ = {
+		27383498E8380C2732F5DA26 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -786,26 +742,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa/Pods-NoGaDa-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1ECDBA0054B5D9DF4A803C0C /* [CP] Check Pods Manifest.lock */ = {
+		8607F7F6F040D44B73A88D05 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NoGaDa-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8E33F3F928547C0E00B6E6EE /* R.Swift */ = {
@@ -827,21 +778,70 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
-		E6FD1104E8E39DC990C78AFC /* [CP] Embed Pods Frameworks */ = {
+		92BB2438C28EE87DFF79B8F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoGaDaTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoGaDa-NoGaDaUITests/Pods-NoGaDa-NoGaDaUITests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9B98DCE2D1FAA1FC1182517 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoGaDa-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F37533C4014B83B48546D85F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoGaDa-NoGaDaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1128,7 +1128,7 @@
 		};
 		4956CE4C26F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B0457ED2C12F5239E2AA7D8 /* Pods-NoGaDa.debug.xcconfig */;
+			baseConfigurationReference = 2DBEC17980675F5034B39413 /* Pods-NoGaDa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1151,7 +1151,7 @@
 		};
 		4956CE4D26F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C3745FBAB8056AF01AFDCC6 /* Pods-NoGaDa.release.xcconfig */;
+			baseConfigurationReference = 856F694A7C3BFF36184C7997 /* Pods-NoGaDa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1174,7 +1174,7 @@
 		};
 		4956CE4F26F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDC2B22F1AE41EC102EF31CD /* Pods-NoGaDaTests.debug.xcconfig */;
+			baseConfigurationReference = 77831074813A4D362C38F4BB /* Pods-NoGaDaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1197,7 +1197,7 @@
 		};
 		4956CE5026F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F6A6382E5BDEE5127BCE065 /* Pods-NoGaDaTests.release.xcconfig */;
+			baseConfigurationReference = FD2F15E8AE44AF844AF0DADA /* Pods-NoGaDaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1220,7 +1220,7 @@
 		};
 		4956CE5226F467060007523B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A97FA837346152377815A14 /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */;
+			baseConfigurationReference = E660BC963D3A9F849EF3D16D /* Pods-NoGaDa-NoGaDaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1241,7 +1241,7 @@
 		};
 		4956CE5326F467060007523B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73DCBAB5E9D8B4D046C98E71 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */;
+			baseConfigurationReference = 07CAA96E8400BBB75B6643F2 /* Pods-NoGaDa-NoGaDaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
