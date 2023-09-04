@@ -81,5 +81,6 @@ class SettingItemTableViewCell: UITableViewCell {
   func configure(item: SettingItem) {
     titleLabel.text = item.title
     iconImageView.image = item.icon
+    iconImageView.tintColor = item.iconContainerColor
   }
 }
