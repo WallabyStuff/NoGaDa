@@ -16,13 +16,13 @@ target 'NoGaDa' do
   pod 'SwiftRater',         '~> 2.1.0'
   
   # Database
-  pod 'RealmSwift'
+  pod 'RealmSwift',         '10.42.4'
   
   # AdMob
   pod 'Google-Mobile-Ads-SDK'
   
   # Conventions
-  pod 'R.swift',            '~> 7.2.4'
+  pod 'R.swift'
   
   target 'NoGaDaTests' do
     inherit! :search_paths

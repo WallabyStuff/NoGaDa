@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SettingViewController: BaseViewController {
+final class SettingViewController: BaseViewController {
   
   // MARK: - Constants
   
@@ -39,7 +39,7 @@ class SettingViewController: BaseViewController {
   @IBOutlet weak var settingItemTableView: UITableView!
   
   
-  // MARK: - Initializers
+  // MARK: - Lifecycle
   
   required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -55,9 +55,6 @@ class SettingViewController: BaseViewController {
   required init?(coder: NSCoder) {
     fatalError("ViewModel has not been implemented")
   }
-  
-  
-  // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -77,7 +74,7 @@ class SettingViewController: BaseViewController {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()

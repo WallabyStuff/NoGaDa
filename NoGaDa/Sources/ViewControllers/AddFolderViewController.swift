@@ -15,7 +15,7 @@ import RxGesture
   @objc func didFolderAdded()
 }
 
-class AddFolderViewController: BaseViewController {
+final class AddFolderViewController: BaseViewController {
   
   // MARK: - Constants
   
@@ -55,22 +55,6 @@ class AddFolderViewController: BaseViewController {
   
   // MARK: - Lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupView()
-    bind()
-  }
-  
-  
-  // MARK: - Overrides
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    view.endEditing(true)
-  }
-  
-  
-  // MARK: - Initializers
-  
   init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -83,6 +67,19 @@ class AddFolderViewController: BaseViewController {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupView()
+    bind()
+  }
+  
+  
+  // MARK: - Overrides
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    view.endEditing(true)
   }
   
   
@@ -121,14 +118,14 @@ class AddFolderViewController: BaseViewController {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
-    bindIntputs()
+    bindInputs()
     bindOutputs()
   }
   
-  private func bindIntputs() {
+  private func bindInputs() {
     exitButton
       .rx.tap
       .bind(to: viewModel.input.tapExitButton)
@@ -194,7 +191,7 @@ class AddFolderViewController: BaseViewController {
 }
 
 
-// MARK: - Extensions
+// MARK: - UITextFieldDelegate
 
 extension AddFolderViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

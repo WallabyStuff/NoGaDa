@@ -10,8 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SearchHistoryViewModel: ViewModelType {
-  
+final class SearchHistoryViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -33,14 +32,14 @@ class SearchHistoryViewModel: ViewModelType {
   private let searchHistoryManager = SearchHistoryManager()
   
   
-  // MARK: - Initializers
+  // MARK: - LifeCycle
   
   init() {
     setupInputOutput()
   }
   
   
-  // MARK: - Setups
+  // MARK: - Pirvate
   
   private func setupInputOutput() {
     let input = Input()
@@ -82,9 +81,10 @@ class SearchHistoryViewModel: ViewModelType {
     self.input = input
     self.output = output
   }
-}
-
-extension SearchHistoryViewModel {
+  
+  
+  // MARK: - Public
+  
   public func deleteHistory(_ index: Int) {
     var histories = output.searchHistories.value
     let selectedItem = histories.remove(at: index)

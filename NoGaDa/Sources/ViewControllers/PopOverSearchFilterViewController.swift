@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable {
+final class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -44,15 +44,6 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   
   // MARK: - Lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setup()
-    bind()
-  }
-  
-  
-  // MARK: - Initializers
-  
   required init(_ viewModel: PopOverSearchFilterViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -68,7 +59,13 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
     fatalError("ViewModel has not been implemented")
   }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    bind()
+  }
   
+
   // MARK: - Setups
   
   private func setup() {
@@ -104,7 +101,7 @@ class PopOverSearchFilterViewController: BaseViewController, ViewModelInjectable
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()

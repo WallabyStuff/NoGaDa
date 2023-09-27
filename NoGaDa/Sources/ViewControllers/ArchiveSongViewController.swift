@@ -10,14 +10,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+
 import Hero
 import SafeAreaBrush
+
 
 @objc protocol ArchiveSongListViewDelegate: AnyObject {
   @objc optional func didFolderEdited()
 }
 
-class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
+final class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -66,6 +68,20 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Lifecycle
   
+  required init(_ viewModel: ArchiveSongViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(_ coder: NSCoder, _ viewModel: ArchiveSongViewModel) {
+    self.viewModel = viewModel
+    super.init(coder: coder)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -84,24 +100,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
     super.touchesBegan(touches, with: event)
     view.endEditing(true)
   }
-  
-  
-  // MARK: - Initialization
-  
-  required init(_ viewModel: ArchiveSongViewModel) {
-    self.viewModel = viewModel
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(_ coder: NSCoder, _ viewModel: ArchiveSongViewModel) {
-    self.viewModel = viewModel
-    super.init(coder: coder)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
+
   
   // MARK: - Setups
   
@@ -182,7 +181,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -267,7 +266,6 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
       .disposed(by: disposeBag)
   }
   
-  
   private func bindFolderTitleEmojiTextField() {
     folderTitleEmojiTextField.rx.text
       .asDriver()
@@ -315,7 +313,7 @@ class ArchiveSongViewController: BaseViewController, ViewModelInjectable {
 }
 
 
-// MARK: - Extensions
+// MARK: - UITableViewDelegate
 
 extension ArchiveSongViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -335,6 +333,9 @@ extension ArchiveSongViewController: UITableViewDelegate {
   }
 }
 
+
+// MARK: - UITableViewDelegate
+
 extension ArchiveSongViewController: AddSongViewDelegate {
   func didSongAdded() {
     Observable.just(Void())
@@ -342,6 +343,9 @@ extension ArchiveSongViewController: AddSongViewDelegate {
       .dispose()
   }
 }
+
+
+// MARK: - PopUpSongOptionViewDelegate
 
 extension ArchiveSongViewController: PopUpSongOptionViewDelegate {
   func didSelectedSongRemoved() {

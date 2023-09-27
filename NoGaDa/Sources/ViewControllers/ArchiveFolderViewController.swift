@@ -10,17 +10,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+
 import Hero
 import SafeAreaBrush
 
+
 @objc
 protocol ArchiveFolderListViewDelegate: AnyObject {
-  @objc optional
-  func didFileChanged()
+  @objc optional func didFileChanged()
 }
 
-class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
-  
+final class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -58,6 +58,20 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Lifecycle
   
+  required init(_ viewModel: ArchiveFolderViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(_ coder: NSCoder, _ viewModel: ArchiveFolderViewModel) {
+    self.viewModel = viewModel
+    super.init(coder: coder)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("ViewModel has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -79,23 +93,6 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
     archiveFolderTableView.reloadData()
-  }
-  
-  
-  // MARK: - Initializers
-  
-  required init(_ viewModel: ArchiveFolderViewModel) {
-    self.viewModel = viewModel
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(_ coder: NSCoder, _ viewModel: ArchiveFolderViewModel) {
-    self.viewModel = viewModel
-    super.init(coder: coder)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("ViewModel has not been implemented")
   }
   
   
@@ -155,7 +152,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindAppbarView()
@@ -267,7 +264,7 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     present(removeFolderAlert, animated: true, completion: nil)
   }
   
-  func presentAddFolderView() {
+  private func presentAddFolderView() {
     let storyboard = UIStoryboard(name: R.storyboard.folder.name, bundle: nil)
     let viewController = storyboard.instantiateViewController(identifier: AddFolderViewController.identifier,
                                                               creator: { coder -> AddFolderViewController in
@@ -280,7 +277,12 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     present(viewController, animated: true, completion: nil)
   }
   
-  public func presentArchiveSongVC(_ archiveFolder: ArchiveFolder) {
+  private func unhighlightSelectedCell(_ animated: Bool = true) {
+    guard let indexPath = archiveFolderTableView.indexPathForSelectedRow else { return }
+    archiveFolderTableView.deselectRow(at: indexPath, animated: animated)
+  }
+  
+  private func presentArchiveSongVC(_ archiveFolder: ArchiveFolder) {
     let storyboard = UIStoryboard(name: R.storyboard.archive.name, bundle: nil)
     let archiveSongListVC = storyboard.instantiateViewController(identifier: ArchiveSongViewController.identifier) { coder -> ArchiveSongViewController in
       let viewModel = ArchiveSongViewModel(currentFolder: archiveFolder)
@@ -291,15 +293,10 @@ class ArchiveFolderViewController: BaseViewController, ViewModelInjectable {
     archiveSongListVC.delegate = self
     present(archiveSongListVC, animated: true, completion: nil)
   }
-  
-  private func unhighlightSelectedCell(_ animated: Bool = true) {
-    guard let indexPath = archiveFolderTableView.indexPathForSelectedRow else { return }
-    archiveFolderTableView.deselectRow(at: indexPath, animated: animated)
-  }
 }
 
 
-// MARK: - Extensions
+// MARK: - UITableViewDelegate
 
 extension ArchiveFolderViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -315,6 +312,9 @@ extension ArchiveFolderViewController: UITableViewDelegate {
   }
 }
 
+
+// MARK: - ArchiveSongListViewDelegate
+
 extension ArchiveFolderViewController: ArchiveSongListViewDelegate {
   func didFolderEdited() {
     Observable.just(Void())
@@ -322,6 +322,9 @@ extension ArchiveFolderViewController: ArchiveSongListViewDelegate {
       .dispose()
   }
 }
+
+
+// MARK: - AddFolderViewDelegate
 
 extension ArchiveFolderViewController: AddFolderViewDelegate {
   func didFolderAdded() {

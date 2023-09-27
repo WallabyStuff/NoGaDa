@@ -10,18 +10,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+
 import Hero
 import SafeAreaBrush
 
-
-
-class SearchViewController: BaseViewController, ViewModelInjectable {
+final class SearchViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
   static let identifier = R.storyboard.search.searchStoryboard.identifier
   
-  struct Metric {
+  enum Metric {
     static let appbarViewCornerRadius = 28.f
     
     static let searchBoxViewCornerRadius = 12.f
@@ -76,27 +75,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   private var archiveFolderFloatingPanelView: ArchiveFolderFloatingPanelView?
   
   
-  // MARK: - Lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setup()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    searchTextField.becomeFirstResponder()
-  }
-  
-  
-  // MARK: - Overrides
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    view.endEditing(true)
-  }
-  
-  
-  // MARK: - Initializers
+  // MARK: - LifeCycle
   
   required init(_ viewModel: SearchViewModel) {
     self.viewModel = viewModel
@@ -114,6 +93,23 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   
   deinit {
     removeObservers()
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    searchTextField.becomeFirstResponder()
+  }
+  
+  
+  // MARK: - Overrides
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    view.endEditing(true)
   }
   
   
@@ -228,7 +224,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInput()
@@ -382,7 +378,7 @@ class SearchViewController: BaseViewController, ViewModelInjectable {
 }
 
 
-// MARK: - Extensions
+// MARK: - UIPopoverPresentationControllerDelegate
 
 extension SearchViewController: UIPopoverPresentationControllerDelegate {
   public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {

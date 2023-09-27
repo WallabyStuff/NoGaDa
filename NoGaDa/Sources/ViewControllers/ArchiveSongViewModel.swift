@@ -10,8 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ArchiveSongViewModel: ViewModelType {
-  
+final class ArchiveSongViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -42,11 +41,19 @@ class ArchiveSongViewModel: ViewModelType {
   private var currentFolder: ArchiveFolder
   private let folderManager = SongFolderManager()
   
+  public var folderTitle: String {
+    return currentFolder.title
+  }
+  
+  public var folderTitleEmoji: String {
+    return currentFolder.titleEmoji
+  }
+  
   
   // MARK: - Initializers
   
   init() {
-    fatalError("Missed arguemnt currentFolder")
+    fatalError("Missing argument 'currentFolder'")
   }
   
   init(currentFolder: ArchiveFolder) {
@@ -55,7 +62,7 @@ class ArchiveSongViewModel: ViewModelType {
   }
   
   
-  // MARK: - Setups
+  // MARK: - Private
   
   private func setupInputOutput() {
     self.input = Input()
@@ -121,9 +128,10 @@ class ArchiveSongViewModel: ViewModelType {
     
     self.output = output
   }
-}
-
-extension ArchiveSongViewModel {
+  
+  
+  // MARK: - Public
+  
   public func updateFolderTitleIfNeeded() -> Bool {
     let newTitle = input.folderTitle.value
     if newTitle != currentFolder.title {
@@ -146,15 +154,5 @@ extension ArchiveSongViewModel {
     }
     
     return false
-  }
-}
-
-extension ArchiveSongViewModel {
-  public var folderTitle: String {
-    return currentFolder.title
-  }
-  
-  public var folderTitleEmoji: String {
-    return currentFolder.titleEmoji
   }
 }

@@ -5,7 +5,6 @@
 //  Created by 이승기 on 2022/08/21.
 //
 
-import Foundation
 import RxSwift
 
 protocol ViewModelType {

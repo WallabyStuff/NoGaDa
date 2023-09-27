@@ -7,16 +7,17 @@
 
 import UIKit
 
-import FloatingPanel
 import RxSwift
 import RxCocoa
 import RxGesture
+
+import FloatingPanel
 
 @objc protocol PopUpArchiveFolderViewDelegate: AnyObject {
   @objc optional func didSongAdded()
 }
 
-class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable {
+final class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -54,15 +55,6 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
   
   // MARK: - Lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setup()
-    bind()
-  }
-  
-  
-  // MARK: - Initializers
-  
   required init(_ viewModel: PopUpArchiveFolderViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -75,6 +67,12 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    bind()
   }
   
   
@@ -117,7 +115,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -211,7 +209,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     present(addFolderVC, animated: true, completion: nil)
   }
   
-  public func presentAddSongAlert(song: Song, targetFolder: ArchiveFolder) {
+  private func presentAddSongAlert(song: Song, targetFolder: ArchiveFolder) {
     let addSongAlert = UIAlertController(title: "저장",
                                          message: "「\(song.title)」를 「\(targetFolder.title)」에 저장하시겠습니까?",
                                          preferredStyle: .alert)
@@ -229,7 +227,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
     present(addSongAlert, animated: true, completion: nil)
   }
   
-  public func presentAlreadyExistsAlert()  {
+  private func presentAlreadyExistsAlert()  {
     let alreadyExistsAlert = UIAlertController(title: "알림",
                                                message: "이미 저장된 곡입니다.",
                                                preferredStyle: .alert)
@@ -241,7 +239,7 @@ class PopUpArchiveFolderViewController: BaseViewController, ViewModelInjectable 
 }
 
 
-// MARK: - Extensions
+// MARK: - AddFolderViewDelegate
 
 extension PopUpArchiveFolderViewController: AddFolderViewDelegate {
   func didFolderAdded() {

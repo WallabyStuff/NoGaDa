@@ -6,11 +6,11 @@
 //
 
 import Foundation
+
 import RxSwift
 import RxCocoa
 
-class ArchiveFolderViewModel: ViewModelType {
-  
+final class ArchiveFolderViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -44,6 +44,9 @@ class ArchiveFolderViewModel: ViewModelType {
   init() {
     setupInputOutput()
   }
+  
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     self.input = Input()

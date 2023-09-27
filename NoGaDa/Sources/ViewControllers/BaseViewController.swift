@@ -9,16 +9,16 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+
 import AppTrackingTransparency
 
 class BaseViewController: UIViewController {
   
-  
   // MARK: - Properties
   
-  var disposeBag = DisposeBag()
-  let compactAppBarHeight: CGFloat = AppBarHeight.compactAppBarHeight
-  let regularAppBarHeight: CGFloat = AppBarHeight.regularAppBarHeight
+  public var disposeBag = DisposeBag()
+  public let compactAppBarHeight: CGFloat = AppBarHeight.compactAppBarHeight
+  public let regularAppBarHeight: CGFloat = AppBarHeight.regularAppBarHeight
   
   
   // MARK: - StatusBarStyle
@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
   
   // MARK: - Methods
   
-  func requestTrackingAuthorization() {
+  public func requestTrackingAuthorization() {
     if #available(iOS 14, *) {
       ATTrackingManager.requestTrackingAuthorization { _ in }
     }

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class PopOverSearchFilterViewModel: ViewModelType {
+final class PopOverSearchFilterViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -38,6 +38,9 @@ class PopOverSearchFilterViewModel: ViewModelType {
   init() {
     setupInputOutput()
   }
+  
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()

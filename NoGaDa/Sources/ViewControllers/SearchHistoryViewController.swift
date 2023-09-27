@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
+final class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -24,7 +24,6 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Properties
   
-//  weak var delegate: SearchHistoryViewDelegate?
   var viewModel: ViewModel
   public var historyItemSelectActionHandler: ((_ term: String) -> Void)? = nil
   
@@ -38,14 +37,6 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setup()
-  }
-  
-  
-  // MARK: - Initializers
-  
   required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -58,6 +49,11 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
   }
   
   
@@ -84,7 +80,7 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -148,7 +144,7 @@ class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Methods
+  // MARK: - Public
   
   public func refresh() {
     Observable.just(Void())

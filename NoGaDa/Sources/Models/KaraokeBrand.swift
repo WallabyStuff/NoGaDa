@@ -7,14 +7,18 @@
 
 import UIKit
 
-enum KaraokeBrand: String, Codable, CaseIterable {
+enum KaraokeBrand: String, Decodable, CaseIterable {
   case tj       = "tj"
   case kumyoung = "kumyoung"
+  
+  
+  // MARK: - Properties
   
   var path: String {
     switch self {
     case .tj:
       return "/tj.json"
+      
     case .kumyoung:
       return "/kumyoung.json"
     }
@@ -24,6 +28,7 @@ enum KaraokeBrand: String, Codable, CaseIterable {
     switch self {
     case .tj:
       return "tj"
+      
     case .kumyoung:
       return "금영"
     }

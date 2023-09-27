@@ -10,8 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class KaraokeBrandPickerViewModel: ViewModelType {
-  
+final class KaraokeBrandPickerViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -30,11 +29,14 @@ class KaraokeBrandPickerViewModel: ViewModelType {
   private(set) var disposeBag = DisposeBag()
   
   
-  // MARK: - Initializers
+  // MARK: - LifeCycle
   
   init() {
     setupInputOutput()
   }
+  
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()

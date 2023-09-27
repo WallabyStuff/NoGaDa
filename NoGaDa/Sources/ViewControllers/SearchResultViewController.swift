@@ -14,8 +14,7 @@ protocol SearchResultViewDelegate: AnyObject {
   func didSelectSongItem(_ selectedSong: Song)
 }
 
-class SearchResultViewController: BaseViewController, ViewModelInjectable {
-  
+final class SearchResultViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -46,23 +45,6 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setup()
-    bind()
-  }
-  
-  
-  // MARK: - Overrides
-  
-  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    super.traitCollectionDidChange(previousTraitCollection)
-    searchResultTableView.reloadData()
-  }
-  
-  
-  // MARK: - Initializers
-  
   required init(_ viewModel: SearchResultViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
@@ -76,6 +58,20 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   
   required init?(coder: NSCoder) {
     fatalError("ViewModel has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    bind()
+  }
+  
+  
+  // MARK: - Overrides
+  
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    searchResultTableView.reloadData()
   }
   
   
@@ -119,7 +115,7 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -189,7 +185,7 @@ class SearchResultViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Methods
+  // MARK: - Public
   
   public func setSearchResult(_ term: String) {
     Observable.just(term)
