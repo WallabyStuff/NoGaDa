@@ -6,11 +6,11 @@
 //
 
 import Foundation
+
 import RxSwift
 import RxCocoa
 
-class SearchResultViewModel: ViewModelType {
-  
+final class SearchResultViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -40,7 +40,7 @@ class SearchResultViewModel: ViewModelType {
   }
   
   
-  // MARK: - Setups
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
@@ -91,9 +91,10 @@ class SearchResultViewModel: ViewModelType {
     self.input = input
     self.output = output
   }
-}
-
-extension SearchResultViewModel {
+  
+  
+  // MARK: - Public
+  
   public var searchKeyword: String {
     return output.searchTerm.value
   }

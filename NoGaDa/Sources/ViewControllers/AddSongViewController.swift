@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+
 import Hero
 
 
@@ -17,15 +18,11 @@ import Hero
   @objc optional func didSongAdded()
 }
 
-class AddSongViewController: BaseViewController, ViewModelInjectable {
+final class AddSongViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
   static let identifier = R.storyboard.archive.addSongStoryboard.identifier
-  
-  // MARK: - Types
-  
-  typealias ViewModel = AddSongViewModel
   
   struct Metric {
     static let commonTextFieldHeight = 44.f
@@ -53,6 +50,11 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
     static let headerLabelTopMargin = 28.f
     static let keyboardTextFieldSpacing = 12.f
   }
+
+  
+  // MARK: - Types
+  
+  typealias ViewModel = AddSongViewModel
   
   
   // MARK: - Properties
@@ -76,6 +78,20 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   
   
   // MARK: - Lifecycle
+  
+  required init(_ viewModel: ViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
+    self.viewModel = viewModel
+    super.init(coder: coder)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -102,23 +118,6 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .default
-  }
-  
-  
-  // MARK: - Initializers
-  
-  required init(_ viewModel: ViewModel) {
-    self.viewModel = viewModel
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(_ coder: NSCoder, _ viewModel: ViewModel) {
-    self.viewModel = viewModel
-    super.init(coder: coder)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
   
   
@@ -177,7 +176,7 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -365,13 +364,16 @@ class AddSongViewController: BaseViewController, ViewModelInjectable {
 }
 
 
-// MARK: - Extensions
+// MARK: - UIPopoverPresentationControllerDelegate
 
 extension AddSongViewController: UIPopoverPresentationControllerDelegate {
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     return .none
   }
 }
+
+
+// MARK: - BrandPickerViewDelegate
 
 extension AddSongViewController: BrandPickerViewDelegate {
   func didBrandSelected(_ selectedBrand: KaraokeBrand) {

@@ -10,8 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class AddSongViewModel: ViewModelType {
-  
+final class AddSongViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -39,8 +38,16 @@ class AddSongViewModel: ViewModelType {
   private var targetFolderId: String?
   private var songFolderManager = SongFolderManager()
   
+  public var numberOfComponents: Int {
+    return 1
+  }
   
-  // MARK: - Initializers
+  public var numberOfRowsInComponent: Int {
+    return KaraokeBrand.allCases.count
+  }
+  
+  
+  // MARK: - LifeCycle
   
   init() {
     fatalError("You must give 'targetFolderId' to initialize")
@@ -52,7 +59,7 @@ class AddSongViewModel: ViewModelType {
   }
   
   
-  // MARK: - Setups
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
@@ -122,18 +129,11 @@ class AddSongViewModel: ViewModelType {
     self.input = input
     self.output = output
   }
-}
-
-extension AddSongViewModel {
-  var numberOfComponents: Int {
-    return 1
-  }
   
-  var numberOfRowsInComponent: Int {
-    return KaraokeBrand.allCases.count
-  }
   
-  func titleForRowAt(_ index: Int) -> String {
+  // MARK: - Public
+  
+  public func titleForRowAt(_ index: Int) -> String {
     return KaraokeBrand.allCases[index].localizedString
   }
 }

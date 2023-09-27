@@ -10,8 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CreditViewModel: ViewModelType {
-  
+final class CreditViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -39,7 +38,7 @@ class CreditViewModel: ViewModelType {
   }
   
   
-  // MARK: - Setups
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
@@ -54,9 +53,10 @@ class CreditViewModel: ViewModelType {
     self.input = input
     self.output = output
   }
-}
-
-extension CreditViewModel {
+  
+  
+  // MARK: - Public
+  
   public var appVersion: String {
     if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
       return appVersion

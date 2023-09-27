@@ -10,8 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class MainViewModel: ViewModelType {
-  
+final class MainViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -53,6 +52,9 @@ class MainViewModel: ViewModelType {
   init() {
     setupInputOutput()
   }
+  
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     self.input = Input()

@@ -6,11 +6,11 @@
 //
 
 import Foundation
+
 import RxSwift
 import RxCocoa
 
-class SettingViewModel: ViewModelType {
-  
+final class SettingViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -28,7 +28,7 @@ class SettingViewModel: ViewModelType {
   private(set) var disposeBag = DisposeBag()
   
   
-  // MARK: - Initializers
+  // MARK: - LifeCycle
   
   init() {
     setupInputOutput()

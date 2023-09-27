@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchViewModel: ViewModelType {
+final class SearchViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -48,6 +48,9 @@ class SearchViewModel: ViewModelType {
   init() {
     setupInputOutput()
   }
+  
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
@@ -120,7 +123,7 @@ class SearchViewModel: ViewModelType {
   }
   
   
-  // MARK: - Methods
+  // MARK: - Public
   
   public func addSearchHistory(_ keyword: String) {
     searchHistoryManager.addData(searchKeyword: keyword)

@@ -15,8 +15,7 @@ import RxCocoa
   @objc optional func didSelectedItemMoved()
 }
 
-class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
-  
+final class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
@@ -53,15 +52,6 @@ class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Lifecycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupView()
-    bind()
-  }
-  
-  
-  // MARK: - Initializers
-  
   required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
     self.parentVC = UIViewController()
@@ -80,6 +70,12 @@ class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
   
   required init?(coder: NSCoder) {
     fatalError("ViewModel has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupView()
+    bind()
   }
   
   
@@ -125,7 +121,7 @@ class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -214,7 +210,7 @@ class PopUpSongOptionViewController: BaseViewController, ViewModelInjectable {
 }
 
 
-// MARK: - Extensions
+// MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension PopUpSongOptionViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -230,6 +226,9 @@ extension PopUpSongOptionViewController: UITableViewDataSource, UITableViewDeleg
     return cell
   }
 }
+
+
+// MARK: - PopUpArchiveFolderViewDelegate
 
 extension PopUpSongOptionViewController: PopUpArchiveFolderViewDelegate {
   func didSongAdded() {

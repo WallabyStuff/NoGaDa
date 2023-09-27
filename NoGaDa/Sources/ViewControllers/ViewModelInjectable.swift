@@ -9,7 +9,6 @@ import UIKit
 
 protocol ViewModelInjectable {
   
-  
   // MARK: - Properties
   
   associatedtype ViewModel: AnyObject

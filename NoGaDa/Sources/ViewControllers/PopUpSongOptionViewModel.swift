@@ -10,8 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class PopUpSongOptionViewModel: ViewModelType {
-  
+final class PopUpSongOptionViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -35,10 +34,20 @@ class PopUpSongOptionViewModel: ViewModelType {
   private(set) var disposeBag = DisposeBag()
   public var selectedSong: ArchiveSong
   private let songFolderManager = SongFolderManager()
-  public var parentViewController: UIViewController?
+
+  private var songOptions: [SongOption] {
+    let moveToOtherFolder = MoveToOtherFolder()
+    let removeFromFolder = RemoveFromFolder()
+    
+    return [moveToOtherFolder, removeFromFolder]
+  }
+  
+  public var sectionCount: Int {
+    return 0
+  }
   
   
-  // MARK: - Initializers
+  // MARK: - LifeCycle
   
   init() {
     fatalError("selectedSong has not been implemented")
@@ -49,7 +58,8 @@ class PopUpSongOptionViewModel: ViewModelType {
     setupInputOutput()
   }
   
-  // MARK: - Setups
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
@@ -98,12 +108,9 @@ class PopUpSongOptionViewModel: ViewModelType {
     self.input = input
     self.output = output
   }
-}
-
-extension PopUpSongOptionViewModel {
-  var sectionCount: Int {
-    return 0
-  }
+  
+  
+  // MARK: - Public
   
   func numberOfRowsInSection(_ section: Int) -> Int {
     return songOptions.count
@@ -111,14 +118,5 @@ extension PopUpSongOptionViewModel {
   
   func optionAtIndex(_ indexPath: IndexPath) -> SongOption {
     return songOptions[indexPath.row]
-  }
-}
-
-extension PopUpSongOptionViewModel {
-  private var songOptions: [SongOption] {
-    let moveToOtherFolder = MoveToOtherFolder()
-    let removeFromFolder = RemoveFromFolder()
-    
-    return [moveToOtherFolder, removeFromFolder]
   }
 }

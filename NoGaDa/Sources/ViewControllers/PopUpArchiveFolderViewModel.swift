@@ -5,14 +5,12 @@
 //  Created by 이승기 on 2021/10/22.
 //
 
-import Foundation
+import UIKit
 
 import RxSwift
 import RxCocoa
-import UIKit
 
-class PopUpArchiveFolderViewModel: ViewModelType {
-  
+final class PopUpArchiveFolderViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -60,7 +58,7 @@ class PopUpArchiveFolderViewModel: ViewModelType {
   }
   
   
-  // MARK: - Setups
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()

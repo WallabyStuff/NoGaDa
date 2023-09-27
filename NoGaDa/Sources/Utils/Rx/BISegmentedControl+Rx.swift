@@ -5,9 +5,9 @@
 //  Created by 이승기 on 2022/08/21.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
+
 import BISegmentedControl
 
 class RxBISegmentedControlDelegateProxy: DelegateProxy<BISegmentedControl, BISegmentedControlDelegate>,

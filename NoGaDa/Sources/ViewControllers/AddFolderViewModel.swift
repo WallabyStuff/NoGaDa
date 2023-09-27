@@ -6,11 +6,11 @@
 //
 
 import Foundation
+
 import RxSwift
 import RxCocoa
 
-class AddFolderViewModel: ViewModelType {
-  
+final class AddFolderViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -38,6 +38,9 @@ class AddFolderViewModel: ViewModelType {
   init() {
     setupInputOutput()
   }
+  
+  
+  // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
@@ -82,11 +85,10 @@ class AddFolderViewModel: ViewModelType {
     self.input = input
     self.output = output
   }
-}
-
-
-
-extension AddFolderViewModel {
+  
+  
+  // MARK: - Public
+  
   func addFolder(_ title: String, _ titleEmoji: String) -> Completable {
     return Completable.create { [weak self] observer in
       guard let self = self else { return Disposables.create() }

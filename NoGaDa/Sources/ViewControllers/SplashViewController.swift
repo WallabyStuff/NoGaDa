@@ -9,8 +9,7 @@ import UIKit
 
 import RxSwift
 
-class SplashViewController: UIViewController {
-  
+final class SplashViewController: UIViewController {
   
   // MARK: - UI
   
@@ -27,7 +26,7 @@ class SplashViewController: UIViewController {
   private var didUpdateConstraints = false
   
   
-  // MARK: - LifeCycles
+  // MARK: - LifeCycle
   
   override func viewDidLoad() {
     super.viewDidLoad()

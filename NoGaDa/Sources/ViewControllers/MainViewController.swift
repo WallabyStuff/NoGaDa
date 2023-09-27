@@ -10,16 +10,17 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxGesture
+
 import SafeAreaBrush
 import BISegmentedControl
 
-class MainViewController: BaseViewController, ViewModelInjectable {
+final class MainViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants
   
   static let identifier = R.storyboard.main.mainStoryboard.identifier
   
-  fileprivate struct Metric {
+  enum Metric {
     static let appBarCornerRadius = 28.f
     
     static let settingButtonPadding = 4.f
@@ -67,7 +68,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   private var archiveFolderFloatingView: ArchiveFolderFloatingPanelView?
   
   
-  // MARK: - Initializers
+  // MARK: - LifeCycle
   
   required init(_ viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -83,9 +84,6 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   required init?(coder: NSCoder) {
     fatalError("ViewModel has not been implemented")
   }
-  
-  
-  // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -195,7 +193,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   }
   
   
-  // MARK: - Binds
+  // MARK: - Binding
   
   private func bind() {
     bindInputs()
@@ -370,7 +368,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
             vc.settingButton.alpha = 0
           }
         } else {
-          // Stretch Appbar
+          // Stretch AppBar
           vc.appBarViewHeightConstraint.constant = regularAppBarHeight - changedY * 0.2
           vc.appBarTitleLabel.alpha = 1
           vc.settingButton.alpha = 1
@@ -381,7 +379,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Methods
   
-  func presentSearchVC() {
+  private func presentSearchVC() {
     let storyboard = UIStoryboard(name: R.storyboard.search.name, bundle: nil)
     let searchVC = storyboard.instantiateViewController(identifier: SearchViewController.identifier) { coder -> SearchViewController in
       let viewModel = SearchViewModel()
@@ -393,7 +391,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     present(searchVC, animated: true)
   }
   
-  func presentArchiveFolderVC() {
+  private func presentArchiveFolderVC() {
     let storyboard = UIStoryboard(name: R.storyboard.archive.name, bundle: nil)
     let archiveVC = storyboard.instantiateViewController(identifier: ArchiveFolderViewController.identifier) { coder -> ArchiveFolderViewController in
       let viewModel = ArchiveFolderViewModel()
@@ -405,7 +403,7 @@ class MainViewController: BaseViewController, ViewModelInjectable {
     present(archiveVC, animated: true, completion: nil)
   }
   
-  func presentSettingVC() {
+  private func presentSettingVC() {
     let storyboard = UIStoryboard(name: R.storyboard.setting.name, bundle: nil)
     let viewController = storyboard.instantiateViewController(identifier: SettingViewController.identifier) { coder -> SettingViewController in
       let viewModel = SettingViewModel()
@@ -423,10 +421,10 @@ class MainViewController: BaseViewController, ViewModelInjectable {
 }
 
 
-// MARK: - Extensions
+// MARK: - PopUpArchiveFolderViewDelegate
 
 extension MainViewController: PopUpArchiveFolderViewDelegate {
-  func didSongAdded() {
+  public func didSongAdded() {
     archiveFolderFloatingView?.hide(animated: true)
     Observable.just(Void())
       .bind(to: viewModel.input.didSongAdded)
@@ -434,8 +432,11 @@ extension MainViewController: PopUpArchiveFolderViewDelegate {
   }
 }
 
+
+// MARK: - ArchiveFolderListViewDelegate
+
 extension MainViewController: ArchiveFolderListViewDelegate {
-  func didFileChanged() {
+  public func didFileChanged() {
     Observable.just(Void())
       .bind(to: viewModel.input.didFileChanged)
       .dispose()
