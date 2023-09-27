@@ -76,6 +76,8 @@
 		8E25076428D1EB3300756AB1 /* SearchFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */; };
 		8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */; };
 		8E25076828D1ED3400756AB1 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E25076728D1ED3400756AB1 /* SettingViewModel.swift */; };
+		8E29D93A2AA60D4E002702AC /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29D9392AA60D4E002702AC /* UIViewController+Preview.swift */; };
+		8E29D93C2AA60DC0002702AC /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29D93B2AA60DC0002702AC /* UIView+Preview.swift */; };
 		8E33F3F828546F7000B6E6EE /* ViewModelInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */; };
 		8E33F3FB28547C7200B6E6EE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FA28547C7200B6E6EE /* R.generated.swift */; };
 		8E33F3FD2854978D00B6E6EE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */; };
@@ -223,6 +225,8 @@
 		8E25076328D1EB3300756AB1 /* SearchFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchFilterTableViewCell.xib; sourceTree = "<group>"; };
 		8E25076528D1EB3F00756AB1 /* SearchFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterTableViewCell.swift; sourceTree = "<group>"; };
 		8E25076728D1ED3400756AB1 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		8E29D9392AA60D4E002702AC /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		8E29D93B2AA60DC0002702AC /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		8E33F3F728546F7000B6E6EE /* ViewModelInjectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelInjectable.swift; sourceTree = "<group>"; };
 		8E33F3FA28547C7200B6E6EE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8E33F3FC2854978D00B6E6EE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -415,7 +419,7 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		4956CE5526F469F00007523B /* Views */ = {
+		4956CE5526F469F00007523B /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
@@ -426,12 +430,10 @@
 				8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */,
 				8E79DC4028BB73B0000B4874 /* AnimateButton.swift */,
 				8E79DC4428BB7858000B4874 /* AnimateView.swift */,
-				4956CE5426F469E30007523B /* ViewControllers */,
 				493BCBE126F4BAC00096422A /* Cells */,
-				4956CE5726F469FA0007523B /* Storyboards */,
 				8E6C95E32767A90200667C01 /* FloatingPanelLayouts */,
 			);
-			path = Views;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		4956CE5626F469F30007523B /* Models */ = {
@@ -440,9 +442,7 @@
 				49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */,
 				49C6DC7C270382620094403B /* SettingItem.swift */,
 				49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */,
-				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
 				49D1D6B126FC68F30024C5F9 /* Song.swift */,
-				49D1D6B326FC69660024C5F9 /* KaraokeAPIPath.swift */,
 				49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */,
 				49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */,
 				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
@@ -468,7 +468,6 @@
 		4989A72426F8862A00A98B63 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				4989A72526F8863C00A98B63 /* KaraokeApiService.swift */,
 				49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */,
 				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
 				4953343A271204C4003F64DE /* SearchHistoryManager.swift */,
@@ -497,6 +496,25 @@
 			path = Rx;
 			sourceTree = "<group>";
 		};
+		8E55802A2AC4EB1C008A76F6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4956CE2426F467040007523B /* AppDelegate.swift */,
+				4956CE2626F467040007523B /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8E55802B2AC4EB4A008A76F6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
+				49D1D6B326FC69660024C5F9 /* KaraokeAPIPath.swift */,
+				4989A72526F8863C00A98B63 /* KaraokeApiService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		8E6C95E32767A90200667C01 /* FloatingPanelLayouts */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,13 +527,14 @@
 		8EF050072826D7BF00166223 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4956CE2426F467040007523B /* AppDelegate.swift */,
-				4956CE2626F467040007523B /* SceneDelegate.swift */,
+				8E55802A2AC4EB1C008A76F6 /* Application */,
+				8E55802B2AC4EB4A008A76F6 /* Networking */,
 				4989A72426F8862A00A98B63 /* Managers */,
 				4956CE5626F469F30007523B /* Models */,
-				4956CE5526F469F00007523B /* Views */,
+				4956CE5426F469E30007523B /* ViewControllers */,
+				4956CE5726F469FA0007523B /* Storyboards */,
+				4956CE5526F469F00007523B /* Components */,
 				8EF0500A2826D82F00166223 /* Utils */,
-				8E3CE86F28B26CA700C3DD27 /* Rx */,
 				8EF050092826D7E600166223 /* SupportingFiles */,
 			);
 			path = Sources;
@@ -560,6 +579,9 @@
 				8EB6ACFC2900465400076C25 /* String+KoreanPolicy.swift */,
 				8E3BF02229BEF90D007EB57A /* NotificaitonName+Default.swift */,
 				8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */,
+				8E29D9392AA60D4E002702AC /* UIViewController+Preview.swift */,
+				8E29D93B2AA60DC0002702AC /* UIView+Preview.swift */,
+				8E3CE86F28B26CA700C3DD27 /* Rx */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -853,6 +875,7 @@
 			files = (
 				8E79DC4928BDF1D8000B4874 /* SplashViewController.swift in Sources */,
 				8E98D78A2826DD000056CED4 /* UIView+Decorate.swift in Sources */,
+				8E29D93C2AA60DC0002702AC /* UIView+Preview.swift in Sources */,
 				4992C7642721B86F006045FF /* PopUpArchiveFolderViewModel.swift in Sources */,
 				493BCBE526F4BAEF0096422A /* FolderTableViewCell.swift in Sources */,
 				495334332711DE4B003F64DE /* SearchHistoryViewController.swift in Sources */,
@@ -922,6 +945,7 @@
 				4953343F2712C503003F64DE /* SearchHistory.swift in Sources */,
 				49C6DC75270372F40094403B /* SettingViewController.swift in Sources */,
 				49484D022720B6D500EC12B3 /* ArchiveFolderViewModel.swift in Sources */,
+				8E29D93A2AA60D4E002702AC /* UIViewController+Preview.swift in Sources */,
 				8EB6ACFD2900465400076C25 /* String+KoreanPolicy.swift in Sources */,
 				8E25076628D1EB3F00756AB1 /* SearchFilterTableViewCell.swift in Sources */,
 				8E3CE87128B26CC700C3DD27 /* UIViewController+Rx.swift in Sources */,
