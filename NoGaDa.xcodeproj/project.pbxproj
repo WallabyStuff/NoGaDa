@@ -419,7 +419,7 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		4956CE5526F469F00007523B /* Views */ = {
+		4956CE5526F469F00007523B /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				493BCBF226F642630096422A /* EmojiTextField.swift */,
@@ -430,12 +430,10 @@
 				8E6C95DF27679BB400667C01 /* SongOptionFloatingPanelView.swift */,
 				8E79DC4028BB73B0000B4874 /* AnimateButton.swift */,
 				8E79DC4428BB7858000B4874 /* AnimateView.swift */,
-				4956CE5426F469E30007523B /* ViewControllers */,
 				493BCBE126F4BAC00096422A /* Cells */,
-				4956CE5726F469FA0007523B /* Storyboards */,
 				8E6C95E32767A90200667C01 /* FloatingPanelLayouts */,
 			);
-			path = Views;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		4956CE5626F469F30007523B /* Models */ = {
@@ -444,9 +442,7 @@
 				49D4CD4C26F9E448000D2E28 /* SearchFilterItem.swift */,
 				49C6DC7C270382620094403B /* SettingItem.swift */,
 				49D1D6AD26FC686D0024C5F9 /* KaraokeBrand.swift */,
-				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
 				49D1D6B126FC68F30024C5F9 /* Song.swift */,
-				49D1D6B326FC69660024C5F9 /* KaraokeAPIPath.swift */,
 				49D1D6B526FC69770024C5F9 /* ArchiveSong.swift */,
 				49D1D6B726FC6C0E0024C5F9 /* ArchiveFolder.swift */,
 				4997CFD6270471CB005F0D85 /* ResourceItem.swift */,
@@ -472,7 +468,6 @@
 		4989A72426F8862A00A98B63 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				4989A72526F8863C00A98B63 /* KaraokeApiService.swift */,
 				49D1D6BB26FC70720024C5F9 /* SongFolderManager.swift */,
 				49E6EB5A270E0F3200610383 /* AdMobManager.swift */,
 				4953343A271204C4003F64DE /* SearchHistoryManager.swift */,
@@ -501,6 +496,25 @@
 			path = Rx;
 			sourceTree = "<group>";
 		};
+		8E55802A2AC4EB1C008A76F6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4956CE2426F467040007523B /* AppDelegate.swift */,
+				4956CE2626F467040007523B /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8E55802B2AC4EB4A008A76F6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				49D1D6AF26FC689D0024C5F9 /* KaraokeAPIErrMessage.swift */,
+				49D1D6B326FC69660024C5F9 /* KaraokeAPIPath.swift */,
+				4989A72526F8863C00A98B63 /* KaraokeApiService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		8E6C95E32767A90200667C01 /* FloatingPanelLayouts */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,13 +527,14 @@
 		8EF050072826D7BF00166223 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				4956CE2426F467040007523B /* AppDelegate.swift */,
-				4956CE2626F467040007523B /* SceneDelegate.swift */,
+				8E55802A2AC4EB1C008A76F6 /* Application */,
+				8E55802B2AC4EB4A008A76F6 /* Networking */,
 				4989A72426F8862A00A98B63 /* Managers */,
 				4956CE5626F469F30007523B /* Models */,
-				4956CE5526F469F00007523B /* Views */,
+				4956CE5426F469E30007523B /* ViewControllers */,
+				4956CE5726F469FA0007523B /* Storyboards */,
+				4956CE5526F469F00007523B /* Components */,
 				8EF0500A2826D82F00166223 /* Utils */,
-				8E3CE86F28B26CA700C3DD27 /* Rx */,
 				8EF050092826D7E600166223 /* SupportingFiles */,
 			);
 			path = Sources;
@@ -566,6 +581,7 @@
 				8EAEBD2B29D315C300FA51A4 /* UserDefaults+PropertyWrapper.swift */,
 				8E29D9392AA60D4E002702AC /* UIViewController+Preview.swift */,
 				8E29D93B2AA60DC0002702AC /* UIView+Preview.swift */,
+				8E3CE86F28B26CA700C3DD27 /* Rx */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
