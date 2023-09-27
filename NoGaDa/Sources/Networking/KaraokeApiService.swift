@@ -24,7 +24,7 @@ class KaraokeApiService {
       let path = "\(KaraokeAPIPath.basePath.rawValue)\(brand.path)".urlEncode()
       
       guard let url = URL(string: path) else {
-        observer(.failure(KaraokeAPIErrMessage.urlParsingError))
+        observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
       
@@ -33,17 +33,17 @@ class KaraokeApiService {
       
       URLSession.shared.dataTask(with: request) { jsonData, response, error in
         guard let jsonData = jsonData else {
-          observer(.failure(KaraokeAPIErrMessage.didNotReceiveData))
+          observer(.failure(KaraokeAPIError.didNotReceiveData))
           return
         }
         
         guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-          observer(.failure(KaraokeAPIErrMessage.httpRequestFailure))
+          observer(.failure(KaraokeAPIError.httpRequestFailure))
           return
         }
         
         guard let newSongs = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-          observer(.failure(KaraokeAPIErrMessage.jsonParsingError))
+          observer(.failure(KaraokeAPIError.jsonParsingError))
           return
         }
         
@@ -64,7 +64,7 @@ class KaraokeApiService {
       let path = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(term)\(brand.path)".urlEncode()
       
       guard let url = URL(string: path) else {
-        observer(.failure(KaraokeAPIErrMessage.urlParsingError))
+        observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
       
@@ -73,17 +73,17 @@ class KaraokeApiService {
       
       URLSession.shared.dataTask(with: request) { jsonData, response, error in
         guard let jsonData = jsonData else {
-          observer(.failure(KaraokeAPIErrMessage.didNotReceiveData))
+          observer(.failure(KaraokeAPIError.didNotReceiveData))
           return
         }
         
         guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-          observer(.failure(KaraokeAPIErrMessage.httpRequestFailure))
+          observer(.failure(KaraokeAPIError.httpRequestFailure))
           return
         }
         
         guard let songs = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-          observer(.failure(KaraokeAPIErrMessage.jsonParsingError))
+          observer(.failure(KaraokeAPIError.jsonParsingError))
           return
         }
         
@@ -99,7 +99,7 @@ class KaraokeApiService {
       let path = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.path)".urlEncode()
       
       guard let url = URL(string: path) else {
-        observer(.failure(KaraokeAPIErrMessage.urlParsingError))
+        observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
       
@@ -108,17 +108,17 @@ class KaraokeApiService {
       
       URLSession.shared.dataTask(with: request) { jsonData, response, error in
         guard let jsonData = jsonData else {
-          observer(.failure(KaraokeAPIErrMessage.didNotReceiveData))
+          observer(.failure(KaraokeAPIError.didNotReceiveData))
           return
         }
         
         guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-          observer(.failure(KaraokeAPIErrMessage.httpRequestFailure))
+          observer(.failure(KaraokeAPIError.httpRequestFailure))
           return
         }
         
         guard let songs = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-          observer(.failure(KaraokeAPIErrMessage.jsonParsingError))
+          observer(.failure(KaraokeAPIError.jsonParsingError))
           return
         }
         
