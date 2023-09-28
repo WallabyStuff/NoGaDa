@@ -51,7 +51,7 @@ class SettingItemTableViewCell: UITableViewCell {
   }
   
   
-  // MARK: - Setups
+  // MARK: - Private
   
   private func setupView() {
     setupSelectedView()
@@ -76,11 +76,11 @@ class SettingItemTableViewCell: UITableViewCell {
   }
   
   
-  // MARK: - Methods
+  // MARK: - Public
   
-  func configure(item: SettingItem) {
-    titleLabel.text = item.title
-    iconImageView.image = item.icon
-    iconImageView.tintColor = item.iconContainerColor
+  public func configure(action: SettingAction) {
+    titleLabel.text = action.title
+    iconImageView.image = action.icon
+    iconImageView.tintColor = action.iconContainerColor
   }
 }

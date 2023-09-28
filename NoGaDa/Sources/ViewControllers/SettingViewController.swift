@@ -97,10 +97,10 @@ final class SettingViewController: BaseViewController {
     
     viewModel.output.settingItems
       .bind(to: settingItemTableView.rx.items(cellIdentifier: SettingItemTableViewCell.identifier, cellType: SettingItemTableViewCell.self)) { index, item, cell in
-        cell.configure(item: item)
+        cell.configure(action: item.action)
         cell.itemSelectAction = { [weak self] in
-          guard let self = self else { return }
-          item.action(vc: self)
+          guard let vc = self else { return }
+          item.action.performAction(on: vc)
         }
       }
       .disposed(by: disposeBag)
