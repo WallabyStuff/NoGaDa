@@ -21,14 +21,15 @@ class KaraokeApiService {
   
   public func fetchUpdatedSong(brand: KaraokeBrand) -> Single<[Song]> {
     return Single.create { observer in
-      let path = "\(KaraokeAPIPath.basePath.rawValue)\(brand.path)".urlEncode()
-      
-      guard let url = URL(string: path) else {
+      guard let basePath = URL(string: KaraokeAPIPath.basePath.rawValue) else {
         observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
       
-      var request         = URLRequest(url: url)
+      let path = basePath
+        .appendingPathComponent(brand.path)
+      
+      var request         = URLRequest(url: path)
       request.httpMethod  = "GET"
       
       URLSession.shared.dataTask(with: request) { jsonData, response, error in
@@ -61,14 +62,16 @@ class KaraokeApiService {
         term.removeAllEmptySpaces()
       }
       
-      let path = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.song.rawValue)/\(term)\(brand.path)".urlEncode()
-      
-      guard let url = URL(string: path) else {
+      guard let basePath = URL(string: KaraokeAPIPath.basePath.rawValue) else {
         observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
       
-      var request         = URLRequest(url: url)
+      let path = basePath
+        .appendingPathComponent(KaraokeAPIPath.song.rawValue)
+        .appendingPathComponent("\(term)\(brand.path)")
+      
+      var request         = URLRequest(url: path)
       request.httpMethod  = "GET"
       
       URLSession.shared.dataTask(with: request) { jsonData, response, error in
@@ -96,14 +99,16 @@ class KaraokeApiService {
   
   public func fetchSong(singer: String, brand: KaraokeBrand) -> Single<[Song]> {
     return Single.create { observer in
-      let path = "\(KaraokeAPIPath.basePath.rawValue)\(KaraokeAPIPath.singer.rawValue)/\(singer)\(brand.path)".urlEncode()
-      
-      guard let url = URL(string: path) else {
+      guard let basePath = URL(string: KaraokeAPIPath.basePath.rawValue) else {
         observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
       
-      var request         = URLRequest(url: url)
+      let path = basePath
+        .appendingPathComponent(KaraokeAPIPath.singer.rawValue)
+        .appendingPathComponent("\(singer)\(brand.path)")
+      
+      var request         = URLRequest(url: path)
       request.httpMethod  = "GET"
       
       URLSession.shared.dataTask(with: request) { jsonData, response, error in
