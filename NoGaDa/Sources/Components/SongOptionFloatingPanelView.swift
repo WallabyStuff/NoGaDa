@@ -1,14 +1,16 @@
 //
-//  SongOptionFloatingPanleView.swift
+//  SongOptionFloatingPanelView.swift
 //  NoGaDa
 //
 //  Created by 이승기 on 2021/12/14.
 //
 
 import UIKit
+
 import FloatingPanel
 
-class SongOptionFloatingPanelView {
+
+final class SongOptionFloatingPanelView {
   
   // MARK: - Properties
   

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class UpdatedSongTableViewCell: UITableViewCell {
+
+final class UpdatedSongTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   

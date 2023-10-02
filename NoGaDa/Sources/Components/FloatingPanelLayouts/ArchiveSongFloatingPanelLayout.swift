@@ -5,10 +5,10 @@
 //  Created by 이승기 on 2021/09/17.
 //
 
-import UIKit
 import FloatingPanel
 
-class ArchiveSongFloatingPanelLayout: FloatingPanelLayout {
+
+final class ArchiveSongFloatingPanelLayout: FloatingPanelLayout {
   let position: FloatingPanelPosition = .bottom
   let initialState: FloatingPanelState = .tip
   var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {

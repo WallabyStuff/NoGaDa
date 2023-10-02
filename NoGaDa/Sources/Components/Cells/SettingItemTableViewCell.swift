@@ -10,7 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SettingItemTableViewCell: UITableViewCell {
+
+final class SettingItemTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   
@@ -26,7 +27,7 @@ class SettingItemTableViewCell: UITableViewCell {
   // MARK: - Properties
   
   private var disposeBag = DisposeBag()
-  var itemSelectAction: () -> Void = {}
+  public var itemSelectAction: () -> Void = {}
   
   
   // MARK: - UI

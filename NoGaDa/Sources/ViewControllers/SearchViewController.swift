@@ -14,6 +14,7 @@ import RxGesture
 import Hero
 import SafeAreaBrush
 
+
 final class SearchViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants

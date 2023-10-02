@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 protocol ViewModelInjectable {
   
   // MARK: - Properties

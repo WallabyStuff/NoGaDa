@@ -5,8 +5,8 @@
 //  Created by 이승기 on 2021/10/10.
 //
 
-import UIKit
 import RealmSwift
+
 
 final class SearchHistory: Object {
   

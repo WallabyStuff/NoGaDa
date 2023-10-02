@@ -10,7 +10,8 @@ import RxCocoa
 
 import BISegmentedControl
 
-class RxBISegmentedControlDelegateProxy: DelegateProxy<BISegmentedControl, BISegmentedControlDelegate>,
+
+final class RxBISegmentedControlDelegateProxy: DelegateProxy<BISegmentedControl, BISegmentedControlDelegate>,
                                          DelegateProxyType,
                                          BISegmentedControlDelegate {
   static func registerKnownImplementations() {

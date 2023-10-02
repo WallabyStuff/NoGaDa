@@ -10,7 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class KaraokeApiService {
+
+final class KaraokeApiService {
   
   // MARK: - Properties
   

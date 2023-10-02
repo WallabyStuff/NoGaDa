@@ -7,7 +7,8 @@
 
 import UIKit
 
-class PopUpArchiveFolderTableViewCell: UITableViewCell {
+
+final class PopUpArchiveFolderTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   

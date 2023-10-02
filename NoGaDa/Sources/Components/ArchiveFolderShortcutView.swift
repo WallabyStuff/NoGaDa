@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ArchiveFolderShortcutView: AnimateView {
+
+final class ArchiveFolderShortcutView: AnimateView {
   
   
   // MARK: - Initializers

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 protocol SettingAction {
   var title: String { get }
   var icon: UIImage { get }

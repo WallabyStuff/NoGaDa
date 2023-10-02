@@ -6,9 +6,11 @@
 //
 
 import UIKit
+
 import RxSwift
 
-class SearchFilterTableViewCell: UITableViewCell {
+
+final class SearchFilterTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   

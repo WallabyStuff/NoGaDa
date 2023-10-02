@@ -12,6 +12,7 @@ import RxCocoa
 
 import AppTrackingTransparency
 
+
 class BaseViewController: UIViewController {
   
   // MARK: - Properties

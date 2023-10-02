@@ -7,7 +7,8 @@
 
 import UIKit
 
-class IconResourceCollectionViewCell: UICollectionViewCell {
+
+final class IconResourceCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Constants
   

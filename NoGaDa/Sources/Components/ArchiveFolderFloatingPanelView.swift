@@ -6,9 +6,11 @@
 //
 
 import UIKit
+
 import FloatingPanel
 
-class ArchiveFolderFloatingPanelView {
+
+final class ArchiveFolderFloatingPanelView {
   
   // MARK: - Properties
   

@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
 final class SearchHistoryViewController: BaseViewController, ViewModelInjectable {
   
   // MARK: - Constants

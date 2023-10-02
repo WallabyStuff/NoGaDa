@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
 final class CreditViewModel: ViewModelType {
   
   // MARK: - Properties
