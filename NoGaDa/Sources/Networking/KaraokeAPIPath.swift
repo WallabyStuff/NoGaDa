@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 enum KaraokeAPIPath: String {
   case basePath     = "https://api.manana.kr/karaoke"
   case song         = "/song"

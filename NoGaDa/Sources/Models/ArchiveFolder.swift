@@ -7,6 +7,7 @@
 
 import RealmSwift
 
+
 final class ArchiveFolder: Object {
   
   // MARK: - Properties

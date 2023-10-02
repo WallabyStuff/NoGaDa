@@ -7,7 +7,8 @@
 
 import UIKit
 
-class PopUpSongOptionTableViewCell: UITableViewCell {
+
+final class PopUpSongOptionTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   

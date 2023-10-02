@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+
 final class SettingViewModel: ViewModelType {
   
   // MARK: - Properties

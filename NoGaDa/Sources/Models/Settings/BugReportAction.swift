@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import MessageUI
+
 
 class BugReportAction: SettingAction {
   var title: String {

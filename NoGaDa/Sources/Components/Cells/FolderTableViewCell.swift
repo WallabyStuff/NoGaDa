@@ -7,7 +7,8 @@
 
 import UIKit
 
-class FolderTableViewCell: UITableViewCell {
+
+final class FolderTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   

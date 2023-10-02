@@ -7,7 +7,8 @@
 
 import UIKit
 
-class KaraokeBrandPickerTableViewCell: UITableViewCell {
+
+final class KaraokeBrandPickerTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   

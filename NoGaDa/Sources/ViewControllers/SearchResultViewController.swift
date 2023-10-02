@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
 protocol SearchResultViewDelegate: AnyObject {
   func didSelectSongItem(_ selectedSong: Song)
 }

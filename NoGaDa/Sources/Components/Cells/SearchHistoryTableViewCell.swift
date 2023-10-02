@@ -6,10 +6,12 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
 
-class SearchHistoryTableViewCell: UITableViewCell {
+
+final class SearchHistoryTableViewCell: UITableViewCell {
   
   // MARK: - Constants
   
