@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+import Alamofire
+
 
 final class KaraokeApiService {
   
@@ -26,31 +28,22 @@ final class KaraokeApiService {
         observer(.failure(KaraokeAPIError.urlParsingError))
         return Disposables.create()
       }
+      let fullPath = basePath.appendingPathComponent(brand.path)
       
-      let path = basePath
-        .appendingPathComponent(brand.path)
-      
-      var request         = URLRequest(url: path)
-      request.httpMethod  = "GET"
-      
-      URLSession.shared.dataTask(with: request) { jsonData, response, error in
-        guard let jsonData = jsonData else {
-          observer(.failure(KaraokeAPIError.didNotReceiveData))
+      let request = AF.request(fullPath)
+      request.responseDecodable(of: [Song].self) { response in
+        if let error = response.error {
+          observer(.failure(error))
           return
         }
         
-        guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+        guard let value = response.value else {
           observer(.failure(KaraokeAPIError.httpRequestFailure))
           return
         }
         
-        guard let newSongs = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-          observer(.failure(KaraokeAPIError.jsonParsingError))
-          return
-        }
-        
-        observer(.success(newSongs))
-      }.resume()
+        observer(.success(value))
+      }
       
       return Disposables.create()
     }
@@ -68,31 +61,23 @@ final class KaraokeApiService {
         return Disposables.create()
       }
       
-      let path = basePath
+      let fullPath = basePath
         .appendingPathComponent(KaraokeAPIPath.song.rawValue)
         .appendingPathComponent("\(term)\(brand.path)")
       
-      var request         = URLRequest(url: path)
-      request.httpMethod  = "GET"
-      
-      URLSession.shared.dataTask(with: request) { jsonData, response, error in
-        guard let jsonData = jsonData else {
-          observer(.failure(KaraokeAPIError.didNotReceiveData))
-          return
+      let request = AF.request(fullPath)
+      request.responseDecodable(of: [Song].self) { response in
+        if let error = response.error {
+          observer(.failure(error))
         }
         
-        guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+        guard let value = response.value else {
           observer(.failure(KaraokeAPIError.httpRequestFailure))
           return
         }
         
-        guard let songs = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-          observer(.failure(KaraokeAPIError.jsonParsingError))
-          return
-        }
-        
-        observer(.success(songs))
-      }.resume()
+        observer(.success(value))
+      }
       
       return Disposables.create()
     }
@@ -105,31 +90,24 @@ final class KaraokeApiService {
         return Disposables.create()
       }
       
-      let path = basePath
+      let fullPath = basePath
         .appendingPathComponent(KaraokeAPIPath.singer.rawValue)
         .appendingPathComponent("\(singer)\(brand.path)")
       
-      var request         = URLRequest(url: path)
-      request.httpMethod  = "GET"
-      
-      URLSession.shared.dataTask(with: request) { jsonData, response, error in
-        guard let jsonData = jsonData else {
-          observer(.failure(KaraokeAPIError.didNotReceiveData))
+      let request = AF.request(fullPath)
+      request.responseDecodable(of: [Song].self) { response in
+        if let error = response.error {
+          observer(.failure(error))
           return
         }
         
-        guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+        guard let value = response.value else {
           observer(.failure(KaraokeAPIError.httpRequestFailure))
           return
         }
         
-        guard let songs = try? JSONDecoder().decode([Song].self, from: jsonData) else {
-          observer(.failure(KaraokeAPIError.jsonParsingError))
-          return
-        }
-        
-        observer(.success(songs))
-      }.resume()
+        observer(.success(value))
+      }
       
       return Disposables.create()
     }

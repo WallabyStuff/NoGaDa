@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.8.0)
   - BISegmentedControl (0.1.1)
   - FloatingPanel (2.6.1)
   - Google-Mobile-Ads-SDK (10.5.0):
@@ -68,6 +69,7 @@ PODS:
   - SwiftRater (2.1.1)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.8.0)
   - BISegmentedControl (~> 0.1.1)
   - FloatingPanel (~> 2.6.0)
   - Google-Mobile-Ads-SDK
@@ -82,6 +84,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - BISegmentedControl
     - FloatingPanel
     - Google-Mobile-Ads-SDK
@@ -102,6 +105,7 @@ SPEC REPOS:
     - SwiftRater
 
 SPEC CHECKSUMS:
+  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
   BISegmentedControl: 748dca74da5dd62039176c8fec2c372161d89916
   FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
   Google-Mobile-Ads-SDK: d4846d2d9bfe840ad7444078b5f9f565032bd4c2
@@ -121,6 +125,6 @@ SPEC CHECKSUMS:
   SafeAreaBrush: 282315ce500e436c04b2c26b46e8ac0ad4288bbd
   SwiftRater: bb8caf402fe466c8f93b53a902cc24a4eb68acec
 
-PODFILE CHECKSUM: 6e2de43a65883e96a3028fba82128f20f7227088
+PODFILE CHECKSUM: 88b7704717e36bb63d3472b1c710d46a17897fac
 
 COCOAPODS: 1.12.1
