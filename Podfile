@@ -21,6 +21,9 @@ target 'NoGaDa' do
   # AdMob
   pod 'Google-Mobile-Ads-SDK'
   
+  # Networking
+  pod 'Alamofire',          '~> 5.8.0'
+  
   # Conventions
   pod 'R.swift'
   
